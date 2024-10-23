@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  obsidian:
+    image: lscr.io/linuxserver/obsidian:1.7.4
+    ports:
+      - 3000:3000
+    volumes:
+      - ${APP_DATA_DIR}/config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
