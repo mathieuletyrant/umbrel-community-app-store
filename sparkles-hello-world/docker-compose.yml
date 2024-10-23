@@ -1,14 +1,13 @@
 version: "3.7"
 
 services:
-
-  app_proxy:
+  obsidian:
+    image: lscr.io/linuxserver/obsidian:1.7.4
+    ports:
+      - 3000:3000
+    volumes:
+      - ${APP_DATA_DIR}/config:/config
     environment:
-      # The format here is: <app-id>_<docker-service-name>_1
-      APP_HOST: sparkles-hello-world_server_1
-      APP_PORT: 3000
-    
-  server:
-    image: getumbrel/community-app-store-hello-world:latest
-    user: "1000:1000"
-    init: true
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
