@@ -1,17 +1,60 @@
-## Umbrel Community App Store Template
+# Mathieu's Umbrel App Store
 
-This repository is a template to create an Umbrel Community App Store. These additional app stores allow developers to distribute applications without submitting to the [Official Umbrel App Store](https://github.com/getumbrel/umbrel-apps).
+A personal [Umbrel Community App Store](https://github.com/getumbrel/umbrel-apps),
+focused on **self-hosted media apps** — the kind of tools that round out a
+*arr / Plex / Jellyfin setup but aren't (yet) in the official Umbrel App Store.
 
-## How to use:
+Everything here is packaged for [umbrelOS](https://umbrel.com) and kept simple:
+one folder per app, images pinned by digest, sensible defaults out of the box.
 
-1. Start by clicking the "Use this template" button located above.
-2. Assign an ID and name to your app store within the `umbrel-app-store.yml` file. This file specifies two important attributes:
-    - `id` - Acts as a unique prefix for every app within your Community App Store. You must start your application's ID with your app store's ID. For instance, in this template, the app store ID is `sparkles`, and there's an app named `hello world`. Consequently, the app's ID should be: `sparkles-hello-world`.
-    - `name` - This is the name of the Community App Store displayed in the umbrelOS UI.
-3. Change the name of the `sparkles-hello-world` folder to match your app's ID. The app ID is for you to decide. For example, if your app store ID is `whistles`, and your app is named My Video Downloader, you could set its app ID to `whistles-my-video-downloader`, and rename the folder accordingly.
-4. Next, enter your app's listing details in the `whistles-my-video-downloader/umbrel-app.yml`. These are displayed in the umbrelOS UI.
-5. Include the necessary Docker services in `whistles-my-video-downloader/docker-compose.yml`.
-6. That's it! Your Community App Store, featuring your unique app, is now set up and ready to go. To use your Community App Store, you can add its GitHub url the umbrelOS user interface as shown in the following demo:
+## 📦 Apps
 
+| App | What it does |
+| --- | --- |
+| **Healarr** | Scans your media library for **corrupt files** (ffprobe / MediaInfo / HandBrake), deletes them, and triggers a re-download via Sonarr / Radarr / Whisparr — then verifies the replacement is healthy. |
+| **Boxarr** | Tracks the **weekly box office top 10** and syncs it with Radarr: check what's already in your library, auto-add trending movies with smart filters, manage quality profiles. |
+| **Tracearr** | Real-time **monitoring for Plex, Jellyfin & Emby** (an open-source Tautulli / Jellystat alternative): stream tracking, session history with geolocation, and account-sharing detection — all from one dashboard. |
 
-https://user-images.githubusercontent.com/10330103/197889452-e5cd7e96-3233-4a09-b475-94b754adc7a3.mp4
+## 🚀 How to install
+
+1. In umbrelOS, open the **App Store**.
+2. Click the **⋮** menu (top right) → **Community App Stores**.
+3. Add this repository's URL:
+
+   ```
+   https://github.com/mathieuletyrant/umbrel-community-app-store
+   ```
+
+4. Open the **Mathieu App Store** that now appears and install any app.
+
+> ℹ️ Community app stores are third-party. Only add stores you trust — you're
+> running their apps on your own hardware.
+
+## 🧩 Notes per app
+
+- **Healarr** — mounts Umbrel's downloads storage read-only at `/media`. Point it
+  at your *arr apps and choose which library paths to scan.
+- **Boxarr** — configured entirely from its web UI. Install **Radarr** first and
+  connect Boxarr to it.
+- **Tracearr** — runs a bundled PostgreSQL (TimescaleDB) + Redis in a single
+  container. Budget **~3 GB of free RAM**; on low-memory devices the database can
+  get OOM-killed. Add your Plex / Jellyfin / Emby servers after first launch.
+
+## 🛠️ Contributing / structure
+
+Each app lives in its own folder prefixed with the store id `mathieu-`:
+
+```
+umbrel-app-store.yml        # store id + name
+mathieu-<app>/
+  umbrel-app.yml            # listing metadata (name, icon, description, port…)
+  docker-compose.yml        # the app's services, behind Umbrel's app_proxy
+```
+
+See [`CLAUDE.md`](./CLAUDE.md) for the packaging conventions and gotchas used
+across these apps.
+
+## 📄 License
+
+App packaging in this repo is provided as-is. Each application is the property of
+its respective author under its own license.
