@@ -20,8 +20,9 @@ description: >-
   ⚙️ RESOURCES
 
 
-  Tracearr runs its own PostgreSQL (TimescaleDB) and Redis. Budget at least ~1.5 GB
-  of free RAM; low-memory devices may see the database get OOM-killed.
+  Tracearr runs its own bundled PostgreSQL (TimescaleDB) and Redis inside a single
+  container. Budget at least ~3 GB of free RAM; low-memory devices may see the
+  database get OOM-killed (exit code 137).
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -37,8 +38,8 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Tracearr for this Community App Store. Uses the recommended
-  multi-container deployment (TimescaleDB + Redis).
+  Initial release of Tracearr for this Community App Store. Uses the all-in-one
+  "supervised" image (bundled TimescaleDB + Redis).
 dependencies: []
 path: ""
 defaultUsername: ""

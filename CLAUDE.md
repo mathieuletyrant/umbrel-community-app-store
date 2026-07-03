@@ -27,7 +27,7 @@ Example: `mathieu-healarr`. The folder name equals the app id.
 Current apps:
 - `mathieu-healarr` — Healarr (media library health monitoring)
 - `mathieu-boxarr` — Boxarr (box office tracking, syncs with Radarr)
-- `mathieu-tracearr` — Tracearr (Plex/Jellyfin/Emby monitoring; multi-container: app + TimescaleDB + Redis)
+- `mathieu-tracearr` — Tracearr (Plex/Jellyfin/Emby monitoring; single-container "supervised" image with bundled TimescaleDB + Redis)
 
 ## Adding or updating an app
 

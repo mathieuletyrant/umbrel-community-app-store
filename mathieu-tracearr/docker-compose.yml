@@ -1,5 +1,9 @@
 version: "3.7"
 
+# Tracearr all-in-one ("supervised") image: bundles TimescaleDB + Redis + the
+# app in a single container. Matches the setup validated on Portainer.
+# On Umbrel the app_proxy handles routing, so no host port mapping is needed.
+
 services:
   app_proxy:
     environment:
@@ -7,62 +11,23 @@ services:
       APP_PORT: 3000
 
   server:
-    image: ghcr.io/connorgallopo/tracearr:1.4.25@sha256:a4ad2dcb3897cebe314b0ef48dbd51bd4dc832b69af468d59eef29ae8cc95277
+    image: ghcr.io/connorgallopo/tracearr:supervised-1.4.25@sha256:eb336b67455cfc1af3bc7a784b5c40bfda2504a053a51fc6a9f84afe9cca358a
     init: true
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - HOST=0.0.0.0
-      - TZ=Europe/London
-      - DATABASE_URL=postgres://tracearr:umbrel-tracearr-db@timescale:5432/tracearr
-      - REDIS_URL=redis://redis:6379
-      - JWT_SECRET=8f3c1a6b2e9d47c05a1f8b3d6e2c9a740b5d1e8f3a2c6b9d0e4f7a1c5b8d3e60
-      - COOKIE_SECRET=2a9f4c7e1b8d306a5f2c9e4b7d1a8f603c5e2b9d4a7f1c8e0b3d6a9f2c5e8b41
-      - CORS_ORIGIN=*
-      - LOG_LEVEL=info
-    depends_on:
-      timescale:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    volumes:
-      - tracearr_backups:/data/backup
-    restart: on-failure
-
-  timescale:
-    image: timescale/timescaledb-ha:pg18.1-ts2.25.0@sha256:9dcbd18e5cb966398ae19f3882fd5fb2e19b3cb98be54d290ab9f69c75bf0a8b
     shm_size: 512mb
     ulimits:
       nofile:
         soft: 65536
         hard: 65536
-    command: postgres -c timescaledb.license=timescale -c timescaledb.max_tuples_decompressed_per_dml_transaction=0 -c max_locks_per_transaction=4096 -c timescaledb.telemetry_level=off
     environment:
-      - POSTGRES_USER=tracearr
-      - POSTGRES_PASSWORD=umbrel-tracearr-db
-      - POSTGRES_DB=tracearr
+      - TZ=Europe/London
+      - LOG_LEVEL=info
+      - JWT_SECRET=8f3c1a6b2e9d47c05a1f8b3d6e2c9a740b5d1e8f3a2c6b9d0e4f7a1c5b8d3e60
+      - COOKIE_SECRET=2a9f4c7e1b8d306a5f2c9e4b7d1a8f603c5e2b9d4a7f1c8e0b3d6a9f2c5e8b41
     volumes:
-      - timescale_data:/home/postgres/pgdata/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U tracearr"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: on-failure
-
-  redis:
-    image: redis:8-alpine@sha256:9d317178eceac8454a2284a9e6df2466b93c745529947f0cd42a0fa9609d7005
-    command: redis-server --appendonly yes
-    volumes:
-      - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - tracearr_data:/data
+      - tracearr_pgdata:/var/lib/postgresql/data
     restart: on-failure
 
 volumes:
-  tracearr_backups:
-  timescale_data:
-  redis_data:
+  tracearr_data:
+  tracearr_pgdata:
