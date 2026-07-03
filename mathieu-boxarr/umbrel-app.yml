@@ -1,0 +1,42 @@
+manifestVersion: 1
+id: mathieu-boxarr
+category: media
+name: Boxarr
+tagline: Weekly box office tracking that syncs with Radarr
+icon: https://raw.githubusercontent.com/iongpt/boxarr/main/src/web/static/boxar-logo.png
+version: "1.7.0"
+port: 8888
+description: >-
+  Boxarr is an automated box office tracking application that integrates with
+  Radarr to monitor, add, and manage the latest theatrical releases.
+
+
+  It shows the current box office top 10 (from Box Office Mojo), their status in
+  your Radarr library, and lets you manage quality profiles. Features include
+  weekly auto-updates, genre-based root folders, auto-add with smart filters
+  (genre, rating, release year), and a clean responsive web UI.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Boxarr is configured entirely from its web interface. After launching, open
+  Boxarr and point it at your Radarr instance (install Radarr from the Umbrel App
+  Store first). Then pick your quality profile and root folders, and Boxarr will
+  keep the weekly top 10 in sync.
+developer: iongpt
+website: https://github.com/iongpt/boxarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/iongpt/boxarr
+repo: https://github.com/iongpt/boxarr
+support: https://github.com/iongpt/boxarr/issues
+gallery:
+  - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/dashboard.png
+  - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/week-view.png
+  - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/images/auto-add-filters.png
+releaseNotes: >-
+  Initial release of Boxarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

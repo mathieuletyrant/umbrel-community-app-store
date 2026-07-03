@@ -1,0 +1,45 @@
+manifestVersion: 1
+id: mathieu-tracearr
+category: media
+name: Tracearr
+tagline: Real-time monitoring for Plex, Jellyfin, and Emby
+icon: https://raw.githubusercontent.com/connorgallopo/Tracearr/main/apps/web/public/apple-touch-icon.png
+version: "1.4.25"
+port: 3000
+description: >-
+  Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
+  open-source alternative to Tautulli and Jellystat.
+
+
+  From a single dashboard it tracks streams in real time across all your media
+  servers, keeps a complete session history with geolocation (who watched what,
+  when, where, and on which device), and detects account sharing with automated
+  rules (e.g. the same account streaming from two distant cities at once).
+
+
+  ⚙️ RESOURCES
+
+
+  Tracearr runs its own PostgreSQL (TimescaleDB) and Redis. Budget at least ~1.5 GB
+  of free RAM; low-memory devices may see the database get OOM-killed.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  After launching, open Tracearr, create your admin account, then add each of your
+  Plex / Jellyfin / Emby servers with their URL and API key/token.
+developer: Connor Gallopo
+website: https://tracearr.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/connorgallopo/Tracearr
+repo: https://github.com/connorgallopo/Tracearr
+support: https://github.com/connorgallopo/Tracearr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Tracearr for this Community App Store. Uses the recommended
+  multi-container deployment (TimescaleDB + Redis).
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

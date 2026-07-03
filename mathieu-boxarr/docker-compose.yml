@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-boxarr_server_1
+      APP_PORT: 8888
+
+  server:
+    image: ghcr.io/iongpt/boxarr:1.7.0@sha256:d6681612d0ab9aa4300dbd15aa815cc5a602950b2b800c5e8dfa75470bebc6cb
+    init: true
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+    restart: on-failure
