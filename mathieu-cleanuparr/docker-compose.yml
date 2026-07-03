@@ -16,4 +16,7 @@ services:
       - TZ=Europe/London
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
+      # Downloads dir (same path the *arr apps use) so Cleanuparr can check
+      # hardlinks for its orphaned / unlinked-download cleanup.
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure

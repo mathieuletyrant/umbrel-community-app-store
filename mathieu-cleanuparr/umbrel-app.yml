@@ -41,3 +41,5 @@ dependencies: []
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
