@@ -1,0 +1,41 @@
+manifestVersion: 1
+id: mathieu-healarr
+category: media
+name: Healarr
+tagline: Automated media library health monitoring and remediation
+icon: https://raw.githubusercontent.com/mescon/Healarr/main/frontend/public/healarr.svg
+version: "v1.3.17"
+port: 3090
+description: >-
+  Healarr is a media library health monitoring system. It detects issues in your
+  media files using ffprobe, MediaInfo, or HandBrake, then orchestrates the
+  complete remediation workflow.
+
+
+  When a corrupted or unhealthy file is found, Healarr automatically triggers a
+  re-download through Sonarr, Radarr, or Whisparr, and verifies the replacement
+  is healthy.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  After launching Healarr, open the web interface and set your password. Then
+  point Healarr at your *arr apps (Sonarr/Radarr/Whisparr) and configure which
+  library paths to scan. Your media is mounted read-only from Umbrel's downloads
+  storage at /media.
+developer: mescon
+website: https://github.com/mescon/Healarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mescon/Healarr
+repo: https://github.com/mescon/Healarr
+support: https://github.com/mescon/Healarr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Healarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
