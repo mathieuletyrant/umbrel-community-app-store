@@ -5,7 +5,7 @@ name: Decluttarr
 tagline: Keeps your *arr download queues free of junk (headless)
 icon: https://avatars.githubusercontent.com/u/124743318?v=4
 version: "2.1.0"
-port: 80
+port: 3737
 description: >-
   Decluttarr watches the download queues of Radarr, Sonarr, Lidarr, Readarr and
   Whisparr and automatically removes downloads that have become stalled, failed,

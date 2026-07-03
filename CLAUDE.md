@@ -88,6 +88,10 @@ this too.
 - Pick a real `icon` URL and, ideally, `gallery` images. If the upstream repo has
   no screenshots, use `gallery: []` rather than linking broken images.
 - Declare `permissions` the app needs (e.g. `STORAGE_DOWNLOADS`).
+- `port` is the **host** port Umbrel binds for the app — it must be unique across
+  installed apps and not a system port. **Never use 80/443** (taken by umbrelOS →
+  install fails with `failed to bind host port ... address already in use`). Pick
+  a free high port; it's independent of the container's internal `APP_PORT`.
 
 ## Verifying an image tag before publishing (avoid "manifest unknown")
 
