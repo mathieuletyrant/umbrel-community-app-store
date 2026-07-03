@@ -33,6 +33,12 @@ description: >-
   you're ready, set `TEST_RUN` to `False` in the app's compose on your Umbrel host
   at `~/umbrel/app-data/mathieu-decluttarr/docker-compose.yml`, restart the app,
   and follow it with `docker logs -f mathieu-decluttarr_server_1`.
+
+
+  ⚠️ IMPORTANT: the orphan / stalled / bad-files jobs need a SUPPORTED download
+  client (qBittorrent or SABnzbd — NOT Transmission) and are OFF by default.
+  With Transmission they would flag your entire library as removable. If you use
+  Transmission, use Cleanuparr instead for that kind of cleanup.
 developer: ManiMatter
 website: https://github.com/ManiMatter/decluttarr
 submitter: Mathieu Le Tyrant

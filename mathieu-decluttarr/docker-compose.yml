@@ -63,13 +63,19 @@ services:
       TEST_RUN: "True"
       # How often (minutes) to scan the queues.
       TIMER: 10
-      # Cleanup jobs — enable/disable as you like.
-      REMOVE_STALLED: "True"
+      # Cleanup jobs. Only the two below operate purely on the *arr download
+      # queue and are safe without a download client. They remove items the
+      # *arr itself has already marked failed.
       REMOVE_FAILED_DOWNLOADS: "True"
       REMOVE_FAILED_IMPORTS: "True"
-      REMOVE_METADATA_MISSING: "True"
-      REMOVE_ORPHANS: "True"
-      REMOVE_BAD_FILES: "True"
+      # ⚠️ The jobs below need a SUPPORTED download client (qBittorrent or
+      # SABnzbd — NOT Transmission). Without one, decluttarr can't tell what's
+      # legitimately claimed and will flag your ENTIRE library as orphaned/
+      # removable. Leave these "False" unless you run qBittorrent/SABnzbd.
+      REMOVE_ORPHANS: "False"
+      REMOVE_STALLED: "False"
+      REMOVE_METADATA_MISSING: "False"
+      REMOVE_BAD_FILES: "False"
       # ---- *arr connections ----
       # Hostnames point at Sonarr/Radarr from the official Umbrel App Store.
       # API keys are injected by exports.sh (auto-read from their config.xml).
