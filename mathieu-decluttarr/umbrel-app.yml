@@ -1,0 +1,49 @@
+manifestVersion: 1
+id: mathieu-decluttarr
+category: media
+name: Decluttarr
+tagline: Keeps your *arr download queues free of junk (headless)
+icon: https://avatars.githubusercontent.com/u/124743318?v=4
+version: "2.1.0"
+port: 80
+description: >-
+  Decluttarr watches the download queues of Radarr, Sonarr, Lidarr, Readarr and
+  Whisparr and automatically removes downloads that have become stalled, failed,
+  orphaned, or are no longer needed — then triggers a fresh search so you get a
+  clean copy instead of a stuck or duplicate one.
+
+
+  ⚠️ HEADLESS APP — NO WEB UI
+
+
+  Decluttarr has no interface of its own. Opening the app shows a small status
+  page confirming it runs. It is configured entirely through environment
+  variables.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Install Radarr and/or Sonarr from the official Umbrel App Store first —
+  Decluttarr auto-detects their API keys (the same way Prowlarr does), so there's
+  nothing to paste.
+
+
+  It ships in dry-run mode, so nothing is deleted until you turn it on. When
+  you're ready, set `TEST_RUN` to `False` in the app's compose on your Umbrel host
+  at `~/umbrel/app-data/mathieu-decluttarr/docker-compose.yml`, restart the app,
+  and follow it with `docker logs -f mathieu-decluttarr_server_1`.
+developer: ManiMatter
+website: https://github.com/ManiMatter/decluttarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/ManiMatter/decluttarr
+repo: https://github.com/ManiMatter/decluttarr
+support: https://github.com/ManiMatter/decluttarr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Decluttarr for this Community App Store. Runs headless with
+  a small status page, following the official Umbrel pattern for UI-less apps.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

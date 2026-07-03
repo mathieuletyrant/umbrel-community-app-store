@@ -1,0 +1,43 @@
+manifestVersion: 1
+id: mathieu-cleanuparr
+category: media
+name: Cleanuparr
+tagline: Automated download cleanup for the *arr stack
+icon: https://raw.githubusercontent.com/Cleanuparr/Cleanuparr/main/Logo/256.png
+version: "2.9.14"
+port: 11011
+description: >-
+  Cleanuparr is an advanced download manager for the Servarr ecosystem
+  (Sonarr, Radarr, Lidarr, Readarr, Whisparr).
+
+
+  It keeps your download queue and disk clean: it removes stalled, failed and
+  malicious/unwanted downloads, blocks them and triggers a fresh search in the
+  *arr apps, and cleans up orphaned downloads — files with no hardlinks or no
+  longer referenced by any *arr. It can scan your download directories for files
+  not claimed by any active torrent and move them aside, so you stop
+  accumulating duplicate and junk files.
+
+
+  Works with Transmission, qBittorrent, Deluge and SABnzbd.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  After launching, open Cleanuparr and connect it to your download client and
+  your *arr apps (URL + API key) from the web interface, then enable the cleanup
+  jobs you want.
+developer: Cleanuparr
+website: https://cleanuparr.github.io/Cleanuparr/
+submitter: Mathieu Le Tyrant
+submission: https://github.com/Cleanuparr/Cleanuparr
+repo: https://github.com/Cleanuparr/Cleanuparr
+support: https://github.com/Cleanuparr/Cleanuparr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Cleanuparr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
