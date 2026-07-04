@@ -3,5 +3,8 @@
 # which makes the container fail with "Could not create or access (files in) the
 # data directory". Pre-create the dir on the host and ensure 1000:1000 owns it
 # before the container starts.
-mkdir -p "${APP_DATA_DIR}/data/opt-data"
-chown -R 1000:1000 "${APP_DATA_DIR}/data/opt-data" 2>/dev/null || true
+#
+# NOTE: exports.sh runs on the host with `set -u`, and only UMBREL_ROOT is
+# available here (APP_DATA_DIR is NOT), so build the path from UMBREL_ROOT.
+mkdir -p "${UMBREL_ROOT}/app-data/mathieu-maintainerr/data/opt-data"
+chown -R 1000:1000 "${UMBREL_ROOT}/app-data/mathieu-maintainerr/data/opt-data" 2>/dev/null || true
