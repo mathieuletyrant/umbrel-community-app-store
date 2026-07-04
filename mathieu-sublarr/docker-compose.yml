@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-sublarr_server_1
+      APP_PORT: 5765
+
+  server:
+    image: ghcr.io/abrechen2/sublarr:1.5.0@sha256:800c83c160bff25e4163d773512cc823aa241cd5862ca5f4efe40b2206aac7a4
+    init: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      # Media mounted at the SAME path Sonarr/Radarr use (/downloads), so Sublarr
+      # writes subtitle files next to the media without path mapping.
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure

@@ -32,6 +32,7 @@ Current apps:
 - `mathieu-profilarr` — Profilarr (quality profiles/custom formats manager for Radarr/Sonarr, web UI on 6868; 2 services: server + optional parser)
 - `mathieu-maintainerr` — Maintainerr (rule-based Plex library cleanup, web UI on 6246; data at /opt/data)
 - `mathieu-lingarr` — Lingarr (subtitle translation for Radarr/Sonarr, web UI on 9876; embedded SQLite, media at /downloads)
+- `mathieu-sublarr` — Sublarr (all-in-one subtitle manager + LLM translator, web UI on 5765; runs as root, drops via gosu; media at /downloads)
 
 ## Adding or updating an app
 

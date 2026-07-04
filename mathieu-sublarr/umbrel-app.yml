@@ -1,0 +1,47 @@
+manifestVersion: 1
+id: mathieu-sublarr
+category: media
+name: Sublarr
+tagline: All-in-one subtitle manager & translator for the *arr stack
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
+version: "1.5.0"
+port: 5765
+description: >-
+  Sublarr is a self-hosted subtitle manager and LLM translator for anime and
+  media — fully local and *arr-compatible.
+
+
+  It searches 20+ subtitle providers in parallel, scores and de-duplicates
+  results, syncs timing with ffsubsync and alass, and can translate subtitles
+  with a local or SaaS LLM (12 backends). It also ships a waveform editor for
+  manual subtitle adjustment. Integrates with Sonarr, Radarr, Jellyfin and Emby
+  via webhooks, with tag-based language profiles and multi-instance support.
+
+
+  ℹ️ Sublarr overlaps Bazarr (subtitle download) and Lingarr (translation) — it's
+  a modern all-in-one alternative. Run whichever you prefer.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  After launching, open Sublarr and connect your Sonarr
+  (`http://sonarr_server_1:8989`) / Radarr (`http://radarr_server_1:7878`) with
+  their API keys, set your language profiles (e.g. French), and optionally a
+  translation backend. Media is mounted at /downloads, matching the paths the
+  *arr apps report.
+developer: Abrechen2
+website: https://sublarr.de
+submitter: Mathieu Le Tyrant
+submission: https://github.com/Abrechen2/sublarr
+repo: https://github.com/Abrechen2/sublarr
+support: https://github.com/Abrechen2/sublarr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Sublarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
