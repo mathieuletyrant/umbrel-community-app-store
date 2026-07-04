@@ -1,0 +1,52 @@
+manifestVersion: 1
+id: mathieu-lingarr
+category: media
+name: Lingarr
+tagline: Automated subtitle translation for Radarr/Sonarr
+icon: https://raw.githubusercontent.com/lingarr-translate/lingarr/main/Lingarr.Client/public/android-chrome-512x512.png
+version: "1.2.4"
+port: 9876
+description: >-
+  Lingarr automatically translates your subtitle files into the language you
+  want — perfect for getting French subtitles when a release only ships with
+  English (or another language).
+
+
+  It integrates with Radarr and Sonarr to know your library, and translates
+  using either a self-hosted engine (LibreTranslate) or a SaaS service (DeepL,
+  OpenAI, Google, Gemini, and more) via an API key. Translated subtitles are
+  written right next to your media files.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  After launching, open Lingarr and:
+
+  1. Connect Radarr (`http://radarr_server_1:7878`) and Sonarr
+  (`http://sonarr_server_1:8989`) with their API keys.
+
+  2. Pick a translation service — point it at a LibreTranslate instance, or add
+  an API key for DeepL / OpenAI / Google / Gemini.
+
+  3. Set your source and target languages (e.g. English → French) and enable
+  automation.
+
+
+  Your media is mounted at /downloads, matching the paths the *arr apps report,
+  so no path mapping is needed.
+developer: Lingarr
+website: https://lingarr.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/lingarr-translate/lingarr
+repo: https://github.com/lingarr-translate/lingarr
+support: https://github.com/lingarr-translate/lingarr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Lingarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS

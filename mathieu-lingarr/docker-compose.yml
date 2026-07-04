@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-lingarr_server_1
+      APP_PORT: 9876
+
+  server:
+    image: ghcr.io/lingarr-translate/lingarr:1.2.4@sha256:1acaed7642794141978d836a75227de4e5d927d580f99beffdd62cff0aa4ad41
+    init: true
+    environment:
+      - TZ=Europe/London
+      # Uses embedded SQLite by default (DB_CONNECTION unset) — no DB container.
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/app/config
+      # Media mounted at the SAME path Sonarr/Radarr use (/downloads), so Lingarr
+      # reads/writes subtitle files next to the media without path mapping.
+      # Read-write: Lingarr writes translated .srt files next to the videos.
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure
