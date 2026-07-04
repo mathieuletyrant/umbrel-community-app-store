@@ -80,10 +80,12 @@ services:
       # Uses *arr-reported speed without qBittorrent (inaccurate) — opt in only
       # after checking dry-run logs.
       REMOVE_SLOW: "False"
-      # Removes downloads whose movie/series was DELETED from the *arr since the
-      # download started (true orphans still seeding/queued). This is the core
-      # cleanup and works with Transmission. On by default; TEST_RUN gates it.
-      REMOVE_ORPHANS: "True"
+      # Off by default. decluttarr decides "orphan" from *arr queue/media
+      # linkage, which false-positives on downloads still seeding for a movie
+      # that IS in the *arr (and it also blocklists the release). Use
+      # Cleanuparr's Download Cleaner → Unlinked Download Settings instead: it
+      # decides by hardlinks on disk, which is correct for this case.
+      REMOVE_ORPHANS: "False"
       # ---- *arr connections ----
       # Hostnames point at Sonarr/Radarr from the official Umbrel App Store.
       # API keys are injected by exports.sh (auto-read from their config.xml).
