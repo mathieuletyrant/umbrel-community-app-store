@@ -54,9 +54,14 @@ Current apps:
   ```
 - Persist app data under `${APP_DATA_DIR}/data/...`.
   Umbrel owns this path as uid/gid **1000**.
-- Shared Umbrel storage is at `${UMBREL_ROOT}/data/storage/...`
-  (e.g. `downloads` is where the *arr apps place media). Mount read-only when
-  the app only needs to read.
+- Shared Umbrel storage is at `${UMBREL_ROOT}/data/storage/...` by the official
+  convention (e.g. `downloads`). **BUT on this owner's umbrelOS the media lives
+  in `${UMBREL_ROOT}/home/Downloads`** (the Files-app shared folder) — that path
+  is what the *arr apps actually use here, so media-touching apps in this store
+  mount `${UMBREL_ROOT}/home/Downloads:/downloads`, NOT `data/storage/downloads`.
+  The *arr containers expose it internally as `/downloads` (root folders
+  `/downloads/movies`, `/downloads/shows`); match that container path so file
+  paths line up. Mount read-only when the app only needs to read.
 - For images that use linuxserver-style `PUID`/`PGID`, set both to `1000` so the
   container's user matches Umbrel's data ownership.
 - **Do not add `cap_drop`, `security_opt: no-new-privileges`, or similar hardening

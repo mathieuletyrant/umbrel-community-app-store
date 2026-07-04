@@ -16,5 +16,7 @@ services:
       - HEALARR_PORT=3090
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
-      - ${UMBREL_ROOT}/data/storage/downloads:/media:ro
+      # Mounted at /downloads to match the paths Sonarr/Radarr report for files.
+      # Host path is umbrelOS's shared home/Downloads folder used by the *arr apps.
+      - ${UMBREL_ROOT}/home/Downloads:/downloads:ro
     restart: on-failure

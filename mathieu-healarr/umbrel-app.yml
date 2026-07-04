@@ -22,8 +22,8 @@ description: >-
 
   After launching Healarr, open the web interface and set your password. Then
   point Healarr at your *arr apps (Sonarr/Radarr/Whisparr) and configure which
-  library paths to scan. Your media is mounted read-only from Umbrel's downloads
-  storage at /media.
+  library paths to scan. Your media is mounted read-only at /downloads, matching
+  the paths the *arr apps report.
 developer: mescon
 website: https://github.com/mescon/Healarr
 submitter: Mathieu Le Tyrant
