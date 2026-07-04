@@ -11,6 +11,9 @@ services:
     init: true
     environment:
       - TZ=Europe/London
+      # The image is .NET (aspnet:10.0) with no port set, so Kestrel would
+      # default to 8080. Force it to 9876 to match app_proxy's APP_PORT.
+      - ASPNETCORE_URLS=http://+:9876
       # Uses embedded SQLite by default (DB_CONNECTION unset) — no DB container.
     volumes:
       - ${APP_DATA_DIR}/data/config:/app/config
