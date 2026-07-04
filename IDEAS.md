@@ -51,7 +51,7 @@ status-sidecar pattern, see CLAUDE.md).
 
 | App | What it does | Repo |
 | --- | --- | --- |
-| **Pulsarr** 🖥️ ⭐ | Real-time **Plex watchlist → Sonarr/Radarr**, driven from the Plex app. Maintained replacement for the dropped Watchlistarr. | `jamcalli/Pulsarr` |
+| ~~**Pulsarr**~~ | Real-time **Plex watchlist → Sonarr/Radarr**. | **Skip:** already covered by Overseerr/Jellyseerr's Plex Watchlist sync (which this setup uses). |
 | **Trailarr** 🖥️ | Downloads & manages **trailers** for your Radarr/Sonarr library. | `nandyalu/trailarr` |
 | **Prefetcharr** 🎧 | Makes Sonarr fetch the **next season** of a show you're watching (Jellyfin/Emby/Plex). | `p-hueber/prefetcharr` |
 | **Episeerr** 🖥️ | Sends/deletes episodes **one at a time** as you watch → saves space. | `Vansmak/episeerr` |
