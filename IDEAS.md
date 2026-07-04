@@ -26,7 +26,10 @@ status-sidecar pattern, see CLAUDE.md).
 | --- | --- |
 | **Recyclarr** 🎧 | Syncs **TRaSH-guides** quality profiles / custom formats into Sonarr/Radarr (the de-facto quality standard) |
 | **Unpackerr** 🎧 | Auto-**extracts** archived downloads for the *arr apps |
-| **Watchlistarr** 🎧 | Syncs your **Plex watchlist → Sonarr/Radarr** |
+
+> ❌ **Watchlistarr** — dropped: no longer actively maintained (last release v0.2.6).
+> Use **Overseerr / Jellyseerr** (official store) instead — they have native
+> **Plex Watchlist → Radarr/Sonarr** auto-request sync.
 
 ## Fun / bonus
 
