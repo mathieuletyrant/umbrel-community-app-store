@@ -3,7 +3,7 @@ id: mathieu-maintainerr
 category: media
 name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
-icon: https://raw.githubusercontent.com/maintainerr/maintainerr/main/apps/ui/public/apple-touch-icon.png
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
 version: "3.13.0"
 port: 6246
 description: >-

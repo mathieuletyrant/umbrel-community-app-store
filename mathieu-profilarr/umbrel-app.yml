@@ -3,7 +3,7 @@ id: mathieu-profilarr
 category: media
 name: Profilarr
 tagline: Quality profiles & custom formats manager for Radarr/Sonarr
-icon: https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/develop/src/lib/client/assets/logo-512.png
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/icon.png
 version: "2.0.9"
 port: 6868
 description: >-

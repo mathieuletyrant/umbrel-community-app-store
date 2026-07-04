@@ -3,7 +3,7 @@ id: mathieu-lingarr
 category: media
 name: Lingarr
 tagline: Automated subtitle translation for Radarr/Sonarr
-icon: https://raw.githubusercontent.com/lingarr-translate/lingarr/main/Lingarr.Client/public/android-chrome-512x512.png
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/icon.png
 version: "1.2.4"
 port: 9876
 description: >-

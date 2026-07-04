@@ -3,7 +3,7 @@ id: mathieu-tracearr
 category: media
 name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
-icon: https://raw.githubusercontent.com/connorgallopo/Tracearr/main/apps/web/public/apple-touch-icon.png
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 version: "1.4.29"
 port: 3000
 description: >-

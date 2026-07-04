@@ -3,7 +3,7 @@ id: mathieu-cleanuparr
 category: media
 name: Cleanuparr
 tagline: Automated download cleanup for the *arr stack
-icon: https://raw.githubusercontent.com/Cleanuparr/Cleanuparr/main/Logo/512.png
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/icon.png
 version: "2.9.15"
 port: 11011
 description: >-
