@@ -47,6 +47,18 @@ status-sidecar pattern, see CLAUDE.md).
 | **Notifiarr** 🖥️ | Universal **notification hub** for the *arr stack → Discord/Telegram/etc. | `Notifiarr/notifiarr` |
 | **FileFlows** 🖥️ | Media **processing/transcoding pipelines** (Tdarr alternative). | fileflows.com |
 
+## More finds (awesome-arr, 2026) — verified active
+
+| App | What it does | Repo |
+| --- | --- | --- |
+| **Pulsarr** 🖥️ ⭐ | Real-time **Plex watchlist → Sonarr/Radarr**, driven from the Plex app. Maintained replacement for the dropped Watchlistarr. | `jamcalli/Pulsarr` |
+| **Trailarr** 🖥️ | Downloads & manages **trailers** for your Radarr/Sonarr library. | `nandyalu/trailarr` |
+| **Prefetcharr** 🎧 | Makes Sonarr fetch the **next season** of a show you're watching (Jellyfin/Emby/Plex). | `p-hueber/prefetcharr` |
+| **Episeerr** 🖥️ | Sends/deletes episodes **one at a time** as you watch → saves space. | `Vansmak/episeerr` |
+| **Wrapperr** 🖥️ | **"Plex Wrapped"** yearly stats (via Tautulli). | `aunefyren/wrapperr` |
+| **Reiverr** 🖥️ | Unified Jellyfin + *arr UI (Overseerr-ish). Popular (⭐2k) but dev slowed (last commit Feb 2026). | `aleksilassila/reiverr` |
+| **Taggarr** 🖥️ | Dub analysis & tagging — filter shows by dub/VF. Niche. | `BassHous3/taggarr` |
+
 ## Fun / bonus
 
 - **Doplarr** / **Requestrr** — **Discord** bots to request movies/series directly from Discord.
