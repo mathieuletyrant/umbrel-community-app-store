@@ -13,7 +13,7 @@ status-sidecar pattern, see CLAUDE.md).
 
 | App | What it does | Notes |
 | --- | --- | --- |
-| **Huntarr** 🖥️ | Continuously searches for **missing / upgradeable** content across Sonarr/Radarr/Lidarr/… | Fills the library automatically. Very popular lately. |
+| ~~**Huntarr**~~ ⚠️ | Continuously searches for **missing / upgradeable** content across Sonarr/Radarr/Lidarr/… | **Avoid (2026):** GitHub repo pulled + alleged security issues (unauth writes, plaintext API keys). |
 | ~~**Maintainerr**~~ ✅ | Rule-based **media cleanup** (watched / old / low-watch) via Plex + Overseerr/Jellyseerr | **Added** (`mathieu-maintainerr`). |
 | **Cross-seed** 🖥️ | Automatic **cross-seeding** of your torrents across trackers | More ratio, no re-downloading what you already have. UI/API. |
 | **Tdarr** 🖥️ | Distributed **transcoding** + library health checks | Standardize/shrink files (H265 etc.). Powerful but resource-heavy. |
@@ -30,6 +30,22 @@ status-sidecar pattern, see CLAUDE.md).
 > ❌ **Watchlistarr** — dropped: no longer actively maintained (last release v0.2.6).
 > Use **Overseerr / Jellyseerr** (official store) instead — they have native
 > **Plex Watchlist → Radarr/Sonarr** auto-request sync.
+
+## French-content focused (found via GitHub search)
+
+| App | What it does | Repo |
+| --- | --- | --- |
+| **Lingarr** 🖥️ | **Auto-translates subtitles into French** (local or SaaS engines) when only e.g. English subs exist. Integrates with Radarr/Sonarr. | `lingarr-translate/lingarr` |
+| **Muxarr** 🖥️ | **Strips unwanted audio/subtitle tracks** without re-encoding (keep FR + original) → saves space, cleaner files. | `KirovAir/muxarr` |
+
+## Discovery / automation (found via GitHub search)
+
+| App | What it does | Repo |
+| --- | --- | --- |
+| **SuggestArr** 🖥️ | Auto-recommends & requests movies/shows to Overseerr/Jellyseerr based on watch activity. | `giuseppe99barchetta/SuggestArr` |
+| **Tunarr** 🖥️ | Build **live-TV channels** from your own library (modern ErsatzTV). | `chrisbenincasa/tunarr` |
+| **Notifiarr** 🖥️ | Universal **notification hub** for the *arr stack → Discord/Telegram/etc. | `Notifiarr/notifiarr` |
+| **FileFlows** 🖥️ | Media **processing/transcoding pipelines** (Tdarr alternative). | fileflows.com |
 
 ## Fun / bonus
 
