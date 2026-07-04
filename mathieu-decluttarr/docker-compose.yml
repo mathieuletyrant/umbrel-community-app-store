@@ -54,6 +54,10 @@ services:
     image: ghcr.io/manimatter/decluttarr:v2.1.0@sha256:c06d48426b612b845f2406c2d045f266468a6390faf87aea796d497a2935ec95
     init: true
     restart: on-failure
+    volumes:
+      # Mount the downloads dir at the SAME path Sonarr/Radarr use (/downloads),
+      # so the detect_deletions job can see the files. Same mount as the *arr apps.
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     environment:
       TZ: Europe/London
       PUID: 1000
