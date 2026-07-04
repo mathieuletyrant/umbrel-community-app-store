@@ -1,0 +1,41 @@
+manifestVersion: 1
+id: mathieu-maintainerr
+category: media
+name: Maintainerr
+tagline: Rule-based media library cleanup for Plex
+icon: https://raw.githubusercontent.com/maintainerr/maintainerr/main/apps/ui/public/apple-touch-icon.png
+version: "3.13.0"
+port: 6246
+description: >-
+  Maintainerr helps you keep your media library lean. You build rules from data
+  across Plex, Overseerr/Jellyseerr, Radarr/Sonarr and Tautulli (e.g. "watched
+  more than 30 days ago", "added over a year ago and never played", "not on
+  anyone's watchlist") and Maintainerr collects the matching movies/shows.
+
+
+  Matched media can be surfaced in a Plex collection (a "Leaving Soon" shelf so
+  users get a heads-up) and then automatically deleted through Radarr/Sonarr
+  after a configurable grace period — reclaiming disk space without you hunting
+  through your library by hand.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  After launching, open Maintainerr and sign in to Plex (built-in Plex login — no
+  token needed). Then add your Radarr (`http://radarr_server_1:7878`) and Sonarr
+  (`http://sonarr_server_1:8989`) with their API keys, plus optionally Overseerr
+  / Jellyseerr and Tautulli. Finally build your rules and collections.
+developer: Maintainerr
+website: https://maintainerr.info
+submitter: Mathieu Le Tyrant
+submission: https://github.com/maintainerr/maintainerr
+repo: https://github.com/maintainerr/maintainerr
+support: https://github.com/maintainerr/maintainerr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Maintainerr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

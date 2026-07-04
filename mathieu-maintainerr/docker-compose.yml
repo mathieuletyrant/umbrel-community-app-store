@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-maintainerr_server_1
+      APP_PORT: 6246
+
+  server:
+    image: ghcr.io/maintainerr/maintainerr:3.13.0@sha256:077060b2c206cce97eb0539aadb0e83cb8ed2add2c3dcd62d2ca631943d1d4a7
+    init: true
+    environment:
+      - TZ=Europe/London
+    volumes:
+      - ${APP_DATA_DIR}/data/opt-data:/opt/data
+    restart: on-failure

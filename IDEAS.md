@@ -14,7 +14,7 @@ status-sidecar pattern, see CLAUDE.md).
 | App | What it does | Notes |
 | --- | --- | --- |
 | **Huntarr** 🖥️ | Continuously searches for **missing / upgradeable** content across Sonarr/Radarr/Lidarr/… | Fills the library automatically. Very popular lately. |
-| **Maintainerr** 🖥️ | Rule-based **media cleanup** (watched / old / low-watch) via Plex + Overseerr/Jellyseerr | Library-side counterpart to Cleanuparr. Polished UI. |
+| ~~**Maintainerr**~~ ✅ | Rule-based **media cleanup** (watched / old / low-watch) via Plex + Overseerr/Jellyseerr | **Added** (`mathieu-maintainerr`). |
 | **Cross-seed** 🖥️ | Automatic **cross-seeding** of your torrents across trackers | More ratio, no re-downloading what you already have. UI/API. |
 | **Tdarr** 🖥️ | Distributed **transcoding** + library health checks | Standardize/shrink files (H265 etc.). Powerful but resource-heavy. |
 
