@@ -1,0 +1,47 @@
+# App ideas (backlog)
+
+Media / *arr companion apps we could add to this store later. All checked against
+the official Umbrel App Store — **none of these are in it** (so no duplicates with
+Sonarr, Radarr, Lidarr, Readarr, Prowlarr, Bazarr, Jackett, Autobrr,
+flaresolverr, Jellyseerr, Overseerr, Tautulli, Transmission, qBittorrent,
+SABnzbd, Jellyfin/Plex/Emby, etc. which are already official).
+
+Legend: 🖥️ = has a web UI (easy Umbrel fit) · 🎧 = headless (needs the nginx
+status-sidecar pattern, see CLAUDE.md).
+
+## Top picks (web UI)
+
+| App | What it does | Notes |
+| --- | --- | --- |
+| **Huntarr** 🖥️ | Continuously searches for **missing / upgradeable** content across Sonarr/Radarr/Lidarr/… | Fills the library automatically. Very popular lately. |
+| **Maintainerr** 🖥️ | Rule-based **media cleanup** (watched / old / low-watch) via Plex + Overseerr/Jellyseerr | Library-side counterpart to Cleanuparr. Polished UI. |
+| **Cross-seed** 🖥️ | Automatic **cross-seeding** of your torrents across trackers | More ratio, no re-downloading what you already have. UI/API. |
+| **Profilarr** 🖥️ | Git-based management of **quality profiles / custom formats** (TRaSH guides) | Pro-grade quality config without doing it by hand. |
+| **Tdarr** 🖥️ | Distributed **transcoding** + library health checks | Standardize/shrink files (H265 etc.). Powerful but resource-heavy. |
+
+## Useful but headless (need sidecar pattern)
+
+| App | What it does |
+| --- | --- |
+| **Recyclarr** 🎧 | Syncs **TRaSH-guides** quality profiles / custom formats into Sonarr/Radarr (the de-facto quality standard) |
+| **Unpackerr** 🎧 | Auto-**extracts** archived downloads for the *arr apps |
+| **Watchlistarr** 🎧 | Syncs your **Plex watchlist → Sonarr/Radarr** |
+
+## Fun / bonus
+
+- **Doplarr** / **Requestrr** — **Discord** bots to request movies/series directly from Discord.
+
+## Also considered (overlap with existing / niche)
+
+- **Checkrr** — corrupt/mismatched media scanner (overlaps Healarr).
+- **Janitorr** — disk-space-based media cleanup (overlaps Maintainerr).
+- **Kometa** (Plex Meta Manager) — collections/metadata (headless, config-heavy).
+- **Posterizarr** — poster management.
+- **Gaps** — find missing movies in collections (Radarr).
+- **Jellystat / Streamystats** — Jellyfin stats (overlaps Tracearr).
+
+## Recommended next 3 (given a Transmission + *arr + cleanup setup)
+
+1. **Huntarr** — fill the library
+2. **Maintainerr** — rule-based library cleanup
+3. **Recyclarr** or **Profilarr** — release quality
