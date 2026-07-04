@@ -1,0 +1,43 @@
+manifestVersion: 1
+id: mathieu-profilarr
+category: media
+name: Profilarr
+tagline: Quality profiles & custom formats manager for Radarr/Sonarr
+icon: https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/develop/src/lib/client/assets/logo-512.png
+version: "2.0.9"
+port: 6868
+description: >-
+  Profilarr is a configuration management platform for Radarr and Sonarr. It
+  takes the pain out of setting up quality — pull curated, community-maintained
+  custom formats and quality profiles (TRaSH-guides style), keep them in sync,
+  and push them to all your *arr instances from one place.
+
+
+  Instead of hand-copying dozens of custom formats and scores across Radarr and
+  Sonarr, you import a database, tweak what you want, and Profilarr syncs it —
+  with Git-style versioning so you can pull updates and see exactly what changed.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  After launching, open Profilarr and connect your Radarr
+  (`http://radarr_server_1:7878`) and Sonarr (`http://sonarr_server_1:8989`)
+  instances with their API keys (Settings → General → API Key). Then import a
+  profile database, choose your profiles/custom formats, and sync them across.
+developer: Dictionarry
+website: https://dictionarry.dev
+submitter: Mathieu Le Tyrant
+submission: https://github.com/Dictionarry-Hub/profilarr
+repo: https://github.com/Dictionarry-Hub/profilarr
+support: https://github.com/Dictionarry-Hub/profilarr/issues
+gallery:
+  - https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/develop/.github/assets/hero-dark.png
+  - https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/develop/.github/assets/qp-list-dark.png
+  - https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/develop/.github/assets/upgrades-dark.png
+releaseNotes: >-
+  Initial release of Profilarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

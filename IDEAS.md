@@ -16,8 +16,9 @@ status-sidecar pattern, see CLAUDE.md).
 | **Huntarr** 🖥️ | Continuously searches for **missing / upgradeable** content across Sonarr/Radarr/Lidarr/… | Fills the library automatically. Very popular lately. |
 | **Maintainerr** 🖥️ | Rule-based **media cleanup** (watched / old / low-watch) via Plex + Overseerr/Jellyseerr | Library-side counterpart to Cleanuparr. Polished UI. |
 | **Cross-seed** 🖥️ | Automatic **cross-seeding** of your torrents across trackers | More ratio, no re-downloading what you already have. UI/API. |
-| **Profilarr** 🖥️ | Git-based management of **quality profiles / custom formats** (TRaSH guides) | Pro-grade quality config without doing it by hand. |
 | **Tdarr** 🖥️ | Distributed **transcoding** + library health checks | Standardize/shrink files (H265 etc.). Powerful but resource-heavy. |
+
+> ✅ **Profilarr** — added to the store (`mathieu-profilarr`).
 
 ## Useful but headless (need sidecar pattern)
 

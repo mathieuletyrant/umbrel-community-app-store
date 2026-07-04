@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-profilarr_server_1
+      APP_PORT: 6868
+
+  server:
+    image: ghcr.io/dictionarry-hub/profilarr:2.0.9@sha256:7a9b5112ff227320d17c65ab643a5d875713e6235991ef04a8e482ec51427902
+    init: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=022
+      - TZ=Europe/London
+      - PARSER_HOST=parser
+      - PARSER_PORT=5000
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+    depends_on:
+      parser:
+        condition: service_started
+    restart: on-failure
+
+  # Optional companion — only used for the custom-format / quality-profile
+  # testing features. Kept internal (not exposed on the host).
+  parser:
+    image: ghcr.io/dictionarry-hub/profilarr-parser:latest@sha256:16b22ef6485e135cc660cd511697c637d44649753d02397c9374e1317cfaaf0e
+    init: true
+    expose:
+      - "5000"
+    restart: on-failure
