@@ -13,6 +13,13 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
+      # Allow the websocket/CORS from any origin — Umbrel apps are reached via
+      # many hostnames (umbrel.local, LAN IP, Tailscale…) and sit behind
+      # Umbrel's trusted auth proxy. Without this, the UI logs
+      # "<origin> is not an accepted origin" and live updates break.
+      - SUBLARR_CORS_ORIGINS=*
+      # Media root — matches where the library is mounted below.
+      - SUBLARR_MEDIA_PATH=/downloads
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
       # Media mounted at the SAME path Sonarr/Radarr use (/downloads), so Sublarr
