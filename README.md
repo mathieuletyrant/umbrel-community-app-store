@@ -15,7 +15,6 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Boxarr** | Tracks the **weekly box office top 10** and syncs it with Radarr: check what's already in your library, auto-add trending movies with smart filters, manage quality profiles. |
 | **Tracearr** | Real-time **monitoring for Plex, Jellyfin & Emby** (an open-source Tautulli / Jellystat alternative): stream tracking, session history with geolocation, and account-sharing detection — all from one dashboard. |
 | **Cleanuparr** | **Download queue cleanup** for the *arr stack: removes stalled, failed and orphaned downloads (no hardlinks / unclaimed files), then re-triggers a search. Web UI, works with Transmission / qBittorrent / SABnzbd. |
-| **Decluttarr** | Lightweight **headless** *arr queue cleaner. Auto-detects your Sonarr/Radarr API keys (like Prowlarr) and removes stalled / failed / orphaned downloads on a timer. No UI — configured via env, ships in dry-run mode. |
 
 ## 🚀 How to install
 

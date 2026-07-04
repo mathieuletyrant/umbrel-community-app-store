@@ -29,7 +29,6 @@ Current apps:
 - `mathieu-boxarr` — Boxarr (box office tracking, syncs with Radarr)
 - `mathieu-tracearr` — Tracearr (Plex/Jellyfin/Emby monitoring; single-container "supervised" image with bundled TimescaleDB + Redis)
 - `mathieu-cleanuparr` — Cleanuparr (download queue cleanup for the *arr stack, web UI on 11011)
-- `mathieu-decluttarr` — Decluttarr (headless *arr queue cleaner; see headless pattern below)
 
 ## Adding or updating an app
 
@@ -76,12 +75,13 @@ Current apps:
 `app_proxy` **requires** a TCP port to proxy — an app with no listening port
 never becomes reachable and the tile can't be opened. The official store's
 pattern (see `flaresolverr`) is to add a tiny **status web sidecar** as the
-`app_proxy` target and run the headless worker as a separate service. We do the
-same for `mathieu-decluttarr`: an `nginx:alpine` `web` service serves a small
-static status page (written inline via `command:`), `app_proxy` points at it,
-and the `server` worker runs alongside. Headless apps that need per-user config
-(API keys) are configured by editing env in the app's compose on the host
+`app_proxy` target and run the headless worker as a separate service: e.g. an
+`nginx:alpine` `web` service serving a small static status page (written inline
+via `command:`), with `app_proxy` pointing at it and the `server` worker running
+alongside. Headless apps that need per-user config (API keys) are configured by
+editing env in the app's compose on the host
 (`~/umbrel/app-data/<app-id>/docker-compose.yml`); document this in the listing.
+(This store previously shipped `mathieu-decluttarr` this way; it was removed.)
 
 Cross-app networking works via `<other-app-id>_<service>_1` hostnames (e.g.
 `radarr_server_1:7878`, `sonarr_server_1:8989`) — the official *arr apps rely on
