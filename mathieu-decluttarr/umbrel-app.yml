@@ -35,10 +35,10 @@ description: >-
   and follow it with `docker logs -f mathieu-decluttarr_server_1`.
 
 
-  ⚠️ IMPORTANT: the orphan / stalled / bad-files jobs need a SUPPORTED download
-  client (qBittorrent or SABnzbd — NOT Transmission) and are OFF by default.
-  With Transmission they would flag your entire library as removable. If you use
-  Transmission, use Cleanuparr instead for that kind of cleanup.
+  ℹ️ DOWNLOAD CLIENT: Decluttarr reads the queue from Sonarr/Radarr, so it works
+  with Transmission out of the box (no download client is configured inside it).
+  Only `REMOVE_BAD_FILES` requires qBittorrent and is off by default; everything
+  else — including orphan cleanup — works with Transmission.
 developer: ManiMatter
 website: https://github.com/ManiMatter/decluttarr
 submitter: Mathieu Le Tyrant

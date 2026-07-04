@@ -63,19 +63,23 @@ services:
       TEST_RUN: "True"
       # How often (minutes) to scan the queues.
       TIMER: 10
-      # Cleanup jobs. Only the two below operate purely on the *arr download
-      # queue and are safe without a download client. They remove items the
-      # *arr itself has already marked failed.
+      # Cleanup jobs. Decluttarr reads the queue from Sonarr/Radarr, so these
+      # work with Transmission as long as NO download client is configured
+      # below (see decluttarr issues #57 / #81).
       REMOVE_FAILED_DOWNLOADS: "True"
       REMOVE_FAILED_IMPORTS: "True"
-      # ⚠️ The jobs below need a SUPPORTED download client (qBittorrent or
-      # SABnzbd — NOT Transmission). Without one, decluttarr can't tell what's
-      # legitimately claimed and will flag your ENTIRE library as orphaned/
-      # removable. Leave these "False" unless you run qBittorrent/SABnzbd.
-      REMOVE_ORPHANS: "False"
-      REMOVE_STALLED: "False"
-      REMOVE_METADATA_MISSING: "False"
+      REMOVE_METADATA_MISSING: "True"
+      REMOVE_STALLED: "True"
+      REMOVE_UNMONITORED: "True"
+      # Needs qBittorrent — cannot work with Transmission. Keep off.
       REMOVE_BAD_FILES: "False"
+      # Uses *arr-reported speed without qBittorrent (inaccurate) — opt in only
+      # after checking dry-run logs.
+      REMOVE_SLOW: "False"
+      # Removes downloads whose movie/series was DELETED from the *arr since the
+      # download started (true orphans still seeding/queued). This is the core
+      # cleanup and works with Transmission. On by default; TEST_RUN gates it.
+      REMOVE_ORPHANS: "True"
       # ---- *arr connections ----
       # Hostnames point at Sonarr/Radarr from the official Umbrel App Store.
       # API keys are injected by exports.sh (auto-read from their config.xml).
