@@ -3,8 +3,8 @@ id: mathieu-cleanuparr
 category: media
 name: Cleanuparr
 tagline: Automated download cleanup for the *arr stack
-icon: https://raw.githubusercontent.com/Cleanuparr/Cleanuparr/main/Logo/256.png
-version: "2.9.14"
+icon: https://raw.githubusercontent.com/Cleanuparr/Cleanuparr/main/Logo/512.png
+version: "2.9.15"
 port: 11011
 description: >-
   Cleanuparr is an advanced download manager for the Servarr ecosystem
