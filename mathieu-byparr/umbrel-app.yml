@@ -1,0 +1,45 @@
+manifestVersion: 1
+id: mathieu-byparr
+category: media
+name: Byparr
+tagline: Cloudflare-bypass proxy for Prowlarr/Jackett (FlareSolverr replacement)
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-byparr/icon.png
+# renovate: datasource=docker depName=ghcr.io/thephaseless/byparr
+version: "2.1.0"
+port: 8191
+description: >-
+  Byparr is a drop-in replacement for FlareSolverr: a proxy server that solves
+  the Cloudflare "checking your browser" challenges that block some indexers.
+
+
+  It exposes the same HTTP API as FlareSolverr on port 8191, but drives a modern
+  stealth browser (Camoufox / seleniumbase) that stands up far better to today's
+  Cloudflare and DDoS-Guard protections — where the original FlareSolverr
+  increasingly fails.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Install Prowlarr (or Jackett) from the Umbrel App Store first. In Prowlarr go
+  to Settings → Indexers → add a FlareSolverr proxy, and point the Host at
+  http://mathieu-byparr_server_1:8191 . Add a matching tag to the indexers that
+  need Cloudflare bypass. That's it — Byparr needs no configuration of its own.
+
+
+  Note: Byparr runs a real headless browser, so it uses more RAM than
+  FlareSolverr. It only responds to API requests; opening its tile shows the
+  FastAPI docs page, which is normal.
+developer: ThePhaseless
+website: https://github.com/ThePhaseless/Byparr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/ThePhaseless/Byparr
+repo: https://github.com/ThePhaseless/Byparr
+support: https://github.com/ThePhaseless/Byparr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Byparr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

@@ -19,6 +19,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Maintainerr** | **Rule-based library cleanup** for Plex: collect media by rules (watched, old, unrequested…), show a "Leaving Soon" Plex collection, then auto-delete via Radarr/Sonarr after a grace period. |
 | **Lingarr** | **Automated subtitle translation** for Radarr/Sonarr: translate subtitles into French (or any language) via LibreTranslate or a SaaS engine (DeepL, OpenAI…), written next to your media. |
 | **Sublarr** | **All-in-one subtitle manager & LLM translator**: searches 20+ providers, syncs timing (ffsubsync/alass), translates, and includes a waveform editor. A modern alternative to Bazarr + Lingarr. |
+| **Byparr** | **Cloudflare-bypass proxy** for Prowlarr / Jackett: a drop-in **FlareSolverr replacement** that drives a modern stealth browser, standing up better to today's Cloudflare / DDoS-Guard challenges. |
 
 ## 🚀 How to install
 
@@ -35,16 +36,6 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 > ℹ️ Community app stores are third-party. Only add stores you trust — you're
 > running their apps on your own hardware.
 
-## 🧩 Notes per app
-
-- **Healarr** — mounts Umbrel's downloads storage read-only at `/media`. Point it
-  at your *arr apps and choose which library paths to scan.
-- **Boxarr** — configured entirely from its web UI. Install **Radarr** first and
-  connect Boxarr to it.
-- **Tracearr** — runs a bundled PostgreSQL (TimescaleDB) + Redis in a single
-  container. Budget **~3 GB of free RAM**; on low-memory devices the database can
-  get OOM-killed. Add your Plex / Jellyfin / Emby servers after first launch.
-
 ## 🛠️ Contributing / structure
 
 Each app lives in its own folder prefixed with the store id `mathieu-`:
@@ -54,6 +45,7 @@ umbrel-app-store.yml        # store id + name
 mathieu-<app>/
   umbrel-app.yml            # listing metadata (name, icon, description, port…)
   docker-compose.yml        # the app's services, behind Umbrel's app_proxy
+  NOTES.md                  # per-app setup notes / gotchas (optional)
 ```
 
 See [`CLAUDE.md`](./CLAUDE.md) for the packaging conventions and gotchas used

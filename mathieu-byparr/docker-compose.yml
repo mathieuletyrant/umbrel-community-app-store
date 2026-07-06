@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-byparr_server_1
+      APP_PORT: 8191
+
+  server:
+    image: ghcr.io/thephaseless/byparr:2.1.0@sha256:01a46a2865d9a6db5eb8ead04ec0dd33b8fbe233e8565ae70b50d4cc0af4cfb0
+    init: true
+    shm_size: 2gb
+    environment:
+      - TZ=Europe/Paris
+      - PORT=8191
+    restart: on-failure
