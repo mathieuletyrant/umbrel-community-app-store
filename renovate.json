@@ -9,6 +9,8 @@
   "labels": ["dependencies"],
   "pinDigests": true,
   "separateMinorPatch": true,
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
   "platformAutomerge": true,
   "customManagers": [
     {
