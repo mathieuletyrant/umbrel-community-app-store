@@ -12,7 +12,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Europe/Paris
       # Allow the websocket/CORS from any origin — Umbrel apps are reached via
       # many hostnames (umbrel.local, LAN IP, Tailscale…) and sit behind
       # Umbrel's trusted auth proxy. Without this, the UI logs

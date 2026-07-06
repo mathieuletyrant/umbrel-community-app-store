@@ -10,7 +10,7 @@ services:
     image: ghcr.io/maintainerr/maintainerr:3.17.0@sha256:59d0095f05ec11aef2d271812903ed4a0738338044f44bbb3f2165c89ebcd06e
     init: true
     environment:
-      - TZ=Europe/London
+      - TZ=Europe/Paris
     volumes:
       - ${APP_DATA_DIR}/data/opt-data:/opt/data
     restart: on-failure

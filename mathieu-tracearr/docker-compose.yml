@@ -19,7 +19,7 @@ services:
         soft: 65536
         hard: 65536
     environment:
-      - TZ=Europe/London
+      - TZ=Europe/Paris
       - LOG_LEVEL=info
       - JWT_SECRET=8f3c1a6b2e9d47c05a1f8b3d6e2c9a740b5d1e8f3a2c6b9d0e4f7a1c5b8d3e60
       - COOKIE_SECRET=2a9f4c7e1b8d306a5f2c9e4b7d1a8f603c5e2b9d4a7f1c8e0b3d6a9f2c5e8b41

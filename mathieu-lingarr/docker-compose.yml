@@ -10,7 +10,7 @@ services:
     image: ghcr.io/lingarr-translate/lingarr:1.2.4@sha256:1acaed7642794141978d836a75227de4e5d927d580f99beffdd62cff0aa4ad41
     init: true
     environment:
-      - TZ=Europe/London
+      - TZ=Europe/Paris
       # The image is .NET (aspnet:10.0) with no port set, so Kestrel would
       # default to 8080. Force it to 9876 to match app_proxy's APP_PORT.
       - ASPNETCORE_URLS=http://+:9876
