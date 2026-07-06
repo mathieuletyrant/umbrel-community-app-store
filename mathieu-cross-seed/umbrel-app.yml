@@ -43,7 +43,8 @@ support: https://github.com/cross-seed/cross-seed/issues
 gallery: []
 releaseNotes: >-
   Initial release of cross-seed for this Community App Store.
-dependencies: []
+dependencies:
+  - transmission
 path: ""
 defaultUsername: ""
 defaultPassword: ""
