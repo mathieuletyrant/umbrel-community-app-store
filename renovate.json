@@ -35,6 +35,7 @@
     { "matchPackageNames": ["ghcr.io/iongpt/boxarr"], "commitMessageTopic": "Boxarr" },
     { "matchPackageNames": ["ghcr.io/thephaseless/byparr"], "commitMessageTopic": "Byparr" },
     { "matchPackageNames": ["ghcr.io/cleanuparr/cleanuparr"], "commitMessageTopic": "Cleanuparr" },
+    { "matchPackageNames": ["ghcr.io/cross-seed/cross-seed"], "commitMessageTopic": "cross-seed" },
     { "matchPackageNames": ["ghcr.io/mescon/healarr"], "commitMessageTopic": "Healarr" },
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
     { "matchPackageNames": ["ghcr.io/maintainerr/maintainerr"], "commitMessageTopic": "Maintainerr" },

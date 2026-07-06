@@ -21,6 +21,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Sublarr** | **All-in-one subtitle manager & LLM translator**: searches 20+ providers, syncs timing (ffsubsync/alass), translates, and includes a waveform editor. A modern alternative to Bazarr + Lingarr. |
 | **Byparr** | **Cloudflare-bypass proxy** for Prowlarr / Jackett: a drop-in **FlareSolverr replacement** that drives a modern stealth browser, standing up better to today's Cloudflare / DDoS-Guard challenges. |
 | **SuggestArr** | **Automatic "what to watch" recommendations**: reads your Plex / Jellyfin / Emby history, finds similar titles (TMDb or any OpenAI-compatible LLM), and auto-requests them through Jellyseerr / Overseerr. |
+| **cross-seed** | **Automatic cross-seeding**: finds torrents on your other trackers matching what you already seed and injects them into Transmission — more ratio on every tracker, zero extra disk space (hardlinks). |
 
 ## 🚀 How to install
 
