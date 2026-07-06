@@ -1,0 +1,51 @@
+manifestVersion: 1
+id: mathieu-cross-seed
+category: media
+name: cross-seed
+tagline: Fully-automatic cross-seeding across your trackers
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
+# renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
+version: "6.13.7"
+port: 2468
+description: >-
+  cross-seed finds torrents on your other trackers that match what you are
+  already seeding, and adds them to Transmission automatically — boosting your
+  ratio on every tracker without downloading anything twice or using extra disk
+  space (matches are hardlinked).
+
+
+  It runs headless as a background daemon: it periodically searches your
+  indexers for everything you seed, watches their RSS feeds for new matches,
+  and injects the cross-seedable torrents straight into Transmission, paused
+  rechecks included.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  cross-seed has no web interface — opening the app shows a status page with
+  these instructions. It is pre-configured for the official Transmission app;
+  you only need to tell it which indexers to search. On your Umbrel host, edit:
+
+
+  ~/umbrel/app-data/mathieu-cross-seed/data/config/config.js
+
+
+  and add one Torznab URL per tracker (copy them from Prowlarr, with your
+  Prowlarr API key), then restart the app. Check activity with:
+  docker logs -f mathieu-cross-seed_daemon_1
+developer: cross-seed
+website: https://www.cross-seed.org
+submitter: Mathieu Le Tyrant
+submission: https://github.com/cross-seed/cross-seed
+repo: https://github.com/cross-seed/cross-seed
+support: https://github.com/cross-seed/cross-seed/issues
+gallery: []
+releaseNotes: >-
+  Initial release of cross-seed for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS

@@ -1,0 +1,77 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-cross-seed_web_1
+      APP_PORT: 80
+
+  web:
+    image: nginx:alpine@sha256:54f2a904c251d5a34adf545a72d32515a15e08418dae0266e23be2e18c66fefa
+    init: true
+    restart: on-failure
+    command:
+      - sh
+      - -c
+      - |
+        cat > /usr/share/nginx/html/index.html <<'HTML'
+        <!doctype html><html lang="en"><head><meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>cross-seed</title>
+        <style>body{font-family:system-ui,sans-serif;max-width:640px;margin:12vh auto;padding:0 24px;line-height:1.6;color:#1a1a1a}code{background:#f0f0f0;padding:2px 6px;border-radius:4px}h1{margin-bottom:.2em}</style>
+        </head><body>
+        <h1>🌱 cross-seed</h1>
+        <p>cross-seed runs <strong>headless</strong> in the background &mdash; it has no web interface. This page just confirms the app is installed.</p>
+        <p>It finds torrents on your other trackers matching what you already seed in Transmission and injects them &mdash; more ratio without re-downloading anything.</p>
+        <h3>Setup</h3>
+        <p>Add your trackers' Torznab URLs (copied from Prowlarr) to the config on your Umbrel host:</p>
+        <p><code>~/umbrel/app-data/mathieu-cross-seed/data/config/config.js</code></p>
+        <p>then restart the app. Watch progress with<br><code>docker logs -f mathieu-cross-seed_daemon_1</code></p>
+        </body></html>
+        HTML
+        exec nginx -g 'daemon off;'
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  daemon:
+    image: ghcr.io/cross-seed/cross-seed:6.13.7@sha256:a1fed512261fd968c55cb03c51cff9c6620aa76a34b3b591afca95c890aa8225
+    init: true
+    restart: on-failure
+    entrypoint:
+      - sh
+      - -c
+      # Seed a starter config on first run only; user edits are never touched.
+      - |
+        [ -f /config/config.js ] || cat > /config/config.js <<'EOF'
+        // cross-seed configuration.
+        // Add your trackers' Torznab URLs below, then restart the app.
+        // All options: https://www.cross-seed.org/docs/basics/options
+        module.exports = {
+          delay: 30,
+          torznab: [
+            // One entry per tracker. In Prowlarr: Indexers -> click the
+            // indexer -> copy its Torznab URL + your Prowlarr API key, e.g.
+            // "http://prowlarr_server_1:9696/1/api?apikey=YOUR_PROWLARR_API_KEY",
+          ],
+          useClientTorrents: true,
+          torrentClients: [
+            "transmission:http://transmission_server_1:9091/transmission/rpc",
+          ],
+          action: "inject",
+          linkDirs: ["/downloads/cross-seed"],
+          linkType: "hardlink",
+          matchMode: "flexible",
+          rssCadence: "30 minutes",
+          searchCadence: "1 day",
+          port: 2468,
+        };
+        EOF
+        exec cross-seed daemon
+    environment:
+      TZ: Europe/Paris
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/home/Downloads:/downloads

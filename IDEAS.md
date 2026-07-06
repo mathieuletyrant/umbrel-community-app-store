@@ -16,7 +16,7 @@ status-sidecar pattern, see CLAUDE.md).
 | ~~**Huntarr**~~ ⛔ | Continuously searches for **missing / upgradeable** content across Sonarr/Radarr/Lidarr/… | **Dead — do NOT use (2026):** repo deleted (404); confirmed unauth auth-bypass leaking every connected *arr API key. Maintained successor is **NeutArr** (`iampuid0/neutarr`), a hardened fork — consider that instead. |
 | ~~**Byparr**~~ ✅ | **Cloudflare-bypass proxy** (drop-in FlareSolverr replacement) for Prowlarr/Jackett | **Added** (`mathieu-byparr`). |
 | ~~**Maintainerr**~~ ✅ | Rule-based **media cleanup** (watched / old / low-watch) via Plex + Overseerr/Jellyseerr | **Added** (`mathieu-maintainerr`). |
-| **Cross-seed** 🖥️ | Automatic **cross-seeding** of your torrents across trackers | More ratio, no re-downloading what you already have. UI/API. |
+| ~~**Cross-seed**~~ ✅ | Automatic **cross-seeding** of your torrents across trackers | **Added** (`mathieu-cross-seed`). Headless (API only, no UI) → status-sidecar pattern. |
 | **Tdarr** 🖥️ | Distributed **transcoding** + library health checks | Standardize/shrink files (H265 etc.). Powerful but resource-heavy. |
 
 > ✅ **Profilarr** — added to the store (`mathieu-profilarr`).
