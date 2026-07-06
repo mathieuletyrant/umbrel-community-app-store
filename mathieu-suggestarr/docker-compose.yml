@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-suggestarr_server_1
+      APP_PORT: 5000
+
+  server:
+    image: ciuse99/suggestarr:v2.9.1@sha256:cfa4fb77862f6cea57f164bf44204c958fb96842815d601e09c92c17dd75d173
+    init: true
+    environment:
+      - TZ=Europe/Paris
+      - SUGGESTARR_PORT=5000
+      - LOG_LEVEL=info
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/app/config/config_files
+    restart: on-failure

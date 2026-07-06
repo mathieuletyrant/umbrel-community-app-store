@@ -20,6 +20,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Lingarr** | **Automated subtitle translation** for Radarr/Sonarr: translate subtitles into French (or any language) via LibreTranslate or a SaaS engine (DeepL, OpenAI…), written next to your media. |
 | **Sublarr** | **All-in-one subtitle manager & LLM translator**: searches 20+ providers, syncs timing (ffsubsync/alass), translates, and includes a waveform editor. A modern alternative to Bazarr + Lingarr. |
 | **Byparr** | **Cloudflare-bypass proxy** for Prowlarr / Jackett: a drop-in **FlareSolverr replacement** that drives a modern stealth browser, standing up better to today's Cloudflare / DDoS-Guard challenges. |
+| **SuggestArr** | **Automatic "what to watch" recommendations**: reads your Plex / Jellyfin / Emby history, finds similar titles (TMDb or any OpenAI-compatible LLM), and auto-requests them through Jellyseerr / Overseerr. |
 
 ## 🚀 How to install
 
