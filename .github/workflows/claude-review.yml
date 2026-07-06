@@ -33,7 +33,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - uses: anthropics/claude-code-action@v1
+      - uses: anthropics/claude-code-action@558b1d6cab4085c7753fe402c10bef0fbb92ac7a # v1
         env:
           # Route Claude Code through OpenRouter's Anthropic-compatible endpoint.
           # The ANTHROPIC_API_KEY secret holds an OpenRouter key (sk-or-…); it's
