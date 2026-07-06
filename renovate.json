@@ -10,16 +10,27 @@
   "pinDigests": true,
   "separateMinorPatch": true,
   "platformAutomerge": true,
+  "customManagers": [
+    {
+      "description": "Keep umbrel-app.yml `version:` in lockstep with each app's Docker image, via a `# renovate:` annotation above the field",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)umbrel-app\\.yml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\s*\\nversion:\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "versioningTemplate": "docker"
+    }
+  ],
   "packageRules": [
     {
       "description": "Auto-merge patch bumps and digest-only refreshes; minor/major open a PR to review",
-      "matchManagers": ["docker-compose"],
       "matchUpdateTypes": ["patch", "digest"],
       "automerge": true
     },
     {
-      "description": "Tracearr's 'supervised' image tags a version as e.g. supervised-1.4.29",
+      "description": "Tracearr's 'supervised' image tags a version as e.g. supervised-1.4.29 (docker-compose side; the umbrel-app.yml side strips the prefix via extractVersion)",
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
+      "matchManagers": ["docker-compose"],
       "versioning": "regex:^supervised-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {

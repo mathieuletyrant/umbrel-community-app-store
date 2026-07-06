@@ -4,6 +4,7 @@ category: media
 name: Lingarr
 tagline: Automated subtitle translation for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/lingarr-translate/lingarr
 version: "1.2.4"
 port: 9876
 description: >-

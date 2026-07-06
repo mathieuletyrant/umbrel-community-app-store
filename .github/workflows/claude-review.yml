@@ -2,7 +2,9 @@ name: Claude review (Renovate PRs, via OpenRouter)
 
 # Reviews Renovate's dependency-bump PRs for anything a version bumper can't
 # judge: breaking changes in the upstream release, config that must change
-# alongside the image, or a tag/digest that looks wrong.
+# alongside the image, or a tag/digest that looks wrong. Also refreshes the
+# `releaseNotes:` in the changed app's umbrel-app.yml from the upstream changelog
+# and commits it to the PR branch (Renovate itself bumps `version:`).
 #
 # Runs claude-code-action, but pointed at OpenRouter instead of the Anthropic
 # API: OpenRouter exposes an Anthropic Messages-compatible endpoint at
@@ -18,11 +20,17 @@ jobs:
     if: startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write # Claude commits a releaseNotes update to the PR branch
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
+          # Check out the PR's actual branch (not the detached merge ref) so a
+          # commit can be pushed back to it. Using GITHUB_TOKEN here is also what
+          # stops an infinite loop: commits it authors do NOT trigger workflows,
+          # so Claude's releaseNotes commit won't re-run this review.
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - uses: anthropics/claude-code-action@v1
@@ -44,30 +52,50 @@ jobs:
           # OpenRouter — the prompt uses WebFetch/gh to read changelogs instead.
           claude_args: >-
             --model ${{ vars.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4.5' }}
-            --max-turns 25
-            --allowedTools "Bash,Read,Grep,Glob,WebFetch"
+            --max-turns 30
+            --allowedTools "Bash,Read,Edit,Write,Grep,Glob,WebFetch"
           prompt: |
             You are reviewing a Renovate PR that bumps a pinned Docker image in
             this Umbrel community app store. Read CLAUDE.md first for the repo's
-            conventions (images are pinned as repo:TAG@sha256:DIGEST).
+            conventions (images are pinned as repo:TAG@sha256:DIGEST; each app
+            folder has a docker-compose.yml and an umbrel-app.yml).
 
-            Steps:
+            ## Part 1 — Review
             1. Run `gh pr diff ${{ github.event.pull_request.number }}` to see
-               the change. Identify the image, old->new version, and whether the
-               jump is patch / minor / major.
+               the change. Identify the app folder, the image, old->new version,
+               and whether the jump is patch / minor / major / digest-only.
             2. Read the upstream release notes for the new version — fetch the
                project's GitHub releases/changelog with WebFetch (or `gh release`
                / curl via Bash). Flag any BREAKING CHANGES, new required env
                vars, changed default ports, or data-path/volume migrations that
-               would need a matching edit to this repo's docker-compose.yml or
-               umbrel-app.yml. Renovate does NOT make those edits.
+               would need a matching edit to docker-compose.yml or umbrel-app.yml.
             3. Sanity-check the new tag and @sha256 digest plausibly exist for
                that image (a wrong tag shows on Umbrel as "manifest unknown").
             4. Confirm the pinned tag still matches the repo's format for that
                image (e.g. tracearr uses `supervised-<version>`).
 
+            ## Part 2 — Refresh releaseNotes (only for real version bumps)
+            Renovate already updated the `version:` field in that app's
+            umbrel-app.yml — do NOT touch `version:`. If this is a version bump
+            (skip this entire part for digest-only refreshes), update the
+            `releaseNotes:` field in the SAME app's umbrel-app.yml to a concise
+            1-3 sentence, user-facing summary of what changed in the new version,
+            based on the changelog you read in step 2.
+            - If you could not find a changelog, or the releaseNotes already
+              describes this version, make NO file changes.
+            - Only ever edit that one app's umbrel-app.yml releaseNotes. Do not
+              edit version, docker-compose.yml, or any other file.
+            Then commit and push just that file to the PR branch:
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add <app-folder>/umbrel-app.yml
+              git commit -m "Refresh releaseNotes for <app> <new-version>"
+              git push
+
+            ## Part 3 — Comment
             Post ONE concise PR comment with:
             `gh pr comment ${{ github.event.pull_request.number }} --body "..."`.
             Start with a verdict line: "✅ Safe to merge",
             "⚠️ Review needed — <reason>", or "⛔ Do not merge — <reason>".
-            Keep it short; only flag real risks.
+            Note whether you refreshed releaseNotes. Keep it short; only flag
+            real risks.

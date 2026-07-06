@@ -4,6 +4,7 @@ category: media
 name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
 version: "1.7.0"
 port: 8888
 description: >-

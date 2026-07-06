@@ -4,6 +4,7 @@ category: media
 name: Profilarr
 tagline: Quality profiles & custom formats manager for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/dictionarry-hub/profilarr
 version: "2.0.9"
 port: 6868
 description: >-

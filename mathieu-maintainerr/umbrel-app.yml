@@ -4,6 +4,7 @@ category: media
 name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
+# renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
 version: "3.13.0"
 port: 6246
 description: >-

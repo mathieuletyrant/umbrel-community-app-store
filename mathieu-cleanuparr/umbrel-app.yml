@@ -4,6 +4,7 @@ category: media
 name: Cleanuparr
 tagline: Automated download cleanup for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/icon.png
+# renovate: datasource=docker depName=ghcr.io/cleanuparr/cleanuparr
 version: "2.9.15"
 port: 11011
 description: >-

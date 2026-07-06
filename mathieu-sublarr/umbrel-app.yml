@@ -4,6 +4,7 @@ category: media
 name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
 version: "1.5.0"
 port: 5765
 description: >-
