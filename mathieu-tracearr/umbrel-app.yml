@@ -39,8 +39,7 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Tracearr for this Community App Store. Uses the all-in-one
-  "supervised" image (bundled TimescaleDB + Redis).
+  Hotfix for violation lookup bug (v1.4.30).
 dependencies: []
 path: ""
 defaultUsername: ""
