@@ -8,6 +8,7 @@
   "timezone": "Europe/Paris",
   "labels": ["dependencies"],
   "pinDigests": true,
+  "rebaseWhen": "behind-base-branch",
   "separateMinorPatch": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
