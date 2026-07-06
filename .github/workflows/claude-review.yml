@@ -6,7 +6,7 @@ on:
 
 jobs:
   review:
-    if: startsWith(github.head_ref, 'renovate/')
+    if: startsWith(github.head_ref, 'renovate/') && github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
