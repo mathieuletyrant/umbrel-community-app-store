@@ -36,12 +36,16 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         env:
           # Route Claude Code through OpenRouter's Anthropic-compatible endpoint.
+          # The ANTHROPIC_API_KEY secret holds an OpenRouter key (sk-or-…); it's
+          # sent as the Bearer token OpenRouter expects.
           ANTHROPIC_BASE_URL: https://openrouter.ai/api/v1
-          ANTHROPIC_AUTH_TOKEN: ${{ secrets.OPENROUTER_API_KEY }}
-          # Must be empty so token auth (above) is used, not direct-Anthropic key auth.
-          ANTHROPIC_API_KEY: ""
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Also passed as the api_key input: the action's startup validation
+          # requires ANTHROPIC_API_KEY to be present, but ANTHROPIC_AUTH_TOKEN
+          # (Bearer) above is what actually authenticates to OpenRouter.
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           # This workflow is triggered by Renovate (a bot). claude-code-action
           # blocks bot actors by default; allow it (the job already only runs on
           # renovate/* branches via the `if:` above).
