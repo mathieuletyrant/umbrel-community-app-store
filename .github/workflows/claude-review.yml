@@ -23,7 +23,7 @@ jobs:
       contents: write # Claude commits a releaseNotes update to the PR branch
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           # Check out the PR's actual branch (not the detached merge ref) so a
           # commit can be pushed back to it. Using GITHUB_TOKEN here is also what
