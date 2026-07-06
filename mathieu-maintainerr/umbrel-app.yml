@@ -35,7 +35,7 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Maintainerr for this Community App Store.
+  Enhanced rule filtering with new Sonarr/Radarr properties (seasonFileRank, movieTitle, episodeFileRank); fixed startup issues on older CPUs via sharp library compatibility; improved library reconciliation and error handling.
 dependencies: []
 path: ""
 defaultUsername: ""
