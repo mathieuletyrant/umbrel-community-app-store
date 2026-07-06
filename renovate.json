@@ -6,7 +6,6 @@
     ":semanticCommitsDisabled"
   ],
   "timezone": "Europe/Paris",
-  "schedule": ["before 6am on monday"],
   "labels": ["dependencies"],
   "pinDigests": true,
   "separateMinorPatch": true,
