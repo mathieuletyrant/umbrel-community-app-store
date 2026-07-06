@@ -38,7 +38,10 @@ jobs:
           # Route Claude Code through OpenRouter's Anthropic-compatible endpoint.
           # The ANTHROPIC_API_KEY secret holds an OpenRouter key (sk-or-…); it's
           # sent as the Bearer token OpenRouter expects.
-          ANTHROPIC_BASE_URL: https://openrouter.ai/api/v1
+          # NOTE: base is .../api (NOT .../api/v1). Claude Code appends
+          # `/v1/messages`, so .../api → .../api/v1/messages. Using .../api/v1
+          # would produce .../api/v1/v1/messages → 404.
+          ANTHROPIC_BASE_URL: https://openrouter.ai/api
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
