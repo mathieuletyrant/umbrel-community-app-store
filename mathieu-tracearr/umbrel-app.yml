@@ -5,7 +5,7 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr extractVersion=^supervised-(?<version>.+)$
-version: "1.4.29"
+version: "1.4.30"
 port: 3000
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
@@ -39,8 +39,7 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Tracearr for this Community App Store. Uses the all-in-one
-  "supervised" image (bundled TimescaleDB + Redis).
+  Hotfix for violation lookup bug (v1.4.30).
 dependencies: []
 path: ""
 defaultUsername: ""
