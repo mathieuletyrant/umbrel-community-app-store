@@ -12,6 +12,13 @@ Umbrel users add it by URL and install the apps it publishes.
 - This is a personal side project. It is **not** related to Primo (the owner's
   employer). Don't name things after Primo.
 
+## Style
+
+- **Keep files clean — don't add explanatory comments everywhere.** No running
+  commentary in `docker-compose.yml`, `renovate.json`, workflows, or `umbrel-app.yml`.
+  Only a comment that is load-bearing (e.g. a `# renovate:` annotation) or warns
+  of a genuine footgun. Put the "why" in the commit message, not the file.
+
 ## Repository layout
 
 ```

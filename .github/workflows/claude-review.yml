@@ -1,108 +1,71 @@
 name: Claude review (Renovate PRs, via OpenRouter)
 
-# Reviews Renovate's dependency-bump PRs for anything a version bumper can't
-# judge: breaking changes in the upstream release, config that must change
-# alongside the image, or a tag/digest that looks wrong. Also refreshes the
-# `releaseNotes:` in the changed app's umbrel-app.yml from the upstream changelog
-# and commits it to the PR branch (Renovate itself bumps `version:`).
-#
-# Runs claude-code-action, but pointed at OpenRouter instead of the Anthropic
-# API: OpenRouter exposes an Anthropic Messages-compatible endpoint at
-# https://openrouter.ai/api/v1, so ANTHROPIC_BASE_URL + ANTHROPIC_AUTH_TOKEN is
-# all it takes — no proxy.
 on:
   pull_request:
     types: [opened, synchronize]
 
 jobs:
   review:
-    # Only Renovate's branches (renovate/*). Skips normal human PRs.
     if: startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Claude commits a releaseNotes update to the PR branch
+      contents: write
       pull-requests: write
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
-          # Check out the PR's actual branch (not the detached merge ref) so a
-          # commit can be pushed back to it. Using GITHUB_TOKEN here is also what
-          # stops an infinite loop: commits it authors do NOT trigger workflows,
-          # so Claude's releaseNotes commit won't re-run this review.
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - uses: anthropics/claude-code-action@v1
         env:
-          # Route Claude Code through OpenRouter's Anthropic-compatible endpoint.
-          # The ANTHROPIC_API_KEY secret holds an OpenRouter key (sk-or-…); it's
-          # sent as the Bearer token OpenRouter expects.
-          # NOTE: base is .../api (NOT .../api/v1). Claude Code appends
-          # `/v1/messages`, so .../api → .../api/v1/messages. Using .../api/v1
-          # would produce .../api/v1/v1/messages → 404.
+          # base is .../api NOT .../api/v1 — Claude Code appends /v1/messages.
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Also passed as the api_key input: the action's startup validation
-          # requires ANTHROPIC_API_KEY to be present, but ANTHROPIC_AUTH_TOKEN
-          # (Bearer) above is what actually authenticates to OpenRouter.
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # This workflow is triggered by Renovate (a bot). claude-code-action
-          # blocks bot actors by default; allow it (the job already only runs on
-          # renovate/* branches via the `if:` above).
           allowed_bots: "renovate[bot]"
-          # --model takes an OpenRouter slug. Override via repo variable
-          # OPENROUTER_MODEL; confirm the exact slug at https://openrouter.ai/models
-          # NOTE: server-side WebSearch is Anthropic-only and won't work through
-          # OpenRouter — the prompt uses WebFetch/gh to read changelogs instead.
           claude_args: >-
             --model ${{ vars.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4.5' }}
             --max-turns 30
             --allowedTools "Bash,Read,Edit,Write,Grep,Glob,WebFetch"
           prompt: |
             You are reviewing a Renovate PR that bumps a pinned Docker image in
-            this Umbrel community app store. Read CLAUDE.md first for the repo's
-            conventions (images are pinned as repo:TAG@sha256:DIGEST; each app
-            folder has a docker-compose.yml and an umbrel-app.yml).
+            this Umbrel community app store. Read CLAUDE.md first (images are
+            pinned as repo:TAG@sha256:DIGEST; each app folder has a
+            docker-compose.yml and an umbrel-app.yml).
 
             ## Part 1 — Review
-            1. Run `gh pr diff ${{ github.event.pull_request.number }}` to see
-               the change. Identify the app folder, the image, old->new version,
-               and whether the jump is patch / minor / major / digest-only.
-            2. Read the upstream release notes for the new version — fetch the
-               project's GitHub releases/changelog with WebFetch (or `gh release`
-               / curl via Bash). Flag any BREAKING CHANGES, new required env
-               vars, changed default ports, or data-path/volume migrations that
-               would need a matching edit to docker-compose.yml or umbrel-app.yml.
-            3. Sanity-check the new tag and @sha256 digest plausibly exist for
-               that image (a wrong tag shows on Umbrel as "manifest unknown").
-            4. Confirm the pinned tag still matches the repo's format for that
-               image (e.g. tracearr uses `supervised-<version>`).
+            1. Run `gh pr diff ${{ github.event.pull_request.number }}`. Identify
+               the app folder, image, old->new version, and update type
+               (patch / minor / major / digest-only).
+            2. Read the upstream release notes for the new version (WebFetch the
+               GitHub releases/changelog, or `gh release` / curl). Note any
+               breaking changes, new required env vars, changed default ports, or
+               data-path/volume migrations that would need a matching edit to
+               docker-compose.yml or umbrel-app.yml.
+            3. Sanity-check the new tag and @sha256 digest plausibly exist.
+            4. Confirm the tag still matches the repo's format (e.g. tracearr
+               uses `supervised-<version>`).
 
-            ## Part 2 — Refresh releaseNotes (only for real version bumps)
-            Renovate already updated the `version:` field in that app's
-            umbrel-app.yml — do NOT touch `version:`. If this is a version bump
-            (skip this entire part for digest-only refreshes), update the
-            `releaseNotes:` field in the SAME app's umbrel-app.yml to a concise
-            1-3 sentence, user-facing summary of what changed in the new version,
-            based on the changelog you read in step 2.
-            - If you could not find a changelog, or the releaseNotes already
-              describes this version, make NO file changes.
-            - Only ever edit that one app's umbrel-app.yml releaseNotes. Do not
-              edit version, docker-compose.yml, or any other file.
-            Then commit and push just that file to the PR branch:
+            ## Part 2 — Refresh releaseNotes (real version bumps only)
+            Renovate already updated `version:` — do NOT touch it. For a version
+            bump (skip for digest-only), rewrite `releaseNotes:` in the SAME
+            app's umbrel-app.yml as a concise 1-3 sentence user-facing summary
+            from the changelog. If no changelog found or releaseNotes already
+            covers this version, make NO changes. Only ever touch that one
+            releaseNotes field. Then:
               git config user.name "github-actions[bot]"
               git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
               git add <app-folder>/umbrel-app.yml
               git commit -m "Refresh releaseNotes for <app> <new-version>"
               git push
 
-            ## Part 3 — Comment
-            Post ONE concise PR comment with:
-            `gh pr comment ${{ github.event.pull_request.number }} --body "..."`.
-            Start with a verdict line: "✅ Safe to merge",
-            "⚠️ Review needed — <reason>", or "⛔ Do not merge — <reason>".
-            Note whether you refreshed releaseNotes. Keep it short; only flag
-            real risks.
+            ## Part 3 — Comment only on a real concern
+            Do NOT comment on a clean/safe bump — leave the PR uncommented. Only
+            if you found a genuine risk (breaking change, missing required
+            config, bad tag/digest) post ONE short comment:
+            `gh pr comment ${{ github.event.pull_request.number }} --body "..."`
+            starting with "⚠️ Review needed — <reason>" or "⛔ Do not merge — <reason>".
