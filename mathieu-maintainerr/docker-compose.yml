@@ -7,7 +7,7 @@ services:
       APP_PORT: 6246
 
   server:
-    image: ghcr.io/maintainerr/maintainerr:3.13.0@sha256:077060b2c206cce97eb0539aadb0e83cb8ed2add2c3dcd62d2ca631943d1d4a7
+    image: ghcr.io/maintainerr/maintainerr:3.17.0@sha256:59d0095f05ec11aef2d271812903ed4a0738338044f44bbb3f2165c89ebcd06e
     init: true
     environment:
       - TZ=Europe/London
