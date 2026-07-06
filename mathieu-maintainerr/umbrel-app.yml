@@ -8,10 +8,11 @@ icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-sto
 version: "3.17.0"
 port: 6246
 description: >-
-  Maintainerr helps you keep your media library lean. You build rules from data
-  across Plex, Overseerr/Jellyseerr, Radarr/Sonarr and Tautulli (e.g. "watched
-  more than 30 days ago", "added over a year ago and never played", "not on
-  anyone's watchlist") and Maintainerr collects the matching movies/shows.
+  Maintainerr is a rule-based cleanup tool for your Plex media library. You
+  build rules from data across Plex, Overseerr/Jellyseerr, Radarr/Sonarr and
+  Tautulli (e.g. "watched more than 30 days ago", "added over a year ago and
+  never played", "not on anyone's watchlist") and Maintainerr collects the
+  matching movies/shows.
 
 
   Matched media can be surfaced in a Plex collection (a "Leaving Soon" shelf so

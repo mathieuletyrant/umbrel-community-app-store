@@ -8,9 +8,10 @@ icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-sto
 version: "1.2.4"
 port: 9876
 description: >-
-  Lingarr automatically translates your subtitle files into the language you
-  want — perfect for getting French subtitles when a release only ships with
-  English (or another language).
+  Lingarr is an automated subtitle translator for Radarr and Sonarr. It
+  translates your subtitle files into the language you want — perfect for
+  getting French subtitles when a release only ships with English (or another
+  language).
 
 
   It integrates with Radarr and Sonarr to know your library, and translates
@@ -37,7 +38,7 @@ description: >-
   Your media is mounted at /downloads, matching the paths the *arr apps report,
   so no path mapping is needed.
 developer: Lingarr
-website: https://lingarr.com
+website: https://github.com/lingarr-translate/lingarr
 submitter: Mathieu Le Tyrant
 submission: https://github.com/lingarr-translate/lingarr
 repo: https://github.com/lingarr-translate/lingarr

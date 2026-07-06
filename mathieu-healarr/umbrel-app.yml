@@ -31,7 +31,8 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/mescon/Healarr
 repo: https://github.com/mescon/Healarr
 support: https://github.com/mescon/Healarr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-healarr/gallery-1.jpg
 releaseNotes: >-
   Initial release of Healarr for this Community App Store.
 dependencies: []

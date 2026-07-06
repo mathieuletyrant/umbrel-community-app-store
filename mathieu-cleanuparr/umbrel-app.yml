@@ -35,7 +35,8 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/Cleanuparr/Cleanuparr
 repo: https://github.com/Cleanuparr/Cleanuparr
 support: https://github.com/Cleanuparr/Cleanuparr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/gallery-1.jpg
 releaseNotes: >-
   Initial release of Cleanuparr for this Community App Store.
 dependencies: []
