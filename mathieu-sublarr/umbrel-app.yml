@@ -39,7 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Sublarr for this Community App Store.
+  1.6.4: Combined/bilingual subtitles, side-by-side sync-compare, full statistics page, provisional machine-translation with automatic original-seeking, reverse-proxy SSO support, encrypted API keys at rest, and broad PostgreSQL/standalone fixes.
 dependencies: []
 path: ""
 defaultUsername: ""
