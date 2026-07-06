@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommitsDisabled"
+  ],
+  "timezone": "Europe/Paris",
+  "schedule": ["before 6am on monday"],
+  "labels": ["dependencies"],
+  "pinDigests": true,
+  "separateMinorPatch": true,
+  "platformAutomerge": true,
+  "packageRules": [
+    {
+      "description": "Auto-merge patch bumps and digest-only refreshes; minor/major open a PR to review",
+      "matchManagers": ["docker-compose"],
+      "matchUpdateTypes": ["patch", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Tracearr's 'supervised' image tags a version as e.g. supervised-1.4.29",
+      "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
+      "versioning": "regex:^supervised-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "description": "profilarr-parser is pinned to :latest — only keep its digest fresh",
+      "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"],
+      "matchUpdateTypes": ["digest"],
+      "automerge": true
+    }
+  ]
+}

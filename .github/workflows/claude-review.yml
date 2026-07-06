@@ -1,0 +1,69 @@
+name: Claude review (Renovate PRs, via OpenRouter)
+
+# Reviews Renovate's dependency-bump PRs for anything a version bumper can't
+# judge: breaking changes in the upstream release, config that must change
+# alongside the image, or a tag/digest that looks wrong.
+#
+# Runs claude-code-action, but pointed at OpenRouter instead of the Anthropic
+# API: OpenRouter exposes an Anthropic Messages-compatible endpoint at
+# https://openrouter.ai/api/v1, so ANTHROPIC_BASE_URL + ANTHROPIC_AUTH_TOKEN is
+# all it takes — no proxy.
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    # Only Renovate's branches (renovate/*). Skips normal human PRs.
+    if: startsWith(github.head_ref, 'renovate/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        env:
+          # Route Claude Code through OpenRouter's Anthropic-compatible endpoint.
+          ANTHROPIC_BASE_URL: https://openrouter.ai/api/v1
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.OPENROUTER_API_KEY }}
+          # Must be empty so token auth (above) is used, not direct-Anthropic key auth.
+          ANTHROPIC_API_KEY: ""
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # --model takes an OpenRouter slug. Override via repo variable
+          # OPENROUTER_MODEL; confirm the exact slug at https://openrouter.ai/models
+          # NOTE: server-side WebSearch is Anthropic-only and won't work through
+          # OpenRouter — the prompt uses WebFetch/gh to read changelogs instead.
+          claude_args: >-
+            --model ${{ vars.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4.5' }}
+            --max-turns 25
+            --allowedTools "Bash,Read,Grep,Glob,WebFetch"
+          prompt: |
+            You are reviewing a Renovate PR that bumps a pinned Docker image in
+            this Umbrel community app store. Read CLAUDE.md first for the repo's
+            conventions (images are pinned as repo:TAG@sha256:DIGEST).
+
+            Steps:
+            1. Run `gh pr diff ${{ github.event.pull_request.number }}` to see
+               the change. Identify the image, old->new version, and whether the
+               jump is patch / minor / major.
+            2. Read the upstream release notes for the new version — fetch the
+               project's GitHub releases/changelog with WebFetch (or `gh release`
+               / curl via Bash). Flag any BREAKING CHANGES, new required env
+               vars, changed default ports, or data-path/volume migrations that
+               would need a matching edit to this repo's docker-compose.yml or
+               umbrel-app.yml. Renovate does NOT make those edits.
+            3. Sanity-check the new tag and @sha256 digest plausibly exist for
+               that image (a wrong tag shows on Umbrel as "manifest unknown").
+            4. Confirm the pinned tag still matches the repo's format for that
+               image (e.g. tracearr uses `supervised-<version>`).
+
+            Post ONE concise PR comment with:
+            `gh pr comment ${{ github.event.pull_request.number }} --body "..."`.
+            Start with a verdict line: "✅ Safe to merge",
+            "⚠️ Review needed — <reason>", or "⛔ Do not merge — <reason>".
+            Keep it short; only flag real risks.
