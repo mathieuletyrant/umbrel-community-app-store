@@ -34,6 +34,10 @@ jobs:
           ANTHROPIC_API_KEY: ""
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # This workflow is triggered by Renovate (a bot). claude-code-action
+          # blocks bot actors by default; allow it (the job already only runs on
+          # renovate/* branches via the `if:` above).
+          allowed_bots: "renovate[bot]"
           # --model takes an OpenRouter slug. Override via repo variable
           # OPENROUTER_MODEL; confirm the exact slug at https://openrouter.ai/models
           # NOTE: server-side WebSearch is Anthropic-only and won't work through
