@@ -28,14 +28,26 @@
       "automerge": true
     },
     {
+      "matchDatasources": ["docker"],
+      "commitMessageExtra": "to {{{newValue}}}"
+    },
+    { "matchPackageNames": ["ghcr.io/iongpt/boxarr"], "commitMessageTopic": "Boxarr" },
+    { "matchPackageNames": ["ghcr.io/cleanuparr/cleanuparr"], "commitMessageTopic": "Cleanuparr" },
+    { "matchPackageNames": ["ghcr.io/mescon/healarr"], "commitMessageTopic": "Healarr" },
+    { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
+    { "matchPackageNames": ["ghcr.io/maintainerr/maintainerr"], "commitMessageTopic": "Maintainerr" },
+    { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
+    { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
+    { "matchPackageNames": ["ghcr.io/abrechen2/sublarr"], "commitMessageTopic": "Sublarr" },
+    {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
       "matchManagers": ["docker-compose"],
       "versioning": "regex:^supervised-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {
-      "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"],
-      "matchUpdateTypes": ["digest"],
-      "automerge": true
+      "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
+      "commitMessageTopic": "Tracearr",
+      "commitMessageExtra": "to {{{replace 'supervised-' '' newValue}}}"
     }
   ]
 }
