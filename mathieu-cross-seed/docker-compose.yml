@@ -66,6 +66,8 @@ services:
           matchMode: "flexible",
           rssCadence: "30 minutes",
           searchCadence: "1 day",
+          excludeRecentSearch: "3 days",
+          excludeOlder: "2 weeks",
           port: 2468,
         };
         EOF
