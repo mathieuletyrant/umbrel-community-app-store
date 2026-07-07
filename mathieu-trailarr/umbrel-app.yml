@@ -36,6 +36,15 @@ description: >-
   (e.g. `/downloads/movies`) to the same path in Trailarr — a 1:1 mapping.
 
   3. Pick your trailer profile (resolution, format, languages) and let it scan.
+
+
+  ⚡ HARDWARE ACCELERATION
+
+
+  The compose passes your Intel/AMD iGPU (`/dev/dri`) to the container for VAAPI
+  transcoding. After install, enable it in Settings > General > Advanced Settings
+  > Hardware Acceleration. (If your host has no `/dev/dri`, remove the `devices:`
+  block from the app's docker-compose or the container won't start.)
 developer: nandyalu
 website: https://nandyalu.github.io/trailarr
 submitter: Mathieu Le Tyrant

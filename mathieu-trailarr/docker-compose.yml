@@ -12,6 +12,8 @@ services:
       - TZ=Europe/Paris
       - PUID=1000
       - PGID=1000
+    devices:
+      - /dev/dri:/dev/dri
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
       # Media mounted at the SAME path Sonarr/Radarr report (/downloads), so
