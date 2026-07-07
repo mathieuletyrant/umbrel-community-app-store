@@ -41,6 +41,7 @@ Current apps:
 - `mathieu-lingarr` — Lingarr (subtitle translation for Radarr/Sonarr, web UI on 9876; embedded SQLite, media at /downloads)
 - `mathieu-sublarr` — Sublarr (all-in-one subtitle manager + LLM translator, web UI on 5765; runs as root, drops via gosu; media at /downloads)
 - `mathieu-cross-seed` — cross-seed (automatic cross-seeding across trackers; headless daemon + nginx status sidecar, API on 2468; config.js seeded on first run, user adds torznab URLs)
+- `mathieu-trailarr` — Trailarr (auto-downloads trailers for Radarr/Sonarr library, web UI on 7889; login admin/trailarr; config at /config, media at /downloads)
 
 ## Adding or updating an app
 
@@ -104,6 +105,19 @@ this too.
 - `id` must equal the folder name and start with `mathieu-`.
 - Pick a real `icon` URL and, ideally, `gallery` images. If the upstream repo has
   no screenshots, use `gallery: []` rather than linking broken images.
+- The `icon.png` **must have a solid (non-transparent) background** — a
+  transparent icon shows the tile background through its corners on umbrelOS and
+  looks broken. If the upstream logo has alpha, composite it onto a solid
+  background (e.g. dark slate `#23262F`) before committing:
+  ```sh
+  python3 - <<'PY'
+  from PIL import Image
+  fg = Image.open("mathieu-<name>/icon.png").convert("RGBA")
+  bg = Image.new("RGBA", fg.size, (35, 38, 47, 255))
+  bg.alpha_composite(fg)
+  bg.convert("RGB").save("mathieu-<name>/icon.png", "PNG")
+  PY
+  ```
 - Declare `permissions` the app needs (e.g. `STORAGE_DOWNLOADS`).
 - `port` is the **host** port Umbrel binds for the app — it must be unique across
   installed apps and not a system port. **Never use 80/443** (taken by umbrelOS →

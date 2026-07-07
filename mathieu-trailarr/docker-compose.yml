@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-trailarr_trailarr_1
+      APP_PORT: 7889
+
+  trailarr:
+    image: nandyalu/trailarr:0.9.9@sha256:330957e169bd3a00e7abd9867ed1be44e5a595f69eb677eac7f9e5399d68e5a1
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      # Media mounted at the SAME path Sonarr/Radarr report (/downloads), so
+      # Trailarr's path mappings are 1:1 and it writes trailers next to the media.
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure

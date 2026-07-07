@@ -43,6 +43,7 @@
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
     { "matchPackageNames": ["ghcr.io/abrechen2/sublarr"], "commitMessageTopic": "Sublarr" },
     { "matchPackageNames": ["ciuse99/suggestarr"], "commitMessageTopic": "SuggestArr" },
+    { "matchPackageNames": ["nandyalu/trailarr"], "commitMessageTopic": "Trailarr" },
     {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
       "matchManagers": ["docker-compose"],

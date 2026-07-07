@@ -1,0 +1,53 @@
+manifestVersion: 1
+id: mathieu-trailarr
+category: media
+name: Trailarr
+tagline: Automatically download trailers for your Radarr/Sonarr library
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/icon.png
+# renovate: datasource=docker depName=nandyalu/trailarr
+version: "0.9.9"
+port: 7889
+description: >-
+  Trailarr automatically downloads and manages trailers for the movies and TV
+  shows in your library. It connects to your Radarr and Sonarr instances,
+  discovers what you own, fetches matching trailers from YouTube, and saves them
+  right next to your media so Plex, Jellyfin and Emby pick them up.
+
+
+  It handles duplicate detection, quality/format profiles (resolution, codec,
+  audio, subtitles) and can batch-process your whole library or watch for new
+  additions.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Trailarr has a web login — the default credentials are `admin` / `trailarr`.
+  Change the password from Settings > About after first login.
+
+
+  Then open Trailarr and:
+
+  1. Add a connection to Radarr (`http://radarr_server_1:7878`) and Sonarr
+  (`http://sonarr_server_1:8989`) with their API keys.
+
+  2. Set the Path Mapping for each connection. Your media is mounted at
+  /downloads here, matching the paths the *arr apps report, so map their path
+  (e.g. `/downloads/movies`) to the same path in Trailarr — a 1:1 mapping.
+
+  3. Pick your trailer profile (resolution, format, languages) and let it scan.
+developer: nandyalu
+website: https://nandyalu.github.io/trailarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/nandyalu/trailarr
+repo: https://github.com/nandyalu/trailarr
+support: https://github.com/nandyalu/trailarr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Trailarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: "admin"
+defaultPassword: "trailarr"
+permissions:
+  - STORAGE_DOWNLOADS
