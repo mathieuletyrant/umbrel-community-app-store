@@ -36,7 +36,8 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Enhanced rule filtering with new Sonarr/Radarr properties (seasonFileRank, movieTitle, episodeFileRank); fixed startup issues on older CPUs via sharp library compatibility; improved library reconciliation and error handling.
+  Fixed Sonarr episode file deletion logic to handle slow or timed-out unmonitor
+  responses. Updated 14 dependencies.
 dependencies: []
 path: ""
 defaultUsername: ""
