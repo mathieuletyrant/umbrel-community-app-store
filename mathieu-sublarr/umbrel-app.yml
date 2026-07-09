@@ -39,7 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  1.6.4: Combined/bilingual subtitles, side-by-side sync-compare, full statistics page, provisional machine-translation with automatic original-seeking, reverse-proxy SSO support, encrypted API keys at rest, and broad PostgreSQL/standalone fixes.
+  1.6.5: Fixed DeepL timeout hangs, retranslation status updates, and translation preview bugs; added dedicated Translations history tab and optional anonymous usage stats; now warns on slow storage.
 dependencies: []
 path: ""
 defaultUsername: ""
