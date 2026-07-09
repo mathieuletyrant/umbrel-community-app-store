@@ -5,7 +5,7 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr extractVersion=^supervised-(?<version>.+)$
-version: "1.4.30"
+version: "1.4.31"
 port: 3000
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
