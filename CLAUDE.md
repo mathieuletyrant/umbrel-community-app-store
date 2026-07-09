@@ -42,6 +42,8 @@ Current apps:
 - `mathieu-sublarr` — Sublarr (all-in-one subtitle manager + LLM translator, web UI on 5765; runs as root, drops via gosu; media at /downloads)
 - `mathieu-cross-seed` — cross-seed (automatic cross-seeding across trackers; headless daemon + nginx status sidecar, API on 2468; config.js seeded on first run, user adds torznab URLs)
 - `mathieu-trailarr` — Trailarr (auto-downloads trailers for Radarr/Sonarr library, web UI on 7889; login admin/trailarr; config at /config, media at /downloads)
+- `mathieu-slskd` — slskd (Soulseek client, web UI on 5030; runs as `user: 1000:1000` so `data/app/.gitkeep` is shipped to pre-own `/app`; SLSKD_REMOTE_CONFIGURATION lets users set Soulseek creds in-UI; default web login slskd/slskd; downloads to /downloads/soulseek/complete; publishes P2P port 50300)
+- `mathieu-soularr` — Soularr (bridges Lidarr wanted list → slskd → Lidarr import, web UI on 8265; ships a seeded `data/config/config.ini` prewired to lidarr_server_1 + mathieu-slskd_server_1, user fills 2 API keys; needs slskd + Lidarr)
 
 ## Adding or updating an app
 

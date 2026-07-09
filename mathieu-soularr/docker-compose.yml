@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-soularr_server_1
+      APP_PORT: 8265
+
+  server:
+    image: mrusse08/soularr:v1.2.2@sha256:c4f97924fabfce4e0de539d821ea7d20519b95c4815a707bacfc9d7212597f20
+    init: true
+    user: "1000:1000"
+    environment:
+      - TZ=Europe/Paris
+      - SCRIPT_INTERVAL=300
+      - WEBUI_ENABLED=true
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/data
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure

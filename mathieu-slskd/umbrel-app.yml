@@ -1,0 +1,57 @@
+manifestVersion: 1
+id: mathieu-slskd
+category: media
+name: slskd
+tagline: Soulseek client with a modern web UI
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/icon.png
+# renovate: datasource=docker depName=slskd/slskd
+version: "0.25.1"
+port: 5030
+description: >-
+  slskd is a modern, self-hosted client for the Soulseek file-sharing network,
+  with a clean web interface. Search the network, browse other users' shares,
+  queue downloads, and share your own library — all from the browser, no
+  desktop client required.
+
+
+  It pairs with Soularr to complete a music-collector's stack: Soularr reads
+  Lidarr's wanted albums, has slskd find and download them from Soulseek, and
+  imports the results back into Lidarr — great for niche or rare tracks that
+  never show up on trackers.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  On first launch, sign in with the default web credentials username `slskd` /
+  password `slskd`, then open Options — remote configuration is enabled, so you
+  can edit everything from the UI:
+
+
+  1. Under Soulseek, enter your Soulseek network username and password (create a
+  free account in any Soulseek client or at slsknet.org if you don't have one).
+
+  2. Set your shared directories (Soulseek expects you to share back) — your
+  library is mounted at /downloads.
+
+  3. Change the web UI password from the default.
+
+
+  Completed downloads land in /downloads/soulseek/complete, alongside your other
+  media so Lidarr can import them. For best connectivity, forward TCP port 50300
+  to your Umbrel on your router.
+developer: slskd
+website: https://github.com/slskd/slskd
+submitter: Mathieu Le Tyrant
+submission: https://github.com/slskd/slskd
+repo: https://github.com/slskd/slskd
+support: https://github.com/slskd/slskd/issues
+gallery: []
+releaseNotes: >-
+  Initial release of slskd for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: "slskd"
+defaultPassword: "slskd"
+permissions:
+  - STORAGE_DOWNLOADS
