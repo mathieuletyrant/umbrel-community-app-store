@@ -39,7 +39,8 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Hotfix for violation lookup bug (v1.4.30).
+  Realtime reliability improvements for Jellyfin and Emby SSE; plugin version display
+  with update nudge; fixes for servers added at runtime and session management.
 dependencies: []
 path: ""
 defaultUsername: ""
