@@ -5,7 +5,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.7.3"
+version: "1.8.0"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -39,6 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
+  1.8.0: Optimization—Sublarr now remembers intact files and skips re-downloading them, preserving provider quota.
   1.7.3: Fixed subtitle repair validation logic to use replay-based proof instead of hash comparison, expanding coverage for damaged files. Repair feature restores subtitles damaged by the pre-1.6.6 HI-removal bug—available under Settings → System → Subtitle repair.
   1.6.6: Critical fixes for HI (hearing-impaired) subtitle removal—eliminated data loss from language-agnostic word stripping, all-caps sentence deletion, and ASS override tag corruption. Users with HI removal enabled should re-download affected subtitles.
   1.6.5: Fixed DeepL timeout hangs, retranslation status updates, and translation preview bugs; added dedicated Translations history tab and optional anonymous usage stats; now warns on slow storage.
