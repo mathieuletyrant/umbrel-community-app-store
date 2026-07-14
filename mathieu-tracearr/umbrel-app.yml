@@ -39,8 +39,9 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Realtime reliability improvements for Jellyfin and Emby SSE; plugin version display
-  with update nudge; fixes for servers added at runtime and session management.
+  Auth system rebuilt with Plex/SSO support and merged user identities across servers.
+  Web users must re-authenticate after upgrade. Performance improvements, updated dependencies
+  (Node 24, Redis v8). Backup before upgrading — downgrade to 1.4.x is not supported.
 dependencies: []
 path: ""
 defaultUsername: ""
