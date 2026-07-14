@@ -5,7 +5,7 @@ name: SuggestArr
 tagline: Automatic media recommendations from your watch history
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/icon.png
 # renovate: datasource=docker depName=ciuse99/suggestarr
-version: "2.9.1"
+version: "2.10.0"
 port: 5000
 description: >-
   SuggestArr automates "what to watch next": it reads your recent activity from
