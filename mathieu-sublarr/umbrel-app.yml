@@ -39,6 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
+  1.9.2: Fixed AnimeTosho subtitle repair—files now restore correctly instead of failing with "No download URL".
   1.9.1: Dry run now capped by a visible limit field (default 25) to prevent accidentally burning daily provider quota for zero progress.
   1.9.0: Quota-stopped repair runs now auto-resume when the provider's quota resets—no manual restart needed.
   1.8.0: Optimization—Sublarr now remembers intact files and skips re-downloading them, preserving provider quota.
