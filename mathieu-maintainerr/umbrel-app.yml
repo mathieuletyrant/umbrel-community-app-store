@@ -36,8 +36,9 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Fixed Sonarr episode file deletion logic to handle slow or timed-out unmonitor
-  responses. Updated 14 dependencies.
+  Fixed Jellyfin season-level watch marks propagating to rule getters and
+  corrected Tautulli watched threshold filtering. Added Seerr requester names
+  to notifications.
 dependencies: []
 path: ""
 defaultUsername: ""
