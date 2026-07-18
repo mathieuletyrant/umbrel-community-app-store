@@ -5,7 +5,7 @@ name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
-version: "3.17.1"
+version: "3.18.0"
 port: 6246
 description: >-
   Maintainerr is a rule-based cleanup tool for your Plex media library. You
