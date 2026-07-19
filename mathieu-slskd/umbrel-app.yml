@@ -48,7 +48,9 @@ repo: https://github.com/slskd/slskd
 support: https://github.com/slskd/slskd/issues
 gallery: []
 releaseNotes: >-
-  Initial release of slskd for this Community App Store.
+  New dashboard landing page with real-time statistics, redesigned Browse screen with better performance on large shares,
+  download retry support with exponential backoff, and granular control over download destinations. Breaking change: file permission
+  configuration moved from `permissions.file.mode` to `transfers.download.destination.permissions.mode`.
 dependencies: []
 path: ""
 defaultUsername: "slskd"
