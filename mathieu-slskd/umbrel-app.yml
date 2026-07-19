@@ -5,7 +5,7 @@ name: slskd
 tagline: Soulseek client with a modern web UI
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/icon.png
 # renovate: datasource=docker depName=slskd/slskd
-version: "0.25.1"
+version: "0.26.0"
 port: 5030
 description: >-
   slskd is a modern, self-hosted client for the Soulseek file-sharing network,
