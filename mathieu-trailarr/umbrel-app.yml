@@ -53,7 +53,7 @@ repo: https://github.com/nandyalu/trailarr
 support: https://github.com/nandyalu/trailarr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Trailarr for this Community App Store.
+  Download records now drive the engine, eliminating re-download loops — only genuinely missing trailers are downloaded. Failed downloads back off progressively instead of retrying every run. Notifications via Apprise (Discord, Telegram, Slack, email, 100+ services) with rich Discord embeds and media details.
 dependencies: []
 path: ""
 defaultUsername: "admin"
