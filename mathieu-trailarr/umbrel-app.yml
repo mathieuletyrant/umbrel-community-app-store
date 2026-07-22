@@ -53,7 +53,7 @@ repo: https://github.com/nandyalu/trailarr
 support: https://github.com/nandyalu/trailarr/issues
 gallery: []
 releaseNotes: >-
-  Download records now drive the engine, eliminating re-download loops — only genuinely missing trailers are downloaded. Failed downloads back off progressively instead of retrying every run. Notifications via Apprise (Discord, Telegram, Slack, email, 100+ services) with rich Discord embeds and media details.
+  Live and upcoming videos are now rejected to prevent endless downloads. Failed downloads no longer leave partial files behind, and temp files are cleaned up automatically. Event ordering in the Events log is now cleaner.
 dependencies: []
 path: ""
 defaultUsername: "admin"
