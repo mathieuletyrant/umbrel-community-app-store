@@ -36,7 +36,7 @@ gallery:
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/week-view.png
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/images/auto-add-filters.png
 releaseNotes: >-
-  Initial release of Boxarr for this Community App Store.
+  Boxarr 2.0 adds selectable Box Office regions, configurable request timeouts, async UI refresh with progress tracking, and improved config resilience. Includes fixes for title escaping, event-loop blocking, auto-add accuracy, and XSS hardening.
 dependencies: []
 path: ""
 defaultUsername: ""
