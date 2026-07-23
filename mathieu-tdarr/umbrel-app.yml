@@ -30,9 +30,9 @@ description: >-
   connected; press Transcode/Health Check to start processing.
 
 
-  ⚡ Hardware transcoding (Intel QSV / VAAPI) needs the /dev/dri device passed
-  through — add a `devices:` entry to the app's compose on the host if your
-  server has an iGPU.
+  ⚡ Hardware transcoding (Intel QSV / VAAPI) works out of the box when your
+  server has an Intel iGPU — /dev/dri is passed through automatically. Enable an
+  HW-accel plugin/flow (e.g. QSV) in your stack to use it.
 developer: HaveAGitGat
 website: https://tdarr.io
 submitter: Mathieu Le Tyrant

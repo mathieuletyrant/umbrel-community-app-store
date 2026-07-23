@@ -18,6 +18,8 @@ services:
       - inContainer=true
       - internalNode=true
       - nodeName=InternalNode
+    devices:
+      - /dev/dri:/dev/dri
     volumes:
       - ${APP_DATA_DIR}/data/server:/app/server
       - ${APP_DATA_DIR}/data/configs:/app/configs
