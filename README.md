@@ -23,6 +23,9 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **SuggestArr** | **Automatic "what to watch" recommendations**: reads your Plex / Jellyfin / Emby history, finds similar titles (TMDb or any OpenAI-compatible LLM), and auto-requests them through Jellyseerr / Overseerr. |
 | **cross-seed** | **Automatic cross-seeding**: finds torrents on your other trackers matching what you already seed and injects them into Transmission — more ratio on every tracker, zero extra disk space (hardlinks). |
 | **Sportarr** | **PVR for sports** (Sonarr/Radarr-style): monitors leagues and events across fighting, football, soccer, basketball, racing…, grabs releases from your indexers, then renames, organizes and imports into Plex / Jellyfin / Emby. |
+| **Trailarr** | **Automatic trailer downloader** for your Radarr/Sonarr library: fetches and stores trailers next to your movies and shows so Plex / Jellyfin / Emby play them in-app. |
+| **slskd** | **Soulseek client** with a modern web UI: search and download from the Soulseek P2P network, set credentials in-browser, files land in your downloads share. |
+| **Soularr** | **Bridges Lidarr → slskd → Lidarr**: reads Lidarr's *wanted* list, searches Soulseek via slskd, downloads the best match and imports it back — ideal for niche or rare tracks that never hit trackers. |
 
 ## 🚀 How to install
 
