@@ -5,7 +5,7 @@ name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "1.7.0"
+version: "2.0.0"
 port: 8888
 description: >-
   Boxarr is an automated box office tracking application that integrates with
@@ -36,7 +36,7 @@ gallery:
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/week-view.png
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/images/auto-add-filters.png
 releaseNotes: >-
-  Initial release of Boxarr for this Community App Store.
+  Boxarr 2.0 adds selectable Box Office regions, configurable request timeouts, async UI refresh with progress tracking, and improved config resilience. Includes fixes for title escaping, event-loop blocking, auto-add accuracy, and XSS hardening.
 dependencies: []
 path: ""
 defaultUsername: ""
