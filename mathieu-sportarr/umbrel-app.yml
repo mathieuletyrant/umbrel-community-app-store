@@ -1,0 +1,45 @@
+manifestVersion: 1
+id: mathieu-sportarr
+category: media
+name: Sportarr
+tagline: PVR for sports — monitors leagues, grabs releases, organizes your library
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/icon.png
+# renovate: datasource=docker depName=sportarr/sportarr
+version: "4.0.1021.1101"
+port: 1867
+description: >-
+  Sportarr is a sports PVR built in the style of Sonarr and Radarr. It monitors
+  leagues and events across major sports — fighting, football, soccer,
+  basketball, racing and more — searches your Usenet and torrent indexers for
+  releases, then renames, organizes and imports the files into your media
+  library.
+
+
+  It handles quality upgrades, multi-part events (e.g. prelims + main card for
+  fights), subtitle fetching via Bazarr, and integrates with Plex, Jellyfin and
+  Emby. Notifications go out through Discord, ntfy, Apprise, webhooks or custom
+  scripts. An alpha IPTV DVR can also record events directly.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Add your indexers (ideally via Prowlarr) and a download client under Settings.
+  Point your root folder at a subfolder of /downloads (the same share your other
+  *arr apps use), so imports line up with no path mapping. Config is stored at
+  /config.
+developer: Sportarr
+website: https://github.com/Sportarr/Sportarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/Sportarr/Sportarr
+repo: https://github.com/Sportarr/Sportarr
+support: https://github.com/Sportarr/Sportarr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Sportarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS

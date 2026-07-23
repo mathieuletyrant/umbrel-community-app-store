@@ -44,6 +44,7 @@
     { "matchPackageNames": ["slskd/slskd"], "commitMessageTopic": "slskd" },
     { "matchPackageNames": ["mrusse08/soularr"], "commitMessageTopic": "Soularr" },
     { "matchPackageNames": ["ghcr.io/abrechen2/sublarr"], "commitMessageTopic": "Sublarr" },
+    { "matchPackageNames": ["sportarr/sportarr"], "commitMessageTopic": "Sportarr" },
     { "matchPackageNames": ["ciuse99/suggestarr"], "commitMessageTopic": "SuggestArr" },
     { "matchPackageNames": ["nandyalu/trailarr"], "commitMessageTopic": "Trailarr" },
     {

@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-sportarr_server_1
+      APP_PORT: 1867
+
+  server:
+    image: sportarr/sportarr:4.0.1021.1101@sha256:f3c289139710d767390422c9165db39a2fc1bd61a0fbcaa297fca4c6ee8a23d0
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure
