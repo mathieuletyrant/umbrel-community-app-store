@@ -47,6 +47,7 @@
     { "matchPackageNames": ["sportarr/sportarr"], "commitMessageTopic": "Sportarr" },
     { "matchPackageNames": ["ciuse99/suggestarr"], "commitMessageTopic": "SuggestArr" },
     { "matchPackageNames": ["nandyalu/trailarr"], "commitMessageTopic": "Trailarr" },
+    { "matchPackageNames": ["haveagitgat/tdarr"], "commitMessageTopic": "Tdarr" },
     {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
       "matchManagers": ["docker-compose"],

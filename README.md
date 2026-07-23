@@ -26,6 +26,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Trailarr** | **Automatic trailer downloader** for your Radarr/Sonarr library: fetches and stores trailers next to your movies and shows so Plex / Jellyfin / Emby play them in-app. |
 | **slskd** | **Soulseek client** with a modern web UI: search and download from the Soulseek P2P network, set credentials in-browser, files land in your downloads share. |
 | **Soularr** | **Bridges Lidarr → slskd → Lidarr**: reads Lidarr's *wanted* list, searches Soulseek via slskd, downloads the best match and imports it back — ideal for niche or rare tracks that never hit trackers. |
+| **Tdarr** | **Automated transcoding & library health checks**: plugin-driven rules re-encode (H.265/AV1), remux, strip unwanted tracks and flag corrupt files across your library, using a Server + Node worker model. |
 
 ## 🚀 How to install
 

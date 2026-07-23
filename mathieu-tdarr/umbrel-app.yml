@@ -1,0 +1,50 @@
+manifestVersion: 1
+id: mathieu-tdarr
+category: media
+name: Tdarr
+tagline: Automated, distributed transcoding and library health checks
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/icon.png
+# renovate: datasource=docker depName=haveagitgat/tdarr
+version: "2.84.01"
+port: 8267
+description: >-
+  Tdarr is an automated media transcoding and library health-check tool. It
+  scans your library on a schedule and applies plugin-driven rules — re-encode
+  to H.265/AV1, remux containers, strip unwanted audio/subtitle tracks, flag
+  corrupt files — keeping your collection consistent and space-efficient.
+
+
+  Work is organized as a Server that dishes out tasks and Nodes that process
+  them. This app runs the Server with a built-in internal Node, so it transcodes
+  out of the box; you can also connect extra Nodes from other machines to the
+  Server (port 8266) to spread the load.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open Tdarr and add a Library pointing at your media under /downloads (e.g.
+  /downloads/movies, /downloads/shows) — the same share your *arr apps use.
+  Pick or build a plugin stack (the Tdarr community "flows"/plugins cover most
+  needs), and set the transcode cache to /temp. The internal Node is already
+  connected; press Transcode/Health Check to start processing.
+
+
+  ⚡ Hardware transcoding (Intel QSV / VAAPI) needs the /dev/dri device passed
+  through — add a `devices:` entry to the app's compose on the host if your
+  server has an iGPU.
+developer: HaveAGitGat
+website: https://tdarr.io
+submitter: Mathieu Le Tyrant
+submission: https://github.com/HaveAGitGat/Tdarr
+repo: https://github.com/HaveAGitGat/Tdarr
+support: https://github.com/HaveAGitGat/Tdarr/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Tdarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS

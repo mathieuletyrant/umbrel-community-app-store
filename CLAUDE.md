@@ -44,6 +44,8 @@ Current apps:
 - `mathieu-trailarr` — Trailarr (auto-downloads trailers for Radarr/Sonarr library, web UI on 7889; login admin/trailarr; config at /config, media at /downloads)
 - `mathieu-slskd` — slskd (Soulseek client, web UI on 5030; runs as `user: 1000:1000` so `data/app/.gitkeep` is shipped to pre-own `/app`; SLSKD_REMOTE_CONFIGURATION lets users set Soulseek creds in-UI; default web login slskd/slskd; downloads to /downloads/soulseek/complete; publishes P2P port 50300)
 - `mathieu-soularr` — Soularr (bridges Lidarr wanted list → slskd → Lidarr import, web UI on 8265; ships a seeded `data/config/config.ini` prewired to lidarr_server_1 + mathieu-slskd_server_1, user fills 2 API keys; needs slskd + Lidarr)
+- `mathieu-sportarr` — Sportarr (sports PVR à la Sonarr/Radarr, host port 1867/web UI 1867; Docker Hub image pinned by multi-arch index digest, linuxserver-style PUID/PGID, config at /config, media at /downloads)
+- `mathieu-tdarr` — Tdarr (automated transcoding + library health checks, host port 8267/web UI 8265, Server port 8266; internalNode=true so it transcodes standalone; config split across /app/server + /app/configs + /app/logs, transcode cache at /temp, media at /downloads; iGPU needs /dev/dri added on host)
 
 ## Adding or updating an app
 

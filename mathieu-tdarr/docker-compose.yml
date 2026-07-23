@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-tdarr_server_1
+      APP_PORT: 8265
+
+  server:
+    image: haveagitgat/tdarr:2.84.01@sha256:93dd407f8a28b035b3ebece794bd3f489a9b07a810ca02b804adf72387888355
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+      - serverIP=0.0.0.0
+      - serverPort=8266
+      - webUIPort=8265
+      - inContainer=true
+      - internalNode=true
+      - nodeName=InternalNode
+    volumes:
+      - ${APP_DATA_DIR}/data/server:/app/server
+      - ${APP_DATA_DIR}/data/configs:/app/configs
+      - ${APP_DATA_DIR}/data/logs:/app/logs
+      - ${APP_DATA_DIR}/data/transcode:/temp
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure
