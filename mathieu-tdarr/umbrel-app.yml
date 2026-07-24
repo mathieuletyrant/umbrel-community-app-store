@@ -5,7 +5,7 @@ name: Tdarr
 tagline: Automated, distributed transcoding and library health checks
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/icon.png
 # renovate: datasource=docker depName=haveagitgat/tdarr
-version: "2.84.01"
+version: "2.85.01"
 port: 8267
 description: >-
   Tdarr is an automated media transcoding and library health-check tool. It
