@@ -36,7 +36,7 @@ repo: https://github.com/Sportarr/Sportarr
 support: https://github.com/Sportarr/Sportarr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Sportarr for this Community App Store.
+  Adds exact numeric IDs for media server integrations (Jellyfin, Emby, Plex) and native Maintainerr support. Now in TrueNAS SCALE and HexOS catalogs. Broad fixes for matching, RSS, DVR, and downloads — no database changes.
 dependencies: []
 path: ""
 defaultUsername: ""
