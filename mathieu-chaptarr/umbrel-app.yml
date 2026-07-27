@@ -1,0 +1,45 @@
+manifestVersion: 1
+id: mathieu-chaptarr
+category: media
+name: Chaptarr
+tagline: Ebook and audiobook manager — the Readarr successor
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-chaptarr/icon.png
+# renovate: datasource=docker depName=robertlordhood/chaptarr
+version: "0.9.852"
+port: 8789
+description: >-
+  Chaptarr is a re-work of the retired Readarr that manages ebooks and
+  audiobooks in a single instance. It monitors your wanted list, searches
+  your indexers, grabs releases through your download client and imports
+  them into your organised library — the familiar *arr workflow, kept alive
+  and actively developed for books.
+
+
+  Note: Chaptarr is pre-1.0 and ships changes regularly.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Add your indexers, ideally through Prowlarr
+  (`http://prowlarr_server_1:9696`) — add Chaptarr there as an app with
+  `http://mathieu-chaptarr_server_1:8789` and the API key from Settings >
+  General.
+
+  2. Add your download client, e.g. Transmission
+  (`transmission_server_1`, port 9091, URL Base `transmission`).
+
+  3. Add a root folder — your shared media storage is mounted at /downloads,
+  so use e.g. `/downloads/books`.
+developer: Robert Lord Hood
+website: https://hub.docker.com/r/robertlordhood/chaptarr
+submitter: Mathieu Le Tyrant
+submission: https://hub.docker.com/r/robertlordhood/chaptarr
+repo: https://hub.docker.com/r/robertlordhood/chaptarr
+support: https://hub.docker.com/r/robertlordhood/chaptarr
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+permissions:
+  - STORAGE_DOWNLOADS

@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-kapowarr_server_1
+      APP_PORT: 5656
+
+  server:
+    image: mrcas/kapowarr:v1.3.1@sha256:d455797e4f2c5b1a8ccc5ce05c427f1af2179451bb1af195ca3fa8c3e928623b
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/app/db
+      - ${APP_DATA_DIR}/data/temp_downloads:/app/temp_downloads
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure

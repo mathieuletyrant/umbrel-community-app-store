@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-chaptarr_server_1
+      APP_PORT: 8789
+
+  server:
+    image: robertlordhood/chaptarr:0.9.852@sha256:cd5813b16d2d00c5e6d439cc53876b5c7a24f0693bfc7111d61f5afacdc5b055
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/home/Downloads:/downloads
+    restart: on-failure
