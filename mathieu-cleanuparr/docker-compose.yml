@@ -7,7 +7,7 @@ services:
       APP_PORT: 11011
 
   server:
-    image: ghcr.io/cleanuparr/cleanuparr:2.10.0@sha256:9f74fa60bbf84c82b86f69fbef75189dd3e38408f99fd9c1895736185c4620b9
+    image: ghcr.io/cleanuparr/cleanuparr:2.10.1@sha256:6564af85578254728a9b06ded12836d2773e56f0da703c317cb589b176c4e215
     init: true
     environment:
       - PORT=11011
