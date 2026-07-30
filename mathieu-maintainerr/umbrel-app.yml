@@ -36,9 +36,8 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Added native Sportarr integration with "Has upcoming events" rule property for
-  shows. Improved Jellyfin watch state resolution. Fixed bugs with overdue
-  item deletion dates and collection member re-adoption.
+  Fixed Jellyfin/Emby metadata handling and Plex collection duplication/orphaning.
+  Improved performance through metadata caching. Fixed watched-state rule matching.
 dependencies: []
 path: ""
 defaultUsername: ""
