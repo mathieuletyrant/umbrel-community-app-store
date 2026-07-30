@@ -36,9 +36,9 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Added per-item postpone deletion for collections. Fixed transient internet
-  lookup failures that previously emptied collections and reset deletion
-  countdowns. Improved rule evaluation performance through metadata caching.
+  Added native Sportarr integration with "Has upcoming events" rule property for
+  shows. Improved Jellyfin watch state resolution. Fixed bugs with overdue
+  item deletion dates and collection member re-adoption.
 dependencies: []
 path: ""
 defaultUsername: ""
