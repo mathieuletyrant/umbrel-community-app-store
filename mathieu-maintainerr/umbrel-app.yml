@@ -36,9 +36,9 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Adds cleanup of dangling symlinks and leftover media folders from per-file
-  *arr deletes. Improves season and episode poster metadata resolution. Various
-  bug fixes and performance improvements.
+  Bug fixes for rule groups and collection management, including reporting
+  manual add failures and adding whole shows to season/episode collections.
+  Dependency updates.
 dependencies: []
 path: ""
 defaultUsername: ""
