@@ -39,9 +39,7 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Auth system rebuilt with Plex/SSO support and merged user identities across servers.
-  Web users must re-authenticate after upgrade. Performance improvements, updated dependencies
-  (Node 24, Redis v8). Backup before upgrading — downgrade to 1.4.x is not supported.
+  Major release with heavy database migration — back up before upgrading. Introduces new Media library interface, consolidates title identities across servers, tracks every file version (4K + 1080p copies), and adds Public API v2 with bearer tokens and OpenAPI docs.
 dependencies: []
 path: ""
 defaultUsername: ""
