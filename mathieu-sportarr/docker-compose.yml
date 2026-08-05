@@ -7,7 +7,7 @@ services:
       APP_PORT: 1867
 
   server:
-    image: sportarr/sportarr:4.0.1022.1102@sha256:6120a00c7d6587626388a40548694a83628eca62ab9fbf8b13681934f4faf4ca
+    image: sportarr/sportarr:4.1.0.1110@sha256:5ab15cfdbac71aad8e5a4a6a97e0513f21e4e8315f247fcdff34d85654d3f6ef
     environment:
       - TZ=Europe/Paris
       - PUID=1000
