@@ -36,7 +36,12 @@ repo: https://github.com/Sportarr/Sportarr
 support: https://github.com/Sportarr/Sportarr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Sportarr for this Community App Store.
+  v4.1.0 adds Kodi as a first-class media server alongside Plex/Emby/Jellyfin,
+  Sportarr Lists for importing sportarr.net content, athlete following, new
+  download clients and notification providers, and background library imports
+  with progress tracking. Includes major fixes for Docker SQLite issues, DVR
+  scheduling, and reverse-proxy authentication. Standard upgrade with no manual
+  steps required.
 dependencies: []
 path: ""
 defaultUsername: ""
