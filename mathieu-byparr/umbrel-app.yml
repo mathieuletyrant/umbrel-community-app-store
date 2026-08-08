@@ -38,7 +38,8 @@ repo: https://github.com/ThePhaseless/Byparr
 support: https://github.com/ThePhaseless/Byparr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Byparr for this Community App Store.
+  Now using invisible-playwright from PyPI for better stability. Improved network
+  timeout handling. Added support for Open WebUI external web loader endpoint.
 dependencies: []
 path: ""
 defaultUsername: ""
