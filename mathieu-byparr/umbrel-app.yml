@@ -5,7 +5,7 @@ name: Byparr
 tagline: Cloudflare-bypass proxy for Prowlarr/Jackett (FlareSolverr replacement)
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-byparr/icon.png
 # renovate: datasource=docker depName=ghcr.io/thephaseless/byparr
-version: "2.1.0"
+version: "3.0.0"
 port: 8191
 description: >-
   Byparr is a drop-in replacement for FlareSolverr: a proxy server that solves
