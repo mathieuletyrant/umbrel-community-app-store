@@ -7,7 +7,7 @@ services:
       APP_PORT: 8789
 
   server:
-    image: robertlordhood/chaptarr:0.9.879@sha256:912f4f5b3049b478e8f76a05945999e5faafb94cd6e4976544d2334f011a11a1
+    image: robertlordhood/chaptarr:0.9.906@sha256:6bed0be1e9f100b4c17288291ac3487d99268d899302eb5e00804fa6afde9ee8
     environment:
       - TZ=Europe/Paris
       - PUID=1000
