@@ -39,7 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  Waveform editor with speech detection, cue snapping, and one-click safe subtitle repairs. Custom regex scoring rules and global release-group tier ranking for fine-grained download control. Provider profiles let you assign different subtitle sources and scoring presets per series. Decision log explains why each subtitle was picked. Performance optimizations for low-power hosts, history rollback, and numerous fixes including login loop and PostgreSQL compatibility.
+  Improved provider diagnostics showing why they're held from searches. Fixed LLM translation, job scheduling, provider throttling, and log rotation. Added batch foreign-tracks cleanup with resume support (disabled by default).
 dependencies: []
 path: ""
 defaultUsername: ""
