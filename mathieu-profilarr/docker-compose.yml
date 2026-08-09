@@ -7,7 +7,7 @@ services:
       APP_PORT: 6868
 
   server:
-    image: ghcr.io/dictionarry-hub/profilarr:2.0.9@sha256:7a9b5112ff227320d17c65ab643a5d875713e6235991ef04a8e482ec51427902
+    image: ghcr.io/dictionarry-hub/profilarr:2.1.0@sha256:75a43c9c19c70f6e48315d4ed5cef3232d905da8fab397391a2078a5e0fd7ec1
     init: true
     environment:
       - PUID=1000
