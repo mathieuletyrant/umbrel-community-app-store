@@ -53,7 +53,7 @@ repo: https://github.com/nandyalu/trailarr
 support: https://github.com/nandyalu/trailarr/issues
 gallery: []
 releaseNotes: >-
-  Download records now drive the engine, eliminating re-download loops — only genuinely missing trailers are downloaded. Failed downloads back off progressively instead of retrying every run. Notifications via Apprise (Discord, Telegram, Slack, email, 100+ services) with rich Discord embeds and media details.
+  Database schema simplified with automatic custom-filter migration — legacy status fields removed, download records are now the only source of truth. New Plex connection UI with local URL and Test button for direct local access. Database file shrinks after upgrades with automatic VACUUM.
 dependencies: []
 path: ""
 defaultUsername: "admin"
