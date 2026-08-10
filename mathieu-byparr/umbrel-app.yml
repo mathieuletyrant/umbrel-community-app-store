@@ -38,8 +38,9 @@ repo: https://github.com/ThePhaseless/Byparr
 support: https://github.com/ThePhaseless/Byparr/issues
 gallery: []
 releaseNotes: >-
-  Now using invisible-playwright from PyPI for better stability. Improved network
-  timeout handling. Added support for Open WebUI external web loader endpoint.
+  Fixes garbled text responses from compressed websites (gzip/brotli/zstd). The
+  CSP-stripping fix in v3.0.0 inadvertently served compressed bytes without
+  decompressing them.
 dependencies: []
 path: ""
 defaultUsername: ""
