@@ -36,9 +36,9 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Adds studio sorting and bulk media actions for collections, Tracearr watch
-  history integration, and batch metadata reads for better performance. Includes
-  security hardening and fixes for qBittorrent sessions, collections, and rules.
+  Fixes collection search/exclude actions, improves collection sizing and maintenance
+  sweep performance, and restores Tracearr watcher rules. UI improvements include
+  production build blur and updated warnings.
 dependencies: []
 path: ""
 defaultUsername: ""
