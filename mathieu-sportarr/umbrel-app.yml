@@ -5,7 +5,7 @@ name: Sportarr
 tagline: PVR for sports — monitors leagues, grabs releases, organizes your library
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/icon.png
 # renovate: datasource=docker depName=sportarr/sportarr
-version: "4.1.0.1110"
+version: "4.1.1.1111"
 port: 1867
 description: >-
   Sportarr is a sports PVR built in the style of Sonarr and Radarr. It monitors
