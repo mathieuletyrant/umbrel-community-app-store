@@ -36,12 +36,12 @@ repo: https://github.com/Sportarr/Sportarr
 support: https://github.com/Sportarr/Sportarr/issues
 gallery: []
 releaseNotes: >-
-  v4.1.0 adds Kodi as a first-class media server alongside Plex/Emby/Jellyfin,
-  Sportarr Lists for importing sportarr.net content, athlete following, new
-  download clients and notification providers, and background library imports
-  with progress tracking. Includes major fixes for Docker SQLite issues, DVR
-  scheduling, and reverse-proxy authentication. Standard upgrade with no manual
-  steps required.
+  v4.1.1 rebuilds the webhook system with structured payloads and adds a
+  documented, stable API for third-party integrations including native Notifiarr
+  support and live event streams. Includes performance improvements, new custom
+  format conditions, and better artwork/metadata handling. Standard upgrade with
+  no manual steps required, though webhook consumers must update to handle the
+  new nested payload structure.
 dependencies: []
 path: ""
 defaultUsername: ""
