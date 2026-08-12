@@ -53,7 +53,7 @@ repo: https://github.com/nandyalu/trailarr
 support: https://github.com/nandyalu/trailarr/issues
 gallery: []
 releaseNotes: >-
-  Database schema simplified with automatic custom-filter migration — legacy status fields removed, download records are now the only source of truth. New Plex connection UI with local URL and Test button for direct local access. Database file shrinks after upgrades with automatic VACUUM.
+  Fixes Windows installer, YouTube downloads on self-hosted setups, and Plex-only media cleanup. New optional per-profile auto-generated subtitles setting (off by default).
 dependencies: []
 path: ""
 defaultUsername: "admin"
