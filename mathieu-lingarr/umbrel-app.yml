@@ -45,7 +45,7 @@ repo: https://github.com/lingarr-translate/lingarr
 support: https://github.com/lingarr-translate/lingarr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Lingarr for this Community App Store.
+  Bug fixes for SQLite locks and subtitle failure retries. Added new themes, proofreading feature, and support for Mistral and xAI translation services.
 dependencies: []
 path: ""
 defaultUsername: ""
