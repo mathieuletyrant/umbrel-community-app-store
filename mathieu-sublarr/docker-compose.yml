@@ -7,7 +7,7 @@ services:
       APP_PORT: 5765
 
   server:
-    image: ghcr.io/abrechen2/sublarr:1.11.1@sha256:24ddd5da990a39a6bbda3e70751310b7200a2e71263c29c44dbe0ccee3ea440d
+    image: ghcr.io/abrechen2/sublarr:1.12.0@sha256:4592ec46b5873910ecf32c05929b11b4063a43202ebd1bee40a6adec606d7d9e
     init: true
     environment:
       - PUID=1000
