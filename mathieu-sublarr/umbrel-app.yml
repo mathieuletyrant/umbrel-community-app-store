@@ -39,7 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  Improved provider diagnostics showing why they're held from searches. Fixed LLM translation, job scheduling, provider throttling, and log rotation. Added batch foreign-tracks cleanup with resume support (disabled by default).
+  Fixed critical search-blocking subtitle translation performance issue. Improved timeout handling and job reporting. Searches can now be cancelled at startup.
 dependencies: []
 path: ""
 defaultUsername: ""
