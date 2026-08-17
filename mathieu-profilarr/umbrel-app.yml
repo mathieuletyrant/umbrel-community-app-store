@@ -5,7 +5,7 @@ name: Profilarr
 tagline: Quality profiles & custom formats manager for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/dictionarry-hub/profilarr
-version: "2.1.0"
+version: "2.2.0"
 port: 6868
 description: >-
   Profilarr is a configuration management platform for Radarr and Sonarr. It
