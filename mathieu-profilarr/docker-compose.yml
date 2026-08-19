@@ -26,7 +26,7 @@ services:
   # Optional companion — only used for the custom-format / quality-profile
   # testing features. Kept internal (not exposed on the host).
   parser:
-    image: ghcr.io/dictionarry-hub/profilarr-parser:latest@sha256:83d668258b2a798adaf25dec0d78e5159953c3b015e2d31edb8e5b9859f3c591
+    image: ghcr.io/dictionarry-hub/profilarr-parser:latest@sha256:3cd3f8c4979ee66304a518462cc6c5b59825bae6b25e7dfa51b30178b9265df7
     init: true
     expose:
       - "5000"
