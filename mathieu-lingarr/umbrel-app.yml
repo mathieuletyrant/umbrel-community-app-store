@@ -5,7 +5,7 @@ name: Lingarr
 tagline: Automated subtitle translation for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/lingarr-translate/lingarr
-version: "1.2.4"
+version: "1.3.0"
 port: 9876
 description: >-
   Lingarr is an automated subtitle translator for Radarr and Sonarr. It
@@ -45,7 +45,7 @@ repo: https://github.com/lingarr-translate/lingarr
 support: https://github.com/lingarr-translate/lingarr/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Lingarr for this Community App Store.
+  Bug fixes for SQLite locks and subtitle failure retries. Added new themes, proofreading feature, and support for Mistral and xAI translation services.
 dependencies: []
 path: ""
 defaultUsername: ""
