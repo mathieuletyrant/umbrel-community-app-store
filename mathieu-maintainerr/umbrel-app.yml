@@ -5,7 +5,7 @@ name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
-version: "3.22.1"
+version: "3.23.0"
 port: 6246
 description: >-
   Maintainerr is a rule-based cleanup tool for your Plex media library. You
@@ -36,9 +36,9 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Fixes collection search/exclude actions, improves collection sizing and maintenance
-  sweep performance, and restores Tracearr watcher rules. UI improvements include
-  production build blur and updated warnings.
+  Adds lastPlayedAt rule for Plex, Tautulli, Tracearr, and Jellyfin/Emby. Implements
+  UI translation pipeline and overlay countdowns on media leaving the library. Includes
+  webhook payload enhancements and various bug fixes.
 dependencies: []
 path: ""
 defaultUsername: ""
