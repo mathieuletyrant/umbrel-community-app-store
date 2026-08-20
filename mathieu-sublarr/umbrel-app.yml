@@ -39,7 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  Fixed critical search-blocking subtitle translation performance issue. Improved timeout handling and job reporting. Searches can now be cancelled at startup.
+  Critical bugfixes: prevents episodes from getting stuck in search automation, fixes subtitle file corruption from LLM responses, resolves permission issues causing playback failures, cleans up abandoned remux files. Improved search cancellation, timeout handling, and task queue reliability.
 dependencies: []
 path: ""
 defaultUsername: ""
