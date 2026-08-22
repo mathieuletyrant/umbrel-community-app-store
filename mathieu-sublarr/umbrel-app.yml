@@ -39,7 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  Fixed critical search-blocking subtitle translation performance issue. Improved timeout handling and job reporting. Searches can now be cancelled at startup.
+  Adds per-provider language exclusion for better source selection. Fixes Titlovi authentication, and ensures failed translations and missing media files recover automatically instead of staying stuck.
 dependencies: []
 path: ""
 defaultUsername: ""
