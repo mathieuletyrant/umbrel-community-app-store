@@ -5,7 +5,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.12.1"
+version: "1.13.0"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -39,7 +39,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  Fixed critical search-blocking subtitle translation performance issue. Improved timeout handling and job reporting. Searches can now be cancelled at startup.
+  Adds per-provider language exclusion for better source selection. Fixes Titlovi authentication, and ensures failed translations and missing media files recover automatically instead of staying stuck.
 dependencies: []
 path: ""
 defaultUsername: ""
