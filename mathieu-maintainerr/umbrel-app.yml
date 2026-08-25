@@ -36,9 +36,8 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Adds comprehensive UI localization support for full language translation, fixes overlay
-  countdowns and collection matching issues, and includes UI layout and performance
-  improvements.
+  Adds per-collection local-only sync option, improves modal and dialog layouts, fixes
+  Monaco editor loading, and includes optional telemetry (disable with TELEMETRY=off).
 dependencies: []
 path: ""
 defaultUsername: ""
