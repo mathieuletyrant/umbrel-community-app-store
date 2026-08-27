@@ -5,7 +5,7 @@ name: Chaptarr
 tagline: Ebook and audiobook manager — the Readarr successor
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-chaptarr/icon.png
 # renovate: datasource=docker depName=robertlordhood/chaptarr
-version: "0.9.929"
+version: "0.9.936"
 port: 8789
 description: >-
   Chaptarr is a re-work of the retired Readarr that manages ebooks and
