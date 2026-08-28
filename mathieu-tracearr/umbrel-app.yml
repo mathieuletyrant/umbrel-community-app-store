@@ -39,7 +39,7 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Refactors rules into automations with 21 ready-made templates and share codes for importing/exporting across instances. Adds media event triggers (on add/upgrade), local GPU-accelerated maps, and improved activity tracking. **Back up before upgrading** — first boot permanently converts existing rules to automations with no downgrade path.
+  Hotfix for HTTP connections: fixes crypto.randomUUID error that caused "painter is undefined" crashes.
 dependencies: []
 path: ""
 defaultUsername: ""
