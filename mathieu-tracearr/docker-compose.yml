@@ -11,7 +11,7 @@ services:
       APP_PORT: 3000
 
   server:
-    image: ghcr.io/connorgallopo/tracearr:supervised-2.2.1@sha256:bbc5415db5093105f8cfbf0b02b4523a54a8c319df8600b788d9db51cdd24043
+    image: ghcr.io/connorgallopo/tracearr:supervised-2.2.2@sha256:76ac2a31a846b37d76417c476fb91c598d6da19a888c72af1b74c70ed904054e
     init: true
     shm_size: 512mb
     ulimits:
