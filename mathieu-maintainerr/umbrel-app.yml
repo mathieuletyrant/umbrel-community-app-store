@@ -36,8 +36,7 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Adds per-collection local-only sync option, improves modal and dialog layouts, fixes
-  Monaco editor loading, and includes optional telemetry (disable with TELEMETRY=off).
+  Adds Sportarr metadata provider for league artwork and descriptions. Adds season view date rules for Plex, Jellyfin, and Emby. Includes bug fixes for HTTP rate limiting, metadata parsing, and settings repository issues.
 dependencies: []
 path: ""
 defaultUsername: ""
