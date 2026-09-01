@@ -5,7 +5,7 @@ name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
-version: "3.25.0"
+version: "3.26.0"
 port: 6246
 description: >-
   Maintainerr is a rule-based cleanup tool for your Plex media library. You
@@ -36,8 +36,7 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Adds per-collection local-only sync option, improves modal and dialog layouts, fixes
-  Monaco editor loading, and includes optional telemetry (disable with TELEMETRY=off).
+  Adds Sportarr metadata provider for league artwork and descriptions. Adds season view date rules for Plex, Jellyfin, and Emby. Includes bug fixes for HTTP rate limiting, metadata parsing, and settings repository issues.
 dependencies: []
 path: ""
 defaultUsername: ""
