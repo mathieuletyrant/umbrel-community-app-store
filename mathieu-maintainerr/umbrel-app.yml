@@ -36,7 +36,7 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Adds Sportarr metadata provider for league artwork and descriptions. Adds season view date rules for Plex, Jellyfin, and Emby. Includes bug fixes for HTTP rate limiting, metadata parsing, and settings repository issues.
+  Fixes collection manual-marking bug that prevented rule-based removal. Adds watcher list rules for filtering by viewer. Includes reliability improvements for HTTP timeouts and collection operations.
 dependencies: []
 path: ""
 defaultUsername: ""
