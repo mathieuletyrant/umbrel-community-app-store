@@ -18,7 +18,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - uses: anthropics/claude-code-action@19dda84776b3518d98b8798e591daee763049ed3 # v1
+      - uses: anthropics/claude-code-action@0a8d3c9443bbff909ab973b6a17a340b913f229f # v1
         env:
           # base is .../api NOT .../api/v1 — Claude Code appends /v1/messages.
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
