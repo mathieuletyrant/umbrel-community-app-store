@@ -53,7 +53,7 @@ repo: https://github.com/nandyalu/trailarr
 support: https://github.com/nandyalu/trailarr/issues
 gallery: []
 releaseNotes: >-
-  Database schema simplified with automatic custom-filter migration — legacy status fields removed, download records are now the only source of truth. New Plex connection UI with local URL and Test button for direct local access. Database file shrinks after upgrades with automatic VACUUM.
+  Backend reorganized into five layers for safer future development. Error messages no longer expose internal details like folder paths or API keys — failures now show only the action and a plain-language explanation in the logs. Log messages use consistent styling with media titles instead of IDs.
 dependencies: []
 path: ""
 defaultUsername: "admin"
