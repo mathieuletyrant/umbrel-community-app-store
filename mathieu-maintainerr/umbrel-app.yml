@@ -36,7 +36,7 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Fixes collection manual-marking bug that prevented rule-based removal. Adds watcher list rules for filtering by viewer. Includes reliability improvements for HTTP timeouts and collection operations.
+  Adds Transmission as a download client option for job cleanup. Fixes download client configuration handling and qBittorrent seeding time comparison. Includes database migrations and dependency updates.
 dependencies: []
 path: ""
 defaultUsername: ""
