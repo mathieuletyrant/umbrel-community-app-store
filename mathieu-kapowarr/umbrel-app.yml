@@ -5,7 +5,7 @@ name: Kapowarr
 tagline: Build and manage your comic book library, *arr style
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-kapowarr/icon.png
 # renovate: datasource=docker depName=mrcas/kapowarr
-version: "1.3.1"
+version: "1.3.2"
 port: 5656
 description: >-
   Kapowarr brings the *arr workflow to comic books. Add volumes to your
