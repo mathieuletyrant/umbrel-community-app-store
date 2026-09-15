@@ -39,7 +39,7 @@ repo: https://github.com/connorgallopo/Tracearr
 support: https://github.com/connorgallopo/Tracearr/issues
 gallery: []
 releaseNotes: >-
-  Refactors rules into automations with 21 ready-made templates and share codes for importing/exporting across instances. Adds media event triggers (on add/upgrade), local GPU-accelerated maps, and improved activity tracking. **Back up before upgrading** — first boot permanently converts existing rules to automations with no downgrade path.
+  Adds Seerr request tracking, member newsletters, and email notifications with SMTP. Includes Jellyfin 12 fixes and security improvements.
 dependencies: []
 path: ""
 defaultUsername: ""
