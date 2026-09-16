@@ -36,7 +36,7 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  Adds Transmission as a download client option for job cleanup. Fixes download client configuration handling and qBittorrent seeding time comparison. Includes database migrations and dependency updates.
+  Improves cleanup performance with targeted media server folder rescans after deletions and optimized collection size calculations to prevent media server flooding. Includes dependency updates.
 dependencies: []
 path: ""
 defaultUsername: ""
