@@ -15,5 +15,5 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/db:/app/db
       - ${APP_DATA_DIR}/data/temp_downloads:/app/temp_downloads
-      - ${UMBREL_ROOT}/home/Downloads:/downloads
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure

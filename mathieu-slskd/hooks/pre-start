@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# slskd runs as 1000:1000 and cannot create its own download folders if the
+# shared Downloads directory is owned by root.
+DOWNLOADS="${UMBREL_ROOT}/home/Downloads"
+[[ -d "${DOWNLOADS}" ]] || DOWNLOADS="${UMBREL_ROOT}/data/storage/downloads"
+
+for dir in "${DOWNLOADS}/soulseek" "${DOWNLOADS}/soulseek/complete" "${DOWNLOADS}/soulseek/incomplete"; do
+	mkdir -p "${dir}"
+	chown 1000:1000 "${dir}"
+done

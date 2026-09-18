@@ -25,5 +25,5 @@ services:
       - ${APP_DATA_DIR}/data/configs:/app/configs
       - ${APP_DATA_DIR}/data/logs:/app/logs
       - ${APP_DATA_DIR}/data/transcode:/temp
-      - ${UMBREL_ROOT}/home/Downloads:/downloads
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure

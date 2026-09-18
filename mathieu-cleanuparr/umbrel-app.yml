@@ -1,11 +1,13 @@
 manifestVersion: 1
 id: mathieu-cleanuparr
+storage:
+  dataRoot: data
 category: media
 name: Cleanuparr
 tagline: Automated download cleanup for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/icon.png
 # renovate: datasource=docker depName=ghcr.io/cleanuparr/cleanuparr
-version: "2.10.6"
+version: "2.10.6-patch.1"
 port: 11011
 description: >-
   Cleanuparr is an advanced download manager for the Servarr ecosystem
@@ -38,6 +40,12 @@ support: https://github.com/Cleanuparr/Cleanuparr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/gallery-1.jpg
 releaseNotes: >-
+  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+
+
+  Previous release notes:
+
+
   Initial release of Cleanuparr for this Community App Store.
 dependencies: []
 path: ""

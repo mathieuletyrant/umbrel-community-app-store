@@ -20,5 +20,5 @@ services:
       # Media mounted at the SAME path Sonarr/Radarr use (/downloads), so Lingarr
       # reads/writes subtitle files next to the media without path mapping.
       # Read-write: Lingarr writes translated .srt files next to the videos.
-      - ${UMBREL_ROOT}/home/Downloads:/downloads
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure

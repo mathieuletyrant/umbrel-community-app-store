@@ -1,11 +1,13 @@
 manifestVersion: 1
 id: mathieu-soularr
+storage:
+  dataRoot: data
 category: media
 name: Soularr
 tagline: Auto-download Lidarr's wanted music from Soulseek via slskd
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-soularr/icon.png
 # renovate: datasource=docker depName=mrusse08/soularr
-version: "1.2.2"
+version: "1.2.2-patch.1"
 port: 8265
 description: >-
   Soularr bridges Lidarr and slskd to automate music downloads from the Soulseek
@@ -47,6 +49,12 @@ repo: https://github.com/mrusse/soularr
 support: https://github.com/mrusse/soularr/issues
 gallery: []
 releaseNotes: >-
+  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+
+
+  Previous release notes:
+
+
   Initial release of Soularr for this Community App Store.
 dependencies:
   - lidarr

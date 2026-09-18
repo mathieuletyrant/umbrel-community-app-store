@@ -18,5 +18,5 @@ services:
       - ${APP_DATA_DIR}/data/config:/config
       # Media mounted at the SAME path Sonarr/Radarr report (/downloads), so
       # Trailarr's path mappings are 1:1 and it writes trailers next to the media.
-      - ${UMBREL_ROOT}/home/Downloads:/downloads
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure

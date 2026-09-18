@@ -24,5 +24,5 @@ services:
       - ${APP_DATA_DIR}/data/config:/config
       # Media mounted at the SAME path Sonarr/Radarr use (/downloads), so Sublarr
       # writes subtitle files next to the media without path mapping.
-      - ${UMBREL_ROOT}/home/Downloads:/downloads
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure

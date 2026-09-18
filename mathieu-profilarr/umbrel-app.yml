@@ -1,11 +1,13 @@
 manifestVersion: 1
 id: mathieu-profilarr
+storage:
+  dataRoot: data
 category: media
 name: Profilarr
 tagline: Quality profiles & custom formats manager for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/dictionarry-hub/profilarr
-version: "2.2.0"
+version: "2.2.0-patch.1"
 port: 6868
 description: >-
   Profilarr is a configuration management platform for Radarr and Sonarr. It
@@ -37,6 +39,12 @@ gallery:
   - https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/develop/.github/assets/qp-list-dark.png
   - https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/develop/.github/assets/upgrades-dark.png
 releaseNotes: >-
+  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+
+
+  Previous release notes:
+
+
   v2.2.0 adds release-group filtering and release date sorting to library views. Fixes onboarding Arr type selection, orphaned process cleanup, and several UI/pattern handling issues.
 dependencies: []
 path: ""

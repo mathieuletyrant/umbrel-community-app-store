@@ -1,11 +1,13 @@
 manifestVersion: 1
 id: mathieu-chaptarr
+storage:
+  dataRoot: data
 category: media
 name: Chaptarr
 tagline: Ebook and audiobook manager — the Readarr successor
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-chaptarr/icon.png
 # renovate: datasource=docker depName=robertlordhood/chaptarr
-version: "0.9.958"
+version: "0.9.958-patch.1"
 port: 8789
 description: >-
   Chaptarr is a re-work of the retired Readarr that manages ebooks and
@@ -38,7 +40,8 @@ submission: https://hub.docker.com/r/robertlordhood/chaptarr
 repo: https://hub.docker.com/r/robertlordhood/chaptarr
 support: https://hub.docker.com/r/robertlordhood/chaptarr
 gallery: []
-releaseNotes: ""
+releaseNotes: >-
+  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
 dependencies: []
 path: ""
 permissions:

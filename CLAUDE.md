@@ -72,11 +72,11 @@ Current apps:
   ```
 - Persist app data under `${APP_DATA_DIR}/data/...`.
   Umbrel owns this path as uid/gid **1000**.
-- Shared Umbrel storage is at `${UMBREL_ROOT}/data/storage/...` by the official
-  convention (e.g. `downloads`). **BUT on this owner's umbrelOS the media lives
-  in `${UMBREL_ROOT}/home/Downloads`** (the Files-app shared folder) — that path
-  is what the *arr apps actually use here, so media-touching apps in this store
-  mount `${UMBREL_ROOT}/home/Downloads:/downloads`, NOT `data/storage/downloads`.
+- Shared Umbrel storage is mounted as `${UMBREL_ROOT}/data/storage/downloads:/downloads`.
+  Keep that path literally: umbrelOS rewrites it to `${UMBREL_ROOT}/home/Downloads`
+  when it patches the compose at install, and older umbrelOS versions still expect
+  the old path. Hardcoding `home/Downloads` breaks installs on umbrelOS 1.x — Docker
+  creates a root-owned empty dir and the container gets permission denied.
   The *arr containers expose it internally as `/downloads` (root folders
   `/downloads/movies`, `/downloads/shows`); match that container path so file
   paths line up. Mount read-only when the app only needs to read.
@@ -107,6 +107,18 @@ Cross-app networking works via `<other-app-id>_<service>_1` hostnames (e.g.
 this too.
 
 ### umbrel-app.yml conventions
+
+- Every manifest declares `storage:` / `dataRoot: data` right after `id:`. This is
+  the umbrelOS 2.0 opt-in that lets users move an app's data to external storage,
+  and it makes umbrelOS create the `${APP_DATA_DIR}/data/...` bind-mount sources
+  before start (without it, Docker creates them root-owned).
+- `folderAccess:` (optional) declares user-pickable folders in the umbrelOS 2.0 UI.
+  Not needed for a plain `/downloads` mount — umbrelOS auto-generates a slot for any
+  compose mount under Downloads. Add it only for extra folders or a custom note.
+- `environment:` (optional) exposes env vars users can edit from the app settings UI.
+- When a change needs to reach existing installs, bump `version` with a `-patch.N`
+  suffix (e.g. `0.26.0-patch.1`) — Renovate replaces the whole string on the next
+  image bump.
 
 - `id` must equal the folder name and start with `mathieu-`.
 - Pick a real `icon` URL and, ideally, `gallery` images. If the upstream repo has

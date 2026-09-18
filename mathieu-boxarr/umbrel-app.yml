@@ -1,11 +1,13 @@
 manifestVersion: 1
 id: mathieu-boxarr
+storage:
+  dataRoot: data
 category: media
 name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "2.1.0"
+version: "2.1.0-patch.1"
 port: 8888
 description: >-
   Boxarr is an automated box office tracking application that integrates with
@@ -36,6 +38,12 @@ gallery:
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/week-view.png
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/images/auto-add-filters.png
 releaseNotes: >-
+  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+
+
+  Previous release notes:
+
+
   Boxarr 2.1 adds full Radarr language vocabulary (~57 languages), weekend gross thresholds, and Hide Ignored Movies setting. Fixes Box Office Mojo column parsing, preserves filter settings on save, and improves setup page stability.
 dependencies: []
 path: ""

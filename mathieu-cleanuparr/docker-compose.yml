@@ -19,5 +19,5 @@ services:
       # Downloads dir (same path the *arr apps use) so Cleanuparr can check
       # hardlinks for its orphaned / unlinked-download cleanup. Host path is
       # umbrelOS's shared home/Downloads folder used by this setup's *arr apps.
-      - ${UMBREL_ROOT}/home/Downloads:/downloads
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure
