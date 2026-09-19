@@ -7,7 +7,7 @@ name: slskd
 tagline: Soulseek client with a modern web UI
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/icon.png
 # renovate: datasource=docker depName=slskd/slskd
-version: "0.26.0-patch.1"
+version: "0.26.0-patch.2"
 port: 5030
 description: >-
   slskd is a modern, self-hosted client for the Soulseek file-sharing network,
@@ -25,23 +25,28 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  On first launch, sign in with the default web credentials username `slskd` /
-  password `slskd`, then open Options — remote configuration is enabled, so you
-  can edit everything from the UI:
+  slskd needs your Soulseek network account before it can connect — it is
+  separate from the web UI login. Set it in this app's settings (⋯ → Settings →
+  Advanced settings) and restart the app:
 
 
-  1. Under Soulseek, enter your Soulseek network username and password (create a
-  free account in any Soulseek client or at slsknet.org if you don't have one).
+  1. SLSKD_SLSK_USERNAME and SLSKD_SLSK_PASSWORD — your Soulseek account. Create
+  a free one in any Soulseek client or at slsknet.org.
 
-  2. Set your shared directories (Soulseek expects you to share back) — your
-  library is mounted at /downloads.
+  2. SLSKD_SHARED_DIR — folders to share back, e.g. /downloads/music (Soulseek
+  expects you to share something).
 
-  3. Change the web UI password from the default.
+
+  Then open the app and sign in to the web UI with `slskd` / `slskd`, and change
+  that password under Options. Remote configuration is enabled, so everything
+  else can be edited from the UI.
 
 
   Completed downloads land in /downloads/soulseek/complete, alongside your other
   media so Lidarr can import them. For best connectivity, forward TCP port 50300
   to your Umbrel on your router.
+
+
 developer: slskd
 website: https://github.com/slskd/slskd
 submitter: Mathieu Le Tyrant
@@ -50,18 +55,33 @@ repo: https://github.com/slskd/slskd
 support: https://github.com/slskd/slskd/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Soulseek credentials can now be entered directly from the app's settings
+  (SLSKD_SLSK_USERNAME, SLSKD_SLSK_PASSWORD, SLSKD_SHARED_DIR) — previously the
+  only way to log in to the Soulseek network was to hand-edit the YAML config,
+  so slskd started but never connected.
 
 
   Previous release notes:
 
 
-  New dashboard landing page with real-time statistics, redesigned Browse screen with better performance on large shares,
-  download retry support with exponential backoff, and granular control over download destinations. Breaking change: file permission
-  configuration moved from `permissions.file.mode` to `transfers.download.destination.permissions.mode`.
+  Support for the new storage management and configuration options introduced with umbrelOS 2.0, and the standard shared Downloads mount path so the app works on every umbrelOS version.
 dependencies: []
 path: ""
 defaultUsername: "slskd"
 defaultPassword: "slskd"
+environment:
+  - name: SLSKD_SLSK_USERNAME
+    services:
+      - server
+    note: Your Soulseek network username. Create a free account in any Soulseek client or at slsknet.org. Without this slskd cannot log in to the network.
+  - name: SLSKD_SLSK_PASSWORD
+    services:
+      - server
+    note: Your Soulseek network password.
+  - name: SLSKD_SHARED_DIR
+    services:
+      - server
+    default: /downloads/music
+    note: Folders to share back with the network, semicolon-separated, as seen inside the container. Example /downloads/music. Soulseek expects you to share something.
 permissions:
   - STORAGE_DOWNLOADS
