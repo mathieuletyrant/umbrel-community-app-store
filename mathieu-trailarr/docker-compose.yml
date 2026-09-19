@@ -7,7 +7,7 @@ services:
       APP_PORT: 7889
 
   trailarr:
-    image: nandyalu/trailarr:0.11.1@sha256:ae5a4fc43cd057d2354f6aa2c594d85675494bf5fa2e90d830614d3618b5b780
+    image: nandyalu/trailarr:0.12.1@sha256:8a2fe82f1369067733f465c96aef9c2cdab06ef20270ec07d93083482b9298b7
     environment:
       - TZ=Europe/Paris
       - PUID=1000
