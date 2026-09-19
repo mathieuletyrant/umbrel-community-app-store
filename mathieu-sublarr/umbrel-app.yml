@@ -41,13 +41,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
-
-
-  Previous release notes:
-
-
-  Adds per-provider language exclusion for better source selection. Fixes Titlovi authentication, and ensures failed translations and missing media files recover automatically instead of staying stuck.
+  Major update with critical fixes for duplicate detection, translation memory corruption, and provider reliability. Fixes Ollama translation direction, embedded subtitle handling, and adds bulk approval for pending originals. Multiple provider endpoints updated (SubSource API, AnimeTosho domain change, TVsubtitles/Subf2m fixes). Database backup recommended before upgrade for Ollama/OpenAI backends.
 dependencies: []
 path: ""
 defaultUsername: ""
