@@ -29,6 +29,8 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Tdarr** | **Automated transcoding & library health checks**: plugin-driven rules re-encode (H.265/AV1), remux, strip unwanted tracks and flag corrupt files across your library, using a Server + Node worker model. |
 | **Kapowarr** | **Comic book library manager** (*arr style): add volumes, and it searches, downloads, renames and converts issues — ComicVine metadata, built-in sources like GetComics, no separate indexer needed. |
 | **Chaptarr** | **Ebook & audiobook manager** — a re-work of the retired Readarr that handles both in one instance: wanted list, indexers via Prowlarr, download client, organized import. |
+| **Scryer** | **A whole *arr stack in one binary**: movies, series and anime in a single interface — monitoring, indexer search, quality upgrades, renaming, import and subtitles, in ~100 MB of RAM instead of a gigabyte. |
+| **Weaver** | **Usenet downloader** (by the Scryer authors): download, PAR2 repair and extraction run as one streaming pipeline, with native RAR/7z/ZIP support and no external unrar or par2. |
 
 ## 🚀 How to install
 

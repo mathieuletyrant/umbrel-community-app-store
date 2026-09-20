@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-weaver_server_1
+      APP_PORT: 9090
+
+  server:
+    image: ghcr.io/scryer-media/weaver:0.13.1@sha256:0002ea7197e97fb32d2bb3b59161c91c53923fe7cb04c6d80b56b83a16f8ce24
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+      - WEAVER_BOOTSTRAP_LOGIN_USERNAME=admin
+      - WEAVER_BOOTSTRAP_LOGIN_PASSWORD=weaver
+      - WEAVER_INTERMEDIATE_DIR=/downloads/usenet/incomplete
+      - WEAVER_COMPLETE_DIR=/downloads/usenet/complete
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    restart: on-failure

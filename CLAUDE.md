@@ -48,6 +48,8 @@ Current apps:
 - `mathieu-tdarr` — Tdarr (automated transcoding + library health checks, host port 8267/web UI 8265, Server port 8266; internalNode=true so it transcodes standalone; config split across /app/server + /app/configs + /app/logs, transcode cache at /temp, media at /downloads; iGPU needs /dev/dri added on host)
 - `mathieu-kapowarr` — Kapowarr (comic book library manager à la *arr, web UI on 5656; Docker Hub tag has `v` prefix; PUID/PGID 1000, db at /app/db, root folder /downloads/comics)
 - `mathieu-chaptarr` — Chaptarr (ebook/audiobook manager, Readarr re-work, web UI on 8789 — not Readarr's 8787; no public GitHub repo yet, Docker Hub only; PUID/PGID 1000, config at /config, root folder /downloads/books)
+- `mathieu-scryer` — Scryer (whole *arr stack in one Rust binary: movies/series/anime, web UI on 8080, host port 8380; runs as root + PUID/PGID, config at /config, libraries under /downloads for hardlinks)
+- `mathieu-weaver` — Weaver (Usenet downloader by the Scryer authors; download+PAR2 repair+extraction in one pipeline, web UI on 9090, host port 9390; bootstrap login admin/weaver via WEAVER_BOOTSTRAP_LOGIN_* env, only read on first start)
 
 ## Adding or updating an app
 

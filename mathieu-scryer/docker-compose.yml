@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-scryer_server_1
+      APP_PORT: 8080
+
+  server:
+    image: ghcr.io/scryer-media/scryer:0.21.7@sha256:0b2d28313c5eece768459f5e3080ddc6309a6ba256bb09f359311ed946bbd356
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    restart: on-failure

@@ -1,0 +1,50 @@
+manifestVersion: 1
+id: mathieu-scryer
+storage:
+  dataRoot: data
+category: media
+name: Scryer
+tagline: A whole *arr stack in one app — movies, series and anime
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/icon.png
+# renovate: datasource=docker depName=ghcr.io/scryer-media/scryer
+version: "0.21.7"
+port: 8380
+description: >-
+  Scryer replaces Sonarr, Radarr, Prowlarr and Bazarr with a single native
+  binary. It monitors your libraries, searches indexers, grabs releases,
+  upgrades quality, renames and imports files, and fetches subtitles — all
+  from one unified interface, for movies, TV series and anime alike.
+
+
+  It is designed to be light: around 100 MB of RAM for the whole workflow,
+  where a full *arr stack needs well over a gigabyte. It also handles
+  requests, multi-user access with roles, multiple libraries per instance,
+  and extracts RAR'd torrents on import.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and complete the first-run setup (create your admin user).
+
+  2. Your shared media storage is mounted at /downloads. Point your download
+  client at `/downloads` and add libraries under it, e.g.
+  `/downloads/movies`, `/downloads/shows`, `/downloads/anime`. Keeping
+  downloads and libraries under the same `/downloads` mount is what makes
+  hardlinks (instant, space-free imports) work.
+
+  3. Add your indexers and download clients in Settings. Other Umbrel apps
+  are reachable by container name, e.g. `transmission_server_1:9091` or
+  `prowlarr_server_1:9696`.
+developer: Scryer Media
+website: https://www.scryer.media
+submitter: Mathieu Le Tyrant
+submission: https://github.com/scryer-media/scryer
+repo: https://github.com/scryer-media/scryer
+support: https://github.com/scryer-media/scryer/issues
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+permissions:
+  - STORAGE_DOWNLOADS

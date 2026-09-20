@@ -1,0 +1,77 @@
+manifestVersion: 1
+id: mathieu-weaver
+storage:
+  dataRoot: data
+category: media
+name: Weaver
+tagline: Usenet downloader with built-in repair and extraction
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/icon.png
+# renovate: datasource=docker depName=ghcr.io/scryer-media/weaver
+version: "0.13.1"
+port: 9390
+description: >-
+  Weaver is a self-hosted Usenet downloader written in Rust. Downloading,
+  verification, PAR2 repair and extraction run as one coordinated pipeline
+  instead of separate post-processing steps, so articles are unpacked as they
+  arrive rather than after the whole download lands.
+
+
+  It handles RAR, 7z, ZIP and TAR natively — plus gzip, bzip2, xz, zstd and
+  brotli — with no external unrar or par2 binaries, and streams RAR extraction
+  straight out of the download.
+
+
+  It pairs with Scryer (or any *arr app) as the Usenet download client, and
+  drops completed files next to your other media so imports use hardlinks.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and sign in with `admin` / `weaver`, then change the password
+  in Settings. To pick your own bootstrap credentials instead, set
+  WEAVER_BOOTSTRAP_LOGIN_USERNAME and WEAVER_BOOTSTRAP_LOGIN_PASSWORD in this
+  app's settings (⋯ → Settings → Advanced settings) before first launch — they
+  are only read the first time Weaver starts.
+
+  2. Add your Usenet provider (server, port, SSL, connections) and your indexers
+  in Settings.
+
+  3. Downloads land in /downloads/usenet/complete on your shared media storage,
+  so *arr apps can import them with hardlinks. Point them at
+  `http://mathieu-weaver_server_1:9090`.
+developer: Scryer Media
+website: https://www.scryer.media/weaver/
+submitter: Mathieu Le Tyrant
+submission: https://github.com/scryer-media/weaver
+repo: https://github.com/scryer-media/weaver
+support: https://github.com/scryer-media/weaver/issues
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: "admin"
+defaultPassword: "weaver"
+environment:
+  - name: WEAVER_BOOTSTRAP_LOGIN_USERNAME
+    services:
+      - server
+    default: admin
+    note: Web UI username, created the first time Weaver starts. Changing it later has no effect — use the Settings page inside the app.
+  - name: WEAVER_BOOTSTRAP_LOGIN_PASSWORD
+    services:
+      - server
+    default: weaver
+    note: Web UI password, set the first time Weaver starts. Change it from inside the app afterwards.
+  - name: WEAVER_INTERMEDIATE_DIR
+    services:
+      - server
+    default: /downloads/usenet/incomplete
+    note: Where in-progress downloads are assembled, as seen inside the container. Only used at first setup.
+  - name: WEAVER_COMPLETE_DIR
+    services:
+      - server
+    default: /downloads/usenet/complete
+    note: Where finished downloads land, as seen inside the container. Keep it under /downloads so *arr imports can hardlink. Only used at first setup.
+permissions:
+  - STORAGE_DOWNLOADS
