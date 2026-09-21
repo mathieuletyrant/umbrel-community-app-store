@@ -47,7 +47,7 @@ submission: https://github.com/scryer-media/weaver
 repo: https://github.com/scryer-media/weaver
 support: https://github.com/scryer-media/weaver/issues
 gallery: []
-releaseNotes: ""
+releaseNotes: "Improved resilience in article decoding to handle malformed headers, optimized memory usage (42% reduction for 100-connection installations), and enhanced the web UI with category counts and download functionality."
 dependencies: []
 path: ""
 defaultUsername: "admin"
