@@ -7,7 +7,7 @@ name: Scryer
 tagline: A whole *arr stack in one app — movies, series and anime
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/scryer
-version: "0.21.7"
+version: "0.21.8"
 port: 8380
 description: >-
   Scryer replaces Sonarr, Radarr, Prowlarr and Bazarr with a single native
