@@ -43,7 +43,7 @@ submission: https://github.com/scryer-media/scryer
 repo: https://github.com/scryer-media/scryer
 support: https://github.com/scryer-media/scryer/issues
 gallery: []
-releaseNotes: ""
+releaseNotes: "Patch with build optimizations for Apple Silicon macOS. No configuration changes required."
 dependencies: []
 path: ""
 permissions:
