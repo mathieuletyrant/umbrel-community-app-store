@@ -55,13 +55,7 @@ repo: https://github.com/nandyalu/trailarr
 support: https://github.com/nandyalu/trailarr/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
-
-
-  Previous release notes:
-
-
-  Database schema simplified with automatic custom-filter migration — legacy status fields removed, download records are now the only source of truth. New Plex connection UI with local URL and Test button for direct local access. Database file shrinks after upgrades with automatic VACUUM.
+  This update integrates TMDB for curated trailers in your preferred language (add an optional TMDB API key in Settings > General), adds a setup guide on first install, and improves database backup management. Filter counts now show how much of your library has a trailer, and any video you choose is preserved across updates.
 dependencies: []
 path: ""
 defaultUsername: "admin"
