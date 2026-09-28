@@ -35,12 +35,12 @@ description: >-
   to choose a username and a password (12+ characters). Until claimed, whoever
   opens it first owns the instance.
 
-  2. Add your services, either from the web UI ("Add a service", applies
-  immediately) or by editing
-  `~/umbrel/app-data/mathieu-arr-mcp/data/config/config.yaml` on your Umbrel:
-  it ships with every supported Umbrel app pre-filled (`radarr_server_1:7878`,
-  `sonarr_server_1:8989`, `prowlarr_server_1:9696`…) — uncomment the ones you
-  run, paste their API keys, then restart arr-mcp.
+  2. Services already installed on your Umbrel are wired in automatically,
+  API keys included: Radarr, Sonarr, Prowlarr, Bazarr, SABnzbd, Jellyseerr
+  (or Overseerr), Transmission and Plex. An app installed later is picked up
+  the next time arr-mcp restarts; a service you remove is not added back. Add
+  anything else (Jellyfin, qBittorrent…) with "Add a service", or edit
+  `~/umbrel/app-data/mathieu-arr-mcp/data/config/config.yaml` and restart.
 
   3. Point your MCP client at `http://umbrel.local:6060/mcp` with the bearer
   token shown on the dashboard (header `Authorization: Bearer <token>`). The

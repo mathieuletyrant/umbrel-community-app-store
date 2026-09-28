@@ -7,6 +7,118 @@ services:
       APP_PORT: 6060
       PROXY_AUTH_WHITELIST: "/mcp*,/.well-known/*,/healthz"
 
+  autoconfig:
+    image: ghcr.io/bardesss/arr-mcp:1.33.2@sha256:cc2339c251618cf9f709ea6b6d3e409cd78ba2da18a7247c27efaee07e041fb1
+    user: "1000:1000"
+    entrypoint: ["node", "--input-type=module", "--eval"]
+    command:
+      - |
+        import { existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs';
+        import { parseDocument, Document } from 'yaml';
+
+        const CONFIG = '/config/config.yaml';
+        const STATE = '/config/.umbrel-autoconfig.json';
+        const env = name => process.env[name]?.trim() || undefined;
+
+        const gateway = () => {
+            try {
+                for (const line of readFileSync('/proc/net/route', 'utf8').split('\n').slice(1)) {
+                    const [, dest, gw] = line.trim().split(/\s+/);
+                    if (dest === '00000000' && gw) {
+                        return gw.match(/../g).reverse().map(h => parseInt(h, 16)).join('.');
+                    }
+                }
+            } catch {}
+            return undefined;
+        };
+
+        function discover() {
+            const found = {};
+            const keyed = (id, url, api_key) => {
+                if (api_key && !found[id]) found[id] = { url, api_key };
+            };
+
+            keyed('radarr', 'http://radarr_server_1:7878', env('RADARR_API_KEY'));
+            keyed('sonarr', 'http://sonarr_server_1:8989', env('SONARR_API_KEY'));
+            keyed('prowlarr', 'http://prowlarr_server_1:9696', env('PROWLARR_API_KEY'));
+            keyed('bazarr', 'http://bazarr_server_1:6767', env('BAZARR_API_KEY'));
+            keyed('sabnzbd', 'http://sabnzbd_web_1:8080', env('SABNZBD_API_KEY'));
+            keyed('seerr', 'http://jellyseerr_server_1:5055', env('JELLYSEERR_API_KEY'));
+            keyed('seerr', 'http://overseerr_server_1:5055', env('OVERSEERR_API_KEY'));
+            if (env('TRANSMISSION') === 'true') found.transmission = { url: 'http://transmission_server_1:9091' };
+
+            const host = gateway();
+            if (host) keyed('plex', 'http://' + host + ':32400', env('PLEX_TOKEN'));
+
+            return found;
+        }
+
+        function main() {
+            const found = discover();
+
+            let done = [];
+            try {
+                done = JSON.parse(readFileSync(STATE, 'utf8'));
+            } catch {}
+
+            const exists = existsSync(CONFIG);
+            let doc;
+            if (exists) {
+                doc = parseDocument(readFileSync(CONFIG, 'utf8'));
+                if (doc.errors.length > 0) {
+                    console.log('config.yaml does not parse — leaving it alone');
+                    return;
+                }
+            } else {
+                doc = new Document({ auth: { username: 'admin', allowed_hosts: [] }, services: {} });
+            }
+
+            if (doc.get('services') == null) doc.set('services', doc.createNode({}));
+            const services = doc.get('services');
+
+            const added = [];
+            for (const [id, entry] of Object.entries(found)) {
+                if (done.includes(id)) continue;
+                done.push(id);
+                if (services.has(id)) continue;
+                if (id === 'plex' && services.has('jellyfin')) continue;
+                services.set(id, doc.createNode(entry));
+                added.push(id);
+            }
+
+            if (added.length > 0 || !exists) {
+                services.flow = services.items.length === 0;
+                const tmp = CONFIG + '.autoconfig.tmp';
+                writeFileSync(tmp, doc.toString(), { mode: 0o600 });
+                renameSync(tmp, CONFIG);
+            }
+            writeFileSync(STATE, JSON.stringify(done));
+
+            console.log(
+                added.length > 0 ? 'added from Umbrel: ' + added.join(', ') : 'no new Umbrel app to add',
+                '(detected: ' + (Object.keys(found).join(', ') || 'none') + ')'
+            );
+        }
+
+        try {
+            main();
+        } catch (err) {
+            console.log('autoconfig skipped: ' + err.message);
+        }
+    environment:
+      RADARR_API_KEY: ${APP_MATHIEU_ARR_MCP_RADARR_API_KEY:-}
+      SONARR_API_KEY: ${APP_MATHIEU_ARR_MCP_SONARR_API_KEY:-}
+      PROWLARR_API_KEY: ${APP_MATHIEU_ARR_MCP_PROWLARR_API_KEY:-}
+      BAZARR_API_KEY: ${APP_MATHIEU_ARR_MCP_BAZARR_API_KEY:-}
+      SABNZBD_API_KEY: ${APP_MATHIEU_ARR_MCP_SABNZBD_API_KEY:-}
+      JELLYSEERR_API_KEY: ${APP_MATHIEU_ARR_MCP_JELLYSEERR_API_KEY:-}
+      OVERSEERR_API_KEY: ${APP_MATHIEU_ARR_MCP_OVERSEERR_API_KEY:-}
+      PLEX_TOKEN: ${APP_MATHIEU_ARR_MCP_PLEX_TOKEN:-}
+      TRANSMISSION: ${APP_MATHIEU_ARR_MCP_TRANSMISSION:-false}
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+    restart: "no"
+
   server:
     image: ghcr.io/bardesss/arr-mcp:1.33.2@sha256:cc2339c251618cf9f709ea6b6d3e409cd78ba2da18a7247c27efaee07e041fb1
     environment:
@@ -15,4 +127,7 @@ services:
       - PGID=1000
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
+    depends_on:
+      autoconfig:
+        condition: service_completed_successfully
     restart: on-failure

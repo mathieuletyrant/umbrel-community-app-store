@@ -50,7 +50,7 @@ Current apps:
 - `mathieu-chaptarr` — Chaptarr (ebook/audiobook manager, Readarr re-work, web UI on 8789 — not Readarr's 8787; no public GitHub repo yet, Docker Hub only; PUID/PGID 1000, config at /config, root folder /downloads/books)
 - `mathieu-scryer` — Scryer (whole *arr stack in one Rust binary: movies/series/anime, web UI on 8080, host port 8380; runs as root + PUID/PGID, config at /config, libraries under /downloads for hardlinks)
 - `mathieu-weaver` — Weaver (Usenet downloader by the Scryer authors; download+PAR2 repair+extraction in one pipeline, web UI on 9090, host port 9390; bootstrap login admin/weaver via WEAVER_BOOTSTRAP_LOGIN_* env, only read on first start)
-- `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; ships a seeded `data/config/config.yaml` with every supported Umbrel app's hostname commented out — `services: {}` must stay a mapping, arr-mcp rejects a null `services:`; bearer token is generated into it on first start)
+- `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; auto-wires installed Umbrel apps: `exports.sh` greps their API keys on the host (Prowlarr-official pattern, must survive `set -euo pipefail`) → env of a one-shot `autoconfig` service (node script inline in compose, no `$` in it) that adds missing services to config.yaml before `server` starts; `.umbrel-autoconfig.json` remembers what was added so removed services stay removed)
 
 ## Adding or updating an app
 
@@ -119,6 +119,9 @@ this too.
   Not needed for a plain `/downloads` mount — umbrelOS auto-generates a slot for any
   compose mount under Downloads. Add it only for extra folders or a custom note.
 - `environment:` (optional) exposes env vars users can edit from the app settings UI.
+- App updates only copy `docker-compose.yml`, `exports.sh`, `*.template`, `torrc`,
+  `hooks` and `umbrel-app.yml` — any other shipped file (scripts, `data/…`) is
+  only laid down at install and never refreshed or overwritten afterwards.
 - When a change needs to reach existing installs, bump `version` with a `-patch.N`
   suffix (e.g. `0.26.0-patch.1`) — Renovate replaces the whole string on the next
   image bump.
