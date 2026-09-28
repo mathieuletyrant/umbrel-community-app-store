@@ -35,10 +35,12 @@ description: >-
   to choose a username and a password (12+ characters). Until claimed, whoever
   opens it first owns the instance.
 
-  2. Click "Add a service" and paste each app's URL and API key. Use the Umbrel
-  container hostnames, e.g. `http://radarr_server_1:7878`,
-  `http://sonarr_server_1:8989` or `http://prowlarr_server_1:9696`. Changes
-  apply immediately.
+  2. Add your services, either from the web UI ("Add a service", applies
+  immediately) or by editing
+  `~/umbrel/app-data/mathieu-arr-mcp/data/config/config.yaml` on your Umbrel:
+  it ships with every supported Umbrel app pre-filled (`radarr_server_1:7878`,
+  `sonarr_server_1:8989`, `prowlarr_server_1:9696`…) — uncomment the ones you
+  run, paste their API keys, then restart arr-mcp.
 
   3. Point your MCP client at `http://umbrel.local:6060/mcp` with the bearer
   token shown on the dashboard (header `Authorization: Bearer <token>`). The

@@ -50,7 +50,7 @@ Current apps:
 - `mathieu-chaptarr` — Chaptarr (ebook/audiobook manager, Readarr re-work, web UI on 8789 — not Readarr's 8787; no public GitHub repo yet, Docker Hub only; PUID/PGID 1000, config at /config, root folder /downloads/books)
 - `mathieu-scryer` — Scryer (whole *arr stack in one Rust binary: movies/series/anime, web UI on 8080, host port 8380; runs as root + PUID/PGID, config at /config, libraries under /downloads for hardlinks)
 - `mathieu-weaver` — Weaver (Usenet downloader by the Scryer authors; download+PAR2 repair+extraction in one pipeline, web UI on 9090, host port 9390; bootstrap login admin/weaver via WEAVER_BOOTSTRAP_LOGIN_* env, only read on first start)
-- `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; config at /config)
+- `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; ships a seeded `data/config/config.yaml` with every supported Umbrel app's hostname commented out — `services: {}` must stay a mapping, arr-mcp rejects a null `services:`; bearer token is generated into it on first start)
 
 ## Adding or updating an app
 
