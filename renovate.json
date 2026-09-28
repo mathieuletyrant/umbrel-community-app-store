@@ -32,6 +32,7 @@
       "matchDatasources": ["docker"],
       "commitMessageExtra": "to {{{newValue}}}"
     },
+    { "matchPackageNames": ["ghcr.io/bardesss/arr-mcp"], "commitMessageTopic": "arr-mcp" },
     { "matchPackageNames": ["ghcr.io/iongpt/boxarr"], "commitMessageTopic": "Boxarr" },
     { "matchPackageNames": ["ghcr.io/thephaseless/byparr"], "commitMessageTopic": "Byparr" },
     { "matchPackageNames": ["robertlordhood/chaptarr"], "commitMessageTopic": "Chaptarr" },

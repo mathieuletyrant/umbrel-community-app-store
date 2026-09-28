@@ -1,0 +1,62 @@
+manifestVersion: 1
+id: mathieu-arr-mcp
+storage:
+  dataRoot: data
+category: media
+name: arr-mcp
+tagline: One MCP server for your whole media stack
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
+# renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
+version: "1.33.2"
+port: 6060
+description: >-
+  arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
+  (Claude, ChatGPT, or any MCP client) talk to your entire media stack through
+  one endpoint: Radarr, Sonarr, Whisparr, Prowlarr, Bazarr, Jellyfin, Plex,
+  Seerr, SABnzbd, Transmission, qBittorrent and Profilarr.
+
+
+  Ask in plain language — "what's downloading and is anything stuck?", "why
+  isn't the film I requested on Tuesday in Jellyfin yet?", "find French
+  subtitles for the film that just landed" — and it correlates the services to
+  answer. Its `diagnose` tool walks the whole chain (requested, monitored,
+  downloaded, imported, scanned) and names the first step that broke.
+
+
+  Writes are off by default and opt-in per service; every write is previewed,
+  confirmed and recorded in an audit trail. Services are added from a built-in
+  web page that tests each connection live — no YAML needed.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app right after installing and claim it: the first page asks you
+  to choose a username and a password (12+ characters). Until claimed, whoever
+  opens it first owns the instance.
+
+  2. Click "Add a service" and paste each app's URL and API key. Use the Umbrel
+  container hostnames, e.g. `http://radarr_server_1:7878`,
+  `http://sonarr_server_1:8989` or `http://prowlarr_server_1:9696`. Changes
+  apply immediately.
+
+  3. Point your MCP client at `http://umbrel.local:6060/mcp` with the bearer
+  token shown on the dashboard (header `Authorization: Bearer <token>`). The
+  web UI stays behind your Umbrel login; only `/mcp` is opened so MCP clients
+  can reach it with the token.
+developer: bardesss
+website: https://github.com/bardesss/arr-mcp
+submitter: Mathieu Le Tyrant
+submission: https://github.com/bardesss/arr-mcp
+repo: https://github.com/bardesss/arr-mcp
+support: https://github.com/bardesss/arr-mcp/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []

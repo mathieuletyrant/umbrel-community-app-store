@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-arr-mcp_server_1
+      APP_PORT: 6060
+      PROXY_AUTH_WHITELIST: "/mcp*,/.well-known/*,/healthz"
+
+  server:
+    image: ghcr.io/bardesss/arr-mcp:1.33.2@sha256:cc2339c251618cf9f709ea6b6d3e409cd78ba2da18a7247c27efaee07e041fb1
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+    restart: on-failure
