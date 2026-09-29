@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.36.0"
+version: "1.37.0"
 port: 6060
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -56,7 +56,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
-releaseNotes: "Add Plex metadata detection and repair capability. Repair is disabled by default and can be enabled in settings."
+releaseNotes: "Plex metadata repair is now configurable directly from the settings page."
 dependencies: []
 path: ""
 defaultUsername: ""
