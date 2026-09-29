@@ -47,7 +47,7 @@ submission: https://github.com/scryer-media/weaver
 repo: https://github.com/scryer-media/weaver
 support: https://github.com/scryer-media/weaver/issues
 gallery: []
-releaseNotes: "Adds hardware profiles for easy resource management and live profile switching without restart. Schedule rules now persist across days until the next rule fires. Improved repair prevents extraction failures on damaged downloads."
+releaseNotes: "Fixes provider settings bug where switching between providers could show incorrect values. Improves memory management during extraction for better performance on constrained systems. Corrects portable package compatibility with older updaters."
 dependencies: []
 path: ""
 defaultUsername: "admin"
