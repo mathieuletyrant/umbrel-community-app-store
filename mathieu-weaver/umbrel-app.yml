@@ -7,7 +7,7 @@ name: Weaver
 tagline: Usenet downloader with built-in repair and extraction
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/weaver
-version: "0.13.3"
+version: "0.14.1"
 port: 9390
 description: >-
   Weaver is a self-hosted Usenet downloader written in Rust. Downloading,
@@ -47,7 +47,7 @@ submission: https://github.com/scryer-media/weaver
 repo: https://github.com/scryer-media/weaver
 support: https://github.com/scryer-media/weaver/issues
 gallery: []
-releaseNotes: ""
+releaseNotes: "Adds hardware profiles for easy resource management and live profile switching without restart. Schedule rules now persist across days until the next rule fires. Improved repair prevents extraction failures on damaged downloads."
 dependencies: []
 path: ""
 defaultUsername: "admin"
