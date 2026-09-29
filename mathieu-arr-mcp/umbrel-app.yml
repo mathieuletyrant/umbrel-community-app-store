@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.37.0"
+version: "1.38.1"
 port: 6060
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
