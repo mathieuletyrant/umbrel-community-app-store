@@ -56,7 +56,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
-releaseNotes: ""
+releaseNotes: "Bug fix: prevents errors when requesting media previews for TMDB IDs that Seerr cannot resolve."
 dependencies: []
 path: ""
 defaultUsername: ""
