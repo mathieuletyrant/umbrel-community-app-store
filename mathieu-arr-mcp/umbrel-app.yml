@@ -56,7 +56,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
-releaseNotes: ""
+releaseNotes: "Add OAuth configuration from the config page. Support named MCP tokens with per-token ceiling and expiry. Fix OAuth token expiry handling."
 dependencies: []
 path: ""
 defaultUsername: ""
