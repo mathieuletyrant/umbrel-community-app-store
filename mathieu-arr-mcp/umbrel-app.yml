@@ -56,7 +56,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
-releaseNotes: "Add Plex metadata detection and repair capability. Repair is disabled by default and can be enabled in settings."
+releaseNotes: "Plex metadata repair is now configurable directly from the settings page."
 dependencies: []
 path: ""
 defaultUsername: ""
