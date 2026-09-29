@@ -1,0 +1,65 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-umbrel-mcp-bridge_web_1
+      APP_PORT: 80
+      PROXY_AUTH_ADD: "false"
+
+  web:
+    image: nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    init: true
+    restart: on-failure
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        server {
+          listen 80;
+          root /usr/share/nginx/html;
+
+          location = /mcp {
+            default_type application/json;
+            if ($$arg_token = "") {
+              return 401 '{"error":"missing ?token=<umbrelmcp_ token>"}';
+            }
+            set $$bearer $$arg_token;
+            set $$args "";
+            proxy_pass http://host.docker.internal/mcp;
+            proxy_set_header Authorization "Bearer $$bearer";
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_buffering off;
+            proxy_cache off;
+            proxy_read_timeout 1h;
+          }
+        }
+        CONF
+        cat > /usr/share/nginx/html/index.html <<'HTML'
+        <!doctype html><html lang="en"><head><meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Umbrel MCP Bridge</title>
+        <style>body{font-family:system-ui,sans-serif;max-width:680px;margin:10vh auto;padding:0 24px;line-height:1.6;color:#e8e8ef;background:#15161c}code{background:#262833;padding:2px 6px;border-radius:4px;word-break:break-all}h1{margin-bottom:.2em}.warn{border-left:3px solid #f5a623;padding:4px 14px;background:#221e14}</style>
+        </head><body>
+        <h1>🌉 Umbrel MCP Bridge</h1>
+        <p>Lets MCP clients that can only take a URL &mdash; like Home Assistant's <em>Model Context Protocol</em> integration &mdash; reach your Umbrel's own MCP server, which only accepts an <code>Authorization</code> header.</p>
+        <h3>Setup</h3>
+        <ol>
+        <li>In umbrelOS, open <strong>Settings &rarr; MCP</strong>, create a token (<code>umbrelmcp_…</code>) with only the permissions you need.</li>
+        <li>Point your MCP client at:<br><code id="url">http://umbrel.local:6161/mcp?token=umbrelmcp_…</code></li>
+        </ol>
+        <p>The bridge moves <code>?token=</code> into an <code>Authorization: Bearer</code> header and forwards the request to <code>/mcp</code> on this Umbrel. It stores nothing.</p>
+        <p class="warn">The token travels in the URL, so it can end up in client logs. Give it the narrowest permissions, and revoke it in umbrelOS if it leaks.</p>
+        <script>document.getElementById("url").textContent=location.protocol+"//"+location.host+"/mcp?token=umbrelmcp_…"</script>
+        </body></html>
+        HTML
+        exec nginx -g 'daemon off;'
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

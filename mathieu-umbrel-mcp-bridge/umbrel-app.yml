@@ -1,0 +1,50 @@
+manifestVersion: 1
+id: mathieu-umbrel-mcp-bridge
+storage:
+  dataRoot: data
+category: ai
+name: Umbrel MCP Bridge
+tagline: Connect URL-only MCP clients like Home Assistant to your Umbrel
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-umbrel-mcp-bridge/icon.png
+version: "1.0.0"
+port: 6161
+description: >-
+  umbrelOS ships its own MCP server, so an AI assistant can manage your Umbrel.
+  It only accepts its token in an Authorization header, though, and some MCP
+  clients can't send headers. Home Assistant's Model Context Protocol
+  integration is one of them: it only takes a URL.
+
+
+  This bridge accepts the token in the URL instead. It moves it into an
+  Authorization header and forwards the request to your Umbrel's MCP server. It
+  stores nothing, and a request without a valid token is refused by umbrelOS
+  itself.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. In umbrelOS, open Settings → MCP and create a token with only the
+  permissions the client needs.
+
+
+  2. Point your MCP client at http://umbrel.local:6161/mcp?token=<your
+  umbrelmcp_ token> (use the Umbrel's IP address if the client can't resolve
+  umbrel.local).
+
+
+  ⚠️ The token is part of the URL, so it can end up in client logs. Give it
+  the narrowest permissions, and revoke it in umbrelOS if it leaks.
+developer: Mathieu Le Tyrant
+website: https://github.com/mathieuletyrant/umbrel-community-app-store
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/mathieuletyrant/umbrel-community-app-store
+support: https://github.com/mathieuletyrant/umbrel-community-app-store/issues
+gallery: []
+releaseNotes: >-
+  Initial release of Umbrel MCP Bridge for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

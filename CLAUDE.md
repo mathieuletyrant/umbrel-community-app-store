@@ -51,6 +51,7 @@ Current apps:
 - `mathieu-scryer` — Scryer (whole *arr stack in one Rust binary: movies/series/anime, web UI on 8080, host port 8380; runs as root + PUID/PGID, config at /config, libraries under /downloads for hardlinks)
 - `mathieu-weaver` — Weaver (Usenet downloader by the Scryer authors; download+PAR2 repair+extraction in one pipeline, web UI on 9090, host port 9390; bootstrap login admin/weaver via WEAVER_BOOTSTRAP_LOGIN_* env, only read on first start)
 - `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; auto-wires installed Umbrel apps: `exports.sh` greps their API keys on the host (Prowlarr-official pattern, must survive `set -euo pipefail`) → env of a one-shot `autoconfig` service (node script inline in compose, no `$` in it) that adds missing services to config.yaml before `server` starts; `.umbrel-autoconfig.json` remembers what was added so removed services stay removed)
+- `mathieu-umbrel-mcp-bridge` — Umbrel MCP Bridge (nginx only, no data; host port 6161, `PROXY_AUTH_ADD: false`; `/mcp?token=umbrelmcp_…` → `Authorization: Bearer` → umbreld `/mcp` via `host.docker.internal:host-gateway`, which lan-ingress routes to umbreld for any Host; for Home Assistant's header-less MCP client)
 
 ## Adding or updating an app
 
