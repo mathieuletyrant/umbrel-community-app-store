@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.38.1"
+version: "1.39.0"
 port: 6060
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -56,7 +56,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
-releaseNotes: "Displays configured seeding limits and highlights items exceeding them. Includes a bug fix for limit reporting."
+releaseNotes: "Adds management API endpoints for read/write operations with improved security hardening. Fixes credential handling in service URLs."
 dependencies: []
 path: ""
 defaultUsername: ""
