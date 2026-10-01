@@ -35,10 +35,12 @@ description: >-
 
 
   3. Build your channel list under Channels, then add the tuner in your media
-  server. In Plex: Settings → Live TV & DVR → Set up Plex DVR, and enter
-  http://umbrel.local:9191/hdhr (use the Umbrel's IP if it can't resolve
-  umbrel.local). In Jellyfin: add a HDHomeRun tuner with the same URL, or an
-  M3U tuner with http://umbrel.local:9191/output/m3u and the guide
+  server. Plex on this Umbrel can't reach the Umbrel's own address, so use
+  localhost: Settings → Live TV & DVR → Set up Plex DVR → enter
+  http://127.0.0.1:9191/hdhr, then pick XMLTV for the guide with
+  http://127.0.0.1:9191/output/epg. From another machine (Jellyfin, Emby,
+  another Plex), use http://umbrel.local:9191/hdhr instead, or an M3U tuner
+  with http://umbrel.local:9191/output/m3u and the guide
   http://umbrel.local:9191/output/epg.
 developer: Dispatcharr
 website: https://github.com/Dispatcharr/Dispatcharr
