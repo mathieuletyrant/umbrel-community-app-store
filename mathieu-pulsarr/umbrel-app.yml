@@ -7,7 +7,7 @@ name: Pulsarr
 tagline: Sync Plex watchlists to Sonarr and Radarr in real time
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/icon.png
 # renovate: datasource=docker depName=lakker/pulsarr
-version: "1.1.6"
+version: "0.19.4"
 port: 3003
 description: >-
   Pulsarr watches the Plex watchlists of you and your friends and sends every
