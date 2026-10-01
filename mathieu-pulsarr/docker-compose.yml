@@ -7,7 +7,7 @@ services:
       APP_PORT: 3003
 
   server:
-    image: lakker/pulsarr:0.19.4@sha256:106f2793eb9acd44364761ed79e20b05249dd700214b8b38ff2ef1502d3d1c2c
+    image: lakker/pulsarr:1.1.6@sha256:4830936b1d77ca321ab2d8cdbf734f5feee35c65e99b0264569df5816cb49dcc
     environment:
       - TZ=Europe/Paris
       - PUID=1000
