@@ -1,0 +1,59 @@
+manifestVersion: 1
+id: mathieu-dispatcharr
+storage:
+  dataRoot: data
+category: media
+name: Dispatcharr
+tagline: Manage IPTV playlists and guides, then stream them to Plex or Jellyfin
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/icon.png
+# renovate: datasource=docker depName=ghcr.io/dispatcharr/dispatcharr
+version: "0.31.0"
+port: 9191
+description: >-
+  Dispatcharr is an IPTV and stream manager in the spirit of the *arr apps. It
+  imports M3U playlists and XMLTV guides, matches channels to their programme
+  data, lets you rename, reorder, group and assign logos, and filters out dead
+  streams. One stream proxy serves every client and fails over to a backup
+  source when a stream drops.
+
+
+  It then serves the result back as a clean M3U + EPG, an Xtream Codes API, or
+  an emulated HDHomeRun tuner, so Plex, Jellyfin and Emby see it as a
+  regular live TV tuner, with guide and DVR.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open Dispatcharr and create the admin account. Dispatcharr has its own
+  login, so the Umbrel login is not added in front of it.
+
+
+  2. Under M3U & EPG Manager, add a playlist and a guide. For free, legal
+  channels try iptv-org: https://iptv-org.github.io/iptv/countries/fr.m3u (any
+  country code works).
+
+
+  3. Build your channel list under Channels, then add the tuner in your media
+  server. In Plex: Settings → Live TV & DVR → Set up Plex DVR, and enter
+  http://umbrel.local:9191/hdhr (use the Umbrel's IP if it can't resolve
+  umbrel.local). In Jellyfin: add a HDHomeRun tuner with the same URL, or an
+  M3U tuner with http://umbrel.local:9191/output/m3u and the guide
+  http://umbrel.local:9191/output/epg.
+developer: Dispatcharr
+website: https://github.com/Dispatcharr/Dispatcharr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/Dispatcharr/Dispatcharr
+repo: https://github.com/Dispatcharr/Dispatcharr
+support: https://github.com/Dispatcharr/Dispatcharr/issues
+gallery:
+  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/channels.png
+  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/guide.png
+  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/m3u-epg-manager.png
+  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/stats.png
+releaseNotes: >-
+  Initial release of Dispatcharr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

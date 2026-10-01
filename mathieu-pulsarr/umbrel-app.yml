@@ -1,0 +1,55 @@
+manifestVersion: 1
+id: mathieu-pulsarr
+storage:
+  dataRoot: data
+category: media
+name: Pulsarr
+tagline: Sync Plex watchlists to Sonarr and Radarr in real time
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/icon.png
+# renovate: datasource=docker depName=lakker/pulsarr
+version: "0.19.4"
+port: 3003
+description: >-
+  Pulsarr watches the Plex watchlists of you and your friends and sends every
+  movie and show to Radarr or Sonarr as soon as it's added. Watchlist a title
+  in any Plex app and it starts downloading, with no request app in between.
+
+
+  Updates are instant with Plex Pass and every few minutes without it. Routing
+  rules (genre, user, language, year, rating, streaming service…) pick which
+  instance, quality profile and root folder each title goes to. Optional
+  approvals and quotas per user, Plex labels synced from watchlists, delete
+  sync when a title leaves every watchlist, and notifications via Discord, Plex
+  push or Apprise.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open Pulsarr, create the admin account and sign in with Plex.
+
+
+  2. Add Sonarr at http://sonarr_server_1:8989 and Radarr at
+  http://radarr_server_1:7878 with their API keys (Settings → General in each
+  app). Pulsarr's webhook address is already set to
+  http://mathieu-pulsarr_server_1:3003, so Sonarr and Radarr can reach it.
+
+
+  3. Pick the default quality profile and root folder (/downloads/shows and
+  /downloads/movies on Umbrel), then choose which Plex users to sync.
+developer: jamcalli
+website: https://jamcalli.github.io/Pulsarr/
+submitter: Mathieu Le Tyrant
+submission: https://github.com/jamcalli/Pulsarr
+repo: https://github.com/jamcalli/Pulsarr
+support: https://github.com/jamcalli/Pulsarr/issues
+gallery:
+  - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Dashboard1.png
+  - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Content-Route-1.png
+  - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Plex1.png
+releaseNotes: >-
+  Initial release of Pulsarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
