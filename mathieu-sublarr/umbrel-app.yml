@@ -41,7 +41,7 @@ repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
 gallery: []
 releaseNotes: >-
-  Major update with critical fixes for duplicate detection, translation memory corruption, and provider reliability. Fixes Ollama translation direction, embedded subtitle handling, and adds bulk approval for pending originals. Multiple provider endpoints updated (SubSource API, AnimeTosho domain change, TVsubtitles/Subf2m fixes). Database backup recommended before upgrade for Ollama/OpenAI backends.
+  Adds track variant policies for foreign-track cleanup with fine-grained controls over which subtitle variants to keep, plus size limits for sweep operations. Fixes critical issues with cleanup scope handling, translation saves, slow-mode searches, upgrade logic, and provider management. Security improvements mask secrets in logs; database migrations are backwards compatible.
 dependencies: []
 path: ""
 defaultUsername: ""
