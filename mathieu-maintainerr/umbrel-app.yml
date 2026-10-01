@@ -38,13 +38,7 @@ repo: https://github.com/maintainerr/maintainerr
 support: https://github.com/maintainerr/maintainerr/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
-
-
-  Previous release notes:
-
-
-  Improves cleanup performance with targeted media server folder rescans after deletions and optimized collection size calculations to prevent media server flooding. Includes dependency updates.
+  Adds Ombi support as a request service alongside Seerr, introduces database migrations for improved settings management, and includes various bug fixes across Plex, Jellyfin, Emby, and watch statistics integrations. Dependency updates for security fixes.
 dependencies: []
 path: ""
 defaultUsername: ""
