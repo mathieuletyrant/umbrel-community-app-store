@@ -56,7 +56,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
-releaseNotes: "Adds management API endpoints for read/write operations with improved security hardening. Fixes credential handling in service URLs."
+releaseNotes: "Fixes metadata detector false positives on Plex libraries, improves Plex per-user tools compatibility, and fixes Jellyfin lock reading for metadata repairs."
 dependencies: []
 path: ""
 defaultUsername: ""
