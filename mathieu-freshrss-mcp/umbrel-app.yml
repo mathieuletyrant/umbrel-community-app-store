@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0-patch.1"
+version: "0.1.0-patch.2"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -49,7 +49,7 @@ repo: https://github.com/leitosama/freshrss-mcp-server
 support: https://github.com/leitosama/freshrss-mcp-server/issues
 gallery: []
 releaseNotes: >-
-  Accepts the token as a ?token= URL parameter for clients that can't send an Authorization header.
+  Fixes the 502 error: the MCP server now listens on IPv4, so the app can reach it. Accepts the token as a ?token= URL parameter for clients that can't send an Authorization header.
 dependencies:
   - freshrss
 path: /health
