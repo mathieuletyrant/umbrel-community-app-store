@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0"
+version: "0.1.0-patch.1"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -30,9 +30,11 @@ description: >-
   this app before the account exists, it stops with a clear message in its
   logs; create the account, then restart the app.
 
-  2. Point your MCP client at `http://umbrel.local:6262/mcp` with the header
-  `Authorization: Bearer <token>`. The token is the password shown in this
-  app's settings in umbrelOS (Default credentials).
+  2. Point your MCP client at `http://umbrel.local:6262/mcp?token=<token>`, or
+  at `http://umbrel.local:6262/mcp` with the header `Authorization: Bearer
+  <token>`. The token is the password shown in this app's settings in umbrelOS
+  (Default credentials). The URL form is for clients that can't send headers,
+  like Home Assistant; the token then ends up in that client's logs.
 
   3. The MCP uses your FreshRSS account (the first one, usually the admin).
   Everything is wired automatically, API access included. The Umbrel login
@@ -47,7 +49,7 @@ repo: https://github.com/leitosama/freshrss-mcp-server
 support: https://github.com/leitosama/freshrss-mcp-server/issues
 gallery: []
 releaseNotes: >-
-  Initial release of FreshRSS MCP for this Community App Store.
+  Accepts the token as a ?token= URL parameter for clients that can't send an Authorization header.
 dependencies:
   - freshrss
 path: /health

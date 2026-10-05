@@ -3,8 +3,8 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: mathieu-freshrss-mcp_server_1
-      APP_PORT: 8080
+      APP_HOST: mathieu-freshrss-mcp_web_1
+      APP_PORT: 80
       PROXY_AUTH_WHITELIST: "/mcp*,/health"
 
   init:
@@ -47,6 +47,41 @@ services:
       - ${UMBREL_ROOT}/app-data/freshrss/data:/config
       - ${APP_DATA_DIR}/data/shared:/shared
     restart: "no"
+
+  web:
+    image: nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2
+    init: true
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        map $$arg_token $$token_auth {
+          ""      $$http_authorization;
+          default "Bearer $$arg_token";
+        }
+        server {
+          listen 80;
+          resolver 127.0.0.11 valid=10s;
+          set $$upstream http://mathieu-freshrss-mcp_server_1:8080;
+
+          location ~ ^/(mcp|health)$$ {
+            set $$auth $$token_auth;
+            set $$args "";
+            proxy_pass $$upstream;
+            proxy_set_header Authorization $$auth;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_buffering off;
+            proxy_cache off;
+            proxy_read_timeout 1h;
+          }
+        }
+        CONF
+        exec nginx -g 'daemon off;'
+    depends_on:
+      - server
+    restart: on-failure
 
   server:
     image: ghcr.io/leitosama/freshrss-mcp-server:latest@sha256:b723946d77b6ef05e8c9ba475d3c4cf2778d1f685395874100fef158ff8f2620
