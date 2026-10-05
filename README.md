@@ -34,6 +34,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Pulsarr** | **Plex watchlist → Sonarr / Radarr in real time**: watchlist a title in any Plex app and it starts downloading — for you and your friends, with routing rules, optional approvals and quotas, and delete sync. |
 | **Dispatcharr** | **IPTV & stream manager**: imports M3U playlists and XMLTV guides, cleans and organizes channels, then serves them to Plex / Jellyfin / Emby as an emulated HDHomeRun tuner (live TV + guide + DVR). |
 | **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
+| **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read — wired to the FreshRSS app automatically (API enabled, password generated), nothing to configure. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
 
 ## 🚀 How to install

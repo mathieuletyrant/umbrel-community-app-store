@@ -1,0 +1,56 @@
+manifestVersion: 1
+id: mathieu-freshrss-mcp
+storage:
+  dataRoot: data
+category: ai
+name: FreshRSS MCP
+tagline: Your FreshRSS feeds, as an MCP server for AI assistants
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
+version: "0.1.0"
+port: 6262
+description: >-
+  FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
+  assistant (Claude, ChatGPT, or any MCP client) read your FreshRSS feeds:
+  list your subscriptions and categories, fetch unread articles, read their
+  content as clean Markdown, pull the full text of summary-only feeds, and mark
+  articles as read. Ideal for a daily digest of what's new in the topics you
+  follow.
+
+
+  It plugs itself into the FreshRSS app already installed on your Umbrel: it
+  turns on FreshRSS's API and creates a dedicated API password for you. Nothing
+  to copy and paste, and the password is kept across restarts and updates, so
+  your mobile RSS apps keep working.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Install FreshRSS and create your FreshRSS account first. If you install
+  this app before the account exists, it stops with a clear message in its
+  logs; create the account, then restart the app.
+
+  2. Point your MCP client at `http://umbrel.local:6262/mcp` with the header
+  `Authorization: Bearer <token>`. The token is the password shown in this
+  app's settings in umbrelOS (Default credentials).
+
+  3. The MCP uses your FreshRSS account (the first one, usually the admin).
+  Everything is wired automatically, API access included. The Umbrel login
+  isn't needed for `/mcp`: only the token opens it.
+
+  ⚠️ The server image is built for amd64 (Intel/AMD) only.
+developer: leitosama
+website: https://github.com/leitosama/freshrss-mcp-server
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/leitosama/freshrss-mcp-server
+support: https://github.com/leitosama/freshrss-mcp-server/issues
+gallery: []
+releaseNotes: >-
+  Initial release of FreshRSS MCP for this Community App Store.
+dependencies:
+  - freshrss
+path: /health
+defaultUsername: mcp
+deterministicPassword: true
+permissions: []
