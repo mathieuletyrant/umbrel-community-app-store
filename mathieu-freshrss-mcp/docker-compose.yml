@@ -1,0 +1,69 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-freshrss-mcp_server_1
+      APP_PORT: 8080
+      PROXY_AUTH_WHITELIST: "/mcp*,/health"
+
+  init:
+    image: linuxserver/freshrss:1.30.0@sha256:e5a2f19980fa595fe39f928791e1e46ac466b1b1ff0e066db5a3b45aec20ebe9
+    user: "1000:1000"
+    working_dir: /app/www
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        set -eu
+        umask 077
+        export DATA_PATH=/config/www/freshrss/data
+
+        user=""
+        i=0
+        while [ "$$i" -lt 30 ]; do
+          user="$$(php cli/list-users.php 2>/dev/null | grep -E -m 1 '^[A-Za-z0-9_.@-]+$$' || true)"
+          [ -n "$$user" ] && break
+          i=$$((i + 1))
+          sleep 2
+        done
+        if [ -z "$$user" ]; then
+          echo "freshrss-mcp: no FreshRSS account found. Create your FreshRSS account, then restart this app." >&2
+          exit 1
+        fi
+
+        php cli/reconfigure.php --api-enabled >/dev/null
+
+        if [ ! -s /shared/api_password ]; then
+          password="$$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 40)"
+          php cli/update-user.php --user "$$user" --api-password "$$password" >/dev/null
+          printf '%s' "$$user" > /shared/username
+          printf '%s' "$$password" > /shared/api_password
+          echo "freshrss-mcp: API password generated for $$user"
+          sleep 3
+        else
+          echo "freshrss-mcp: API password already set, keeping it"
+        fi
+    volumes:
+      - ${UMBREL_ROOT}/app-data/freshrss/data:/config
+      - ${APP_DATA_DIR}/data/shared:/shared
+    restart: "no"
+
+  server:
+    image: ghcr.io/leitosama/freshrss-mcp-server:latest@sha256:b723946d77b6ef05e8c9ba475d3c4cf2778d1f685395874100fef158ff8f2620
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        export FRESHRSS_USERNAME="$$(cat /shared/username)"
+        export FRESHRSS_API_PASSWORD="$$(cat /shared/api_password)"
+        exec freshrss-mcp
+    environment:
+      TZ: Europe/Paris
+      FRESHRSS_API_URL: http://freshrss_server_1:80/api/greader.php
+      FRESHRSS_BASE_URL: http://umbrel.local:3432
+      API_KEY: ${APP_PASSWORD:?APP_PASSWORD is not set}
+    volumes:
+      - ${APP_DATA_DIR}/data/shared:/shared:ro
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    restart: on-failure
