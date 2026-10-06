@@ -1,5 +1,5 @@
 ---
-name: verify
+name: verify-app
 description: Verify an app of this store end to end on a throwaway umbrelOS (Docker), install it from the working tree, run its first-run setup flow in a real browser, and produce a proof screenshot. Use after adding or changing an app (compose, manifest, image bump), before opening or merging a PR, when a Renovate bump needs checking, when asked to "verify", "test on Umbrel", "prove it works" or for a screenshot of an app running — and to create or repair an app's flow in flows/.
 ---
 
@@ -11,7 +11,7 @@ store, installs the app the way a user would, runs the app's flow from `flows/<a
 Chromium, and writes a proof image.
 
 ```sh
-V=.claude/skills/verify/scripts/verify.mjs
+V=.claude/skills/verify-app/scripts/verify.mjs
 node $V run mathieu-healarr            # one app (or several)
 node $V run --changed                  # apps touched vs origin/master (app folder or its flow)
 node $V run --all                      # the whole store

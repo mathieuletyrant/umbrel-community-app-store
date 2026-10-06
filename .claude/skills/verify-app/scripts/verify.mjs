@@ -635,7 +635,7 @@ function changedApps() {
 	]
 	const apps = new Set()
 	for (const f of files) {
-		const m = f.match(/^(mathieu-[^/]+)\//) ?? f.match(/^\.claude\/skills\/verify\/flows\/(mathieu-[^/]+)\.yml$/)
+		const m = f.match(/^(mathieu-[^/]+)\//) ?? f.match(/^\.claude\/skills\/verify-app\/flows\/(mathieu-[^/]+)\.yml$/)
 		if (m && fs.existsSync(path.join(REPO, m[1], 'umbrel-app.yml'))) apps.add(m[1])
 	}
 	return [...apps]

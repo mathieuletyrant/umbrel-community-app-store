@@ -24,7 +24,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^\\.claude/skills/verify/scripts/verify\\.mjs$/"],
+      "managerFilePatterns": ["/^\\.claude/skills/verify-app/scripts/verify\\.mjs$/"],
       "matchStrings": [
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s*\\nconst \\w+ = '[^:]+:(?<currentValue>[^@']+)@(?<currentDigest>sha256:[a-f0-9]+)'"
       ]
@@ -47,7 +47,7 @@
     { "matchPackageNames": ["ghcr.io/cleanuparr/cleanuparr"], "commitMessageTopic": "Cleanuparr" },
     { "matchPackageNames": ["ghcr.io/cross-seed/cross-seed"], "commitMessageTopic": "cross-seed" },
     { "matchPackageNames": ["ghcr.io/dispatcharr/dispatcharr"], "commitMessageTopic": "Dispatcharr" },
-    { "matchPackageNames": ["dockurr/umbrel"], "commitMessageTopic": "test umbrelOS (verify skill)" },
+    { "matchPackageNames": ["dockurr/umbrel"], "commitMessageTopic": "test umbrelOS (verify-app skill)" },
     { "matchPackageNames": ["ghcr.io/mescon/healarr"], "commitMessageTopic": "Healarr" },
     { "matchPackageNames": ["mrcas/kapowarr"], "commitMessageTopic": "Kapowarr" },
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
