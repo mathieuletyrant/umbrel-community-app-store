@@ -233,6 +233,14 @@ needs, log patterns, browser steps). Keep it in sync with the app: a new app get
 a change that alters the UI or setup updates it. `SKILL.md` documents the format and the
 failure triage.
 
+## Automated updates
+
+Renovate (Mend GitHub App, `renovate.json`) opens one PR per image bump, with the
+manifest `version:` bumped alongside. Nothing auto-merges: a Claude routine fires
+on each `renovate/*` PR and runs the `review-app-update` skill (changelog →
+`releaseNotes` → `verify-app` → merge verified patch/minor bumps, comment on the rest).
+Run it by hand with `/review-app-update <pr>`.
+
 ## Testing changes on Umbrel
 
 The store polls for git updates periodically. To force a refresh immediately,
