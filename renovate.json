@@ -12,7 +12,6 @@
   "separateMinorPatch": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
-  "platformAutomerge": true,
   "customManagers": [
     {
       "customType": "regex",
@@ -32,10 +31,6 @@
     }
   ],
   "packageRules": [
-    {
-      "matchUpdateTypes": ["patch", "digest"],
-      "automerge": true
-    },
     {
       "matchDatasources": ["docker"],
       "commitMessageExtra": "to {{{newValue}}}"
