@@ -5,4 +5,5 @@ logs:
   server: No releases wanted
 steps:
   - goto: /
-  - shot: webui
+  - see: {text: No releases wanted, reload: true}
+  - shot: logs

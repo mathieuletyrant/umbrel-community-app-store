@@ -22,6 +22,20 @@ the working tree), `--umbrel 1.7.4` (another `dockurr/umbrel` tag, e.g. the 1.x 
 `--no-record`, `--pr <n>` (see below). `run` always reinstalls the app from scratch; `requires` apps are reused when
 already installed.
 
+## Hard rules (don't claim what you didn't check)
+
+- **Look at every proof image** (Read it) before calling an app verified or sending it. A ✅ only
+  means the assertions passed; a blank or wrong screen means the flow is too weak — fix the flow.
+- The last `shot` must come right after a `see` of something only the set-up app shows (or an
+  `http` whose response is the proof, for API-only apps). `run` refuses any other flow. A `logs:`
+  match alone proves the container started, not that the app works or is wired.
+- When the change is about wiring apps together, assert the wiring itself (the other app listed,
+  a setting's value through the app's API, a log line only printed after the other app answered),
+  not just that the page loads.
+- **Proofs go on the PR.** Check `echo ${UPLOADS_TOKEN:+set}` before saying there is no token;
+  when set, run with `--pr <n>` (or `attach --pr <n>`) for **every** app of the PR, then read the
+  PR comment back and check each app has its image. Never report proofs as attached from memory.
+
 Output (`.verify-out/`, gitignored, or `--out`): `<app>.proof.png` (verdict banner + the flow's
 last screenshot + the store listing + the umbrelOS home), the individual screenshots, and
 `summary.json`. **Always send `<app>.proof.png` to the user** (SendUserFile) — it is the proof.

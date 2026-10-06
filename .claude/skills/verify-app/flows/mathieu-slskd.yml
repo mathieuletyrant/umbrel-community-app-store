@@ -8,4 +8,5 @@ steps:
   - http: {path: /api/v0/application, headers: {X-API-Key: "${SLSKD_API_KEY}"}, status: 200}
   - goto: /
   # Stops at the login page: connecting to Soulseek needs a real account.
+  - see: Remember Me
   - shot: login

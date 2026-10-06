@@ -4,4 +4,23 @@ logs:
   server: radarr settings completed
 steps:
   - goto: /
-  - shot: home
+  - see: Welcome to Lingarr
+  - click: {role: button, name: Continue}
+  - see: Help Improve Lingarr
+  - click: {role: button, name: Skip}
+  - see: Setup complete!
+  - click: {role: button, name: Go to Dashboard}
+  - goto: /settings/integration
+  - see: "Radarr Settings:"
+  - see: "Sonarr Settings:"
+  # Radarr and Sonarr come from the env set by exports.sh; inputs can't be asserted with `see`.
+  - http:
+      path: /api/setting/multiple/get
+      method: POST
+      headers: {Content-Type: application/json}
+      body: [radarr_url, sonarr_url, radarr_settings_completed, sonarr_settings_completed]
+      status: 200
+      contains: '"radarr_url":"http://radarr_server_1:7878","sonarr_url":"http://sonarr_server_1:8989","radarr_settings_completed":"true","sonarr_settings_completed":"true"'
+  - goto: /settings/integration
+  - see: "Radarr Settings:"
+  - shot: integrations
