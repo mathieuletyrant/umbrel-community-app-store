@@ -1,3 +1,4 @@
+verified: 1.15.1-patch.1 on umbrelOS 2.0.0 (2026-10-06)
 requires: [sonarr, radarr]
 logs:
   autoconfig: added Sonarr and Radarr
