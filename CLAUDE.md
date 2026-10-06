@@ -238,7 +238,7 @@ failure triage.
 Renovate (Mend GitHub App, `renovate.json`) opens one PR per image bump, with the
 manifest `version:` bumped alongside. Nothing auto-merges: a Claude routine fires
 on each `renovate/*` PR and runs the `review-app-update` skill (changelog →
-`releaseNotes` → `verify-app` → merge patch/digest bumps, comment on the rest).
+`releaseNotes` → `verify-app` → merge verified patch/minor bumps, comment on the rest).
 Run it by hand with `/review-app-update <pr>`.
 
 ## Testing changes on Umbrel
