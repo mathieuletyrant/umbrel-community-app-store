@@ -26,7 +26,7 @@ status-sidecar pattern, see CLAUDE.md).
 | App | What it does |
 | --- | --- |
 | **Recyclarr** 🎧 | Syncs **TRaSH-guides** quality profiles / custom formats into Sonarr/Radarr (the de-facto quality standard) |
-| **Unpackerr** 🎧 | Auto-**extracts** archived downloads for the *arr apps |
+| ~~**Unpackerr**~~ ✅ | Auto-**extracts** archived downloads for the *arr apps. **Added** (`mathieu-unpackerr`). |
 
 > ❌ **Watchlistarr** — dropped: no longer actively maintained (last release v0.2.6).
 > Use **Overseerr / Jellyseerr** (official store) instead — they have native

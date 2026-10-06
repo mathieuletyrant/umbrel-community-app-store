@@ -1,0 +1,48 @@
+manifestVersion: 1
+id: mathieu-unpackerr
+storage:
+  dataRoot: data
+category: media
+name: Unpackerr
+tagline: Extract archived downloads so Radarr, Sonarr and Lidarr can import them
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-unpackerr/icon.png
+# renovate: datasource=docker depName=ghcr.io/unpackerr/unpackerr
+version: "0.16.1"
+port: 5657
+description: >-
+  Some releases arrive as .rar, .7z or .zip archives instead of a playable
+  file. Radarr, Sonarr and Lidarr can't import those, so the download sits in
+  their queue forever with "No files found are eligible for import".
+
+
+  Unpackerr fixes that automatically: it polls the queues of your *arr apps,
+  extracts every completed download that contains archives (multi-part and
+  nested archives included), lets the app import the result, then deletes the
+  extracted copy so only the original torrent keeps seeding.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Nothing to configure. Install Radarr, Sonarr and/or Lidarr and a download
+  client (e.g. Transmission) from the Umbrel App Store: Unpackerr finds them
+  and reads their API keys on its own. If you install one of them after
+  Unpackerr, restart Unpackerr so it picks it up.
+
+
+  Unpackerr runs in the background. Opening the app shows a status page with
+  the connected apps, extraction counters and recent activity.
+developer: Go Lift
+website: https://unpackerr.zip
+submitter: Mathieu Le Tyrant
+submission: https://github.com/Unpackerr/unpackerr
+repo: https://github.com/Unpackerr/unpackerr
+support: https://github.com/Unpackerr/unpackerr/issues
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS

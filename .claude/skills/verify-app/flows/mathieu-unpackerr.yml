@@ -1,0 +1,12 @@
+verified: 0.16.1 on umbrelOS 2.0.0 (2026-10-06)
+requires: [radarr, sonarr]
+logs:
+  server: Starting webserver
+steps:
+  - goto: /
+  - see: Connected apps
+  - see: {text: "✅ Connected", reload: true}
+  - see: Radarr
+  - see: Sonarr
+  - see: Starting webserver
+  - shot: status

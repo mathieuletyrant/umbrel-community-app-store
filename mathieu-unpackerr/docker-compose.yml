@@ -1,0 +1,123 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-unpackerr_web_1
+      APP_PORT: 80
+
+  web:
+    image: nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2
+    init: true
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        server {
+          listen 80;
+          root /usr/share/nginx/html;
+          resolver 127.0.0.11 valid=10s;
+          set $$upstream http://mathieu-unpackerr_server_1:5656;
+
+          location = /metrics {
+            access_log off;
+            proxy_pass $$upstream/metrics;
+          }
+
+          location = /log {
+            access_log off;
+            default_type text/plain;
+            add_header Cache-Control no-store;
+            alias /config/unpackerr.log;
+          }
+        }
+        CONF
+        cat > /usr/share/nginx/html/index.html <<'HTML'
+        <!doctype html><html lang="en"><head><meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Unpackerr</title>
+        <style>body{font-family:system-ui,sans-serif;max-width:760px;margin:8vh auto;padding:0 24px;line-height:1.6;color:#e8e8ef;background:#15161c}code{background:#262833;padding:2px 6px;border-radius:4px}h1{margin-bottom:.2em}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:6px 10px;border-bottom:1px solid #262833}.ok{color:#67b279}.ko{color:#f5a623}#stats{display:flex;gap:12px;flex-wrap:wrap}#stats div{background:#262833;border-radius:6px;padding:8px 14px;flex:1;min-width:140px}#stats b{display:block;font-size:1.4em}pre{background:#0d0e12;border-radius:6px;padding:12px;font-size:12px;overflow:auto;max-height:360px;white-space:pre-wrap;word-break:break-all}</style>
+        </head><body>
+        <h1>📦 Unpackerr</h1>
+        <p>Unpackerr runs in the background: it watches the Radarr, Sonarr and Lidarr queues, extracts downloads that arrive as <code>.rar</code>/<code>.7z</code>/<code>.zip</code> archives so they get imported, then removes the extracted files once the import is done.</p>
+        <h3>Connected apps</h3>
+        <div id="apps">Loading…</div>
+        <h3>Since start</h3>
+        <div id="stats"></div>
+        <h3>Recent activity</h3>
+        <pre id="log">Loading…</pre>
+        <p>Radarr, Sonarr and Lidarr are connected automatically when they are installed. Installed one after Unpackerr? Restart Unpackerr from its tile in umbrelOS.</p>
+        <script>
+        const fmt = n => n >= 1e9 ? (n / 1e9).toFixed(1) + " GB" : n >= 1e6 ? (n / 1e6).toFixed(1) + " MB" : Math.round(n) + " B";
+        async function metrics() {
+          const m = {};
+          const text = await (await fetch("metrics")).text();
+          for (const line of text.split("\n")) {
+            const r = line.match(/^(unpackerr_\w+)(?:\{app="([^"]*)"[^}]*\})?\s+(\S+)$$/);
+            if (!r) continue;
+            const [, name, app = "", value] = r;
+            (m[name] ??= {})[app] = ((m[name] ?? {})[app] ?? 0) + Number(value);
+          }
+          return m;
+        }
+        async function refresh() {
+          const apps = document.getElementById("apps"), stats = document.getElementById("stats");
+          try {
+            const m = await metrics();
+            const fetched = m.unpackerr_app_queue_fetch_total ?? {}, errors = m.unpackerr_app_queue_fetch_errors_total ?? {}, queue = m.unpackerr_app_queue_size ?? {};
+            const names = Object.keys(fetched);
+            const uptime = (m.unpackerr_uptime_seconds_total ?? {})[""] ?? 0;
+            apps.innerHTML = names.length ? "<table><tr><th>App</th><th>Status</th><th>Queue</th></tr>" + names.map(a => {
+              const ok = (fetched[a] ?? 0) > (errors[a] ?? 0);
+              return "<tr><td>" + a + "</td><td class=" + (ok ? "ok>✅ Connected" : "ko>⚠️ Unreachable") + "</td><td>" + (queue[a] ?? 0) + "</td></tr>";
+            }).join("") + "</table>" : uptime < 120 ? "Starting, the first queue check runs a minute after start…" : "<span class=ko>⚠️ No app connected: install Radarr, Sonarr or Lidarr from the umbrelOS App Store, then restart Unpackerr.</span>";
+            const sum = k => Object.values(m[k] ?? {}).reduce((a, b) => a + b, 0);
+            stats.innerHTML = [["Archives extracted", sum("unpackerr_archives_read_total")], ["Files written", sum("unpackerr_files_extracted_total")], ["Data written", fmt(sum("unpackerr_bytes_written_total"))]]
+              .map(([k, v]) => "<div>" + k + "<b>" + v + "</b></div>").join("");
+          } catch {
+            apps.innerHTML = "<span class=ko>⚠️ Unpackerr is not responding yet.</span>";
+          }
+          try {
+            const r = await fetch("log", { headers: { Range: "bytes=-16384" } });
+            const log = document.getElementById("log");
+            log.textContent = r.ok ? (await r.text()).split("\n").slice(-60).join("\n") : "No activity yet.";
+            log.scrollTop = log.scrollHeight;
+          } catch {}
+        }
+        refresh();
+        setInterval(refresh, 15000);
+        </script>
+        </body></html>
+        HTML
+        exec nginx -g 'daemon off;'
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config:ro
+    depends_on:
+      - server
+    restart: on-failure
+
+  server:
+    image: ghcr.io/unpackerr/unpackerr:0.16.1@sha256:406586865431b40b29353d899fb75a788f5384743f7f381444db5fe55d206914
+    user: "1000:1000"
+    restart: on-failure
+    environment:
+      TZ: Europe/Paris
+      UN_LOG_FILE: /config/unpackerr.log
+      UN_LOG_FILE_MODE: "0644"
+      UN_LOG_FILES: 3
+      UN_LOG_FILE_MB: 5
+      UN_WEBSERVER_METRICS: "true"
+      UN_WEBSERVER_LISTEN_ADDR: 0.0.0.0:5656
+      UN_RADARR_0_URL: http://radarr_server_1:7878
+      UN_RADARR_0_API_KEY: ${APP_MATHIEU_UNPACKERR_RADARR_API_KEY:-}
+      UN_RADARR_0_PATHS_0: /downloads
+      UN_SONARR_0_URL: http://sonarr_server_1:8989
+      UN_SONARR_0_API_KEY: ${APP_MATHIEU_UNPACKERR_SONARR_API_KEY:-}
+      UN_SONARR_0_PATHS_0: /downloads
+      UN_LIDARR_0_URL: http://lidarr_server_1:8686
+      UN_LIDARR_0_API_KEY: ${APP_MATHIEU_UNPACKERR_LIDARR_API_KEY:-}
+      UN_LIDARR_0_PATHS_0: /downloads
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads

@@ -68,6 +68,7 @@
     { "matchPackageNames": ["nandyalu/trailarr"], "commitMessageTopic": "Trailarr" },
     { "matchPackageNames": ["haveagitgat/tdarr"], "commitMessageTopic": "Tdarr" },
     { "matchPackageNames": ["ghcr.io/chrisbenincasa/tunarr"], "commitMessageTopic": "Tunarr" },
+    { "matchPackageNames": ["ghcr.io/unpackerr/unpackerr"], "commitMessageTopic": "Unpackerr" },
     { "matchPackageNames": ["ghcr.io/scryer-media/weaver"], "commitMessageTopic": "Weaver" },
     {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
