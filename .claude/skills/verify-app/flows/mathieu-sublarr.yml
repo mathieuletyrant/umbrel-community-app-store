@@ -2,5 +2,6 @@ requires: [sonarr, radarr]
 logs:
   autoconfig: added Sonarr and Radarr
 steps:
-  - http: {path: /api/v1/config, status: 200, contains: 'radarr_server_1:7878[\s\S]*sonarr_server_1:8989|sonarr_server_1:8989[\s\S]*radarr_server_1:7878'}
-  - shot: config
+  # Sublarr's own health check calls Sonarr and Radarr with the keys the autoconfig service set.
+  - http: {path: /api/v1/health/detailed, status: 200, contains: '"arr_connectivity":\s*\{\s*"healthy":\s*true,\s*"radarr":\s*\[\s*\{\s*"healthy":\s*true[\s\S]*?"sonarr":\s*\[\s*\{\s*"healthy":\s*true'}
+  - shot: health

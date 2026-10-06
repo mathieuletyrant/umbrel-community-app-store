@@ -1,3 +1,4 @@
+verified: 2.1.0-patch.2 on umbrelOS 2.0.0 (2026-10-06)
 requires: [transmission, radarr]
 logs:
   autoconfig: connected to Radarr
