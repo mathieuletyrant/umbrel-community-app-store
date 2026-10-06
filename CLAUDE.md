@@ -63,9 +63,15 @@ Current apps:
 2. Model the packaging on the official apps (https://github.com/getumbrel/umbrel-apps)
    and, for third-party images, on dennysubke/dennys-umbrel-app-store (a large,
    well-maintained community store with 200+ apps to copy conventions from).
-3. Add or update its flow in `.claude/skills/verify-app/flows/<app-id>.yml` and verify it
+3. Wire it into Renovate: a `# renovate: datasource=docker depName=<image>` line right
+   above `version:` in `umbrel-app.yml`, and a
+   `{ "matchPackageNames": ["<image>"], "commitMessageTopic": "<Name>" }` entry in
+   `renovate.json` `packageRules` (alphabetical by topic). CI (`validate_apps.py`) fails
+   when the annotation has no matching rule.
+4. Add or update its flow in `.claude/skills/verify-app/flows/<app-id>.yml` and verify it
    end to end with the `verify-app` skill (see "Verifying on a test umbrelOS").
-4. Commit and push. Only commit/push when the user asks.
+5. Run `python3 .github/scripts/validate_apps.py`, then commit and push. Only commit/push
+   when the user asks.
 
 ### docker-compose.yml conventions
 

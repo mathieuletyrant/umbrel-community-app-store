@@ -122,7 +122,10 @@ workaround, why the flow stops early).
 
 ## Maintaining
 
-- **New app** → add `flows/<app-id>.yml` in the same change and run it.
+- **New app** → add `flows/<app-id>.yml` in the same change and run it. Before opening the
+  PR, check the rest of the new-app checklist in `CLAUDE.md` too, especially the Renovate
+  wiring (`# renovate:` annotation + `renovate.json` `commitMessageTopic` rule), and run
+  `python3 .github/scripts/validate_apps.py`.
 - **App changed** (compose, env, ports, image bump) → `run` it. When the upstream UI changed,
   update the flow; when the app is broken, fix the app, not the flow.
 - **Failure triage** — read the error (it includes the URL, page text, recent console/HTTP
