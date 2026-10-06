@@ -7,7 +7,7 @@ Guidance for working in this repository.
 A personal [Umbrel Community App Store](https://github.com/getumbrel/umbrel-apps).
 Umbrel users add it by URL and install the apps it publishes.
 
-- Store id: `mathieu` — display name: `Mathieu` (shown in umbrelOS as "Mathieu App Store")
+- Store id: `mathieu` — display name: `Mathieu's Umbrel` (shown in umbrelOS as "Mathieu's Umbrel App Store")
 - Defined in `umbrel-app-store.yml`
 - This is a personal side project. It is **not** related to Primo (the owner's
   employer). Don't name things after Primo.
