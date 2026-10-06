@@ -80,7 +80,9 @@ services:
           }
           try {
             const r = await fetch("log", { headers: { Range: "bytes=-16384" } });
-            document.getElementById("log").textContent = r.ok ? (await r.text()).split("\n").slice(-60).join("\n") : "No activity yet.";
+            const log = document.getElementById("log");
+            log.textContent = r.ok ? (await r.text()).split("\n").slice(-60).join("\n") : "No activity yet.";
+            log.scrollTop = log.scrollHeight;
           } catch {}
         }
         refresh();
