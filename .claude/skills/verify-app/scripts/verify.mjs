@@ -268,7 +268,16 @@ async function install(appId) {
 	}
 	log(`installing ${appId}`)
 	const t0 = Date.now()
-	await trpc('apps.install', {appId}, {mutation: true})
+	for (let attempt = 1; ; attempt++) {
+		try {
+			await trpc('apps.install', {appId}, {mutation: true})
+			break
+		} catch (e) {
+			if (attempt >= 4 || !/429 Too Many Requests|toomanyrequests/i.test(e.message)) throw e
+			log(`registry rate limit, retrying ${appId} in ${30 * attempt}s`)
+			await sleep(30_000 * attempt)
+		}
+	}
 	for (;;) {
 		const s = await trpc('apps.state', {appId})
 		if (['ready', 'running'].includes(s.state)) break
