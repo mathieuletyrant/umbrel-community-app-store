@@ -39,6 +39,7 @@
       "matchDatasources": ["docker"],
       "commitMessageExtra": "to {{{newValue}}}"
     },
+    { "matchPackageNames": ["ghcr.io/samik081/mcp-adguard-home"], "commitMessageTopic": "AdGuard MCP" },
     { "matchPackageNames": ["ghcr.io/bardesss/arr-mcp"], "commitMessageTopic": "arr-mcp" },
     { "matchPackageNames": ["ghcr.io/leitosama/freshrss-mcp-server"], "commitMessageTopic": "FreshRSS MCP" },
     { "matchPackageNames": ["ghcr.io/iongpt/boxarr"], "commitMessageTopic": "Boxarr" },
@@ -52,6 +53,7 @@
     { "matchPackageNames": ["mrcas/kapowarr"], "commitMessageTopic": "Kapowarr" },
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
     { "matchPackageNames": ["ghcr.io/maintainerr/maintainerr"], "commitMessageTopic": "Maintainerr" },
+    { "matchPackageNames": ["doobidoo/mcp-memory-service"], "commitMessageTopic": "MCP Memory" },
     { "matchPackageNames": ["ghcr.io/kirovair/muxarr"], "commitMessageTopic": "Muxarr" },
     { "matchPackageNames": ["iampuid0/neutarr"], "commitMessageTopic": "NeutArr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },

@@ -1,0 +1,74 @@
+manifestVersion: 1
+id: mathieu-adguard-mcp
+storage:
+  dataRoot: data
+category: ai
+name: AdGuard MCP
+tagline: Your AdGuard Home, as an MCP server for AI assistants
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-adguard-mcp/icon.png
+# renovate: datasource=docker depName=ghcr.io/samik081/mcp-adguard-home
+version: "0.10.1"
+port: 6464
+description: >-
+  AdGuard MCP is a Model Context Protocol (MCP) server that lets an AI
+  assistant (Claude, ChatGPT, Home Assistant, or any MCP client) read and
+  manage the AdGuard Home app of your Umbrel. Ask in plain language: "why
+  doesn't this site load on my phone?" (it reads the query log), "unblock this
+  domain", "block TikTok on the kids' tablet", "which devices make the most
+  requests?", "add a DNS rewrite for nas.home".
+
+
+  It covers the whole AdGuard Home API (65 tools): status and statistics, query
+  log, filter lists and custom rules, blocked services, clients, DNS rewrites,
+  DHCP, safe search and parental control. Switch it to read-only in the app
+  settings if you only want the assistant to look, not change anything.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. In umbrelOS, open this app's settings and fill in the username and
+  password of your AdGuard Home admin account (the ones you chose in the
+  AdGuard Home setup wizard). The app connects on its own; its page shows
+  whether the connection works.
+
+  2. Point your MCP client at `http://umbrel.local:6464/mcp` with the header
+  `Authorization: Bearer <token>`, or at
+  `http://umbrel.local:6464/mcp?token=<token>` for clients that can't send
+  headers, like Home Assistant (the token then ends up in that client's logs).
+  The token is the password shown in this app's settings in umbrelOS (Default
+  credentials).
+
+  3. Only `/mcp` is opened without the Umbrel login, and the token protects
+  it.
+developer: Samik081
+website: https://github.com/Samik081/mcp-adguard-home
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/Samik081/mcp-adguard-home
+support: https://github.com/Samik081/mcp-adguard-home/issues
+gallery: []
+releaseNotes: ""
+dependencies:
+  - adguard-home
+path: ""
+defaultUsername: mcp
+deterministicPassword: true
+environment:
+  - name: ADGUARD_USERNAME
+    services:
+      - server
+    note: Username of your AdGuard Home admin account.
+  - name: ADGUARD_PASSWORD
+    services:
+      - server
+    note: Password of your AdGuard Home admin account.
+  - name: ADGUARD_ACCESS_TIER
+    services:
+      - server
+    default: full
+    options:
+      - full
+      - read-only
+    note: full lets the assistant change settings (unblock a domain, edit rules…). read-only only lets it read status, statistics and the query log.
+permissions: []
