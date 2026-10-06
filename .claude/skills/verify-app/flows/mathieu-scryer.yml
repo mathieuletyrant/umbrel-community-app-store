@@ -3,5 +3,5 @@ steps:
   - goto: /
   - see: Welcome to Scryer
   - click: {role: button, name: Skip setup entirely}
-  - see: No root folders configured
+  - see: {text: No root folders configured, reload: true}
   - shot: movies
