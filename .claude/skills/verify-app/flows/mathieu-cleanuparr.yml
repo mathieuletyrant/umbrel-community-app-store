@@ -1,0 +1,17 @@
+verified: 2.10.8 on umbrelOS 2.0.0 (2026-10-06)
+steps:
+  - goto: /
+  - see: Create Admin Account
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, exact: true, value: Verify-Cleanuparr-1!}
+  - fill: {label: Confirm Password, value: Verify-Cleanuparr-1!}
+  - click: {role: button, name: Continue}
+  - see: Two-Factor Authentication
+  - click: {role: button, name: Skip for now}
+  - see: Link Plex Account
+  - click: {role: button, name: Complete Setup}
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, exact: true, value: Verify-Cleanuparr-1!}
+  - click: {role: button, name: Sign In}
+  - see: Overview of your Cleanuparr instance
+  - shot: dashboard

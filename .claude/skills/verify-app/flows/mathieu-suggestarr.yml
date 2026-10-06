@@ -1,0 +1,11 @@
+steps:
+  - goto: /
+  - see: Set up your admin credentials to get started.
+  - fill: {css: "#login-username", value: admin}
+  - fill: {css: "#login-password", value: Verify-Suggestarr-1}
+  - click: {role: button, name: Create Admin Account}
+  - see: Welcome to SuggestArr!
+  - click: {role: button, name: Start Setup}
+  # Stops at the media server step: going further needs a Plex/Jellyfin/Emby token, a TMDb key and Jellyseerr.
+  - see: Select a media service above to continue.
+  - shot: setup

@@ -1,0 +1,7 @@
+verified: 4.1.1.1111-patch.1 on umbrelOS 2.0.0 (2026-10-06)
+egress: true
+steps:
+  - goto: /
+  - click: {role: button, name: Skip all steps}
+  - see: No leagues yet
+  - shot: leagues

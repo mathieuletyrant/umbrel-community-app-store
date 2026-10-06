@@ -1,0 +1,12 @@
+verified: 0.14.2-patch.1 on umbrelOS 2.0.0 (2026-10-06)
+steps:
+  - goto: /
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, value: weaver-admin}
+  - click: {role: button, name: Sign in}
+  - see: Connect your Usenet provider
+  # Stops before the provider: it needs a real Usenet account. The folders step shows the
+  # /downloads paths set by WEAVER_COMPLETE_DIR / WEAVER_INTERMEDIATE_DIR.
+  - click: {role: button, name: Skip for now}
+  - see: /downloads/usenet/complete
+  - shot: folders
