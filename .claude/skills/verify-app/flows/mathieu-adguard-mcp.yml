@@ -1,0 +1,50 @@
+verified: 0.10.1 on umbrelOS 2.0.0 (2026-10-06)
+requires: [adguard-home]
+setup:
+  - curl -sf -u admin:Verify-AdGuard-1 localhost:8095/control/status | grep -q dns_port || curl -sf -X POST localhost:8095/control/install/configure -H 'content-type:application/json' -d '{"web":{"ip":"0.0.0.0","port":8095},"dns":{"ip":"0.0.0.0","port":53},"username":"admin","password":"Verify-AdGuard-1"}'
+logs:
+  server: credentials refused
+steps:
+  - goto: /
+  - see: Not connected to AdGuard Home yet
+  - goto: http://localhost/settings/apps?dialog=app-settings&app=mathieu-adguard-mcp
+  - click: {role: button, name: "Advanced Environment variables, terminal, and logs"}
+  - click: {role: button, name: "Environment variables No variables set"}
+  - fill: {css: "[role=dialog] div.p-3:has-text(\"ADGUARD_USERNAME\") input", value: admin}
+  - fill: {css: "[role=dialog] div.p-3:has-text(\"ADGUARD_PASSWORD\") input", value: Verify-AdGuard-1}
+  - click: {role: button, name: Apply and restart}
+  - wait: 30000
+  - goto: /
+  - see: {text: "✅ Connected to AdGuard Home", reload: true}
+  - shot: connected
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream"}
+      body: {jsonrpc: "2.0", id: 1, method: tools/list}
+      status: 401
+  - http:
+      path: /mcp?token=${env.web.MCP_TOKEN}
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream"}
+      body: {jsonrpc: "2.0", id: 1, method: initialize, params: {protocolVersion: "2025-06-18", capabilities: {}, clientInfo: {name: verify, version: "1"}}}
+      status: 200
+      contains: mcp-adguard-home
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream", authorization: "Bearer ${env.web.MCP_TOKEN}"}
+      body: {jsonrpc: "2.0", id: 2, method: tools/call, params: {name: rewrites_add, arguments: {domain: nas.home, answer: 192.168.68.58}}}
+      status: 200
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream", authorization: "Bearer ${env.web.MCP_TOKEN}"}
+      body: {jsonrpc: "2.0", id: 3, method: tools/call, params: {name: rewrites_list, arguments: {}}}
+      status: 200
+      contains: 'nas\.home[\s\S]*192\.168\.68\.58'
+  - shot: rewrites

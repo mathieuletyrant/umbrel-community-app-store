@@ -34,7 +34,13 @@ change it verified.
 
 `run ... --pr <n>` uploads each proof to [uploads.sh](https://uploads.sh) and its bot
 (`uploads-sh[bot]`) keeps **one** comment on the PR up to date with every proof and its ✅/❌ line.
-Running again replaces the images in place. Nothing is committed, and it works from a Claude Code
+Running again replaces the images in place.
+
+Don't replay a flow just for the PR: when the proofs were made before the PR existed, attach
+them with `node $V attach --pr <n>` (the changed apps, or name them). Each `run` leaves a
+`<app>.result.json` next to the proof; `attach` refuses a proof when the app folder or its flow
+changed since (the `verified:` line aside), so a stale proof never lands on a PR. Use the same
+`--out` as the run. Nothing is committed, and it works from a Claude Code
 on the web session, whose GitHub proxy refuses every native way to attach an image. Don't post a
 proof comment of your own on top of it.
 
@@ -97,6 +103,9 @@ steps:                        # run on http://localhost:<port>, in order
   - http: {path: /mcp, method: POST, headers: {...}, body: {...}, status: 200, contains: regex}
   - shot: dashboard                           # named screenshot; the last one is the proof's main image
 ```
+
+An `http` response's `mcp-session-id` header is sent back on the flow's next `http` steps, so a
+flow can `initialize` a stateful MCP server, then call its tools.
 
 `${NAME}` in values expands `vars`; `${env.<service>.<VAR>}` reads a container's env (e.g. a
 deterministic `APP_PASSWORD`).

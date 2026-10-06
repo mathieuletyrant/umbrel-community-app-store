@@ -1,0 +1,70 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-mcp-memory_web_1
+      APP_PORT: 80
+      PROXY_AUTH_WHITELIST: "/mcp*,/api/health"
+
+  web:
+    image: nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2
+    init: true
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        map $$arg_token $$token_auth {
+          ""      $$http_authorization;
+          default "Bearer $$arg_token";
+        }
+        server {
+          listen 80;
+          client_max_body_size 50m;
+          resolver 127.0.0.11 valid=10s;
+          set $$upstream http://mathieu-mcp-memory_server_1:8000;
+
+          location ~ ^/mcp/?$$ {
+            set $$auth $$token_auth;
+            set $$args "";
+            proxy_pass $$upstream/mcp;
+            proxy_set_header Authorization $$auth;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_buffering off;
+            proxy_read_timeout 1h;
+          }
+
+          location / {
+            proxy_pass $$upstream;
+            proxy_set_header Host $$host;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_buffering off;
+            proxy_read_timeout 1h;
+          }
+        }
+        CONF
+        exec nginx -g 'daemon off;'
+    depends_on:
+      - server
+    restart: on-failure
+
+  server:
+    image: doobidoo/mcp-memory-service:11.15.0-slim@sha256:de8bcd7b321b0d94220aef630832296e83a86215b3ba31b50b8b083181022fc3
+    user: "1000:1000"
+    environment:
+      TZ: Europe/Paris
+      HOME: /data
+      MCP_MODE: http
+      MCP_HTTP_HOST: 0.0.0.0
+      MCP_HTTP_PORT: 8000
+      MCP_API_KEY: ${APP_PASSWORD:?APP_PASSWORD is not set}
+      MCP_MDNS_ENABLED: "false"
+      MCP_MEMORY_STORAGE_BACKEND: sqlite_vec
+      MCP_MEMORY_SQLITE_PATH: /data/db/memory.db
+      MCP_MEMORY_BACKUPS_PATH: /data/backups
+    volumes:
+      - ${APP_DATA_DIR}/data/memory:/data
+    restart: on-failure
