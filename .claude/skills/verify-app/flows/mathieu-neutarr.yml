@@ -24,6 +24,7 @@ steps:
   - check: {css: "#radarr-enabled-0"}
   - click: {role: button, name: Save changes}
   - wait: 3000
+  - shot: apps
   - click: {role: link, name: Home}
   - see: {text: Connected 1/1, reload: true}
   - shot: home

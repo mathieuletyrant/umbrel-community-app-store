@@ -1,0 +1,22 @@
+verified: 0.9.965 on umbrelOS 2.0.0 (2026-10-06)
+egress: true
+steps:
+  - goto: /
+  - see: Authentication Required
+  - click: {role: button, name: Plex}
+  - click: "Forms (Login Page)"
+  - fill: {css: "input >> nth=0", value: admin}
+  - fill: {css: "input >> nth=1", value: Verify-Chaptarr-1}
+  - fill: {css: "input >> nth=2", value: Verify-Chaptarr-1}
+  - click: {role: button, name: Save}
+  - see: No authors found
+  - goto: /add/search
+  - fill: {placeholder: Username, value: admin}
+  - fill: {placeholder: Password, value: Verify-Chaptarr-1}
+  - click: {role: button, name: Login}
+  - goto: /add/search
+  - fill: {placeholder: "e.g. War and Peace, gr:656, isbn:067003469X, az:B00JCDK5ME", value: Brandon Sanderson}
+  - press: Enter
+  - see: {text: "Authors (1)"}
+  - see: Mistborn
+  - shot: search

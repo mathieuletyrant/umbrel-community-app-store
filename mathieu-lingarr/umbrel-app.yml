@@ -47,7 +47,9 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/lingarr-translate/lingarr
 repo: https://github.com/lingarr-translate/lingarr
 support: https://github.com/lingarr-translate/lingarr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-2.jpg
 releaseNotes: >-
   Radarr and Sonarr from the Umbrel App Store are now connected automatically:
   Lingarr picks up their API keys at startup, no copy-paste needed.

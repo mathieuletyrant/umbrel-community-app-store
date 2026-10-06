@@ -167,8 +167,14 @@ this too.
   image bump.
 
 - `id` must equal the folder name and start with `mathieu-`.
-- Pick a real `icon` URL and, ideally, `gallery` images. If the upstream repo has
-  no screenshots, use `gallery: []` rather than linking broken images.
+- Pick a real `icon` URL and, ideally, `gallery` images.
+- Gallery images live **in this repo** as `<app-id>/gallery-N.jpg`, **1440×900 JPG**,
+  referenced by their `raw.githubusercontent.com/.../master/<app-id>/gallery-N.jpg`
+  URL — never hotlink upstream (URLs move, Git LFS / hashed site assets break).
+  Source them from upstream screenshots (README, docs site), or, when there are
+  none, from the `verify-app` flow's screenshots of the set-up app. Resize to
+  1440 wide, then crop the top 900 px or pad with the edge colour. Use
+  `gallery: []` only when the app has no UI worth showing (headless, MCP-only).
 - The `icon.png` **must have a solid (non-transparent) background** — a
   transparent icon shows the tile background through its corners on umbrelOS and
   looks broken. If the upstream logo has alpha, composite it onto a solid

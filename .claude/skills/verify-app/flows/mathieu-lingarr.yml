@@ -10,6 +10,8 @@ steps:
   - click: {role: button, name: Skip}
   - see: Setup complete!
   - click: {role: button, name: Go to Dashboard}
+  - wait: 3000
+  - shot: dashboard
   - goto: /settings/integration
   - see: "Radarr Settings:"
   - see: "Sonarr Settings:"
