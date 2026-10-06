@@ -49,19 +49,23 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
    (run it in the background, as the skill says), then Read `summary.png`.
    Follow `.claude/skills/verify-app/SKILL.md`. If the app has no flow, run it
    anyway: install + containers + HTTP checks still count.
-5. **Decide.**
-   - Merge (`gh pr merge <n> --squash`) when: update type is patch or
-     digest-only, verify is ✅ (or the PR touches no app), and the changelog shows
-     nothing that needs a human.
+5. **Decide.** The gate is the verify proof: an app that installs and reaches
+   its set-up screen works. But `verify-app` always installs from scratch, so it
+   can't see what breaks an *existing* install on upgrade: that is what the
+   changelog is for.
+   - Merge (`gh pr merge <n> --squash`) when: verify is ✅ and you Read its proof
+     (or the PR touches no app), the bump is patch, minor or digest-only, and
+     the changelog announces no data migration, breaking change or manual step.
    - Otherwise leave it open with **one** comment: what changed upstream (3–5
-     bullets), the verify result, and what needs a decision — starting with
-     `⚠️ Review needed — <reason>` (minor/major bump, or a risk) or
+     bullets), the verify result, and what needs a decision, starting with
+     `⚠️ Review needed — <reason>` (major bump, migration or manual step) or
      `⛔ Do not merge — <reason>` (verify ❌, breaking change you couldn't fix).
    - Never merge a major bump.
 
 ## Rules
 
 - Never touch other apps, `renovate.json` or this skill.
+- Never merge on a ✅ whose proof you have not looked at.
 - Never force-push, never rewrite Renovate's commits.
 - A ❌ that comes from the sandbox (egress blocked, Docker Hub rate limit), not
   from the app: say so in the comment, don't merge.
