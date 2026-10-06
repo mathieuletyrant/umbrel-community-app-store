@@ -1,0 +1,11 @@
+requires: [radarr, sonarr]
+logs:
+  server: Starting webserver
+steps:
+  - goto: /
+  - see: Connected apps
+  - see: {text: "✅ Connected", reload: true}
+  - see: Radarr
+  - see: Sonarr
+  - see: Starting webserver
+  - shot: status
