@@ -1,0 +1,48 @@
+manifestVersion: 1
+id: mathieu-neutarr
+storage:
+  dataRoot: data
+category: media
+name: NeutArr
+tagline: Hunt down missing media and quality upgrades in your *arr apps
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-neutarr/icon.png
+# renovate: datasource=docker depName=iampuid0/neutarr
+version: "1.11.1"
+port: 9705
+description: >-
+  NeutArr periodically checks Sonarr, Radarr, Lidarr, Readarr and Whisparr for
+  missing media and items that haven't reached their quality cutoff, then asks
+  those apps to search for them, a few at a time so your indexers aren't
+  hammered. It can also clean up stalled downloads (Swaparr).
+
+
+  It is the maintained, security-hardened fork of Huntarr, whose original
+  project was abandoned after an authentication bypass leaked every connected
+  API key.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open NeutArr. Paste the default password shown by umbrelOS as the setup
+  token, then create your own username and password and keep Login Mode.
+
+  2. Go to Apps, pick Radarr and add an instance with the URL
+  `http://radarr_server_1:7878` and Radarr's API key (Settings → General).
+  For Sonarr use `http://sonarr_server_1:8989`. Click Test Connection, then
+  Save.
+
+  3. Start with low item limits, then check Logs after the first cycle.
+developer: I-am-PUID-0
+website: https://github.com/I-am-PUID-0/NeutArr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/I-am-PUID-0/NeutArr
+support: https://github.com/I-am-PUID-0/NeutArr/issues
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+deterministicPassword: true
+permissions: []

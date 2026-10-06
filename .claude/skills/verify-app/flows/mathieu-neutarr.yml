@@ -1,0 +1,16 @@
+requires: [radarr]
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+logs:
+  server: 9705
+steps:
+  - goto: /
+  - see: Create Your Account
+  - fill: {css: "#setup_token", value: "${env.server.NEUTARR_SETUP_TOKEN}"}
+  - fill: {css: "#username", value: admin}
+  - fill: {css: "#password", value: Verify-Neutarr-1!}
+  - fill: {css: "#confirm_password", value: Verify-Neutarr-1!}
+  - click: {css: "#accountNextButton"}
+  - see: Choose Authentication Mode
+  - click: {css: "#finishButton"}
+  - shot: home

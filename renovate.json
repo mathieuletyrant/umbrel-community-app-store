@@ -53,6 +53,7 @@
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
     { "matchPackageNames": ["ghcr.io/maintainerr/maintainerr"], "commitMessageTopic": "Maintainerr" },
     { "matchPackageNames": ["ghcr.io/kirovair/muxarr"], "commitMessageTopic": "Muxarr" },
+    { "matchPackageNames": ["iampuid0/neutarr"], "commitMessageTopic": "NeutArr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
     { "matchPackageNames": ["lakker/pulsarr"], "commitMessageTopic": "Pulsarr", "allowedVersions": "<1.0.0" },
