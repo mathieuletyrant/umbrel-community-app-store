@@ -62,7 +62,9 @@ Current apps:
 2. Model the packaging on the official apps (https://github.com/getumbrel/umbrel-apps)
    and, for third-party images, on dennysubke/dennys-umbrel-app-store (a large,
    well-maintained community store with 200+ apps to copy conventions from).
-3. Commit and push. Only commit/push when the user asks.
+3. Add or update its flow in `.claude/skills/verify/flows/<app-id>.yml` and verify it
+   end to end with the `verify` skill (see "Verifying on a test umbrelOS").
+4. Commit and push. Only commit/push when the user asks.
 
 ### docker-compose.yml conventions
 
@@ -175,6 +177,21 @@ curl -sI -H "Authorization: Bearer $token" \
 
 A wrong tag surfaces on the Umbrel host as
 `Error: (HTTP code 404) unexpected - manifest unknown` during install.
+
+## Verifying on a test umbrelOS
+
+The `verify` skill (`.claude/skills/verify/`) runs umbrelOS in Docker, publishes the
+working tree as this store, installs an app, runs its first-run setup in Chromium and
+writes a proof screenshot:
+
+```sh
+node .claude/skills/verify/scripts/verify.mjs run mathieu-<name>   # or --changed / --all
+```
+
+Each app has a committed flow in `.claude/skills/verify/flows/<app-id>.yml` (apps it
+needs, log patterns, browser steps). Keep it in sync with the app: a new app gets a flow,
+a change that alters the UI or setup updates it. `SKILL.md` documents the format and the
+failure triage.
 
 ## Testing changes on Umbrel
 
