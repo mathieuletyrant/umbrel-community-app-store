@@ -1,0 +1,9 @@
+verified: 1.2.2-patch.2 on umbrelOS 2.0.0 (2026-10-06)
+requires: [lidarr, mathieu-slskd]
+logs:
+  # Only printed once Lidarr accepted the API key picked up by exports.sh.
+  server: No releases wanted
+steps:
+  - goto: /
+  - see: {text: No releases wanted, reload: true}
+  - shot: logs

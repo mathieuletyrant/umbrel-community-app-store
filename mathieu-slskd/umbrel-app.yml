@@ -7,7 +7,7 @@ name: slskd
 tagline: Soulseek client with a modern web UI
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/icon.png
 # renovate: datasource=docker depName=slskd/slskd
-version: "0.26.0-patch.2"
+version: "0.26.0-patch.3"
 port: 5030
 description: >-
   slskd is a modern, self-hosted client for the Soulseek file-sharing network,
@@ -42,6 +42,10 @@ description: >-
   else can be edited from the UI.
 
 
+  Soularr (also in this store) connects to slskd on its own: slskd gets an API
+  key that Soularr picks up automatically.
+
+
   Completed downloads land in /downloads/soulseek/complete, alongside your other
   media so Lidarr can import them. For best connectivity, forward TCP port 50300
   to your Umbrel on your router.
@@ -55,16 +59,15 @@ repo: https://github.com/slskd/slskd
 support: https://github.com/slskd/slskd/issues
 gallery: []
 releaseNotes: >-
-  Soulseek credentials can now be entered directly from the app's settings
-  (SLSKD_SLSK_USERNAME, SLSKD_SLSK_PASSWORD, SLSKD_SHARED_DIR) — previously the
-  only way to log in to the Soulseek network was to hand-edit the YAML config,
-  so slskd started but never connected.
+  slskd now gets an API key that Soularr (also in this store) picks up on its
+  own, so Soularr needs no manual setup anymore.
 
 
   Previous release notes:
 
 
-  Support for the new storage management and configuration options introduced with umbrelOS 2.0, and the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Soulseek credentials can be entered directly from the app's settings
+  (SLSKD_SLSK_USERNAME, SLSKD_SLSK_PASSWORD, SLSKD_SHARED_DIR). Support for the new storage management and configuration options introduced with umbrelOS 2.0, and the standard shared Downloads mount path so the app works on every umbrelOS version.
 dependencies: []
 path: ""
 defaultUsername: "slskd"

@@ -59,7 +59,7 @@ async function ensureDocker() {
 	if (process.getuid?.() !== 0 || !trySh('which', ['dockerd'])) throw new Error('Docker daemon is not running')
 	log('starting dockerd')
 	const out = fs.openSync(path.join(HOME, 'dockerd.log'), 'a')
-	spawn('dockerd', [], {detached: true, stdio: ['ignore', out, out]}).unref()
+	spawn('dockerd', ['--registry-mirror', 'https://mirror.gcr.io'], {detached: true, stdio: ['ignore', out, out]}).unref()
 	for (let i = 0; i < 60; i++) {
 		if (trySh('docker', ['info']) !== null) return
 		await sleep(1000)
@@ -700,10 +700,22 @@ function recordVerified(appId, version, umbrel) {
 	fs.writeFileSync(file, /^verified:.*$/m.test(src) ? src.replace(/^verified:.*$/m, line) : `${line}\n${src}`)
 }
 
+// The proof's main image is the last shot: it must follow an assertion on what it shows, or
+// it can be a blank page caught mid-load or the wrong screen, and still pass.
+function lintFlow(appId, flow) {
+	const steps = flow?.steps ?? []
+	const last = steps.findLastIndex((st) => 'shot' in st)
+	if (last < 0) return
+	const before = steps[last - 1]
+	if (!before || !('see' in before || 'http' in before))
+		throw new Error(`flows/${appId}.yml: the last shot must come right after a \`see\` (or an \`http\` whose response is the proof), not ${before ? Object.keys(before)[0] : 'nothing'}`)
+}
+
 async function verify(appId, flags, ctxHolder) {
 	const manifest = readYaml(path.join(REPO, appId, 'umbrel-app.yml'))
 	const flowFile = path.join(FLOWS_DIR, `${appId}.yml`)
 	const flow = fs.existsSync(flowFile) ? readYaml(flowFile) : null
+	lintFlow(appId, flow)
 	const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))
 	fs.mkdirSync(out, {recursive: true})
 	for (const f of fs.readdirSync(out)) if (f.startsWith(`${appId}.`)) fs.rmSync(path.join(out, f))

@@ -14,7 +14,11 @@ services:
       # The image is .NET (aspnet:10.0) with no port set, so Kestrel would
       # default to 8080. Force it to 9876 to match app_proxy's APP_PORT.
       - ASPNETCORE_URLS=http://+:9876
-      # Uses embedded SQLite by default (DB_CONNECTION unset) — no DB container.
+      - DB_CONNECTION=sqlite
+      - RADARR_URL=${APP_MATHIEU_LINGARR_RADARR_URL:-}
+      - RADARR_API_KEY=${APP_MATHIEU_LINGARR_RADARR_API_KEY:-}
+      - SONARR_URL=${APP_MATHIEU_LINGARR_SONARR_URL:-}
+      - SONARR_API_KEY=${APP_MATHIEU_LINGARR_SONARR_API_KEY:-}
     volumes:
       - ${APP_DATA_DIR}/data/config:/app/config
       # Media mounted at the SAME path Sonarr/Radarr use (/downloads), so Lingarr

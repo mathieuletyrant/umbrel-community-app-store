@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "6.13.7-patch.1"
+version: "6.13.7-patch.2"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -26,16 +26,21 @@ description: >-
 
 
   cross-seed has no web interface — opening the app shows a status page with
-  these instructions. It is pre-configured for the official Transmission app;
-  you only need to tell it which indexers to search. On your Umbrel host, edit:
+  these instructions. It is pre-configured for the official Transmission app,
+  and each time it starts it picks up every enabled torrent indexer from
+  Prowlarr, plus Sonarr and Radarr, all from the Umbrel App Store. Nothing to
+  copy-paste: install Prowlarr, add your trackers there, and restart cross-seed
+  whenever you add one.
+
+
+  Other Torznab URLs and every other option go in the config on your Umbrel
+  host, then restart the app:
 
 
   ~/umbrel/app-data/mathieu-cross-seed/data/config/config.js
 
 
-  and add one Torznab URL per tracker (copy them from Prowlarr, with your
-  Prowlarr API key), then restart the app. Check activity with:
-  docker logs -f mathieu-cross-seed_daemon_1
+  Check activity with: docker logs -f mathieu-cross-seed_daemon_1
 developer: cross-seed
 website: https://www.cross-seed.org
 submitter: Mathieu Le Tyrant
@@ -44,13 +49,16 @@ repo: https://github.com/cross-seed/cross-seed
 support: https://github.com/cross-seed/cross-seed/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  cross-seed now fills in its indexers on its own: at each start it reads every
+  enabled torrent indexer from Prowlarr, plus Sonarr and Radarr, from the Umbrel
+  App Store.
 
 
-  Previous release notes:
+  Already installed? Your config.js is never modified. To switch, rename it
+  (e.g. to config.js.old) and restart the app: a new one wired to Prowlarr is
+  created, then copy over any setting you had customized.
 
 
-  Initial release of cross-seed for this Community App Store.
 dependencies:
   - transmission
 path: ""

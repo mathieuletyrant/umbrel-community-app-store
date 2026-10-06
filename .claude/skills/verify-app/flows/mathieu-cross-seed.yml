@@ -1,0 +1,8 @@
+verified: 6.13.7-patch.2 on umbrelOS 2.0.0 (2026-10-06)
+requires: [transmission, prowlarr, sonarr, radarr]
+logs:
+  daemon: "Sonarr: yes, Radarr: yes"
+steps:
+  - goto: /
+  - see: Nothing to fill in
+  - shot: status

@@ -7,7 +7,7 @@ name: Soularr
 tagline: Auto-download Lidarr's wanted music from Soulseek via slskd
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-soularr/icon.png
 # renovate: datasource=docker depName=mrusse08/soularr
-version: "1.2.2-patch.1"
+version: "1.2.2-patch.2"
 port: 8265
 description: >-
   Soularr bridges Lidarr and slskd to automate music downloads from the Soulseek
@@ -27,17 +27,13 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  A starter config is created on first run, already pointing at Lidarr
-  (lidarr_server_1) and slskd (mathieu-slskd_server_1). You only need to fill in
-  two API keys — open Soularr, go to the Config editor, and set:
+  Nothing to copy-paste: Soularr is pre-wired to Lidarr (lidarr_server_1) and
+  slskd (mathieu-slskd_server_1), and picks up both API keys on its own each
+  time it starts. Install slskd and Lidarr first; if you install one of them
+  after Soularr, restart Soularr.
 
 
-  1. [Lidarr] api_key — from Lidarr → Settings → General.
-
-  2. [Slskd] api_key — from slskd → Options → the API key under Web/Authentication.
-
-
-  Save, and Soularr will start processing your Lidarr wanted list every 5 minutes
+  Soularr processes your Lidarr wanted list every 5 minutes
   (change SCRIPT_INTERVAL in the app's compose to adjust). Downloads flow through
   /downloads/soulseek/complete — the same path slskd and Lidarr use — so imports
   line up with no path mapping.
@@ -49,13 +45,11 @@ repo: https://github.com/mrusse/soularr
 support: https://github.com/mrusse/soularr/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  The Lidarr and slskd API keys are now filled in automatically — no more
+  copying them into the config. Update slskd as well: its update gives it the
+  API key Soularr now uses.
 
 
-  Previous release notes:
-
-
-  Initial release of Soularr for this Community App Store.
 dependencies:
   - lidarr
 path: ""
