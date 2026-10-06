@@ -1,0 +1,21 @@
+steps:
+  - goto: /
+  - see: Umbrel MCP Bridge
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream"}
+      body: {jsonrpc: "2.0", id: 1, method: tools/list}
+      status: 401
+      contains: missing \?token=
+  # A bogus token reaches umbreld's own /mcp (host port 80), which answers with a JSON-RPC error.
+  - http:
+      path: /mcp?token=umbrelmcp_verify
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream"}
+      body: {jsonrpc: "2.0", id: 1, method: tools/list}
+      status: 401
+      contains: '"jsonrpc"'
+  - shot: bridge

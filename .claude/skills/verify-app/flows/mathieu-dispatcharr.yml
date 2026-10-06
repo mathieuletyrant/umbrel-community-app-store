@@ -1,0 +1,15 @@
+verified: 0.31.0 on umbrelOS 2.0.0 (2026-10-06)
+steps:
+  - goto: /
+  - see: Create your Super User Account
+  - fill: {label: "Username *", value: admin}
+  - fill: {label: "Password *", value: Verify-Dispatcharr-1}
+  - click: {role: button, name: Create Account}
+  - see: Welcome back! Please log in to continue.
+  - fill: {label: "Username *", value: admin}
+  - fill: {label: Password, exact: true, value: Verify-Dispatcharr-1}
+  - click: {role: button, name: Login}
+  - see: Add Individual Stream
+  # Plex and IPTV clients reach the tuner without an Umbrel session (PROXY_AUTH_ADD: false).
+  - http: {path: /hdhr/discover.json, anonymous: true, status: 200, contains: DeviceID}
+  - shot: hdhr

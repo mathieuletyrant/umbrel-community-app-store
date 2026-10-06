@@ -1,0 +1,8 @@
+verified: 0.13.1 on umbrelOS 2.0.0 (2026-10-06)
+steps:
+  - goto: /
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, value: trailarr}
+  - click: {role: button, name: Sign In}
+  - see: Welcome to Trailarr
+  - shot: setup

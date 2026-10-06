@@ -1,0 +1,18 @@
+verified: 2.1.0-patch.1 on umbrelOS 2.0.0 (2026-10-06)
+requires: [radarr]
+egress: true
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+steps:
+  - goto: /
+  - see: {text: Welcome to Boxarr!, reload: true}
+  - fill: {label: Radarr URL, value: "http://radarr_server_1:7878"}
+  - fill: {label: Radarr API Key, value: "${RADARR_API_KEY}"}
+  - click: {role: button, name: Test Connection}
+  # Root folders and quality profiles are read from Radarr, so they only appear once the connection works.
+  - select: {label: Root Folder, value: /downloads/movies}
+  - select: {label: Default Quality Profile, value: HD-1080p}
+  - click: {role: button, name: Save Configuration}
+  - see: Boxarr Dashboard
+  - see: ✅ Configured
+  - shot: dashboard

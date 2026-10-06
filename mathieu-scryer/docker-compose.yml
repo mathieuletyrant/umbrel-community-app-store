@@ -9,7 +9,7 @@ services:
   server:
     image: ghcr.io/scryer-media/scryer:0.21.9@sha256:48ee8f251312cd04c33ff8b727bd759776075dcf82e2e074c8ebf8dedc22ce0c
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
     volumes:

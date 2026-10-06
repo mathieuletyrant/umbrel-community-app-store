@@ -1,0 +1,31 @@
+requires: [freshrss]
+headless: true
+# The init service needs a FreshRSS account; create one before installing.
+prepare:
+  - docker exec -u 1000 -e DATA_PATH=/config/www/freshrss/data freshrss_server_1 sh -c 'cd /app/www && (php cli/list-users.php | grep -q . || (php cli/do-install.php --default-user admin --auth-type form --environment production --base-url http://localhost --db-type sqlite && php cli/create-user.php --user admin --password Verify-FreshRSS-1))'
+logs:
+  init: API password (generated|already set)
+steps:
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream"}
+      body: {jsonrpc: "2.0", id: 1, method: tools/list}
+      status: 401
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream", authorization: "Bearer ${env.server.API_KEY}"}
+      body: {jsonrpc: "2.0", id: 1, method: initialize, params: {protocolVersion: "2025-06-18", capabilities: {}, clientInfo: {name: verify, version: "1"}}}
+      status: 200
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, accept: "application/json, text/event-stream", authorization: "Bearer ${env.server.API_KEY}"}
+      body: {jsonrpc: "2.0", id: 2, method: tools/list}
+      status: 200
+      contains: '"tools"'
+  - shot: tools

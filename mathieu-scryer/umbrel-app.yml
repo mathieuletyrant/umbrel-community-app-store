@@ -44,7 +44,11 @@ repo: https://github.com/scryer-media/scryer
 support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Build-only release: no changes to app behaviour, configuration or the database.
+
+
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.9
 dependencies: []
 path: ""
 permissions:

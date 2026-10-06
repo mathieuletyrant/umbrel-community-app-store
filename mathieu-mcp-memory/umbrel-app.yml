@@ -55,7 +55,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Security fix: the MCP-only server now refuses to listen on a non-loopback address without authentication. Also adds per-store scoping to the HTTP API, better hybrid keyword search, and several retention and decay fixes.
+
+
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v11.15.0
 dependencies: []
 path: ""
 defaultUsername: mcp

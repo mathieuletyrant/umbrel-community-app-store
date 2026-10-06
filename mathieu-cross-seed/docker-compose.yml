@@ -32,7 +32,7 @@ services:
         HTML
         exec nginx -g 'daemon off;'
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80/"]
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:80/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -135,7 +135,7 @@ services:
         EOF
         exec cross-seed daemon
     environment:
-      TZ: Europe/Paris
+      TZ: Etc/UTC
       PROWLARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_PROWLARR_API_KEY:-}
       SONARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_SONARR_API_KEY:-}
       RADARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_RADARR_API_KEY:-}

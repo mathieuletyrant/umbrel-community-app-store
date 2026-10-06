@@ -1,0 +1,7 @@
+verified: 0.21.9 on umbrelOS 2.0.0 (2026-10-06)
+steps:
+  - goto: /
+  - see: Welcome to Scryer
+  - click: {role: button, name: Skip setup entirely}
+  - see: {text: No root folders configured, reload: true}
+  - shot: movies

@@ -10,7 +10,7 @@ services:
   server:
     image: ghcr.io/chrisbenincasa/tunarr:2026.9.3@sha256:60ce005b475315883be106e06ca42be31a746ef0970bae7014b3fa3d7395b1f4
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
     volumes:
       - ${APP_DATA_DIR}/data/config:/config/tunarr
       - ${UMBREL_ROOT}/data/storage/downloads:/downloads:ro

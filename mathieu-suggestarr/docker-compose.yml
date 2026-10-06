@@ -10,7 +10,7 @@ services:
     image: ciuse99/suggestarr:v2.15.0@sha256:1e7f274df052d2a2a20bafdd4d730474902258008c1030bb43ba3dcb5daed8d7
     init: true
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - SUGGESTARR_PORT=5000
       - LOG_LEVEL=info
     volumes:

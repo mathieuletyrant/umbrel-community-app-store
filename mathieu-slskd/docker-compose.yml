@@ -11,7 +11,7 @@ services:
     init: true
     user: "1000:1000"
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - SLSKD_REMOTE_CONFIGURATION=true
       - SLSKD_DOWNLOADS_DIR=/downloads/soulseek/complete
       - SLSKD_INCOMPLETE_DIR=/downloads/soulseek/incomplete

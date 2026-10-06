@@ -23,7 +23,7 @@ services:
           /data/config.ini 2>/dev/null || true
         exec /app/run.sh
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - SCRIPT_INTERVAL=300
       - WEBUI_ENABLED=true
       - LIDARR_API_KEY=${APP_MATHIEU_SOULARR_LIDARR_API_KEY:-}

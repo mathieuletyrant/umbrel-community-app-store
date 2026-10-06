@@ -9,7 +9,7 @@ services:
   server:
     image: ghcr.io/kirovair/muxarr:0.9.9@sha256:b506ac7107ab166fe1d65959e04f15a07692f230a3da823329f51628cb25b709
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
     volumes:

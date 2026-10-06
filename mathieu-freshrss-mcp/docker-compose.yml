@@ -92,7 +92,7 @@ services:
         export FRESHRSS_API_PASSWORD="$$(cat /shared/api_password)"
         exec freshrss-mcp
     environment:
-      TZ: Europe/Paris
+      TZ: Etc/UTC
       MCP_HOST: 0.0.0.0
       FRESHRSS_API_URL: http://freshrss_server_1:80/api/greader.php
       FRESHRSS_BASE_URL: http://umbrel.local:3432

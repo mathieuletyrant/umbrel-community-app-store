@@ -1,0 +1,13 @@
+steps:
+  - goto: /
+  - see: Set a password to protect the UI
+  - fill: {placeholder: "Enter a password…", value: Verify-Sublarr-1}
+  - fill: {placeholder: "Repeat password…", value: Verify-Sublarr-1}
+  - click: {role: button, name: "Set Password & Continue"}
+  - click: {css: "[data-testid=wizard-next]"}
+  - click: {css: "[data-testid=wizard-pick]"}
+  - click: {css: "[data-testid=wizard-done-close]"}
+  - click: {role: button, name: Got it}
+  - click: {css: "[data-testid=usage-stats-decline]"}
+  - see: Live Activity Feed
+  - shot: dashboard

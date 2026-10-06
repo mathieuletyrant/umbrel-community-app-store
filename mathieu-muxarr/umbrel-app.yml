@@ -55,7 +55,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
-releaseNotes: ""
+releaseNotes: >-
+  App data now lives in /config, like the linuxserver containers, and a new UMASK setting lets you make library files group-writable. This is the last pre-release before stable.
+
+
+  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.9
 dependencies: []
 path: ""
 defaultUsername: ""

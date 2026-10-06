@@ -42,7 +42,11 @@ support: https://github.com/I-am-PUID-0/NeutArr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-neutarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-neutarr/gallery-2.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Fixes the version check picking up stale runtime markers.
+
+
+  Full release notes can be found at https://github.com/I-am-PUID-0/NeutArr/releases/tag/1.11.1
 dependencies: []
 path: ""
 defaultUsername: ""

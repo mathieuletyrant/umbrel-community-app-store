@@ -1,0 +1,14 @@
+verified: 1.39.1 on umbrelOS 2.0.0 (2026-10-06)
+requires: [radarr, sonarr]
+logs:
+  autoconfig: "added from Umbrel: .*[Rr]adarr"
+steps:
+  - goto: /
+  - see: Set up arr-mcp
+  - fill: {label: Password, exact: true, value: Verify-ArrMcp-1}
+  - fill: {label: Confirm password, value: Verify-ArrMcp-1}
+  - click: {role: button, name: Claim this instance}
+  # Radarr and Sonarr were added by the autoconfig service from the keys exports.sh found.
+  - see: {text: Radarr, reload: true}
+  - see: Sonarr
+  - shot: services

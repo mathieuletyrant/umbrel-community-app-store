@@ -9,7 +9,7 @@ services:
   server:
     image: lakker/pulsarr:0.19.4@sha256:106f2793eb9acd44364761ed79e20b05249dd700214b8b38ff2ef1502d3d1c2c
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
       - baseUrl=http://mathieu-pulsarr_server_1

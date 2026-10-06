@@ -1,0 +1,13 @@
+verified: 2.2.0-patch.1 on umbrelOS 2.0.0 (2026-10-06)
+egress: true
+steps:
+  - goto: /
+  # The server takes a few seconds after the container starts to listen.
+  - see: {text: Welcome to Profilarr, reload: true}
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, exact: true, value: Verify-Profilarr-1}
+  - fill: {label: Confirm Password, value: Verify-Profilarr-1}
+  - click: {role: button, name: Create Account}
+  # The Dictionarry database is cloned from GitHub on first start.
+  - see: Dictionarry-Hub/database
+  - shot: databases

@@ -1,0 +1,13 @@
+verified: 2.6.3 on umbrelOS 2.0.0 (2026-10-06)
+steps:
+  - goto: /
+  - see: Create your account to get started
+  - fill: {label: Display Name, value: Verify}
+  - fill: {label: Username, value: admin}
+  - fill: {label: Email, value: verify@example.com}
+  - fill: {label: Password, value: Verify-Tracearr-1}
+  - click: {role: button, name: Create Account}
+  # Stops once logged in: adding a server needs a Plex or Jellyfin token.
+  - see: Now Playing
+  - see: supervised-v2
+  - shot: dashboard

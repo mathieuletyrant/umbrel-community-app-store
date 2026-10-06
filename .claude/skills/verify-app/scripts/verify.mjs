@@ -634,7 +634,7 @@ async function runSteps(ctx, appId, port, steps, out, {page, final = true, vars 
 		try {
 			switch (type) {
 				case 'goto':
-					await page.goto(/^https?:/.test(arg) ? arg : origin + arg, {waitUntil: 'domcontentloaded'})
+					await page.goto(/^https?:/.test(arg) ? arg.replace(/^http:\/\/localhost\//, `http://localhost:${UMBREL_PORT}/`) : origin + arg, {waitUntil: 'domcontentloaded'})
 					break
 				case 'see':
 					if (arg.reload) await seeWithReload(page, arg)

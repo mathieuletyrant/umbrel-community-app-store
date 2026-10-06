@@ -9,11 +9,11 @@ services:
   server:
     image: ghcr.io/scryer-media/weaver:0.14.2@sha256:bc2e1ff61b7bebe52ae6a2a3ba6aec050952f1060ed38088bbf5d27712c58bf5
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
       - WEAVER_BOOTSTRAP_LOGIN_USERNAME=admin
-      - WEAVER_BOOTSTRAP_LOGIN_PASSWORD=weaver
+      - WEAVER_BOOTSTRAP_LOGIN_PASSWORD=weaver-admin
       - WEAVER_INTERMEDIATE_DIR=/downloads/usenet/incomplete
       - WEAVER_COMPLETE_DIR=/downloads/usenet/complete
     volumes:
