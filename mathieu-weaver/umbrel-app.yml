@@ -46,7 +46,8 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/scryer-media/weaver
 repo: https://github.com/scryer-media/weaver
 support: https://github.com/scryer-media/weaver/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: "Adds hardware profiles for easy resource management and live profile switching without restart. Schedule rules now persist across days until the next rule fires. Improved repair prevents extraction failures on damaged downloads."
 dependencies: []
 path: ""

@@ -39,7 +39,11 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/Abrechen2/sublarr
 repo: https://github.com/Abrechen2/sublarr
 support: https://github.com/Abrechen2/sublarr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
   Adds track variant policies for foreign-track cleanup with fine-grained controls over which subtitle variants to keep, plus size limits for sweep operations. Fixes critical issues with cleanup scope handling, translation saves, slow-mode searches, upgrade logic, and provider management. Security improvements mask secrets in logs; database migrations are backwards compatible.
 dependencies: []

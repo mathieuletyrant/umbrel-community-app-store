@@ -49,10 +49,10 @@ submission: https://github.com/Dispatcharr/Dispatcharr
 repo: https://github.com/Dispatcharr/Dispatcharr
 support: https://github.com/Dispatcharr/Dispatcharr/issues
 gallery:
-  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/channels.png
-  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/guide.png
-  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/m3u-epg-manager.png
-  - https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docs/images/stats.png
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-4.jpg
 releaseNotes: >-
   Initial release of Dispatcharr for this Community App Store.
 dependencies: []

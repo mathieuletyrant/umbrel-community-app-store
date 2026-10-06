@@ -42,9 +42,9 @@ submission: https://github.com/jamcalli/Pulsarr
 repo: https://github.com/jamcalli/Pulsarr
 support: https://github.com/jamcalli/Pulsarr/issues
 gallery:
-  - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Dashboard1.png
-  - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Content-Route-1.png
-  - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Plex1.png
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
   On a fresh install, Sonarr and Radarr from the Umbrel App Store are now added
   automatically — no API keys to copy.

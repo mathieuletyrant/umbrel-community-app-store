@@ -2,7 +2,7 @@ manifestVersion: 1
 id: mathieu-arr-mcp
 storage:
   dataRoot: data
-category: media
+category: ai
 name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
@@ -53,9 +53,9 @@ submission: https://github.com/bardesss/arr-mcp
 repo: https://github.com/bardesss/arr-mcp
 support: https://github.com/bardesss/arr-mcp/issues
 gallery:
-  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.png
-  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.png
-  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.png
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: "Fixes metadata detector false positives on Plex libraries, improves Plex per-user tools compatibility, and fixes Jellyfin lock reading for metadata repairs."
 dependencies: []
 path: ""

@@ -57,7 +57,10 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/slskd/slskd
 repo: https://github.com/slskd/slskd
 support: https://github.com/slskd/slskd/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/gallery-3.jpg
 releaseNotes: >-
   slskd now gets an API key that Soularr (also in this store) picks up on its
   own, so Soularr needs no manual setup anymore.
