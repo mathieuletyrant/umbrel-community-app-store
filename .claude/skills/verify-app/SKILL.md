@@ -98,6 +98,9 @@ steps:                        # run on http://localhost:<port>, in order
   - shot: dashboard                           # named screenshot; the last one is the proof's main image
 ```
 
+An `http` response's `mcp-session-id` header is sent back on the flow's next `http` steps, so a
+flow can `initialize` a stateful MCP server, then call its tools.
+
 `${NAME}` in values expands `vars`; `${env.<service>.<VAR>}` reads a container's env (e.g. a
 deterministic `APP_PASSWORD`).
 

@@ -563,6 +563,7 @@ async function runSteps(ctx, appId, port, steps, out, {page, final = true, vars 
 	}
 	page.setDefaultTimeout(timeout)
 	const errors = pageErrors(page)
+	let mcpSession
 	if (!steps?.length) steps = [{goto: '/'}, {wait: 4000}]
 	for (const [i, step] of steps.entries()) {
 		const [type, raw] = Object.entries(step)[0]
@@ -608,14 +609,19 @@ async function runSteps(ctx, appId, port, steps, out, {page, final = true, vars 
 					break
 				case 'http': {
 					const headers = Object.fromEntries(Object.entries(arg.headers ?? {}).map(([k, v]) => [k, interpolate(v, appId, vars)]))
+					if (mcpSession && !Object.keys(headers).some((k) => k.toLowerCase() === 'mcp-session-id')) headers['mcp-session-id'] = mcpSession
 					const url = origin + interpolate(arg.path ?? '/', appId, vars)
 					const body = arg.body === undefined ? undefined : interpolate(typeof arg.body === 'string' ? arg.body : JSON.stringify(arg.body), appId, vars)
 					const r = arg.anonymous
-						? await fetch(url, {method: arg.method ?? 'GET', headers, body, redirect: 'manual'})
+						? await (async () => {
+								const res = await fetch(url, {method: arg.method ?? 'GET', headers, body, redirect: 'manual'})
+								return {status: res.status, text: () => res.text(), session: res.headers.get('mcp-session-id')}
+							})()
 						: await (async () => {
 								const res = await page.request.fetch(url, {method: arg.method ?? 'GET', headers, data: body, maxRedirects: 0, timeout: 120_000})
-								return {status: res.status(), text: () => res.text()}
+								return {status: res.status(), text: () => res.text(), session: res.headers()['mcp-session-id']}
 							})()
+					if (r.session) mcpSession = r.session
 					const text = await r.text()
 					const esc = (v) => String(v).replace(/[&<>]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;'})[c])
 					const pretty = (() => {
