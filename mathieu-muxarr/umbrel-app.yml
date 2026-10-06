@@ -51,10 +51,10 @@ submission: https://github.com/KirovAir/muxarr
 repo: https://github.com/KirovAir/muxarr
 support: https://github.com/KirovAir/muxarr/issues
 gallery:
-  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/dashboard.png
-  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/filedetails.png
-  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/settings.png
-  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/statistics.png
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
 releaseNotes: ""
 dependencies: []
 path: ""

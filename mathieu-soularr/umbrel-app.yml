@@ -43,7 +43,8 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/mrusse/soularr
 repo: https://github.com/mrusse/soularr
 support: https://github.com/mrusse/soularr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-soularr/gallery-1.jpg
 releaseNotes: >-
   The Lidarr and slskd API keys are now filled in automatically — no more
   copying them into the config. Update slskd as well: its update gives it the

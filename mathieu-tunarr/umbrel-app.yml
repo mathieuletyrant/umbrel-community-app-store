@@ -51,9 +51,9 @@ submission: https://github.com/chrisbenincasa/tunarr
 repo: https://github.com/chrisbenincasa/tunarr
 support: https://github.com/chrisbenincasa/tunarr/issues
 gallery:
-  - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/design/tunarr-channels.png
-  - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/design/tunarr-guide.png
-  - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/docs/assets/channel-properties.png
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-3.jpg
 releaseNotes: >-
   Initial release of Tunarr for this Community App Store.
 dependencies: []

@@ -36,7 +36,11 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/Sportarr/Sportarr
 repo: https://github.com/Sportarr/Sportarr
 support: https://github.com/Sportarr/Sportarr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-4.jpg
 releaseNotes: >-
   This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
 

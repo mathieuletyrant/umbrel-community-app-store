@@ -242,7 +242,9 @@ function serveGit() {
 }
 
 function storeUrl() {
-	const gw = sh('docker', ['inspect', '-f', '{{range .NetworkSettings.Networks}}{{.Gateway}} {{end}}', CONTAINER]).split(' ')[0]
+	const gw = process.platform === 'darwin'
+		? 'host.docker.internal'
+		: sh('docker', ['inspect', '-f', '{{range .NetworkSettings.Networks}}{{.Gateway}} {{end}}', CONTAINER]).split(' ')[0]
 	return `http://${gw}:${GIT_PORT}/store.git`
 }
 

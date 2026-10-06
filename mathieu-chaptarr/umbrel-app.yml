@@ -39,7 +39,8 @@ submitter: Mathieu Le Tyrant
 submission: https://hub.docker.com/r/robertlordhood/chaptarr
 repo: https://hub.docker.com/r/robertlordhood/chaptarr
 support: https://hub.docker.com/r/robertlordhood/chaptarr
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-chaptarr/gallery-1.jpg
 releaseNotes: >-
   This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
 dependencies: []

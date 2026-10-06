@@ -39,7 +39,9 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/I-am-PUID-0/NeutArr
 support: https://github.com/I-am-PUID-0/NeutArr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-neutarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-neutarr/gallery-2.jpg
 releaseNotes: ""
 dependencies: []
 path: ""

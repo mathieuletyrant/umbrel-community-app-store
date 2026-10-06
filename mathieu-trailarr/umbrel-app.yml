@@ -53,7 +53,11 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/nandyalu/trailarr
 repo: https://github.com/nandyalu/trailarr
 support: https://github.com/nandyalu/trailarr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-4.jpg
 releaseNotes: >-
   This update integrates TMDB for curated trailers in your preferred language (add an optional TMDB API key in Settings > General), adds a setup guide on first install, and improves database backup management. Filter counts now show how much of your library has a trailer, and any video you choose is preserved across updates.
 dependencies: []

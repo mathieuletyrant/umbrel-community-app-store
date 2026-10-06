@@ -50,7 +50,11 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/doobidoo/mcp-memory-service
 support: https://github.com/doobidoo/mcp-memory-service/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: ""
 dependencies: []
 path: ""
