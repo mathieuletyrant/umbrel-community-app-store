@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-tunarr_server_1
+      APP_PORT: 8000
+      PROXY_AUTH_WHITELIST: "/device.xml,/discover.json,/lineup.json,/lineup_status.json,/stream/*,/streams/*,/api/channels.m3u,/api/xmltv.xml"
+
+  server:
+    image: ghcr.io/chrisbenincasa/tunarr:2026.9.3@sha256:60ce005b475315883be106e06ca42be31a746ef0970bae7014b3fa3d7395b1f4
+    environment:
+      - TZ=Europe/Paris
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config/tunarr
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads:ro
+    restart: on-failure

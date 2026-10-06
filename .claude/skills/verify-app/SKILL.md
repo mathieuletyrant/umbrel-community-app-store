@@ -76,6 +76,8 @@ egress: true                  # app needs internet at runtime (see Sandbox)
 headless: true                # no HTTP check on / (status page apps still get steps)
 vars:                         # shell commands run on the host after install, retried until non-empty
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+setup:                        # shell commands run on the host after install (retried until they succeed)
+  - docker exec mathieu-x_server_1 touch /config/seed
 logs:                         # service → regex that must appear in <app-id>_<service>_1 logs
   server: started successfully
 steps:                        # run on http://localhost:<port>, in order
