@@ -41,7 +41,7 @@ conversation; `uploads whoami` checks it) and the CLI
 ```sh
 cd .verify-out
 uploads --json put mathieu-<name>.proof.png --pr <n> --repo mathieuletyrant/umbrel-community-app-store \
-    --state mathieu-<name> --alt "mathieu-<name> verified on umbrelOS" --width 800
+    --state after --alt "mathieu-<name> verified on umbrelOS" --width 800
 ```
 
 Embed the answer's `embedUrl` as `<img src="<embedUrl>" alt="..." width="800">`, not its
