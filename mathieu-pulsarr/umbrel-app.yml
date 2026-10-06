@@ -7,7 +7,7 @@ name: Pulsarr
 tagline: Sync Plex watchlists to Sonarr and Radarr in real time
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/icon.png
 # renovate: datasource=docker depName=lakker/pulsarr
-version: "0.19.4"
+version: "0.19.4-patch.1"
 port: 3003
 description: >-
   Pulsarr watches the Plex watchlists of you and your friends and sends every
@@ -28,15 +28,13 @@ description: >-
 
   1. Open Pulsarr, create the admin account and sign in with Plex.
 
-
-  2. Add Sonarr at http://sonarr_server_1:8989 and Radarr at
-  http://radarr_server_1:7878 with their API keys (Settings → General in each
-  app). Pulsarr's webhook address is already set to
+  2. Sonarr and Radarr from the Umbrel App Store are already added (on a fresh
+  install), using their first quality profile and root folder
+  (/downloads/shows and /downloads/movies on Umbrel) — change them in Pulsarr's
+  Sonarr/Radarr pages. Pulsarr's webhook address is already set to
   http://mathieu-pulsarr_server_1:3003, so Sonarr and Radarr can reach it.
 
-
-  3. Pick the default quality profile and root folder (/downloads/shows and
-  /downloads/movies on Umbrel), then choose which Plex users to sync.
+  3. Choose which Plex users to sync.
 developer: jamcalli
 website: https://jamcalli.github.io/Pulsarr/
 submitter: Mathieu Le Tyrant
@@ -48,7 +46,9 @@ gallery:
   - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Content-Route-1.png
   - https://raw.githubusercontent.com/jamcalli/Pulsarr/master/assets/screenshots/Plex1.png
 releaseNotes: >-
-  Initial release of Pulsarr for this Community App Store.
+  On a fresh install, Sonarr and Radarr from the Umbrel App Store are now added
+  automatically — no API keys to copy.
+
 dependencies: []
 path: ""
 defaultUsername: ""

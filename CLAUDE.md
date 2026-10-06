@@ -52,7 +52,7 @@ Current apps:
 - `mathieu-chaptarr` — Chaptarr (ebook/audiobook manager, Readarr re-work, web UI on 8789 — not Readarr's 8787; no public GitHub repo yet, Docker Hub only; PUID/PGID 1000, config at /config, root folder /downloads/books)
 - `mathieu-scryer` — Scryer (whole *arr stack in one Rust binary: movies/series/anime, web UI on 8080, host port 8380; runs as root + PUID/PGID, config at /config, libraries under /downloads for hardlinks)
 - `mathieu-weaver` — Weaver (Usenet downloader by the Scryer authors; download+PAR2 repair+extraction in one pipeline, web UI on 9090, host port 9390; bootstrap login admin/weaver via WEAVER_BOOTSTRAP_LOGIN_* env, only read on first start)
-- `mathieu-pulsarr` — Pulsarr (Plex watchlist → Sonarr/Radarr in real time, web UI on 3003; PUID/PGID 1000, data at /app/data; `baseUrl`/`port` env pre-set to `http://mathieu-pulsarr_server_1:3003` so *arr webhooks reach it — env overrides the UI value)
+- `mathieu-pulsarr` — Pulsarr (Plex watchlist → Sonarr/Radarr in real time, web UI on 3003; PUID/PGID 1000, data at /app/data; `baseUrl`/`port` env pre-set to `http://mathieu-pulsarr_server_1:3003` so *arr webhooks reach it — env overrides the UI value; `sonarrBaseUrl`/`sonarrApiKey`/`radarr*` env from `exports.sh` seed its default instances, which Pulsarr only creates while it has none — `exports.sh` falls back to upstream's localhost/`placeholder` defaults when the app isn't installed)
 - `mathieu-dispatcharr` — Dispatcharr (IPTV M3U/EPG manager + HDHomeRun emulation, web UI on 9191; AIO image with bundled Postgres + Redis, data at /data; `PROXY_AUTH_ADD: false` because Plex (host network) and IPTV clients hit `/hdhr`, `/output/*`, `/proxy/*` and root-level Xtream paths through app_proxy, and Dispatcharr has its own login; the host-network Plex app can't reach the Umbrel's own LAN IP on app ports, so it must use `http://127.0.0.1:9191/hdhr`)
 - `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; auto-wires installed Umbrel apps: `exports.sh` greps their API keys on the host (Prowlarr-official pattern, must survive `set -euo pipefail`) → env of a one-shot `autoconfig` service (node script inline in compose, no `$` in it) that adds missing services to config.yaml before `server` starts; `.umbrel-autoconfig.json` remembers what was added so removed services stay removed)
 - `mathieu-freshrss-mcp` — FreshRSS MCP (MCP server for the official `freshrss` app, `/mcp` on host port 6262 → container 8080; zero config: one-shot `init` service reuses the official FreshRSS image (same digest) with `DATA_PATH=/config/www/freshrss/data` and the app's data mounted from `${UMBREL_ROOT}/app-data/freshrss/data` to enable the API and generate the API password once into `data/shared` (never regenerated); `deterministicPassword` → `${APP_PASSWORD}` is the bearer `API_KEY`, shown as default credentials; image is `latest@digest` (upstream has no version tags), so bump `version` with `-patch.N` to ship digest updates; amd64 only)
@@ -137,9 +137,12 @@ already wire themselves (Prowlarr apps, Transmission/qBittorrent/SABnzbd, root f
   `|| true`. umbrelOS only sources the app's own `exports.sh` and those of its `dependencies`,
   never other installed apps', so read the other app's files directly instead of relying on its
   exports.
-- Feed them through upstream env vars when the app has some (Lingarr); else a one-shot `autoconfig`
-  service or an entrypoint wrapper that writes the config or calls the app's API **only while it is
-  unconfigured** (Healarr, cross-seed's generated file), and never overwrites what the user set.
+- Only wire an app the way it supports natively: upstream env vars (Lingarr, Pulsarr, slskd) or a
+  config file it reads (Soularr's `${VAR}` in config.ini). **No new custom scripts in compose
+  files** (inline node/sh calling APIs or writing configs): they are untested code to maintain in
+  YAML. When an app has no native way, leave it manual and document the steps in its listing.
+  The scripts already shipped (arr-mcp, Healarr, cross-seed) stay; don't extend the pattern.
+- Never overwrite what the user set: seed only while the app is unconfigured.
 - An app installed later is picked up on the next restart; say so in the listing.
 
 Cross-app networking works via `<other-app-id>_<service>_1` hostnames (e.g.

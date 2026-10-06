@@ -280,7 +280,7 @@ const appContainers = (appId) =>
 		.filter(Boolean)
 		.map((l) => JSON.parse(l))
 
-async function install(appId) {
+async function install(appId, timeoutMs = 900_000) {
 	const st = await trpc('apps.state', {appId})
 	if (st.state !== 'not-installed') {
 		log(`${appId} already installed (${st.state})`)
@@ -301,7 +301,7 @@ async function install(appId) {
 	for (;;) {
 		const s = await trpc('apps.state', {appId})
 		if (['ready', 'running'].includes(s.state)) break
-		if (['not-installed', 'unknown'].includes(s.state) || Date.now() - t0 > 900_000)
+		if (['not-installed', 'unknown'].includes(s.state) || Date.now() - t0 > timeoutMs)
 			throw new Error(`install of ${appId} ended in state ${s.state}\n${await appLogs(appId)}`)
 		await sleep(3000)
 	}
@@ -786,38 +786,66 @@ async function verify(appId, flow, flags, b, {keepInstalled = false} = {}) {
 	const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))
 	fs.mkdirSync(out, {recursive: true})
 	for (const f of fs.readdirSync(out)) if (f.startsWith(`${appId}.`)) fs.rmSync(path.join(out, f))
-	const timeout = (flow?.timeout ?? 300) * 1000
+	// One budget for the whole app (install → checks → flow), not per wait: a stuck app fails
+	// after `timeout` seconds (default 300) with its containers' state and logs, and the run
+	// moves on instead of piling up 5-minute waits.
+	const budget = (flow?.timeout ?? 300) * 1000
+	const left = () => Math.max(1000, budget - (Date.now() - t0))
 	const state = loadState()
 	const result = {appId, version: manifest.version, umbrel: state.umbrel, store: state.storeLabel, hash: appHash(appId), shots: [], out}
 	if (!flow) say(`⚠ no flow at flows/${appId}.yml — generic checks only`)
 	let session
-	try {
+	let stage = 'install'
+	let timer
+	const body = (async () => {
 		await uninstall(appId)
-		await runCommands('prepare', flow?.prepare, {}, timeout)
-		await install(appId)
+		await runCommands('prepare', flow?.prepare, {}, left())
+		await install(appId, left())
 		if (flow?.egress) await trustProxyCA(appId)
 		const health = {ignoreHealth: flow?.ignoreHealth}
-		await waitHealthy(appId, timeout, health)
+		stage = 'containers healthy'
+		await waitHealthy(appId, left(), health)
 		placeFixtures(flow?.fixtures)
-		const vars = await resolveVars(flow?.vars)
+		stage = 'vars'
+		const vars = await resolveVars(flow?.vars, left())
 		if (flow?.setup) {
-			await runCommands('setup', flow.setup, vars, timeout)
-			await waitHealthy(appId, timeout, health)
+			stage = 'setup commands'
+			await runCommands('setup', flow.setup, vars, left())
+			await waitHealthy(appId, left(), health)
 		}
-		await waitLogs(appId, flow?.logs, timeout)
-		if (!flow?.headless) log(`port ${manifest.port} answers HTTP ${await waitHttp(manifest.port, timeout)}`)
+		stage = 'logs'
+		await waitLogs(appId, flow?.logs, left())
+		stage = 'HTTP on the app port'
+		if (!flow?.headless) log(`port ${manifest.port} answers HTTP ${await waitHttp(manifest.port, left())}`)
+		stage = 'flow steps'
 		session = await login(b)
 		result.shots.push(...(await umbrelShots(session.page, appId, out)))
 		result.shots.push(...(await runSteps(session.ctx, appId, manifest.port, flow?.steps, out, {vars})))
 		const spread = await blankness(session.ctx, result.shots.at(-1))
 		if (spread < BLANK && !flow?.allowBlank)
 			throw Object.assign(new Error(`the proof's main screenshot is blank (luminance spread ${spread.toFixed(1)}): the page wasn't rendered yet or is empty — add a \`see\` for what it must show before the last shot`), {shots: []})
+	})()
+	const deadline = new Promise((_, reject) => {
+		timer = setTimeout(async () => {
+			const shots = []
+			if (session) {
+				const file = path.join(out, `${appId}.99-timeout.png`)
+				if (await session.page.screenshot({path: file}).then(() => true, () => false)) shots.push(file)
+			}
+			reject(Object.assign(new Error(`timed out after ${budget / 1000}s waiting for ${stage}\n${await appLogs(appId, 3000)}`), {shots}))
+		}, budget)
+	})
+	try {
+		await Promise.race([body, deadline])
 		result.ok = true
 	} catch (e) {
 		result.ok = false
 		result.error = e.message
 		result.shots.push(...(e.shots ?? []))
 		log(`✗ ${e.message}`)
+	} finally {
+		clearTimeout(timer)
+		body.catch(() => {})
 	}
 	const ctx = session?.ctx ?? (await b.newContext())
 	result.proof = await proof(ctx, result).catch((e) => log(`proof image failed: ${e.message}`))
@@ -878,8 +906,8 @@ async function run(apps, flags) {
 			const failed = []
 			await Promise.all(deps.map((d) => appScope.run(d, async () => {
 				try {
-					await install(d)
-					await waitHealthy(d, 600_000)
+					await install(d, 300_000)
+					await waitHealthy(d, 300_000)
 				} catch (e) {
 					failed.push(d)
 					log(`✗ ${e.message}`)

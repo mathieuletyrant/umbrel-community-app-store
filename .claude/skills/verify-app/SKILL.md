@@ -29,6 +29,9 @@ node $V run --all                      # the whole store
   front, in parallel**, and stay installed after the run so the next one starts right away
   (`--clean` removes them). App images stay cached, and Docker Hub goes through `mirror.gcr.io`.
   Verify every app of a change in **one** `run`, not one run per app.
+- Each app has **one time budget** (`timeout:` in its flow, default 300 s) from install to the
+  last step. Over it, the app fails with the stage it was stuck at and its containers' state and
+  logs, and the run goes on: a stuck app never stalls a run.
 - An app that another app of the run `requires` (e.g. slskd for Soularr) is verified first, stays
   installed for its dependents, and their verification is skipped if it fails.
 
@@ -111,7 +114,7 @@ Other commands: `up` / `down` (wipe everything) / `status` / `store` / `install 
 ```yaml
 verified: 1.3.17-patch.1 on umbrelOS 2.0.0 (2026-10-06)   # written by run, don't hand-edit
 requires: [radarr]            # installed first, uninstalled after
-timeout: 300                  # seconds, per wait (default 300)
+timeout: 300                  # seconds for the whole app, install to last step (default 300); over it the app fails with its containers' logs
 egress: true                  # app needs internet at runtime (see Sandbox)
 headless: true                # no HTTP check on / (status page apps still get steps)
 vars:                         # shell commands run on the host after install, retried until non-empty
