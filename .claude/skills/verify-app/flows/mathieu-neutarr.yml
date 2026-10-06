@@ -1,0 +1,29 @@
+verified: 1.11.1 on umbrelOS 2.0.0 (2026-10-06)
+requires: [radarr]
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+steps:
+  - goto: /
+  - see: Create Your Account
+  - fill: {css: "#setup_token", value: "${env.server.NEUTARR_SETUP_TOKEN}"}
+  - fill: {css: "#username", value: admin}
+  - fill: {css: "#password", value: Verify-Neutarr-1!}
+  - fill: {css: "#confirm_password", value: Verify-Neutarr-1!}
+  - click: {css: "#accountNextButton"}
+  - see: Choose Authentication Mode
+  - click: {css: "#finishButton"}
+  - see: Automation activity
+  - click: {role: link, name: Apps}
+  - select: {label: Choose an app integration, value: radarr}
+  - see: Radarr Instances
+  # Save changes stays disabled for edits made before the async form wires its change listeners.
+  - wait: 2000
+  - fill: {css: "#radarr-name-0", value: Radarr}
+  - fill: {css: "#radarr-url-0", value: "http://radarr_server_1:7878"}
+  - fill: {css: "#radarr-key-0", value: "${RADARR_API_KEY}"}
+  - check: {css: "#radarr-enabled-0"}
+  - click: {role: button, name: Save changes}
+  - wait: 3000
+  - click: {role: link, name: Home}
+  - see: {text: Connected 1/1, reload: true}
+  - shot: home
