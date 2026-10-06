@@ -31,11 +31,11 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
    path or volume migrations, dropped architectures.
 3. **Keep `umbrel-app.yml` in sync** (only that app's file, commit to the PR
    branch):
-   - `version:` is Renovate's job — leave it, unless the bump is digest-only on
-     an image that has no `# renovate:` annotation in the manifest (sidecars like
-     `nginx:alpine`, `node`, `:latest@digest` images): then bump the manifest
-     `version:` with `-patch.N` (`1.2.3` → `1.2.3-patch.1`, `-patch.1` →
-     `-patch.2`), otherwise existing installs never get the new image.
+   - `version:` is Renovate's job on a version bump — leave it. When the PR
+     leaves `version:` unchanged (digest-only bump, or an image without a
+     `# renovate:` annotation: sidecars like `nginx:alpine`, `node`,
+     `:latest@digest`), bump it with `-patch.N` (`1.2.3` → `1.2.3-patch.1`,
+     `-patch.1` → `-patch.2`), otherwise existing installs never get the image.
    - `releaseNotes:` for a real version bump: rewrite it as a short user-facing
      summary of what changed since the previous version (2–4 sentences, plain
      English, no marketing), then a blank line and
@@ -43,8 +43,7 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
      block scalar (`releaseNotes: >-`).
    - `-patch.N` bump (a packaging change, nothing released upstream): one
      sentence on what changed for the user (e.g. "Updates the bundled status
-     page web server."), no upstream link. Digest-only bump of the app's own
-     image with no version change: leave `releaseNotes`.
+     page web server."), no upstream link.
    - When step 2 found a needed change you can make safely (new env var with a
      sane default, renamed path), make it in `docker-compose.yml` too.
    Commit as `Refresh releaseNotes for <App> <version>` (or a message naming
