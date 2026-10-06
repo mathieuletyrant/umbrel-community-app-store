@@ -1,0 +1,6 @@
+requires: [sonarr, radarr]
+logs:
+  autoconfig: added Sonarr and Radarr
+steps:
+  - http: {path: /api/v1/config, status: 200, contains: 'radarr_server_1:7878[\s\S]*sonarr_server_1:8989|sonarr_server_1:8989[\s\S]*radarr_server_1:7878'}
+  - shot: config

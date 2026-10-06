@@ -2,8 +2,10 @@ verified: 3.0.1-patch.1 on umbrelOS 2.0.0 (2026-10-06)
 # The healthcheck solves a challenge on a real website with the bundled browser, which can't
 # trust the sandbox's TLS-intercepting proxy, so health never leaves "starting" here.
 ignoreHealth: true
+requires: [prowlarr]
 logs:
   server: Uvicorn running on
+  autoconfig: added Byparr to Prowlarr
 steps:
   - http:
       path: /v1

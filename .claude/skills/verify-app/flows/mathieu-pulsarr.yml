@@ -1,0 +1,11 @@
+requires: [sonarr, radarr]
+logs:
+  server: Creating default Radarr instance
+setup:
+  # The instances Pulsarr created from the env point at the Umbrel apps (not its localhost placeholders).
+  - docker exec mathieu-pulsarr_server_1 sh -c 'cat /app/data/db/pulsarr.db* | grep -a -q sonarr_server_1:8989 && cat /app/data/db/pulsarr.db* | grep -a -q radarr_server_1:7878'
+steps:
+  - goto: /
+  # Stops at the admin account page: the rest of the setup needs a Plex account.
+  - see: {text: Pulsarr, exact: true}
+  - shot: create-user

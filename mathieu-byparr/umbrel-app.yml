@@ -7,7 +7,7 @@ name: Byparr
 tagline: Cloudflare-bypass proxy for Prowlarr/Jackett (FlareSolverr replacement)
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-byparr/icon.png
 # renovate: datasource=docker depName=ghcr.io/thephaseless/byparr
-version: "3.0.1-patch.1"
+version: "3.0.1-patch.2"
 port: 8191
 description: >-
   Byparr is a drop-in replacement for FlareSolverr: a proxy server that solves
@@ -23,10 +23,11 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Install Prowlarr (or Jackett) from the Umbrel App Store first. In Prowlarr go
-  to Settings → Indexers → add a FlareSolverr proxy, and point the Host at
-  http://mathieu-byparr_server_1:8191 . Add a matching tag to the indexers that
-  need Cloudflare bypass. That's it — Byparr needs no configuration of its own.
+  Install Prowlarr from the Umbrel App Store first: Byparr adds itself to
+  Prowlarr as a proxy on its first start. Then, in Prowlarr, add the tag
+  "byparr" to the indexers that need Cloudflare bypass — only those go through
+  Byparr. Installed Prowlarr after Byparr? Restart Byparr. With Jackett, point
+  its FlareSolverr URL at http://mathieu-byparr_server_1:8191 .
 
 
   Note: Byparr runs a real headless browser, so it uses more RAM than
@@ -40,14 +41,9 @@ repo: https://github.com/ThePhaseless/Byparr
 support: https://github.com/ThePhaseless/Byparr/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Byparr now adds itself to Prowlarr from the Umbrel App Store as a proxy:
+  just tag the Cloudflare-protected indexers with "byparr" in Prowlarr.
 
-
-  Previous release notes:
-
-
-  Now using invisible-playwright from PyPI for better stability. Improved network
-  timeout handling. Added support for Open WebUI external web loader endpoint.
 dependencies: []
 path: ""
 defaultUsername: ""

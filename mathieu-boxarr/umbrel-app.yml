@@ -7,7 +7,7 @@ name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "2.1.0-patch.1"
+version: "2.1.0-patch.2"
 port: 8888
 description: >-
   Boxarr is an automated box office tracking application that integrates with
@@ -23,10 +23,11 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Boxarr is configured entirely from its web interface. After launching, open
-  Boxarr and point it at your Radarr instance (install Radarr from the Umbrel App
-  Store first). Then pick your quality profile and root folders, and Boxarr will
-  keep the weekly top 10 in sync.
+  Install Radarr from the Umbrel App Store first: Boxarr connects to it on its
+  first start, with Radarr's first library folder (/downloads/movies on Umbrel)
+  and the HD-1080p quality profile. Open Boxarr and the weekly top 10 is
+  already there; change the folder, profiles and root folder rules from its
+  settings page whenever you like. Installed Radarr after Boxarr? Restart Boxarr.
 developer: iongpt
 website: https://github.com/iongpt/boxarr
 submitter: Mathieu Le Tyrant
@@ -38,13 +39,10 @@ gallery:
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/week-view.png
   - https://raw.githubusercontent.com/iongpt/boxarr/main/docs/images/auto-add-filters.png
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Boxarr now connects to Radarr from the Umbrel App Store on its own on first
+  start, with Radarr's library folder and the HD-1080p quality profile — all
+  still editable from its settings page.
 
-
-  Previous release notes:
-
-
-  Boxarr 2.1 adds full Radarr language vocabulary (~57 languages), weekend gross thresholds, and Hide Ignored Movies setting. Fixes Box Office Mojo column parsing, preserves filter settings on save, and improves setup page stability.
 dependencies: []
 path: ""
 defaultUsername: ""

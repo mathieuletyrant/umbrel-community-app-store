@@ -1,0 +1,7 @@
+requires: [transmission, radarr]
+logs:
+  autoconfig: connected to Radarr
+steps:
+  # Boxarr skips its setup page: the autoconfig service wrote Radarr into local.yaml.
+  - http: {path: /api/config, status: 200, contains: 'radarr_server_1:7878.*"radarr_configured":\s*true'}
+  - shot: config

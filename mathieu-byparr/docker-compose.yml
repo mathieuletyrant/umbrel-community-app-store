@@ -14,3 +14,70 @@ services:
       - TZ=Europe/Paris
       - PORT=8191
     restart: on-failure
+
+  autoconfig:
+    image: node:24.21.0-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1
+    user: "1000:1000"
+    command:
+      - node
+      - --input-type=module
+      - --eval
+      - |
+        const log = message => console.log('[umbrel autoconfig] ' + message);
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+        async function call(url, options = {}) {
+            const res = await fetch(url, { ...options, signal: AbortSignal.timeout(15000) });
+            if (!res.ok) throw new Error(url + ' answered HTTP ' + res.status + ' ' + (await res.text()).slice(0, 200));
+            return res.status === 204 ? null : res.json();
+        }
+
+        async function retry(what, fn, attempts) {
+            for (let i = 1; ; i++) {
+                try {
+                    return await fn();
+                } catch (err) {
+                    if (i >= attempts) throw new Error(what + ': ' + err.message);
+                    await sleep(5000);
+                }
+            }
+        }
+
+        const PROWLARR = 'http://prowlarr_server_1:9696/api/v1';
+        const BYPARR = 'http://mathieu-byparr_server_1:8191/';
+        const key = process.env.PROWLARR_API_KEY?.trim();
+
+        async function main() {
+            if (!key) {
+                log('no Prowlarr from the Umbrel App Store, nothing to add');
+                return;
+            }
+            const prowlarr = (path, options = {}) => call(PROWLARR + path, { ...options, headers: { 'X-Api-Key': key, 'Content-Type': 'application/json' } });
+
+            const proxies = await retry('Prowlarr', () => prowlarr('/indexerproxy'), 24);
+            if (proxies.some(proxy => proxy.fields?.some(field => field.name === 'host' && String(field.value).includes('mathieu-byparr_server_1')))) {
+                log('Byparr is already a proxy in Prowlarr');
+                return;
+            }
+
+            const tags = await prowlarr('/tag');
+            const tag = tags.find(t => t.label === 'byparr') ?? (await prowlarr('/tag', { method: 'POST', body: JSON.stringify({ label: 'byparr' }) }));
+
+            const schema = (await prowlarr('/indexerproxy/schema')).find(proxy => proxy.implementation === 'FlareSolverr');
+            if (!schema) throw new Error('Prowlarr has no FlareSolverr proxy type');
+            const proxy = {
+                ...schema,
+                name: 'Byparr',
+                tags: [tag.id],
+                fields: schema.fields.map(field => (field.name === 'host' ? { ...field, value: BYPARR } : field)),
+            };
+            await prowlarr('/indexerproxy', { method: 'POST', body: JSON.stringify(proxy) });
+            log('added Byparr to Prowlarr as a proxy for the indexers tagged "byparr"');
+        }
+
+        main().catch(err => log('skipped: ' + err.message));
+    environment:
+      PROWLARR_API_KEY: ${APP_MATHIEU_BYPARR_PROWLARR_API_KEY:-}
+    depends_on:
+      - server
+    restart: "no"
