@@ -18,8 +18,9 @@
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)umbrel-app\\.yml$/"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\s*\\nversion:\\s*\"(?<currentValue>[^\"]+)\""
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s*\\nversion:\\s*\"(?<currentValue>[^\"]+?)(?:-patch\\.\\d+)?\""
       ],
+      "autoReplaceStringTemplate": "# renovate: datasource={{{datasource}}} depName={{{depName}}}\nversion: \"{{{newValue}}}\"",
       "versioningTemplate": "docker"
     },
     {
@@ -74,6 +75,11 @@
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
       "matchManagers": ["docker-compose"],
       "versioning": "regex:^supervised-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
+      "matchManagers": ["custom.regex"],
+      "extractVersion": "^supervised-(?<version>.+)$"
     },
     {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
