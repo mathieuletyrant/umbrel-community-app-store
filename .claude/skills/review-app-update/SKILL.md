@@ -40,7 +40,11 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
      summary of what changed since the previous version (2–4 sentences, plain
      English, no marketing), then a blank line and
      `Full release notes can be found at <upstream release URL>`. Use a YAML
-     block scalar (`releaseNotes: >-`). Digest-only bump: leave it.
+     block scalar (`releaseNotes: >-`).
+   - `-patch.N` bump (a packaging change, nothing released upstream): one
+     sentence on what changed for the user (e.g. "Updates the bundled status
+     page web server."), no upstream link. Digest-only bump of the app's own
+     image with no version change: leave `releaseNotes`.
    - When step 2 found a needed change you can make safely (new env var with a
      sane default, renamed path), make it in `docker-compose.yml` too.
    Commit as `Refresh releaseNotes for <App> <version>` (or a message naming
