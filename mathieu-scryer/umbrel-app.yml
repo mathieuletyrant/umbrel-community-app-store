@@ -7,7 +7,7 @@ name: Scryer
 tagline: A whole *arr stack in one app — movies, series and anime
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/scryer
-version: "0.21.9"
+version: "0.21.14"
 port: 8380
 description: >-
   Scryer replaces Sonarr, Radarr, Prowlarr and Bazarr with a single native
@@ -45,11 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Build-only release: no changes to app behaviour, configuration or the database.
+  Adds an experimental Lists page to follow external lists and import their titles, a season-wide interactive search, Missing/Partial/Complete library filters, and Sonarr/Radarr-compatible endpoints so tools like Prowlarr or autobrr can push releases to Scryer. Library moves and renames are now blocked from claiming a library root, and wrong title folders recorded by earlier versions are repaired automatically on first start. Also includes a security update to the plugin sandbox, faster background searching, and many import, indexer and recycle-bin fixes.
 
+  Database migrations run automatically on startup; no manual steps are needed. If you set a custom recycle bin folder inside a library folder, move it outside before upgrading — recycling stops until you do.
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.9
-dependencies: []
-path: ""
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.14
 permissions:
   - STORAGE_DOWNLOADS
