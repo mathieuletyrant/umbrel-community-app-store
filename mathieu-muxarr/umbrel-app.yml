@@ -7,7 +7,7 @@ name: Muxarr
 tagline: Strip unwanted audio and subtitle tracks without re-encoding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/kirovair/muxarr
-version: "0.9.9"
+version: "0.9.9-patch.1"
 port: 8184
 description: >-
   Muxarr cleans up your media files by removing the audio and subtitle tracks
@@ -55,7 +55,12 @@ gallery:
   - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/filedetails.png
   - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/settings.png
   - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/statistics.png
-releaseNotes: ""
+releaseNotes: |-
+  Hey, Mathieu here 👋 New in the Mathieu App Store: **Muxarr** (strip unused audio/subtitle tracks, no re-encode), **Tunarr** (live TV channels from your own library), **NeutArr** (the maintained Huntarr successor) and **FreshRSS MCP** (your feeds for Claude / ChatGPT).
+
+  Missing an app? Open an issue on [GitHub](https://github.com/mathieuletyrant/umbrel-community-app-store/issues) with its name and repo. Claude packages it, tests it on a throwaway umbrelOS and opens a PR, so it usually lands in the store shortly after.
+
+  This update only refreshes this note, the app itself is unchanged.
 dependencies: []
 path: ""
 defaultUsername: ""

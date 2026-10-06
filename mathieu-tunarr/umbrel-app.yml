@@ -7,7 +7,7 @@ name: Tunarr
 tagline: Turn your media library into live TV channels
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/chrisbenincasa/tunarr
-version: "2026.9.3"
+version: "2026.9.3-patch.1"
 port: 8020
 description: >-
   Tunarr builds classic, always-on TV channels out of the movies, shows and
@@ -54,8 +54,12 @@ gallery:
   - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/design/tunarr-channels.png
   - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/design/tunarr-guide.png
   - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/docs/assets/channel-properties.png
-releaseNotes: >-
-  Initial release of Tunarr for this Community App Store.
+releaseNotes: |-
+  Hey, Mathieu here 👋 New in the Mathieu App Store: **Muxarr** (strip unused audio/subtitle tracks, no re-encode), **Tunarr** (live TV channels from your own library), **NeutArr** (the maintained Huntarr successor) and **FreshRSS MCP** (your feeds for Claude / ChatGPT).
+
+  Missing an app? Open an issue on [GitHub](https://github.com/mathieuletyrant/umbrel-community-app-store/issues) with its name and repo. Claude packages it, tests it on a throwaway umbrelOS and opens a PR, so it usually lands in the store shortly after.
+
+  This update only refreshes this note, the app itself is unchanged.
 dependencies: []
 path: ""
 defaultUsername: ""

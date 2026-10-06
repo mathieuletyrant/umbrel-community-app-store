@@ -7,7 +7,7 @@ name: NeutArr
 tagline: Hunt down missing media and quality upgrades in your *arr apps
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-neutarr/icon.png
 # renovate: datasource=docker depName=iampuid0/neutarr
-version: "1.11.1"
+version: "1.11.1-patch.1"
 port: 9705
 description: >-
   NeutArr periodically checks Sonarr, Radarr, Lidarr, Readarr and Whisparr for
@@ -40,7 +40,12 @@ submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/I-am-PUID-0/NeutArr
 support: https://github.com/I-am-PUID-0/NeutArr/issues
 gallery: []
-releaseNotes: ""
+releaseNotes: |-
+  Hey, Mathieu here 👋 New in the Mathieu App Store: **Muxarr** (strip unused audio/subtitle tracks, no re-encode), **Tunarr** (live TV channels from your own library), **NeutArr** (the maintained Huntarr successor) and **FreshRSS MCP** (your feeds for Claude / ChatGPT).
+
+  Missing an app? Open an issue on [GitHub](https://github.com/mathieuletyrant/umbrel-community-app-store/issues) with its name and repo. Claude packages it, tests it on a throwaway umbrelOS and opens a PR, so it usually lands in the store shortly after.
+
+  This update only refreshes this note, the app itself is unchanged.
 dependencies: []
 path: ""
 defaultUsername: ""

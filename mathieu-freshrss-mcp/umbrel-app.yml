@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0-patch.2"
+version: "0.1.0-patch.3"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -48,8 +48,12 @@ submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/leitosama/freshrss-mcp-server
 support: https://github.com/leitosama/freshrss-mcp-server/issues
 gallery: []
-releaseNotes: >-
-  Fixes the 502 error: the MCP server now listens on IPv4, so the app can reach it. Accepts the token as a ?token= URL parameter for clients that can't send an Authorization header.
+releaseNotes: |-
+  Hey, Mathieu here 👋 New in the Mathieu App Store: **Muxarr** (strip unused audio/subtitle tracks, no re-encode), **Tunarr** (live TV channels from your own library), **NeutArr** (the maintained Huntarr successor) and **FreshRSS MCP** (your feeds for Claude / ChatGPT).
+
+  Missing an app? Open an issue on [GitHub](https://github.com/mathieuletyrant/umbrel-community-app-store/issues) with its name and repo. Claude packages it, tests it on a throwaway umbrelOS and opens a PR, so it usually lands in the store shortly after.
+
+  This update only refreshes this note, the app itself is unchanged.
 dependencies:
   - freshrss
 path: /health
