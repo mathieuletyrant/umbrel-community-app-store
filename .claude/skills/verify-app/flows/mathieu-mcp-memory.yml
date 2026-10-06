@@ -1,0 +1,37 @@
+verified: 11.15.0 on umbrelOS 2.0.0 (2026-10-06)
+egress: true
+# egress patches the system trust stores, but the model download goes through httpx, which reads certifi's bundle.
+setup:
+  - docker exec -u 0 mathieu-mcp-memory_server_1 sh -c 'cat /etc/ssl/certs/ca-certificates.crt > "$(python -c "import certifi; print(certifi.where())")"' && docker restart mathieu-mcp-memory_server_1
+logs:
+  server: ONNX model ready for use
+steps:
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json}
+      body: {jsonrpc: "2.0", id: 1, method: tools/list}
+      status: 401
+  - http:
+      path: /mcp?token=${env.server.MCP_API_KEY}
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json}
+      body: {jsonrpc: "2.0", id: 1, method: tools/call, params: {name: memory_store, arguments: {content: "Julie prefers the living room AC in quiet mode at night", metadata: {tags: [home, preferences]}}}}
+      status: 200
+      contains: stored successfully
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json, authorization: "Bearer ${env.server.MCP_API_KEY}"}
+      body: {jsonrpc: "2.0", id: 2, method: tools/call, params: {name: memory_search, arguments: {query: "air conditioning settings for sleeping"}}}
+      status: 200
+      contains: 'mode: semantic\)[\s\S]*quiet mode at night'
+  - shot: search
+  - goto: /
+  - fill: {css: "#apiKeyInput", value: "${env.server.MCP_API_KEY}"}
+  - click: {role: button, name: Authenticate}
+  - see: {text: quiet mode at night}
+  - shot: dashboard

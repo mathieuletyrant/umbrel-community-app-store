@@ -1,0 +1,59 @@
+manifestVersion: 1
+id: mathieu-mcp-memory
+storage:
+  dataRoot: data
+category: ai
+name: MCP Memory
+tagline: Long-term memory for your AI assistants, as an MCP server
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/icon.png
+# renovate: datasource=docker depName=doobidoo/mcp-memory-service
+version: "11.15.0"
+port: 6363
+description: >-
+  MCP Memory gives your AI assistant (Claude, ChatGPT, Home Assistant, or any
+  MCP client) a memory that lasts across conversations. It remembers what you
+  tell it to keep: your preferences, decisions, how your home and server are set
+  up, what was tried last time and why. Ask "remember that…" and, later, "what
+  did we decide about…?": it searches by meaning, not just keywords.
+
+
+  Everything stays on your Umbrel: memories live in a local SQLite database,
+  embeddings are computed on the Umbrel's CPU (a ~80 MB model downloaded on
+  first start), and a backup is taken every day. Memories can be tagged, linked
+  together in a knowledge graph, and browsed, searched or cleaned up from the
+  built-in dashboard. Several assistants can share the same memory.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Point your MCP client at `http://umbrel.local:6363/mcp` with the header
+  `Authorization: Bearer <token>`, or at
+  `http://umbrel.local:6363/mcp?token=<token>` for clients that can't send
+  headers, like Home Assistant (the token then ends up in that client's logs).
+  The token is the password shown in this app's settings in umbrelOS (Default
+  credentials).
+
+  2. Open the app to reach the dashboard. It asks for an API key: paste the
+  same token.
+
+  3. Only `/mcp` is opened without the Umbrel login, and the token protects
+  it. The dashboard stays behind your Umbrel login.
+
+
+  Memories are stored in
+  `~/umbrel/app-data/mathieu-mcp-memory/data/memory/db`, daily backups in
+  `data/memory/backups`.
+developer: doobidoo
+website: https://github.com/doobidoo/mcp-memory-service
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/doobidoo/mcp-memory-service
+support: https://github.com/doobidoo/mcp-memory-service/issues
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: mcp
+deterministicPassword: true
+permissions: []
