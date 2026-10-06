@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {AsyncLocalStorage} from 'node:async_hooks'
 import {execFileSync, spawn} from 'node:child_process'
 import crypto from 'node:crypto'
 import fs from 'node:fs'
@@ -25,7 +26,26 @@ const umbrelImage = (tag) => (tag ? `dockurr/umbrel:${tag}` : UMBREL_IMAGE)
 const umbrelVersion = (image) => image.split(':')[1].split('@')[0]
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
-const log = (...a) => console.log('›', ...a)
+// `run` is quiet: details go to <out>/run.log, stdout only gets milestones (say) and the summary,
+// so a background run's output is short to read. Each line carries the app it belongs to when
+// several apps are verified at once.
+const output = {quiet: false, file: null}
+const appScope = new AsyncLocalStorage()
+const line = (a) => {
+	const app = appScope.getStore()
+	return `${app ? `[${app}] ` : ''}${a.join(' ')}`
+}
+const toFile = (l) => output.file && fs.appendFileSync(output.file, l + '\n')
+const log = (...a) => {
+	const l = line(a)
+	toFile(`› ${l}`)
+	if (!output.quiet) console.log('›', l)
+}
+const say = (...a) => {
+	const l = line(a)
+	toFile(`» ${l}`)
+	console.log(output.quiet ? l : `› ${l}`)
+}
 const sh = (cmd, args, opts = {}) => execFileSync(cmd, args, {encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], ...opts}).trim()
 const trySh = (cmd, args, opts) => {
 	try {
@@ -46,7 +66,7 @@ function parseArgs(argv) {
 	for (let i = 0; i < argv.length; i++) {
 		const a = argv[i]
 		if (!a.startsWith('--')) rest.push(a)
-		else if (['--out', '--umbrel', '--pr', '--steps'].includes(a)) flags[a.slice(2)] = argv[++i]
+		else if (['--out', '--umbrel', '--pr', '--steps', '--jobs'].includes(a)) flags[a.slice(2)] = argv[++i]
 		else flags[a.slice(2)] = true
 	}
 	return {flags, rest}
@@ -288,13 +308,11 @@ async function install(appId) {
 	log(`${appId} installed in ${Math.round((Date.now() - t0) / 1000)}s`)
 }
 
-async function uninstall(appId, {keepImages = false} = {}) {
-	const images = keepImages ? [] : appContainers(appId).map((c) => c.Image)
+async function uninstall(appId) {
 	if ((await trpc('apps.state', {appId})).state === 'not-installed') return
 	log(`uninstalling ${appId}`)
 	await trpc('apps.uninstall', {appId}, {mutation: true})
 	for (let i = 0; i < 120 && (await trpc('apps.state', {appId})).state !== 'not-installed'; i++) await sleep(2000)
-	for (const img of images) trySh('docker', ['rmi', img])
 }
 
 async function appLogs(appId, bytes = 20_000) {
@@ -470,17 +488,59 @@ async function playwright() {
 	return createRequire(import.meta.url)('playwright')
 }
 
-async function browser() {
+async function launch() {
 	const {chromium} = await playwright()
-	const b = await chromium.launch()
+	return chromium.launch()
+}
+
+async function login(b) {
 	const ctx = await b.newContext({viewport: {width: 1440, height: 900}})
 	const page = await ctx.newPage()
 	await page.goto(`http://localhost:${UMBREL_PORT}/login`)
 	await page.locator('input[type=password]').fill(PASSWORD)
 	await page.keyboard.press('Enter')
 	await page.waitForURL((u) => !u.pathname.startsWith('/login'), {timeout: 30_000})
-	await page.waitForTimeout(2000)
-	return {b, ctx, page}
+	await settle(page)
+	return {ctx, page}
+}
+
+async function browser() {
+	const b = await launch()
+	return {b, ...(await login(b))}
+}
+
+// Wait for the page to go quiet instead of a fixed sleep; SPAs that poll never reach networkidle,
+// hence the cap.
+const settle = (page, ms = 6000) => page.waitForLoadState('networkidle', {timeout: ms}).catch(() => {}).then(() => page.waitForTimeout(300))
+
+// Luminance spread of a screenshot: ~0 for a blank page (white, black, a lone spinner on a flat
+// background). A proof whose main image is blank proves nothing, whatever the steps asserted.
+async function blankness(ctx, file) {
+	const page = await ctx.newPage()
+	try {
+		await page.setContent(`<img id="i" src="data:image/png;base64,${fs.readFileSync(file).toString('base64')}">`)
+		return await page.evaluate(async () => {
+			const img = document.getElementById('i')
+			await img.decode()
+			const c = document.createElement('canvas')
+			c.width = 720
+			c.height = 450
+			const g = c.getContext('2d')
+			g.drawImage(img, 0, 0, c.width, c.height)
+			const d = g.getImageData(0, 0, c.width, c.height).data
+			let sum = 0
+			let sq = 0
+			for (let i = 0; i < d.length; i += 4) {
+				const l = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]
+				sum += l
+				sq += l * l
+			}
+			const n = d.length / 4
+			return Math.sqrt(sq / n - (sum / n) ** 2)
+		})
+	} finally {
+		await page.close()
+	}
 }
 
 function locate(page, spec) {
@@ -659,12 +719,12 @@ ${body === undefined ? '' : `<pre style="color:#8b93a7">${esc(body)}</pre>`}
 async function umbrelShots(page, appId, out) {
 	const files = []
 	await page.goto(`http://localhost:${UMBREL_PORT}/community-app-store/${appId.split('-')[0]}`)
-	await page.waitForTimeout(4000)
+	await settle(page)
 	await page.getByText(readYaml(path.join(REPO, appId, 'umbrel-app.yml')).name, {exact: true}).first().scrollIntoViewIfNeeded().catch(() => {})
 	files.push(path.join(out, `${appId}.01-store.png`))
 	await page.screenshot({path: files.at(-1)})
 	await page.goto(`http://localhost:${UMBREL_PORT}/`)
-	await page.waitForTimeout(4000)
+	await settle(page)
 	files.push(path.join(out, `${appId}.02-home.png`))
 	await page.screenshot({path: files.at(-1)})
 	return files
@@ -711,23 +771,27 @@ function lintFlow(appId, flow) {
 		throw new Error(`flows/${appId}.yml: the last shot must come right after a \`see\` (or an \`http\` whose response is the proof), not ${before ? Object.keys(before)[0] : 'nothing'}`)
 }
 
-async function verify(appId, flags, ctxHolder) {
+const readFlow = (appId) => {
+	const file = path.join(FLOWS_DIR, `${appId}.yml`)
+	return fs.existsSync(file) ? readYaml(file) : null
+}
+
+const BLANK = 4
+
+// One app: fresh install, checks, flow in its own logged-in browser context, proof image.
+// Its `requires` are installed beforehand by `run`, once for every app of the run.
+async function verify(appId, flow, flags, b, {keepInstalled = false} = {}) {
+	const t0 = Date.now()
 	const manifest = readYaml(path.join(REPO, appId, 'umbrel-app.yml'))
-	const flowFile = path.join(FLOWS_DIR, `${appId}.yml`)
-	const flow = fs.existsSync(flowFile) ? readYaml(flowFile) : null
-	lintFlow(appId, flow)
 	const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))
 	fs.mkdirSync(out, {recursive: true})
 	for (const f of fs.readdirSync(out)) if (f.startsWith(`${appId}.`)) fs.rmSync(path.join(out, f))
 	const timeout = (flow?.timeout ?? 300) * 1000
 	const state = loadState()
 	const result = {appId, version: manifest.version, umbrel: state.umbrel, store: state.storeLabel, hash: appHash(appId), shots: [], out}
-	if (!flow) log(`⚠ no flow at ${path.relative(REPO, flowFile)} — running generic checks only`)
+	if (!flow) say(`⚠ no flow at flows/${appId}.yml — generic checks only`)
+	let session
 	try {
-		for (const dep of flow?.requires ?? []) {
-			await install(dep)
-			await waitHealthy(dep, timeout)
-		}
 		await uninstall(appId)
 		await runCommands('prepare', flow?.prepare, {}, timeout)
 		await install(appId)
@@ -742,25 +806,137 @@ async function verify(appId, flags, ctxHolder) {
 		}
 		await waitLogs(appId, flow?.logs, timeout)
 		if (!flow?.headless) log(`port ${manifest.port} answers HTTP ${await waitHttp(manifest.port, timeout)}`)
-		ctxHolder.v ??= await browser()
-		const {ctx, page} = ctxHolder.v
-		result.shots.push(...(await umbrelShots(page, appId, out)))
-		result.shots.push(...(await runSteps(ctx, appId, manifest.port, flow?.steps, out, {vars})))
+		session = await login(b)
+		result.shots.push(...(await umbrelShots(session.page, appId, out)))
+		result.shots.push(...(await runSteps(session.ctx, appId, manifest.port, flow?.steps, out, {vars})))
+		const spread = await blankness(session.ctx, result.shots.at(-1))
+		if (spread < BLANK && !flow?.allowBlank)
+			throw Object.assign(new Error(`the proof's main screenshot is blank (luminance spread ${spread.toFixed(1)}): the page wasn't rendered yet or is empty — add a \`see\` for what it must show before the last shot`), {shots: []})
 		result.ok = true
 	} catch (e) {
 		result.ok = false
 		result.error = e.message
 		result.shots.push(...(e.shots ?? []))
-		console.error(`✗ ${appId}: ${e.message}`)
+		log(`✗ ${e.message}`)
 	}
-	if (ctxHolder.v) result.proof = await proof(ctxHolder.v.ctx, result)
+	const ctx = session?.ctx ?? (await b.newContext())
+	result.proof = await proof(ctx, result).catch((e) => log(`proof image failed: ${e.message}`))
+	await ctx.close()
 	fs.writeFileSync(path.join(out, `${appId}.result.json`), JSON.stringify(result, null, 2))
 	if (result.ok && flow && !flags['no-record'] && !flags.remote) recordVerified(appId, manifest.version, result.umbrel)
-	if (!flags.keep) {
-		await uninstall(appId).catch((e) => console.error(`uninstall ${appId}: ${e.message}`))
-		for (const dep of flow?.requires ?? []) await uninstall(dep, {keepImages: true}).catch(() => {})
-	}
+	if (!flags.keep && !keepInstalled) await uninstall(appId).catch((e) => log(`uninstall: ${e.message}`))
+	result.seconds = Math.round((Date.now() - t0) / 1000)
+	say(`${result.ok ? '✅' : '❌'} ${manifest.version} in ${result.seconds}s${result.ok ? '' : ` — ${result.error.split('\n')[0]}`}`)
 	return result
+}
+
+function semaphore(n) {
+	const queue = []
+	let free = n
+	return {
+		acquire: () => (free > 0 ? (free--, Promise.resolve()) : new Promise((r) => queue.push(r))),
+		release: () => (queue.length ? queue.shift()() : free++),
+	}
+}
+
+// All proofs on one image, so a run is checked with a single look.
+async function contactSheet(b, results, out) {
+	const items = results.filter((r) => r.proof && fs.existsSync(r.proof))
+	if (!items.length) return null
+	const ctx = await b.newContext({viewport: {width: 1640, height: 900}})
+	const page = await ctx.newPage()
+	const cells = items.map((r) => `<img src="data:image/png;base64,${fs.readFileSync(r.proof).toString('base64')}" style="width:800px;border-radius:8px;border:1px solid #2c303b">`)
+	await page.setContent(`<body style="margin:0;padding:12px;background:#0d0f14;display:grid;grid-template-columns:repeat(2,800px);gap:12px">${cells.join('')}</body>`)
+	const file = path.join(out, 'summary.png')
+	await page.screenshot({path: file, fullPage: true})
+	await ctx.close()
+	return file
+}
+
+async function run(apps, flags) {
+	const t0 = Date.now()
+	for (const a of apps) if (!fs.existsSync(path.join(REPO, a, 'umbrel-app.yml'))) throw new Error(`no app folder ${a}`)
+	const flows = Object.fromEntries(apps.map((a) => [a, readFlow(a)]))
+	for (const a of apps) lintFlow(a, flows[a])
+	const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))
+	fs.mkdirSync(out, {recursive: true})
+	output.quiet = !flags.verbose
+	output.file = path.join(out, 'run.log')
+	fs.writeFileSync(output.file, '')
+	const jobs = Math.max(1, Number(flags.jobs ?? 3))
+	say(`verifying ${apps.join(', ')} (${jobs} at a time) — details in ${output.file}`)
+	await up(flags.umbrel)
+	const git = flags.remote ? null : await serveGit()
+	try {
+		const store = await publishStore(flags)
+		say(`umbrelOS ${loadState().umbrel} ready, store ${store.label}`)
+
+		const requires = (a) => flows[a]?.requires ?? []
+		const deps = [...new Set(apps.flatMap(requires))].filter((d) => !apps.includes(d))
+		if (deps.length) {
+			const td = Date.now()
+			const failed = []
+			await Promise.all(deps.map((d) => appScope.run(d, async () => {
+				try {
+					await install(d)
+					await waitHealthy(d, 600_000)
+				} catch (e) {
+					failed.push(d)
+					log(`✗ ${e.message}`)
+				}
+			})))
+			say(`dependencies ${failed.length ? `FAILED: ${failed.join(', ')} (see run.log), ok: ` : 'ready: '}${deps.filter((d) => !failed.includes(d)).join(', ') || '-'} (${Math.round((Date.now() - td) / 1000)}s)`)
+		}
+
+		// An app under test that another one requires is kept installed until the end, and its
+		// dependents wait for its own verification.
+		const neededByOthers = new Set(apps.flatMap(requires).filter((d) => apps.includes(d)))
+		const finished = Object.fromEntries(apps.map((a) => {
+			let resolve
+			const promise = new Promise((r) => (resolve = r))
+			return [a, {promise, resolve}]
+		}))
+		const sem = semaphore(jobs)
+		const b = await launch()
+		const results = await Promise.all(apps.map((a) => appScope.run(a, async () => {
+			let r
+			try {
+				const blocked = []
+				for (const d of requires(a).filter((d) => finished[d])) if (!(await finished[d].promise).ok) blocked.push(d)
+				if (blocked.length) {
+					r = {appId: a, ok: false, error: `required app failed: ${blocked.join(', ')}`, out}
+					say(`❌ skipped — ${r.error}`)
+					return r
+				}
+				await sem.acquire()
+				try {
+					r = await verify(a, flows[a], flags, b, {keepInstalled: neededByOthers.has(a)})
+				} finally {
+					sem.release()
+				}
+				return r
+			} finally {
+				finished[a].resolve(r ?? {ok: false})
+			}
+		})))
+		if (!flags.keep) for (const a of neededByOthers) await uninstall(a).catch(() => {})
+		if (flags.clean) await Promise.all(deps.map((d) => uninstall(d).catch(() => {})))
+		const sheet = await contactSheet(b, results, out)
+		await b.close()
+		fs.writeFileSync(path.join(out, 'summary.json'), JSON.stringify(results, null, 2))
+		console.log(
+			[
+				'',
+				...results.map((r) => `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version ?? ''}${r.ok ? '' : ` — ${r.error.split('\n')[0]}`}`),
+				`${results.filter((r) => r.ok).length}/${results.length} ok in ${Math.round((Date.now() - t0) / 1000)}s`,
+				`all proofs: ${sheet ?? '-'} (Read it)   details: ${output.file}`,
+			].join('\n'),
+		)
+		if (flags.pr) attachProofs(results, flags.pr)
+		if (results.some((r) => !r.ok)) process.exitCode = 1
+	} finally {
+		git?.close()
+	}
 }
 
 async function describe(page, file) {
@@ -873,7 +1049,7 @@ function attachProofs(results, pr) {
 		const j = res && JSON.parse(res.slice(res.indexOf('{')))
 		if (!j?.embedUrl) console.error(`✗ upload of ${r.proof} failed`)
 		else if (j.commentError) console.error(`✗ uploaded but the PR comment failed: ${j.commentError.split('\n')[0]}\n  post it yourself: ![${alt}](${j.embedUrl})`)
-		else log(`proof on PR #${pr}: ${j.embedUrl}`)
+		else say(`proof on PR #${pr}: ${j.embedUrl}`)
 	}
 }
 
@@ -897,6 +1073,9 @@ const allApps = () => fs.readdirSync(REPO).filter((d) => d.startsWith('mathieu-'
 
 const USAGE = `usage: verify.mjs <command> [args] [flags]
   run <app-id>... | --changed | --all   install + check + run flow + proof image
+      --jobs N      apps verified at the same time (default 3); \`requires\` are installed once, up front
+      --clean       also uninstall the \`requires\` apps at the end (kept by default: the next run reuses them)
+      --verbose     print every detail instead of milestones (they always go to <out>/run.log)
       --keep        leave the app installed afterwards
       --remote      use the store from GitHub (default branch) instead of the working tree
       --out DIR     where screenshots and proofs go (default .verify-out/)
@@ -960,10 +1139,10 @@ async function main() {
 			const health = {ignoreHealth: flow.ignoreHealth}
 			const apps = [appId, ...(flow.requires ?? [])]
 			await up(flags.umbrel)
-			for (const dep of flow.requires ?? []) {
+			await Promise.all((flow.requires ?? []).map(async (dep) => {
 				await install(dep)
 				await waitHealthy(dep, 300_000)
-			}
+			}))
 			const key = checkpointKey(appId, flow, loadState().umbrel)
 			const installed = (await trpc('apps.state', {appId})).state !== 'not-installed'
 			if (flags.fresh && !flags.reinstall && installed && hasCheckpoint(appId, key)) {
@@ -1052,23 +1231,8 @@ async function main() {
 		}
 		case 'run': {
 			const apps = flags.all ? allApps() : flags.changed ? changedApps() : rest
-			if (!apps.length) {
-				log('no apps to verify')
-				break
-			}
-			for (const a of apps) if (!fs.existsSync(path.join(REPO, a, 'umbrel-app.yml'))) throw new Error(`no app folder ${a}`)
-			await up(flags.umbrel)
-			const git = flags.remote ? null : await serveGit()
-			await publishStore(flags)
-			const holder = {}
-			const results = []
-			for (const a of apps) results.push(await verify(a, flags, holder))
-			await holder.v?.b.close()
-			git?.close()
-			console.log('\n' + results.map((r) => `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version}${r.ok ? '' : ` — ${r.error.split('\n')[0]}`}\n   proof: ${r.proof ?? '-'}`).join('\n'))
-			fs.writeFileSync(path.join(results[0].out, 'summary.json'), JSON.stringify(results, null, 2))
-			if (flags.pr) attachProofs(results, flags.pr)
-			if (results.some((r) => !r.ok)) process.exitCode = 1
+			if (!apps.length) say('no apps to verify')
+			else await run(apps, flags)
 			break
 		}
 		default:

@@ -12,23 +12,40 @@ Chromium, and writes a proof image.
 
 ```sh
 V=.claude/skills/verify-app/scripts/verify.mjs
-node $V run mathieu-healarr            # one app (or several)
+node $V run mathieu-healarr mathieu-lingarr --pr 123   # several apps, proofs on the PR
 node $V run --changed                  # apps touched vs origin/master (app folder or its flow)
 node $V run --all                      # the whole store
 ```
 
-Flags: `--keep` (leave it installed to poke at it), `--remote` (GitHub default branch instead of
-the working tree), `--umbrel 1.7.4` (another `dockurr/umbrel` tag, e.g. the 1.x line), `--out DIR`,
-`--no-record`, `--pr <n>` (see below). `run` always reinstalls the app from scratch; `requires` apps are reused when
-already installed.
+## Running it without wasting time
+
+- **Always start `run` with Bash `run_in_background: true`**, then carry on with other work (next
+  flow, docs, review). You are notified when it ends. Never wait on it with `sleep`, `until`
+  loops, `tail -f` or repeated status checks; never run it in the foreground.
+- When it ends, read the last lines of its output: one ✅/❌ line per app, the time, and two paths.
+  Then **Read `summary.png` once**: every app's proof on a single image. Open `run.log` (all the
+  details, each line tagged `[app-id]`) only for a ❌.
+- Apps run **3 at a time** (`--jobs N`). The `requires` of every app are installed **once, up
+  front, in parallel**, and stay installed after the run so the next one starts right away
+  (`--clean` removes them). App images stay cached, and Docker Hub goes through `mirror.gcr.io`.
+  Verify every app of a change in **one** `run`, not one run per app.
+- An app that another app of the run `requires` (e.g. slskd for Soularr) is verified first, stays
+  installed for its dependents, and their verification is skipped if it fails.
+
+Flags: `--jobs N`, `--clean`, `--verbose` (every detail on stdout), `--keep` (leave the app
+installed to poke at it), `--remote` (GitHub default branch instead of the working tree),
+`--umbrel 1.7.4` (another `dockurr/umbrel` tag, e.g. the 1.x line), `--out DIR`, `--no-record`,
+`--pr <n>` (see below). `run` always reinstalls the app under test from scratch.
 
 ## Hard rules (don't claim what you didn't check)
 
 - **Look at every proof image** (Read it) before calling an app verified or sending it. A ✅ only
   means the assertions passed; a blank or wrong screen means the flow is too weak — fix the flow.
 - The last `shot` must come right after a `see` of something only the set-up app shows (or an
-  `http` whose response is the proof, for API-only apps). `run` refuses any other flow. A `logs:`
-  match alone proves the container started, not that the app works or is wired.
+  `http` whose response is the proof, for API-only apps). `run` refuses any other flow before
+  starting, and fails an app whose last screenshot is blank (flat white/black page; `allowBlank:
+  true` in the flow for the rare app whose real screen is). A `logs:` match alone proves the
+  container started, not that the app works or is wired.
 - When the change is about wiring apps together, assert the wiring itself (the other app listed,
   a setting's value through the app's API, a log line only printed after the other app answered),
   not just that the page loads.
@@ -36,9 +53,10 @@ already installed.
   when set, run with `--pr <n>` (or `attach --pr <n>`) for **every** app of the PR, then read the
   PR comment back and check each app has its image. Never report proofs as attached from memory.
 
-Output (`.verify-out/`, gitignored, or `--out`): `<app>.proof.png` (verdict banner + the flow's
-last screenshot + the store listing + the umbrelOS home), the individual screenshots, and
-`summary.json`. **Always send `<app>.proof.png` to the user** (SendUserFile) — it is the proof.
+Output (`.verify-out/`, gitignored, or `--out`): `summary.png` (all proofs), `run.log`,
+`<app>.proof.png` (verdict banner + the flow's last screenshot + the store listing + the umbrelOS
+home), the individual screenshots, and
+`summary.json`. **Send `summary.png` to the user** (SendUserFile) — it is the proof of the whole run.
 Use the scratchpad as `--out` when the user should open the files.
 
 On success the flow's `verified:` line is updated (version, umbrelOS, date). Commit it with the
@@ -76,14 +94,17 @@ Other commands: `up` / `down` (wipe everything) / `status` / `store` / `install 
 
 ## What `run` checks, in order
 
-1. `requires` apps installed and healthy (official store ids like `radarr`, or `mathieu-*`).
-2. App installs through umbreld (`apps.install`) — catches manifest/compose errors, bad tags
-   (`manifest unknown`), port clashes.
-3. Every container running, `healthy` when it has a healthcheck, one-shot services exited 0.
+1. Every flow is linted (last shot after a `see`/`http`) before anything starts.
+2. The `requires` apps of the whole run are installed and healthy (official store ids like
+   `radarr`, or `mathieu-*`), in parallel.
+3. For each app (3 at a time): it installs through umbreld (`apps.install`) — catches
+   manifest/compose errors, bad tags (`manifest unknown`), port clashes.
+4. Every container running, `healthy` when it has a healthcheck, one-shot services exited 0.
    A crash or restart loop fails with the container logs.
-4. `logs:` patterns appear.
-5. The app port answers HTTP through umbrelOS's ingress (skipped with `headless: true`).
-6. Store listing + home screenshots, then the flow `steps` in a browser logged into umbrelOS.
+5. `logs:` patterns appear.
+6. The app port answers HTTP through umbrelOS's ingress (skipped with `headless: true`).
+7. Store listing + home screenshots, then the flow `steps` in its own browser context logged into
+   umbrelOS; the last screenshot must not be blank.
 
 ## Flow file format (`flows/<app-id>.yml`)
 
