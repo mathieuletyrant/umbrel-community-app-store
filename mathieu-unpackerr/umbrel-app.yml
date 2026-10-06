@@ -39,7 +39,11 @@ submission: https://github.com/Unpackerr/unpackerr
 repo: https://github.com/Unpackerr/unpackerr
 support: https://github.com/Unpackerr/unpackerr/issues
 gallery: []
-releaseNotes: ""
+releaseNotes: >-
+  Fixes the Docker images of 0.16.0, which did not start. No app changes.
+
+
+  Full release notes can be found at https://github.com/Unpackerr/unpackerr/releases/tag/v0.16.1
 dependencies: []
 path: ""
 defaultUsername: ""

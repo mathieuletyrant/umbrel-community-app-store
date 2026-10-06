@@ -105,6 +105,7 @@ Current apps:
   paths line up. Mount read-only when the app only needs to read.
 - For images that use linuxserver-style `PUID`/`PGID`, set both to `1000` so the
   container's user matches Umbrel's data ownership.
+- Set `TZ` to `Etc/UTC` (like the official apps), never a personal timezone.
 - **Do not add `cap_drop`, `security_opt: no-new-privileges`, or similar hardening
   flags** unless you have verified the image tolerates them. Many images start as
   root and drop privileges via `gosu`/`su-exec` + `chown`, which needs

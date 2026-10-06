@@ -27,15 +27,20 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **slskd** | **Soulseek client** with a modern web UI: search and download from the Soulseek P2P network, set credentials in-browser, files land in your downloads share. |
 | **Soularr** | **Bridges Lidarr → slskd → Lidarr**: reads Lidarr's *wanted* list, searches Soulseek via slskd, downloads the best match and imports it back — ideal for niche or rare tracks that never hit trackers. |
 | **Tdarr** | **Automated transcoding & library health checks**: plugin-driven rules re-encode (H.265/AV1), remux, strip unwanted tracks and flag corrupt files across your library, using a Server + Node worker model. |
+| **Muxarr** | **Strips unwanted audio & subtitle tracks** without re-encoding: keeps the languages you want (e.g. original + French) using Radarr/Sonarr's original-language info, renames tracks, and processes new imports automatically. Often saves 10–30% of disk space. |
 | **Kapowarr** | **Comic book library manager** (*arr style): add volumes, and it searches, downloads, renames and converts issues — ComicVine metadata, built-in sources like GetComics, no separate indexer needed. |
 | **Chaptarr** | **Ebook & audiobook manager** — a re-work of the retired Readarr that handles both in one instance: wanted list, indexers via Prowlarr, download client, organized import. |
 | **Scryer** | **A whole *arr stack in one binary**: movies, series and anime in a single interface — monitoring, indexer search, quality upgrades, renaming, import and subtitles, in ~100 MB of RAM instead of a gigabyte. |
 | **Weaver** | **Usenet downloader** (by the Scryer authors): download, PAR2 repair and extraction run as one streaming pipeline, with native RAR/7z/ZIP support and no external unrar or par2. |
 | **Pulsarr** | **Plex watchlist → Sonarr / Radarr in real time**: watchlist a title in any Plex app and it starts downloading — for you and your friends, with routing rules, optional approvals and quotas, and delete sync. |
+| **NeutArr** | **Hunts missing media and quality upgrades**: periodically asks Sonarr / Radarr / Lidarr / Readarr / Whisparr to search for missing or below-cutoff items, a few at a time. The maintained, security-hardened fork of Huntarr. |
 | **Dispatcharr** | **IPTV & stream manager**: imports M3U playlists and XMLTV guides, cleans and organizes channels, then serves them to Plex / Jellyfin / Emby as an emulated HDHomeRun tuner (live TV + guide + DVR). |
+| **Tunarr** | **Live TV channels from your own library**: builds always-on channels from Plex / Jellyfin / Emby or local folders, with time slots, shuffles and filler, served as an HDHomeRun tuner + M3U + XMLTV guide. |
 | **Unpackerr** | **Extracts archived downloads** for the *arr stack: when a release arrives as .rar / .7z / .zip, it unpacks it so Radarr / Sonarr / Lidarr can import it, then cleans up the extracted copy. Finds your *arr apps and their API keys on its own. |
 | **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
 | **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read — wired to the FreshRSS app automatically (API enabled, password generated), nothing to configure. |
+| **AdGuard MCP** | **Your AdGuard Home as an MCP server**: ask an AI assistant why a site doesn't load, unblock a domain, block a service on one device, or add a DNS rewrite. Covers the whole AdGuard Home API. |
+| **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
 
 ## 🚀 How to install
@@ -48,25 +53,21 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
    https://github.com/mathieuletyrant/umbrel-community-app-store
    ```
 
-4. Open the **Mathieu App Store** that now appears and install any app.
+4. Open the **Mathieu's Umbrel App Store** that now appears and install any app.
 
 > ℹ️ Community app stores are third-party. Only add stores you trust — you're
 > running their apps on your own hardware.
 
-## 🛠️ Contributing / structure
+## 🔄 Updates
 
-Each app lives in its own folder prefixed with the store id `mathieu-`:
+Apps follow their upstream releases automatically. [Renovate](https://github.com/renovatebot/renovate)
+opens a pull request for every new image; each one is checked against the upstream
+changelog, gets user-facing release notes, and is installed on a test umbrelOS
+before it's merged. Updates then show up in umbrelOS like any other app update.
 
-```
-umbrel-app-store.yml        # store id + name
-mathieu-<app>/
-  umbrel-app.yml            # listing metadata (name, icon, description, port…)
-  docker-compose.yml        # the app's services, behind Umbrel's app_proxy
-  NOTES.md                  # per-app setup notes / gotchas (optional)
-```
+## 💬 Requests & issues
 
-See [`CLAUDE.md`](./CLAUDE.md) for the packaging conventions and gotchas used
-across these apps.
+Want an app added, or something isn't working? [Open an issue](https://github.com/mathieuletyrant/umbrel-community-app-store/issues).
 
 ## 📄 License
 

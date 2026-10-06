@@ -9,7 +9,7 @@ services:
   server:
     image: mrcas/kapowarr:v1.3.2@sha256:cd3f004caff59636dde73b06df5b2f8068b485b47ff5fe82f6129562c0f2ac3b
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
     volumes:

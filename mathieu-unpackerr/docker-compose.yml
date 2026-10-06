@@ -102,7 +102,7 @@ services:
     user: "1000:1000"
     restart: on-failure
     environment:
-      TZ: Europe/Paris
+      TZ: Etc/UTC
       UN_LOG_FILE: /config/unpackerr.log
       UN_LOG_FILE_MODE: "0644"
       UN_LOG_FILES: 3

@@ -48,7 +48,11 @@ submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/Samik081/mcp-adguard-home
 support: https://github.com/Samik081/mcp-adguard-home/issues
 gallery: []
-releaseNotes: ""
+releaseNotes: >-
+  Fixes connecting to an AdGuard Home instance that has authentication disabled.
+
+
+  Full release notes can be found at https://github.com/Samik081/mcp-adguard-home/releases/tag/v0.10.1
 dependencies:
   - adguard-home
 path: ""

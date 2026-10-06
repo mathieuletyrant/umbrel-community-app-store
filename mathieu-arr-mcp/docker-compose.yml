@@ -122,7 +122,7 @@ services:
   server:
     image: ghcr.io/bardesss/arr-mcp:1.39.1@sha256:3603c7b04715e7032d99a5b681fde92fba57a3958f68efa12d58a8a669fe4ca9
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
     volumes:

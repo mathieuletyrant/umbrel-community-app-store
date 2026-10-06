@@ -9,7 +9,7 @@ services:
   trailarr:
     image: nandyalu/trailarr:0.13.1@sha256:9c8723e6ea5761c670466b534719c267f26564fd35500f1caa396f6ed6c06d1b
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
     devices:

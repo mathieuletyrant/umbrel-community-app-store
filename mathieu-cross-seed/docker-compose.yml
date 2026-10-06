@@ -135,7 +135,7 @@ services:
         EOF
         exec cross-seed daemon
     environment:
-      TZ: Europe/Paris
+      TZ: Etc/UTC
       PROWLARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_PROWLARR_API_KEY:-}
       SONARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_SONARR_API_KEY:-}
       RADARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_RADARR_API_KEY:-}

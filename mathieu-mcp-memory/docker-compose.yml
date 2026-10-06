@@ -55,7 +55,7 @@ services:
     image: doobidoo/mcp-memory-service:11.15.0-slim@sha256:de8bcd7b321b0d94220aef630832296e83a86215b3ba31b50b8b083181022fc3
     user: "1000:1000"
     environment:
-      TZ: Europe/Paris
+      TZ: Etc/UTC
       HOME: /data
       MCP_MODE: http
       MCP_HTTP_HOST: 0.0.0.0

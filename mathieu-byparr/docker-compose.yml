@@ -11,6 +11,6 @@ services:
     init: true
     shm_size: 2gb
     environment:
-      - TZ=Europe/Paris
+      - TZ=Etc/UTC
       - PORT=8191
     restart: on-failure
