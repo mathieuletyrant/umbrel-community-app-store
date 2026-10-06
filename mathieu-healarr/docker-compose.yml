@@ -20,3 +20,100 @@ services:
       # Host path is umbrelOS's shared home/Downloads folder used by the *arr apps.
       - ${UMBREL_ROOT}/data/storage/downloads:/downloads:ro
     restart: on-failure
+
+  autoconfig:
+    image: node:24.21.0-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1
+    user: "1000:1000"
+    command:
+      - node
+      - --input-type=module
+      - --eval
+      - |
+        const HEALARR = 'http://mathieu-healarr_server_1:3090/api';
+        const ARRS = [
+            { name: 'Radarr', type: 'radarr', url: 'http://radarr_server_1:7878', key: process.env.RADARR_API_KEY?.trim() },
+            { name: 'Sonarr', type: 'sonarr', url: 'http://sonarr_server_1:8989', key: process.env.SONARR_API_KEY?.trim() },
+        ].filter(arr => arr.key);
+
+        const log = message => console.log('[umbrel autoconfig] ' + message);
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+        async function call(url, options = {}) {
+            const res = await fetch(url, { ...options, signal: AbortSignal.timeout(15000) });
+            if (!res.ok) throw new Error(url + ' answered HTTP ' + res.status);
+            return res.json();
+        }
+
+        async function retry(what, fn, attempts) {
+            for (let i = 1; ; i++) {
+                try {
+                    return await fn();
+                } catch (err) {
+                    if (i >= attempts) throw new Error(what + ' unreachable: ' + err.message);
+                    await sleep(5000);
+                }
+            }
+        }
+
+        const importConfig = body => call(HEALARR + '/setup/import', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        });
+
+        const trimSlash = path => (path.length > 1 && path.endsWith('/') ? trimSlash(path.slice(0, -1)) : path);
+
+        async function main() {
+            if (ARRS.length === 0) {
+                log('no Radarr or Sonarr from the Umbrel App Store, nothing to add');
+                return;
+            }
+
+            const status = await retry('Healarr', () => call(HEALARR + '/setup/status'), 30);
+            if (status.has_password || status.has_instances) {
+                log('Healarr is already set up, leaving it alone');
+                return;
+            }
+
+            const found = await Promise.all(ARRS.map(async arr => {
+                try {
+                    const paths = await retry(arr.name + ' library folders', async () => {
+                        const folders = await call(arr.url + '/api/v3/rootfolder', { headers: { 'X-Api-Key': arr.key } });
+                        const inDownloads = folders.map(folder => trimSlash(folder.path)).filter(path => path === '/downloads' || path.startsWith('/downloads/'));
+                        if (inDownloads.length === 0) throw new Error('none under /downloads yet');
+                        return inDownloads;
+                    }, 24);
+                    return { ...arr, paths };
+                } catch (err) {
+                    log(err.message);
+                    return { ...arr, paths: [] };
+                }
+            }));
+
+            const result = await importConfig({
+                arr_instances: found.map(arr => ({ name: arr.name, type: arr.type, url: arr.url, api_key: arr.key, enabled: true })),
+            });
+            if (result.imported?.arr_instances !== found.length) {
+                log('Healarr imported ' + result.imported?.arr_instances + ' of ' + found.length + ' apps, not adding library paths');
+                return;
+            }
+
+            const scanPaths = found.flatMap((arr, index) => arr.paths.map(path => ({
+                local_path: path,
+                arr_path: path,
+                arr_instance_id: index + 1,
+                enabled: true,
+                auto_remediate: true,
+            })));
+            if (scanPaths.length > 0) await importConfig({ scan_paths: scanPaths });
+
+            log('added ' + found.map(arr => arr.name).join(' and ') + ', library paths: ' + (scanPaths.map(path => path.local_path).join(', ') || 'none'));
+        }
+
+        main().catch(err => log('skipped: ' + err.message));
+    environment:
+      RADARR_API_KEY: ${APP_MATHIEU_HEALARR_RADARR_API_KEY:-}
+      SONARR_API_KEY: ${APP_MATHIEU_HEALARR_SONARR_API_KEY:-}
+    depends_on:
+      - server
+    restart: "no"

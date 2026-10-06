@@ -32,20 +32,20 @@ Every app id **must** be prefixed with the store id `mathieu-`.
 Example: `mathieu-healarr`. The folder name equals the app id.
 
 Current apps:
-- `mathieu-healarr` — Healarr (media library health monitoring)
+- `mathieu-healarr` — Healarr (media library health monitoring; one-shot `autoconfig` service (node:alpine, script inline) posts Radarr/Sonarr + their /downloads root folders to the public `/api/setup/import` while no password and no instance exist — keys from `exports.sh`; IDs are 1..n because the table is empty)
 - `mathieu-boxarr` — Boxarr (box office tracking, syncs with Radarr)
 - `mathieu-tracearr` — Tracearr (Plex/Jellyfin/Emby monitoring; single-container "supervised" image with bundled TimescaleDB + Redis)
 - `mathieu-cleanuparr` — Cleanuparr (download queue cleanup for the *arr stack, web UI on 11011)
 - `mathieu-profilarr` — Profilarr (quality profiles/custom formats manager for Radarr/Sonarr, web UI on 6868; 2 services: server + optional parser)
 - `mathieu-maintainerr` — Maintainerr (rule-based Plex library cleanup, web UI on 6246; data at /opt/data)
-- `mathieu-lingarr` — Lingarr (subtitle translation for Radarr/Sonarr, web UI on 9876; embedded SQLite, media at /downloads)
+- `mathieu-lingarr` — Lingarr (subtitle translation for Radarr/Sonarr, web UI on 9876; embedded SQLite, media at /downloads; `exports.sh` → upstream's `RADARR_URL`/`RADARR_API_KEY`/`SONARR_*` env, applied by Lingarr at every start — the URL is only exported when the key was found, since an empty value is skipped and a URL alone would overwrite a hand-set remote one)
 - `mathieu-sublarr` — Sublarr (all-in-one subtitle manager + LLM translator, web UI on 5765; runs as root, drops via gosu; media at /downloads)
 - `mathieu-byparr` — Byparr (Cloudflare-bypass proxy, drop-in FlareSolverr replacement for Prowlarr/Jackett, API on 8191; no config, Prowlarr points at `http://mathieu-byparr_server_1:8191`; runs a headless browser so `shm_size: 2gb`; the tile shows the FastAPI docs page)
 - `mathieu-suggestarr` — SuggestArr (recommendations from Plex/Jellyfin/Emby watch history, requested through Jellyseerr/Overseerr, web UI on 5000; TMDb or OpenAI-compatible LLM, setup wizard in-UI; config at /app/config/config_files)
-- `mathieu-cross-seed` — cross-seed (automatic cross-seeding across trackers; headless daemon + nginx status sidecar, API on 2468; config.js seeded on first run, user adds torznab URLs)
+- `mathieu-cross-seed` — cross-seed (automatic cross-seeding across trackers; headless daemon + nginx status sidecar, API on 2468; at each start the daemon entrypoint runs an inline node script that writes `/config/umbrel-autoconfig.json` (Prowlarr's enabled torrent indexers as torznab URLs + Sonarr/Radarr, keys from `exports.sh`; keeps the last list when Prowlarr is down); the config.js seeded on first run spreads that file, existing config.js files are never touched)
 - `mathieu-trailarr` — Trailarr (auto-downloads trailers for Radarr/Sonarr library, web UI on 7889; login admin/trailarr; config at /config, media at /downloads)
-- `mathieu-slskd` — slskd (Soulseek client, web UI on 5030; runs as `user: 1000:1000` so `data/app/.gitkeep` is shipped to pre-own `/app`; SLSKD_REMOTE_CONFIGURATION lets users set Soulseek creds in-UI; default web login slskd/slskd; downloads to /downloads/soulseek/complete; publishes P2P port 50300)
-- `mathieu-soularr` — Soularr (bridges Lidarr wanted list → slskd → Lidarr import, web UI on 8265; ships a seeded `data/config/config.ini` prewired to lidarr_server_1 + mathieu-slskd_server_1, user fills 2 API keys; needs slskd + Lidarr)
+- `mathieu-slskd` — slskd (Soulseek client, web UI on 5030; runs as `user: 1000:1000` so `data/app/.gitkeep` is shipped to pre-own `/app`; SLSKD_REMOTE_CONFIGURATION lets users set Soulseek creds in-UI; default web login slskd/slskd; downloads to /downloads/soulseek/complete; publishes P2P port 50300; `exports.sh` generates `data/umbrel-api-key` once (outside the /app mount) → `SLSKD_API_KEY`, the primary admin key Soularr uses)
+- `mathieu-soularr` — Soularr (bridges Lidarr wanted list → slskd → Lidarr import, web UI on 8265; ships a seeded `data/config/config.ini` prewired to lidarr_server_1 + mathieu-slskd_server_1 with `api_key = ${LIDARR_API_KEY}` / `${SLSKD_API_KEY}` — Soularr expands env vars in config.ini; `exports.sh` reads the Lidarr key and slskd's `data/umbrel-api-key` (creating it if slskd's own exports hasn't yet); the entrypoint rewrites the old placeholders of pre-existing installs; needs slskd + Lidarr)
 - `mathieu-sportarr` — Sportarr (sports PVR à la Sonarr/Radarr, host port 1867/web UI 1867; Docker Hub image pinned by multi-arch index digest, linuxserver-style PUID/PGID, config at /config, media at /downloads)
 - `mathieu-tdarr` — Tdarr (automated transcoding + library health checks, host port 8267/web UI 8265, Server port 8266; internalNode=true so it transcodes standalone; config split across /app/server + /app/configs + /app/logs, transcode cache at /temp, media at /downloads; iGPU needs /dev/dri added on host)
 - `mathieu-kapowarr` — Kapowarr (comic book library manager à la *arr, web UI on 5656; Docker Hub tag has `v` prefix; PUID/PGID 1000, db at /app/db, root folder /downloads/comics)
@@ -124,6 +124,23 @@ alongside. Headless apps that need per-user config (API keys) are configured by
 editing env in the app's compose on the host
 (`~/umbrel/app-data/<app-id>/docker-compose.yml`); document this in the listing.
 (This store previously shipped `mathieu-decluttarr` this way; it was removed.)
+
+### Auto-wiring to other installed apps
+
+Don't make users copy URLs and API keys between apps. The official Radarr/Sonarr/Lidarr/Prowlarr
+already wire themselves (Prowlarr apps, Transmission/qBittorrent/SABnzbd, root folders) through
+`getumbrel/media-app-configurator`; Bazarr and every app of this store are on their own. Pattern:
+
+- `exports.sh` greps the keys on the host (`<ApiKey>` in `app-data/<app>/data/config/config.xml`,
+  only for apps in `"${UMBREL_ROOT}/scripts/app" ls-installed`) and exports
+  `APP_MATHIEU_<APP>_<OTHER>_API_KEY`. It runs with `set -euo pipefail`: end every pipeline with
+  `|| true`. umbrelOS only sources the app's own `exports.sh` and those of its `dependencies`,
+  never other installed apps', so read the other app's files directly instead of relying on its
+  exports.
+- Feed them through upstream env vars when the app has some (Lingarr); else a one-shot `autoconfig`
+  service or an entrypoint wrapper that writes the config or calls the app's API **only while it is
+  unconfigured** (Healarr, cross-seed's generated file), and never overwrites what the user set.
+- An app installed later is picked up on the next restart; say so in the listing.
 
 Cross-app networking works via `<other-app-id>_<service>_1` hostnames (e.g.
 `radarr_server_1:7878`, `sonarr_server_1:8989`) — the official *arr apps rely on

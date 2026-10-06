@@ -10,10 +10,24 @@ services:
     image: mrusse08/soularr:v1.2.2@sha256:c4f97924fabfce4e0de539d821ea7d20519b95c4815a707bacfc9d7212597f20
     init: true
     user: "1000:1000"
+    entrypoint:
+      - tini
+      - -g
+      - --
+      - sh
+      - -c
+      - |
+        sed -i \
+          -e 's/^api_key = yourlidarrapikeygoeshere/api_key = $${LIDARR_API_KEY}/' \
+          -e 's/^api_key = yourslskdapikeygoeshere/api_key = $${SLSKD_API_KEY}/' \
+          /data/config.ini 2>/dev/null || true
+        exec /app/run.sh
     environment:
       - TZ=Europe/Paris
       - SCRIPT_INTERVAL=300
       - WEBUI_ENABLED=true
+      - LIDARR_API_KEY=${APP_MATHIEU_SOULARR_LIDARR_API_KEY:-}
+      - SLSKD_API_KEY=${APP_MATHIEU_SOULARR_SLSKD_API_KEY:-}
     volumes:
       - ${APP_DATA_DIR}/data/config:/data
       - ${UMBREL_ROOT}/data/storage/downloads:/downloads
