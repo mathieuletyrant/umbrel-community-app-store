@@ -56,7 +56,7 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
    its set-up screen works. But `verify-app` always installs from scratch, so it
    can't see what breaks an *existing* install on upgrade: that is what the
    changelog is for.
-   - Merge (`gh pr merge <n> --squash --delete-branch`: a leftover branch you pushed to blocks Renovate's next PR for that app) when all hold:
+   - Merge (`gh pr merge <n> --squash`) when all hold:
      - verify is ✅ and you Read its proof (or the PR touches no app);
      - the proof is uploaded: read the uploads.sh comment on the PR back and
        check it shows that app's image (not uploaded → no merge);
