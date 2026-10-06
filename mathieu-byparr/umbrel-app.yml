@@ -40,15 +40,7 @@ repo: https://github.com/ThePhaseless/Byparr
 support: https://github.com/ThePhaseless/Byparr/issues
 gallery: []
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Cloudflare challenges are solved again: Byparr now matches a real browser's TLS fingerprint and detects localized interstitials, not just English ones. Requests no longer fail when the page blocks script evaluation (such as Firefox's JSON viewer). A new optional BROWSER_LOCALE setting lets you force the browser language.
 
-
-  Previous release notes:
-
-
-  Now using invisible-playwright from PyPI for better stability. Improved network
-  timeout handling. Added support for Open WebUI external web loader endpoint.
-dependencies: []
-path: ""
-defaultUsername: ""
+  Full release notes can be found at https://github.com/ThePhaseless/Byparr/releases/tag/v3.0.4
 defaultPassword: ""
