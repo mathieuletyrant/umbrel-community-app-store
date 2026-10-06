@@ -1,0 +1,64 @@
+manifestVersion: 1
+id: mathieu-muxarr
+storage:
+  dataRoot: data
+category: media
+name: Muxarr
+tagline: Strip unwanted audio and subtitle tracks without re-encoding
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/kirovair/muxarr
+version: "0.9.9"
+port: 8184
+description: >-
+  Muxarr cleans up your media files by removing the audio and subtitle tracks
+  you never use (foreign dubs, commentary, SDH, dozens of subtitle languages)
+  and standardizing track names. Files are remuxed with mkvmerge or ffmpeg
+  stream copy — never re-encoded — so there is zero quality loss and a 4 GB file
+  takes about a minute. Dropping spare audio tracks alone often saves 10-30% of
+  disk space.
+
+
+  It hooks into Radarr and Sonarr to detect each title's original language, so
+  you can keep e.g. French + the original audio (VF + VO) on every film, and
+  processes new imports automatically through a webhook. It even tells VFF /
+  Truefrench apart from VFQ.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open Muxarr and follow the setup wizard:
+
+  1. Choose a username and password (optional).
+
+  2. Set the Muxarr URL to `http://mathieu-muxarr_server_1:8183`, connect
+  Radarr (`http://radarr_server_1:7878`) and Sonarr
+  (`http://sonarr_server_1:8989`) with their API keys, then click Connect
+  Webhook so new imports are processed automatically.
+
+  3. Create a profile with your media directories (e.g. `/downloads/movies`,
+  `/downloads/shows`) and the languages to keep.
+
+  4. Scan your library, preview the changes, then queue files for processing.
+
+
+  Your media is mounted at /downloads, matching the paths the *arr apps report,
+  so no path mapping is needed.
+developer: KirovAir
+website: https://muxarr.app
+submitter: Mathieu Le Tyrant
+submission: https://github.com/KirovAir/muxarr
+repo: https://github.com/KirovAir/muxarr
+support: https://github.com/KirovAir/muxarr/issues
+gallery:
+  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/dashboard.png
+  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/filedetails.png
+  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/settings.png
+  - https://raw.githubusercontent.com/KirovAir/muxarr/master/docs/screenshots/statistics.png
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS

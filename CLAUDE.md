@@ -54,6 +54,7 @@ Current apps:
 - `mathieu-dispatcharr` — Dispatcharr (IPTV M3U/EPG manager + HDHomeRun emulation, web UI on 9191; AIO image with bundled Postgres + Redis, data at /data; `PROXY_AUTH_ADD: false` because Plex (host network) and IPTV clients hit `/hdhr`, `/output/*`, `/proxy/*` and root-level Xtream paths through app_proxy, and Dispatcharr has its own login; the host-network Plex app can't reach the Umbrel's own LAN IP on app ports, so it must use `http://127.0.0.1:9191/hdhr`)
 - `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; auto-wires installed Umbrel apps: `exports.sh` greps their API keys on the host (Prowlarr-official pattern, must survive `set -euo pipefail`) → env of a one-shot `autoconfig` service (node script inline in compose, no `$` in it) that adds missing services to config.yaml before `server` starts; `.umbrel-autoconfig.json` remembers what was added so removed services stay removed)
 - `mathieu-freshrss-mcp` — FreshRSS MCP (MCP server for the official `freshrss` app, `/mcp` on host port 6262 → container 8080; zero config: one-shot `init` service reuses the official FreshRSS image (same digest) with `DATA_PATH=/config/www/freshrss/data` and the app's data mounted from `${UMBREL_ROOT}/app-data/freshrss/data` to enable the API and generate the API password once into `data/shared` (never regenerated); `deterministicPassword` → `${APP_PASSWORD}` is the bearer `API_KEY`, shown as default credentials; image is `latest@digest` (upstream has no version tags), so bump `version` with `-patch.N` to ship digest updates; amd64 only)
+- `mathieu-muxarr` — Muxarr (strips unwanted audio/subtitle tracks by remuxing, no re-encode; web UI on 8183, host port 8184 — 8183 is the official `lunalytics`; PUID/PGID 1000, config at /config, media at /downloads; Blazor setup wizard sets the webhook URL to `http://mathieu-muxarr_server_1:8183`)
 - `mathieu-umbrel-mcp-bridge` — Umbrel MCP Bridge (nginx only, no data; host port 6161, `PROXY_AUTH_ADD: false`; `/mcp?token=umbrelmcp_…` → `Authorization: Bearer` → umbreld `/mcp` via `host.docker.internal:host-gateway`, which lan-ingress routes to umbreld for any Host; for Home Assistant's header-less MCP client)
 
 ## Adding or updating an app
@@ -62,9 +63,15 @@ Current apps:
 2. Model the packaging on the official apps (https://github.com/getumbrel/umbrel-apps)
    and, for third-party images, on dennysubke/dennys-umbrel-app-store (a large,
    well-maintained community store with 200+ apps to copy conventions from).
-3. Add or update its flow in `.claude/skills/verify-app/flows/<app-id>.yml` and verify it
+3. Wire it into Renovate: a `# renovate: datasource=docker depName=<image>` line right
+   above `version:` in `umbrel-app.yml`, and a
+   `{ "matchPackageNames": ["<image>"], "commitMessageTopic": "<Name>" }` entry in
+   `renovate.json` `packageRules` (alphabetical by topic). CI (`validate_apps.py`) fails
+   when the annotation has no matching rule.
+4. Add or update its flow in `.claude/skills/verify-app/flows/<app-id>.yml` and verify it
    end to end with the `verify-app` skill (see "Verifying on a test umbrelOS").
-4. Commit and push. Only commit/push when the user asks.
+5. Run `python3 .github/scripts/validate_apps.py`, then commit and push. Only commit/push
+   when the user asks.
 
 ### docker-compose.yml conventions
 

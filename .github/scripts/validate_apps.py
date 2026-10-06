@@ -5,6 +5,7 @@ Checks each `<store-id>-*/` app folder against the store's conventions so a
 broken definition can't reach master. Exits non-zero (and prints every problem)
 on any failure.
 """
+import json
 import re
 import sys
 from pathlib import Path
@@ -34,6 +35,14 @@ if not app_dirs:
 
 seen_ports: dict[int, str] = {}
 
+renovate = json.loads((ROOT / "renovate.json").read_text())
+renovate_topics = {
+    pkg
+    for rule in renovate.get("packageRules", [])
+    if "commitMessageTopic" in rule
+    for pkg in rule.get("matchPackageNames", [])
+}
+
 for d in app_dirs:
     name = d.name
     app_yml = d / "umbrel-app.yml"
@@ -52,6 +61,10 @@ for d in app_dirs:
         fail(f"{name}: umbrel-app.yml id '{app.get('id')}' must equal folder name '{name}'")
     if not str(app.get("id", "")).startswith(prefix):
         fail(f"{name}: id must start with '{prefix}'")
+
+    annotation = re.search(r"# renovate: .*depName=(\S+)", app_yml.read_text())
+    if annotation and annotation.group(1) not in renovate_topics:
+        fail(f"{name}: renovate.json has no commitMessageTopic packageRule for {annotation.group(1)}")
 
     port = app.get("port")
     if not isinstance(port, int):

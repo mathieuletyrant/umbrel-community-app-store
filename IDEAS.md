@@ -37,7 +37,7 @@ status-sidecar pattern, see CLAUDE.md).
 | App | What it does | Repo |
 | --- | --- | --- |
 | ~~**Lingarr**~~ ✅ | **Auto-translates subtitles into French** (local or SaaS engines) when only e.g. English subs exist. Integrates with Radarr/Sonarr. | **Added** (`mathieu-lingarr`). |
-| **Muxarr** 🖥️ | **Strips unwanted audio/subtitle tracks** without re-encoding (keep FR + original) → saves space, cleaner files. | `KirovAir/muxarr` |
+| ~~**Muxarr**~~ ✅ | **Strips unwanted audio/subtitle tracks** without re-encoding (keep FR + original) → saves space, cleaner files. | **Added** (`mathieu-muxarr`). |
 
 ## Discovery / automation (found via GitHub search)
 
