@@ -1,0 +1,43 @@
+verified: 2026.9.3 on umbrelOS 2.0.0 (2026-10-06)
+# A local media source needs a file to schedule; generate a 2-minute test pattern with the
+# image's own ffmpeg (the app mounts /downloads read-only).
+setup:
+  - >-
+    D=$(docker inspect mathieu-tunarr_server_1 -f '{{range .Mounts}}{{if eq .Destination "/downloads"}}{{.Source}}{{end}}{{end}}');
+    I=$(docker inspect mathieu-tunarr_server_1 -f '{{.Config.Image}}');
+    mkdir -p "$D/movies/Test Pattern (2026)" &&
+    docker run --rm --entrypoint ffmpeg -v "$D/movies:/movies" "$I" -y -loglevel error
+    -f lavfi -i testsrc2=size=640x360:rate=25:duration=120 -f lavfi -i sine=frequency=440:duration=120
+    -c:v libx264 -preset ultrafast -crf 35 -c:a aac -shortest "/movies/Test Pattern (2026)/Test Pattern (2026).mkv"
+steps:
+  - goto: /
+  - see: Welcome to Tunarr!
+  - click: {role: button, name: ADD}
+  - click: {role: menuitem, name: Local}
+  - fill: {label: Name, exact: true, value: Films}
+  - fill: {label: Path, exact: true, value: /downloads/movies}
+  - click: {css: "[role=dialog] button >> nth=0"}
+  - see: {css: "[role=dialog] li:has-text('/downloads/movies')"}
+  - click: {css: "[role=dialog] button[type=submit]"}
+  - see: 1 source connected.
+  - click: {role: button, name: NEXT}
+  - see: FFMPEG is installed.
+  - click: {role: button, name: NEXT}
+  - see: You're All Set!
+  - click: {role: button, name: FINISH}
+  - see: New Channel
+  - fill: {label: Channel Name, exact: true, value: Umbrel TV}
+  - click: {role: button, name: SAVE}
+  - see: No programming added yet
+  - wait: 5000
+  - click: {role: button, name: ADD MEDIA}
+  - click: Test Pattern
+  - click: {role: button, name: ADD SELECTED MEDIA}
+  - see: {text: Test Pattern, exact: true}
+  - click: {role: button, name: SAVE}
+  - see: 1 program
+  - http: {path: /lineup.json, status: 200, contains: Umbrel TV}
+  - http: {path: /api/xmltv.xml, status: 200, contains: Test Pattern}
+  - goto: /web/guide
+  - see: {text: Test Pattern, exact: true}
+  - shot: guide

@@ -44,7 +44,7 @@ status-sidecar pattern, see CLAUDE.md).
 | App | What it does | Repo |
 | --- | --- | --- |
 | ~~**SuggestArr**~~ ✅ | Auto-recommends & requests movies/shows to Overseerr/Jellyseerr based on watch activity (TMDb or OpenAI-compatible LLM). | **Added** (`mathieu-suggestarr`). |
-| **Tunarr** 🖥️ | Build **live-TV channels** from your own library (modern ErsatzTV). | `chrisbenincasa/tunarr` |
+| ~~**Tunarr**~~ ✅ | Build **live-TV channels** from your own library (modern ErsatzTV). | **Added** (`mathieu-tunarr`). |
 | **Notifiarr** 🖥️ | Universal **notification hub** for the *arr stack → Discord/Telegram/etc. | `Notifiarr/notifiarr` |
 | **FileFlows** 🖥️ | Media **processing/transcoding pipelines** (Tdarr alternative). | fileflows.com |
 

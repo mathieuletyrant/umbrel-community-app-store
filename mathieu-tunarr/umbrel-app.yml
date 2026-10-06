@@ -1,0 +1,64 @@
+manifestVersion: 1
+id: mathieu-tunarr
+storage:
+  dataRoot: data
+category: media
+name: Tunarr
+tagline: Turn your media library into live TV channels
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/chrisbenincasa/tunarr
+version: "2026.9.3"
+port: 8020
+description: >-
+  Tunarr builds classic, always-on TV channels out of the movies, shows and
+  music you already own — like flipping through cable, but with your own
+  library. Fill a channel from Plex, Jellyfin, Emby or straight from folders on
+  your Umbrel, then schedule it with time slots, block shuffles, random slots,
+  filler (bumpers, trailers, commercials) and per-channel logos.
+
+
+  Tunarr then exposes your channels as an emulated HDHomeRun tuner plus an M3U
+  playlist and an XMLTV guide, so Plex, Jellyfin, Emby or any IPTV player shows
+  them in its Live TV section, guide included. Channels can also be watched
+  right in the Tunarr web UI.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open Tunarr and add a media source under Settings → Media Sources: your
+  Plex / Jellyfin / Emby server, or a Local source pointing at a folder under
+  /downloads (e.g. /downloads/movies, /downloads/shows).
+
+
+  2. Create a channel under Channels → New, then add programming to it.
+
+
+  3. Add the tuner to your media server. Plex on this Umbrel can't reach the
+  Umbrel's own address, so use localhost: Settings → Live TV & DVR → Set up Plex
+  DVR → enter http://127.0.0.1:8020, then pick XMLTV for the guide with
+  http://127.0.0.1:8020/api/xmltv.xml. From another machine (Jellyfin, Emby,
+  another Plex, an IPTV app), use http://umbrel.local:8020 instead, or the M3U
+  playlist http://umbrel.local:8020/api/channels.m3u with the same guide.
+
+
+  Only the tuner, playlist, guide and stream URLs skip the Umbrel login; the
+  Tunarr interface itself stays behind it.
+developer: Christian Benincasa
+website: https://tunarr.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/chrisbenincasa/tunarr
+repo: https://github.com/chrisbenincasa/tunarr
+support: https://github.com/chrisbenincasa/tunarr/issues
+gallery:
+  - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/design/tunarr-channels.png
+  - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/design/tunarr-guide.png
+  - https://raw.githubusercontent.com/chrisbenincasa/tunarr/main/docs/assets/channel-properties.png
+releaseNotes: >-
+  Initial release of Tunarr for this Community App Store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
