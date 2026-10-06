@@ -7,7 +7,7 @@ name: Weaver
 tagline: Usenet downloader with built-in repair and extraction
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/weaver
-version: "0.14.2"
+version: "0.14.2-patch.1"
 port: 9390
 description: >-
   Weaver is a self-hosted Usenet downloader written in Rust. Downloading,
@@ -28,7 +28,7 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  1. Open the app and sign in with `admin` / `weaver`, then change the password
+  1. Open the app and sign in with `admin` / `weaver-admin`, then change the password
   in Settings. To pick your own bootstrap credentials instead, set
   WEAVER_BOOTSTRAP_LOGIN_USERNAME and WEAVER_BOOTSTRAP_LOGIN_PASSWORD in this
   app's settings (⋯ → Settings → Advanced settings) before first launch — they
@@ -48,11 +48,13 @@ repo: https://github.com/scryer-media/weaver
 support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
-releaseNotes: "Adds hardware profiles for easy resource management and live profile switching without restart. Schedule rules now persist across days until the next rule fires. Improved repair prevents extraction failures on damaged downloads."
+releaseNotes: >-
+  Fixes Weaver not starting on a fresh install: the default password is now
+  `weaver-admin`, since Weaver requires at least 8 characters.
 dependencies: []
 path: ""
 defaultUsername: "admin"
-defaultPassword: "weaver"
+defaultPassword: "weaver-admin"
 environment:
   - name: WEAVER_BOOTSTRAP_LOGIN_USERNAME
     services:
@@ -62,7 +64,7 @@ environment:
   - name: WEAVER_BOOTSTRAP_LOGIN_PASSWORD
     services:
       - server
-    default: weaver
+    default: weaver-admin
     note: Web UI password, set the first time Weaver starts. Change it from inside the app afterwards.
   - name: WEAVER_INTERMEDIATE_DIR
     services:

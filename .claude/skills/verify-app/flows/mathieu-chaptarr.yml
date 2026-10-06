@@ -10,7 +10,8 @@ steps:
   - fill: {css: "input >> nth=2", value: Verify-Chaptarr-1}
   - click: {role: button, name: Save}
   - see: No authors found
-  - goto: /add/search
+  - wait: 3000
+  - goto: /login
   - fill: {placeholder: Username, value: admin}
   - fill: {placeholder: Password, value: Verify-Chaptarr-1}
   - click: {role: button, name: Login}
