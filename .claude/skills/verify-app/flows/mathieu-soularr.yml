@@ -1,0 +1,7 @@
+requires: [lidarr, mathieu-slskd]
+logs:
+  # Only printed once Lidarr accepted the API key picked up by exports.sh.
+  server: No releases wanted
+steps:
+  - goto: /
+  - shot: webui

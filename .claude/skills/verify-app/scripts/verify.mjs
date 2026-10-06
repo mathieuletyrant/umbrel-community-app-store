@@ -59,7 +59,7 @@ async function ensureDocker() {
 	if (process.getuid?.() !== 0 || !trySh('which', ['dockerd'])) throw new Error('Docker daemon is not running')
 	log('starting dockerd')
 	const out = fs.openSync(path.join(HOME, 'dockerd.log'), 'a')
-	spawn('dockerd', [], {detached: true, stdio: ['ignore', out, out]}).unref()
+	spawn('dockerd', ['--registry-mirror', 'https://mirror.gcr.io'], {detached: true, stdio: ['ignore', out, out]}).unref()
 	for (let i = 0; i < 60; i++) {
 		if (trySh('docker', ['info']) !== null) return
 		await sleep(1000)

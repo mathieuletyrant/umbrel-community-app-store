@@ -1,0 +1,6 @@
+requires: [radarr, sonarr]
+logs:
+  server: radarr settings completed
+steps:
+  - goto: /
+  - shot: home

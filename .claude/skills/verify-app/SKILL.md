@@ -176,6 +176,10 @@ workaround, why the flow stops early).
 
 - `dockerd` is started automatically when Docker isn't running (root). umbrelOS listens on
   :80, apps on their manifest `port` (override with `VERIFY_UMBREL_PORT` / `VERIFY_GIT_PORT`).
+- Docker Hub pulls go through `mirror.gcr.io` (Google's pull-through cache), so the anonymous
+  rate limit of the shared egress IP (`429 Too Many Requests`) doesn't stall installs. On a
+  dockerd that was already running: write `{"registry-mirrors": ["https://mirror.gcr.io"]}` to
+  `/etc/docker/daemon.json` and `kill -HUP` it (live reload, containers keep running).
 - Outbound HTTPS goes through a TLS-intercepting proxy. umbreld gets its CA automatically.
   App containers don't: `egress: true` appends the CA to the container's system trust store
   and restarts it (works for Go/Python/OpenSSL; Node apps that ignore the system store still

@@ -1,0 +1,7 @@
+requires: [transmission, prowlarr, sonarr, radarr]
+logs:
+  daemon: "Sonarr: yes, Radarr: yes"
+steps:
+  - goto: /
+  - see: Nothing to fill in
+  - shot: status
