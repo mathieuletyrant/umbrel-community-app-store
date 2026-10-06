@@ -15,6 +15,9 @@ steps:
   - see: Automation activity
   - click: {role: link, name: Apps}
   - select: {label: Choose an app integration, value: radarr}
+  - see: Radarr Instances
+  # Save changes stays disabled for edits made before the async form wires its change listeners.
+  - wait: 2000
   - fill: {css: "#radarr-name-0", value: Radarr}
   - fill: {css: "#radarr-url-0", value: "http://radarr_server_1:7878"}
   - fill: {css: "#radarr-key-0", value: "${RADARR_API_KEY}"}
