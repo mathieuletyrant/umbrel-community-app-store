@@ -1,0 +1,34 @@
+verified: 0.9.9 on umbrelOS 2.0.0 (2026-10-06)
+requires: [radarr]
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+steps:
+  - goto: /
+  - see: Welcome to Muxarr
+  # Blazor re-renders the form once its circuit connects, wiping anything typed before.
+  - wait: 3000
+  - fill: {css: "input[type=text]", value: admin}
+  - fill: {css: "input[type=password] >> nth=0", value: verify-muxarr}
+  - fill: {css: "input[type=password] >> nth=1", value: verify-muxarr}
+  - click: {role: button, name: Next}
+  - see: Connect Sonarr & Radarr
+  - fill: {css: "input:visible >> nth=0", value: "http://mathieu-muxarr_server_1:8183"}
+  - fill: {css: "input:visible >> nth=3", value: "http://radarr_server_1:7878"}
+  - fill: {css: "input:visible >> nth=4", value: "${RADARR_API_KEY}"}
+  - click: {css: "button:has-text('Test Connection') >> nth=1"}
+  - see: Radarr connection successful!
+  - click: {css: "button.btn-outline-success:has-text('Connect Webhook')"}
+  - see: Webhook Active
+  - click: {role: button, name: Next}
+  - see: You're all set!
+  - click: {role: button, name: Create Profile}
+  - fill: {label: Profile Name, value: Films}
+  - click: {role: button, name: Add Directory}
+  - click: {css: "button.list-group-item:text-is('/downloads')"}
+  - click: {css: "button.list-group-item:text-is('movies')"}
+  - click: {role: button, name: Select Directory}
+  - click: {role: button, name: Save Settings & Scan}
+  - see: {text: Films, exact: true}
+  - click: {text: Integrations, exact: true}
+  - see: Webhook Active
+  - shot: integrations
