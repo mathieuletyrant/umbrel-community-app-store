@@ -41,16 +41,20 @@ conversation; `uploads whoami` checks it) and the CLI
 ```sh
 cd .verify-out
 uploads --json put mathieu-<name>.proof.png --pr <n> --repo mathieuletyrant/umbrel-community-app-store \
-    --state after --alt "mathieu-<name> verified on umbrelOS" --width 800
+    --no-comment --state after --alt "mathieu-<name> verified on umbrelOS" --width 800
 ```
 
-Embed the answer's `embedUrl` as `<img src="<embedUrl>" alt="..." width="800">`, not its
-`markdown` field: the GitHub MCP tools drop the `!` of `![alt](url)` and the image lands as a
-bare link. Post one comment (GitHub MCP on the web, `gh pr comment -F body.md` locally) with one
-image per verified app and its ✅/❌ line. Putting the same `--pr` key again replaces the image in
-place. Uploads are **public** whatever the repository's visibility — the proof only shows the
-throwaway umbrelOS, but never upload a shot holding real credentials or a user's data. Without the
-token, send the proof with SendUserFile and say in the PR that it wasn't uploaded.
+Embed the answer's `embedUrl` as Markdown, `![<alt>](<embedUrl>)`, not its `markdown` field: that
+field is an `<img>` tag, and the GitHub MCP tools HTML-escape it, so the comment shows the tag as
+text. `--no-comment` skips the CLI's own PR comment, which fails here (the repo isn't linked to the
+uploads workspace) — post the comment yourself. After posting, read the comment back
+(`pull_request_read` `get_comments`) and check the body still holds `![`; fix it with
+`update_issue_comment`, never a second comment. Post one comment (GitHub MCP on the web, `gh pr
+comment -F body.md` locally) with one image per verified app and its ✅/❌ line. Putting the same
+`--pr` key again replaces the image in place. Uploads are **public** whatever the repository's
+visibility — the proof only shows the throwaway umbrelOS, but never upload a shot holding real
+credentials or a user's data. Without the token, send the proof with SendUserFile and say in the PR
+that it wasn't uploaded.
 
 Other commands: `up` / `down` (wipe everything) / `status` / `store` / `install <id>` /
 `uninstall <id>` / `logs <id>` / `explore <id> [path] [--fresh]`.
