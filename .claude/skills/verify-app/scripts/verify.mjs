@@ -709,7 +709,7 @@ async function verify(appId, flags, ctxHolder) {
 	for (const f of fs.readdirSync(out)) if (f.startsWith(`${appId}.`)) fs.rmSync(path.join(out, f))
 	const timeout = (flow?.timeout ?? 300) * 1000
 	const state = loadState()
-	const result = {appId, version: manifest.version, umbrel: state.umbrel, store: state.storeLabel, shots: [], out}
+	const result = {appId, version: manifest.version, umbrel: state.umbrel, store: state.storeLabel, hash: appHash(appId), shots: [], out}
 	if (!flow) log(`⚠ no flow at ${path.relative(REPO, flowFile)} — running generic checks only`)
 	try {
 		for (const dep of flow?.requires ?? []) {
@@ -742,6 +742,7 @@ async function verify(appId, flags, ctxHolder) {
 		console.error(`✗ ${appId}: ${e.message}`)
 	}
 	if (ctxHolder.v) result.proof = await proof(ctxHolder.v.ctx, result)
+	fs.writeFileSync(path.join(out, `${appId}.result.json`), JSON.stringify(result, null, 2))
 	if (result.ok && flow && !flags['no-record'] && !flags.remote) recordVerified(appId, manifest.version, result.umbrel)
 	if (!flags.keep) {
 		await uninstall(appId).catch((e) => console.error(`uninstall ${appId}: ${e.message}`))
@@ -841,6 +842,16 @@ function serveControl({appId, port, page, ctx, b, out, vars, file, flowFile}) {
 	})
 }
 
+function appHash(appId) {
+	const h = crypto.createHash('sha256')
+	const files = sh('git', ['-C', REPO, 'ls-files', '--cached', '--others', '--exclude-standard', '--', appId, path.relative(REPO, path.join(FLOWS_DIR, `${appId}.yml`))])
+		.split('\n')
+		.filter((f) => f && fs.existsSync(path.join(REPO, f)))
+		.sort()
+	for (const f of files) h.update(`${f}\0`).update(fs.readFileSync(path.join(REPO, f), 'utf8').replace(/^verified:.*$/m, '')).update('\0')
+	return h.digest('hex')
+}
+
 function attachProofs(results, pr) {
 	if (!trySh('which', ['uploads'])) return console.error('✗ --pr: uploads CLI missing (npm install -g @buildinternet/uploads@0.56.7)')
 	const repo = REMOTE_URL().replace(/^.*github\.com\//, '').replace(/\.git$/, '')
@@ -880,6 +891,8 @@ const USAGE = `usage: verify.mjs <command> [args] [flags]
       --no-record   do not update "verified:" in the flow file
       --umbrel TAG  dockurr/umbrel tag to test against (default ${umbrelVersion(UMBREL_IMAGE)}, e.g. 1.7.4)
       --pr N        upload each proof to PR N with uploads.sh (its bot keeps one comment up to date)
+  attach --pr N [<app-id>... | --changed]   upload the proofs of the last runs without running again;
+                    refuses a proof when the app or its flow changed since (default: the changed apps)
   explore <app-id> [path]   replay the flow's steps (or open path), then screenshot + list fields/buttons/text
       --fresh       back to the just-installed state: restores a checkpoint in seconds, reinstalls when
                     there is none or the app/flow setup changed (wizards only run once)
@@ -1007,6 +1020,22 @@ async function main() {
 			if (res.error) console.error(`✗ ${res.error}`)
 			if (res.describe) console.log(res.describe)
 			if (!res.ok) process.exitCode = 1
+			break
+		}
+		case 'attach': {
+			if (!flags.pr) throw new Error('attach needs --pr N')
+			const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))
+			const apps = rest.length ? rest : changedApps()
+			const results = []
+			for (const a of apps) {
+				const file = path.join(out, `${a}.result.json`)
+				if (!fs.existsSync(file)) throw new Error(`no proof for ${a} in ${out}: \`run ${a}\` first`)
+				const r = JSON.parse(fs.readFileSync(file, 'utf8'))
+				if (r.hash !== appHash(a)) throw new Error(`${a} or its flow changed since its proof: \`run ${a} --pr ${flags.pr}\` instead`)
+				if (!r.proof || !fs.existsSync(r.proof)) throw new Error(`${a}: proof image ${r.proof ?? '-'} is missing`)
+				results.push(r)
+			}
+			attachProofs(results, flags.pr)
 			break
 		}
 		case 'run': {
