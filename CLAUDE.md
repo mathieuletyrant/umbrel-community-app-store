@@ -33,14 +33,14 @@ Example: `mathieu-healarr`. The folder name equals the app id.
 
 Current apps:
 - `mathieu-healarr` — Healarr (media library health monitoring; one-shot `autoconfig` service (node:alpine, script inline) posts Radarr/Sonarr + their /downloads root folders to the public `/api/setup/import` while no password and no instance exist — keys from `exports.sh`; IDs are 1..n because the table is empty)
-- `mathieu-boxarr` — Boxarr (box office tracking, syncs with Radarr; one-shot `autoconfig` writes `/config/local.yaml` (Radarr URL + key from `exports.sh`, Radarr's first /downloads root folder, HD-1080p or first profile) only when it doesn't exist, before `server` starts — not env vars, which Boxarr locks against UI edits; ships `data/config/.gitkeep` so the 1000-owned autoconfig can write)
+- `mathieu-boxarr` — Boxarr (box office tracking, syncs with Radarr)
 - `mathieu-tracearr` — Tracearr (Plex/Jellyfin/Emby monitoring; single-container "supervised" image with bundled TimescaleDB + Redis)
 - `mathieu-cleanuparr` — Cleanuparr (download queue cleanup for the *arr stack, web UI on 11011)
 - `mathieu-profilarr` — Profilarr (quality profiles/custom formats manager for Radarr/Sonarr, web UI on 6868; 2 services: server + optional parser)
 - `mathieu-maintainerr` — Maintainerr (rule-based Plex library cleanup, web UI on 6246; data at /opt/data)
 - `mathieu-lingarr` — Lingarr (subtitle translation for Radarr/Sonarr, web UI on 9876; embedded SQLite, media at /downloads; `exports.sh` → upstream's `RADARR_URL`/`RADARR_API_KEY`/`SONARR_*` env, applied by Lingarr at every start — the URL is only exported when the key was found, since an empty value is skipped and a URL alone would overwrite a hand-set remote one)
-- `mathieu-sublarr` — Sublarr (all-in-one subtitle manager + LLM translator, web UI on 5765; runs as root, drops via gosu; media at /downloads; one-shot `autoconfig` PUTs Sonarr/Radarr to `/api/v1/config` (open while `SUBLARR_API_KEY` is unset) only when their URL is empty)
-- `mathieu-byparr` — Byparr (Cloudflare-bypass proxy, drop-in FlareSolverr replacement for Prowlarr/Jackett, API on 8191; no config of its own; one-shot `autoconfig` adds it to Prowlarr (key from `exports.sh`) as a FlareSolverr indexer proxy tagged `byparr`, once; runs a headless browser so `shm_size: 2gb`; the tile shows the FastAPI docs page)
+- `mathieu-sublarr` — Sublarr (all-in-one subtitle manager + LLM translator, web UI on 5765; runs as root, drops via gosu; media at /downloads)
+- `mathieu-byparr` — Byparr (Cloudflare-bypass proxy, drop-in FlareSolverr replacement for Prowlarr/Jackett, API on 8191; no config, Prowlarr points at `http://mathieu-byparr_server_1:8191`; runs a headless browser so `shm_size: 2gb`; the tile shows the FastAPI docs page)
 - `mathieu-suggestarr` — SuggestArr (recommendations from Plex/Jellyfin/Emby watch history, requested through Jellyseerr/Overseerr, web UI on 5000; TMDb or OpenAI-compatible LLM, setup wizard in-UI; config at /app/config/config_files)
 - `mathieu-cross-seed` — cross-seed (automatic cross-seeding across trackers; headless daemon + nginx status sidecar, API on 2468; at each start the daemon entrypoint runs an inline node script that writes `/config/umbrel-autoconfig.json` (Prowlarr's enabled torrent indexers as torznab URLs + Sonarr/Radarr, keys from `exports.sh`; keeps the last list when Prowlarr is down); the config.js seeded on first run spreads that file, existing config.js files are never touched)
 - `mathieu-trailarr` — Trailarr (auto-downloads trailers for Radarr/Sonarr library, web UI on 7889; login admin/trailarr; config at /config, media at /downloads)
@@ -137,9 +137,12 @@ already wire themselves (Prowlarr apps, Transmission/qBittorrent/SABnzbd, root f
   `|| true`. umbrelOS only sources the app's own `exports.sh` and those of its `dependencies`,
   never other installed apps', so read the other app's files directly instead of relying on its
   exports.
-- Feed them through upstream env vars when the app has some (Lingarr); else a one-shot `autoconfig`
-  service or an entrypoint wrapper that writes the config or calls the app's API **only while it is
-  unconfigured** (Healarr, cross-seed's generated file), and never overwrites what the user set.
+- Only wire an app the way it supports natively: upstream env vars (Lingarr, Pulsarr, slskd) or a
+  config file it reads (Soularr's `${VAR}` in config.ini). **No new custom scripts in compose
+  files** (inline node/sh calling APIs or writing configs): they are untested code to maintain in
+  YAML. When an app has no native way, leave it manual and document the steps in its listing.
+  The scripts already shipped (arr-mcp, Healarr, cross-seed) stay; don't extend the pattern.
+- Never overwrite what the user set: seed only while the app is unconfigured.
 - An app installed later is picked up on the next restart; say so in the listing.
 
 Cross-app networking works via `<other-app-id>_<service>_1` hostnames (e.g.

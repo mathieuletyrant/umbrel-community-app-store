@@ -1,9 +1,0 @@
-verified: 1.15.1-patch.1 on umbrelOS 2.0.0 (2026-10-06)
-requires: [sonarr, radarr]
-logs:
-  autoconfig: added Sonarr and Radarr
-steps:
-  # Sublarr's own health check calls Sonarr and Radarr with the keys the autoconfig service set.
-  # No status: the overall check is 503 in the sandbox (other subsystems need the internet).
-  - http: {path: /api/v1/health/detailed, contains: '"arr_connectivity":\s*\{\s*"healthy":\s*true,\s*"radarr":\s*\[\s*\{\s*"healthy":\s*true[\s\S]*?"sonarr":\s*\[\s*\{\s*"healthy":\s*true'}
-  - shot: health
