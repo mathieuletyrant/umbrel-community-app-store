@@ -53,6 +53,9 @@ releaseNotes: >-
   Lingarr picks up their API keys at startup, no copy-paste needed.
 
 
+  Also fixes Lingarr 1.3.0 failing to start ("DB_CONNECTION is not set").
+
+
 dependencies: []
 path: ""
 defaultUsername: ""

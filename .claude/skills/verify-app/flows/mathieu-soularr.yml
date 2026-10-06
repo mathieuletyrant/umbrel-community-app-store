@@ -1,3 +1,4 @@
+verified: 1.2.2-patch.2 on umbrelOS 2.0.0 (2026-10-06)
 requires: [lidarr, mathieu-slskd]
 logs:
   # Only printed once Lidarr accepted the API key picked up by exports.sh.

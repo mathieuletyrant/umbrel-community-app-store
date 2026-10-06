@@ -16,6 +16,8 @@ services:
       - SLSKD_DOWNLOADS_DIR=/downloads/soulseek/complete
       - SLSKD_INCOMPLETE_DIR=/downloads/soulseek/incomplete
       - SLSKD_API_KEY=${APP_MATHIEU_SLSKD_API_KEY:-}
+      - SLSKD_HTTP_IP_ADDRESS=0.0.0.0
+      - SLSKD_HTTPS_IP_ADDRESS=0.0.0.0
     ports:
       - "50300:50300/tcp"
     volumes:

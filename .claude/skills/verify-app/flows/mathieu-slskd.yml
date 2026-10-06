@@ -1,3 +1,4 @@
+verified: 0.26.0-patch.3 on umbrelOS 2.0.0 (2026-10-06)
 vars:
   SLSKD_API_KEY: docker exec mathieu-slskd_server_1 printenv SLSKD_API_KEY
 logs:
