@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {execFileSync, spawn} from 'node:child_process'
+import crypto from 'node:crypto'
 import fs from 'node:fs'
 import http from 'node:http'
 import os from 'node:os'
@@ -14,6 +15,7 @@ const HOME = process.env.VERIFY_HOME || path.join(os.homedir(), '.umbrel-verify'
 const STATE_FILE = path.join(HOME, 'state.json')
 const UMBREL_PORT = Number(process.env.VERIFY_UMBREL_PORT || 80)
 const GIT_PORT = Number(process.env.VERIFY_GIT_PORT || 8418)
+const CONTROL_PORT = Number(process.env.VERIFY_CONTROL_PORT || 8419)
 const PASSWORD = 'umbrel-verify'
 const CONTAINER = 'umbrel-verify'
 
@@ -34,6 +36,7 @@ const trySh = (cmd, args, opts) => {
 }
 const readYaml = (file) =>
 	JSON.parse(sh('python3', ['-c', 'import sys,json,yaml;print(json.dumps(yaml.safe_load(open(sys.argv[1])) or {}))', file]))
+const parseYaml = (text) => JSON.parse(sh('python3', ['-c', 'import sys,json,yaml;print(json.dumps(yaml.safe_load(sys.stdin.read())))'], {input: text, stdio: ['pipe', 'pipe', 'pipe']}))
 const loadState = () => (fs.existsSync(STATE_FILE) ? JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')) : {})
 const saveState = (s) => fs.writeFileSync(STATE_FILE, JSON.stringify(s, null, 2))
 
@@ -43,7 +46,7 @@ function parseArgs(argv) {
 	for (let i = 0; i < argv.length; i++) {
 		const a = argv[i]
 		if (!a.startsWith('--')) rest.push(a)
-		else if (['--out', '--umbrel'].includes(a)) flags[a.slice(2)] = argv[++i]
+		else if (['--out', '--umbrel', '--pr', '--steps'].includes(a)) flags[a.slice(2)] = argv[++i]
 		else flags[a.slice(2)] = true
 	}
 	return {flags, rest}
@@ -265,7 +268,16 @@ async function install(appId) {
 	}
 	log(`installing ${appId}`)
 	const t0 = Date.now()
-	await trpc('apps.install', {appId}, {mutation: true})
+	for (let attempt = 1; ; attempt++) {
+		try {
+			await trpc('apps.install', {appId}, {mutation: true})
+			break
+		} catch (e) {
+			if (attempt >= 4 || !/429 Too Many Requests|toomanyrequests/i.test(e.message)) throw e
+			log(`registry rate limit, retrying ${appId} in ${30 * attempt}s`)
+			await sleep(30_000 * attempt)
+		}
+	}
 	for (;;) {
 		const s = await trpc('apps.state', {appId})
 		if (['ready', 'running'].includes(s.state)) break
@@ -324,6 +336,91 @@ async function trustProxyCA(appId) {
 	}
 	fs.rmSync(tmp, {recursive: true, force: true})
 	log(`egress: proxy CA added to ${patched.length ? patched.join(', ') : 'no trust store'}, containers restarted`)
+}
+
+const FIXTURES = {
+	movie: 'movies/Test Pattern (2026)/Test Pattern (2026).mkv',
+	show: 'shows/Test Show/Season 01/Test Show - S01E01 - Pilot.mkv',
+}
+
+function downloadsDir() {
+	for (const d of ['home/Downloads', 'storage/downloads']) if (fs.existsSync(path.join(HOME, 'data', d))) return path.join(HOME, 'data', d)
+	return path.join(HOME, 'data', 'home', 'Downloads')
+}
+
+function placeFixtures(names) {
+	if (!names?.length) return
+	const sample = path.join(HOME, 'fixtures', 'sample.mkv')
+	if (!fs.existsSync(sample)) {
+		if (!trySh('which', ['ffmpeg'])) throw new Error('fixtures need ffmpeg on the host')
+		fs.mkdirSync(path.dirname(sample), {recursive: true})
+		sh('ffmpeg', [
+			'-y', '-loglevel', 'error', '-f', 'lavfi', '-i', 'testsrc2=size=640x360:rate=25:duration=120',
+			'-f', 'lavfi', '-i', 'sine=frequency=440:duration=120', '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '35',
+			'-c:a', 'aac', '-shortest', '-metadata:s:a:0', 'language=eng', `${sample}.tmp.mkv`,
+		], {timeout: 300_000})
+		fs.renameSync(`${sample}.tmp.mkv`, sample)
+	}
+	const dl = downloadsDir()
+	for (const name of names) {
+		const rel = FIXTURES[name]
+		if (!rel) throw new Error(`unknown fixture "${name}" (known: ${Object.keys(FIXTURES).join(', ')})`)
+		fs.mkdirSync(path.dirname(path.join(dl, rel)), {recursive: true})
+		fs.copyFileSync(sample, path.join(dl, rel))
+		if (process.getuid?.() === 0) trySh('chown', ['-R', '1000:1000', path.join(dl, rel.split('/')[0])])
+	}
+	log(`fixtures: ${names.map((n) => `/downloads/${FIXTURES[n]}`).join(', ')}`)
+}
+
+const appDataDir = (id) => path.join(HOME, 'data', 'app-data', id)
+const checkpointDir = (id) => path.join(HOME, 'checkpoints', id)
+
+function checkpointKey(appId, flow, umbrel) {
+	const h = crypto.createHash('sha256')
+	const walk = (dir) => {
+		for (const f of fs.readdirSync(dir, {withFileTypes: true}).sort((a, b) => a.name.localeCompare(b.name))) {
+			const full = path.join(dir, f.name)
+			if (f.isDirectory()) walk(full)
+			else h.update(path.relative(REPO, full)).update(fs.readFileSync(full))
+		}
+	}
+	walk(path.join(REPO, appId))
+	const {requires, prepare, setup, vars, fixtures, egress} = flow
+	h.update(JSON.stringify({requires, prepare, setup, vars, fixtures, egress, umbrel}))
+	return h.digest('hex').slice(0, 16)
+}
+
+function withStopped(apps, fn) {
+	const names = apps.flatMap((a) => appContainers(a).map((c) => c.Names))
+	if (names.length) sh('docker', ['stop', '-t', '30', ...names], {timeout: 300_000})
+	try {
+		fn()
+	} finally {
+		if (names.length) sh('docker', ['start', ...names])
+	}
+}
+
+function saveCheckpoint(appId, apps, key) {
+	const dir = checkpointDir(appId)
+	fs.rmSync(dir, {recursive: true, force: true})
+	fs.mkdirSync(dir, {recursive: true})
+	withStopped(apps, () => {
+		for (const a of apps) sh('cp', ['-a', appDataDir(a), path.join(dir, a)])
+	})
+	fs.writeFileSync(path.join(dir, 'key'), key)
+	log(`checkpoint saved (${apps.join(', ')})`)
+}
+
+const hasCheckpoint = (appId, key) => trySh('cat', [path.join(checkpointDir(appId), 'key')]) === key
+
+function restoreCheckpoint(appId, apps) {
+	withStopped(apps, () => {
+		for (const a of apps) {
+			fs.rmSync(appDataDir(a), {recursive: true, force: true})
+			sh('cp', ['-a', path.join(checkpointDir(appId), a), appDataDir(a)])
+		}
+	})
+	log(`restored ${apps.join(', ')} from checkpoint`)
 }
 
 async function waitLogs(appId, expectations, timeoutMs) {
@@ -389,7 +486,7 @@ async function browser() {
 function locate(page, spec) {
 	if (typeof spec === 'string') return page.getByText(spec).first()
 	const opts = spec.exact ? {exact: true} : {}
-	if (spec.css) return page.locator(spec.css).first()
+	if (spec.css) return (spec.text ? page.locator(spec.css).filter({hasText: spec.text}) : page.locator(spec.css)).first()
 	if (spec.role) return page.getByRole(spec.role, {name: spec.name, ...opts}).first()
 	if (spec.label) return page.getByLabel(spec.label, opts).first()
 	if (spec.placeholder) return page.getByPlaceholder(spec.placeholder, opts).first()
@@ -434,7 +531,28 @@ function interpolate(value, appId, vars = {}) {
 	})
 }
 
-async function runSteps(ctx, appId, port, steps, out, {page, final = true, vars = {}} = {}) {
+function pageErrors(page) {
+	if (page.verifyErrors) return page.verifyErrors
+	const errors = (page.verifyErrors = [])
+	page.on('pageerror', (e) => errors.push(`pageerror: ${e.message.split('\n')[0]}`))
+	page.on('console', (m) => m.type() === 'error' && errors.push(`console: ${m.text().slice(0, 200)}`))
+	page.on('response', (r) => r.status() >= 400 && errors.push(`HTTP ${r.status()} ${r.request().method()} ${r.url()}`))
+	return errors
+}
+
+async function seeWithReload(page, spec, timeoutMs = 120_000) {
+	const t0 = Date.now()
+	for (;;) {
+		try {
+			return await locate(page, spec).waitFor({state: 'visible', timeout: 5000})
+		} catch (e) {
+			if (Date.now() - t0 > timeoutMs) throw e
+			await page.reload({waitUntil: 'domcontentloaded'})
+		}
+	}
+}
+
+async function runSteps(ctx, appId, port, steps, out, {page, final = true, vars = {}, timeout = 30_000} = {}) {
 	page ??= await ctx.newPage()
 	const origin = `http://localhost:${port}`
 	const shots = []
@@ -443,11 +561,8 @@ async function runSteps(ctx, appId, port, steps, out, {page, final = true, vars 
 		await page.screenshot({path: file})
 		shots.push(file)
 	}
-	page.setDefaultTimeout(30_000)
-	const errors = []
-	page.on('pageerror', (e) => errors.push(`pageerror: ${e.message.split('\n')[0]}`))
-	page.on('console', (m) => m.type() === 'error' && errors.push(`console: ${m.text().slice(0, 200)}`))
-	page.on('response', (r) => r.status() >= 400 && errors.push(`HTTP ${r.status()} ${r.request().method()} ${r.url()}`))
+	page.setDefaultTimeout(timeout)
+	const errors = pageErrors(page)
 	if (!steps?.length) steps = [{goto: '/'}, {wait: 4000}]
 	for (const [i, step] of steps.entries()) {
 		const [type, raw] = Object.entries(step)[0]
@@ -459,7 +574,8 @@ async function runSteps(ctx, appId, port, steps, out, {page, final = true, vars 
 					await page.goto(/^https?:/.test(arg) ? arg : origin + arg, {waitUntil: 'domcontentloaded'})
 					break
 				case 'see':
-					await locate(page, arg).waitFor({state: 'visible'})
+					if (arg.reload) await seeWithReload(page, arg)
+					else await locate(page, arg).waitFor({state: 'visible'})
 					break
 				case 'click':
 					await locate(page, arg).click()
@@ -600,6 +716,7 @@ async function verify(appId, flags, ctxHolder) {
 		if (flow?.egress) await trustProxyCA(appId)
 		const health = {ignoreHealth: flow?.ignoreHealth}
 		await waitHealthy(appId, timeout, health)
+		placeFixtures(flow?.fixtures)
 		const vars = await resolveVars(flow?.vars)
 		if (flow?.setup) {
 			await runCommands('setup', flow.setup, vars, timeout)
@@ -627,6 +744,110 @@ async function verify(appId, flags, ctxHolder) {
 	return result
 }
 
+async function describe(page, file) {
+	await page.screenshot({path: file})
+	const info = await page.evaluate(() => {
+		const vis = (el) => el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden'
+		const clean = (t) => (t ?? '').trim().replace(/\s+/g, ' ')
+		const dialog = [...document.querySelectorAll('[role=dialog],dialog[open]')].filter(vis).at(-1)
+		const scope = dialog ?? document.body
+		const prefix = dialog ? '[role=dialog] ' : ''
+		let dialogName = null
+		if (dialog) {
+			const by = dialog.getAttribute('aria-labelledby')
+			dialogName = clean(dialog.getAttribute('aria-label') || (by && document.getElementById(by)?.innerText) || dialog.querySelector('h1,h2,h3,h4,h5,h6')?.innerText) || '(unnamed)'
+		}
+		const allInputs = [...scope.querySelectorAll('input,select,textarea')]
+		const inputs = allInputs.filter((el) => vis(el) && el.type !== 'hidden').map((el) => {
+			const label = clean(el.labels?.[0]?.innerText || el.getAttribute('aria-label'))
+			const tag = el.tagName.toLowerCase()
+			const locator = label ? {label} : el.id && !/[:]/.test(el.id) ? {css: `#${el.id}`} : el.placeholder ? {placeholder: el.placeholder} : {css: `${prefix}${tag} >> nth=${allInputs.indexOf(el)}`}
+			return {locator, type: el.type || tag, value: clean(el.value).slice(0, 40), disabled: el.disabled}
+		})
+		const allButtons = [...scope.querySelectorAll('button')]
+		const buttons = [...scope.querySelectorAll('button,[role=button],a[href]')].filter(vis).slice(0, 60).map((el) => {
+			const name = clean(el.innerText) || clean(el.getAttribute('aria-label')) || clean(el.title)
+			const role = el.tagName === 'A' ? 'link' : 'button'
+			const icon = el.querySelector('svg[data-testid]')?.dataset.testid
+			const locator = name ? {role, name} : el.tagName === 'BUTTON' ? {css: `${prefix}button >> nth=${allButtons.indexOf(el)}`} : el.id ? {css: `#${el.id}`} : null
+			return {locator, icon, disabled: el.disabled || el.getAttribute('aria-disabled') === 'true'}
+		}).filter((x) => x.locator)
+		return {url: location.href, dialog: dialogName, inputs, buttons, text: scope.innerText.slice(0, 1500)}
+	})
+	const loc = (l) => '{' + Object.entries(l).map(([k, v]) => `${k}: ${/^[\w ./-]+$/.test(v) && !/^\s|\s$/.test(v) ? v : JSON.stringify(v)}`).join(', ') + '}'
+	return [
+		`url: ${info.url}`,
+		...(info.dialog ? [`dialog: ${info.dialog} (inputs and buttons below are inside it)`] : []),
+		'inputs:',
+		...info.inputs.map((i) => `  ${loc(i.locator)}  ${i.type}${i.value ? ` = ${JSON.stringify(i.value)}` : ''}${i.disabled ? '  (disabled)' : ''}`),
+		'buttons:',
+		...info.buttons.map((x) => `  ${loc(x.locator)}${x.icon ? `  icon=${x.icon}` : ''}${x.disabled ? '  (disabled)' : ''}`),
+		'text:',
+		info.text.split('\n').map((l) => l.trim()).filter(Boolean).map((l) => `  ${l}`).join('\n'),
+		`screenshot: ${file}`,
+	].join('\n')
+}
+
+function serveControl({appId, port, page, ctx, b, out, vars, file, flowFile}) {
+	return new Promise((resolve) => {
+		const server = http.createServer(async (req, res) => {
+			let raw = ''
+			for await (const chunk of req) raw += chunk
+			const body = JSON.parse(raw || '{}')
+			const reply = (o) => res.end(JSON.stringify(o))
+			if (body.stop) {
+				reply({ok: true, log: 'explore session closed'})
+				server.close()
+				await b.close()
+				return resolve()
+			}
+			const lines = []
+			const origLog = console.log
+			console.log = (...a) => lines.push(a.join(' '))
+			let ok = true
+			let error
+			try {
+				if (body.text.trim()) {
+					const parsed = parseYaml(body.text)
+					const steps = Array.isArray(parsed) ? parsed : [parsed]
+					await runSteps(ctx, appId, port, steps, out, {page, final: false, vars, timeout: 10_000})
+					if (body.append) {
+						const t = body.text.trim()
+						const yaml = t.startsWith('-') ? t.split('\n').map((l) => `  ${l}`).join('\n') : `  - ${t}`
+						const src = fs.readFileSync(flowFile, 'utf8').replace(/\n*$/, '\n')
+						const shot = src.match(/^ *- shot:.*\n$/m)
+						fs.writeFileSync(flowFile, shot && src.endsWith(shot[0]) ? src.slice(0, -shot[0].length) + yaml + '\n' + shot[0] : src + yaml + '\n')
+						lines.push(`appended to ${path.relative(REPO, flowFile)}`)
+					}
+				}
+			} catch (e) {
+				ok = false
+				error = e.message
+			} finally {
+				console.log = origLog
+			}
+			await page.waitForTimeout(500)
+			reply({ok, error, log: lines.join('\n'), describe: await describe(page, file).catch((e) => `describe failed: ${e.message}`)})
+		})
+		server.listen(CONTROL_PORT, '127.0.0.1', () =>
+			log(`explore session ready — drive it with: node ${path.relative(REPO, fileURLToPath(import.meta.url))} step '<yaml step>' [--append], end with: step --stop`),
+		)
+	})
+}
+
+function attachProofs(results, pr) {
+	if (!trySh('which', ['uploads'])) return console.error('✗ --pr: uploads CLI missing (npm install -g @buildinternet/uploads@0.56.7)')
+	const repo = REMOTE_URL().replace(/^.*github\.com\//, '').replace(/\.git$/, '')
+	for (const r of results.filter((r) => r.proof)) {
+		const alt = `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version} on umbrelOS ${r.umbrel}`
+		const res = trySh('uploads', ['--json', 'put', r.proof, '--pr', String(pr), '--repo', repo, '--state', r.ok ? 'after' : 'error', '--alt', alt, '--width', '800'])
+		const j = res && JSON.parse(res.slice(res.indexOf('{')))
+		if (!j?.embedUrl) console.error(`✗ upload of ${r.proof} failed`)
+		else if (j.commentError) console.error(`✗ uploaded but the PR comment failed: ${j.commentError.split('\n')[0]}\n  post it yourself: ![${alt}](${j.embedUrl})`)
+		else log(`proof on PR #${pr}: ${j.embedUrl}`)
+	}
+}
+
 function changedApps() {
 	const base = trySh('git', ['-C', REPO, 'merge-base', 'HEAD', 'origin/master']) ?? 'HEAD'
 	const files = [
@@ -652,8 +873,16 @@ const USAGE = `usage: verify.mjs <command> [args] [flags]
       --out DIR     where screenshots and proofs go (default .verify-out/)
       --no-record   do not update "verified:" in the flow file
       --umbrel TAG  dockurr/umbrel tag to test against (default ${umbrelVersion(UMBREL_IMAGE)}, e.g. 1.7.4)
+      --pr N        upload each proof to PR N with uploads.sh (its bot keeps one comment up to date)
   explore <app-id> [path]   replay the flow's steps (or open path), then screenshot + list fields/buttons/text
-      --fresh       republish the store and reinstall the app first (wizards only run once)
+      --fresh       back to the just-installed state: restores a checkpoint in seconds, reinstalls when
+                    there is none or the app/flow setup changed (wizards only run once)
+      --reinstall   force a real reinstall (and a new checkpoint)
+      --no-replay   don't replay the flow's steps, just open / (or path)
+      --steps N     replay only the first N steps
+      --serve       keep the browser open; drive it with \`step\`
+  step '<yaml>'     run step(s) in the --serve session, print the page; --append adds them to the flow
+  step --stop       close the --serve session
   up | down | store | install <app-id> | uninstall <app-id> | logs <app-id> | status`
 
 async function main() {
@@ -697,54 +926,81 @@ async function main() {
 			const manifest = readYaml(path.join(REPO, appId, 'umbrel-app.yml'))
 			const flowFile = path.join(FLOWS_DIR, `${appId}.yml`)
 			const flow = fs.existsSync(flowFile) ? readYaml(flowFile) : {}
-			const steps = flow.steps ?? []
+			const health = {ignoreHealth: flow.ignoreHealth}
+			const apps = [appId, ...(flow.requires ?? [])]
+			await up(flags.umbrel)
 			for (const dep of flow.requires ?? []) {
 				await install(dep)
 				await waitHealthy(dep, 300_000)
 			}
-			if (flags.fresh) {
+			const key = checkpointKey(appId, flow, loadState().umbrel)
+			const installed = (await trpc('apps.state', {appId})).state !== 'not-installed'
+			if (flags.fresh && !flags.reinstall && installed && hasCheckpoint(appId, key)) {
+				restoreCheckpoint(appId, apps)
+				placeFixtures(flow.fixtures)
+				for (const a of apps) await waitHealthy(a, 300_000, a === appId ? health : {})
+			} else if (flags.fresh || flags.reinstall) {
 				const git = await serveGit()
 				await publishStore(flags)
 				git.close()
 				await uninstall(appId)
 				await runCommands('prepare', flow.prepare, {}, 300_000)
-			}
-			await install(appId)
-			if (flags.fresh && flow.egress) await trustProxyCA(appId)
-			const health = {ignoreHealth: flow.ignoreHealth}
-			await waitHealthy(appId, 300_000, health)
-			const vars = await resolveVars(flow.vars)
-			if (flags.fresh && flow.setup) {
-				await runCommands('setup', flow.setup, vars, 300_000)
+				await install(appId)
+				if (flow.egress) await trustProxyCA(appId)
+				await waitHealthy(appId, 300_000, health)
+				placeFixtures(flow.fixtures)
+				if (flow.setup) {
+					await runCommands('setup', flow.setup, await resolveVars(flow.vars), 300_000)
+					await waitHealthy(appId, 300_000, health)
+				}
+				saveCheckpoint(appId, apps, key)
+				for (const a of apps) await waitHealthy(a, 300_000, a === appId ? health : {})
+			} else {
+				await install(appId)
 				await waitHealthy(appId, 300_000, health)
 			}
+			const vars = await resolveVars(flow.vars)
 			await waitLogs(appId, flow.logs, 300_000)
+			if (!flow.headless) await waitHttp(manifest.port, 300_000)
 			const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))
 			fs.mkdirSync(out, {recursive: true})
 			const {b, ctx} = await browser()
 			const page = await ctx.newPage()
 			page.setDefaultTimeout(30_000)
-			if (p || !steps.length) await page.goto(`http://localhost:${manifest.port}${p ?? '/'}`)
-			else await runSteps(ctx, appId, manifest.port, steps.filter((st) => !('shot' in st)), out, {page, final: false, vars})
-			await page.waitForTimeout(3000)
-			const file = path.join(out, `${appId}.explore.png`)
-			await page.screenshot({path: file})
-			const info = await page.evaluate(() => {
-				const vis = (el) => el.offsetParent !== null
-				return {
-					url: location.href,
-					title: document.title,
-					inputs: [...document.querySelectorAll('input,select,textarea')].filter(vis).map((el) => ({
-						tag: el.tagName.toLowerCase(), type: el.type, name: el.name, id: el.id, placeholder: el.placeholder,
-						label: el.labels?.[0]?.innerText ?? el.getAttribute('aria-label'),
-					})),
-					buttons: [...document.querySelectorAll('button,a,[role=button]')].filter(vis).map((el) => el.innerText.trim().replace(/\s+/g, ' ')).filter(Boolean).slice(0, 40),
-					text: document.body.innerText.slice(0, 1500),
+			let steps = (flow.steps ?? []).filter((st) => !('shot' in st))
+			if (flags.steps !== undefined) steps = steps.slice(0, Number(flags.steps))
+			if (p || flags['no-replay'] || !steps.length) await page.goto(`http://localhost:${manifest.port}${p ?? '/'}`)
+			else {
+				try {
+					await runSteps(ctx, appId, manifest.port, steps, out, {page, final: false, vars})
+				} catch (e) {
+					if (!flags.serve) throw e
+					console.error(`✗ ${e.message}`)
 				}
-			})
-			console.log(JSON.stringify(info, null, 2))
-			log(`screenshot: ${file}`)
-			await b.close()
+			}
+			await page.waitForTimeout(2000)
+			const file = path.join(out, `${appId}.explore.png`)
+			console.log(await describe(page, file))
+			if (!flags.serve) {
+				await b.close()
+				break
+			}
+			await serveControl({appId, port: manifest.port, page, ctx, b, out, vars, file, flowFile})
+			break
+		}
+		case 'step': {
+			const body = flags.stop ? {stop: true} : {text: rest.join(' '), append: !!flags.append}
+			let r
+			try {
+				r = await fetch(`http://127.0.0.1:${CONTROL_PORT}/`, {method: 'POST', body: JSON.stringify(body)})
+			} catch {
+				throw new Error('no explore session: start one with `explore <app-id> --serve` (in the background)')
+			}
+			const res = await r.json()
+			if (res.log) console.log(res.log)
+			if (res.error) console.error(`✗ ${res.error}`)
+			if (res.describe) console.log(res.describe)
+			if (!res.ok) process.exitCode = 1
 			break
 		}
 		case 'run': {
@@ -764,6 +1020,7 @@ async function main() {
 			git?.close()
 			console.log('\n' + results.map((r) => `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version}${r.ok ? '' : ` — ${r.error.split('\n')[0]}`}\n   proof: ${r.proof ?? '-'}`).join('\n'))
 			fs.writeFileSync(path.join(results[0].out, 'summary.json'), JSON.stringify(results, null, 2))
+			if (flags.pr) attachProofs(results, flags.pr)
 			if (results.some((r) => !r.ok)) process.exitCode = 1
 			break
 		}

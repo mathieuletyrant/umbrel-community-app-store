@@ -19,7 +19,7 @@ node $V run --all                      # the whole store
 
 Flags: `--keep` (leave it installed to poke at it), `--remote` (GitHub default branch instead of
 the working tree), `--umbrel 1.7.4` (another `dockurr/umbrel` tag, e.g. the 1.x line), `--out DIR`,
-`--no-record`. `run` always reinstalls the app from scratch; `requires` apps are reused when
+`--no-record`, `--pr <n>` (see below). `run` always reinstalls the app from scratch; `requires` apps are reused when
 already installed.
 
 Output (`.verify-out/`, gitignored, or `--out`): `<app>.proof.png` (verdict banner + the flow's
@@ -32,32 +32,27 @@ change it verified.
 
 ### Proof on a pull request
 
-Put the proof image on the PR with [uploads.sh](https://uploads.sh): nothing is committed, and it
-works from a Claude Code on the web session, whose GitHub proxy refuses every native way to attach
-an image. Needs `UPLOADS_TOKEN` (set in the environment's settings, never pasted in a
-conversation; `uploads whoami` checks it) and the CLI
-(`npm install -g @buildinternet/uploads@0.56.7` when `uploads` is missing).
+`run ... --pr <n>` uploads each proof to [uploads.sh](https://uploads.sh) and its bot
+(`uploads-sh[bot]`) keeps **one** comment on the PR up to date with every proof and its ✅/❌ line.
+Running again replaces the images in place. Nothing is committed, and it works from a Claude Code
+on the web session, whose GitHub proxy refuses every native way to attach an image. Don't post a
+proof comment of your own on top of it.
 
-```sh
-cd .verify-out
-uploads --json put mathieu-<name>.proof.png --pr <n> --repo mathieuletyrant/umbrel-community-app-store \
-    --no-comment --state after --alt "mathieu-<name> verified on umbrelOS" --width 800
-```
+Needs `UPLOADS_TOKEN` (set in the environment's settings, never pasted in a conversation;
+`uploads whoami` checks it) and the CLI (`npm install -g @buildinternet/uploads@0.56.7` when
+`uploads` is missing). The repo is linked to the uploads workspace
+(`uploads github link --status --repo mathieuletyrant/umbrel-community-app-store`). If the run
+prints `PR comment failed`, post the comment yourself with the Markdown line it prints:
+`![alt](embedUrl)`, never the `<img>` tag of the upload's `markdown` field, which the GitHub MCP
+tools HTML-escape into text. Then read the comment back (`pull_request_read` `get_comments`) to
+check it still holds `![`.
 
-Embed the answer's `embedUrl` as Markdown, `![<alt>](<embedUrl>)`, not its `markdown` field: that
-field is an `<img>` tag, and the GitHub MCP tools HTML-escape it, so the comment shows the tag as
-text. `--no-comment` skips the CLI's own PR comment, which fails here (the repo isn't linked to the
-uploads workspace) — post the comment yourself. After posting, read the comment back
-(`pull_request_read` `get_comments`) and check the body still holds `![`; fix it with
-`update_issue_comment`, never a second comment. Post one comment (GitHub MCP on the web, `gh pr
-comment -F body.md` locally) with one image per verified app and its ✅/❌ line. Putting the same
-`--pr` key again replaces the image in place. Uploads are **public** whatever the repository's
-visibility — the proof only shows the throwaway umbrelOS, but never upload a shot holding real
-credentials or a user's data. Without the token, send the proof with SendUserFile and say in the PR
-that it wasn't uploaded.
+Uploads are **public** whatever the repository's visibility. The proof only shows the throwaway
+umbrelOS, but never upload a shot holding real credentials or a user's data. Without the token,
+send the proof with SendUserFile and say in the PR that it wasn't uploaded.
 
 Other commands: `up` / `down` (wipe everything) / `status` / `store` / `install <id>` /
-`uninstall <id>` / `logs <id>` / `explore <id> [path] [--fresh]`.
+`uninstall <id>` / `logs <id>` / `explore` / `step` (see "Writing or repairing a flow").
 
 ## What `run` checks, in order
 
@@ -80,6 +75,7 @@ egress: true                  # app needs internet at runtime (see Sandbox)
 headless: true                # no HTTP check on / (status page apps still get steps)
 vars:                         # shell commands run on the host after install, retried until non-empty
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+fixtures: [movie, show]       # sample media dropped into /downloads after install (see below)
 setup:                        # shell commands run on the host after install (retried until they succeed)
   - docker exec mathieu-x_server_1 touch /config/seed
 logs:                         # service → regex that must appear in <app-id>_<service>_1 logs
@@ -88,11 +84,13 @@ steps:                        # run on http://localhost:<port>, in order
   - goto: /                                   # path or absolute URL
   - click: Fresh Start                        # string = visible text
   - click: {role: button, name: Continue}     # or {css}, {label}, {placeholder}, {text}; add exact: true
+  - click: {css: "[role=dialog] li", text: Films}   # css + text = the css matches that contain text
   - fill: {label: Password, exact: true, value: secret}
   - select: {css: "#arr-type", value: radarr}
   - check: {label: I agree}
   - press: Enter
   - see: Connection successful!               # waits until visible (same locator forms)
+  - see: {text: Test Pattern, reload: true}   # reload the page until it shows up (async scans, jobs)
   - url: /dashboard                           # regex on the current URL
   - wait: 2000
   - mock: {path: /api/updates/check, status: 200, body: {...}}   # stub an app API call in the browser
@@ -103,6 +101,11 @@ steps:                        # run on http://localhost:<port>, in order
 `${NAME}` in values expands `vars`; `${env.<service>.<VAR>}` reads a container's env (e.g. a
 deterministic `APP_PASSWORD`).
 
+`fixtures` gives media apps something to work on: a 2-minute 640x360 H.264/AAC test pattern
+(generated once with the host's ffmpeg, cached in `~/.umbrel-verify/fixtures`), copied to
+`/downloads/movies/Test Pattern (2026)/Test Pattern (2026).mkv` (`movie`) and
+`/downloads/shows/Test Show/Season 01/Test Show - S01E01 - Pilot.mkv` (`show`), owned by 1000.
+
 ## Writing or repairing a flow
 
 A flow should take the app from a fresh install to its **real, set-up main screen**: do the
@@ -112,16 +115,31 @@ possible offline (Radarr/Sonarr/Lidarr/Transmission from the official store, via
 the set-up app shows, then a `shot`. Stop at the setup screen only when the next step needs an
 external account (Plex token, Soulseek login, LLM key) — say so in a comment.
 
-Loop:
+Loop: keep a browser open and add steps one at a time.
 
-1. `node $V explore <app-id> --fresh` — reinstalls, replays the steps already in the flow, then
-   prints the URL, form fields (label/id/placeholder), buttons and text, and saves
-   `.verify-out/<app>.explore.png`. Wizards only run once, so use `--fresh` whenever the flow
-   changes state.
-2. Append the next steps, repeat until the main screen.
-3. `node $V run <app-id>` and **look at the proof image** — a `see` can match text elsewhere on
-   the page (e.g. "Dashboard" in "from the Dashboard"); pick assertions unique to the target
+1. Read the app's first-run code (setup wizard page, its buttons and labels) before guessing
+   locators. Then start a session in the background (Bash `run_in_background`):
+   `node $V explore <app-id> --fresh --serve`. It replays the steps already in the flow and
+   prints the page.
+2. `node $V step '<yaml step or list>'` runs steps on that same page (~2 s, open dialogs and
+   form state kept), then prints the URL, the open dialog, every input and button **with a
+   locator to copy** (icon-only buttons get `{css: "[role=dialog] button >> nth=0"}`, disabled
+   ones are marked), the text, and a screenshot. A failing step leaves the page as it was, so
+   try another locator. Add `--append` once a step works to write it into the flow (before
+   the final `shot`). `node $V step` alone reprints the page; `step --stop` ends the session.
+3. `node $V run <app-id>` and **look at the proof image**. A `see` can match text elsewhere on
+   the page (e.g. "Dashboard" in "from the Dashboard"), so pick assertions unique to the target
    screen.
+
+`--fresh` brings the app back to its just-installed state (after `fixtures` and `setup`). The
+first time it reinstalls and saves a checkpoint of the app's data (and its `requires` apps'
+data). After that it restores the checkpoint in seconds, and it reinstalls again only when the
+app folder or the flow's `requires`/`prepare`/`setup`/`vars`/`fixtures`/`egress` changed.
+`--reinstall` forces a reinstall. Restoring restarts the containers, so a step must not rely on
+something that only happens on the very first boot (e.g. Tunarr redirects `/` to its welcome
+page only before its first restart, so the flow opens `/web/welcome` directly). `--steps N`
+replays only the first N steps; `--no-replay` opens `/` (or the given path) as is. Without
+`--serve`, `explore` prints the page once and exits.
 
 Prefer roles/labels/ids over brittle CSS. Comment only what is non-obvious (a mock, a sandbox
 workaround, why the flow stops early).
