@@ -49,32 +49,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Fixes Weaver not starting on a fresh install: the default password is now
-  `weaver-admin`, since Weaver requires at least 8 characters.
-dependencies: []
-path: ""
-defaultUsername: "admin"
-defaultPassword: "weaver-admin"
-environment:
-  - name: WEAVER_BOOTSTRAP_LOGIN_USERNAME
-    services:
-      - server
-    default: admin
-    note: Web UI username, created the first time Weaver starts. Changing it later has no effect — use the Settings page inside the app.
-  - name: WEAVER_BOOTSTRAP_LOGIN_PASSWORD
-    services:
-      - server
-    default: weaver-admin
-    note: Web UI password, set the first time Weaver starts. Change it from inside the app afterwards.
-  - name: WEAVER_INTERMEDIATE_DIR
-    services:
-      - server
-    default: /downloads/usenet/incomplete
-    note: Where in-progress downloads are assembled, as seen inside the container. Only used at first setup.
-  - name: WEAVER_COMPLETE_DIR
-    services:
-      - server
-    default: /downloads/usenet/complete
-    note: Where finished downloads land, as seen inside the container. Keep it under /downloads so *arr imports can hardlink. Only used at first setup.
+  Downloads no longer stall on slow disks or network shares: making data durable now happens away from the download pipeline, and PAR2 verification and restart checks run without holding up other jobs. A job queued for post-processing is no longer completed a second time, which used to move its output into a <name>.#<id> folder from under a running script. A download that hits a dead post is reported as such instead of failing early with a byte-count error, and an in-app upgrade now restarts the newly installed build on Linux instead of the backed-up one.
+
+  No configuration or database changes.
+
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.14.5
 permissions:
   - STORAGE_DOWNLOADS
