@@ -42,13 +42,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-3.jpg
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Adds watch history management and an "Already Seen" action whose feedback shapes future recommendations, plus YouTube trailers in request details, AI Search results and recommendation previews. Trakt now only needs a Client ID (Client Secret is optional). Fixes queued requests reverting to the default Seer user.
 
 
-  Previous release notes:
-
-
-  Initial release of SuggestArr for this Community App Store.
+  Full release notes can be found at https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v2.16.0
 dependencies: []
 path: ""
 defaultUsername: ""
