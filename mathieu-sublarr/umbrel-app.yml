@@ -7,7 +7,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.15.1"
+version: "1.15.2"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -45,7 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Adds track variant policies for foreign-track cleanup with fine-grained controls over which subtitle variants to keep, plus size limits for sweep operations. Fixes critical issues with cleanup scope handling, translation saves, slow-mode searches, upgrade logic, and provider management. Security improvements mask secrets in logs; database migrations are backwards compatible.
+  Common Fixes no longer shorten overlapping events in ASS/SSA subtitles, which broke karaoke and typeset signs; the overlap fix now applies to SRT only. Auto-sync now rejects results that would stretch the subtitle timeline by about 4 % and leaves the subtitle untouched.
+
+
+  Full release notes can be found at https://github.com/Abrechen2/sublarr/releases/tag/v1.15.2
 dependencies: []
 path: ""
 defaultUsername: ""

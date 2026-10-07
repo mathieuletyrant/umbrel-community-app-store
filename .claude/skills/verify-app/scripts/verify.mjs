@@ -496,7 +496,7 @@ async function launch() {
 }
 
 async function login(b) {
-	const ctx = await b.newContext({viewport: {width: 1440, height: 900}})
+	const ctx = await b.newContext({viewport: {width: 1440, height: 900}, locale: 'en-US'})
 	const page = await ctx.newPage()
 	await page.goto(`http://localhost:${UMBREL_PORT}/login`)
 	await page.locator('input[type=password]').fill(PASSWORD)
