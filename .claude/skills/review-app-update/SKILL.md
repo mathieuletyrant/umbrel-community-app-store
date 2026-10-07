@@ -59,7 +59,9 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
    - Merge (`gh pr merge <n> --squash`) when all hold:
      - verify is ✅ and you Read its proof (or the PR touches no app);
      - the proof is uploaded: read the uploads.sh comment on the PR back and
-       check it shows that app's image (not uploaded → no merge);
+       check that its newest entry for that app is named
+       `<app-id>--<new version>--pass--<hash>` (missing, `--fail--` or another
+       version → no merge);
      - the bump is patch, minor or digest-only;
      - the changelog announces no data migration, breaking change or manual step.
    - Otherwise leave it open with **one** comment: what changed upstream (3–5
