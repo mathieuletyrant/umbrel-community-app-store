@@ -45,7 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Adds track variant policies for foreign-track cleanup with fine-grained controls over which subtitle variants to keep, plus size limits for sweep operations. Fixes critical issues with cleanup scope handling, translation saves, slow-mode searches, upgrade logic, and provider management. Security improvements mask secrets in logs; database migrations are backwards compatible.
+  Common Fixes no longer break typeset ASS subtitles: the overlap fix now applies to SRT only, so karaoke and signs are preserved. Auto-sync now rejects results that would stretch the subtitle timeline and leaves the subtitle as it was.
+
+
+  Full release notes can be found at https://github.com/Abrechen2/sublarr/blob/HEAD/CHANGELOG.md#1152---2026-10-03
 dependencies: []
 path: ""
 defaultUsername: ""
