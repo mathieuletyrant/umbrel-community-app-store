@@ -54,6 +54,7 @@
     { "matchPackageNames": ["doobidoo/mcp-memory-service"], "commitMessageTopic": "MCP Memory" },
     { "matchPackageNames": ["ghcr.io/kirovair/muxarr"], "commitMessageTopic": "Muxarr" },
     { "matchPackageNames": ["iampuid0/neutarr"], "commitMessageTopic": "NeutArr" },
+    { "matchPackageNames": ["ghcr.io/notifiarr/notifiarr"], "commitMessageTopic": "Notifiarr" },
     { "matchPackageNames": ["ghcr.io/fscorrupt/posterizarr"], "commitMessageTopic": "Posterizarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },

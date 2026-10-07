@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-notifiarr_server_1
+      APP_PORT: 5454
+      PROXY_AUTH_WHITELIST: "/plex"
+
+  server:
+    image: ghcr.io/notifiarr/notifiarr:0.9.7@sha256:2b0a8784d8a43177cbc5a19110e7eb066d9321572c3352eda79c0a89898c7735
+    hostname: ${DEVICE_HOSTNAME:-umbrel}
+    user: "1000:1000"
+    restart: on-failure
+    environment:
+      TZ: Etc/UTC
+      DN_UI_PASSWORD: ${APP_PASSWORD}
+      DN_RADARR_0_URL:
+      DN_RADARR_0_API_KEY:
+      DN_SONARR_0_URL:
+      DN_SONARR_0_API_KEY:
+      DN_LIDARR_0_URL:
+      DN_LIDARR_0_API_KEY:
+      DN_READARR_0_URL:
+      DN_READARR_0_API_KEY:
+      DN_PROWLARR_0_URL:
+      DN_PROWLARR_0_API_KEY:
+      DN_SABNZBD_0_URL:
+      DN_SABNZBD_0_API_KEY:
+      DN_TRANSMISSION_0_URL:
+      DN_TAUTULLI_URL:
+      DN_TAUTULLI_API_KEY:
+      DN_PLEX_URL:
+      DN_PLEX_TOKEN:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads:ro
