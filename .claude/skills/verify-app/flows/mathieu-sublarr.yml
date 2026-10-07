@@ -1,3 +1,4 @@
+verified: 1.15.2 on umbrelOS 2.0.0 (2026-10-07)
 steps:
   - goto: /
   - see: Set a password to protect the UI
