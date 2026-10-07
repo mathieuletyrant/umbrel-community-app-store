@@ -1,4 +1,4 @@
-verified: 2.94.02 on umbrelOS 2.0.0 (2026-10-06)
+verified: 2.94.03 on umbrelOS 2.0.0 (2026-10-07)
 steps:
   - goto: /
   - see: Hello and welcome to Tdarr!
