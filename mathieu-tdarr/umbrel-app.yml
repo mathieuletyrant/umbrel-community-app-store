@@ -7,7 +7,7 @@ name: Tdarr
 tagline: Automated, distributed transcoding and library health checks
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/icon.png
 # renovate: datasource=docker depName=haveagitgat/tdarr
-version: "2.94.02"
+version: "2.94.03"
 port: 8267
 description: >-
   Tdarr is an automated media transcoding and library health-check tool. It
@@ -47,13 +47,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-4.jpg
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Improves library scan reliability when a folder can't be read (permissions or network issues), improves classic transcode and health check reliability, and fixes library scans missing files on some Windows drives. Also fixes unmapped Node path translation in certain scenarios, jobs failing after lowering a Node's worker limit, and high CPU usage from folder watching on very large libraries.
 
 
-  Previous release notes:
-
-
-  Initial release of Tdarr for this Community App Store.
+  Full release notes can be found at https://github.com/HaveAGitGat/Tdarr/releases
 dependencies: []
 path: ""
 defaultUsername: ""
