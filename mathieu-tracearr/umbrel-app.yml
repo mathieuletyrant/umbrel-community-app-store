@@ -45,13 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
+  Adds live events to the public API v2 (streams, violations and server health over a single connection) and links titles in history, session details, now playing and the map to their media pages. Server down/up automations now fire once per outage, and editing a Jellyfin or Emby server accepts a new API key after the old one was revoked.
 
 
-  Previous release notes:
-
-
-  Refactors rules into automations with 21 ready-made templates and share codes for importing/exporting across instances. Adds media event triggers (on add/upgrade), local GPU-accelerated maps, and improved activity tracking. **Back up before upgrading** — first boot permanently converts existing rules to automations with no downgrade path.
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v2.7.0
 dependencies: []
 path: ""
 defaultUsername: ""
