@@ -7,7 +7,7 @@ name: Dispatcharr
 tagline: Manage IPTV playlists and guides, then stream them to Plex or Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/icon.png
 # renovate: datasource=docker depName=ghcr.io/dispatcharr/dispatcharr
-version: "0.31.0"
+version: "0.32.0"
 port: 9191
 description: >-
   Dispatcharr is an IPTV and stream manager in the spirit of the *arr apps. It
@@ -54,7 +54,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-4.jpg
 releaseNotes: >-
-  Initial release of Dispatcharr for this Community App Store.
+  Adds optional reverse-proxy header authentication (off by default), radio
+  channel support in M3U and XC output, richer stream failover events, and
+  quieter container logs. The default FFmpeg and Streamlink stream profiles now
+  copy all input streams and mux to MPEG-TS. Also fixes several issues with
+  connection counters, catch-up playback, Redis URLs and DVR recordings.
+
+  Full release notes can be found at https://github.com/Dispatcharr/Dispatcharr/releases/tag/v0.32.0
 dependencies: []
 path: ""
 defaultUsername: ""
