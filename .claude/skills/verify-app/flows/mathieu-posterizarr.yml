@@ -1,0 +1,21 @@
+verified: 3.3.7 on umbrelOS 2.0.0 (2026-10-07)
+requires: [plex]
+steps:
+  # The test Plex is not claimed, so it refuses any token from a container: a 401 answer (not a
+  # timeout) proves the documented Plex URL reaches Plex from Posterizarr.
+  - http:
+      path: /api/validate/plex
+      method: POST
+      headers: {content-type: application/json}
+      body: {url: "http://host.docker.internal:32400", token: verify-placeholder}
+      status: 200
+      contains: Invalid Plex token
+  - goto: /
+  - see: Let's get you set up in just a few steps!
+  - click: {role: button, name: Continue}
+  - see: Primary Media Server
+  - click: {role: button, name: Plex}
+  - fill: {placeholder: "http://192.168.1.93:32400", value: "http://host.docker.internal:32400"}
+  # Stops at the Plex token: completing the onboarding needs a Plex account (Auto-Fetch Token).
+  - see: {role: button, name: Auto-Fetch Token}
+  - shot: onboarding

@@ -1,0 +1,73 @@
+manifestVersion: 1
+id: mathieu-agregarr
+storage:
+  dataRoot: data
+category: media
+name: Agregarr
+tagline: Keep your Plex Home screen fresh with auto-updated collections
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/icon.png
+# renovate: datasource=docker depName=bitr8/agregarr
+version: "2.11.0"
+port: 7171
+description: >-
+  Agregarr builds Plex collections from public lists and pins them to your
+  Plex Home and Recommended screens: trending and popular lists from Trakt,
+  IMDb, TMDb, Letterboxd, MDBList, AniList and MyAnimeList, the Top 10 of each
+  streaming network (FlixPatrol), your most watched titles from Tautulli and
+  the requests made in Overseerr. Collections are refreshed on a schedule, can
+  be shown only on certain days or hours, and their order on the Home screen
+  can be rotated so it never looks the same.
+
+
+  Items missing from a list can be sent to Radarr/Sonarr (or requested through
+  Overseerr), "Coming Soon" collections show what Radarr and Sonarr are about
+  to grab, and poster templates and overlays give every collection its own
+  artwork.
+
+
+  This is the actively maintained bitr8 fork of Agregarr (same settings as
+  the original project).
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open Agregarr, sign in with your Plex account and pick your server. If it
+  isn't found, add it by hand with the address `host.docker.internal` and
+  port `32400`.
+
+
+  In the settings, connect the other apps with their API keys:
+
+  - Radarr: `http://radarr_server_1:7878`
+
+  - Sonarr: `http://sonarr_server_1:8989`
+
+  - Tautulli (optional): `http://tautulli_web_1:8181`
+
+  - Overseerr (optional): `http://overseerr_server_1:5055`
+
+
+  "Coming Soon" placeholders need a folder that Plex sees but Radarr and
+  Sonarr don't, e.g. `/downloads/agregarr/movies` and
+  `/downloads/agregarr/shows`: pick them in Agregarr and add them to your Plex
+  libraries.
+
+
+  Showing collections on the Plex Home screen requires Plex Pass.
+developer: bitr8
+website: https://agregarr.org
+submitter: Mathieu Le Tyrant
+submission: https://github.com/bitr8/agregarr-dev
+repo: https://github.com/bitr8/agregarr-dev
+support: https://github.com/bitr8/agregarr-dev/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
+releaseNotes: >-
+  Initial release on this store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
