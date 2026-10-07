@@ -38,6 +38,7 @@
     { "matchPackageNames": ["ghcr.io/samik081/mcp-adguard-home"], "commitMessageTopic": "AdGuard MCP" },
     { "matchPackageNames": ["ghcr.io/bardesss/arr-mcp"], "commitMessageTopic": "arr-mcp" },
     { "matchPackageNames": ["ghcr.io/leitosama/freshrss-mcp-server"], "commitMessageTopic": "FreshRSS MCP" },
+    { "matchPackageNames": ["bitr8/agregarr"], "commitMessageTopic": "Agregarr" },
     { "matchPackageNames": ["ghcr.io/iongpt/boxarr"], "commitMessageTopic": "Boxarr" },
     { "matchPackageNames": ["ghcr.io/thephaseless/byparr"], "commitMessageTopic": "Byparr" },
     { "matchPackageNames": ["robertlordhood/chaptarr"], "commitMessageTopic": "Chaptarr" },
@@ -47,11 +48,13 @@
     { "matchPackageNames": ["dockurr/umbrel"], "commitMessageTopic": "test umbrelOS (verify-app skill)" },
     { "matchPackageNames": ["ghcr.io/mescon/healarr"], "commitMessageTopic": "Healarr" },
     { "matchPackageNames": ["mrcas/kapowarr"], "commitMessageTopic": "Kapowarr" },
+    { "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"], "commitMessageTopic": "Labelarr" },
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
     { "matchPackageNames": ["ghcr.io/maintainerr/maintainerr"], "commitMessageTopic": "Maintainerr" },
     { "matchPackageNames": ["doobidoo/mcp-memory-service"], "commitMessageTopic": "MCP Memory" },
     { "matchPackageNames": ["ghcr.io/kirovair/muxarr"], "commitMessageTopic": "Muxarr" },
     { "matchPackageNames": ["iampuid0/neutarr"], "commitMessageTopic": "NeutArr" },
+    { "matchPackageNames": ["ghcr.io/fscorrupt/posterizarr"], "commitMessageTopic": "Posterizarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
     { "matchPackageNames": ["lakker/pulsarr"], "commitMessageTopic": "Pulsarr", "allowedVersions": "<1.0.0" },
@@ -66,6 +69,11 @@
     { "matchPackageNames": ["ghcr.io/chrisbenincasa/tunarr"], "commitMessageTopic": "Tunarr" },
     { "matchPackageNames": ["ghcr.io/unpackerr/unpackerr"], "commitMessageTopic": "Unpackerr" },
     { "matchPackageNames": ["ghcr.io/scryer-media/weaver"], "commitMessageTopic": "Weaver" },
+    {
+      "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"],
+      "matchManagers": ["custom.regex"],
+      "extractVersion": "^v(?<version>.+)$"
+    },
     {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
       "matchManagers": ["docker-compose"],

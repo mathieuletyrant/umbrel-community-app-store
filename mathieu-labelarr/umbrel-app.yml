@@ -1,0 +1,68 @@
+manifestVersion: 1
+id: mathieu-labelarr
+storage:
+  dataRoot: data
+category: media
+name: Labelarr
+tagline: Turn TMDb keywords into Plex labels for smarter filters and collections
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/nullable-eth/labelarr
+version: "1.4.0"
+port: 9095
+description: >-
+  TMDb tags every movie and show with keywords such as "time travel",
+  "heist", "based on novel" or "post-apocalyptic future". Labelarr copies
+  those keywords to Plex as labels (or genres), so you can filter your
+  libraries by them and build smart collections ("all heist movies", "every
+  show based on a comic") in a couple of clicks.
+
+
+  It never removes the labels you set yourself, remembers what it has
+  already processed, and runs every hour. With Plex Pass, a Plex webhook makes
+  it label new media as soon as it is added.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Labelarr needs a free TMDb "API Read Access Token" (themoviedb.org →
+  Settings → API): paste it in Labelarr's settings in umbrelOS. Everything
+  else is automatic: Labelarr reads the token of the Plex app installed on
+  this Umbrel (sign in to Plex first) and the API keys of Radarr and Sonarr,
+  which it uses to find the TMDb id of each title. If you install or sign in
+  to one of them later, restart Labelarr.
+
+
+  Labelarr runs in the background. Opening the app shows a status page with
+  the connections, a "Scan now" button and the recent activity. To label new
+  media right away (Plex Pass), add `http://127.0.0.1:9095/webhook` in Plex →
+  Settings → Webhooks.
+developer: nullable-eth
+website: https://github.com/nullable-eth/labelarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/nullable-eth/labelarr
+repo: https://github.com/nullable-eth/labelarr
+support: https://github.com/nullable-eth/labelarr/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/gallery-2.jpg
+releaseNotes: >-
+  Initial release on this store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+environment:
+  - name: TMDB_READ_ACCESS_TOKEN
+    services:
+      - server
+    note: TMDb "API Read Access Token" (the long one) from themoviedb.org → Settings → API.
+  - name: UPDATE_FIELD
+    services:
+      - server
+    default: label
+    options:
+      - label
+      - genre
+    note: Where the keywords go in Plex. label keeps Plex's own genres untouched.
+permissions: []

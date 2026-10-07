@@ -1,0 +1,9 @@
+verified: 2.11.0 on umbrelOS 2.0.0 (2026-10-07)
+steps:
+  - http: {path: /api/v1/status, status: 200, contains: '"version":"2\.11\.0"'}
+  - goto: /
+  - url: /setup
+  # Stops at the Plex sign-in: the next setup steps need a Plex account (plex.tv OAuth).
+  - see: Welcome to Agregarr
+  - see: {role: button, name: Sign In}
+  - shot: setup

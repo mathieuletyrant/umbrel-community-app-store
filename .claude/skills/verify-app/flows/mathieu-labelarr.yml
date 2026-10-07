@@ -1,0 +1,17 @@
+verified: 1.4.0 on umbrelOS 2.0.0 (2026-10-07)
+requires: [plex, radarr, sonarr]
+timeout: 420
+# No Plex account or TMDb token offline: a placeholder token in the Plex app's Preferences.xml stands
+# in for a signed-in Plex, so the proof shows Labelarr picked it up and now only waits for TMDb.
+prepare:
+  - docker exec plex_server_1 sh -c 'f="/config/Library/Application Support/Plex Media Server/Preferences.xml"; test -s "$f" && (grep -q PlexOnlineToken "$f" || sed -i "s|<Preferences |<Preferences PlexOnlineToken=\"verify-placeholder\" |" "$f")'
+logs:
+  server: TMDB_READ_ACCESS_TOKEN environment variable is required
+steps:
+  - goto: /
+  - see: {text: "Reachable (Plex", reload: true}
+  - see: {css: "#wiring tr:has-text('Plex account')", text: Signed in}
+  - see: {css: "#wiring tr:has-text('Radarr')", text: Found}
+  - see: {css: "#wiring tr:has-text('Sonarr')", text: Found}
+  - see: Add your TMDb read access token
+  - shot: status

@@ -1,0 +1,62 @@
+manifestVersion: 1
+id: mathieu-posterizarr
+storage:
+  dataRoot: data
+category: media
+name: Posterizarr
+tagline: Automated, consistent posters and title cards for Plex
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/fscorrupt/posterizarr
+version: "3.3.7"
+port: 8007
+description: >-
+  Posterizarr gives your whole Plex library a matching look. It fetches
+  textless artwork from TMDb, Fanart.tv and TVDB in the language you prefer,
+  then adds borders, overlays and the title in your own font to create movie
+  and show posters, season posters, backgrounds and episode title cards, and
+  uploads them to Plex.
+
+
+  Everything is driven from a web UI: a dashboard and live logs, a gallery
+  of every generated asset, a picker to replace any poster by hand, the
+  config editor and a scheduler. Runs can also be triggered by
+  Sonarr/Radarr or Tautulli so new movies and episodes get their artwork as
+  soon as they are imported.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open Posterizarr and follow the onboarding:
+
+  - Media server: Plex, with the URL `http://host.docker.internal:32400`,
+  then "Auto-Fetch Token" to sign in with your Plex account
+
+  - API keys: a TMDb read access token, a Fanart.tv key and a TVDB key (all
+  free)
+
+
+  Then start a test from the "Run Modes" page to check the settings, and a
+  normal run to create your artwork.
+
+
+  To get artwork as soon as something is imported, generate an API key in
+  Configuration → System → WebUI Settings, then in Sonarr and Radarr add a
+  Webhook connection (On Import, On Upgrade) with the URL
+  `http://mathieu-posterizarr_server_1:8000/api/webhook/arr?api_key=<key>`.
+developer: fscorrupt
+website: https://fscorrupt.github.io/posterizarr/
+submitter: Mathieu Le Tyrant
+submission: https://github.com/fscorrupt/posterizarr
+repo: https://github.com/fscorrupt/posterizarr
+support: https://github.com/fscorrupt/posterizarr/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/gallery-2.jpg
+releaseNotes: >-
+  Initial release on this store.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
