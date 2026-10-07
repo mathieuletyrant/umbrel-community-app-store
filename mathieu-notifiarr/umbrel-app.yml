@@ -37,10 +37,10 @@ description: >-
   1. Create an account on notifiarr.com, link your Discord and copy your API
   key from your profile.
 
-  2. Open Notifiarr and log in as `admin` with the default password shown by
-  umbrelOS. Under Configuration, paste the API key and save. Your Umbrel
-  then appears as a client on notifiarr.com, where you set up the
-  notifications.
+  2. Open Notifiarr, paste the API key and save. Then log in with your
+  notifiarr.com email and password. You can set a local password in
+  Notifiarr's profile page. Your Umbrel then appears as a client on
+  notifiarr.com, where you set up the notifications.
 
   3. For grab/import notifications, add a Notifiarr connection in Radarr and
   Sonarr (Settings → Connect → + → Notifiarr) with the same API key.
@@ -49,9 +49,6 @@ description: >-
   `http://127.0.0.1:5454/plex?token=<your API key>` in Plex (Settings →
   Webhooks).
 
-
-  The admin password is managed by umbrelOS: a password changed in
-  Notifiarr's profile page is reset to it on the next restart.
 developer: Go Lift
 website: https://notifiarr.com
 submitter: Mathieu Le Tyrant
@@ -62,7 +59,7 @@ gallery: []
 releaseNotes: ""
 dependencies: []
 path: ""
-defaultUsername: admin
-deterministicPassword: true
+defaultUsername: ""
+defaultPassword: ""
 permissions:
   - STORAGE_DOWNLOADS

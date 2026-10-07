@@ -4,15 +4,11 @@ timeout: 420
 # signed-in Plex, so Notifiarr gets wired to it like on a real Umbrel.
 prepare:
   - docker exec plex_server_1 sh -c 'f="/config/Library/Application Support/Plex Media Server/Preferences.xml"; test -s "$f" && (grep -q PlexOnlineToken "$f" || sed -i "s|<Preferences |<Preferences PlexOnlineToken=\"verify-placeholder\" |" "$f")'
+# Printed once the env is parsed, only for an instance that has an API key.
 logs:
   server: "Server 1: http://radarr_server_1:7878 apikey:true"
-# Past the login, Notifiarr only shows its UI once a notifiarr.com API key is validated online.
+# Until a notifiarr.com API key is validated online, Notifiarr only shows this screen.
 steps:
   - goto: /
-  - fill: {css: "#username", value: admin}
-  - fill: {css: "#password", value: "${env.server.DN_UI_PASSWORD}"}
-  - press: Enter
   - see: Provide API Key
   - shot: api-key
-  - http: {path: /ui/profile, status: 200, contains: "radarr_server_1:7878"}
-  - shot: profile

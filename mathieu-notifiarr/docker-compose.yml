@@ -14,7 +14,6 @@ services:
     restart: on-failure
     environment:
       TZ: Etc/UTC
-      DN_UI_PASSWORD: ${APP_PASSWORD}
       DN_RADARR_0_URL:
       DN_RADARR_0_API_KEY:
       DN_SONARR_0_URL:
