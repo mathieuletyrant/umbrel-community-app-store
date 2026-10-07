@@ -1073,9 +1073,18 @@ function appHash(appId) {
 function attachProofs(results, pr) {
 	if (!trySh('which', ['uploads'])) return console.error('✗ --pr: uploads CLI missing (npm install -g @buildinternet/uploads@0.56.7)')
 	const repo = REMOTE_URL().replace(/^.*github\.com\//, '').replace(/\.git$/, '')
+	const listed = trySh('uploads', ['--json', 'list', '--pr', String(pr), '--repo', repo])
+	const keys = listed ? JSON.parse(listed.slice(listed.indexOf('{'))).items.map((i) => i.key) : []
 	for (const r of results.filter((r) => r.proof)) {
 		const alt = `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version} on umbrelOS ${r.umbrel}`
-		const res = trySh('uploads', ['--json', 'put', r.proof, '--pr', String(pr), '--repo', repo, '--state', r.ok ? 'after' : 'error', '--alt', alt, '--width', '800'])
+		// GitHub caches embeds by URL: every proof needs a new name, so a re-run never shows the old image
+		const hash = crypto.createHash('sha256').update(fs.readFileSync(r.proof)).digest('hex').slice(0, 8)
+		const name = `${r.appId}--${r.version}--${r.ok ? 'pass' : 'fail'}--${hash}${path.extname(r.proof)}`
+		const old = new RegExp(`/${r.appId.replace(/[.]/g, '\\.')}(\\.proof|--.*--(pass|fail)--[0-9a-f]{8})\\.\\w+$`)
+		for (const k of keys.filter((k) => old.test(k))) {
+			if (trySh('uploads', ['delete', k]) === null) console.error(`✗ could not delete the previous proof ${k} (the token needs files:delete), it stays in the PR comment`)
+		}
+		const res = trySh('uploads', ['--json', 'put', r.proof, '--pr', String(pr), '--repo', repo, '--name', name, '--state', r.ok ? 'after' : 'error', '--alt', alt, '--width', '800'])
 		const j = res && JSON.parse(res.slice(res.indexOf('{')))
 		if (!j?.embedUrl) console.error(`✗ upload of ${r.proof} failed`)
 		else if (j.commentError) console.error(`✗ uploaded but the PR comment failed: ${j.commentError.split('\n')[0]}\n  post it yourself: ![${alt}](${j.embedUrl})`)

@@ -69,7 +69,11 @@ change it verified.
 
 `run ... --pr <n>` uploads each proof to [uploads.sh](https://uploads.sh) and its bot
 (`uploads-sh[bot]`) keeps **one** comment on the PR up to date with every proof and its ✅/❌ line.
-Running again replaces the images in place.
+Each proof gets a new name, `<app-id>--<version>--pass|fail--<hash>.webp`: GitHub caches an embed
+by its URL, so an image replaced in place keeps showing the old one. The previous proof of the
+app is deleted first (the token needs the `files:delete` scope; without it the run says so and the
+old image stays listed below the new one). When reading the comment back, trust the file name,
+not the picture: the newest entry for the app must say `--pass--` on the right version.
 
 Don't replay a flow just for the PR: when the proofs were made before the PR existed, attach
 them with `node $V attach --pr <n>` (the changed apps, or name them). Each `run` leaves a
