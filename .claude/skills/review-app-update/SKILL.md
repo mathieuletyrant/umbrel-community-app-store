@@ -22,7 +22,7 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
    Find the app folder, the image, old → new version, and the update type
    (patch / minor / major / digest-only). PRs that only touch
    `.github/workflows/` or `.claude/skills/` (action digests, verify-app's
-   umbrelOS image): skip to step 5.
+   umbrelOS image): skip to step 6.
 2. **Changelog.** Read the upstream release notes for every version between old
    and new: the PR body first, then the upstream repo (`repo:` / `website:` in
    the app's `umbrel-app.yml`): GitHub releases, CHANGELOG, docs site, Docker
@@ -52,7 +52,18 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
    (run it in the background, as the skill says), then Read `summary.png`.
    Follow `.claude/skills/verify-app/SKILL.md`. If the app has no flow, run it
    anyway: install + containers + HTTP checks still count.
-5. **Decide.** The gate is the verify proof: an app that installs and reaches
+5. **Fix, don't just report.** The goal is a merged PR with a green uploaded proof.
+   When verify ❌ or the changelog announces a breaking change, fix it yourself on
+   the PR branch and re-run verify until it passes:
+   - flow drift (a step can't find its element, a new wizard, a changed login):
+     `explore`, then update `.claude/skills/verify-app/flows/<app-id>.yml`;
+   - sandbox/browser quirks (locale, timeouts): fix `verify.mjs`;
+   - breaking change (renamed env var, new port, moved path, new required
+     setting): adapt `docker-compose.yml` / `umbrel-app.yml` for that app, and
+     bump `-patch.N` if `version:` didn't change.
+   Only stop and comment when you cannot fix it: a real upstream bug, a data
+   migration needing manual steps, a major bump, or a sandbox ❌ (egress, rate limit).
+6. **Decide.** The gate is the verify proof: an app that installs and reaches
    its set-up screen works. But `verify-app` always installs from scratch, so it
    can't see what breaks an *existing* install on upgrade: that is what the
    changelog is for.
@@ -72,7 +83,7 @@ mathieuletyrant/umbrel-community-app-store. Read `CLAUDE.md` first.
 
 ## Rules
 
-- Never touch other apps, `renovate.json` or this skill.
+- Touch only the app under review, its flow and `verify.mjs`; never other apps or `renovate.json`.
 - Never merge on a ✅ whose proof you have not looked at, or that is not uploaded on the PR.
 - Never force-push, never rewrite Renovate's commits.
 - A ❌ that comes from the sandbox (egress blocked, Docker Hub rate limit), not
