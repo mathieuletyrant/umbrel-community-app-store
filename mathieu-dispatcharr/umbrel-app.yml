@@ -7,7 +7,7 @@ name: Dispatcharr
 tagline: Manage IPTV playlists and guides, then stream them to Plex or Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/icon.png
 # renovate: datasource=docker depName=ghcr.io/dispatcharr/dispatcharr
-version: "0.31.0"
+version: "0.32.0"
 port: 9191
 description: >-
   Dispatcharr is an IPTV and stream manager in the spirit of the *arr apps. It
