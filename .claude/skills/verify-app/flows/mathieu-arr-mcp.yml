@@ -1,4 +1,4 @@
-verified: 1.39.1 on umbrelOS 2.0.0 (2026-10-06)
+verified: 1.39.2 on umbrelOS 2.0.0 (2026-10-08)
 requires: [radarr, sonarr]
 logs:
   autoconfig: "added from Umbrel: .*[Rr]adarr"
