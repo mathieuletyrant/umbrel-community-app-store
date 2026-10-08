@@ -55,7 +55,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-3.jpg
 releaseNotes: >-
-  Initial release of Tunarr for this Community App Store.
+  Bug-fix release. Guide (XMLTV) writes no longer stall live streams, each HLS
+  streaming session gets its own directory and playlists stop listing deleted
+  segments, and lineup items shorter than 10 seconds are no longer skipped.
+  Local library scans keep going past bad NFO files, and media source URLs are
+  trimmed of whitespace.
+
+
+  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.0
 dependencies: []
 path: ""
 defaultUsername: ""
