@@ -56,7 +56,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
-releaseNotes: "Fixes metadata detector false positives on Plex libraries, improves Plex per-user tools compatibility, and fixes Jellyfin lock reading for metadata repairs."
+releaseNotes: >-
+  Hardens tool and config input against SSRF-style misuse, hides user:pass@ in service URLs on the config page, and matches Seerr requests by user id.
+
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.39.2
 dependencies: []
 path: ""
 defaultUsername: ""
