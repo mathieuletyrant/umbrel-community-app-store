@@ -74,12 +74,18 @@ function parseArgs(argv) {
 
 // ── Docker + umbrelOS ────────────────────────────────────────────────────────
 
+const ROOT = process.getuid?.() === 0
+const UPLOADS_PKG = '@buildinternet/uploads@0.56.7'
+
 async function ensureDocker() {
 	if (trySh('docker', ['info']) !== null) return
-	if (process.getuid?.() !== 0 || !trySh('which', ['dockerd'])) throw new Error('Docker daemon is not running')
+	if (!trySh('which', ['dockerd'])) throw new Error('dockerd is not installed (run scripts/setup-cloud.sh in the sandbox, or start Docker)')
+	if (!ROOT) throw new Error('Docker daemon is not running (start it, or run as root so verify can)')
 	log('starting dockerd')
 	const out = fs.openSync(path.join(HOME, 'dockerd.log'), 'a')
-	spawn('dockerd', ['--registry-mirror', 'https://mirror.gcr.io'], {detached: true, stdio: ['ignore', out, out]}).unref()
+	// A compose `ulimits: nofile` above dockerd's own hard limit fails with "error setting rlimit type 7";
+	// nested sandboxes start low, so raise it before dockerd inherits it.
+	spawn('sh', ['-c', 'ulimit -n 1048576 2>/dev/null; exec dockerd --registry-mirror https://mirror.gcr.io'], {detached: true, stdio: ['ignore', out, out]}).unref()
 	for (let i = 0; i < 60; i++) {
 		if (trySh('docker', ['info']) !== null) return
 		await sleep(1000)
@@ -1070,11 +1076,21 @@ function appHash(appId) {
 	return h.digest('hex')
 }
 
+const uploads = (args) => {
+	const [cmd, ...pre] = trySh('which', ['uploads']) ? ['uploads'] : ['npx', '-y', UPLOADS_PKG]
+	return trySh(cmd, [...pre, ...args], {timeout: 180_000})
+}
+const uploadsJson = (args) => {
+	const out = uploads(['--json', ...args])
+	return out && out.includes('{') ? JSON.parse(out.slice(out.indexOf('{'))) : null
+}
+const repoSlug = () => REMOTE_URL().replace(/^.*github\.com\//, '').replace(/\.git$/, '')
+
 function attachProofs(results, pr) {
-	if (!trySh('which', ['uploads'])) return console.error('✗ --pr: uploads CLI missing (npm install -g @buildinternet/uploads@0.56.7)')
-	const repo = REMOTE_URL().replace(/^.*github\.com\//, '').replace(/\.git$/, '')
-	const listed = trySh('uploads', ['--json', 'list', '--pr', String(pr), '--repo', repo])
-	const keys = listed ? JSON.parse(listed.slice(listed.indexOf('{'))).items.map((i) => i.key) : []
+	if (!process.env.UPLOADS_TOKEN) return console.error('✗ --pr: UPLOADS_TOKEN is not set, proofs stay local')
+	const repo = repoSlug()
+	const keys = uploadsJson(['list', '--pr', String(pr), '--repo', repo])?.items?.map((i) => i.key) ?? []
+	let attached = 0
 	for (const r of results.filter((r) => r.proof)) {
 		const alt = `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version} on umbrelOS ${r.umbrel}`
 		// GitHub caches embeds by URL: every proof needs a new name, so a re-run never shows the old image
@@ -1082,14 +1098,18 @@ function attachProofs(results, pr) {
 		const name = `${r.appId}--${r.version}--${r.ok ? 'pass' : 'fail'}--${hash}${path.extname(r.proof)}`
 		const old = new RegExp(`/${r.appId.replace(/[.]/g, '\\.')}(\\.proof|--.*--(pass|fail)--[0-9a-f]{8})\\.\\w+$`)
 		for (const k of keys.filter((k) => old.test(k))) {
-			if (trySh('uploads', ['delete', k]) === null) console.error(`✗ could not delete the previous proof ${k} (the token needs files:delete), it stays in the PR comment`)
+			if (uploads(['delete', k]) === null) console.error(`✗ could not delete the previous proof ${k} (the token needs files:delete), it stays in the PR comment`)
 		}
-		const res = trySh('uploads', ['--json', 'put', r.proof, '--pr', String(pr), '--repo', repo, '--name', name, '--state', r.ok ? 'after' : 'error', '--alt', alt, '--width', '800'])
-		const j = res && JSON.parse(res.slice(res.indexOf('{')))
+		const j = uploadsJson(['put', r.proof, '--pr', String(pr), '--repo', repo, '--name', name, '--state', r.ok ? 'after' : 'error', '--alt', alt, '--width', '800'])
 		if (!j?.embedUrl) console.error(`✗ upload of ${r.proof} failed`)
 		else if (j.commentError) console.error(`✗ uploaded but the PR comment failed: ${j.commentError.split('\n')[0]}\n  post it yourself: ![${alt}](${j.embedUrl})`)
-		else say(`proof on PR #${pr}: ${j.embedUrl}`)
+		else {
+			attached++
+			say(`proof on PR #${pr}: ${name} → ${j.embedUrl}`)
+		}
 	}
+	const n = results.filter((r) => r.proof).length
+	console.log(`proofs on PR #${pr}: ${attached}/${n} uploaded${attached < n ? ' — NOT all proofs are on the PR' : ''}`)
 }
 
 function changedApps() {
@@ -1132,7 +1152,48 @@ const USAGE = `usage: verify.mjs <command> [args] [flags]
       --serve       keep the browser open; drive it with \`step\`
   step '<yaml>'     run step(s) in the --serve session, print the page; --append adds them to the flow
   step --stop       close the --serve session
+  doctor            check this machine can run a verification (Docker, browser, uploads, egress) and say what is missing
   up | down | store | install <app-id> | uninstall <app-id> | logs <app-id> | status`
+
+// What a `run` needs, checked up front so a missing piece costs seconds, not a 10-minute run.
+async function doctor() {
+	const checks = []
+	const check = (name, ok, fix, {blocking = true} = {}) => checks.push({name, ok: !!ok, fix, blocking})
+	check('python3 + pyyaml (flow and manifest parsing)', trySh('python3', ['-c', 'import yaml']) !== null, 'pip install pyyaml  (or apt-get install python3-yaml)')
+	const docker = trySh('docker', ['info']) !== null
+	check('Docker daemon', docker, trySh('which', ['dockerd']) ? (ROOT ? '`verify.mjs up` starts dockerd itself' : 'start Docker, or run as root') : 'install Docker (scripts/setup-cloud.sh)')
+	if (docker) {
+		const mirrors = trySh('docker', ['info', '-f', '{{json .RegistryConfig.Mirrors}}']) ?? ''
+		check('Docker Hub mirror (mirror.gcr.io, avoids the anonymous rate limit)', mirrors.includes('mirror.gcr.io'), 'add {"registry-mirrors":["https://mirror.gcr.io"]} to /etc/docker/daemon.json and kill -HUP dockerd', {blocking: false})
+	}
+	const raw = trySh('sh', ['-c', 'ulimit -Hn']) ?? '0'
+	const nofile = raw === 'unlimited' ? Infinity : Number(raw)
+	check(`hard nofile limit ${raw} (a compose \`ulimits: nofile\` above it fails with "error setting rlimit type 7")`, nofile >= 65536, 'ulimit -n 1048576 before starting dockerd', {blocking: false})
+	let chromium = null
+	try {
+		chromium = (await playwright()).chromium.executablePath()
+	} catch {}
+	check('Playwright + Chromium', chromium && fs.existsSync(chromium), `npm install -g playwright@1.63.0 && npx playwright install --with-deps chromium`)
+	check('ffmpeg (flows with `fixtures`)', trySh('which', ['ffmpeg']), 'apt-get install ffmpeg', {blocking: false})
+	check('gh authenticated (PR comments and merges)', trySh('gh', ['api', 'user', '-q', '.login']), 'gh auth login', {blocking: false})
+	const token = !!process.env.UPLOADS_TOKEN
+	check('UPLOADS_TOKEN set (proofs on the PR)', token, 'set it in the environment settings', {blocking: false})
+	if (token) check('uploads CLI works (`uploads` or npx fallback)', uploads(['whoami']), `npm install -g ${UPLOADS_PKG}`, {blocking: false})
+	const reach = async (url) => {
+		try {
+			return (await fetch(url, {signal: AbortSignal.timeout(10_000)})).status < 500
+		} catch (e) {
+			return false
+		}
+	}
+	for (const [what, url] of [['ghcr.io (most app images)', 'https://ghcr.io/v2/'], ['mirror.gcr.io (Docker Hub images)', 'https://mirror.gcr.io/v2/'], ['registry.npmjs.org (npx fallback)', 'https://registry.npmjs.org/-/ping'], ['uploads.sh', 'https://uploads.sh/']])
+		check(`egress to ${what}`, await reach(url), 'allow the host in the environment network settings', {blocking: what.startsWith('ghcr')})
+	check(`proxy CA bundle ${caBundle() ?? '(none, fine outside the sandbox)'}`, true, '', {blocking: false})
+	for (const c of checks) console.log(`${c.ok ? '✓' : c.blocking ? '✗' : '⚠'} ${c.name}${c.ok || !c.fix ? '' : `\n    → ${c.fix}`}`)
+	const bad = checks.filter((c) => !c.ok && c.blocking)
+	console.log(bad.length ? `\n✗ ${bad.length} blocking problem(s): a run cannot work here until fixed` : '\n✓ ready to run')
+	if (bad.length) process.exitCode = 1
+}
 
 async function main() {
 	const [cmd, ...argv] = process.argv.slice(2)
@@ -1147,6 +1208,9 @@ async function main() {
 			log(`umbrelOS ready on http://localhost:${UMBREL_PORT} (password: ${PASSWORD})`)
 			break
 		}
+		case 'doctor':
+			await doctor()
+			break
 		case 'down':
 			await down()
 			break

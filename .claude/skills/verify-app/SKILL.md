@@ -84,20 +84,23 @@ on the web session, whose GitHub proxy refuses every native way to attach an ima
 proof comment of your own on top of it.
 
 Needs `UPLOADS_TOKEN` (set in the environment's settings, never pasted in a conversation;
-`uploads whoami` checks it) and the CLI (`npm install -g @buildinternet/uploads@0.56.7` when
-`uploads` is missing). The repo is linked to the uploads workspace
-(`uploads github link --status --repo mathieuletyrant/umbrel-community-app-store`). If the run
-prints `PR comment failed`, post the comment yourself with the Markdown line it prints:
-`![alt](embedUrl)`, never the `<img>` tag of the upload's `markdown` field, which the GitHub MCP
-tools HTML-escape into text. Then read the comment back (`pull_request_read` `get_comments`) to
-check it still holds `![`.
+`uploads whoami` checks it). The CLI is `uploads` when installed, else `npx -y
+@buildinternet/uploads@0.56.7` (the run falls back to it by itself). The repo is linked to the
+uploads workspace (`uploads github link --status --repo mathieuletyrant/umbrel-community-app-store`).
+The run ends with `proofs on PR #n: k/k uploaded`; any other count means a proof is missing on
+the PR (`attach --pr <n>` retries). If it prints `PR comment failed`, post the comment yourself
+with the Markdown line it prints: `![alt](embedUrl)`, never the `<img>` tag of the upload's
+`markdown` field, which the GitHub MCP tools HTML-escape into text. Then read the comment back
+(`pull_request_read` `get_comments`) to check it still holds `![`.
 
 Uploads are **public** whatever the repository's visibility. The proof only shows the throwaway
 umbrelOS, but never upload a shot holding real credentials or a user's data. Without the token,
 send the proof with SendUserFile and say in the PR that it wasn't uploaded.
 
-Other commands: `up` / `down` (wipe everything) / `status` / `store` / `install <id>` /
+Other commands: `doctor` (can this machine run a verification? ✗ blocking / ⚠ degraded, each
+with its fix) / `up` / `down` (wipe everything) / `status` / `store` / `install <id>` /
 `uninstall <id>` / `logs <id>` / `explore` / `step` (see "Writing or repairing a flow").
+On a machine you don't know (a cloud sandbox), run `doctor` before anything else.
 
 ## What `run` checks, in order
 
@@ -216,17 +219,25 @@ workaround, why the flow stops early).
 
 ## Sandbox notes (Claude Code cloud)
 
-- `dockerd` is started automatically when Docker isn't running (root). umbrelOS listens on
-  :80, apps on their manifest `port` (override with `VERIFY_UMBREL_PORT` / `VERIFY_GIT_PORT`).
+- The VM is root, Ubuntu, with Docker installed but **no running dockerd** (processes don't
+  survive a VM snapshot). `up`/`run` start it (`--registry-mirror mirror.gcr.io`, hard `nofile`
+  raised first: a compose `ulimits: nofile` above dockerd's own limit fails with `error setting
+  rlimit type 7`). Never conclude "no Docker here" from a failed `docker ps`: run `doctor`.
+- `scripts/setup-cloud.sh` is the environment's setup script (Chromium, `uploads`, ffmpeg,
+  pyyaml, Docker mirror). It is cached between VMs when it finishes within ~5 min, so it installs
+  and starts nothing. When `doctor` shows a ✗ the script should have covered, the environment
+  isn't using it (or its cache is stale): say so in the PR comment.
+- umbrelOS listens on :80, apps on their manifest `port` (override with `VERIFY_UMBREL_PORT` /
+  `VERIFY_GIT_PORT`).
 - Docker Hub pulls go through `mirror.gcr.io` (Google's pull-through cache), so the anonymous
   rate limit of the shared egress IP (`429 Too Many Requests`) doesn't stall installs. On a
-  dockerd that was already running: write `{"registry-mirrors": ["https://mirror.gcr.io"]}` to
-  `/etc/docker/daemon.json` and `kill -HUP` it (live reload, containers keep running).
-- Outbound HTTPS goes through a TLS-intercepting proxy. umbreld gets its CA automatically.
-  App containers don't: `egress: true` appends the CA to the container's system trust store
-  and restarts it (works for Go/Python/OpenSSL; Node apps that ignore the system store still
-  fail). Some hosts are denied by policy (e.g. `api.github.com` for other repos) — `mock`
-  the app's own endpoint in the browser instead, never work around the policy.
+  dockerd that was already running without it: write `{"registry-mirrors": ["https://mirror.gcr.io"]}`
+  to `/etc/docker/daemon.json` and `kill -HUP` it (live reload, containers keep running).
+- Outbound HTTPS may go through a TLS-intercepting proxy. umbreld gets its CA automatically
+  (`NODE_EXTRA_CA_CERTS` or `/root/.ccr/ca-bundle.crt`). App containers don't: `egress: true`
+  appends the CA to the container's system trust store and restarts it (works for
+  Go/Python/OpenSSL; Node apps that ignore the system store still fail). Some hosts are denied
+  by policy: `mock` the app's own endpoint in the browser instead, never work around the policy.
 - App ports are only reachable from a browser logged into umbrelOS (the runner does that); a
   bare `curl` gets a 302 to umbrelOS auth.
 - `down` wipes the test umbrelOS (`~/.umbrel-verify`). It only touches containers it created
