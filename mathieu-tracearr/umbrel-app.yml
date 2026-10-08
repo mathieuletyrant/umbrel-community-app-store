@@ -45,7 +45,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  Tracearr's data now persists across restarts and updates: its database, Redis, settings and backups are stored in the app's data folder instead of temporary Docker volumes. Data created before this update was already lost at the last restart and can't be recovered; you will need to create your account and add your servers again once.
+  Tracearr's data now persists across restarts and updates: its database, Redis, settings and backups are stored in the app's data folder instead of anonymous Docker volumes that were replaced at every restart. Data from before this update isn't carried over, so create your account and add your servers once more after updating.
 
   The public API v2 gains live events over SSE, plus violations and server status. Titles in history, now playing and the map now link to their media pages. Server down and up automations fire once per outage, and editing a Jellyfin or Emby server accepts a new API key after the old one was revoked.
 
