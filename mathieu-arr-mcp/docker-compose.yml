@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp*,/.well-known/*,/healthz"
 
   autoconfig:
-    image: ghcr.io/bardesss/arr-mcp:1.39.2@sha256:fe17c6db84763d7caa6873c18a5d6978c538082eddd9bdaaf71dff9b114bde8d
+    image: ghcr.io/bardesss/arr-mcp:1.39.3@sha256:48f3bcac6fd57b3e1e23717a30431e768b72a50926d0d0f4bf9e45e3e51b710e
     user: "1000:1000"
     entrypoint: ["node", "--input-type=module", "--eval"]
     command:
@@ -120,7 +120,7 @@ services:
     restart: "no"
 
   server:
-    image: ghcr.io/bardesss/arr-mcp:1.39.2@sha256:fe17c6db84763d7caa6873c18a5d6978c538082eddd9bdaaf71dff9b114bde8d
+    image: ghcr.io/bardesss/arr-mcp:1.39.3@sha256:48f3bcac6fd57b3e1e23717a30431e768b72a50926d0d0f4bf9e45e3e51b710e
     environment:
       - TZ=Etc/UTC
       - PUID=1000
