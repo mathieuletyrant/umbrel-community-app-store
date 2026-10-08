@@ -1,0 +1,65 @@
+manifestVersion: 1
+id: mathieu-notifiarr
+storage:
+  dataRoot: data
+category: media
+name: Notifiarr
+tagline: Rich Discord notifications and a dashboard for your *arr stack and Plex
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-notifiarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/notifiarr/notifiarr
+version: "0.9.7"
+port: 5454
+description: >-
+  Notifiarr turns what happens in your media stack into rich, configurable
+  Discord notifications: grabs, imports, upgrades, health warnings, Plex
+  playback, stuck downloads, failed backups, system snapshots and more. It
+  can also sync TRaSH custom formats and quality profiles to Radarr and
+  Sonarr, and keep an eye on your services with health checks.
+
+
+  This app is the Notifiarr client. It runs on your Umbrel, talks to your
+  apps locally and connects out to notifiarr.com, where you pick which
+  notifications go to which Discord channel. No port forwarding is needed.
+  A free notifiarr.com account is required; some features need a Patron
+  subscription.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Radarr, Sonarr, Lidarr, Readarr, Prowlarr, SABnzbd, Transmission, Tautulli
+  and Plex from the Umbrel App Store are connected automatically when they are
+  installed. If you install one of them after Notifiarr, restart Notifiarr so
+  it picks it up. Their settings are shown with an "environment variable"
+  notice in Notifiarr: they are managed by umbrelOS.
+
+
+  1. Create an account on notifiarr.com, link your Discord and copy your API
+  key from your profile.
+
+  2. Open Notifiarr, paste the API key and save. Then log in with your
+  notifiarr.com email and password. You can set a local password in
+  Notifiarr's profile page. Your Umbrel then appears as a client on
+  notifiarr.com, where you set up the notifications.
+
+  3. For grab/import notifications, add a Notifiarr connection in Radarr and
+  Sonarr (Settings → Connect → + → Notifiarr) with the same API key.
+
+  4. Optional, Plex Pass only: for playback notifications, add the webhook
+  `http://127.0.0.1:5454/plex?token=<your API key>` in Plex (Settings →
+  Webhooks).
+
+developer: Go Lift
+website: https://notifiarr.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/Notifiarr/notifiarr
+support: https://notifiarr.com/discord
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
