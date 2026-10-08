@@ -1,4 +1,4 @@
-verified: 2.7.0 on umbrelOS 2.0.0 (2026-10-08)
+verified: 2.7.0-patch.1 on umbrelOS 2.0.0 (2026-10-08)
 steps:
   - goto: /
   - see: Create your account to get started
