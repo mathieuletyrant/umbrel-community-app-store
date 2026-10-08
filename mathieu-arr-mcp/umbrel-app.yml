@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.41.0"
+version: "1.41.1"
 port: 6060
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,9 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  get_queue now carries import status messages, trigger_scan can import files with a mapping when the service cannot place them, and manage_indexer can disable or delete a Prowlarr indexer. Also fixes metadata and Plex repair detector findings.
+  Metadata findings that are only a language difference are now marked as such instead of being reported as real mismatches.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.41.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.41.1
 dependencies: []
 path: ""
 defaultUsername: ""
