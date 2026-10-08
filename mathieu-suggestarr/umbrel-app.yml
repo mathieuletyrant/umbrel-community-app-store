@@ -42,10 +42,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-3.jpg
 releaseNotes: >-
-  Adds a user-managed watch history and feedback-driven recommendations, lets you open a title's YouTube trailer from request details, AI Search and dry run, and simplifies Trakt setup (only a Client ID is needed now). Also improves Seer request handling and settings.
+  Fixes Jellyfin 12 account linking (no more legacy authorization needed), makes Jellyfin/Emby recommendation jobs request through the linked Seerr account of the user whose watch history is processed, and improves Seerr authentication reliability on retries.
 
 
-  Full release notes can be found at https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v2.16.0
+  Full release notes can be found at https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v2.16.1
 dependencies: []
 path: ""
 defaultUsername: ""
