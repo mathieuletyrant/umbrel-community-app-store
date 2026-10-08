@@ -1,9 +1,5 @@
 version: "3.7"
 
-# Tracearr all-in-one ("supervised") image: bundles TimescaleDB + Redis + the
-# app in a single container. Matches the setup validated on Portainer.
-# On Umbrel the app_proxy handles routing, so no host port mapping is needed.
-
 services:
   app_proxy:
     environment:
@@ -17,13 +13,9 @@ services:
     environment:
       - TZ=Etc/UTC
       - LOG_LEVEL=info
-      - JWT_SECRET=8f3c1a6b2e9d47c05a1f8b3d6e2c9a740b5d1e8f3a2c6b9d0e4f7a1c5b8d3e60
-      - COOKIE_SECRET=2a9f4c7e1b8d306a5f2c9e4b7d1a8f603c5e2b9d4a7f1c8e0b3d6a9f2c5e8b41
     volumes:
-      - tracearr_data:/data
-      - tracearr_pgdata:/var/lib/postgresql/data
+      - ${APP_DATA_DIR}/data/postgres:/data/postgres
+      - ${APP_DATA_DIR}/data/redis:/data/redis
+      - ${APP_DATA_DIR}/data/tracearr:/data/tracearr
+      - ${APP_DATA_DIR}/data/tracearr/backup:/data/backup
     restart: on-failure
-
-volumes:
-  tracearr_data:
-  tracearr_pgdata:
