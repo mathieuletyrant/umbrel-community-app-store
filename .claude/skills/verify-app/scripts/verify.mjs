@@ -85,7 +85,8 @@ async function ensureDocker() {
 	const out = fs.openSync(path.join(HOME, 'dockerd.log'), 'a')
 	// A compose `ulimits: nofile` above dockerd's own hard limit fails with "error setting rlimit type 7";
 	// nested sandboxes start low, so raise it before dockerd inherits it.
-	spawn('sh', ['-c', 'ulimit -n 1048576 2>/dev/null; exec dockerd --registry-mirror https://mirror.gcr.io'], {detached: true, stdio: ['ignore', out, out]}).unref()
+	const mirrorFlag = (() => { try { return fs.readFileSync('/etc/docker/daemon.json', 'utf8').includes('registry-mirrors') ? '' : '--registry-mirror https://mirror.gcr.io' } catch { return '--registry-mirror https://mirror.gcr.io' } })()
+	spawn('sh', ['-c', `ulimit -n 1048576 2>/dev/null; exec dockerd ${mirrorFlag}`], {detached: true, stdio: ['ignore', out, out]}).unref()
 	for (let i = 0; i < 60; i++) {
 		if (trySh('docker', ['info']) !== null) return
 		await sleep(1000)
