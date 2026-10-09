@@ -1,4 +1,4 @@
-verified: 0.3.0 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.1.0 on umbrelOS 2.0.0 (2026-10-09)
 requires: [radarr, sonarr, transmission]
 logs:
   server: "apps: radarr, sonarr, transmission"
