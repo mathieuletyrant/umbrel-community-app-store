@@ -238,9 +238,11 @@ JSON directly from the host: no app_proxy, no Umbrel login, the container's inte
   or a setting the user fills in. Never a key copied by hand into the compose.
 - The `Packages` workflow runs `bun run typecheck` and `bun test` on every push, and publishes each
   image the first time its version from `packages/<package>/package.json` is pushed, from any
-  branch. Published versions are never overwritten: bump the version to ship a change, then pin the
-  new digest (the run summary prints it) in each app using it, with a `-patch.N` bump. Renovate
-  groups those bumps in one PR.
+  branch. Published versions are never overwritten: bump the version to ship a change.
+- Renovate ignores the store's own images (`ghcr.io/mathieuletyrant/**`): the PR that bumps a
+  package's version also pins the new digest (the run summary prints it) in every app using that
+  image, with a `-patch.N` bump. `validate_apps.py` fails an app whose own-image tag differs from
+  its package's version (each `package.json` names its `image`).
 - Verify with a `widget: <id>` flow step, then a `see` of what the widget renders on the home screen.
 
 ## Verifying an image tag before publishing (avoid "manifest unknown")

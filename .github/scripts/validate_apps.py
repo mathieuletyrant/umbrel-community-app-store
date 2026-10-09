@@ -77,6 +77,15 @@ if official_dir:
 else:
     print("⚠️  OFFICIAL_APPS_DIR not set: ports are not checked against the official Umbrel App Store")
 
+# The store's own images: Renovate leaves them alone, so the PR that bumps a package also pins
+# its new version in every app using it.
+own_images = {
+    package["image"]: (manifest.parent.name, str(package["version"]))
+    for manifest in sorted((ROOT / "packages").glob("*/package.json"))
+    for package in [json.loads(manifest.read_text())]
+    if "image" in package
+}
+
 renovate = json.loads((ROOT / "renovate.json").read_text())
 renovate_topics = {
     pkg
@@ -161,6 +170,10 @@ for d in app_dirs:
         if svc == "app_proxy":
             continue
         image = (spec or {}).get("image")
+        repository, _, tag = str(image or "").split("@")[0].rpartition(":")
+        if repository in own_images and tag != own_images[repository][1]:
+            package, version = own_images[repository]
+            fail(f"{name}: service '{svc}' uses {repository}:{tag}, but packages/{package} is at {version}: pin the new version and digest, with a -patch.N bump")
         if image and "@sha256:" not in image:
             fail(f"{name}: service '{svc}' image is not pinned by digest: {image}")
         for device in (spec or {}).get("devices") or []:

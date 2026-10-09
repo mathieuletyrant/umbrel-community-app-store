@@ -35,13 +35,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        include:
-          - package: widgets
-            image: ghcr.io/mathieuletyrant/umbrel-widgets
-          - package: vitals
-            image: ghcr.io/mathieuletyrant/vitals
-    env:
-      IMAGE: ${{ matrix.image }}
+        package: [widgets, vitals]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -51,14 +45,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Skip a version that is already published
+      - name: Read the image, skip a version that is already published
         id: version
         run: |
-          version=$(jq -r .version "packages/${{ matrix.package }}/package.json")
+          manifest="packages/${{ matrix.package }}/package.json"
+          IMAGE=$(jq -r .image "$manifest")
+          version=$(jq -r .version "$manifest")
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
           echo "version=$version" >> "$GITHUB_OUTPUT"
           if docker buildx imagetools inspect "$IMAGE:$version" > /dev/null 2>&1; then
             echo "published=true" >> "$GITHUB_OUTPUT"
-            echo "$IMAGE:$version is already published. Bump the version in packages/${{ matrix.package }}/package.json to publish a new image." | tee -a "$GITHUB_STEP_SUMMARY"
+            echo "$IMAGE:$version is already published. Bump the version in $manifest to publish a new image." | tee -a "$GITHUB_STEP_SUMMARY"
           fi
 
       - if: steps.version.outputs.published != 'true'
