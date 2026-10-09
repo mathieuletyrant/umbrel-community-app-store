@@ -1,9 +1,9 @@
 import {readFile} from 'node:fs/promises'
 import path from 'node:path'
 
-import {decodeHtml, timeAgo} from '../format'
-import {HttpError, request} from '../http'
-import type {App, FourStatsWidget, ListWidget} from '../umbrel'
+import {decodeHtml, timeAgo} from '../../core/format'
+import {HttpError, request} from '../../core/http'
+import type {App, FourStatsWidget, ListWidget} from '../types'
 
 type Config = {
 	apiUrl: string

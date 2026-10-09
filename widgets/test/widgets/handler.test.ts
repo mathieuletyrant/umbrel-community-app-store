@@ -1,7 +1,7 @@
 import {expect, test} from 'bun:test'
 
-import {createHandler} from '../src/handler'
-import type {App, ListWidget} from '../src/umbrel'
+import {createHandler} from '../../src/widgets/handler'
+import type {App, ListWidget} from '../../src/widgets/types'
 
 const fallback: ListWidget = {type: 'list', refresh: '1m', items: [], noItemsText: 'Unavailable'}
 const app: App = {

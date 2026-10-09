@@ -1,4 +1,5 @@
-import type {App} from './umbrel'
+import {errorMessage} from '../core/http'
+import type {App} from './types'
 
 export function createHandler(app: App, log: (message: string) => void = console.error) {
 	return async (request: Request): Promise<Response> => {
@@ -8,7 +9,7 @@ export function createHandler(app: App, log: (message: string) => void = console
 		try {
 			return Response.json(await source.read())
 		} catch (error) {
-			log(`${id}: ${error instanceof Error ? error.message : String(error)}`)
+			log(`${id}: ${errorMessage(error)}`)
 			return Response.json(source.fallback)
 		}
 	}

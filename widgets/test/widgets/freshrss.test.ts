@@ -3,7 +3,7 @@ import {mkdtempSync, writeFileSync} from 'node:fs'
 import {tmpdir} from 'node:os'
 import path from 'node:path'
 
-import {freshrss} from '../src/apps/freshrss'
+import {freshrss} from '../../src/widgets/apps/freshrss'
 
 const now = new Date('2026-10-09T12:00:00Z')
 const nowSeconds = now.getTime() / 1000

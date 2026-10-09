@@ -1,12 +1,11 @@
-import {apps} from './apps'
-import {createHandler} from './handler'
+import {serveVitals} from './vitals'
+import {serveWidgets} from './widgets'
 
-const name = process.env.WIDGET_APP ?? ''
-const app = apps[name]
-if (!app) {
-	console.error(`WIDGET_APP must be one of: ${Object.keys(apps).join(', ')}`)
+const [mode = 'widgets'] = process.argv.slice(2)
+
+if (mode === 'vitals') serveVitals()
+else if (mode === 'widgets') serveWidgets()
+else {
+	console.error(`Unknown mode "${mode}": use "widgets" (default) or "vitals"`)
 	process.exit(1)
 }
-
-const server = Bun.serve({port: Number(process.env.PORT ?? 3000), fetch: createHandler(app())})
-console.log(`${name} widgets listening on :${server.port}`)

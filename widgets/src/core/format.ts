@@ -23,3 +23,18 @@ export function decodeHtml(text: string): string {
 		return point <= 0x10ffff ? String.fromCodePoint(point) : entity
 	})
 }
+
+const SPEED_UNITS = ['B/s', 'kB/s', 'MB/s', 'GB/s']
+
+// Decimal units, like Transmission's own interface.
+export function formatSpeed(bytesPerSecond: number): string {
+	let value = bytesPerSecond
+	let unit = 0
+	while (value >= 1000 && unit < SPEED_UNITS.length - 1) {
+		value /= 1000
+		unit++
+	}
+	return `${unit === 0 ? Math.round(value) : value.toFixed(1)} ${SPEED_UNITS[unit]}`
+}
+
+export const formatCount = (count: number) => count.toLocaleString('en')
