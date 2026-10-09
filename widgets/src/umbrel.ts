@@ -9,7 +9,16 @@ export type ListWidget = {
 	noItemsText?: string
 }
 
-export type Widget = ListWidget
+export type FourStatsWidget = {
+	type: 'four-stats'
+	refresh: string
+	link?: string
+	items: [FourStatsItem, FourStatsItem, FourStatsItem, FourStatsItem]
+}
+
+type FourStatsItem = {title: string; text: string; subtext?: string}
+
+export type Widget = ListWidget | FourStatsWidget
 
 export type WidgetSource = {
 	read: () => Promise<Widget>

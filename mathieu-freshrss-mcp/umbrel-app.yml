@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0-patch.4"
+version: "0.1.0-patch.5"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -23,8 +23,9 @@ description: >-
   your mobile RSS apps keep working.
 
 
-  It also adds a home screen widget with your latest unread articles: add it
-  from "Edit widgets" on the umbrelOS home screen.
+  It also adds two home screen widgets, your latest unread articles or an
+  overview of your counts: add one from "Edit widgets" on the umbrelOS home
+  screen.
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -53,8 +54,9 @@ repo: https://github.com/leitosama/freshrss-mcp-server
 support: https://github.com/leitosama/freshrss-mcp-server/issues
 gallery: []
 releaseNotes: >-
-  Adds a home screen widget with your latest unread FreshRSS articles. Add it
-  from "Edit widgets" on the umbrelOS home screen; clicking it opens FreshRSS.
+  A second home screen widget, "overview": your unread articles, the ones
+  fetched in the last 24 hours, your starred articles and your feeds. Pick it
+  in "Edit widgets" next to the list of latest unread articles.
 
 dependencies:
   - freshrss
@@ -75,6 +77,25 @@ widgets:
           subtext: "Self-hosting · 2 hr. ago"
         - text: "Ten years of open source RSS readers"
           subtext: "Open web · yesterday"
+  - id: "overview"
+    type: "four-stats"
+    refresh: "5m"
+    endpoint: "widget:3000/overview"
+    link: "/freshrss"
+    example:
+      type: "four-stats"
+      link: ""
+      items:
+        - title: "Unread"
+          text: "128"
+          subtext: "articles"
+        - title: "Today"
+          text: "34"
+          subtext: "new"
+        - title: "Starred"
+          text: "12"
+        - title: "Feeds"
+          text: "42"
 defaultUsername: mcp
 deterministicPassword: true
 permissions: []

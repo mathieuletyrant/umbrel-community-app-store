@@ -1,4 +1,4 @@
-verified: 0.1.0-patch.4 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.1.0-patch.5 on umbrelOS 2.0.0 (2026-10-09)
 requires: [freshrss]
 headless: true
 setup:
@@ -48,4 +48,8 @@ steps:
   - shot: tools
   - widget: unread
   - see: Widget test article
-  - shot: widget
+  - shot: unread-widget
+  # Its fallback has the same titles with dashes: the JSON check proves real counts.
+  - widget: {id: overview, contains: '"title":"Unread","text":"[1-9]'}
+  - see: Starred
+  - shot: overview-widget

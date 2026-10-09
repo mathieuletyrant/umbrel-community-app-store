@@ -5,13 +5,21 @@ import path from 'node:path'
 
 import {freshrss} from '../src/apps/freshrss'
 
-const credentialsDir = mkdtempSync(path.join(tmpdir(), 'freshrss-'))
-writeFileSync(path.join(credentialsDir, 'username'), 'admin')
-writeFileSync(path.join(credentialsDir, 'api_password'), 'secret\n')
+const now = new Date('2026-10-09T12:00:00Z')
+const nowSeconds = now.getTime() / 1000
+const entryId = (secondsAgo: number) => String((nowSeconds - secondsAgo) * 1_000_000)
+
+function credentials(password: string) {
+	const dir = mkdtempSync(path.join(tmpdir(), 'freshrss-'))
+	writeFileSync(path.join(dir, 'username'), 'admin')
+	writeFileSync(path.join(dir, 'api_password'), password)
+	return dir
+}
+const credentialsDir = credentials('secret\n')
 
 let logins = 0
-let rejectNextStream = false
-let lastStreamUrl: URL | undefined
+let rejectNextCall = false
+const calls: URL[] = []
 
 const greader = Bun.serve({
 	port: 0,
@@ -23,35 +31,51 @@ const greader = Bun.serve({
 			logins++
 			return new Response(`SID=admin/x\nLSID=null\nAuth=token-${logins}\n`)
 		}
-		if (url.pathname.includes('/reader/api/0/stream/contents/')) {
-			lastStreamUrl = url
-			if (rejectNextStream || request.headers.get('authorization') !== `GoogleLogin auth=token-${logins}`) {
-				rejectNextStream = false
-				return new Response('Unauthorized', {status: 401})
-			}
+		calls.push(url)
+		if (rejectNextCall || request.headers.get('authorization') !== `GoogleLogin auth=token-${logins}`) {
+			rejectNextCall = false
+			return new Response('Unauthorized', {status: 401})
+		}
+		const endpoint = decodeURIComponent(url.pathname.split('/reader/api/0/')[1] ?? '')
+		if (endpoint === 'stream/contents/user/-/state/com.google/reading-list') {
 			return Response.json({
 				items: [
-					{title: 'Tom &amp; Jerry&#039;s comeback', published: Date.now() / 1000 - 20 * 60, origin: {title: 'Cartoons'}},
-					{title: 'No feed name', published: Date.now() / 1000 - 3 * 86_400},
+					{title: 'Tom &amp; Jerry&#039;s comeback', published: nowSeconds - 20 * 60, origin: {title: 'Cartoons'}},
+					{title: 'No feed name', published: nowSeconds - 3 * 86_400},
 				],
 			})
 		}
+		if (endpoint === 'unread-count') {
+			return Response.json({
+				unreadcounts: [
+					{id: 'feed/1', count: 1200},
+					{id: 'user/-/state/com.google/reading-list', count: 1234},
+				],
+			})
+		}
+		if (endpoint === 'stream/items/ids' && url.searchParams.get('s') === 'user/-/state/com.google/reading-list') {
+			return Response.json({itemRefs: [{id: entryId(60)}, {id: entryId(23 * 3_600)}, {id: entryId(25 * 3_600)}]})
+		}
+		if (endpoint === 'stream/items/ids' && url.searchParams.get('s') === 'user/-/state/com.google/starred') {
+			return Response.json({itemRefs: Array.from({length: 1000}, (_, i) => ({id: entryId(i)}))})
+		}
+		if (endpoint === 'subscription/list') return Response.json({subscriptions: [{}, {}, {}]})
 		return new Response('Not found', {status: 404})
 	},
 })
 afterAll(() => greader.stop())
 
 const apiUrl = `http://localhost:${greader.port}/api/greader.php`
+const app = (dir = credentialsDir) => freshrss({apiUrl, credentialsDir: dir, now: () => now})
 
 beforeEach(() => {
 	logins = 0
-	rejectNextStream = false
+	rejectNextCall = false
+	calls.length = 0
 })
 
-test('lists the latest unread articles with their feed and age', async () => {
-	const widget = await freshrss({apiUrl, credentialsDir}).unread!.read()
-
-	expect(widget).toEqual({
+test('unread lists the latest unread articles with their feed and age', async () => {
+	expect(await app().unread!.read()).toEqual({
 		type: 'list',
 		refresh: '2m',
 		link: '/freshrss',
@@ -61,28 +85,41 @@ test('lists the latest unread articles with their feed and age', async () => {
 		],
 		noItemsText: 'No unread articles',
 	})
-	expect(decodeURIComponent(lastStreamUrl!.pathname)).toEndWith('/stream/contents/user/-/state/com.google/reading-list')
-	expect(lastStreamUrl!.searchParams.get('xt')).toBe('user/-/state/com.google/read')
-	expect(lastStreamUrl!.searchParams.get('n')).toBe('5')
+	expect(calls[0]!.searchParams.get('xt')).toBe('user/-/state/com.google/read')
+	expect(calls[0]!.searchParams.get('n')).toBe('5')
+})
+
+test('overview counts unread, fetched in the last 24 h, starred and feeds', async () => {
+	expect(await app().overview!.read()).toEqual({
+		type: 'four-stats',
+		refresh: '5m',
+		link: '/freshrss',
+		items: [
+			{title: 'Unread', text: '1,234', subtext: 'articles'},
+			{title: 'Today', text: '2', subtext: 'new'},
+			{title: 'Starred', text: '1000+'},
+			{title: 'Feeds', text: '3'},
+		],
+	})
+	expect(logins).toBe(1)
 })
 
 test('reuses its token, and logs in again once FreshRSS rejects it', async () => {
-	const unread = freshrss({apiUrl, credentialsDir}).unread!
+	const unread = app().unread!
 	await unread.read()
 	await unread.read()
 	expect(logins).toBe(1)
 
-	rejectNextStream = true
+	rejectNextCall = true
 	await unread.read()
 	expect(logins).toBe(2)
 })
 
-test('fails when the credentials are wrong, so the fallback is served', async () => {
-	const otherDir = mkdtempSync(path.join(tmpdir(), 'freshrss-'))
-	writeFileSync(path.join(otherDir, 'username'), 'admin')
-	writeFileSync(path.join(otherDir, 'api_password'), 'wrong')
-	const unread = freshrss({apiUrl, credentialsDir: otherDir}).unread!
+test('fails with wrong credentials, so the fallbacks are served', async () => {
+	const widgets = app(credentials('wrong'))
 
-	await expect(unread.read()).rejects.toThrow('HTTP 401')
-	expect(unread.fallback).toEqual({type: 'list', refresh: '2m', link: '/freshrss', items: [], noItemsText: "Can't reach FreshRSS"})
+	await expect(widgets.unread!.read()).rejects.toThrow('HTTP 401')
+	await expect(widgets.overview!.read()).rejects.toThrow('HTTP 401')
+	expect(widgets.unread!.fallback).toMatchObject({type: 'list', items: [], noItemsText: "Can't reach FreshRSS"})
+	expect(widgets.overview!.fallback).toMatchObject({type: 'four-stats', items: [{title: 'Unread', text: '–'}, {}, {}, {}]})
 })
