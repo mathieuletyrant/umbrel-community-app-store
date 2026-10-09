@@ -17,7 +17,7 @@ status-sidecar pattern, see CLAUDE.md).
 | ~~**Byparr**~~ ✅ | **Cloudflare-bypass proxy** (drop-in FlareSolverr replacement) for Prowlarr/Jackett | **Added** (`mathieu-byparr`). |
 | ~~**Maintainerr**~~ ✅ | Rule-based **media cleanup** (watched / old / low-watch) via Plex + Overseerr/Jellyseerr | **Added** (`mathieu-maintainerr`). |
 | ~~**Cross-seed**~~ ✅ | Automatic **cross-seeding** of your torrents across trackers | **Added** (`mathieu-cross-seed`). Headless (API only, no UI) → status-sidecar pattern. |
-| **Tdarr** 🖥️ | Distributed **transcoding** + library health checks | Standardize/shrink files (H265 etc.). Powerful but resource-heavy. |
+| ~~**Tdarr**~~ ✅ | Distributed **transcoding** + library health checks | **Added** (`mathieu-tdarr`). |
 
 > ✅ **Profilarr** — added to the store (`mathieu-profilarr`).
 
@@ -53,7 +53,7 @@ status-sidecar pattern, see CLAUDE.md).
 | App | What it does | Repo |
 | --- | --- | --- |
 | ~~**Pulsarr**~~ ✅ | Real-time **Plex watchlist → Sonarr/Radarr**. | **Added** (`mathieu-pulsarr`) — replaces Seerr's watchlist sync with something lighter. |
-| **Trailarr** 🖥️ | Downloads & manages **trailers** for your Radarr/Sonarr library. | `nandyalu/trailarr` |
+| ~~**Trailarr**~~ ✅ | Downloads & manages **trailers** for your Radarr/Sonarr library. | **Added** (`mathieu-trailarr`). |
 | **Prefetcharr** 🎧 | Makes Sonarr fetch the **next season** of a show you're watching (Jellyfin/Emby/Plex). | `p-hueber/prefetcharr` |
 | **Episeerr** 🖥️ | Sends/deletes episodes **one at a time** as you watch → saves space. | `Vansmak/episeerr` |
 | **Wrapperr** 🖥️ | **"Plex Wrapped"** yearly stats (via Tautulli). | `aunefyren/wrapperr` |
@@ -69,12 +69,5 @@ status-sidecar pattern, see CLAUDE.md).
 - **Checkrr** — corrupt/mismatched media scanner (overlaps Healarr).
 - **Janitorr** — disk-space-based media cleanup (overlaps Maintainerr).
 - **Kometa** (Plex Meta Manager) — collections/metadata (headless, config-heavy).
-- **Posterizarr** — poster management.
 - **Gaps** — find missing movies in collections (Radarr).
 - **Jellystat / Streamystats** — Jellyfin stats (overlaps Tracearr).
-
-## Recommended next 3 (given a Transmission + *arr + cleanup setup)
-
-1. **Huntarr** — fill the library
-2. **Maintainerr** — rule-based library cleanup
-3. **Recyclarr** or **Profilarr** — release quality

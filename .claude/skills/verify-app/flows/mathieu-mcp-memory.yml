@@ -18,7 +18,7 @@ steps:
       method: POST
       anonymous: true
       headers: {content-type: application/json}
-      body: {jsonrpc: "2.0", id: 1, method: tools/call, params: {name: memory_store, arguments: {content: "Julie prefers the living room AC in quiet mode at night", metadata: {tags: [home, preferences]}}}}
+      body: {jsonrpc: "2.0", id: 1, method: tools/call, params: {name: memory_store, arguments: {content: "The living room AC runs in quiet mode at night", metadata: {tags: [home, preferences]}}}}
       status: 200
       contains: stored successfully
   - http:

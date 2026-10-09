@@ -47,5 +47,9 @@ releaseNotes: >-
   Database migrations run automatically on first start; back up your database before updating. Event-type grouping is off by default and only applies to new imports.
 
   Full release notes can be found at https://github.com/Sportarr/Sportarr/releases/tag/v4.1.9.1119
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
 permissions:
   - STORAGE_DOWNLOADS

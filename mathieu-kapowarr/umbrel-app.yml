@@ -47,5 +47,7 @@ releaseNotes: >-
   This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
 dependencies: []
 path: ""
+defaultUsername: ""
+defaultPassword: ""
 permissions:
   - STORAGE_DOWNLOADS
