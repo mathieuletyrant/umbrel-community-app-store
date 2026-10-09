@@ -57,12 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  ⚠️ Breaking: the app moves from port 6060 to 6061, because BookLore from the Umbrel App Store already uses 6060 and the two apps could not be installed together. Update the URL in your MCP clients (Claude, ChatGPT, Home Assistant…) to http://umbrel.local:6061/mcp.
+  The manage_indexer tool can now add public indexers and edit indexer settings.
 
 
-  Metadata findings that are only a language difference are now marked as such instead of being reported as real mismatches.
-
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.41.1
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.42.0
 dependencies: []
 path: ""
 defaultUsername: ""
