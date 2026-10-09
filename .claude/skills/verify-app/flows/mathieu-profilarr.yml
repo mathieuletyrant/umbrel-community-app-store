@@ -10,4 +10,6 @@ steps:
   - click: {role: button, name: Create Account}
   # The Dictionarry database is cloned from GitHub on first start.
   - see: Dictionarry-Hub/database
+  # The Testing entry is only listed when the server reaches the parser service.
+  - see: {role: link, name: Testing}
   - shot: databases
