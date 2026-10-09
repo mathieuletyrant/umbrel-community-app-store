@@ -7,7 +7,7 @@ name: Tunarr
 tagline: Turn your media library into live TV channels
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/chrisbenincasa/tunarr
-version: "2026.10.0-patch.2"
+version: "2026.10.1"
 port: 8023
 description: >-
   Tunarr builds classic, always-on TV channels out of the movies, shows and
@@ -55,17 +55,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-3.jpg
 releaseNotes: >-
-  ⚠️ Breaking: the app moves from port 8020 to 8023, because Super Productivity from the Umbrel App Store already uses 8020 and the two apps could not be installed together. Update the tuner in Plex (Settings → Live TV & DVR) to http://127.0.0.1:8023 and its guide to http://127.0.0.1:8023/api/xmltv.xml, and the address in any IPTV app.
+  Bug-fix release. Deinterlace and scaling filters now apply to offline
+  sessions, hardware tone mapping falls back cleanly when OpenCL can't attach
+  to VAAPI, and Jellyfin shows that belong to a collection are scanned. Local
+  folders are rescanned when a file is overwritten in place, and the guide
+  places blocks by time so zoom levels scale correctly.
 
 
-  Bug-fix release. Guide (XMLTV) writes no longer stall live streams, each HLS
-  streaming session gets its own directory and playlists stop listing deleted
-  segments, and lineup items shorter than 10 seconds are no longer skipped.
-  Local library scans keep going past bad NFO files, and media source URLs are
-  trimmed of whitespace.
-
-
-  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.0
+  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.1
 dependencies: []
 path: ""
 defaultUsername: ""
