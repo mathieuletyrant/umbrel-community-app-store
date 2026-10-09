@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0-patch.6"
+version: "0.1.0-patch.7"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
