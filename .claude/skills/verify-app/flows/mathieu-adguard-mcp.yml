@@ -1,4 +1,4 @@
-verified: 0.10.1 on umbrelOS 2.0.0 (2026-10-06)
+verified: 0.10.1 on umbrelOS 2.0.0 (2026-10-09)
 requires: [adguard-home]
 setup:
   - curl -sf -u admin:Verify-AdGuard-1 localhost:8095/control/status | grep -q dns_port || curl -sf -X POST localhost:8095/control/install/configure -H 'content-type:application/json' -d '{"web":{"ip":"0.0.0.0","port":8095},"dns":{"ip":"0.0.0.0","port":53},"username":"admin","password":"Verify-AdGuard-1"}'
@@ -37,7 +37,7 @@ steps:
       method: POST
       anonymous: true
       headers: {content-type: application/json, accept: "application/json, text/event-stream", authorization: "Bearer ${env.web.MCP_TOKEN}"}
-      body: {jsonrpc: "2.0", id: 2, method: tools/call, params: {name: rewrites_add, arguments: {domain: nas.home, answer: 192.168.68.58}}}
+      body: {jsonrpc: "2.0", id: 2, method: tools/call, params: {name: rewrites_add, arguments: {domain: nas.home, answer: 192.168.1.50}}}
       status: 200
   - http:
       path: /mcp
@@ -46,5 +46,5 @@ steps:
       headers: {content-type: application/json, accept: "application/json, text/event-stream", authorization: "Bearer ${env.web.MCP_TOKEN}"}
       body: {jsonrpc: "2.0", id: 3, method: tools/call, params: {name: rewrites_list, arguments: {}}}
       status: 200
-      contains: 'nas\.home[\s\S]*192\.168\.68\.58'
+      contains: 'nas\.home[\s\S]*192\.168\.1\.50'
   - shot: rewrites

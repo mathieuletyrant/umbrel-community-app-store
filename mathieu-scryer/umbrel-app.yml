@@ -50,5 +50,9 @@ releaseNotes: >-
   Database migrations run automatically on startup; no manual steps are needed. If you set a custom recycle bin folder inside a library folder, move it outside before upgrading — recycling stops until you do.
 
   Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.14
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
 permissions:
   - STORAGE_DOWNLOADS
