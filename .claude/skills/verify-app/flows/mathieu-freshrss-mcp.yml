@@ -1,4 +1,4 @@
-verified: 0.1.0-patch.5 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.1.0-patch.7 on umbrelOS 2.0.0 (2026-10-09)
 requires: [freshrss]
 headless: true
 setup:
@@ -12,6 +12,8 @@ setup:
     set -e
     cd /app/www
     printf '%s' '<?xml version="1.0"?><rss version="2.0"><channel><title>Verify feed</title><link>http://127.0.0.1/</link><description>Fixture</description><item><title>Widget test article</title><link>http://127.0.0.1/verify-article</link><guid>verify-article</guid></item></channel></rss>' > p/verify-feed.xml
+    # Fails (and setup retries) until nginx, restarted just above, serves the feed.
+    curl -fsS -o /dev/null http://127.0.0.1/verify-feed.xml
     php -r '$f = getenv("DATA_PATH") . "/config.php"; $c = include $f; $c["internal_host_allowlist"] = ["127.0.0.1/32"]; file_put_contents($f, "<?php\nreturn " . var_export($c, true) . ";\n");'
     printf '%s' '<?xml version="1.0"?><opml version="2.0"><body><outline text="Verify feed" type="rss" xmlUrl="http://127.0.0.1/verify-feed.xml"/></body></opml>' > /tmp/verify.opml
     php cli/import-for-user.php --user admin --filename /tmp/verify.opml
