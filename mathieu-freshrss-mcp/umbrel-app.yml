@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0-patch.3"
+version: "0.1.0-patch.4"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -21,6 +21,10 @@ description: >-
   turns on FreshRSS's API and creates a dedicated API password for you. Nothing
   to copy and paste, and the password is kept across restarts and updates, so
   your mobile RSS apps keep working.
+
+
+  It also adds a home screen widget with your latest unread articles: add it
+  from "Edit widgets" on the umbrelOS home screen.
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -49,11 +53,28 @@ repo: https://github.com/leitosama/freshrss-mcp-server
 support: https://github.com/leitosama/freshrss-mcp-server/issues
 gallery: []
 releaseNotes: >-
-  Article links now use your Umbrel's own address instead of always pointing to umbrel.local.
+  Adds a home screen widget with your latest unread FreshRSS articles. Add it
+  from "Edit widgets" on the umbrelOS home screen; clicking it opens FreshRSS.
 
 dependencies:
   - freshrss
 path: /health
+widgets:
+  - id: "unread"
+    type: "list"
+    refresh: "2m"
+    endpoint: "widget:3000/unread"
+    link: "/freshrss"
+    example:
+      type: "list"
+      link: ""
+      items:
+        - text: "The best mini PCs for a home server"
+          subtext: "Tech news · 20 min. ago"
+        - text: "Backing up your photos the easy way"
+          subtext: "Self-hosting · 2 hr. ago"
+        - text: "Ten years of open source RSS readers"
+          subtext: "Open web · yesterday"
 defaultUsername: mcp
 deterministicPassword: true
 permissions: []

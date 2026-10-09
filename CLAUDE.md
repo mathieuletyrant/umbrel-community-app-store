@@ -26,6 +26,7 @@ umbrel-app-store.yml        # store id + name
 <app-id>/
   umbrel-app.yml            # store listing metadata
   docker-compose.yml        # the app's services
+widgets/                    # source of the umbrel-widgets image (home screen widgets)
 ```
 
 Every app id **must** be prefixed with the store id `mathieu-`.
@@ -58,7 +59,7 @@ Current apps:
 - `mathieu-pulsarr` — Pulsarr (Plex watchlist → Sonarr/Radarr in real time, web UI on 3003, host port 3023 — 3003 is the official `btcpay-server`; PUID/PGID 1000, data at /app/data; `baseUrl`/`port` env pre-set to `http://mathieu-pulsarr_server_1:3003` so *arr webhooks reach it — env overrides the UI value; `sonarrBaseUrl`/`sonarrApiKey`/`radarr*` env from `exports.sh` seed its default instances, which Pulsarr only creates while it has none — `exports.sh` falls back to upstream's localhost/`placeholder` defaults when the app isn't installed)
 - `mathieu-dispatcharr` — Dispatcharr (IPTV M3U/EPG manager + HDHomeRun emulation, web UI on 9191; AIO image with bundled Postgres + Redis, data at /data; `PROXY_AUTH_ADD: false` because Plex (host network) and IPTV clients hit `/hdhr`, `/output/*`, `/proxy/*` and root-level Xtream paths through app_proxy, and Dispatcharr has its own login; the host-network Plex app can't reach the Umbrel's own LAN IP on app ports, so it must use `http://127.0.0.1:9191/hdhr`)
 - `mathieu-arr-mcp` — arr-mcp (MCP server for the whole *arr/Plex/Jellyfin stack, web UI + `/mcp` on 6060, host port 6061 — 6060 is the official `booklore`; claim-on-first-visit login, services added in-UI; app_proxy `PROXY_AUTH_WHITELIST` opens `/mcp*` + `/.well-known/*` so MCP clients bypass Umbrel login with the bearer token; auto-wires installed Umbrel apps: `exports.sh` greps their API keys on the host (Prowlarr-official pattern, must survive `set -euo pipefail`) → env of a one-shot `autoconfig` service (node script inline in compose, no `$` in it) that adds missing services to config.yaml before `server` starts; `.umbrel-autoconfig.json` remembers what was added so removed services stay removed)
-- `mathieu-freshrss-mcp` — FreshRSS MCP (MCP server for the official `freshrss` app, `/mcp` on host port 6262 → container 8080; zero config: one-shot `init` service reuses the official FreshRSS image (same digest) with `DATA_PATH=/config/www/freshrss/data` and the app's data mounted from `${UMBREL_ROOT}/app-data/freshrss/data` to enable the API and generate the API password once into `data/shared` (never regenerated); `deterministicPassword` → `${APP_PASSWORD}` is the bearer `API_KEY`, shown as default credentials; `FRESHRSS_BASE_URL` (article links) built from `${DEVICE_DOMAIN_NAME}`; image is `latest@digest` (upstream has no version tags), so bump `version` with `-patch.N` to ship digest updates; amd64 only)
+- `mathieu-freshrss-mcp` — FreshRSS MCP (MCP server for the official `freshrss` app, `/mcp` on host port 6262 → container 8080; zero config: one-shot `init` service reuses the official FreshRSS image (same digest) with `DATA_PATH=/config/www/freshrss/data` and the app's data mounted from `${UMBREL_ROOT}/app-data/freshrss/data` to enable the API and generate the API password once into `data/shared` (never regenerated); `deterministicPassword` → `${APP_PASSWORD}` is the bearer `API_KEY`, shown as default credentials; `FRESHRSS_BASE_URL` (article links) built from `${DEVICE_DOMAIN_NAME}`; image is `latest@digest` (upstream has no version tags), so bump `version` with `-patch.N` to ship digest updates; amd64 only; `widget` service (umbrel-widgets image) serves the `unread` list widget from the same `data/shared` credentials, and the `web` sidecar's `/freshrss` redirects to FreshRSS on port 3432 so clicking the widget opens it)
 - `mathieu-muxarr` — Muxarr (strips unwanted audio/subtitle tracks by remuxing, no re-encode; web UI on 8183, host port 8184 — 8183 is the official `lunalytics`; PUID/PGID 1000, config at /config, media at /downloads; Blazor setup wizard sets the webhook URL to `http://mathieu-muxarr_server_1:8183`)
 - `mathieu-neutarr` — NeutArr (maintained, hardened Huntarr fork: periodically triggers searches for missing/cutoff-unmet media in Sonarr/Radarr/Lidarr/Readarr/Whisparr, web UI on 9705; PUID/PGID 1000, config at /config; `NEUTARR_SETUP_TOKEN: ${APP_PASSWORD}` + `deterministicPassword` so the first-run setup token is the default password shown by umbrelOS instead of a token buried in the logs)
 - `mathieu-tunarr` — Tunarr (live TV channels built from Plex/Jellyfin/Emby or local folders, web UI on 8000, host port 8023 — 8020 is the official `super-productivity`; runs as root, config at /config/tunarr, media at /downloads read-only; app_proxy `PROXY_AUTH_WHITELIST` opens only the HDHomeRun/M3U/XMLTV/stream paths so Plex (host network, must use `http://127.0.0.1:8023`) and IPTV clients reach it while the UI stays behind Umbrel login; amd64 only — arm64 is a separate `-arm64` tag)
@@ -208,6 +209,31 @@ this too.
   installed apps, including the official store's (CI checks it), and not a system port. **Never use 80/443** (taken by umbrelOS →
   install fails with `failed to bind host port ... address already in use`). Pick
   a free high port; it's independent of the container's internal `APP_PORT`.
+
+## Home screen widgets
+
+umbrelOS shows up to 3 widgets on its home screen. An app declares them under `widgets:` in
+`umbrel-app.yml` (`id`, `type`, `refresh`, `endpoint: "<service>:<port>/<path>"`, `example` for the
+picker). umbreld resolves `<service>` to the container IP of `<app-id>_<service>_1` and fetches the
+JSON directly from the host: no app_proxy, no Umbrel login, the container's internal port.
+
+- The JSON must carry `refresh` as a string (`"2m"`): umbreld parses it with `ms()` and fails the
+  widget without it, and it, not the manifest's, sets the polling interval. umbrelOS renders the
+  manifest's `type` and uses the response's `link` (a path on the app's own URL).
+- None of this store's apps answer in that format, so widgets come from one image built from
+  `widgets/`: `ghcr.io/mathieuletyrant/umbrel-widgets`. An app adds a `widget` service with that
+  image and `WIDGET_APP=<app>`; each widget is `src/apps/<app>.ts`, registered in
+  `src/apps/index.ts`, with tests against recorded responses in `test/`.
+- A failing app answers with the widget's `fallback` over HTTP 200 (an HTTP error makes umbrelOS
+  show an error), and calls to the app time out after 3 s (umbreld has no timeout).
+- Read keys the way the wiring rules above allow: a file of the app mounted read-only, `${APP_PASSWORD}`,
+  or a setting the user fills in. Never a key copied by hand into the compose.
+- The `Widgets` workflow runs `bun run typecheck` and `bun test` on every push, and publishes
+  `umbrel-widgets:<version>` the first time a version from `widgets/package.json` is pushed, from any
+  branch. Published versions are never overwritten: bump the version to ship a change, then pin the
+  new digest (the run summary prints it) in each app using it, with a `-patch.N` bump. Renovate
+  groups those bumps in one PR.
+- Verify with a `widget: <id>` flow step, then a `see` of what the widget renders on the home screen.
 
 ## Verifying an image tag before publishing (avoid "manifest unknown")
 

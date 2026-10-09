@@ -32,3 +32,8 @@ steps:
       status: 200
       contains: '"tools"'
   - shot: tools
+  # FreshRSS has no feeds offline: the widget's empty state proves login and stream call worked
+  # (its fallback says "Can't reach FreshRSS").
+  - widget: unread
+  - see: No unread articles
+  - shot: widget

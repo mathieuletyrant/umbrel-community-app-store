@@ -710,6 +710,15 @@ ${body === undefined ? '' : `<pre style="color:#8b93a7">${esc(body)}</pre>`}
 					log(`  HTTP ${r.status} ${text.slice(0, 120).replace(/\s+/g, ' ')}`)
 					break
 				}
+				case 'widget': {
+					// umbrelOS shows 3 widgets at most: keep only this one on the home screen.
+					const widgetId = `${appId}:${arg}`
+					for (const id of await trpc('widget.enabled')) if (id !== widgetId) await trpc('widget.disable', {widgetId: id}, {mutation: true})
+					if (!(await trpc('widget.enabled')).includes(widgetId)) await trpc('widget.enable', {widgetId}, {mutation: true})
+					log(`  ${widgetId}: ${JSON.stringify(await trpc('widget.data', {widgetId})).slice(0, 200)}`)
+					await page.goto(`http://localhost:${UMBREL_PORT}/`, {waitUntil: 'domcontentloaded'})
+					break
+				}
 				default:
 					throw new Error(`unknown step type "${type}"`)
 			}
