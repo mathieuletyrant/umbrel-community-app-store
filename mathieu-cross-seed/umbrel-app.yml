@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "6.13.7-patch.2"
+version: "6.13.7-patch.3"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -49,15 +49,7 @@ repo: https://github.com/cross-seed/cross-seed
 support: https://github.com/cross-seed/cross-seed/issues
 gallery: []
 releaseNotes: >-
-  cross-seed now fills in its indexers on its own: at each start it reads every
-  enabled torrent indexer from Prowlarr, plus Sonarr and Radarr, from the Umbrel
-  App Store.
-
-
-  Already installed? Your config.js is never modified. To switch, rename it
-  (e.g. to config.js.old) and restart the app: a new one wired to Prowlarr is
-  created, then copy over any setting you had customized.
-
+  cross-seed now runs as the same user as Transmission, as its developer requires, instead of root. Files it created before are handed over automatically when the app starts.
 
 dependencies:
   - transmission

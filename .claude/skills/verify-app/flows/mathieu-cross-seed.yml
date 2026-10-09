@@ -1,5 +1,7 @@
-verified: 6.13.7-patch.2 on umbrelOS 2.0.0 (2026-10-06)
+verified: 6.13.7-patch.3 on umbrelOS 2.0.0 (2026-10-09)
 requires: [transmission, prowlarr, sonarr, radarr]
+setup:
+  - docker exec mathieu-cross-seed_daemon_1 sh -c '[ "$(id -u)" = 1000 ] && [ "$(stat -c %u /config/config.js)" = 1000 ]'
 logs:
   daemon: "Sonarr: yes, Radarr: yes"
 steps:

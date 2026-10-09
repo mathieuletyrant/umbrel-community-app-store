@@ -10,6 +10,7 @@ services:
     image: ghcr.io/connorgallopo/tracearr:supervised-2.7.1@sha256:07982a48981f6f623dce3e552d67e36e68a48b19a7613416741b724abb5608f4
     init: true
     shm_size: 512mb
+    mem_limit: 3g
     environment:
       - TZ=Etc/UTC
       - LOG_LEVEL=info

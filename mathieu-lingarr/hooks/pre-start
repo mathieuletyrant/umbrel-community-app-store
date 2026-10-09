@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Lingarr ran as root before 1.3.0-patch.3; it now runs as 1000 like the *arr apps.
+dir="${APP_DATA_DIR}/data/config"
+[[ -d "${dir}" ]] && find -H "${dir}" ! -user 1000 -exec chown -h 1000:1000 {} +
+true

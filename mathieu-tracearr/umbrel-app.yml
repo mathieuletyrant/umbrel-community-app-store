@@ -7,7 +7,7 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr
-version: "2.7.1"
+version: "2.7.1-patch.1"
 port: 3000
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
@@ -24,8 +24,8 @@ description: >-
 
 
   Tracearr runs its own bundled PostgreSQL (TimescaleDB) and Redis inside a single
-  container. Budget at least ~3 GB of free RAM; low-memory devices may see the
-  database get OOM-killed (exit code 137).
+  container, capped at 3 GB of RAM as its developer recommends. Budget ~3 GB of
+  free RAM; low-memory devices may see the database get OOM-killed (exit code 137).
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -45,9 +45,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  The first Jellyfin and Emby library sync after updating is a full scan, so existing episodes get their poster. The poster precache no longer stalls for days on Jellyfin and Emby items that have no image, and episodes and seasons without their own image now show the season or series poster.
+  Tracearr now runs within a 3 GB memory limit, as its developer recommends. Before, its
+  bundled PostgreSQL sized itself for all of your Umbrel's RAM and could take memory from your
+  other apps. Your data is kept.
+
 
   Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v2.7.1
+
 dependencies: []
 path: ""
 defaultUsername: ""
