@@ -146,8 +146,12 @@ steps:                        # run on http://localhost:<port>, in order
   - wait: 2000
   - mock: {path: /api/updates/check, status: 200, body: {...}}   # stub an app API call in the browser
   - http: {path: /mcp, method: POST, headers: {...}, body: {...}, status: 200, contains: regex}
+  - widget: unread                            # enable the app's widget (alone) on the umbrelOS home and open it
   - shot: dashboard                           # named screenshot; the last one is the proof's main image
 ```
+
+A `widget` step goes through umbreld itself (`widget.enable`, then `widget.data`, logged), so
+the next `see` asserts what the home screen renders from the app's widget endpoint.
 
 An `http` response's `mcp-session-id` header is sent back on the flow's next `http` steps, so a
 flow can `initialize` a stateful MCP server, then call its tools.

@@ -65,6 +65,10 @@ services:
           resolver 127.0.0.11 valid=10s;
           set $$upstream http://mathieu-freshrss-mcp_server_1:8080;
 
+          location = /freshrss {
+            return 302 http://${DEVICE_DOMAIN_NAME:-umbrel.local}:3432/;
+          }
+
           location ~ ^/(mcp|health)$$ {
             set $$auth $$token_auth;
             set $$args "";
@@ -102,4 +106,15 @@ services:
     depends_on:
       init:
         condition: service_completed_successfully
+    restart: on-failure
+
+  widget:
+    image: ghcr.io/mathieuletyrant/umbrel-widgets:0.1.0@sha256:8b7b1eb2e2571d857481c2a4801b1271836b0c6c7034617b2e05ba9e5adedafa
+    user: "1000:1000"
+    environment:
+      WIDGET_APP: freshrss-mcp
+      FRESHRSS_API_URL: http://freshrss_server_1:80/api/greader.php
+      FRESHRSS_CREDENTIALS_DIR: /shared
+    volumes:
+      - ${APP_DATA_DIR}/data/shared:/shared:ro
     restart: on-failure
