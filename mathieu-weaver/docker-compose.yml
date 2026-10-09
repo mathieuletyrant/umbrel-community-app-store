@@ -13,7 +13,7 @@ services:
       - PUID=1000
       - PGID=1000
       - WEAVER_BOOTSTRAP_LOGIN_USERNAME=admin
-      - WEAVER_BOOTSTRAP_LOGIN_PASSWORD=weaver-admin
+      - WEAVER_BOOTSTRAP_LOGIN_PASSWORD=${APP_PASSWORD}
       - WEAVER_INTERMEDIATE_DIR=/downloads/usenet/incomplete
       - WEAVER_COMPLETE_DIR=/downloads/usenet/complete
     volumes:
