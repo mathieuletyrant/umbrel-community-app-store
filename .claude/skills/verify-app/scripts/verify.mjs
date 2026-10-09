@@ -712,10 +712,13 @@ ${body === undefined ? '' : `<pre style="color:#8b93a7">${esc(body)}</pre>`}
 				}
 				case 'widget': {
 					// umbrelOS shows 3 widgets at most: keep only this one on the home screen.
-					const widgetId = `${appId}:${arg}`
+					const {id: name, contains} = typeof arg === 'string' ? {id: arg} : arg
+					const widgetId = `${appId}:${name}`
 					for (const id of await trpc('widget.enabled')) if (id !== widgetId) await trpc('widget.disable', {widgetId: id}, {mutation: true})
 					if (!(await trpc('widget.enabled')).includes(widgetId)) await trpc('widget.enable', {widgetId}, {mutation: true})
-					log(`  ${widgetId}: ${JSON.stringify(await trpc('widget.data', {widgetId})).slice(0, 200)}`)
+					const data = JSON.stringify(await trpc('widget.data', {widgetId}))
+					log(`  ${widgetId}: ${data.slice(0, 200)}`)
+					if (contains && !new RegExp(contains).test(data)) throw new Error(`widget data does not match /${contains}/: ${data.slice(0, 300)}`)
 					await page.goto(`http://localhost:${UMBREL_PORT}/`, {waitUntil: 'domcontentloaded'})
 					break
 				}

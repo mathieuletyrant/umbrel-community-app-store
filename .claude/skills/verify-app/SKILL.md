@@ -147,6 +147,7 @@ steps:                        # run on http://localhost:<port>, in order
   - mock: {path: /api/updates/check, status: 200, body: {...}}   # stub an app API call in the browser
   - http: {path: /mcp, method: POST, headers: {...}, body: {...}, status: 200, contains: regex}
   - widget: unread                            # enable the app's widget (alone) on the umbrelOS home and open it
+  - widget: {id: overview, contains: regex}   # same, and its widget.data JSON must match (values a fallback lacks)
   - shot: dashboard                           # named screenshot; the last one is the proof's main image
 ```
 

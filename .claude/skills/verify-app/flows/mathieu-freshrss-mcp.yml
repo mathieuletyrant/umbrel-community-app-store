@@ -48,4 +48,8 @@ steps:
   - shot: tools
   - widget: unread
   - see: Widget test article
-  - shot: widget
+  - shot: unread-widget
+  # Its fallback has the same titles with dashes: the JSON check proves real counts.
+  - widget: {id: overview, contains: '"title":"Unread","text":"[1-9]'}
+  - see: Starred
+  - shot: overview-widget
