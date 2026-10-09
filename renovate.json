@@ -74,8 +74,10 @@
     { "matchPackageNames": ["nandyalu/trailarr"], "commitMessageTopic": "Trailarr" },
     { "matchPackageNames": ["haveagitgat/tdarr"], "commitMessageTopic": "Tdarr" },
     { "matchPackageNames": ["ghcr.io/chrisbenincasa/tunarr"], "commitMessageTopic": "Tunarr" },
+    { "matchPackageNames": ["ghcr.io/mathieuletyrant/umbrel-widgets"], "commitMessageTopic": "umbrel-widgets image", "groupName": "umbrel-widgets image" },
     { "matchPackageNames": ["ghcr.io/unpackerr/unpackerr"], "commitMessageTopic": "Unpackerr" },
     { "matchPackageNames": ["ghcr.io/scryer-media/weaver"], "commitMessageTopic": "Weaver" },
+    { "matchFileNames": ["widgets/**"], "groupName": "umbrel-widgets build" },
     {
       "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"],
       "matchManagers": ["custom.regex"],
