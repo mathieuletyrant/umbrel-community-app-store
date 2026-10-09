@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  You can now connect Plex and Jellyfin at the same time.
+  The management API can now read and set the primary media server.
 
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.43.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.44.0
 dependencies: []
 path: ""
 defaultUsername: ""
