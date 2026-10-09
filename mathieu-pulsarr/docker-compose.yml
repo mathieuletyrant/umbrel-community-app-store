@@ -14,10 +14,6 @@ services:
       - PGID=1000
       - baseUrl=http://mathieu-pulsarr_server_1
       - port=3003
-      - sonarrBaseUrl=${APP_MATHIEU_PULSARR_SONARR_URL:-http://localhost:8989}
-      - sonarrApiKey=${APP_MATHIEU_PULSARR_SONARR_API_KEY:-placeholder}
-      - radarrBaseUrl=${APP_MATHIEU_PULSARR_RADARR_URL:-http://localhost:7878}
-      - radarrApiKey=${APP_MATHIEU_PULSARR_RADARR_API_KEY:-placeholder}
     volumes:
       - ${APP_DATA_DIR}/data/data:/app/data
     restart: on-failure

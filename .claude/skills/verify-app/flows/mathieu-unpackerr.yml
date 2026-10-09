@@ -1,5 +1,11 @@
 verified: 0.16.1 on umbrelOS 2.0.0 (2026-10-06)
 requires: [radarr, sonarr]
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+  SONARR_API_KEY: docker exec sonarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+settings:
+  UN_RADARR_0_API_KEY: ${RADARR_API_KEY}
+  UN_SONARR_0_API_KEY: ${SONARR_API_KEY}
 logs:
   server: Starting webserver
 steps:

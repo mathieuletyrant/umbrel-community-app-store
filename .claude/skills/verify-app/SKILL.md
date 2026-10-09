@@ -126,6 +126,8 @@ egress: true                  # app needs internet at runtime (see Sandbox)
 headless: true                # no HTTP check on / (status page apps still get steps)
 vars:                         # shell commands run on the host after install, retried until non-empty
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+settings:                     # the app's umbrelOS settings (manifest `environment:`), saved after `vars`; the app restarts
+  RADARR_API_KEY: ${RADARR_API_KEY}
 fixtures: [movie, show]       # sample media dropped into /downloads after install (see below)
 setup:                        # shell commands run on the host after install (retried until they succeed)
   - docker exec mathieu-x_server_1 touch /config/seed
@@ -157,7 +159,7 @@ the next `see` asserts what the home screen renders from the app's widget endpoi
 An `http` response's `mcp-session-id` header is sent back on the flow's next `http` steps, so a
 flow can `initialize` a stateful MCP server, then call its tools.
 
-`${NAME}` in values expands `vars`; `${env.<service>.<VAR>}` reads a container's env (e.g. a
+`${NAME}` in values (steps and `settings`) expands `vars`; `${env.<service>.<VAR>}` reads a container's env (e.g. a
 deterministic `APP_PASSWORD`).
 
 `fixtures` gives media apps something to work on: a 2-minute 640x360 H.264/AAC test pattern
@@ -170,7 +172,8 @@ deterministic `APP_PASSWORD`).
 A flow should take the app from a fresh install to its **real, set-up main screen**: do the
 first-run wizard / account creation, wire it to the other apps it is built for when that is
 possible offline (Radarr/Sonarr/Lidarr/Transmission from the official store, via
-`<app>_server_1` hostnames and API keys read with `vars`), and end on a `see` of something only
+`<app>_server_1` hostnames and API keys read with `vars`, entered in the app's UI or, for an app
+configured through umbrelOS settings, with `settings`), and end on a `see` of something only
 the set-up app shows, then a `shot`. Stop at the setup screen only when the next step needs an
 external account (Plex token, Soulseek login, LLM key) — say so in a comment.
 
@@ -193,7 +196,7 @@ Loop: keep a browser open and add steps one at a time.
 `--fresh` brings the app back to its just-installed state (after `fixtures` and `setup`). The
 first time it reinstalls and saves a checkpoint of the app's data (and its `requires` apps'
 data). After that it restores the checkpoint in seconds, and it reinstalls again only when the
-app folder or the flow's `requires`/`prepare`/`setup`/`vars`/`fixtures`/`egress` changed.
+app folder or the flow's `requires`/`prepare`/`setup`/`vars`/`settings`/`fixtures`/`egress` changed.
 `--reinstall` forces a reinstall. Restoring restarts the containers, so a step must not rely on
 something that only happens on the very first boot (e.g. Tunarr redirects `/` to its welcome
 page only before its first restart, so the flow opens `/web/welcome` directly). `--steps N`

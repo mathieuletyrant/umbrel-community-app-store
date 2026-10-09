@@ -8,7 +8,7 @@ import {seerr} from './seerr'
 import {tracearr} from './tracearr'
 import {transmission} from './transmission'
 
-// Adding an app to Vitals: a source module, one line here, and its URL (and key) in exports.sh.
+// Adding an app to Vitals: a source module, one line here, and its URL (and key) as settings in mathieu-vitals/umbrel-app.yml.
 export function sourcesFromEnv(env: NodeJS.ProcessEnv = process.env) {
 	return {
 		radarr: arr({name: 'Radarr', url: env.RADARR_URL, apiKey: env.RADARR_API_KEY, upcomingDays: 30}),

@@ -24,8 +24,7 @@ services:
         <p>cross-seed runs <strong>headless</strong> in the background &mdash; it has no web interface. This page just confirms the app is installed.</p>
         <p>It finds torrents on your other trackers matching what you already seed in Transmission and injects them &mdash; more ratio without re-downloading anything.</p>
         <h3>Setup</h3>
-        <p>Nothing to fill in if you use the Umbrel App Store apps: at each start, cross-seed picks up every enabled torrent indexer from <strong>Prowlarr</strong>, plus <strong>Sonarr</strong> and <strong>Radarr</strong> for ID lookups. Added an indexer in Prowlarr? Restart cross-seed.</p>
-        <p>Other Torznab URLs and options go in the config on your Umbrel host:</p>
+        <p>cross-seed is set up for the Transmission app. Add your trackers' Torznab URLs (from Prowlarr: <code>http://prowlarr_server_1:9696/&lt;indexer id&gt;/api?apikey=&lt;Prowlarr API key&gt;</code>) and any other option in the config on your Umbrel host:</p>
         <p><code>~/umbrel/app-data/mathieu-cross-seed/data/config/config.js</code></p>
         <p>then restart the app. Watch progress with<br><code>docker logs -f mathieu-cross-seed_daemon_1</code></p>
         </body></html>
@@ -49,25 +48,12 @@ services:
         [ -f /config/config.js ] || cat > /config/config.js <<'EOF'
         // cross-seed configuration. All options: https://www.cross-seed.org/docs/basics/options
         //
-        // Prowlarr's torrent indexers, Sonarr and Radarr from the Umbrel App Store
-        // are filled in automatically each time the app starts, from
-        // umbrel-autoconfig.json. Add any other Torznab URL to the torznab list
-        // below, then restart the app.
-        const umbrel = (() => {
-          try {
-            return JSON.parse(require("fs").readFileSync("/config/umbrel-autoconfig.json", "utf8"));
-          } catch {
-            return {};
-          }
-        })();
-
+        // Add your trackers' Torznab URLs to the torznab list (from Prowlarr:
+        // http://prowlarr_server_1:9696/<indexer id>/api?apikey=<Prowlarr API key>),
+        // then restart the app.
         module.exports = {
           delay: 30,
-          torznab: [
-            ...(umbrel.torznab || []),
-          ],
-          sonarr: umbrel.sonarr || [],
-          radarr: umbrel.radarr || [],
+          torznab: [],
           useClientTorrents: true,
           torrentClients: [
             "transmission:http://transmission_server_1:9091/transmission/rpc",
@@ -83,63 +69,9 @@ services:
           port: 2468,
         };
         EOF
-        node --input-type=module <<'EOF' || true
-        import { readFileSync, writeFileSync, renameSync } from 'node:fs';
-
-        const FILE = '/config/umbrel-autoconfig.json';
-        const PROWLARR = 'http://prowlarr_server_1:9696';
-        const key = name => process.env[name]?.trim() || '';
-        const log = message => console.log('[umbrel autoconfig] ' + message);
-        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-        async function indexers(apiKey) {
-            for (let i = 1; ; i++) {
-                try {
-                    const res = await fetch(PROWLARR + '/api/v1/indexer', { headers: { 'X-Api-Key': apiKey }, signal: AbortSignal.timeout(15000) });
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    return await res.json();
-                } catch (err) {
-                    if (i >= 6) throw err;
-                    await sleep(10000);
-                }
-            }
-        }
-
-        let previous = {};
-        try {
-            previous = JSON.parse(readFileSync(FILE, 'utf8'));
-        } catch {}
-
-        const config = {
-            torznab: [],
-            sonarr: key('SONARR_API_KEY') ? ['http://sonarr_server_1:8989/?apikey=' + key('SONARR_API_KEY')] : [],
-            radarr: key('RADARR_API_KEY') ? ['http://radarr_server_1:7878/?apikey=' + key('RADARR_API_KEY')] : [],
-        };
-
-        const prowlarrKey = key('PROWLARR_API_KEY');
-        if (prowlarrKey) {
-            try {
-                const torrent = (await indexers(prowlarrKey)).filter(indexer => indexer.enable && indexer.protocol === 'torrent');
-                config.torznab = torrent.map(indexer => PROWLARR + '/' + indexer.id + '/api?apikey=' + prowlarrKey);
-                log('Prowlarr indexers: ' + (torrent.map(indexer => indexer.name).join(', ') || 'none enabled'));
-            } catch (err) {
-                config.torznab = previous.torznab || [];
-                log('Prowlarr unreachable (' + err.message + '), keeping the ' + config.torznab.length + ' indexers from the last start');
-            }
-        } else {
-            log('Prowlarr from the Umbrel App Store not found');
-        }
-        log('Sonarr: ' + (config.sonarr.length ? 'yes' : 'no') + ', Radarr: ' + (config.radarr.length ? 'yes' : 'no'));
-
-        writeFileSync(FILE + '.tmp', JSON.stringify(config, null, 2) + '\n', { mode: 0o600 });
-        renameSync(FILE + '.tmp', FILE);
-        EOF
         exec cross-seed daemon
     environment:
       TZ: Etc/UTC
-      PROWLARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_PROWLARR_API_KEY:-}
-      SONARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_SONARR_API_KEY:-}
-      RADARR_API_KEY: ${APP_MATHIEU_CROSS_SEED_RADARR_API_KEY:-}
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
       - ${UMBREL_ROOT}/data/storage/downloads:/downloads

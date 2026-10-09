@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.44.0"
+version: "1.44.0-patch.1"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -35,12 +35,11 @@ description: >-
   to choose a username and a password (12+ characters). Until claimed, whoever
   opens it first owns the instance.
 
-  2. Services already installed on your Umbrel are wired in automatically,
-  API keys included: Radarr, Sonarr, Prowlarr, Bazarr, SABnzbd, Jellyseerr
-  (or Overseerr), Transmission and Plex. An app installed later is picked up
-  the next time arr-mcp restarts; a service you remove is not added back. Add
-  anything else (Jellyfin, qBittorrent…) with "Add a service", or edit
-  `~/umbrel/app-data/mathieu-arr-mcp/data/config/config.yaml` and restart.
+  2. Add your services with "Add a service": its URL and API key, tested live.
+  Apps from the Umbrel App Store answer at `http://<app>_server_1:<port>`,
+  e.g. `http://radarr_server_1:7878`, `http://sonarr_server_1:8989`,
+  `http://prowlarr_server_1:9696`; the API key is in each app's Settings →
+  General.
 
   3. Point your MCP client at `http://umbrel.local:6061/mcp` with the bearer
   token shown on the dashboard (header `Authorization: Bearer <token>`). The
@@ -57,10 +56,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  The management API can now read and set the primary media server.
+  Services are no longer added automatically from the other apps installed on
+  your Umbrel: add them with "Add a service". The ones already added stay as
+  they are.
 
-
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.44.0
 dependencies: []
 path: ""
 defaultUsername: ""

@@ -1,13 +1,11 @@
-import {readFile} from 'node:fs/promises'
-import path from 'node:path'
-
 import {decodeHtml, timeAgo} from '@mathieu/core/format'
 import {HttpError, request} from '@mathieu/core/http'
 import type {FourStatsWidget, ListWidget, WidgetSet} from '@mathieu/core/widget'
 
 type Config = {
 	apiUrl: string
-	credentialsDir: string
+	username?: string
+	password?: string
 	now?: () => Date
 }
 
@@ -24,16 +22,14 @@ const COUNT_LIMIT = 1000
 
 const LINK = '/freshrss'
 
-export function freshrss({apiUrl, credentialsDir, now = () => new Date()}: Config): WidgetSet {
+export function freshrss({apiUrl, username, password, now = () => new Date()}: Config): WidgetSet {
 	let token: Promise<string> | undefined
 
-	const credential = async (file: string) => (await readFile(path.join(credentialsDir, file), 'utf8')).trim()
-
 	async function login(): Promise<string> {
-		const [user, password] = await Promise.all([credential('username'), credential('api_password')])
+		if (!username || !password) throw new Error('FRESHRSS_USERNAME and FRESHRSS_API_PASSWORD are not set')
 		const response = await request(`${apiUrl}/accounts/ClientLogin`, {
 			method: 'POST',
-			body: new URLSearchParams({Email: user, Passwd: password}),
+			body: new URLSearchParams({Email: username, Passwd: password}),
 		})
 		const auth = (await response.text()).match(/^Auth=(.+)$/m)?.[1]
 		if (!auth) throw new Error('FreshRSS login answered without an Auth token')

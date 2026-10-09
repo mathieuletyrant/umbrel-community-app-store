@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "6.13.7-patch.3"
+version: "6.13.7-patch.4"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -26,15 +26,11 @@ description: >-
 
 
   cross-seed has no web interface — opening the app shows a status page with
-  these instructions. It is pre-configured for the official Transmission app,
-  and each time it starts it picks up every enabled torrent indexer from
-  Prowlarr, plus Sonarr and Radarr, all from the Umbrel App Store. Nothing to
-  copy-paste: install Prowlarr, add your trackers there, and restart cross-seed
-  whenever you add one.
-
-
-  Other Torznab URLs and every other option go in the config on your Umbrel
-  host, then restart the app:
+  these instructions. It is pre-configured for the official Transmission app.
+  Add your trackers' Torznab URLs (from Prowlarr:
+  `http://prowlarr_server_1:9696/<indexer id>/api?apikey=<Prowlarr API key>`)
+  and any other option to the config on your Umbrel host, then restart the
+  app:
 
 
   ~/umbrel/app-data/mathieu-cross-seed/data/config/config.js
@@ -49,7 +45,9 @@ repo: https://github.com/cross-seed/cross-seed
 support: https://github.com/cross-seed/cross-seed/issues
 gallery: []
 releaseNotes: >-
-  cross-seed now runs as the same user as Transmission, as its developer requires, instead of root. Files it created before are handed over automatically when the app starts.
+  Prowlarr's indexers, Sonarr and Radarr are no longer picked up on their own
+  at each start: list your Torznab URLs in config.js. Existing installs keep
+  the indexers found at their last start.
 
 dependencies:
   - transmission

@@ -152,7 +152,7 @@ test('every app needing a key is not configured without one', () => {
 
 test('an installed app missing its key says where to paste it', () => {
 	expect(healarr({name: 'Healarr', url: 'http://healarr'}).setup).toBe(
-		"Paste Healarr's API key in Vitals' settings in umbrelOS, then restart Vitals.",
+		"Paste Healarr's API key in Vitals' settings in umbrelOS.",
 	)
 	expect(healarr({name: 'Healarr'}).setup).toBeUndefined()
 })

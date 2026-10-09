@@ -1,6 +1,6 @@
 {
   "name": "@mathieu/widgets",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "image": "ghcr.io/mathieuletyrant/umbrel-widgets",
   "private": true,
   "type": "module",
