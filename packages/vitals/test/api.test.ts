@@ -32,7 +32,7 @@ test('serves the status page and a liveness check without a token', async () => 
 	expect(page.headers.get('content-type')).toStartWith('text/html')
 	const html = await page.text()
 	expect(html).toContain('<h2>Radarr</h2>')
-	expect(html).toContain('Not installed')
+	expect(html).toContain('Not set up')
 	expect(await (await get('/health')).json()).toEqual({status: 'ok'})
 })
 

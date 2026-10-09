@@ -7,7 +7,7 @@ name: Vitals
 tagline: Live numbers and health of your media stack, as one JSON API
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/vitals
-version: "0.2.0"
+version: "0.2.1"
 port: 6565
 description: >-
   Vitals reads the apps of your media stack and answers with one small JSON

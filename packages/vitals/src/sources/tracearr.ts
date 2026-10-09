@@ -1,6 +1,7 @@
 import {formatCount} from '@mathieu/core/format'
 import {apiClient} from '@mathieu/core/http'
 
+import {keySetup} from './setup'
 import type {Source} from '../types'
 
 export type TracearrStats = {streams: number; transcodes: number; directPlays: number; directStreams: number; bitrate: string}
@@ -14,7 +15,7 @@ export function tracearr({name, url, apiKey}: Config): Source<TracearrStats> {
 		{label: 'Direct play', value: formatCount(data.directPlays)},
 		{label: 'Bandwidth', value: data.bitrate},
 	]
-	if (!url || !apiKey) return {name, read: null, facts}
+	if (!url || !apiKey) return {name, read: null, facts, setup: keySetup(name, url)}
 
 	const api = apiClient(`${url}/api/v1/public`, {Authorization: `Bearer ${apiKey}`})
 

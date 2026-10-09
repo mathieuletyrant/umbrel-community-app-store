@@ -1,6 +1,7 @@
 import {formatCount} from '@mathieu/core/format'
 import {apiClient} from '@mathieu/core/http'
 
+import {keySetup} from './setup'
 import type {Issue, Source} from '../types'
 
 export type HealarrStats = {scannedToday: number; corrupted: number; needsAttention: number; repaired: number}
@@ -21,7 +22,7 @@ export function healarr({name, url, apiKey}: Config): Source<HealarrStats> {
 		{label: 'Needs you', value: formatCount(data.needsAttention)},
 		{label: 'Repaired', value: formatCount(data.repaired)},
 	]
-	if (!url || !apiKey) return {name, read: null, facts}
+	if (!url || !apiKey) return {name, read: null, facts, setup: keySetup(name, url)}
 
 	const api = apiClient(`${url}/api`, {'X-API-Key': apiKey})
 

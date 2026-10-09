@@ -1,6 +1,7 @@
 import {formatCount} from '@mathieu/core/format'
 import {apiClient} from '@mathieu/core/http'
 
+import {keySetup} from './setup'
 import type {Source} from '../types'
 
 export type CleanuparrStats = {strikes: number; removed: number; cleaned: number; windowHours: number}
@@ -22,7 +23,7 @@ export function cleanuparr({name, url, apiKey, windowHours = 24}: Config): Sourc
 		{label: 'Removed', value: formatCount(data.removed)},
 		{label: 'Cleaned', value: formatCount(data.cleaned)},
 	]
-	if (!url || !apiKey) return {name, read: null, facts}
+	if (!url || !apiKey) return {name, read: null, facts, setup: keySetup(name, url)}
 
 	const api = apiClient(`${url}/api/v2`, {'X-Api-Key': apiKey})
 
