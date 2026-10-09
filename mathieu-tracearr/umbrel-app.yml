@@ -7,8 +7,8 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr
-version: "2.7.1-patch.1"
-port: 3000
+version: "2.7.1-patch.2"
+port: 3009
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
   open-source alternative to Tautulli and Jellystat.
@@ -45,6 +45,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
+  The app moves from port 3000 to 3009, because ThunderHub from the Umbrel App Store already uses 3000 and the two apps could not be installed together. Update your bookmark if you open it by address.
+
+
   Tracearr now runs within a 3 GB memory limit, as its developer recommends. Before, its
   bundled PostgreSQL sized itself for all of your Umbrel's RAM and could take memory from your
   other apps. Your data is kept.

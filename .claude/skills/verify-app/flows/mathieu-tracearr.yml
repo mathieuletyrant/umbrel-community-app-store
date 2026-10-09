@@ -1,4 +1,4 @@
-verified: 2.7.1-patch.1 on umbrelOS 2.0.0 (2026-10-09)
+verified: 2.7.1-patch.2 on umbrelOS 2.0.0 (2026-10-09)
 logs:
   server: Tuning PostgreSQL for 2048MB \(cgroup
 steps:

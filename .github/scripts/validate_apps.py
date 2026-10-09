@@ -6,6 +6,7 @@ broken definition can't reach master. Exits non-zero (and prints every problem)
 on any failure.
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -34,6 +35,34 @@ if not app_dirs:
     fail(f"no app folders found with prefix '{prefix}'")
 
 seen_ports: dict[int, str] = {}
+
+
+def published_ports(compose: dict) -> set[int]:
+    ports = set()
+    for spec in (compose.get("services") or {}).values():
+        for entry in (spec or {}).get("ports") or []:
+            host = str(entry.get("published", "") if isinstance(entry, dict) else entry).split("/")[0]
+            parts = host.split(":")
+            if len(parts) >= 2 and parts[-2].isdigit():
+                ports.add(int(parts[-2]))
+    return ports
+
+
+official_ports: dict[int, str] = {}
+official_dir = os.environ.get("OFFICIAL_APPS_DIR")
+if official_dir:
+    for manifest in sorted(Path(official_dir).glob("*/umbrel-app.yml")):
+        official = load(manifest) or {}
+        if isinstance(official.get("port"), int):
+            official_ports.setdefault(official["port"], f"official app '{manifest.parent.name}'")
+        compose_file = manifest.parent / "docker-compose.yml"
+        if compose_file.exists():
+            for port in published_ports(load(compose_file) or {}):
+                official_ports.setdefault(port, f"official app '{manifest.parent.name}' (published port)")
+    if not official_ports:
+        fail(f"OFFICIAL_APPS_DIR={official_dir} holds no official app manifests")
+else:
+    print("⚠️  OFFICIAL_APPS_DIR not set: ports are not checked against the official Umbrel App Store")
 
 renovate = json.loads((ROOT / "renovate.json").read_text())
 renovate_topics = {
@@ -76,11 +105,39 @@ for d in app_dirs:
             fail(f"{name}: port {port} already used by {seen_ports[port]}")
         else:
             seen_ports[port] = name
+        if port in official_ports:
+            fail(f"{name}: port {port} already used by {official_ports[port]}: both apps can't be installed together")
+
+    if (app.get("storage") or {}).get("dataRoot") != "data":
+        fail(f"{name}: umbrel-app.yml must declare storage: dataRoot: data")
 
     compose = load(compose_yml) or {}
     services = compose.get("services", {})
     if "app_proxy" not in services:
         fail(f"{name}: docker-compose.yml has no app_proxy service")
+    else:
+        app_host = str(((services["app_proxy"] or {}).get("environment") or {}).get("APP_HOST", ""))
+        match = re.fullmatch(rf"{re.escape(name)}_(.+)_1", app_host)
+        if not match or match.group(1) not in services:
+            fail(f"{name}: app_proxy APP_HOST '{app_host}' must be {name}_<service>_1 for a service of the compose")
+
+    for port in published_ports(compose):
+        if port in official_ports:
+            fail(f"{name}: published port {port} already used by {official_ports[port]}")
+
+    if annotation:
+        version = str(app.get("version", "")).split("-patch.")[0].lstrip("v")
+        tags = [
+            str((spec or {}).get("image", "")).split("@")[0].rsplit(":", 1)[-1]
+            for spec in services.values()
+            if str((spec or {}).get("image", "")).startswith(annotation.group(1) + ":")
+        ]
+        if not tags:
+            fail(f"{name}: no service uses the image {annotation.group(1)} named by the renovate annotation")
+        for tag in tags:
+            bare = re.sub(r"^(supervised-|v)", "", tag)
+            if bare != version and not bare.startswith(version + "-"):
+                fail(f"{name}: image tag '{tag}' does not match version '{app.get('version')}'")
 
     for svc, spec in services.items():
         if svc == "app_proxy":
@@ -88,6 +145,11 @@ for d in app_dirs:
         image = (spec or {}).get("image")
         if image and "@sha256:" not in image:
             fail(f"{name}: service '{svc}' image is not pinned by digest: {image}")
+        for device in (spec or {}).get("devices") or []:
+            if str(device).startswith("/dev/dri"):
+                fail(f"{name}: service '{svc}' maps {device}: umbrelOS 2.0 strips it, declare the GPU permission in umbrel-app.yml instead")
+            else:
+                fail(f"{name}: service '{svc}' maps {device}: the container can't start on a host without that device")
 
 if errors:
     print(f"❌ {len(errors)} validation error(s):")

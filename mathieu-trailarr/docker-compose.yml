@@ -12,11 +12,7 @@ services:
       - TZ=Etc/UTC
       - PUID=1000
       - PGID=1000
-    devices:
-      - /dev/dri:/dev/dri
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
-      # Media mounted at the SAME path Sonarr/Radarr report (/downloads), so
-      # Trailarr's path mappings are 1:1 and it writes trailers next to the media.
       - ${UMBREL_ROOT}/data/storage/downloads:/downloads
     restart: on-failure

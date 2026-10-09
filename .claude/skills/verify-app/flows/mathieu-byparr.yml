@@ -1,4 +1,4 @@
-verified: 3.0.4 on umbrelOS 2.0.0 (2026-10-06)
+verified: 3.0.4-patch.1 on umbrelOS 2.0.0 (2026-10-09)
 # The healthcheck solves a challenge on a real website with the bundled browser, which can't
 # trust the sandbox's TLS-intercepting proxy, so health never leaves "starting" here.
 ignoreHealth: true

@@ -7,8 +7,8 @@ name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "2.1.0-patch.1"
-port: 8888
+version: "2.1.0-patch.2"
+port: 8891
 description: >-
   Boxarr is an automated box office tracking application that integrates with
   Radarr to monitor, add, and manage the latest theatrical releases.
@@ -38,6 +38,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-3.jpg
 releaseNotes: >-
+  The app moves from port 8888 to 8891, because InfluxDB from the Umbrel App Store already uses 8888 and the two apps could not be installed together. Update your bookmark if you open it by address.
+
+
   This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
 
 

@@ -7,8 +7,8 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.41.1"
-port: 6060
+version: "1.41.1-patch.1"
+port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
   (Claude, ChatGPT, or any MCP client) talk to your entire media stack through
@@ -42,7 +42,7 @@ description: >-
   anything else (Jellyfin, qBittorrent…) with "Add a service", or edit
   `~/umbrel/app-data/mathieu-arr-mcp/data/config/config.yaml` and restart.
 
-  3. Point your MCP client at `http://umbrel.local:6060/mcp` with the bearer
+  3. Point your MCP client at `http://umbrel.local:6061/mcp` with the bearer
   token shown on the dashboard (header `Authorization: Bearer <token>`). The
   web UI stays behind your Umbrel login; only `/mcp` is opened so MCP clients
   can reach it with the token.
@@ -57,6 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
+  ⚠️ Breaking: the app moves from port 6060 to 6061, because BookLore from the Umbrel App Store already uses 6060 and the two apps could not be installed together. Update the URL in your MCP clients (Claude, ChatGPT, Home Assistant…) to http://umbrel.local:6061/mcp.
+
+
   Metadata findings that are only a language difference are now marked as such instead of being reported as real mismatches.
 
   Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.41.1
