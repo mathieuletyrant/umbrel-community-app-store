@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/v1/*,/health"
 
   server:
-    image: ghcr.io/mathieuletyrant/vitals:0.2.1@sha256:7facc3c4ba0e63321fad981766531c8f48936530da30372028c143f59dbcd85d
+    image: ghcr.io/mathieuletyrant/vitals:0.2.2@sha256:550cae73b79a0a5e8cd25c2605239ae19317ad6bc05ec6b2791bf4ee736f5d0b
     environment:
       VITALS_TOKEN: ${APP_PASSWORD:?APP_PASSWORD is not set}
     restart: on-failure

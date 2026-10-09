@@ -1,4 +1,4 @@
-verified: 1.2.2-patch.2 on umbrelOS 2.0.0 (2026-10-06)
+verified: 1.2.2-patch.3 on umbrelOS 2.0.0 (2026-10-09)
 requires: [lidarr, mathieu-slskd]
 vars:
   LIDARR_API_KEY: docker exec lidarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml

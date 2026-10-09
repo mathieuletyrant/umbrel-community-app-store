@@ -54,11 +54,13 @@ services:
       MCP_HOST: 0.0.0.0
       FRESHRSS_API_URL: http://freshrss_server_1:80/api/greader.php
       FRESHRSS_BASE_URL: http://${DEVICE_DOMAIN_NAME:-umbrel.local}:3432
+      FRESHRSS_USERNAME: ""
+      FRESHRSS_API_PASSWORD: ""
       API_KEY: ${APP_PASSWORD:?APP_PASSWORD is not set}
     restart: on-failure
 
   widget:
-    image: ghcr.io/mathieuletyrant/umbrel-widgets:0.5.0@sha256:PENDING
+    image: ghcr.io/mathieuletyrant/umbrel-widgets:0.5.0@sha256:bb353015e26f3949135a03c7874731e19910a3ca798847e05f8cd12a6a0abd05
     user: "1000:1000"
     environment:
       WIDGET_APP: freshrss-mcp

@@ -1,3 +1,4 @@
+verified: 0.9.7-patch.1 on umbrelOS 2.0.0 (2026-10-09)
 # Until a notifiarr.com API key is validated online, Notifiarr only shows this screen.
 steps:
   - goto: /

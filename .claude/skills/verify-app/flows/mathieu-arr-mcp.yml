@@ -1,14 +1,18 @@
 verified: 1.41.1-patch.1 on umbrelOS 2.0.0 (2026-10-09)
-requires: [radarr, sonarr]
-logs:
-  autoconfig: "added from Umbrel: .*[Rr]adarr"
+requires: [radarr]
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
 steps:
   - goto: /
   - see: Set up arr-mcp
   - fill: {label: Password, exact: true, value: Verify-ArrMcp-1}
   - fill: {label: Confirm password, value: Verify-ArrMcp-1}
   - click: {role: button, name: Claim this instance}
-  # Radarr and Sonarr were added by the autoconfig service from the keys exports.sh found.
-  - see: {text: Radarr, reload: true}
-  - see: Sonarr
+  - click: {role: link, name: Configuration}
+  - click: {role: button, name: Add a service}
+  - select: {css: "[id='add.type']", value: radarr}
+  - fill: {css: "[id='add.url']", value: "http://radarr_server_1:7878"}
+  - fill: {css: "[id='add.api_key']", value: "${RADARR_API_KEY}"}
+  - click: {role: button, name: Add, exact: true}
+  - see: {text: radarr_server_1:7878, reload: true}
   - shot: services
