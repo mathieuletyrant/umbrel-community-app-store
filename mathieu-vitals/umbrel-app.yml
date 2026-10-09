@@ -7,19 +7,21 @@ name: Vitals
 tagline: Live numbers and health of your media stack, as one JSON API
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/vitals
-version: "0.1.0"
+version: "0.2.1"
 port: 6565
 description: >-
   Vitals reads the apps of your media stack and answers with one small JSON
-  document: what is queued, missing and coming up in Radarr and Sonarr, what
-  Transmission is downloading and how fast, and whether each app is healthy.
-  Point your own dashboard at it instead of wiring every app's API and key
-  yourself.
+  document: queues, missing and upcoming media, downloads, subtitles, requests,
+  library cleanup and file health, and whether each app is healthy. Point your
+  own dashboard at it instead of wiring every app's API and key yourself.
 
 
-  It plugs itself into the Radarr, Sonarr and Transmission apps installed on
-  your Umbrel: it finds their API keys on its own. An app installed later is
-  picked up the next time Vitals restarts.
+  Apps it reads: Radarr, Sonarr, Prowlarr, Bazarr, Seerr (Jellyseerr or
+  Overseerr), Transmission, Maintainerr, Healarr, Cleanuparr and Tracearr.
+  It finds the keys of the first seven on its own. Healarr, Cleanuparr and
+  Tracearr keep their keys to themselves: paste each one once in this app's
+  settings in umbrelOS, then restart Vitals. An app installed later is picked
+  up the next time Vitals restarts.
 
 
   It also adds a home screen widget with your downloads, queues and missing
@@ -31,7 +33,9 @@ description: >-
 
   - `GET /v1/summary`: every app, with an overall `healthy` flag.
 
-  - `GET /v1/apps/<radarr|sonarr|transmission>`: one app.
+  - `GET /v1/apps/<id>`: one app (`radarr`, `sonarr`, `prowlarr`, `bazarr`,
+  `seerr`, `transmission`, `maintainerr`, `healarr`, `cleanuparr`,
+  `tracearr`).
 
   - Send the header `Authorization: Bearer <token>`. The token is the password
   shown in this app's settings in umbrelOS (Default credentials). The Umbrel
@@ -43,7 +47,8 @@ description: >-
   `data`. Answers are cached for 10 seconds.
 
 
-  Opening the app shows the same numbers on a status page.
+  The keys never leave your Umbrel: Vitals reads them when it starts and never
+  returns them. Opening the app shows the same numbers on a status page.
 developer: Mathieu Le Tyrant
 website: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/packages/vitals
 submitter: Mathieu Le Tyrant
@@ -54,8 +59,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-2.jpg
 releaseNotes: >-
-  First version: Radarr, Sonarr and Transmission, with a health status for each
-  app and for the whole stack.
+  Seven more apps: Prowlarr, Bazarr, Seerr and Maintainerr are wired on their
+  own; Healarr, Cleanuparr and Tracearr once you paste their key in this app's
+  settings.
 dependencies: []
 path: ""
 widgets:
@@ -79,6 +85,19 @@ widgets:
           subtext: "queued"
         - title: "Missing"
           text: "23"
+environment:
+  - name: HEALARR_API_KEY
+    services:
+      - server
+    note: Healarr's API key, from its settings. Leave empty to skip Healarr.
+  - name: CLEANUPARR_API_KEY
+    services:
+      - server
+    note: Cleanuparr's API key, from its account settings. Leave empty to skip Cleanuparr.
+  - name: TRACEARR_API_KEY
+    services:
+      - server
+    note: A Tracearr public API token (trr_pub_…), created in its settings. Leave empty to skip Tracearr.
 defaultUsername: api
 deterministicPassword: true
 permissions: []

@@ -1,4 +1,4 @@
-import type {Report, Sources, Summary} from './types'
+import type {Report, Source, Sources, Summary} from './types'
 
 const escape = (text: string) =>
 	text.replace(/[&<>"']/g, (char) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[char]!)
@@ -6,10 +6,10 @@ const escape = (text: string) =>
 const STATE: Record<Report<unknown>['status'], {label: string; tone: string}> = {
 	ok: {label: 'Healthy', tone: 'ok'},
 	error: {label: 'Unreachable', tone: 'bad'},
-	'not-configured': {label: 'Not installed', tone: 'off'},
+	'not-configured': {label: 'Not set up', tone: 'off'},
 }
 
-function card<T>(id: string, report: Report<T>, facts: (data: T) => {label: string; value: string}[]): string {
+function card<T>(id: string, report: Report<T>, {facts, setup}: Source<T>): string {
 	const state = report.status === 'ok' && !report.healthy ? {label: 'Needs attention', tone: 'warn'} : STATE[report.status]
 	const body =
 		report.status === 'ok'
@@ -22,13 +22,13 @@ function card<T>(id: string, report: Report<T>, facts: (data: T) => {label: stri
 				}`
 			: report.status === 'error'
 				? `<p class="note">${escape(report.error)}</p>`
-				: `<p class="note">Install ${escape(report.name)}, then restart Vitals.</p>`
+				: `<p class="note">${escape(setup ?? `Install ${report.name}, then restart Vitals.`)}</p>`
 	return `<article><header><h2>${escape(report.name)}</h2><span class="pill ${state.tone}">${state.label}</span></header>${body}<code>/v1/apps/${escape(id)}</code></article>`
 }
 
 export function renderPage<S extends Sources>(sources: S, summary: Summary<S>): string {
 	const cards = Object.entries(summary.apps)
-		.map(([id, report]) => card(id, report as Report<unknown>, sources[id]!.facts))
+		.map(([id, report]) => card(id, report as Report<unknown>, sources[id]!))
 		.join('')
 	return `<!doctype html>
 <html lang="en">

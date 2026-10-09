@@ -1,6 +1,6 @@
 import {expect, test} from 'bun:test'
 
-import {decodeHtml, formatSpeed, timeAgo} from '../src/format'
+import {decodeHtml, formatBytes, formatSpeed, timeAgo} from '../src/format'
 
 const now = new Date('2026-10-09T12:00:00Z')
 const ago = (seconds: number) => new Date(now.getTime() - seconds * 1000)
@@ -27,4 +27,10 @@ test('formatSpeed uses decimal units like Transmission', () => {
 	expect(formatSpeed(999)).toBe('999 B/s')
 	expect(formatSpeed(4_200_000)).toBe('4.2 MB/s')
 	expect(formatSpeed(1_500_000_000)).toBe('1.5 GB/s')
+})
+
+test('formatBytes uses decimal units', () => {
+	expect(formatBytes(512)).toBe('512 B')
+	expect(formatBytes(412_000_000_000)).toBe('412 GB')
+	expect(formatBytes(1_960_000_000_000)).toBe('2.0 TB')
 })

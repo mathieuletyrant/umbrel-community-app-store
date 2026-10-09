@@ -1,7 +1,7 @@
-verified: 0.1.0 on umbrelOS 2.0.0 (2026-10-09)
-requires: [radarr, sonarr, transmission]
+verified: 0.2.1 on umbrelOS 2.0.0 (2026-10-09)
+requires: [radarr, sonarr, prowlarr, bazarr, transmission, mathieu-healarr]
 logs:
-  server: "apps: radarr, sonarr, transmission"
+  server: "apps: radarr, sonarr, prowlarr, bazarr, transmission"
 steps:
   - http: {path: /v1/summary, anonymous: true, status: 401}
   - http:
@@ -9,10 +9,11 @@ steps:
       anonymous: true
       headers: {authorization: "Bearer ${env.server.VITALS_TOKEN}"}
       status: 200
-      contains: '"healthy":true,"apps"'
+      contains: '"healthy":true,"apps".*"prowlarr":\{"name":"Prowlarr","status":"ok".*"bazarr":\{"name":"Bazarr","status":"ok"'
   - widget: {id: media, contains: '"title":"Movies","text":"0"'}
   - see: Episodes
   - shot: media-widget
   - goto: /
   - see: All healthy
+  - see: "Paste Healarr's API key in Vitals' settings"
   - shot: status-page

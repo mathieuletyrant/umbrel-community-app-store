@@ -4,11 +4,12 @@ export type Reading<T> = {data: T; issues: Issue[]}
 
 export type Fact = {label: string; value: string}
 
-// `read` is null when the app is not installed or Vitals has no way in (no API key).
+// `read` is null when the app is not installed or Vitals has no way in (no API key); `setup` then says what to do.
 export type Source<T> = {
 	name: string
 	read: (() => Promise<Reading<T>>) | null
 	facts: (data: T) => Fact[]
+	setup?: string
 }
 
 export type Report<T> =
