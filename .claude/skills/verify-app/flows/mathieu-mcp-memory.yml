@@ -1,4 +1,4 @@
-verified: 11.15.0 on umbrelOS 2.0.0 (2026-10-06)
+verified: 11.15.0 on umbrelOS 2.0.0 (2026-10-09)
 egress: true
 # egress patches the system trust stores, but the model download goes through httpx, which reads certifi's bundle.
 setup:
