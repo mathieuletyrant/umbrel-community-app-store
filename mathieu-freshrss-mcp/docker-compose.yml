@@ -109,7 +109,7 @@ services:
     restart: on-failure
 
   widget:
-    image: ghcr.io/mathieuletyrant/umbrel-widgets:0.2.0@sha256:de663e41bfa10c33c693e77e682c63d30f3daa0ae8008e9253df8a5a48bbcbfd
+    image: ghcr.io/mathieuletyrant/umbrel-widgets:0.3.0@sha256:527d0f81e07cb69802039c173661d7ae717530ee416020d08603bd583e15be7d
     user: "1000:1000"
     environment:
       WIDGET_APP: freshrss-mcp

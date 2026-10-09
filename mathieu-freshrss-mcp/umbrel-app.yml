@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0-patch.5"
+version: "0.1.0-patch.6"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -54,9 +54,7 @@ repo: https://github.com/leitosama/freshrss-mcp-server
 support: https://github.com/leitosama/freshrss-mcp-server/issues
 gallery: []
 releaseNotes: >-
-  A second home screen widget, "overview": your unread articles, the ones
-  fetched in the last 24 hours, your starred articles and your feeds. Pick it
-  in "Edit widgets" next to the list of latest unread articles.
+  Updated the home screen widgets to the latest version.
 
 dependencies:
   - freshrss
