@@ -39,8 +39,7 @@ description: >-
   Apps from the Umbrel App Store answer at `http://<app>_server_1:<port>`,
   e.g. `http://radarr_server_1:7878`, `http://sonarr_server_1:8989`,
   `http://prowlarr_server_1:9696`; the API key is in each app's Settings →
-  General. Addresses of the other apps, to copy:
-  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
+  General.
 
   3. Point your MCP client at `http://umbrel.local:6061/mcp` with the bearer
   token shown on the dashboard (header `Authorization: Bearer <token>`). The

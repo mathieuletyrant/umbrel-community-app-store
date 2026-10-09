@@ -7,7 +7,7 @@ name: Vitals
 tagline: Live numbers and health of your media stack, as one JSON API
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/vitals
-version: "0.2.3"
+version: "0.2.2"
 port: 6565
 description: >-
   Vitals reads the apps of your media stack and answers with one small JSON
@@ -18,10 +18,9 @@ description: >-
 
   Apps it reads: Radarr, Sonarr, Prowlarr, Bazarr, Seerr (Jellyseerr or
   Overseerr), Transmission, Maintainerr, Healarr, Cleanuparr and Tracearr.
-  Paste the API key of each app you use in this app's settings in umbrelOS
-  (⋯ → Settings → Advanced settings), and pick Transmission and Maintainerr
-  from their list. The addresses of the Umbrel App Store apps are already
-  filled in. Apps left empty are reported as `not-configured`.
+  Set the address and API key of each app you use in this app's settings in
+  umbrelOS (⋯ → Settings → Advanced settings); each note gives the address of
+  the Umbrel App Store app. Apps left empty are reported as `not-configured`.
 
 
   It also adds a home screen widget with your downloads, queues and missing
@@ -58,9 +57,8 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-2.jpg
 releaseNotes: >-
-  Vitals no longer finds the other apps and their keys on its own: paste the
-  API key of each app in its settings in umbrelOS. The addresses of the
-  Umbrel App Store apps are already filled in.
+  Vitals no longer finds the other apps and their keys on its own: set the
+  address and API key of each app in its settings in umbrelOS.
 
 dependencies: []
 path: ""
@@ -86,90 +84,78 @@ widgets:
         - title: "Missing"
           text: "23"
 environment:
-  - name: RADARR_API_KEY
-    services:
-      - server
-    note: Radarr's API key, from Settings → General. Leave empty to skip Radarr.
   - name: RADARR_URL
     services:
       - server
-    default: http://radarr_server_1:7878
-    note: Only if Radarr isn't the Umbrel App Store app.
-  - name: SONARR_API_KEY
+    note: Radarr's address, e.g. http://radarr_server_1:7878. Leave empty to skip Radarr.
+  - name: RADARR_API_KEY
     services:
       - server
-    note: Sonarr's API key, from Settings → General. Leave empty to skip Sonarr.
+    note: Radarr's API key, from Settings → General.
   - name: SONARR_URL
     services:
       - server
-    default: http://sonarr_server_1:8989
-    note: Only if Sonarr isn't the Umbrel App Store app.
-  - name: PROWLARR_API_KEY
+    note: Sonarr's address, e.g. http://sonarr_server_1:8989. Leave empty to skip Sonarr.
+  - name: SONARR_API_KEY
     services:
       - server
-    note: Prowlarr's API key, from Settings → General. Leave empty to skip Prowlarr.
+    note: Sonarr's API key, from Settings → General.
   - name: PROWLARR_URL
     services:
       - server
-    default: http://prowlarr_server_1:9696
-    note: Only if Prowlarr isn't the Umbrel App Store app.
-  - name: BAZARR_API_KEY
+    note: Prowlarr's address, e.g. http://prowlarr_server_1:9696. Leave empty to skip Prowlarr.
+  - name: PROWLARR_API_KEY
     services:
       - server
-    note: Bazarr's API key, from Settings → General → Security. Leave empty to skip Bazarr.
+    note: Prowlarr's API key, from Settings → General.
   - name: BAZARR_URL
     services:
       - server
-    default: http://bazarr_server_1:6767
-    note: Only if Bazarr isn't the Umbrel App Store app.
-  - name: SEERR_API_KEY
+    note: Bazarr's address, e.g. http://bazarr_server_1:6767. Leave empty to skip Bazarr.
+  - name: BAZARR_API_KEY
     services:
       - server
-    note: Seerr's API key, from Settings → General. Leave empty to skip Seerr.
+    note: Bazarr's API key, from Settings → General → Security.
   - name: SEERR_URL
     services:
       - server
-    default: http://jellyseerr_server_1:5055
-    note: Only if Seerr isn't the Umbrel App Store app. With Overseerr, use http://overseerr_server_1:5055.
-  - name: HEALARR_API_KEY
+    note: Seerr's address, e.g. http://jellyseerr_server_1:5055 (Jellyseerr) or http://overseerr_server_1:5055 (Overseerr). Leave empty to skip Seerr.
+  - name: SEERR_API_KEY
     services:
       - server
-    note: Healarr's API key, from its settings. Leave empty to skip Healarr.
-  - name: HEALARR_URL
-    services:
-      - server
-    default: http://mathieu-healarr_server_1:3090
-    note: Only if Healarr isn't the Umbrel App Store app.
-  - name: CLEANUPARR_API_KEY
-    services:
-      - server
-    note: Cleanuparr's API key, from its account settings. Leave empty to skip Cleanuparr.
-  - name: CLEANUPARR_URL
-    services:
-      - server
-    default: http://mathieu-cleanuparr_server_1:11011
-    note: Only if Cleanuparr isn't the Umbrel App Store app.
-  - name: TRACEARR_API_KEY
-    services:
-      - server
-    note: A Tracearr public API token (trr_pub_…), created in its settings. Leave empty to skip Tracearr.
-  - name: TRACEARR_URL
-    services:
-      - server
-    default: http://mathieu-tracearr_server_1:3000
-    note: Only if Tracearr isn't the Umbrel App Store app.
+    note: Seerr's API key, from Settings → General.
   - name: TRANSMISSION_URL
     services:
       - server
-    options:
-      - http://transmission_server_1:9091/transmission/rpc
-    note: Pick the Transmission app's address to read it (its RPC must have no login).
+    note: Transmission's RPC address (with no login set), e.g. http://transmission_server_1:9091/transmission/rpc. Leave empty to skip Transmission.
   - name: MAINTAINERR_URL
     services:
       - server
-    options:
-      - http://mathieu-maintainerr_server_1:6246
-    note: Pick the Maintainerr app's address to read it.
+    note: Maintainerr's address, e.g. http://mathieu-maintainerr_server_1:6246. Leave empty to skip Maintainerr.
+  - name: HEALARR_URL
+    services:
+      - server
+    note: Healarr's address, e.g. http://mathieu-healarr_server_1:3090. Leave empty to skip Healarr.
+  - name: HEALARR_API_KEY
+    services:
+      - server
+    note: Healarr's API key, from its settings.
+  - name: CLEANUPARR_URL
+    services:
+      - server
+    note: Cleanuparr's address, e.g. http://mathieu-cleanuparr_server_1:11011. Leave empty to skip Cleanuparr.
+  - name: CLEANUPARR_API_KEY
+    services:
+      - server
+    note: Cleanuparr's API key, from its account settings.
+  - name: TRACEARR_URL
+    services:
+      - server
+    note: Tracearr's address, e.g. http://mathieu-tracearr_server_1:3000. Leave empty to skip Tracearr.
+  - name: TRACEARR_API_KEY
+    services:
+      - server
+    note: Tracearr's API key, a public API token (trr_pub_…) created in its settings.
 defaultUsername: api
 deterministicPassword: true
 permissions: []

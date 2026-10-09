@@ -1,7 +1,6 @@
 import {formatCount} from '@mathieu/core/format'
 import {apiClient} from '@mathieu/core/http'
 
-import {keySetup} from './setup'
 import type {Source} from '../types'
 import {type ArrHealth, arrIssues} from './arr'
 
@@ -14,7 +13,7 @@ export function prowlarr({name, url, apiKey, now = () => new Date()}: Config): S
 		{label: 'Indexers', value: formatCount(data.indexers)},
 		{label: 'Failing', value: formatCount(data.failing)},
 	]
-	if (!url || !apiKey) return {name, read: null, facts, setup: keySetup(name, url)}
+	if (!url || !apiKey) return {name, read: null, facts}
 
 	const api = apiClient(`${url}/api/v1`, {'X-Api-Key': apiKey})
 

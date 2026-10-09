@@ -8,15 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/v1/*,/health"
 
   server:
-    image: ghcr.io/mathieuletyrant/vitals:0.2.3@sha256:PENDING
+    image: ghcr.io/mathieuletyrant/vitals:0.2.2@sha256:550cae73b79a0a5e8cd25c2605239ae19317ad6bc05ec6b2791bf4ee736f5d0b
     environment:
       VITALS_TOKEN: ${APP_PASSWORD:?APP_PASSWORD is not set}
-      RADARR_URL: http://radarr_server_1:7878
-      SONARR_URL: http://sonarr_server_1:8989
-      PROWLARR_URL: http://prowlarr_server_1:9696
-      BAZARR_URL: http://bazarr_server_1:6767
-      SEERR_URL: http://jellyseerr_server_1:5055
-      HEALARR_URL: http://mathieu-healarr_server_1:3090
-      CLEANUPARR_URL: http://mathieu-cleanuparr_server_1:11011
-      TRACEARR_URL: http://mathieu-tracearr_server_1:3000
     restart: on-failure

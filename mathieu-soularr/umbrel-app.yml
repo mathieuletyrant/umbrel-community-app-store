@@ -31,8 +31,6 @@ description: >-
   Settings → General) and one you add in slskd (Options → web → authentication
   → api_keys). The addresses of Lidarr (lidarr_server_1) and slskd
   (mathieu-slskd_server_1) are already filled in.
-  Addresses of the other apps, to copy:
-  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
 
   Soularr processes your Lidarr wanted list every 5 minutes

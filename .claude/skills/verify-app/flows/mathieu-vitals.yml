@@ -6,14 +6,18 @@ vars:
   PROWLARR_API_KEY: docker exec prowlarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
   BAZARR_API_KEY: >-
     docker exec bazarr_server_1 awk '/^auth:/ {a=1; next} /^[^ #]/ {a=0} a && /^  apikey:/ {gsub(/["\047]/, "", $2); print $2; exit}' /config/config/config.yaml
-# What the user fills in Vitals' settings: the keys (the Umbrel addresses are the defaults), and
-# Transmission picked from its list. Healarr has no key, so Vitals asks for it.
+# What the user fills in Vitals' settings. Healarr gets its address but no key.
 settings:
+  RADARR_URL: http://radarr_server_1:7878
   RADARR_API_KEY: ${RADARR_API_KEY}
+  SONARR_URL: http://sonarr_server_1:8989
   SONARR_API_KEY: ${SONARR_API_KEY}
+  PROWLARR_URL: http://prowlarr_server_1:9696
   PROWLARR_API_KEY: ${PROWLARR_API_KEY}
+  BAZARR_URL: http://bazarr_server_1:6767
   BAZARR_API_KEY: ${BAZARR_API_KEY}
   TRANSMISSION_URL: http://transmission_server_1:9091/transmission/rpc
+  HEALARR_URL: http://mathieu-healarr_server_1:3090
 logs:
   server: "apps: radarr, sonarr, prowlarr, bazarr, transmission"
 steps:

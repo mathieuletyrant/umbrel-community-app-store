@@ -1,7 +1,6 @@
 import {formatCount} from '@mathieu/core/format'
 import {apiClient} from '@mathieu/core/http'
 
-import {keySetup} from './setup'
 import type {Issue, Source} from '../types'
 
 export type ArrStats = {
@@ -34,7 +33,7 @@ export function arr({name, url, apiKey, upcomingDays, now = () => new Date()}: C
 		{label: 'Missing', value: formatCount(data.missing)},
 		{label: `Next ${data.upcomingDays} days`, value: formatCount(data.upcoming)},
 	]
-	if (!url || !apiKey) return {name, read: null, facts, setup: keySetup(name, url)}
+	if (!url || !apiKey) return {name, read: null, facts}
 
 	const api = apiClient(`${url}/api/v3`, {'X-Api-Key': apiKey})
 

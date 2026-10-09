@@ -33,8 +33,6 @@ description: >-
   with the API key from each app's Settings → General. Pulsarr's webhook
   address is already set to http://mathieu-pulsarr_server_1:3003, so Sonarr
   and Radarr can reach it.
-  Addresses of the other apps, to copy:
-  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
   3. Choose which Plex users to sync.
 developer: jamcalli

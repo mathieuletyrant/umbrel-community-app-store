@@ -36,10 +36,6 @@ description: >-
   ~/umbrel/app-data/mathieu-cross-seed/data/config/config.js
 
 
-  Addresses of the other apps, to copy:
-  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
-
-
   Check activity with: docker logs -f mathieu-cross-seed_daemon_1
 developer: cross-seed
 website: https://www.cross-seed.org

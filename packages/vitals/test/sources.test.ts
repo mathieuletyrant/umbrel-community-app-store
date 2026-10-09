@@ -1,6 +1,5 @@
 import {afterAll, describe, expect, test} from 'bun:test'
 
-import {arr} from '../src/sources/arr'
 import {bazarr} from '../src/sources/bazarr'
 import {cleanuparr} from '../src/sources/cleanuparr'
 import {healarr} from '../src/sources/healarr'
@@ -156,5 +155,4 @@ test('an installed app missing its key says where to paste it', () => {
 		"Paste Healarr's API key in Vitals' settings in umbrelOS.",
 	)
 	expect(healarr({name: 'Healarr'}).setup).toBeUndefined()
-	expect(arr({name: 'Radarr', url: 'http://radarr', upcomingDays: 30}).setup).toBe("Paste Radarr's API key in Vitals' settings in umbrelOS.")
 })
