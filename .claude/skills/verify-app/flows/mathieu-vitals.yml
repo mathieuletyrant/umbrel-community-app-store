@@ -1,0 +1,17 @@
+requires: [radarr, sonarr, transmission]
+logs:
+  server: "apps: radarr, sonarr, transmission"
+steps:
+  - http: {path: /v1/summary, anonymous: true, status: 401}
+  - http:
+      path: /v1/summary
+      anonymous: true
+      headers: {authorization: "Bearer ${env.server.VITALS_TOKEN}"}
+      status: 200
+      contains: '"healthy":true,"apps"'
+  - widget: {id: media, contains: '"title":"Movies","text":"0"'}
+  - see: Episodes
+  - shot: media-widget
+  - goto: /
+  - see: All healthy
+  - shot: status-page
