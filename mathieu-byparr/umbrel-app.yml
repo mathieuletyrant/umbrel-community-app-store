@@ -7,7 +7,7 @@ name: Byparr
 tagline: Cloudflare-bypass proxy for Prowlarr/Jackett (FlareSolverr replacement)
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-byparr/icon.png
 # renovate: datasource=docker depName=ghcr.io/thephaseless/byparr
-version: "3.0.4-patch.1"
+version: "3.0.4-patch.2"
 port: 8192
 description: >-
   Byparr is a drop-in replacement for FlareSolverr: a proxy server that solves
@@ -40,6 +40,9 @@ repo: https://github.com/ThePhaseless/Byparr
 support: https://github.com/ThePhaseless/Byparr/issues
 gallery: []
 releaseNotes: >-
+  Byparr's browser now keeps its temporary files in memory, as its developer recommends, instead of writing them to your Umbrel's disk on every request.
+
+
   The app moves from port 8191 to 8192, because FlareSolverr from the Umbrel App Store already uses 8191 and the two apps could not be installed together. Update your bookmark if you open it by address.
 
 
