@@ -21,6 +21,14 @@ export async function getJson<T>(url: string, headers: Record<string, string> = 
 	return (await request(url, {headers})).json() as Promise<T>
 }
 
+// A JSON API at one base URL, with the headers every call needs (usually its key).
+export function apiClient(baseUrl: string, headers: Record<string, string> = {}) {
+	return <T>(path: string, params: Record<string, string> = {}): Promise<T> => {
+		const query = new URLSearchParams(params).toString()
+		return getJson<T>(`${baseUrl}${path}${query ? `?${query}` : ''}`, headers)
+	}
+}
+
 export function errorMessage(error: unknown): string {
 	return error instanceof Error ? error.message : String(error)
 }
