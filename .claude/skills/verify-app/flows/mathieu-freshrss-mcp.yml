@@ -1,4 +1,4 @@
-verified: 0.1.0-patch.4 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.1.0-patch.5 on umbrelOS 2.0.0 (2026-10-09)
 requires: [freshrss]
 headless: true
 setup:
