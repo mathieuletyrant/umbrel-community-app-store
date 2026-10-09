@@ -50,7 +50,9 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/widgets
 support: https://github.com/mathieuletyrant/umbrel-community-app-store/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-2.jpg
 releaseNotes: >-
   First version: Radarr, Sonarr and Transmission, with a health status for each
   app and for the whole stack.
