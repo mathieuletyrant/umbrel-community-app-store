@@ -7,7 +7,7 @@ name: Tunarr
 tagline: Turn your media library into live TV channels
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/chrisbenincasa/tunarr
-version: "2026.10.0-patch.2"
+version: "2026.10.1"
 port: 8023
 description: >-
   Tunarr builds classic, always-on TV channels out of the movies, shows and
