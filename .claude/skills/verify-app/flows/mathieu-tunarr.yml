@@ -1,4 +1,4 @@
-verified: 2026.10.0-patch.2 on umbrelOS 2.0.0 (2026-10-09)
+verified: 2026.10.1 on umbrelOS 2.0.0 (2026-10-09)
 fixtures: [movie]
 steps:
   - goto: /web/welcome
