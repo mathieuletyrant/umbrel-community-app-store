@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# cross-seed ran as root before 6.13.7-patch.3; it now runs as 1000 like Transmission.
+DOWNLOADS="${UMBREL_ROOT}/home/Downloads"
+[[ -d "${DOWNLOADS}" ]] || DOWNLOADS="${UMBREL_ROOT}/data/storage/downloads"
+
+for dir in "${APP_DATA_DIR}/data/config" "${DOWNLOADS}/cross-seed"; do
+	[[ -d "${dir}" ]] || continue
+	find -H "${dir}" ! -user 1000 -exec chown -h 1000:1000 {} +
+done

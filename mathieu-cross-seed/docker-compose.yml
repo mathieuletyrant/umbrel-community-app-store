@@ -39,6 +39,7 @@ services:
 
   daemon:
     image: ghcr.io/cross-seed/cross-seed:6.13.7@sha256:a1fed512261fd968c55cb03c51cff9c6620aa76a34b3b591afca95c890aa8225
+    user: "1000:1000"
     init: true
     restart: on-failure
     entrypoint:

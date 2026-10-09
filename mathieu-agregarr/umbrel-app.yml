@@ -7,7 +7,7 @@ name: Agregarr
 tagline: Keep your Plex Home screen fresh with auto-updated collections
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/icon.png
 # renovate: datasource=docker depName=bitr8/agregarr
-version: "2.11.0"
+version: "2.11.0-patch.1"
 port: 7171
 description: >-
   Agregarr builds Plex collections from public lists and pins them to your
@@ -64,7 +64,8 @@ support: https://github.com/bitr8/agregarr-dev/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
 releaseNotes: >-
-  Initial release on this store.
+  Agregarr now runs as your Umbrel user instead of root, as its developer recommends, so the "Coming Soon" folders it creates in your Downloads no longer block Radarr and Sonarr imports. Placeholder folders created before this update are still owned by root: delete them in the Files app and Agregarr recreates them.
+
 dependencies: []
 path: ""
 defaultUsername: ""

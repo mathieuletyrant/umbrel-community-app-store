@@ -1,5 +1,8 @@
+verified: 0.1.0-patch.3 on umbrelOS 2.0.0 (2026-10-09)
 requires: [freshrss]
 headless: true
+setup:
+  - docker exec mathieu-freshrss-mcp_server_1 sh -c 'echo "$FRESHRSS_BASE_URL" | grep -Eq "^http://[A-Za-z0-9.-]+:3432$"'
 # The init service needs a FreshRSS account; create one before installing.
 prepare:
   - docker exec -u 1000 -e DATA_PATH=/config/www/freshrss/data freshrss_server_1 sh -c 'cd /app/www && (php cli/list-users.php | grep -q . || (php cli/do-install.php --default-user admin --auth-type form --environment production --base-url http://localhost --db-type sqlite && php cli/create-user.php --user admin --password Verify-FreshRSS-1))'
