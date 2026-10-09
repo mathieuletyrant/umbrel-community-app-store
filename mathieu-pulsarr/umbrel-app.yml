@@ -7,8 +7,8 @@ name: Pulsarr
 tagline: Sync Plex watchlists to Sonarr and Radarr in real time
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/icon.png
 # renovate: datasource=docker depName=lakker/pulsarr
-version: "0.19.4-patch.1"
-port: 3003
+version: "0.19.4-patch.2"
+port: 3023
 description: >-
   Pulsarr watches the Plex watchlists of you and your friends and sends every
   movie and show to Radarr or Sonarr as soon as it's added. Watchlist a title
@@ -46,6 +46,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
+  The app moves from port 3003 to 3023, because BTCPay Server from the Umbrel App Store already uses 3003 and the two apps could not be installed together. Update your bookmark if you open it by address.
+
+
   On a fresh install, Sonarr and Radarr from the Umbrel App Store are now added
   automatically — no API keys to copy.
 

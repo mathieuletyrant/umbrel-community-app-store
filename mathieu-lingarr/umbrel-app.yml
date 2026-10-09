@@ -7,8 +7,8 @@ name: Lingarr
 tagline: Automated subtitle translation for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/lingarr-translate/lingarr
-version: "1.3.0-patch.3"
-port: 9876
+version: "1.3.0-patch.4"
+port: 9877
 description: >-
   Lingarr is an automated subtitle translator for Radarr and Sonarr. It
   translates your subtitle files into the language you want — perfect for
@@ -51,6 +51,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-2.jpg
 releaseNotes: >-
+  The app moves from port 9876 to 9877, because SABnzbd from the Umbrel App Store already uses 9876 and the two apps could not be installed together. Update your bookmark if you open it by address.
+
+
   Lingarr now runs as your Umbrel user instead of root, so the subtitles it writes next to your media belong to the same user as Radarr, Sonarr and Bazarr. Its settings are handed over automatically when the app starts.
 
 dependencies: []

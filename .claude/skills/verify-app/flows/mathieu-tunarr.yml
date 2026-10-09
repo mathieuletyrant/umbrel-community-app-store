@@ -1,4 +1,4 @@
-verified: 2026.10.0-patch.1 on umbrelOS 2.0.0 (2026-10-08)
+verified: 2026.10.0-patch.2 on umbrelOS 2.0.0 (2026-10-09)
 fixtures: [movie]
 steps:
   - goto: /web/welcome
@@ -29,6 +29,9 @@ steps:
   - click: {role: button, name: SAVE}
   - see: 1 program
   - http: {path: /lineup.json, status: 200, contains: Umbrel TV}
+  # The XMLTV file is rewritten in the background after a save: read it once the guide shows the program.
+  - goto: /web/guide
+  - see: {text: Test Pattern, exact: true}
   - http: {path: /api/xmltv.xml, status: 200, contains: Test Pattern}
   - goto: /web/guide
   - see: {text: Test Pattern, exact: true}

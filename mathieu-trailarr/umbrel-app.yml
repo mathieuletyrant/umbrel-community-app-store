@@ -7,7 +7,7 @@ name: Trailarr
 tagline: Automatically download trailers for your Radarr/Sonarr library
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/icon.png
 # renovate: datasource=docker depName=nandyalu/trailarr
-version: "0.13.1"
+version: "0.13.1-patch.1"
 port: 7889
 description: >-
   Trailarr automatically downloads and manages trailers for the movies and TV
@@ -43,10 +43,8 @@ description: >-
   ⚡ HARDWARE ACCELERATION
 
 
-  The compose passes your Intel/AMD iGPU (`/dev/dri`) to the container for VAAPI
-  transcoding. After install, enable it in Settings > General > Advanced Settings
-  > Hardware Acceleration. (If your host has no `/dev/dri`, remove the `devices:`
-  block from the app's docker-compose or the container won't start.)
+  When your Umbrel has a GPU, umbrelOS gives it to Trailarr automatically. Enable
+  it in Settings > General > Advanced Settings > Hardware Acceleration.
 developer: nandyalu
 website: https://nandyalu.github.io/trailarr
 submitter: Mathieu Le Tyrant
@@ -59,6 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-4.jpg
 releaseNotes: >-
+  Hardware acceleration works again on umbrelOS 2.0: Trailarr now asks umbrelOS for the GPU, which removed the old /dev/dri mapping. It also installs on an Umbrel without a GPU.
+
+
   This update integrates TMDB for curated trailers in your preferred language (add an optional TMDB API key in Settings > General), adds a setup guide on first install, and improves database backup management. Filter counts now show how much of your library has a trailer, and any video you choose is preserved across updates.
 dependencies: []
 path: ""
@@ -66,3 +67,4 @@ defaultUsername: "admin"
 defaultPassword: "trailarr"
 permissions:
   - STORAGE_DOWNLOADS
+  - GPU

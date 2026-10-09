@@ -4,6 +4,8 @@ on:
   push:
     branches: [master]
   pull_request:
+  schedule:
+    - cron: "17 6 * * 1"
 
 jobs:
   validate:
@@ -11,7 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: getumbrel/umbrel-apps
+          path: .official
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*/umbrel-app.yml
+            /*/docker-compose.yml
+
       - run: pip install pyyaml
 
       - name: Validate app definitions
+        env:
+          OFFICIAL_APPS_DIR: .official
         run: python3 .github/scripts/validate_apps.py

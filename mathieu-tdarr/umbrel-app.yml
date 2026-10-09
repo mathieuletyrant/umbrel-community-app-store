@@ -7,7 +7,7 @@ name: Tdarr
 tagline: Automated, distributed transcoding and library health checks
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/icon.png
 # renovate: datasource=docker depName=haveagitgat/tdarr
-version: "2.95.01"
+version: "2.95.01-patch.1"
 port: 8267
 description: >-
   Tdarr is an automated media transcoding and library health-check tool. It
@@ -32,8 +32,8 @@ description: >-
   connected; press Transcode/Health Check to start processing.
 
 
-  ⚡ Hardware transcoding (Intel QSV / VAAPI) works out of the box when your
-  server has an Intel iGPU — /dev/dri is passed through automatically. Enable an
+  ⚡ Hardware transcoding (Intel QSV / VAAPI, NVIDIA NVENC) works out of the box
+  when your Umbrel has a GPU: umbrelOS gives it to Tdarr automatically. Enable an
   HW-accel plugin/flow (e.g. QSV) in your stack to use it.
 developer: HaveAGitGat
 website: https://tdarr.io
@@ -47,6 +47,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-4.jpg
 releaseNotes: >-
+  Hardware transcoding works again on umbrelOS 2.0: Tdarr now asks umbrelOS for the GPU, which removed the old /dev/dri mapping. It also installs on an Umbrel without a GPU.
+
+
   Lower CPU usage and disk activity when idle, lower Docker container resource usage, faster and more reliable copying of finished files to libraries on SMB, NFS and FUSE mounts, and improved queue, staged file and automation reliability.
 
 
@@ -57,3 +60,4 @@ defaultUsername: ""
 defaultPassword: ""
 permissions:
   - STORAGE_DOWNLOADS
+  - GPU
