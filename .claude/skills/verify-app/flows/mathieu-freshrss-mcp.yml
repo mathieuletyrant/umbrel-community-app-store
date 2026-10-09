@@ -3,6 +3,20 @@ requires: [freshrss]
 headless: true
 setup:
   - docker exec mathieu-freshrss-mcp_server_1 sh -c 'echo "$FRESHRSS_BASE_URL" | grep -Eq "^http://[A-Za-z0-9.-]+:3432$"'
+  # The sandbox kernel has no IPv6: FreshRSS's nginx can't bind [::]:80 and never serves HTTP.
+  - docker exec freshrss_server_1 sh -c "sed -i '/listen \[::\]/d' /config/nginx/site-confs/default.conf && s6-svc -r /run/service/svc-nginx"
+  # One unread article for the widget, offline: a feed served by FreshRSS itself on loopback,
+  # which FreshRSS only fetches once loopback is in its internal_host_allowlist.
+  - |
+    docker exec -i -u 1000 -e DATA_PATH=/config/www/freshrss/data freshrss_server_1 sh -s <<'SH'
+    set -e
+    cd /app/www
+    printf '%s' '<?xml version="1.0"?><rss version="2.0"><channel><title>Verify feed</title><link>http://127.0.0.1/</link><description>Fixture</description><item><title>Widget test article</title><link>http://127.0.0.1/verify-article</link><guid>verify-article</guid></item></channel></rss>' > p/verify-feed.xml
+    php -r '$f = getenv("DATA_PATH") . "/config.php"; $c = include $f; $c["internal_host_allowlist"] = ["127.0.0.1/32"]; file_put_contents($f, "<?php\nreturn " . var_export($c, true) . ";\n");'
+    printf '%s' '<?xml version="1.0"?><opml version="2.0"><body><outline text="Verify feed" type="rss" xmlUrl="http://127.0.0.1/verify-feed.xml"/></body></opml>' > /tmp/verify.opml
+    php cli/import-for-user.php --user admin --filename /tmp/verify.opml
+    php cli/actualize-user.php --user admin || true
+    SH
 # The init service needs a FreshRSS account; create one before installing.
 prepare:
   - docker exec -u 1000 -e DATA_PATH=/config/www/freshrss/data freshrss_server_1 sh -c 'cd /app/www && (php cli/list-users.php | grep -q . || (php cli/do-install.php --default-user admin --auth-type form --environment production --base-url http://localhost --db-type sqlite && php cli/create-user.php --user admin --password Verify-FreshRSS-1))'
@@ -32,8 +46,6 @@ steps:
       status: 200
       contains: '"tools"'
   - shot: tools
-  # FreshRSS has no feeds offline: the widget's empty state proves login and stream call worked
-  # (its fallback says "Can't reach FreshRSS").
   - widget: unread
-  - see: No unread articles
+  - see: Widget test article
   - shot: widget
