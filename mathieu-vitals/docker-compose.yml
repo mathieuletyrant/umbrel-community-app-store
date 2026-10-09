@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/v1/*,/health"
 
   server:
-    image: ghcr.io/mathieuletyrant/vitals:0.1.0@sha256:DIGEST
+    image: ghcr.io/mathieuletyrant/vitals:0.1.0@sha256:a35705887eef5812433fd5d5ca70e705c70fbe5194a16c230617c622c9058055
     environment:
       VITALS_TOKEN: ${APP_PASSWORD:?APP_PASSWORD is not set}
       RADARR_URL: ${APP_MATHIEU_VITALS_RADARR_URL:-}
