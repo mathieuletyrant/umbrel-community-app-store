@@ -7,6 +7,10 @@ focused on **self-hosted media apps** — the kind of tools that round out a
 Everything here is packaged for [umbrelOS](https://umbrel.com) and kept simple:
 one folder per app, images pinned by digest, sensible defaults out of the box.
 
+> 🤖 **This store is maintained with AI.** Most of the packaging, updates and
+> fixes are written by an AI coding agent ([Claude Code](https://claude.com/claude-code)),
+> under rules I set. See [How this store is maintained](#-how-this-store-is-maintained).
+
 ## 📦 Apps
 
 | App | What it does |
@@ -68,6 +72,26 @@ Apps follow their upstream releases automatically. [Renovate](https://github.com
 opens a pull request for every new image; each one is checked against the upstream
 changelog, gets user-facing release notes, and is installed on a test umbrelOS
 before it's merged. Updates then show up in umbrelOS like any other app update.
+
+## 🤖 How this store is maintained
+
+This is a one-person side project, and most of the work is done by an AI coding
+agent ([Claude Code](https://claude.com/claude-code)) rather than by hand:
+
+- **Packaging:** new apps and fixes are written by the agent, following the
+  rules in [`CLAUDE.md`](CLAUDE.md) and each app's official install docs.
+- **Updates:** Renovate opens a pull request for each new image. The agent reads
+  the upstream changelog, writes the release notes, installs the app on a test
+  umbrelOS and posts a screenshot of it running on the pull request. Verified
+  patch and minor updates are merged by the agent; the rest wait for me.
+- **Checks:** CI validates every app (pinned images, unique ports, including
+  against the official store) before anything is merged.
+
+What this means for you: apps are tested on a real umbrelOS before release, but
+not by a human on every hardware setup, and the agent can get things wrong. The
+upstream developers don't maintain these packages, so report problems here first.
+If something is off, [open an issue](https://github.com/mathieuletyrant/umbrel-community-app-store/issues)
+and it will be looked at.
 
 ## 💬 Requests & issues
 
