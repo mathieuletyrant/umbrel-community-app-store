@@ -35,6 +35,12 @@
       "matchDatasources": ["docker"],
       "commitMessageExtra": "to {{{newValue}}}"
     },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageExtra": "digest to {{{newDigestShort}}}"
+    },
+    { "matchPackageNames": ["nginx"], "commitMessageTopic": "nginx sidecar" },
     { "matchPackageNames": ["ghcr.io/samik081/mcp-adguard-home"], "commitMessageTopic": "AdGuard MCP" },
     { "matchPackageNames": ["ghcr.io/bardesss/arr-mcp"], "commitMessageTopic": "arr-mcp" },
     { "matchPackageNames": ["ghcr.io/leitosama/freshrss-mcp-server"], "commitMessageTopic": "FreshRSS MCP" },

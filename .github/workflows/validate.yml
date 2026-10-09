@@ -22,9 +22,13 @@ jobs:
             /*/umbrel-app.yml
             /*/docker-compose.yml
 
+      - if: github.event_name == 'pull_request'
+        run: git fetch --no-tags --depth=1 origin ${{ github.base_ref }}
+
       - run: pip install pyyaml
 
       - name: Validate app definitions
         env:
           OFFICIAL_APPS_DIR: .official
+          BASE_REF: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
         run: python3 .github/scripts/validate_apps.py

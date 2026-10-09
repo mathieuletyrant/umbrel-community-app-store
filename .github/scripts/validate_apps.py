@@ -8,6 +8,7 @@ on any failure.
 import json
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -46,6 +47,18 @@ def published_ports(compose: dict) -> set[int]:
             if len(parts) >= 2 and parts[-2].isdigit():
                 ports.add(int(parts[-2]))
     return ports
+
+
+def images(compose: dict) -> list[str]:
+    return sorted(str((spec or {}).get("image")) for spec in (compose.get("services") or {}).values() if (spec or {}).get("image"))
+
+
+def base_version(path: str):
+    base_ref = os.environ.get("BASE_REF")
+    if not base_ref:
+        return None
+    shown = subprocess.run(["git", "show", f"{base_ref}:{path}"], cwd=ROOT, capture_output=True, text=True)
+    return yaml.safe_load(shown.stdout) if shown.returncode == 0 else None
 
 
 official_ports: dict[int, str] = {}
@@ -120,6 +133,11 @@ for d in app_dirs:
         match = re.fullmatch(rf"{re.escape(name)}_(.+)_1", app_host)
         if not match or match.group(1) not in services:
             fail(f"{name}: app_proxy APP_HOST '{app_host}' must be {name}_<service>_1 for a service of the compose")
+
+    base_app = base_version(f"{name}/umbrel-app.yml")
+    base_compose = base_version(f"{name}/docker-compose.yml")
+    if base_app and base_compose and images(base_compose) != images(compose) and str(base_app.get("version")) == str(app.get("version")):
+        fail(f"{name}: an image changed but version is still {app.get('version')}: bump it with -patch.N, or existing installs never get the new image")
 
     for port in published_ports(compose):
         if port in official_ports:
