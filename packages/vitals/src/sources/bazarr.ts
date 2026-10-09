@@ -1,6 +1,7 @@
 import {formatCount} from '@mathieu/core/format'
 import {apiClient} from '@mathieu/core/http'
 
+import {keySetup} from './setup'
 import type {Source} from '../types'
 
 export type BazarrStats = {missingEpisodes: number; missingMovies: number; throttledProviders: number}
@@ -14,7 +15,7 @@ export function bazarr({name, url, apiKey}: Config): Source<BazarrStats> {
 		{label: 'Movies missing', value: formatCount(data.missingMovies)},
 		{label: 'Throttled providers', value: formatCount(data.throttledProviders)},
 	]
-	if (!url || !apiKey) return {name, read: null, facts}
+	if (!url || !apiKey) return {name, read: null, facts, setup: keySetup(name, url)}
 
 	const api = apiClient(`${url}/api`, {'X-API-KEY': apiKey})
 

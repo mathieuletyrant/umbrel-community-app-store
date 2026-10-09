@@ -28,6 +28,8 @@ description: >-
   `http://sonarr_server_1:8989`, with the API key from each app's Settings →
   General. Your media is mounted read-only at /downloads, matching the paths
   the *arr apps report, so their library folders work as scan paths as is.
+  Addresses of the other apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 developer: mescon
 website: https://github.com/mescon/Healarr
 submitter: Mathieu Le Tyrant
