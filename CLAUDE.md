@@ -37,7 +37,7 @@ Current apps:
 - `mathieu-tracearr` — Tracearr (Plex/Jellyfin/Emby monitoring; single-container "supervised" image with bundled TimescaleDB + Redis; `mem_limit: 3g` as upstream's example: without a limit its entrypoint tunes PostgreSQL for the host's whole RAM; no `ulimits:` since the entrypoint raises nofile itself and a value above dockerd's hard limit stops the container from starting)
 - `mathieu-cleanuparr` — Cleanuparr (download queue cleanup for the *arr stack, web UI on 11011)
 - `mathieu-profilarr` — Profilarr (quality profiles/custom formats manager for Radarr/Sonarr, web UI on 6868; 2 services: server + optional parser)
-- `mathieu-maintainerr` — Maintainerr (rule-based Plex library cleanup, web UI on 6246; data at /opt/data)
+- `mathieu-maintainerr` — Maintainerr (rule-based Plex library cleanup, web UI on 6246; the image runs as 1000, so `data/opt-data/.gitkeep` is shipped to pre-own /opt/data)
 - `mathieu-agregarr` — Agregarr (Plex collections + Home/Recommended hubs from Trakt/IMDb/TMDb/Letterboxd/Tautulli/Overseerr, web UI on 7171; the maintained `bitr8/agregarr` fork, upstream `agregarr/agregarr` stalled in April 2026; Overseerr-based, Plex OAuth setup wizard, PUID/PGID 1000 + UMASK 022 (upstream: without them it runs as root and its folders break *arr imports), config at /app/config; `host.docker.internal:host-gateway` so the host-network Plex can be added by hand; /downloads mounted for its "Coming Soon" placeholder folders)
 - `mathieu-posterizarr` — Posterizarr (poster/title card maker for Plex, FastAPI web UI on 8000, host port 8007; `user: 1000:1000` with `data/{config,assets,assetsbackup,manualassets}/.gitkeep`; Plex at `http://host.docker.internal:32400` via host-gateway, set in its onboarding with Plex OAuth "Auto-Fetch Token"; Sonarr/Radarr webhook `http://mathieu-posterizarr_server_1:8000/api/webhook/arr?api_key=…`)
 - `mathieu-labelarr` — Labelarr (TMDb keywords → Plex labels; headless Go daemon, nginx `web` status sidecar on host port 9095; `exports.sh` reads Plex's `PlexOnlineToken` from its Preferences.xml and the Radarr/Sonarr keys on the host → upstream's `PLEX_TOKEN`/`USE_RADARR`/`RADARR_*`/`SONARR_*` env, Plex reached at `host.docker.internal:32400`; the TMDb token is an `environment:` setting; upstream exits on any missing setting or failed connection, so `server` loops `until ./labelarr | tee /data/labelarr.log … sleep 60` and the status page reads that log; `WEBHOOK_ENABLED` on 9090 behind the sidecar, app_proxy whitelists `/webhook` for Plex (host network) at `http://127.0.0.1:9095/webhook`)
@@ -162,7 +162,9 @@ this too.
 - Every manifest declares `storage:` / `dataRoot: data` right after `id:`. This is
   the umbrelOS 2.0 opt-in that lets users move an app's data to external storage,
   and it makes umbrelOS create the `${APP_DATA_DIR}/data/...` bind-mount sources
-  before start (without it, Docker creates them root-owned).
+  before start. That does not make them writable for an image that runs as 1000
+  (Maintainerr, slskd, Posterizarr): ship a `data/<dir>/.gitkeep` so the folder
+  exists, owned by 1000, from install.
 - `folderAccess:` (optional) declares user-pickable folders in the umbrelOS 2.0 UI.
   Not needed for a plain `/downloads` mount — umbrelOS auto-generates a slot for any
   compose mount under Downloads. Add it only for extra folders or a custom note.
