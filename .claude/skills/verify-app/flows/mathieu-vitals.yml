@@ -1,5 +1,5 @@
-verified: 0.2.0 on umbrelOS 2.0.0 (2026-10-09)
-requires: [radarr, sonarr, prowlarr, bazarr, transmission]
+verified: 0.2.1 on umbrelOS 2.0.0 (2026-10-09)
+requires: [radarr, sonarr, prowlarr, bazarr, transmission, mathieu-healarr]
 logs:
   server: "apps: radarr, sonarr, prowlarr, bazarr, transmission"
 steps:
@@ -15,4 +15,5 @@ steps:
   - shot: media-widget
   - goto: /
   - see: All healthy
+  - see: "Paste Healarr's API key in Vitals' settings"
   - shot: status-page
