@@ -1,0 +1,14 @@
+{
+  "name": "mathieu-store-packages",
+  "private": true,
+  "packageManager": "bun@1.4.2",
+  "workspaces": ["core", "widgets", "vitals"],
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "typescript": "7.0.2"
+  }
+}

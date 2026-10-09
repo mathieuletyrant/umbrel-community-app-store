@@ -6,8 +6,8 @@ category: media
 name: Vitals
 tagline: Live numbers and health of your media stack, as one JSON API
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/icon.png
-# renovate: datasource=docker depName=ghcr.io/mathieuletyrant/umbrel-widgets
-version: "0.3.0"
+# renovate: datasource=docker depName=ghcr.io/mathieuletyrant/vitals
+version: "0.1.0"
 port: 6565
 description: >-
   Vitals reads the apps of your media stack and answers with one small JSON
@@ -45,10 +45,10 @@ description: >-
 
   Opening the app shows the same numbers on a status page.
 developer: Mathieu Le Tyrant
-website: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/widgets
+website: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/packages/vitals
 submitter: Mathieu Le Tyrant
 submission: https://github.com/mathieuletyrant/umbrel-community-app-store
-repo: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/widgets
+repo: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/packages/vitals
 support: https://github.com/mathieuletyrant/umbrel-community-app-store/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
