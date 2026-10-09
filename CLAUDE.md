@@ -26,7 +26,7 @@ umbrel-app-store.yml        # store id + name
 <app-id>/
   umbrel-app.yml            # store listing metadata
   docker-compose.yml        # the app's services
-widgets/                    # source of the umbrel-widgets image (home screen widgets)
+packages/                   # this store's own code (Bun workspaces): core, widgets, vitals
 ```
 
 Every app id **must** be prefixed with the store id `mathieu-`.
@@ -67,6 +67,7 @@ Current apps:
 - `mathieu-adguard-mcp` — AdGuard MCP (Samik081/mcp-adguard-home, 65 tools, MCP on container 3000 at `/`, host port 6464; reaches the official host-network `adguard-home` at `http://host.docker.internal:8095` via `host-gateway`; AdGuard passwords are bcrypt-hashed so the user enters their AdGuard admin login in the app settings (`environment:` ADGUARD_USERNAME/PASSWORD/ACCESS_TIER); upstream exits when it can't connect, so `server` wraps it in an `until … sleep 30` loop instead of crash-looping; upstream HTTP has no auth, so the nginx `web` sidecar checks the token (`${APP_PASSWORD}`, `?token=` or bearer) itself, serves a status page and returns 503 JSON while not connected)
 - `mathieu-umbrel-mcp-bridge` — Umbrel MCP Bridge (nginx only, no data; host port 6161, `PROXY_AUTH_ADD: false`; `/mcp?token=umbrelmcp_…` → `Authorization: Bearer` → umbreld `/mcp` via `host.docker.internal:host-gateway`, which lan-ingress routes to umbreld for any Host; for Home Assistant's header-less MCP client)
 - `mathieu-notifiarr` — Notifiarr (client for notifiarr.com: Discord notifications, dashboard, TRaSH sync and service checks for the *arr stack/Plex, web UI on 5454; runs as `user: 1000:1000`, config written by upstream at `/config/notifiarr.conf`, `hostname: ${DEVICE_HOSTNAME}` since notifiarr.com lists clients by hostname; no `DN_UI_PASSWORD` on purpose: upstream shows only its API key page (no login) until a notifiarr.com key is set, then logs in with notifiarr.com credentials until a local password is set in its profile page, and an env password would override that one at every start; wiring through upstream's `DN_*` env, which override the config file and are flagged in its UI: a `DN_*` var that is set but empty creates an empty instance (Notifiarr refuses to start on an empty URL) or blanks a user value, so compose lists them **without a value** (passed through only when set) and `exports.sh` exports `DN_<APP>_0_URL`/`_API_KEY` itself, only for installed apps whose key it found (Radarr/Sonarr/Lidarr/Readarr/Prowlarr/SABnzbd/Tautulli, Plex `PlexOnlineToken` → `host.docker.internal:32400`, Transmission when its RPC has no auth); app_proxy whitelists `/plex` for Plex's webhook at `http://127.0.0.1:5454/plex?token=<API key>`)
+- `mathieu-vitals` — Vitals (this store's own: live numbers + health of Radarr/Sonarr/Transmission as one JSON API for a private dashboard; host port 6565; its own image `ghcr.io/mathieuletyrant/vitals`, code in `packages/vitals/`; `/v1/summary` and `/v1/apps/<id>` need `Authorization: Bearer ${APP_PASSWORD}` (`deterministicPassword`), app_proxy whitelists `/v1/*` + `/health`, `/` is a status page behind the Umbrel login; `exports.sh` greps the Radarr/Sonarr keys and checks Transmission's RPC has no auth, and exports a URL only for an app it can reach, so an empty URL means `not-configured`; the `media` widget is served on its own port 3001, never proxied, because umbreld calls widgets without credentials)
 - `mathieu-unpackerr` — Unpackerr (extracts .rar/.7z/.zip downloads so Radarr/Sonarr/Lidarr can import them; headless, nginx `web` status sidecar on host port 5657 reads Unpackerr's `/metrics` (container 5656, not published) and tails `data/config/unpackerr.log` (`UN_LOG_FILE_MODE: 0644` so nginx can read it); runs as `user: 1000:1000`, all config via `UN_*` env; `exports.sh` greps the *arr API keys on the host like arr-mcp — an empty key makes Unpackerr skip that app, so uninstalled apps are harmless; an app installed later needs an Unpackerr restart)
 
 ## Adding or updating an app
@@ -220,16 +221,23 @@ JSON directly from the host: no app_proxy, no Umbrel login, the container's inte
 - The JSON must carry `refresh` as a string (`"2m"`): umbreld parses it with `ms()` and fails the
   widget without it, and it, not the manifest's, sets the polling interval. umbrelOS renders the
   manifest's `type` and uses the response's `link` (a path on the app's own URL).
-- None of this store's apps answer in that format, so widgets come from one image built from
-  `widgets/`: `ghcr.io/mathieuletyrant/umbrel-widgets`. An app adds a `widget` service with that
-  image and `WIDGET_APP=<app>`; each widget is `src/apps/<app>.ts`, registered in
-  `src/apps/index.ts`, with tests against recorded responses in `test/`.
+- None of this store's apps answer in that format, so this store builds its own, in `packages/`
+  (Bun workspaces, one `Dockerfile` with `PACKAGE` as build arg):
+  - `core/`: shared code, imported as `@mathieu/core/<module>`: HTTP, formatting, env, and the
+    umbrelOS widget protocol (`widget.ts`: widget types and the handler that serves them).
+  - `widgets/` → `ghcr.io/mathieuletyrant/umbrel-widgets`: the server of the store's app widgets.
+    An app adds a `widget` service with that image and `WIDGET_APP=<app>`; each app's widgets are
+    `src/apps/<app>.ts`, registered in `src/apps/index.ts`.
+  - `vitals/` → `ghcr.io/mathieuletyrant/vitals`: the Vitals API. Each app it reads is
+    `src/sources/<app>.ts` (data, health issues, display facts), registered in
+    `src/sources/index.ts`; its `media` widget combines several apps through the same protocol.
+  - Tests live next to each package, in `<package>/test/`.
 - A failing app answers with the widget's `fallback` over HTTP 200 (an HTTP error makes umbrelOS
   show an error), and calls to the app time out after 3 s (umbreld has no timeout).
 - Read keys the way the wiring rules above allow: a file of the app mounted read-only, `${APP_PASSWORD}`,
   or a setting the user fills in. Never a key copied by hand into the compose.
-- The `Widgets` workflow runs `bun run typecheck` and `bun test` on every push, and publishes
-  `umbrel-widgets:<version>` the first time a version from `widgets/package.json` is pushed, from any
+- The `Packages` workflow runs `bun run typecheck` and `bun test` on every push, and publishes each
+  image the first time its version from `packages/<package>/package.json` is pushed, from any
   branch. Published versions are never overwritten: bump the version to ship a change, then pin the
   new digest (the run summary prints it) in each app using it, with a `-patch.N` bump. Renovate
   groups those bumps in one PR.

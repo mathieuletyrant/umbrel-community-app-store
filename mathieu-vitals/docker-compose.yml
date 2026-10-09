@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-vitals_server_1
+      APP_PORT: 3000
+      PROXY_AUTH_WHITELIST: "/v1/*,/health"
+
+  server:
+    image: ghcr.io/mathieuletyrant/vitals:0.1.0@sha256:a35705887eef5812433fd5d5ca70e705c70fbe5194a16c230617c622c9058055
+    environment:
+      VITALS_TOKEN: ${APP_PASSWORD:?APP_PASSWORD is not set}
+      RADARR_URL: ${APP_MATHIEU_VITALS_RADARR_URL:-}
+      RADARR_API_KEY: ${APP_MATHIEU_VITALS_RADARR_API_KEY:-}
+      SONARR_URL: ${APP_MATHIEU_VITALS_SONARR_URL:-}
+      SONARR_API_KEY: ${APP_MATHIEU_VITALS_SONARR_API_KEY:-}
+      TRANSMISSION_URL: ${APP_MATHIEU_VITALS_TRANSMISSION_URL:-}
+    restart: on-failure
