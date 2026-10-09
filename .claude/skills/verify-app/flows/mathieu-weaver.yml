@@ -1,4 +1,4 @@
-verified: 0.14.5 on umbrelOS 2.0.0 (2026-10-06)
+verified: 0.14.7-patch.1 on umbrelOS 2.0.0 (2026-10-09)
 steps:
   - goto: /
   - fill: {label: Username, value: admin}
