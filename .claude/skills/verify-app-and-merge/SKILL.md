@@ -52,7 +52,8 @@ node $V up                          # Bash run_in_background: boots umbrelOS whi
    (`gh api repos/<owner>/<repo>/compare/<old>...<new> --jq '.commits[].commit.message'`).
    Note anything needing a change on our side: breaking changes, new required env vars,
    changed ports, data path or volume migrations, dropped architectures.
-3. **Keep `umbrel-app.yml` in sync** (only that app's file, committed to the PR branch):
+3. **Keep `umbrel-app.yml` in sync** (the file of every app the PR touches, committed to
+   the PR branch; a sidecar digest bump such as `nginx:alpine` touches several apps at once):
    - `version:` is Renovate's job on a version bump: leave it. When the PR leaves
      `version:` unchanged (digest-only bump, or an image without a `# renovate:`
      annotation: sidecars like `nginx:alpine`, `node`, `:latest@digest`), bump it with

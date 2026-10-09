@@ -174,7 +174,9 @@ this too.
   only laid down at install and never refreshed or overwritten afterwards.
 - When a change needs to reach existing installs, bump `version` with a `-patch.N`
   suffix (e.g. `0.26.0-patch.1`) — Renovate replaces the whole string on the next
-  image bump.
+  image bump. Any image change (a sidecar digest like `nginx:alpine`, a
+  `latest@digest` refresh) needs one: CI fails a PR that changes an app's images
+  and leaves its `version` as it was.
 
 - `id` must equal the folder name and start with `mathieu-`.
 - Pick a real `icon` URL and, ideally, `gallery` images.
