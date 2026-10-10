@@ -47,7 +47,7 @@ services:
         <div id="stats"></div>
         <h3>Recent activity</h3>
         <pre id="log">Loading…</pre>
-        <p>Radarr, Sonarr and Lidarr are connected automatically when they are installed. Installed one after Unpackerr? Restart Unpackerr from its tile in umbrelOS.</p>
+        <p>Unpackerr connects to the apps whose API key is set in its settings in umbrelOS (Radarr, Sonarr, Lidarr: Settings → General → API Key in each app).</p>
         <script>
         const fmt = n => n >= 1e9 ? (n / 1e9).toFixed(1) + " GB" : n >= 1e6 ? (n / 1e6).toFixed(1) + " MB" : Math.round(n) + " B";
         async function metrics() {
@@ -71,7 +71,7 @@ services:
             apps.innerHTML = names.length ? "<table><tr><th>App</th><th>Status</th><th>Queue</th></tr>" + names.map(a => {
               const ok = (fetched[a] ?? 0) > (errors[a] ?? 0);
               return "<tr><td>" + a + "</td><td class=" + (ok ? "ok>✅ Connected" : "ko>⚠️ Unreachable") + "</td><td>" + (queue[a] ?? 0) + "</td></tr>";
-            }).join("") + "</table>" : uptime < 120 ? "Starting, the first queue check runs a minute after start…" : "<span class=ko>⚠️ No app connected: install Radarr, Sonarr or Lidarr from the umbrelOS App Store, then restart Unpackerr.</span>";
+            }).join("") + "</table>" : uptime < 120 ? "Starting, the first queue check runs a minute after start…" : "<span class=ko>⚠️ No app connected: paste the API key of Radarr, Sonarr or Lidarr in Unpackerr's settings in umbrelOS.</span>";
             const sum = k => Object.values(m[k] ?? {}).reduce((a, b) => a + b, 0);
             stats.innerHTML = [["Archives extracted", sum("unpackerr_archives_read_total")], ["Files written", sum("unpackerr_files_extracted_total")], ["Data written", fmt(sum("unpackerr_bytes_written_total"))]]
               .map(([k, v]) => "<div>" + k + "<b>" + v + "</b></div>").join("");
@@ -110,13 +110,10 @@ services:
       UN_WEBSERVER_METRICS: "true"
       UN_WEBSERVER_LISTEN_ADDR: 0.0.0.0:5656
       UN_RADARR_0_URL: http://radarr_server_1:7878
-      UN_RADARR_0_API_KEY: ${APP_MATHIEU_UNPACKERR_RADARR_API_KEY:-}
       UN_RADARR_0_PATHS_0: /downloads
       UN_SONARR_0_URL: http://sonarr_server_1:8989
-      UN_SONARR_0_API_KEY: ${APP_MATHIEU_UNPACKERR_SONARR_API_KEY:-}
       UN_SONARR_0_PATHS_0: /downloads
       UN_LIDARR_0_URL: http://lidarr_server_1:8686
-      UN_LIDARR_0_API_KEY: ${APP_MATHIEU_UNPACKERR_LIDARR_API_KEY:-}
       UN_LIDARR_0_PATHS_0: /downloads
     volumes:
       - ${APP_DATA_DIR}/data/config:/config

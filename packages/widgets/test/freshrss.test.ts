@@ -1,21 +1,10 @@
 import {afterAll, beforeEach, expect, test} from 'bun:test'
-import {mkdtempSync, writeFileSync} from 'node:fs'
-import {tmpdir} from 'node:os'
-import path from 'node:path'
 
 import {freshrss} from '../src/apps/freshrss'
 
 const now = new Date('2026-10-09T12:00:00Z')
 const nowSeconds = now.getTime() / 1000
 const entryId = (secondsAgo: number) => String((nowSeconds - secondsAgo) * 1_000_000)
-
-function credentials(password: string) {
-	const dir = mkdtempSync(path.join(tmpdir(), 'freshrss-'))
-	writeFileSync(path.join(dir, 'username'), 'admin')
-	writeFileSync(path.join(dir, 'api_password'), password)
-	return dir
-}
-const credentialsDir = credentials('secret\n')
 
 let logins = 0
 let rejectNextCall = false
@@ -66,7 +55,7 @@ const greader = Bun.serve({
 afterAll(() => greader.stop())
 
 const apiUrl = `http://localhost:${greader.port}/api/greader.php`
-const app = (dir = credentialsDir) => freshrss({apiUrl, credentialsDir: dir, now: () => now})
+const app = (password = 'secret') => freshrss({apiUrl, username: 'admin', password, now: () => now})
 
 beforeEach(() => {
 	logins = 0
@@ -115,8 +104,13 @@ test('reuses its token, and logs in again once FreshRSS rejects it', async () =>
 	expect(logins).toBe(2)
 })
 
+test('fails without credentials, before calling FreshRSS', async () => {
+	await expect(app('').unread!.read()).rejects.toThrow('FRESHRSS_USERNAME and FRESHRSS_API_PASSWORD are not set')
+	expect(calls).toEqual([])
+})
+
 test('fails with wrong credentials, so the fallbacks are served', async () => {
-	const widgets = app(credentials('wrong'))
+	const widgets = app('wrong')
 
 	await expect(widgets.unread!.read()).rejects.toThrow('HTTP 401')
 	await expect(widgets.overview!.read()).rejects.toThrow('HTTP 401')

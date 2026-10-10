@@ -22,7 +22,7 @@ function card<T>(id: string, report: Report<T>, {facts, setup}: Source<T>): stri
 				}`
 			: report.status === 'error'
 				? `<p class="note">${escape(report.error)}</p>`
-				: `<p class="note">${escape(setup ?? `Install ${report.name}, then restart Vitals.`)}</p>`
+				: `<p class="note">${escape(setup ?? `Set ${report.name}'s address in Vitals' settings in umbrelOS.`)}</p>`
 	return `<article><header><h2>${escape(report.name)}</h2><span class="pill ${state.tone}">${state.label}</span></header>${body}<code>/v1/apps/${escape(id)}</code></article>`
 }
 

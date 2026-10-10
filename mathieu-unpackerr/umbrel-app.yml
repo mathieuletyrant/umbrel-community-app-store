@@ -7,7 +7,7 @@ name: Unpackerr
 tagline: Extract archived downloads so Radarr, Sonarr and Lidarr can import them
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-unpackerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/unpackerr/unpackerr
-version: "0.16.1"
+version: "0.16.1-patch.1"
 port: 5657
 description: >-
   Some releases arrive as .rar, .7z or .zip archives instead of a playable
@@ -24,10 +24,9 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Nothing to configure. Install Radarr, Sonarr and/or Lidarr and a download
-  client (e.g. Transmission) from the Umbrel App Store: Unpackerr finds them
-  and reads their API keys on its own. If you install one of them after
-  Unpackerr, restart Unpackerr so it picks it up.
+  Paste the API key of Radarr, Sonarr and/or Lidarr (Settings → General in each
+  app) in Unpackerr's settings in umbrelOS (⋯ → Settings → Advanced settings).
+  Their addresses default to the apps of the Umbrel App Store.
 
 
   Unpackerr runs in the background. Opening the app shows a status page with
@@ -40,13 +39,40 @@ repo: https://github.com/Unpackerr/unpackerr
 support: https://github.com/Unpackerr/unpackerr/issues
 gallery: []
 releaseNotes: >-
-  Fixes the Docker images of 0.16.0, which did not start. No app changes.
+  The API keys of Radarr, Sonarr and Lidarr are no longer read from those apps:
+  paste them in Unpackerr's settings in umbrelOS.
 
-
-  Full release notes can be found at https://github.com/Unpackerr/unpackerr/releases/tag/v0.16.1
 dependencies: []
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+environment:
+  - name: UN_RADARR_0_URL
+    services:
+      - server
+    default: http://radarr_server_1:7878
+    note: Radarr's address. http://radarr_server_1:7878 is the Radarr app of the Umbrel App Store.
+  - name: UN_RADARR_0_API_KEY
+    services:
+      - server
+    note: Radarr's API key, from Radarr → Settings → General. Leave empty to skip Radarr.
+  - name: UN_SONARR_0_URL
+    services:
+      - server
+    default: http://sonarr_server_1:8989
+    note: Sonarr's address. http://sonarr_server_1:8989 is the Sonarr app of the Umbrel App Store.
+  - name: UN_SONARR_0_API_KEY
+    services:
+      - server
+    note: Sonarr's API key, from Sonarr → Settings → General. Leave empty to skip Sonarr.
+  - name: UN_LIDARR_0_URL
+    services:
+      - server
+    default: http://lidarr_server_1:8686
+    note: Lidarr's address. http://lidarr_server_1:8686 is the Lidarr app of the Umbrel App Store.
+  - name: UN_LIDARR_0_API_KEY
+    services:
+      - server
+    note: Lidarr's API key, from Lidarr → Settings → General. Leave empty to skip Lidarr.
 permissions:
   - STORAGE_DOWNLOADS

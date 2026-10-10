@@ -412,8 +412,8 @@ function checkpointKey(appId, flow, umbrel) {
 		}
 	}
 	walk(path.join(REPO, appId))
-	const {requires, prepare, setup, vars, fixtures, egress} = flow
-	h.update(JSON.stringify({requires, prepare, setup, vars, fixtures, egress, umbrel}))
+	const {requires, prepare, setup, vars, settings, fixtures, egress} = flow
+	h.update(JSON.stringify({requires, prepare, setup, vars, settings, fixtures, egress, umbrel}))
 	return h.digest('hex').slice(0, 16)
 }
 
@@ -588,6 +588,20 @@ async function runCommands(label, cmds, vars, timeoutMs) {
 				await sleep(3000)
 			}
 		}
+	}
+}
+
+// The app's settings in umbrelOS (its manifest `environment:`), saved like the settings page does:
+// umbreld injects them into the compose and restarts the app.
+async function applySettings(appId, settings, vars, timeoutMs) {
+	if (!settings) return
+	const environment = Object.entries(settings).map(([name, value]) => ({name, value: interpolate(value, appId, vars)}))
+	await trpc('apps.setSettings', {appId, environment}, {mutation: true})
+	log(`settings: ${environment.map(({name}) => name).join(', ')}`)
+	const t0 = Date.now()
+	while (!['ready', 'running'].includes((await trpc('apps.state', {appId})).state)) {
+		if (Date.now() - t0 > timeoutMs) throw new Error(`${appId} did not come back after its settings were saved`)
+		await sleep(2000)
 	}
 }
 
@@ -829,6 +843,11 @@ async function verify(appId, flow, flags, b, {keepInstalled = false} = {}) {
 		placeFixtures(flow?.fixtures)
 		stage = 'vars'
 		const vars = await resolveVars(flow?.vars, left())
+		if (flow?.settings) {
+			stage = 'settings'
+			await applySettings(appId, flow.settings, vars, left())
+			await waitHealthy(appId, left(), health)
+		}
 		if (flow?.setup) {
 			stage = 'setup commands'
 			await runCommands('setup', flow.setup, vars, left())
@@ -1286,6 +1305,10 @@ async function main() {
 				await waitHealthy(appId, 300_000, health)
 			}
 			const vars = await resolveVars(flow.vars)
+			if (flow.settings) {
+				await applySettings(appId, flow.settings, vars, 300_000)
+				await waitHealthy(appId, 300_000, health)
+			}
 			await waitLogs(appId, flow.logs, 300_000)
 			if (!flow.headless) await waitHttp(manifest.port, 300_000)
 			const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))

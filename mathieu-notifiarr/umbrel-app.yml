@@ -7,7 +7,7 @@ name: Notifiarr
 tagline: Rich Discord notifications and a dashboard for your *arr stack and Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-notifiarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/notifiarr/notifiarr
-version: "0.9.7"
+version: "0.9.7-patch.1"
 port: 5454
 description: >-
   Notifiarr turns what happens in your media stack into rich, configurable
@@ -27,13 +27,6 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Radarr, Sonarr, Lidarr, Readarr, Prowlarr, SABnzbd, Transmission, Tautulli
-  and Plex from the Umbrel App Store are connected automatically when they are
-  installed. If you install one of them after Notifiarr, restart Notifiarr so
-  it picks it up. Their settings are shown with an "environment variable"
-  notice in Notifiarr: they are managed by umbrelOS.
-
-
   1. Create an account on notifiarr.com, link your Discord and copy your API
   key from your profile.
 
@@ -42,10 +35,17 @@ description: >-
   Notifiarr's profile page. Your Umbrel then appears as a client on
   notifiarr.com, where you set up the notifications.
 
-  3. For grab/import notifications, add a Notifiarr connection in Radarr and
+  3. Add your apps in Notifiarr's Starr Apps, Downloaders, Media and Snapshot
+  pages. Apps from the Umbrel App Store answer at
+  `http://<app>_server_1:<port>`, e.g. `http://radarr_server_1:7878`,
+  `http://sonarr_server_1:8989`; Plex at `http://host.docker.internal:32400`.
+  Addresses of the other apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
+
+  4. For grab/import notifications, add a Notifiarr connection in Radarr and
   Sonarr (Settings → Connect → + → Notifiarr) with the same API key.
 
-  4. Optional, Plex Pass only: for playback notifications, add the webhook
+  5. Optional, Plex Pass only: for playback notifications, add the webhook
   `http://127.0.0.1:5454/plex?token=<your API key>` in Plex (Settings →
   Webhooks).
 
@@ -56,7 +56,10 @@ submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/Notifiarr/notifiarr
 support: https://notifiarr.com/discord
 gallery: []
-releaseNotes: ""
+releaseNotes: >-
+  Your apps are no longer connected automatically: add them in Notifiarr's
+  settings pages. Apps that were connected this way must be added again once.
+
 dependencies: []
 path: ""
 defaultUsername: ""

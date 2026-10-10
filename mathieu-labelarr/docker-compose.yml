@@ -12,10 +12,6 @@ services:
     init: true
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    environment:
-      PLEX_SIGNED_IN: ${APP_MATHIEU_LABELARR_PLEX_SIGNED_IN:-false}
-      RADARR_FOUND: ${APP_MATHIEU_LABELARR_USE_RADARR:-false}
-      SONARR_FOUND: ${APP_MATHIEU_LABELARR_USE_SONARR:-false}
     command:
       - sh
       - -c
@@ -55,7 +51,6 @@ services:
           }
         }
         CONF
-        printf '{"plex":%s,"radarr":%s,"sonarr":%s}' "$$PLEX_SIGNED_IN" "$$RADARR_FOUND" "$$SONARR_FOUND" > /usr/share/nginx/html/wiring.json
         cat > /usr/share/nginx/html/index.html <<'HTML'
         <!doctype html><html lang="en"><head><meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -74,12 +69,13 @@ services:
         <p>With Plex Pass, add <code>http://127.0.0.1:9095/webhook</code> as a webhook in Plex (Settings → Webhooks) so new media is labelled right away instead of at the next hourly run.</p>
         <script>
         const hints = [
-          [/PLEX_TOKEN environment variable is required/, "Plex isn't installed or isn't signed in yet. Install Plex from the umbrelOS App Store, sign in, then restart Labelarr."],
+          [/PLEX_TOKEN environment variable is required/, "Paste your Plex token in Labelarr's settings in umbrelOS (PLEX_TOKEN). To find it: support.plex.tv/articles/204059436."],
           [/TMDB_READ_ACCESS_TOKEN environment variable is required/, "Add your TMDb read access token in Labelarr's settings in umbrelOS. It's free: themoviedb.org → Settings → API → \"API Read Access Token\"."],
           [/Failed to connect to TMDb/, "TMDb refused the token: check the TMDb read access token in Labelarr's settings in umbrelOS (the long \"API Read Access Token\", not the short API key)."],
-          [/Error fetching libraries/, "Plex didn't answer with the saved token. Open Plex, check you are signed in, then restart Labelarr."],
+          [/Error fetching libraries/, "Plex refused the token: check PLEX_TOKEN in Labelarr's settings in umbrelOS."],
           [/No (movie |TV show )?librar(y|ies) found/, "Labelarr needs a Movies and a TV Shows library in Plex. Create them, then restart Labelarr."],
-          [/Failed to connect to (Radarr|Sonarr)/, "Radarr or Sonarr didn't answer. Check that it is running, then restart Labelarr."]
+          [/(RADARR|SONARR)_(URL|API_KEY) environment variable is required/, "Radarr or Sonarr is turned on without its URL or API key: fill them in Labelarr's settings in umbrelOS."],
+          [/Failed to connect to (Radarr|Sonarr)/, "Radarr or Sonarr didn't answer: check its URL and API key in Labelarr's settings in umbrelOS."]
         ];
         const row = (name, ok, text) => "<tr><td>" + name + "</td><td class=" + (ok === null ? ">⏳ " : ok ? "ok>✅ " : "ko>⚠️ ") + text + "</td></tr>";
         async function refresh() {
@@ -101,16 +97,14 @@ services:
             status.innerHTML = hint ? "<div class=hint>⚠️ " + hint[1] + "</div>" : "Starting…";
           }
           document.getElementById("scan").disabled = !running;
-          let wiring = {};
-          try { wiring = await (await fetch("wiring.json")).json(); } catch {}
           let plex = null;
           try { const r = await fetch("plex"); if (r.ok) plex = (await r.text()).match(/<MediaContainer[^>]* version="([^"]+)"/); } catch {}
-          const linked = (app, found) => found ? (current.includes("Successfully connected to " + app) ? row(app, true, "Connected, used to find TMDb ids") : row(app, true, "Found, connects when Labelarr starts")) : row(app, false, "Not installed: optional, helps find TMDb ids");
+          const linked = app => current.includes("Successfully connected to " + app) ? row(app, true, "Connected, used to find TMDb ids") : new RegExp("Failed to connect to " + app + "|" + app.toUpperCase() + "_\\w+ environment variable is required").test(current) ? row(app, false, "Check its URL and API key in Labelarr's settings in umbrelOS") : row(app, null, "Off: optional, turn it on in Labelarr's settings in umbrelOS to help find TMDb ids");
           document.getElementById("wiring").innerHTML =
             row("Plex server", !!plex, plex ? "Reachable (Plex " + plex[1].split("-")[0] + ")" : "Not reachable: install Plex from the umbrelOS App Store") +
-            row("Plex account", wiring.plex, wiring.plex ? "Signed in" : "Not signed in: sign in to Plex, then restart Labelarr") +
+            (/PLEX_TOKEN environment variable is required/.test(current) ? row("Plex token", false, "Missing: paste it in Labelarr's settings in umbrelOS") : /Error fetching libraries/.test(current) ? row("Plex token", false, "Refused by Plex: check it in Labelarr's settings in umbrelOS") : /Found \d+ libraries/.test(current) ? row("Plex token", true, "Accepted") : row("Plex token", null, "Checked when Labelarr starts")) +
             (current.includes("Successfully connected to TMDb") ? row("TMDb", true, "Connected") : /TMDB_READ_ACCESS_TOKEN|Failed to connect to TMDb/.test(current) ? row("TMDb", false, "Token missing or refused: set it in Labelarr's settings in umbrelOS") : row("TMDb", null, "Checked once Plex is ready")) +
-            linked("Radarr", wiring.radarr) + linked("Sonarr", wiring.sonarr);
+            linked("Radarr") + linked("Sonarr");
           const pre = document.getElementById("log");
           pre.textContent = log ? log.split("\n").slice(-60).join("\n") : "No activity yet.";
           pre.scrollTop = pre.scrollHeight;
@@ -151,17 +145,14 @@ services:
       DATA_DIR: /data
       PLEX_SERVER: host.docker.internal
       PLEX_PORT: "32400"
-      PLEX_TOKEN: ${APP_MATHIEU_LABELARR_PLEX_TOKEN:-}
       MOVIE_PROCESS_ALL: "true"
       TV_PROCESS_ALL: "true"
       WEBHOOK_ENABLED: "true"
       WEBHOOK_PORT: "9090"
-      USE_RADARR: ${APP_MATHIEU_LABELARR_USE_RADARR:-false}
+      USE_RADARR: "false"
       RADARR_URL: http://radarr_server_1:7878
-      RADARR_API_KEY: ${APP_MATHIEU_LABELARR_RADARR_API_KEY:-}
-      USE_SONARR: ${APP_MATHIEU_LABELARR_USE_SONARR:-false}
+      USE_SONARR: "false"
       SONARR_URL: http://sonarr_server_1:8989
-      SONARR_API_KEY: ${APP_MATHIEU_LABELARR_SONARR_API_KEY:-}
     volumes:
       - ${APP_DATA_DIR}/data/labelarr:/data
     restart: on-failure

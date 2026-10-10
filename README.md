@@ -23,7 +23,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Maintainerr** | **Rule-based library cleanup** for Plex: collect media by rules (watched, old, unrequested…), show a "Leaving Soon" Plex collection, then auto-delete via Radarr/Sonarr after a grace period. |
 | **Agregarr** | **Keeps your Plex Home screen fresh**: builds collections from Trakt, IMDb, TMDb, Letterboxd, streaming Top 10s, Tautulli stats and Overseerr requests, pins them to Plex Home / Recommended on a schedule, and sends missing titles to Radarr / Sonarr. |
 | **Posterizarr** | **Consistent posters & title cards** for Plex: fetches textless artwork (TMDb, Fanart.tv, TVDB), adds your overlays, borders and fonts, and uploads posters, season posters, backgrounds and episode cards — on a schedule or on each Sonarr / Radarr import. |
-| **Labelarr** | **TMDb keywords → Plex labels**: tags every movie and show with its TMDb keywords ("heist", "time travel"…) for smart filters and collections. Finds Plex, Radarr and Sonarr on its own; only needs a free TMDb token. |
+| **Labelarr** | **TMDb keywords → Plex labels**: tags every movie and show with its TMDb keywords ("heist", "time travel"…) for smart filters and collections. Needs a free TMDb token and your Plex token; Radarr and Sonarr optional. |
 | **Lingarr** | **Automated subtitle translation** for Radarr/Sonarr: translate subtitles into French (or any language) via LibreTranslate or a SaaS engine (DeepL, OpenAI…), written next to your media. |
 | **Sublarr** | **All-in-one subtitle manager & LLM translator**: searches 20+ providers, syncs timing (ffsubsync/alass), translates, and includes a waveform editor. A modern alternative to Bazarr + Lingarr. |
 | **Byparr** | **Cloudflare-bypass proxy** for Prowlarr / Jackett: a drop-in **FlareSolverr replacement** that drives a modern stealth browser, standing up better to today's Cloudflare / DDoS-Guard challenges. |
@@ -43,13 +43,42 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **NeutArr** | **Hunts missing media and quality upgrades**: periodically asks Sonarr / Radarr / Lidarr / Readarr / Whisparr to search for missing or below-cutoff items, a few at a time. The maintained, security-hardened fork of Huntarr. |
 | **Dispatcharr** | **IPTV & stream manager**: imports M3U playlists and XMLTV guides, cleans and organizes channels, then serves them to Plex / Jellyfin / Emby as an emulated HDHomeRun tuner (live TV + guide + DVR). |
 | **Tunarr** | **Live TV channels from your own library**: builds always-on channels from Plex / Jellyfin / Emby or local folders, with time slots, shuffles and filler, served as an HDHomeRun tuner + M3U + XMLTV guide. |
-| **Notifiarr** | **Rich Discord notifications for the whole media stack**: grabs, imports, Plex playback, stuck downloads, health checks and system snapshots, routed per channel from notifiarr.com, plus TRaSH profile sync. Finds your *arr apps, download clients, Tautulli and Plex on its own. |
-| **Unpackerr** | **Extracts archived downloads** for the *arr stack: when a release arrives as .rar / .7z / .zip, it unpacks it so Radarr / Sonarr / Lidarr can import it, then cleans up the extracted copy. Finds your *arr apps and their API keys on its own. |
+| **Notifiarr** | **Rich Discord notifications for the whole media stack**: grabs, imports, Plex playback, stuck downloads, health checks and system snapshots, routed per channel from notifiarr.com, plus TRaSH profile sync. |
+| **Unpackerr** | **Extracts archived downloads** for the *arr stack: when a release arrives as .rar / .7z / .zip, it unpacks it so Radarr / Sonarr / Lidarr can import it, then cleans up the extracted copy. Headless: API keys set in its umbrelOS settings. |
 | **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
-| **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read — wired to the FreshRSS app automatically (API enabled, password generated), nothing to configure. |
+| **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read. |
 | **AdGuard MCP** | **Your AdGuard Home as an MCP server**: ask an AI assistant why a site doesn't load, unblock a domain, block a service on one device, or add a DNS rewrite. Covers the whole AdGuard Home API. |
 | **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
+
+## 🔗 Connecting apps
+
+The apps of this store don't wire themselves to your other apps: you connect them in each app's
+settings. Apps on your Umbrel reach each other by these addresses (copy them from here):
+
+| App | Address | API key |
+|---|---|---|
+| Radarr | `http://radarr_server_1:7878` | Settings → General |
+| Sonarr | `http://sonarr_server_1:8989` | Settings → General |
+| Lidarr | `http://lidarr_server_1:8686` | Settings → General |
+| Readarr | `http://readarr_server_1:8787` | Settings → General |
+| Prowlarr | `http://prowlarr_server_1:9696` | Settings → General |
+| Bazarr | `http://bazarr_server_1:6767` | Settings → General → Security |
+| Jellyseerr | `http://jellyseerr_server_1:5055` | Settings → General |
+| Overseerr | `http://overseerr_server_1:5055` | Settings → General |
+| SABnzbd | `http://sabnzbd_web_1:8080` | Config → General |
+| Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
+| Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
+| Plex | `http://host.docker.internal:32400` | your Plex token |
+| Healarr | `http://mathieu-healarr_server_1:3090` | its settings |
+| Cleanuparr | `http://mathieu-cleanuparr_server_1:11011` | its account settings |
+| Maintainerr | `http://mathieu-maintainerr_server_1:6246` | none |
+| Tracearr | `http://mathieu-tracearr_server_1:3000` | its settings |
+| slskd | `http://mathieu-slskd_server_1:5030` | its options (`web.authentication.api_keys`) |
+| Byparr | `http://mathieu-byparr_server_1:8191` | none |
+
+Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that
+need it declare it), and Plex reaches an app through `http://127.0.0.1:<the app's port>`.
 
 ## 🚀 How to install
 

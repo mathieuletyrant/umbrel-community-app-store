@@ -1,4 +1,4 @@
-verified: 0.1.0-patch.7 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.1.0-patch.8 on umbrelOS 2.0.0 (2026-10-09)
 requires: [freshrss]
 headless: true
 setup:
@@ -19,11 +19,13 @@ setup:
     php cli/import-for-user.php --user admin --filename /tmp/verify.opml
     php cli/actualize-user.php --user admin || true
     SH
-# The init service needs a FreshRSS account; create one before installing.
+# What the user does in FreshRSS before filling this app's settings: an account, API access
+# allowed, an API password.
 prepare:
-  - docker exec -u 1000 -e DATA_PATH=/config/www/freshrss/data freshrss_server_1 sh -c 'cd /app/www && (php cli/list-users.php | grep -q . || (php cli/do-install.php --default-user admin --auth-type form --environment production --base-url http://localhost --db-type sqlite && php cli/create-user.php --user admin --password Verify-FreshRSS-1))'
-logs:
-  init: API password (generated|already set)
+  - docker exec -u 1000 -e DATA_PATH=/config/www/freshrss/data freshrss_server_1 sh -c 'cd /app/www && (php cli/list-users.php | grep -q . || (php cli/do-install.php --default-user admin --auth-type form --environment production --base-url http://localhost --db-type sqlite && php cli/create-user.php --user admin --password Verify-FreshRSS-1)) && php cli/reconfigure.php --api-enabled && php cli/update-user.php --user admin --api-password Verify-FreshRSS-Api-1'
+settings:
+  FRESHRSS_USERNAME: admin
+  FRESHRSS_API_PASSWORD: Verify-FreshRSS-Api-1
 steps:
   - http:
       path: /mcp

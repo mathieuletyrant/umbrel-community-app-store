@@ -7,7 +7,7 @@ name: Labelarr
 tagline: Turn TMDb keywords into Plex labels for smarter filters and collections
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/nullable-eth/labelarr
-version: "1.4.0"
+version: "1.4.0-patch.1"
 port: 9095
 description: >-
   TMDb tags every movie and show with keywords such as "time travel",
@@ -25,12 +25,16 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Labelarr needs a free TMDb "API Read Access Token" (themoviedb.org →
-  Settings → API): paste it in Labelarr's settings in umbrelOS. Everything
-  else is automatic: Labelarr reads the token of the Plex app installed on
-  this Umbrel (sign in to Plex first) and the API keys of Radarr and Sonarr,
-  which it uses to find the TMDb id of each title. If you install or sign in
-  to one of them later, restart Labelarr.
+  Fill in Labelarr's settings in umbrelOS (⋯ → Settings → Advanced settings):
+
+  1. TMDB_READ_ACCESS_TOKEN: a free TMDb "API Read Access Token"
+  (themoviedb.org → Settings → API).
+
+  2. PLEX_TOKEN: your Plex token (support.plex.tv/articles/204059436). Labelarr
+  talks to the Plex app installed on this Umbrel.
+
+  3. Optional: turn on Radarr and Sonarr (USE_RADARR, USE_SONARR) with their
+  API keys, which help Labelarr find the TMDb id of each title.
 
 
   Labelarr runs in the background. Opening the app shows a status page with
@@ -47,7 +51,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/gallery-2.jpg
 releaseNotes: >-
-  Initial release on this store.
+  The Plex token and the Radarr/Sonarr API keys are no longer read from the
+  other apps: fill them in Labelarr's settings in umbrelOS.
+
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -57,6 +63,44 @@ environment:
     services:
       - server
     note: TMDb "API Read Access Token" (the long one) from themoviedb.org → Settings → API.
+  - name: PLEX_TOKEN
+    services:
+      - server
+    note: Your Plex token, see support.plex.tv/articles/204059436.
+  - name: USE_RADARR
+    services:
+      - server
+    default: "false"
+    options:
+      - "false"
+      - "true"
+    note: Use Radarr to find the TMDb id of each title. Set its API key below too.
+  - name: RADARR_URL
+    services:
+      - server
+    default: http://radarr_server_1:7878
+    note: Radarr's address. http://radarr_server_1:7878 is the Radarr app of the Umbrel App Store.
+  - name: RADARR_API_KEY
+    services:
+      - server
+    note: Radarr's API key, from Radarr → Settings → General.
+  - name: USE_SONARR
+    services:
+      - server
+    default: "false"
+    options:
+      - "false"
+      - "true"
+    note: Use Sonarr to find the TMDb id of each title. Set its API key below too.
+  - name: SONARR_URL
+    services:
+      - server
+    default: http://sonarr_server_1:8989
+    note: Sonarr's address. http://sonarr_server_1:8989 is the Sonarr app of the Umbrel App Store.
+  - name: SONARR_API_KEY
+    services:
+      - server
+    note: Sonarr's API key, from Sonarr → Settings → General.
   - name: UPDATE_FIELD
     services:
       - server

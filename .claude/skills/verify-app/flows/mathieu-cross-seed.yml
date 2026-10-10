@@ -1,10 +1,11 @@
-verified: 6.13.7-patch.3 on umbrelOS 2.0.0 (2026-10-09)
-requires: [transmission, prowlarr, sonarr, radarr]
+verified: 6.13.7-patch.4 on umbrelOS 2.0.0 (2026-10-09)
+requires: [transmission]
 setup:
-  - docker exec mathieu-cross-seed_daemon_1 sh -c '[ "$(id -u)" = 1000 ] && [ "$(stat -c %u /config/config.js)" = 1000 ]'
+  - >-
+    docker exec mathieu-cross-seed_daemon_1 sh -c '[ "$(id -u)" = 1000 ] && [ "$(stat -c %u /config/config.js)" = 1000 ] && grep -qF "torznab: []," /config/config.js'
 logs:
-  daemon: "Sonarr: yes, Radarr: yes"
+  daemon: Server is running on port 2468
 steps:
   - goto: /
-  - see: Nothing to fill in
+  - see: Add your trackers' Torznab URLs
   - shot: status

@@ -1,7 +1,13 @@
-verified: 1.2.2-patch.2 on umbrelOS 2.0.0 (2026-10-06)
+verified: 1.2.2-patch.3 on umbrelOS 2.0.0 (2026-10-09)
 requires: [lidarr, mathieu-slskd]
+vars:
+  LIDARR_API_KEY: docker exec lidarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+# What the user does in Soularr's config editor: paste Lidarr's API key.
+setup:
+  - docker exec mathieu-soularr_server_1 sed -i "s/^api_key = yourlidarrapikeygoeshere/api_key = $LIDARR_API_KEY/" /data/config.ini
+  - docker restart mathieu-soularr_server_1
 logs:
-  # Only printed once Lidarr accepted the API key picked up by exports.sh.
+  # Only printed once Lidarr accepted the API key.
   server: No releases wanted
 steps:
   - goto: /

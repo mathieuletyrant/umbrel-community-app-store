@@ -7,7 +7,7 @@ name: Soularr
 tagline: Auto-download Lidarr's wanted music from Soulseek via slskd
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-soularr/icon.png
 # renovate: datasource=docker depName=mrusse08/soularr
-version: "1.2.2-patch.2"
+version: "1.2.2-patch.3"
 port: 8265
 description: >-
   Soularr bridges Lidarr and slskd to automate music downloads from the Soulseek
@@ -27,10 +27,12 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Nothing to copy-paste: Soularr is pre-wired to Lidarr (lidarr_server_1) and
-  slskd (mathieu-slskd_server_1), and picks up both API keys on its own each
-  time it starts. Install slskd and Lidarr first; if you install one of them
-  after Soularr, restart Soularr.
+  Open Soularr's config editor and fill in the two API keys: Lidarr's (Lidarr →
+  Settings → General) and one you add in slskd (Options → web → authentication
+  → api_keys). The addresses of Lidarr (lidarr_server_1) and slskd
+  (mathieu-slskd_server_1) are already filled in.
+  Addresses of the other apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
 
   Soularr processes your Lidarr wanted list every 5 minutes
@@ -46,10 +48,8 @@ support: https://github.com/mrusse/soularr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-soularr/gallery-1.jpg
 releaseNotes: >-
-  The Lidarr and slskd API keys are now filled in automatically — no more
-  copying them into the config. Update slskd as well: its update gives it the
-  API key Soularr now uses.
-
+  The Lidarr and slskd API keys are no longer filled in automatically: paste
+  them in Soularr's config editor (an slskd key is added in slskd's options).
 
 dependencies:
   - lidarr

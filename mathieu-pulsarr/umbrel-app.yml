@@ -7,7 +7,7 @@ name: Pulsarr
 tagline: Sync Plex watchlists to Sonarr and Radarr in real time
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/icon.png
 # renovate: datasource=docker depName=lakker/pulsarr
-version: "0.19.4-patch.2"
+version: "0.19.4-patch.3"
 port: 3023
 description: >-
   Pulsarr watches the Plex watchlists of you and your friends and sends every
@@ -28,11 +28,13 @@ description: >-
 
   1. Open Pulsarr, create the admin account and sign in with Plex.
 
-  2. Sonarr and Radarr from the Umbrel App Store are already added (on a fresh
-  install), using their first quality profile and root folder
-  (/downloads/shows and /downloads/movies on Umbrel) — change them in Pulsarr's
-  Sonarr/Radarr pages. Pulsarr's webhook address is already set to
-  http://mathieu-pulsarr_server_1:3003, so Sonarr and Radarr can reach it.
+  2. Add Sonarr and Radarr in Pulsarr's Sonarr/Radarr pages: for the Umbrel
+  App Store apps, `http://sonarr_server_1:8989` and `http://radarr_server_1:7878`,
+  with the API key from each app's Settings → General. Pulsarr's webhook
+  address is already set to http://mathieu-pulsarr_server_1:3003, so Sonarr
+  and Radarr can reach it.
+  Addresses of the other apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
   3. Choose which Plex users to sync.
 developer: jamcalli
@@ -46,11 +48,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
-  The app moves from port 3003 to 3023, because BTCPay Server from the Umbrel App Store already uses 3003 and the two apps could not be installed together. Update your bookmark if you open it by address.
-
-
-  On a fresh install, Sonarr and Radarr from the Umbrel App Store are now added
-  automatically — no API keys to copy.
+  Sonarr and Radarr are no longer added automatically on a fresh install: add
+  them in Pulsarr's Sonarr/Radarr pages. Existing installs keep their
+  instances.
 
 dependencies: []
 path: ""

@@ -1,5 +1,19 @@
-verified: 0.2.1 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.2.3 on umbrelOS 2.0.0 (2026-10-09)
 requires: [radarr, sonarr, prowlarr, bazarr, transmission, mathieu-healarr]
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+  SONARR_API_KEY: docker exec sonarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+  PROWLARR_API_KEY: docker exec prowlarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+  BAZARR_API_KEY: >-
+    docker exec bazarr_server_1 awk '/^auth:/ {a=1; next} /^[^ #]/ {a=0} a && /^  apikey:/ {gsub(/["\047]/, "", $2); print $2; exit}' /config/config/config.yaml
+# What the user fills in Vitals' settings: the keys (the Umbrel addresses are the defaults), and
+# Transmission picked from its list. Healarr has no key, so Vitals asks for it.
+settings:
+  RADARR_API_KEY: ${RADARR_API_KEY}
+  SONARR_API_KEY: ${SONARR_API_KEY}
+  PROWLARR_API_KEY: ${PROWLARR_API_KEY}
+  BAZARR_API_KEY: ${BAZARR_API_KEY}
+  TRANSMISSION_URL: http://transmission_server_1:9091/transmission/rpc
 logs:
   server: "apps: radarr, sonarr, prowlarr, bazarr, transmission"
 steps:
@@ -16,4 +30,5 @@ steps:
   - goto: /
   - see: All healthy
   - see: "Paste Healarr's API key in Vitals' settings"
+  - see: "Set Maintainerr's address in Vitals' settings"
   - shot: status-page

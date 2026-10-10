@@ -14,23 +14,6 @@ services:
     restart: on-failure
     environment:
       TZ: Etc/UTC
-      DN_RADARR_0_URL:
-      DN_RADARR_0_API_KEY:
-      DN_SONARR_0_URL:
-      DN_SONARR_0_API_KEY:
-      DN_LIDARR_0_URL:
-      DN_LIDARR_0_API_KEY:
-      DN_READARR_0_URL:
-      DN_READARR_0_API_KEY:
-      DN_PROWLARR_0_URL:
-      DN_PROWLARR_0_API_KEY:
-      DN_SABNZBD_0_URL:
-      DN_SABNZBD_0_API_KEY:
-      DN_TRANSMISSION_0_URL:
-      DN_TAUTULLI_URL:
-      DN_TAUTULLI_API_KEY:
-      DN_PLEX_URL:
-      DN_PLEX_TOKEN:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:

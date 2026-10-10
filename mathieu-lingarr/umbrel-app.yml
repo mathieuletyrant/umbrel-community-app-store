@@ -7,7 +7,7 @@ name: Lingarr
 tagline: Automated subtitle translation for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/lingarr-translate/lingarr
-version: "1.4.0"
+version: "1.4.0-patch.1"
 port: 9877
 description: >-
   Lingarr is an automated subtitle translator for Radarr and Sonarr. It
@@ -25,17 +25,18 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Radarr and Sonarr installed from the Umbrel App Store are connected
-  automatically: Lingarr reads their API keys each time it starts. If you
-  install one of them after Lingarr, restart Lingarr.
+  Open Lingarr and:
 
+  1. Connect Radarr and Sonarr in Settings → Integrations: for the Umbrel App
+  Store apps, `http://radarr_server_1:7878` and `http://sonarr_server_1:8989`,
+  with the API key from each app's Settings → General.
+  Addresses of the other apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
-  Then open Lingarr and:
-
-  1. Pick a translation service — point it at a LibreTranslate instance, or add
+  2. Pick a translation service — point it at a LibreTranslate instance, or add
   an API key for DeepL / OpenAI / Google / Gemini.
 
-  2. Set your source and target languages (e.g. English → French) and enable
+  3. Set your source and target languages (e.g. English → French) and enable
   automation.
 
 
@@ -51,10 +52,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-2.jpg
 releaseNotes: >-
-  The app moves from port 9876 to 9877, because SABnzbd from the Umbrel App Store already uses 9876 and the two apps could not be installed together. Update your bookmark if you open it by address.
-
-
-  Lingarr now runs as your Umbrel user instead of root, so the subtitles it writes next to your media belong to the same user as Radarr, Sonarr and Bazarr. Its settings are handed over automatically when the app starts.
+  Radarr and Sonarr are no longer connected automatically: set them once in
+  Lingarr's Settings → Integrations. Existing installs keep the values saved
+  in Lingarr.
 
 dependencies: []
 path: ""

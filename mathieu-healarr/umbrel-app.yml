@@ -7,7 +7,7 @@ name: Healarr
 tagline: Automated media library health monitoring and remediation
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-healarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mescon/healarr
-version: "1.3.17-patch.2"
+version: "1.3.17-patch.3"
 port: 3090
 description: >-
   Healarr is a media library health monitoring system. It detects issues in your
@@ -23,12 +23,13 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  Radarr and Sonarr from the Umbrel App Store are added automatically on first
-  start, with their library folders as scan paths. Open Healarr, set your
-  password and finish the short setup wizard — nothing to copy-paste. Other
-  *arr apps (Whisparr, a remote Sonarr…) can be added from Healarr's settings.
-  Your media is mounted read-only at /downloads, matching the paths the *arr
-  apps report.
+  Open Healarr, set your password and add your *arr apps in the setup wizard:
+  for the Umbrel App Store apps, `http://radarr_server_1:7878` and
+  `http://sonarr_server_1:8989`, with the API key from each app's Settings →
+  General. Your media is mounted read-only at /downloads, matching the paths
+  the *arr apps report, so their library folders work as scan paths as is.
+  Addresses of the other apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 developer: mescon
 website: https://github.com/mescon/Healarr
 submitter: Mathieu Le Tyrant
@@ -38,10 +39,8 @@ support: https://github.com/mescon/Healarr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-healarr/gallery-1.jpg
 releaseNotes: >-
-  Radarr and Sonarr from the Umbrel App Store, and their library folders, are
-  now added automatically on a fresh install — the setup wizard only asks for
-  your password.
-
+  Radarr and Sonarr are no longer added automatically on a fresh install: add
+  them in Healarr's setup wizard. Existing installs keep their settings.
 
 dependencies: []
 path: ""
