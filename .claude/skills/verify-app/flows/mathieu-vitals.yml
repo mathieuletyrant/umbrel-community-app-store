@@ -1,4 +1,4 @@
-verified: 0.2.2 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.2.3 on umbrelOS 2.0.0 (2026-10-09)
 requires: [radarr, sonarr, prowlarr, bazarr, transmission, mathieu-healarr]
 vars:
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
