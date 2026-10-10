@@ -67,21 +67,28 @@ test('seerr reads its request counts', async () => {
 	})
 })
 
-test('maintainerr needs no key, and reports unreachable *arr instances', async () => {
+test('maintainerr needs no key, counts media pending deletion, and reports unreachable *arr instances', async () => {
 	const url = serve({
 		'/api/storage-metrics': {
 			instances: [
 				{name: 'Radarr', ok: true, error: null},
 				{name: 'Sonarr', ok: false, error: 'connect ECONNREFUSED'},
 			],
-			collectionSummary: {reclaimableCount: 18, activeSizeBytes: 412_000_000_000},
+			collectionSummary: {reclaimableCount: 2, activeSizeBytes: 412_000_000_000},
 			cleanupTotals: {itemsHandled: 128},
 		},
+		'/api/collections': [
+			{id: 1, title: 'Films vus', isActive: true, deleteAfterDays: 30, mediaCount: 12},
+			{id: 2, title: 'Séries finies', isActive: true, deleteAfterDays: 7, mediaCount: 5},
+			{id: 3, title: 'En pause', isActive: false, deleteAfterDays: 30, mediaCount: 40},
+			{id: 4, title: 'Juste un tag', isActive: true, deleteAfterDays: 0, mediaCount: 9},
+			{id: 5, title: 'Jamais supprimer', isActive: true, deleteAfterDays: null, mediaCount: 3},
+		],
 	})
 	const source = maintainerr({name: 'Maintainerr', url})
 	const reading = await source.read!()
 	expect(reading).toEqual({
-		data: {reclaimableItems: 18, reclaimableBytes: 412_000_000_000, itemsHandled: 128},
+		data: {pendingItems: 17, reclaimableCollections: 2, reclaimableBytes: 412_000_000_000, itemsHandled: 128},
 		issues: [{level: 'warning', message: 'Sonarr: connect ECONNREFUSED'}],
 	})
 	expect(source.facts(reading.data)[0]).toEqual({label: 'To reclaim', value: '412 GB'})

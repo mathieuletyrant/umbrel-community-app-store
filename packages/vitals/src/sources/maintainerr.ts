@@ -3,7 +3,12 @@ import {apiClient} from '@mathieu/core/http'
 
 import type {Source} from '../types'
 
-export type MaintainerrStats = {reclaimableItems: number; reclaimableBytes: number; itemsHandled: number}
+export type MaintainerrStats = {
+	pendingItems: number
+	reclaimableCollections: number
+	reclaimableBytes: number
+	itemsHandled: number
+}
 
 type StorageMetrics = {
 	instances: {name: string; ok: boolean; error: string | null}[]
@@ -11,13 +16,19 @@ type StorageMetrics = {
 	cleanupTotals: {itemsHandled: number}
 }
 
+type Collection = {isActive: boolean; deleteAfterDays: number | null; mediaCount?: number}
+
+// Same rule as Maintainerr's collectionSummary.reclaimableCount: active, and deletes after some days.
+const deletes = ({isActive, deleteAfterDays}: Collection) => isActive && (deleteAfterDays ?? 0) > 0
+
 type Config = {name: string; url?: string}
 
 // Maintainerr has no API key: the Umbrel login guards it, and Vitals reaches it on the Docker network.
 export function maintainerr({name, url}: Config): Source<MaintainerrStats> {
 	const facts = (data: MaintainerrStats) => [
 		{label: 'To reclaim', value: formatBytes(data.reclaimableBytes)},
-		{label: 'Items', value: formatCount(data.reclaimableItems)},
+		{label: 'Pending deletion', value: formatCount(data.pendingItems)},
+		{label: 'Collections', value: formatCount(data.reclaimableCollections)},
 		{label: 'Cleaned up', value: formatCount(data.itemsHandled)},
 	]
 	if (!url) return {name, read: null, facts}
@@ -28,10 +39,15 @@ export function maintainerr({name, url}: Config): Source<MaintainerrStats> {
 		name,
 		facts,
 		async read() {
-			const {instances, collectionSummary, cleanupTotals} = await api<StorageMetrics>('/storage-metrics')
+			const [{instances, collectionSummary, cleanupTotals}, collections] = await Promise.all([
+				api<StorageMetrics>('/storage-metrics'),
+				api<Collection[]>('/collections'),
+			])
 			return {
 				data: {
-					reclaimableItems: collectionSummary.reclaimableCount,
+					// A media item in two deleting collections counts twice: Maintainerr gives no deduplicated count.
+					pendingItems: collections.filter(deletes).reduce((sum, c) => sum + (c.mediaCount ?? 0), 0),
+					reclaimableCollections: collectionSummary.reclaimableCount,
 					reclaimableBytes: collectionSummary.activeSizeBytes,
 					itemsHandled: cleanupTotals.itemsHandled,
 				},
