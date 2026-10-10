@@ -47,10 +47,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-4.jpg
 releaseNotes: >-
-  Hardware transcoding works again on umbrelOS 2.0: Tdarr now asks umbrelOS for the GPU, which removed the old /dev/dri mapping. It also installs on an Umbrel without a GPU.
-
-
-  Lower CPU usage and disk activity when idle, lower Docker container resource usage, faster and more reliable copying of finished files to libraries on SMB, NFS and FUSE mounts, and improved queue, staged file and automation reliability.
+  Updates Tdarr to 2.96.01 with upstream fixes and improvements.
 
 
   Full release notes can be found at https://github.com/HaveAGitGat/Tdarr/releases
