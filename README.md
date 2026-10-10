@@ -51,6 +51,35 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
 
+## 🔗 Connecting apps
+
+The apps of this store don't wire themselves to your other apps: you connect them in each app's
+settings. Apps on your Umbrel reach each other by these addresses (copy them from here):
+
+| App | Address | API key |
+|---|---|---|
+| Radarr | `http://radarr_server_1:7878` | Settings → General |
+| Sonarr | `http://sonarr_server_1:8989` | Settings → General |
+| Lidarr | `http://lidarr_server_1:8686` | Settings → General |
+| Readarr | `http://readarr_server_1:8787` | Settings → General |
+| Prowlarr | `http://prowlarr_server_1:9696` | Settings → General |
+| Bazarr | `http://bazarr_server_1:6767` | Settings → General → Security |
+| Jellyseerr | `http://jellyseerr_server_1:5055` | Settings → General |
+| Overseerr | `http://overseerr_server_1:5055` | Settings → General |
+| SABnzbd | `http://sabnzbd_web_1:8080` | Config → General |
+| Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
+| Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
+| Plex | `http://host.docker.internal:32400` | your Plex token |
+| Healarr | `http://mathieu-healarr_server_1:3090` | its settings |
+| Cleanuparr | `http://mathieu-cleanuparr_server_1:11011` | its account settings |
+| Maintainerr | `http://mathieu-maintainerr_server_1:6246` | none |
+| Tracearr | `http://mathieu-tracearr_server_1:3000` | its settings |
+| slskd | `http://mathieu-slskd_server_1:5030` | its options (`web.authentication.api_keys`) |
+| Byparr | `http://mathieu-byparr_server_1:8191` | none |
+
+Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that
+need it declare it), and Plex reaches an app through `http://127.0.0.1:<the app's port>`.
+
 ## 🚀 How to install
 
 1. In umbrelOS, open the **App Store**.

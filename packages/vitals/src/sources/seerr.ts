@@ -1,6 +1,7 @@
 import {formatCount} from '@mathieu/core/format'
 import {apiClient} from '@mathieu/core/http'
 
+import {keySetup} from './setup'
 import type {Source} from '../types'
 
 export type SeerrStats = {pending: number; processing: number; available: number; total: number}
@@ -14,7 +15,7 @@ export function seerr({name, url, apiKey}: Config): Source<SeerrStats> {
 		{label: 'Processing', value: formatCount(data.processing)},
 		{label: 'Available', value: formatCount(data.available)},
 	]
-	if (!url || !apiKey) return {name, read: null, facts}
+	if (!url || !apiKey) return {name, read: null, facts, setup: keySetup(name, url)}
 
 	const api = apiClient(`${url}/api/v1`, {'X-Api-Key': apiKey})
 

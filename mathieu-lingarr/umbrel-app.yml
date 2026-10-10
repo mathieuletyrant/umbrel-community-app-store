@@ -30,6 +30,8 @@ description: >-
   1. Connect Radarr and Sonarr in Settings → Integrations: for the Umbrel App
   Store apps, `http://radarr_server_1:7878` and `http://sonarr_server_1:8989`,
   with the API key from each app's Settings → General.
+  Addresses of the other apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
   2. Pick a translation service — point it at a LibreTranslate instance, or add
   an API key for DeepL / OpenAI / Google / Gemini.
