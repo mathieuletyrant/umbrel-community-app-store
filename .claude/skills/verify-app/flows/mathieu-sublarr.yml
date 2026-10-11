@@ -1,10 +1,12 @@
-verified: 1.15.2 on umbrelOS 2.0.0 (2026-10-09)
+verified: 1.16.0 on umbrelOS 2.0.0 (2026-10-11)
 steps:
   - goto: /
   - see: Set a password to protect the UI
+  - wait: 5000
   - fill: {placeholder: "Enter a password…", value: Verify-Sublarr-1}
   - fill: {placeholder: "Repeat password…", value: Verify-Sublarr-1}
   - click: {role: button, name: "Set Password & Continue"}
+  - wait: 3000
   - goto: /login
   - fill: {placeholder: Password, value: Verify-Sublarr-1}
   - click: {role: button, name: Log In}
@@ -13,5 +15,6 @@ steps:
   - click: {css: "[data-testid=wizard-done-close]"}
   - click: {role: button, name: Got it}
   - click: {css: "[data-testid=usage-stats-decline]"}
+  - wait: 1500
   - see: Live Activity Feed
   - shot: dashboard
