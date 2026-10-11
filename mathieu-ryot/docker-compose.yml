@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-ryot_server_1
+      APP_PORT: 8000
+      PROXY_AUTH_WHITELIST: "/_i/*"
+
+  server:
+    image: ghcr.io/ignisda/ryot:v10.5.3@sha256:6a475fb30ac3715444e79ff7721ddb24f16cb31314a91c4b0e3b47d7f053b60b
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: Etc/UTC
+      DATABASE_URL: postgres://ryot:ryot@mathieu-ryot_db_1:5432/ryot
+      SERVER_ADMIN_ACCESS_TOKEN: ${APP_SEED}
+      FRONTEND_URL: http://${DEVICE_DOMAIN_NAME:-umbrel.local}:8010
+      DISABLE_TELEMETRY: "true"
+      USERS_ALLOW_REGISTRATION: "true"
+
+  db:
+    image: postgres:18.6-alpine@sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_DB: ryot
+      POSTGRES_USER: ryot
+      POSTGRES_PASSWORD: ryot
+      PGDATA: /data/pgdata
+    healthcheck:
+      test: "pg_isready -U ryot -h localhost -d ryot"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/data
