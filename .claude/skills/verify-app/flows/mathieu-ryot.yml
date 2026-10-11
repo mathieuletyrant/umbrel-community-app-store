@@ -2,13 +2,13 @@ logs:
   db: database system is ready to accept connections
 steps:
   - goto: /auth?intent=register
-  - fill: {label: Username, value: admin}
-  - fill: {label: Password, exact: true, value: Verify-Ryot-1}
-  - fill: {label: Confirm password, value: Verify-Ryot-1}
+  - fill: {css: "input[name=username]", value: admin}
+  - fill: {css: "input[name=password]", value: Verify-Ryot-1}
+  - fill: {css: "input[name=confirm]", value: Verify-Ryot-1}
   - click: {role: button, name: Register}
   - see: Please login with your new credentials
-  - fill: {label: Username, value: admin}
-  - fill: {label: Password, exact: true, value: Verify-Ryot-1}
+  - fill: {css: "input[name=username]", value: admin}
+  - fill: {css: "input[name=password]", value: Verify-Ryot-1}
   - click: {role: button, name: Login}
   - see: In Progress
   - shot: dashboard
