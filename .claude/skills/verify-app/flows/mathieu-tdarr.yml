@@ -1,6 +1,11 @@
-verified: 2.95.01-patch.1 on umbrelOS 2.0.0 (2026-10-09)
+verified: 3.00.00 on umbrelOS 2.0.0 (2026-10-11)
 steps:
   - goto: /
+  - see: Please create a local account
+  - fill: {css: "input >> nth=0", value: tdarr}
+  - fill: {css: "input >> nth=1", value: tdarr-verify-1}
+  - fill: {css: "input >> nth=2", value: tdarr-verify-1}
+  - click: {role: button, name: Create, exact: true}
   - see: Hello and welcome to Tdarr!
   # internalNode=true: the server runs its own worker node, so it can transcode on its own.
   - see: {text: InternalNode, reload: true}
