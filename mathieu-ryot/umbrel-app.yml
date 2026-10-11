@@ -1,0 +1,103 @@
+manifestVersion: 1
+id: mathieu-ryot
+storage:
+  dataRoot: data
+category: media
+name: Ryot
+tagline: Track the movies, shows, books, games and workouts of your life in one place
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/icon.png
+# renovate: datasource=docker depName=ghcr.io/ignisda/ryot
+version: "10.5.3"
+port: 8010
+description: >-
+  Ryot ("Roll Your Own Tracker") keeps track of everything you watch, read,
+  play and listen to — movies, shows, anime, manga, books, audiobooks,
+  podcasts, comics, music and video games — plus your workouts and body
+  measurements, in a single self-hosted app.
+
+
+  Log what you started, finished or dropped, rate and review it, build
+  collections, follow upcoming episodes in a calendar and get recommendations.
+  Plays from Plex, Jellyfin, Emby or Kodi are logged automatically, and
+  history can be imported from Trakt, Goodreads, Letterboxd, MyAnimeList,
+  Audiobookshelf, Strong, Hevy and more. Several people can share one
+  instance, each with their own account.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and create your account: the first account is the
+  administrator. To stop anyone else from signing up afterwards, set
+  USERS_ALLOW_REGISTRATION to false in this app's settings in umbrelOS
+  (⋯ → Settings → Advanced settings).
+
+  2. Movies and shows need a free TMDb token: create an API key on
+  themoviedb.org (Settings → API) and paste the "API Read Access Token" (the
+  long one) as MOVIES_AND_SHOWS_TMDB_ACCESS_TOKEN in the same settings. Video
+  games need a Twitch client (VIDEO_GAMES_TWITCH_CLIENT_ID and
+  VIDEO_GAMES_TWITCH_CLIENT_SECRET, from dev.twitch.tv). Books, podcasts,
+  anime and manga work without any key.
+
+  3. To log Plex plays automatically, create a "Plex Sink" integration in
+  Ryot's Settings → Integrations and add its webhook URL in Plex (Settings →
+  Webhooks), replacing the address with `http://127.0.0.1:8010` (Plex runs on
+  the host network). Jellyfin, Emby and Kodi use their own sink integration
+  the same way. Push integrations can send the titles you add to a collection
+  to Radarr (`http://radarr_server_1:7878`) and Sonarr
+  (`http://sonarr_server_1:8989`), with the API key from each app's Settings →
+  General.
+developer: IgnisDa
+website: https://ryot.io
+submitter: Mathieu Le Tyrant
+submission: https://github.com/IgnisDa/ryot
+repo: https://github.com/IgnisDa/ryot
+support: https://github.com/IgnisDa/ryot/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-4.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+environment:
+  - name: MOVIES_AND_SHOWS_TMDB_ACCESS_TOKEN
+    services:
+      - server
+    note: TMDb "API Read Access Token" (the long one) from themoviedb.org → Settings → API. Required for movies and shows.
+  - name: MOVIES_AND_SHOWS_TVDB_API_KEY
+    services:
+      - server
+    note: Optional TVDB API key (thetvdb.com → API), as a second source for shows.
+  - name: VIDEO_GAMES_TWITCH_CLIENT_ID
+    services:
+      - server
+    note: Twitch client ID from dev.twitch.tv → Applications. Required for video games (IGDB).
+  - name: VIDEO_GAMES_TWITCH_CLIENT_SECRET
+    services:
+      - server
+    note: Twitch client secret of the same application.
+  - name: SERVER_IMPORTER_TRAKT_CLIENT_ID
+    services:
+      - server
+    note: Optional Trakt client ID (trakt.tv → Settings → Your API Apps), only for imports by Trakt username. ZIP exports need none.
+  - name: ANIME_AND_MANGA_MAL_CLIENT_ID
+    services:
+      - server
+    note: Optional MyAnimeList client ID (myanimelist.net → Account settings → API), only for MyAnimeList imports.
+  - name: USERS_ALLOW_REGISTRATION
+    services:
+      - server
+    default: "true"
+    options:
+      - "true"
+      - "false"
+    note: Whether new accounts can sign up. Set to false once everyone has an account.
+  - name: SERVER_PRO_KEY
+    services:
+      - server
+    note: Optional Ryot Pro key from ryot.io. Without it Ryot runs the free community edition.
+permissions: []
