@@ -1,0 +1,15 @@
+verified: 10.5.3 on umbrelOS 2.0.0 (2026-10-11)
+logs:
+  db: database system is ready to accept connections
+steps:
+  - goto: /auth?intent=register
+  - fill: {css: "input[name=username]", value: admin}
+  - fill: {css: "input[name=password]", value: Verify-Ryot-1}
+  - fill: {css: "input[name=confirm]", value: Verify-Ryot-1}
+  - click: {role: button, name: Register}
+  - see: Please login with your new credentials
+  - fill: {css: "input[name=username]", value: admin}
+  - fill: {css: "input[name=password]", value: Verify-Ryot-1}
+  - click: {role: button, name: Login}
+  - see: In Progress
+  - shot: dashboard
