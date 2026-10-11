@@ -1,9 +1,13 @@
-verified: 0.2.0 on umbrelOS 2.0.0 (2026-10-11)
+verified: 0.2.0-patch.1 on umbrelOS 2.0.0 (2026-10-11)
 # A real TMDB token is a personal account's: a placeholder only gets Sofa past its /setup page.
 settings:
   TMDB_API_READ_ACCESS_TOKEN: verify-placeholder-token
+# Browsed by IP, not localhost: browsers accept Secure cookies over plain HTTP on localhost only,
+# which hid a login loop that every real umbrel.local / IP install hit.
+vars:
+  HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
 steps:
-  - goto: /
+  - goto: http://${HOST_IP}:7632/
   - click: {role: link, name: Get Started}
   - see: Create your account
   - fill: {label: NAME, value: Verify}
@@ -11,5 +15,7 @@ steps:
   - fill: {label: PASSWORD, value: Verify-Sofa-1}
   - click: {role: button, name: Create account}
   - click: {role: button, name: Skip for now}
+  - see: Welcome back, Verify
+  - goto: http://${HOST_IP}:7632/dashboard
   - see: Welcome back, Verify
   - shot: dashboard
