@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-sofa_server_1
+      APP_PORT: 3000
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: ghcr.io/jakejarvis/sofa:0.2.0@sha256:3edf68bc55fb010e6dd4d0a3b3c9a2e99e58060ea99f1a52c0767e6b206edfac
+    environment:
+      - TZ=Etc/UTC
+      - BETTER_AUTH_SECRET=${APP_SEED}
+    volumes:
+      - ${APP_DATA_DIR}/data/sofa:/data
+    restart: on-failure

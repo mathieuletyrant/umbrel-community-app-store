@@ -44,6 +44,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Dispatcharr** | **IPTV & stream manager**: imports M3U playlists and XMLTV guides, cleans and organizes channels, then serves them to Plex / Jellyfin / Emby as an emulated HDHomeRun tuner (live TV + guide + DVR). |
 | **Tunarr** | **Live TV channels from your own library**: builds always-on channels from Plex / Jellyfin / Emby or local folders, with time slots, shuffles and filler, served as an HDHomeRun tuner + M3U + XMLTV guide. |
 | **Ryot** | **One tracker for everything you watch, read, play and lift**: movies, shows, anime, books, audiobooks, podcasts, comics, music and video games, plus workouts and measurements — with Plex / Jellyfin / Emby / Kodi plays logged automatically and imports from Trakt, Goodreads, Letterboxd and more. |
+| **Sofa** | **Your own Trakt / Letterboxd**: tracks the movies and shows you watch, episode by episode, with Continue Watching, ratings, what airs this week and where to stream it. Plex / Jellyfin / Emby log watches, Sonarr / Radarr pull your watchlist, Trakt / Simkl / Letterboxd history imports. Accounts for the whole household and iPhone / Android apps. |
 | **Notifiarr** | **Rich Discord notifications for the whole media stack**: grabs, imports, Plex playback, stuck downloads, health checks and system snapshots, routed per channel from notifiarr.com, plus TRaSH profile sync. |
 | **Unpackerr** | **Extracts archived downloads** for the *arr stack: when a release arrives as .rar / .7z / .zip, it unpacks it so Radarr / Sonarr / Lidarr can import it, then cleans up the extracted copy. Headless: API keys set in its umbrelOS settings. |
 | **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
@@ -77,6 +78,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Tracearr | `http://mathieu-tracearr_server_1:3000` | its settings |
 | slskd | `http://mathieu-slskd_server_1:5030` | its options (`web.authentication.api_keys`) |
 | Byparr | `http://mathieu-byparr_server_1:8191` | none |
+| Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
 
 Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that
 need it declare it), and Plex reaches an app through `http://127.0.0.1:<the app's port>`.
