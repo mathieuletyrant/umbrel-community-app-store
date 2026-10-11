@@ -1,0 +1,15 @@
+verified: 0.2.0 on umbrelOS 2.0.0 (2026-10-11)
+# A real TMDB token is a personal account's: a placeholder only gets Sofa past its /setup page.
+settings:
+  TMDB_API_READ_ACCESS_TOKEN: verify-placeholder-token
+steps:
+  - goto: /
+  - click: {role: link, name: Get Started}
+  - see: Create your account
+  - fill: {label: NAME, value: Verify}
+  - fill: {label: EMAIL, value: verify@example.com}
+  - fill: {label: PASSWORD, value: Verify-Sofa-1}
+  - click: {role: button, name: Create account}
+  - click: {role: button, name: Skip for now}
+  - see: Welcome back, Verify
+  - shot: dashboard

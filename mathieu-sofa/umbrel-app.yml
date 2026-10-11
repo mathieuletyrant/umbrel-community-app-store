@@ -1,0 +1,72 @@
+manifestVersion: 1
+id: mathieu-sofa
+storage:
+  dataRoot: data
+category: media
+name: Sofa
+tagline: Self-hosted movie and TV tracker
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sofa/icon.png
+# renovate: datasource=docker depName=ghcr.io/jakejarvis/sofa
+version: "0.2.0"
+port: 7632
+description: >-
+  Sofa is a self-hosted tracker for the movies and TV shows you watch, a
+  private alternative to Trakt, Simkl or Letterboxd. Your history stays on
+  your Umbrel, in a single SQLite database.
+
+
+  Track shows episode by episode or a whole season at once, pick up where you
+  left off from Continue Watching, rate titles, see what airs this week and
+  which streaming services carry a title, and get recommendations from what
+  you rated highly. Every person in the household gets their own account and
+  history, and the iPhone and Android apps connect to your own server.
+
+
+  It fits the media stack: Plex, Jellyfin and Emby log your watches through a
+  webhook, Sonarr and Radarr pull your watchlist as a custom import list, and
+  your existing history imports from Trakt, Simkl or Letterboxd.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Sofa needs a free TMDB token for its movie and TV data: create a TMDB
+  account, copy the "API Read Access Token" (the long one) from
+  themoviedb.org → Settings → API, and paste it in this app's settings in
+  umbrelOS (TMDB_API_READ_ACCESS_TOKEN). Until then Sofa shows its setup page.
+
+  2. Open the app and create your account: the first account is the admin.
+  Sofa has its own login (no Umbrel login in front, so the mobile apps and
+  webhooks can reach it). Registration closes after that first account; open
+  it again or add accounts in Sofa's admin settings.
+
+  3. Connect your apps in Sofa → Settings → Integrations. Each one gives you a
+  URL to copy; replace its address part before pasting it:
+
+  - Plex (needs Plex Pass): `http://127.0.0.1:7632/api/webhooks/…` in Plex's
+  Webhooks settings.
+
+  - Radarr / Sonarr: `http://mathieu-sofa_server_1:3000/api/lists/…` in
+  Settings → Import Lists → Custom Lists.
+
+  - Jellyfin / Emby: `http://mathieu-sofa_server_1:3000/api/webhooks/…`.
+
+  4. Mobile apps: point them at `http://<your Umbrel's address>:7632`.
+developer: Jake Jarvis
+website: https://sofa.watch
+submitter: Mathieu Le Tyrant
+submission: https://github.com/jakejarvis/sofa
+repo: https://github.com/jakejarvis/sofa
+support: https://github.com/jakejarvis/sofa/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sofa/gallery-1.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+environment:
+  - name: TMDB_API_READ_ACCESS_TOKEN
+    services:
+      - server
+    note: TMDB "API Read Access Token" (the long one) from themoviedb.org → Settings → API.
