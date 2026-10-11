@@ -7,7 +7,7 @@ name: slskd
 tagline: Soulseek client with a modern web UI
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/icon.png
 # renovate: datasource=docker depName=slskd/slskd
-version: "0.26.0-patch.4"
+version: "0.26.1"
 port: 5030
 description: >-
   slskd is a modern, self-hosted client for the Soulseek file-sharing network,
@@ -63,8 +63,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/gallery-3.jpg
 releaseNotes: >-
-  slskd no longer gets an API key generated for Soularr: add one in slskd's
-  options and paste it in Soularr's config.
+  Adds an option to set the MTU of the connection to the Soulseek server (set it
+  to 1500 if you use jumbo frames and cannot connect), logging to disk is now
+  enabled by default with 30 days of retention, and downloads are cancelled when
+  their enqueue attempt times out. Also includes memory and stability fixes.
+
+  Full release notes can be found at https://github.com/slskd/slskd/releases/tag/0.26.1
 
 dependencies: []
 path: ""
