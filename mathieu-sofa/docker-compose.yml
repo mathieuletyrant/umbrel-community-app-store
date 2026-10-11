@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: ghcr.io/jakejarvis/sofa:0.2.0@sha256:3edf68bc55fb010e6dd4d0a3b3c9a2e99e58060ea99f1a52c0767e6b206edfac
+    image: ghcr.io/jakejarvis/sofa:sha-0de7560@sha256:99747d681c4f5f7e8829019e09a7bdb152f8594779d297e63561cb482b4819e9
     environment:
       - TZ=Etc/UTC
       - BETTER_AUTH_SECRET=${APP_SEED}
