@@ -12,6 +12,8 @@ services:
     environment:
       - TZ=Etc/UTC
       - BETTER_AUTH_SECRET=${APP_SEED}
+      - BETTER_AUTH_URL=http://${DEVICE_DOMAIN_NAME}:7632
+      - BETTER_AUTH_TRUSTED_ORIGINS=*
     volumes:
       - ${APP_DATA_DIR}/data/sofa:/data
     restart: on-failure
