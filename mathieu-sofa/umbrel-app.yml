@@ -6,7 +6,7 @@ category: media
 name: Sofa
 tagline: Self-hosted movie and TV tracker
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sofa/icon.png
-version: "0.2.0-patch.2"
+version: "0.2.0-patch.3"
 port: 7632
 description: >-
   Sofa is a self-hosted tracker for the movies and TV shows you watch, a
@@ -51,6 +51,11 @@ description: >-
   - Jellyfin / Emby: `http://mathieu-sofa_server_1:3000/api/webhooks/…`.
 
   4. Mobile apps: point them at `http://<your Umbrel's address>:7632`.
+
+  5. Opening Sofa from a domain of your own (Cloudflare Tunnel, reverse
+  proxy): put that address, e.g. `https://sofa.example.com`, in this app's
+  settings (CORS_ORIGIN), or every page fails with "Something went wrong".
+  Not needed for umbrel.local, the IP address or Tailscale.
 developer: Jake Jarvis
 website: https://sofa.watch
 submitter: Mathieu Le Tyrant
@@ -60,7 +65,7 @@ support: https://github.com/jakejarvis/sofa/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sofa/gallery-1.jpg
 releaseNotes: >-
-  Fixes Plex, Jellyfin and Emby webhooks for TV episodes: they were received but never marked the episode as watched, because Sofa looked the show up with the episode's TMDB id. Sofa now runs a build of its main branch, which includes the fix, until the next upstream release. Episodes scrobbled before this update must be marked again.
+  New CORS_ORIGIN setting for opening Sofa from your own domain (Cloudflare Tunnel, reverse proxy). Sofa now rejects browser requests from an address it doesn't know, so every page failed with "Something went wrong" there: put that address, e.g. https://sofa.example.com, in this app's settings. umbrel.local, the IP address and Tailscale keep working without it. Also includes the fix for Plex, Jellyfin and Emby episode webhooks.
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -70,3 +75,7 @@ environment:
     services:
       - server
     note: TMDB "API Read Access Token" (the long one) from themoviedb.org → Settings → API.
+  - name: CORS_ORIGIN
+    services:
+      - server
+    note: Only if you open Sofa from a domain of your own (Cloudflare Tunnel, reverse proxy) — that full address, e.g. https://sofa.example.com. Leave empty for umbrel.local, the IP or Tailscale.
