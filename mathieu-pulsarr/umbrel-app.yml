@@ -48,12 +48,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
-  Safer Sonarr/Radarr webhook handling: the existing webhook is kept until the
-  arr accepts the new one, and a changed Pulsarr address is tested before it is
-  saved. Label sync no longer removes labels it does not own. Also fixes for
-  approvals, quotas, dashboard stats and routing rules.
+  Hotfix: routing now checks Plex before completing an approval record.
 
-  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.5
+  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.6
 
 dependencies: []
 path: ""
