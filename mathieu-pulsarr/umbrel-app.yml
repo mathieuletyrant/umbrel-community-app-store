@@ -7,7 +7,7 @@ name: Pulsarr
 tagline: Sync Plex watchlists to Sonarr and Radarr in real time
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/icon.png
 # renovate: datasource=docker depName=lakker/pulsarr
-version: "0.19.4-patch.3"
+version: "0.19.5"
 port: 3023
 description: >-
   Pulsarr watches the Plex watchlists of you and your friends and sends every
@@ -48,9 +48,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
-  Sonarr and Radarr are no longer added automatically on a fresh install: add
-  them in Pulsarr's Sonarr/Radarr pages. Existing installs keep their
-  instances.
+  Safer Sonarr/Radarr webhook handling: the existing webhook is kept until the
+  arr accepts the new one, and a changed Pulsarr address is tested before it is
+  saved. Label sync no longer removes labels it does not own. Also fixes for
+  approvals, quotas, dashboard stats and routing rules.
+
+  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.5
 
 dependencies: []
 path: ""
