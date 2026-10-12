@@ -1,0 +1,52 @@
+manifestVersion: 1
+id: mathieu-spotarr
+storage:
+  dataRoot: data
+category: media
+name: Spotarr
+tagline: Share a reel from your iPhone, add the movie or show through Seerr
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
+version: "0.1.0"
+port: 3838
+description: >-
+  Spotarr identifies the movie or TV show behind an Instagram reel shared from
+  your iPhone. An LLM watches the reel's frames and hears its sound, TMDB
+  confirms the titles, and Seerr tells which ones are already in your library.
+  Pick a candidate in the history and Spotarr requests it through Seerr.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open Spotarr and sign in with the default password shown by umbrelOS:
+  it is Spotarr's API token.
+
+  2. In Settings → Identification, paste an OpenRouter API key (or any
+  OpenAI-compatible API) and a TMDB read access token.
+
+  3. In Settings → Seerr, set the URL `http://jellyseerr_server_1:5055` (or
+  `http://overseerr_server_1:5055`) and Seerr's API key, from its Settings →
+  General.
+
+  4. The Status at the top of Settings says whether each service answers.
+
+  5. On the iPhone, install the Shortcut from
+  https://github.com/mathieuletyrant/spotarr#-share-from-the-iphone with the
+  address `http://umbrel.local:3838` and the same token.
+developer: Mathieu Le Tyrant
+website: https://github.com/mathieuletyrant/spotarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/mathieuletyrant/spotarr
+support: https://github.com/mathieuletyrant/spotarr/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
+releaseNotes: >-
+  First release.
+dependencies: []
+path: ""
+defaultUsername: ""
+deterministicPassword: true
+permissions: []
