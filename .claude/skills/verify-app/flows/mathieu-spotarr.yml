@@ -1,4 +1,4 @@
-verified: 0.2.0 on umbrelOS 2.0.0 (2026-10-12)
+verified: 0.3.0 on umbrelOS 2.0.0 (2026-10-12)
 logs:
   server: '"step":"start"'
 steps:
@@ -16,7 +16,7 @@ steps:
       headers: {content-type: application/json, authorization: "Bearer ${env.server.API_TOKEN}"}
       body: {}
       status: 200
-      contains: '"version":"0.2.0"'
+      contains: '"version":"0.3.0"'
   - goto: /
   - fill: {label: API token, value: "${env.server.API_TOKEN}"}
   - click: {role: button, name: Sign in}

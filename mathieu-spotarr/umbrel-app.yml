@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.2.0"
+version: "0.3.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel shared from
@@ -44,9 +44,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Auto add: Spotarr can request a candidate on its own when it is sure of it,
-  by a rule you set in Settings → Auto add (off by default). The iOS Shortcut
-  no longer asks questions on import, and can send Cloudflare Access headers.
+  Auto add now acts only when an identification finds a single candidate, at
+  the minimum confidence or more: with two candidates or more, you choose. The
+  web UI gets one keyboard focus style everywhere.
 dependencies: []
 path: ""
 defaultUsername: ""
