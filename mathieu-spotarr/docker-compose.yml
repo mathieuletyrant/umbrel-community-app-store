@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-spotarr_server_1
+      APP_PORT: 3000
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: ghcr.io/mathieuletyrant/spotarr:0.1.0@sha256:66c74afc1000ccd3b4d4a7f4705da1b50806fd211a7005bbd34e1a308cb0a396
+    user: "1000:1000"
+    environment:
+      API_TOKEN: ${APP_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/data/spotarr:/data
+    restart: on-failure
