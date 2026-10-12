@@ -16,7 +16,7 @@ steps:
       headers: {content-type: application/json, authorization: "Bearer ${env.server.API_TOKEN}"}
       body: {}
       status: 200
-      contains: '"version":"0.3.0"'
+      contains: '"version":"0.5.0"'
   - goto: /
   - fill: {label: API token, value: "${env.server.API_TOKEN}"}
   - click: {role: button, name: Sign in}

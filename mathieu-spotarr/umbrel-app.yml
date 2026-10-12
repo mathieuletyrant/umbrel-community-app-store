@@ -7,11 +7,12 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.4.0"
+version: "0.5.0"
 port: 3838
 description: >-
-  Spotarr identifies the movie or TV show behind an Instagram reel, a TikTok or
-  a YouTube Short shared from your iPhone. An LLM watches the video's frames and hears its sound, TMDB
+  Spotarr identifies the movie or TV show behind an Instagram reel or photo
+  post, a TikTok or a YouTube Short shared from your iPhone. An LLM watches the
+  video's frames (or the photo) and hears its sound, TMDB
   confirms the titles, and Seerr tells which ones are already in your library.
   Pick a candidate in the history and Spotarr requests it through Seerr.
 
@@ -44,9 +45,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Spotarr now reads TikTok videos and YouTube Shorts, not only Instagram
-  reels. A new Stats page shows shares per month, the identification rate,
-  the last titles added, the top authors, and the LLM cost.
+  Spotarr now identifies Instagram photo posts, not only videos: it reads the
+  post's caption, author and first picture. The TMDB rating is shown wherever
+  a title is shown.
 dependencies: []
 path: ""
 defaultUsername: ""
