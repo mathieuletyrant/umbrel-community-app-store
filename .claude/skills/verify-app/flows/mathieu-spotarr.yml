@@ -1,4 +1,4 @@
-verified: 0.1.0 on umbrelOS 2.0.0 (2026-10-12)
+verified: 0.2.0 on umbrelOS 2.0.0 (2026-10-12)
 logs:
   server: '"step":"start"'
 steps:
@@ -16,12 +16,13 @@ steps:
       headers: {content-type: application/json, authorization: "Bearer ${env.server.API_TOKEN}"}
       body: {}
       status: 200
-      contains: '"version":"0.1.0"'
+      contains: '"version":"0.2.0"'
   - goto: /
   - fill: {label: API token, value: "${env.server.API_TOKEN}"}
   - click: {role: button, name: Sign in}
   - see: Every share, what was suggested and what was added.
   - shot: history
   - click: {role: link, name: Settings}
-  - see: Checked when the page opens.
+  - see: Whether each service Spotarr needs answers
+  - see: The LLM names the works
   - shot: settings
