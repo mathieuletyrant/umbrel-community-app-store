@@ -45,11 +45,9 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Lists is now a beta feature, custom scheduled script jobs join the Jobs page, and release search can use localized title aliases. Import, archive, SABnzbd and NZBGet cleanup handling is more robust, and copy verification now defaults to Quick.
+  Fixes search stalls and lost results during large searches, and Prowlarr/Jackett syncs now keep your indexer routing categories, enabled state and priority. Imports no longer fail only because the destination reports a different owner, and Lists, requests and script settings got small fixes.
 
-  IMDb public user lists are no longer supported: upgrading removes those subscriptions (titles and files are kept; IMDb chart subscriptions stay).
-
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.15
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.16
 dependencies: []
 path: ""
 defaultUsername: ""
