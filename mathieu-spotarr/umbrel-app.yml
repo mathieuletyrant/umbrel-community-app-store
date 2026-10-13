@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.5.0"
+version: "0.6.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -45,9 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Spotarr now identifies Instagram photo posts, not only videos: it reads the
-  post's caption, author and first picture. The TMDB rating is shown wherever
-  a title is shown.
+  A pasted text containing an IMDb or TMDB link is now identified. The
+  history's added count no longer exceeds the number of titles after a retry,
+  and the login page tells a refused token from Spotarr being unreachable.
+  A crash during an identification no longer leaves a share half written.
 dependencies: []
 path: ""
 defaultUsername: ""
