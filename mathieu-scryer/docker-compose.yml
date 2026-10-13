@@ -7,7 +7,7 @@ services:
       APP_PORT: 8080
 
   server:
-    image: ghcr.io/scryer-media/scryer:0.21.15@sha256:cbfc0f15f9bceb45f6151df1e151a8bbb916b1c7d6650e75d0cbff29b1726984
+    image: ghcr.io/scryer-media/scryer:0.21.16@sha256:192fc2e644d949aaf9072122c5afbd0071897a377b749fa46b3c9337c9ff1ce8
     environment:
       - TZ=Etc/UTC
       - PUID=1000
