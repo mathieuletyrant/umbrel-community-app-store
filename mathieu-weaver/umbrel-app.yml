@@ -47,14 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  New installs sign in with a password unique to your Umbrel, shown in this app's settings in umbrelOS, instead of the same weaver-admin password on every install. Already installed? Nothing changes: keep your current login, and change it in Settings → Security if you still use weaver-admin.
+  Adds per-server and per-feed network routes (proxies, WireGuard, interface binding, kill switch), download quotas per egress, script jobs with their own triggers and schedules, a Secrets screen, and a list of archive passwords to try. Obfuscated or misnumbered RAR and 7z archives now finish where 0.14 failed them. The legacy web UI is gone. This is an upstream pre-release; the database migrates automatically on first start.
 
 
-  Fixes for RAR downloads that resume after a restart, and for articles with a malformed yEnc escape, which now decode like other downloaders instead of failing. PAR2 verification reads damaged files only once, and RAR3 recovery volumes are restored faster.
-
-  No configuration or database changes.
-
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.14.7
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.15.0
 dependencies: []
 path: ""
 defaultUsername: "admin"
