@@ -7,7 +7,7 @@ name: Pulsarr
 tagline: Sync Plex watchlists to Sonarr and Radarr in real time
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/icon.png
 # renovate: datasource=docker depName=lakker/pulsarr
-version: "0.19.6"
+version: "0.19.7"
 port: 3023
 description: >-
   Pulsarr watches the Plex watchlists of you and your friends and sends every
@@ -48,9 +48,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
-  Hotfix: routing now checks Plex before completing an approval record.
+  Hotfix: the highest-priority routing rule now decides both approval and
+  quota bypass.
 
-  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.6
+  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.7
 
 dependencies: []
 path: ""
