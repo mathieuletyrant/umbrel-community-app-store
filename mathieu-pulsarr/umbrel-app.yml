@@ -48,9 +48,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
-  Hotfix: routing now checks Plex before completing an approval record.
+  Hotfix: the highest-priority routing rule now decides both approval and
+  quota bypass.
 
-  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.6
+  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.7
 
 dependencies: []
 path: ""
