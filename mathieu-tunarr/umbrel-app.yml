@@ -55,14 +55,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-3.jpg
 releaseNotes: >-
-  Bug-fix release. Deinterlace and scaling filters now apply to offline
-  sessions, hardware tone mapping falls back cleanly when OpenCL can't attach
-  to VAAPI, and Jellyfin shows that belong to a collection are scanned. Local
-  folders are rescanned when a file is overwritten in place, and the guide
-  places blocks by time so zoom levels scale correctly.
+  Bug-fix release. Several hardware transcoding fixes (VAAPI driver name and
+  rate control detection, NVIDIA looped inputs and subtitle burn-in), hardware
+  capability probes are cached for one hour instead of 41 days, and mid-roll
+  breaks stay inside their time slot. Lineup durations are reconciled after
+  scans, and block and cyclic shuffle are merged into one dialog with presets.
 
 
-  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.1
+  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.2
 dependencies: []
 path: ""
 defaultUsername: ""
