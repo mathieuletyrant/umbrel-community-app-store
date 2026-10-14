@@ -242,7 +242,8 @@ JSON directly from the host: no app_proxy, no Umbrel login, the container's inte
 - The `Packages` workflow runs `bun run typecheck` and `bun test` on every push, and publishes each
   image the first time its version from `packages/<package>/package.json` is pushed, from any
   branch. Published versions are never overwritten: bump the version to ship a change.
-- Renovate ignores the store's own images (`ghcr.io/mathieuletyrant/**`): the PR that bumps a
+- Renovate ignores the store's own images (`ghcr.io/mathieuletyrant/**`, except Spotarr: its own
+  repo releases it, so Renovate opens its PRs like any upstream app): the PR that bumps a
   package's version also pins the new digest (the run summary prints it) in every app using that
   image, with a `-patch.N` bump. `validate_apps.py` fails an app whose own-image tag differs from
   its package's version (each `package.json` names its `image`).
