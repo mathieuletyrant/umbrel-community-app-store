@@ -7,7 +7,7 @@ services:
       APP_PORT: 8183
 
   server:
-    image: ghcr.io/kirovair/muxarr:0.9.10@sha256:97ef739d15a3145059309fd1ce236d7ffedbc6e9c5a820f32e4739d51948fb8d
+    image: ghcr.io/kirovair/muxarr:0.9.11@sha256:0268133c8e6ad9ba13e055ae24194bab3da8fe715ba2a3a19559f418c18e75a3
     environment:
       - TZ=Etc/UTC
       - PUID=1000
