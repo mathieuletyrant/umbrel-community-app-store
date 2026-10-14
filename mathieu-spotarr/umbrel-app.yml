@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.6.0"
+version: "0.7.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -45,10 +45,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  A pasted text containing an IMDb or TMDB link is now identified. The
-  history's added count no longer exceeds the number of titles after a retry,
-  and the login page tells a refused token from Spotarr being unreachable.
-  A crash during an identification no longer leaves a share half written.
+  Auto add rules: write your own rules (movie or TV show, a single candidate,
+  confidence, TMDB rating and votes) and Spotarr requests the matching
+  candidates without a click, with a preview of what each rule would have
+  added. Candidates now show their TMDB genres, and the history can be
+  filtered and searched by genre. A share can be deleted, a failed share says
+  why it failed, and a retry can change the LLM's effort and give it a hint.
 dependencies: []
 path: ""
 defaultUsername: ""
