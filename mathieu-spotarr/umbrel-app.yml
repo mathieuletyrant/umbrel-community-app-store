@@ -4,16 +4,18 @@ storage:
   dataRoot: data
 category: media
 name: Spotarr
-tagline: Share a reel from your iPhone, add the movie or show through Seerr
+tagline: Share any link from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
 version: "0.8.0"
 port: 3838
 description: >-
-  Spotarr identifies the movie or TV show behind an Instagram reel or photo
-  post, a TikTok or a YouTube Short shared from your iPhone. An LLM watches the
-  video's frames (or the photo) and hears its sound, TMDB
-  confirms the titles, and Seerr tells which ones are already in your library.
+  Spotarr identifies the movie or TV show behind any link shared from your
+  iPhone: a reel, a TikTok, a YouTube video, an article, a film's page on
+  Letterboxd, AlloCiné or Wikipedia. A page linking to IMDb or TMDB names its
+  work at once; otherwise an LLM watches the video's frames and hears its
+  sound, or reads the page's text and pictures. TMDB confirms the titles, and
+  Seerr tells which ones are already in your library.
   Pick a candidate in the history and Spotarr requests it through Seerr.
 
 
