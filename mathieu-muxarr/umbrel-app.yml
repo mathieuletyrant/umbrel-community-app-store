@@ -56,10 +56,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
 releaseNotes: >-
-  Sonarr v4 webhooks work again, notifications are sent right after start, and the audio codec exclusion setting now applies to audio. Library sorting by Tracks and Size is fixed and faster. New: a "Queue finished" notification, a "Queue new files found by a scan" setting, and POST /api/queue to queue every file that needs work.
+  Sonarr and Radarr are now told about a converted file, rescan it and rename it when their naming format changed, and Muxarr follows the new name. Autoscan now really scans on its interval. New: GET /api/conversions, a filePath field in webhook notifications and Telegram forum topics. A late cancel no longer flips a finished conversion to cancelled.
 
 
-  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.10
+  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.11
 dependencies: []
 path: ""
 defaultUsername: ""
