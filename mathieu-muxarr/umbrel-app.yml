@@ -56,10 +56,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
 releaseNotes: >-
-  App data now lives in /config, like the linuxserver containers, and a new UMASK setting lets you make library files group-writable. This is the last pre-release before stable.
+  Sonarr v4 webhooks work again, notifications are sent right after start, and the audio codec exclusion setting now applies to audio. Library sorting by Tracks and Size is fixed and faster. New: a "Queue finished" notification, a "Queue new files found by a scan" setting, and POST /api/queue to queue every file that needs work.
 
 
-  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.9
+  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.10
 dependencies: []
 path: ""
 defaultUsername: ""
