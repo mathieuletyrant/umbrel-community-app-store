@@ -82,7 +82,7 @@
     { "matchPackageNames": ["ghcr.io/mathieuletyrant/vitals"], "commitMessageTopic": "Vitals" },
     { "matchPackageNames": ["ghcr.io/scryer-media/weaver"], "commitMessageTopic": "Weaver" },
     { "matchFileNames": ["packages/**"], "groupName": "packages build" },
-    { "matchPackageNames": ["ghcr.io/mathieuletyrant/**"], "enabled": false },
+    { "matchPackageNames": ["ghcr.io/mathieuletyrant/**", "!ghcr.io/mathieuletyrant/spotarr"], "enabled": false },
     {
       "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"],
       "matchManagers": ["custom.regex"],
