@@ -7,7 +7,7 @@ name: Muxarr
 tagline: Strip unwanted audio and subtitle tracks without re-encoding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/kirovair/muxarr
-version: "0.9.9"
+version: "0.9.10"
 port: 8184
 description: >-
   Muxarr cleans up your media files by removing the audio and subtitle tracks
