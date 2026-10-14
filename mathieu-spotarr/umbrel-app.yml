@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.7.0"
+version: "0.8.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -35,6 +35,10 @@ description: >-
   5. On the iPhone, install the Shortcut from
   https://github.com/mathieuletyrant/spotarr#-share-from-the-iphone with the
   address `http://umbrel.local:3838` and the same token.
+
+  6. To let an AI assistant (Claude…) read your history, give its MCP client
+  the MCP URL from Settings → Access. It can only read, and Regenerate
+  revokes it.
 developer: Mathieu Le Tyrant
 website: https://github.com/mathieuletyrant/spotarr
 submitter: Mathieu Le Tyrant
@@ -45,12 +49,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Auto add rules: write your own rules (movie or TV show, a single candidate,
-  confidence, TMDB rating and votes) and Spotarr requests the matching
-  candidates without a click, with a preview of what each rule would have
-  added. Candidates now show their TMDB genres, and the history can be
-  filtered and searched by genre. A share can be deleted, a failed share says
-  why it failed, and a retry can change the LLM's effort and give it a hint.
+  An MCP server for AI assistants: give an assistant like Claude the MCP URL
+  from Settings → Access, and it can read your history (filtered by genre,
+  text or status) and the genres it holds, to pick a movie for tonight among
+  what you shared. The MCP token can only read and can be regenerated. Each
+  candidate now keeps TMDB's synopsis; older ones get it at the first start.
 dependencies: []
 path: ""
 defaultUsername: ""

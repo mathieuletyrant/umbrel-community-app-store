@@ -1,4 +1,4 @@
-verified: 0.7.0 on umbrelOS 2.0.0 (2026-10-14)
+verified: 0.8.0 on umbrelOS 2.0.0 (2026-10-14)
 logs:
   server: '"step":"start"'
 steps:
@@ -16,7 +16,15 @@ steps:
       headers: {content-type: application/json, authorization: "Bearer ${env.server.API_TOKEN}"}
       body: {}
       status: 200
-      contains: '"version":"0.7.0"'
+      contains: '"version":"0.8.0"'
+  - http:
+      path: /mcp
+      method: POST
+      anonymous: true
+      headers: {content-type: application/json}
+      body: {}
+      status: 401
+      contains: missing or invalid MCP token
   - goto: /
   - fill: {label: API token, value: "${env.server.API_TOKEN}"}
   - click: {role: button, name: Sign in}
@@ -25,4 +33,5 @@ steps:
   - click: {role: link, name: Settings}
   - see: Whether each service Spotarr needs answers
   - see: The LLM names the works
+  - see: MCP URL
   - shot: settings
