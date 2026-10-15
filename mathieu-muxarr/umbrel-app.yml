@@ -56,10 +56,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
 releaseNotes: >-
-  Sonarr and Radarr are now told about a converted file, rescan it and rename it when their naming format changed, and Muxarr follows the new name. Autoscan now really scans on its interval. New: GET /api/conversions, a filePath field in webhook notifications and Telegram forum topics. A late cancel no longer flips a finished conversion to cancelled.
+  The bundled mkvmerge and mkvpropedit tools are updated to MKVToolNix v102 (previously v82). When Sonarr or Radarr reject a webhook, Muxarr now shows the reason they give, usually a Muxarr URL they cannot reach.
 
 
-  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.11
+  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.12
 dependencies: []
 path: ""
 defaultUsername: ""
