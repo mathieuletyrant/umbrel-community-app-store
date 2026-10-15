@@ -1,8 +1,8 @@
-verified: 12.0.1-patch.1 on umbrelOS 2.0.0 (2026-10-15)
+verified: 12.1.0 on umbrelOS 2.0.0 (2026-10-15)
 egress: true
 # egress patches the system trust stores, but the model download goes through httpx, which reads certifi's bundle.
 setup:
-  - docker exec -u 0 mathieu-mcp-memory_server_1 sh -c 'cat /etc/ssl/certs/ca-certificates.crt > "$(python -c "import certifi; print(certifi.where())")"' && docker restart mathieu-mcp-memory_server_1
+  - docker exec -u 0 mathieu-mcp-memory_server_1 sh -c 'cat /etc/ssl/certs/ca-certificates.crt > "$(python -c "import certifi; print(certifi.where())")"; rm -rf /data/.cache/mcp_memory/onnx_models' && docker restart mathieu-mcp-memory_server_1
 logs:
   server: ONNX model ready for use
 steps:
