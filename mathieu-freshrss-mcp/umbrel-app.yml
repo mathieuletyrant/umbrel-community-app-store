@@ -6,7 +6,7 @@ category: ai
 name: FreshRSS MCP
 tagline: Your FreshRSS feeds, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-freshrss-mcp/icon.png
-version: "0.1.0-patch.9"
+version: "0.1.0-patch.10"
 port: 6262
 description: >-
   FreshRSS MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -47,12 +47,7 @@ repo: https://github.com/leitosama/freshrss-mcp-server
 support: https://github.com/leitosama/freshrss-mcp-server/issues
 gallery: []
 releaseNotes: >-
-  This app no longer turns on FreshRSS's API and creates an API password on
-  its own: enter your FreshRSS username and API password in its settings in
-  umbrelOS. The password it created before is in
-  ~/umbrel/app-data/mathieu-freshrss-mcp/data/shared/api_password on your
-  Umbrel.
-
+  Updates the bundled nginx web server to its latest build.
 dependencies:
   - freshrss
 path: /health

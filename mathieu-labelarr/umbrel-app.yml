@@ -7,7 +7,7 @@ name: Labelarr
 tagline: Turn TMDb keywords into Plex labels for smarter filters and collections
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/nullable-eth/labelarr
-version: "1.4.0-patch.2"
+version: "1.4.0-patch.3"
 port: 9095
 description: >-
   TMDb tags every movie and show with keywords such as "time travel",
@@ -51,9 +51,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/gallery-2.jpg
 releaseNotes: >-
-  The Plex token and the Radarr/Sonarr API keys are no longer read from the
-  other apps: fill them in Labelarr's settings in umbrelOS.
-
+  Updates the bundled nginx web server to its latest build.
 dependencies: []
 path: ""
 defaultUsername: ""
