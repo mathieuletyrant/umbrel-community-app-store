@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "6.13.7-patch.5"
+version: "6.13.7-patch.6"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -49,10 +49,7 @@ repo: https://github.com/cross-seed/cross-seed
 support: https://github.com/cross-seed/cross-seed/issues
 gallery: []
 releaseNotes: >-
-  Prowlarr's indexers, Sonarr and Radarr are no longer picked up on their own
-  at each start: list your Torznab URLs in config.js. Existing installs keep
-  the indexers found at their last start.
-
+  Updates the bundled nginx web server to its latest build.
 dependencies:
   - transmission
 path: ""

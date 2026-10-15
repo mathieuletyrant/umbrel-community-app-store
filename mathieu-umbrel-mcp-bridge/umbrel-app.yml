@@ -6,7 +6,7 @@ category: ai
 name: Umbrel MCP Bridge
 tagline: Connect URL-only MCP clients like Home Assistant to your Umbrel
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-umbrel-mcp-bridge/icon.png
-version: "1.0.0-patch.1"
+version: "1.0.0-patch.2"
 port: 6161
 description: >-
   umbrelOS ships its own MCP server, so an AI assistant can manage your Umbrel.
@@ -43,7 +43,7 @@ repo: https://github.com/mathieuletyrant/umbrel-community-app-store
 support: https://github.com/mathieuletyrant/umbrel-community-app-store/issues
 gallery: []
 releaseNotes: >-
-  Initial release of Umbrel MCP Bridge for this Community App Store.
+  Updates the bundled nginx web server to its latest build.
 dependencies: []
 path: ""
 defaultUsername: ""
