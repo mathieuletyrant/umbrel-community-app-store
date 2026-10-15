@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.9.0"
+version: "0.10.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -49,13 +49,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Share any link, not only reels: web pages are now read with their text and
-  pictures, and the movie or show they mention is identified like a reel.
-  The iOS Shortcut import is fixed (a complete If action and labelled Text
-  actions).
+  Library states now stay current from Seerr: add a Webhook notification agent
+  in Seerr pointing at Spotarr and a title shows as Available once downloaded.
+  Settings are split into tabs with the Seerr setup as numbered steps, service
+  status moves to the header, and the Stats chart shows each month's LLM cost.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.9.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.10.0
 dependencies: []
 path: ""
 defaultUsername: ""
