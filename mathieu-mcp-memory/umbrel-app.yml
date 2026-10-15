@@ -56,10 +56,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: >-
-  Major release, but nothing changes for this install: search summaries are no longer switched on by a Harvest LLM provider (they need MCP_SEARCH_SUMMARIZE_ENABLED=true). Adds opt-in sync features and a Prometheus metrics endpoint, both off by default, plus additive database migrations that run on first start.
+  Security fix: with OAuth enabled, a read-only token could still write memories over SSE and Streamable HTTP; write scope is now checked per message. Also fixes hybrid sync (Cloudflare tombstones, dedup of pulled memories), the export/import round trip and embedding regeneration.
 
-
-  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.0.0
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.0.1
 dependencies: []
 path: ""
 defaultUsername: mcp
