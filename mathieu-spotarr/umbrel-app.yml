@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.8.0"
+version: "0.9.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -49,11 +49,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  An MCP server for AI assistants: give an assistant like Claude the MCP URL
-  from Settings → Access, and it can read your history (filtered by genre,
-  text or status) and the genres it holds, to pick a movie for tonight among
-  what you shared. The MCP token can only read and can be regenerated. Each
-  candidate now keeps TMDB's synopsis; older ones get it at the first start.
+  Share any link, not only reels: web pages are now read with their text and
+  pictures, and the movie or show they mention is identified like a reel.
+  The iOS Shortcut import is fixed (a complete If action and labelled Text
+  actions).
+
+
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.9.0
 dependencies: []
 path: ""
 defaultUsername: ""
