@@ -7,7 +7,7 @@ name: Labelarr
 tagline: Turn TMDb keywords into Plex labels for smarter filters and collections
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-labelarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/nullable-eth/labelarr
-version: "1.4.0-patch.1"
+version: "1.4.0-patch.2"
 port: 9095
 description: >-
   TMDb tags every movie and show with keywords such as "time travel",
