@@ -31,7 +31,7 @@ steps:
   - see: Every share, what was suggested and what was added.
   - shot: history
   - click: {role: link, name: Settings}
-  - see: Whether each service Spotarr needs answers
   - see: The LLM names the works
+  - click: {text: MCP, exact: true}
   - see: MCP URL
   - shot: settings
