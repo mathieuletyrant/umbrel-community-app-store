@@ -7,7 +7,7 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr
-version: "2.8.0"
+version: "2.8.3"
 port: 3009
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
@@ -45,13 +45,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  Members can now sign in to Tracearr with their Jellyfin, Emby or Plex account (including Jellyfin Quick Connect). It is off by default: turn it on in Settings → Sign-in. Note that every admin becomes a member on upgrade; give Admin back on their user page or under Settings → Sign-in.
+  Members now only see the libraries their media server account can open. Admins can switch back from the personal dashboard even with no recent plays, and accounts that signed in through more than one of Plex, Jellyfin or Emby can be merged.
 
 
-  This release also adds a personal dashboard, a read-only "View as" mode for owners, and security fixes for sessions, Plex sign-in and the image proxy.
+  This update also fixes the run list returning errors for runs about a library item, keeps Seerr and media server versions fresh after sync, and makes image precaching skip images the server can't serve.
 
 
-  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v2.8.0
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v2.8.3
 
 dependencies: []
 path: ""
