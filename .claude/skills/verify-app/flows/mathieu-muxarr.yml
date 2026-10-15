@@ -1,4 +1,4 @@
-verified: 0.9.11 on umbrelOS 2.0.0 (2026-10-14)
+verified: 0.9.12 on umbrelOS 2.0.0 (2026-10-15)
 requires: [radarr]
 vars:
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
@@ -24,11 +24,9 @@ steps:
   - click: {role: button, name: Create Profile}
   - fill: {label: Profile Name, value: Films}
   - click: {role: button, name: Add Directory}
-  - click: {css: "button.list-group-item:text-is('/downloads')"}
-  - click: {css: "button.list-group-item:text-is('movies')"}
   - click: {role: button, name: Select Directory}
   - click: {role: button, name: Save Settings & Scan}
   - see: {text: Films, exact: true}
   - click: {text: Integrations, exact: true}
-  - see: Webhook Active
+  - see: Connected
   - shot: integrations
