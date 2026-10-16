@@ -51,6 +51,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
 | **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read. |
 | **AdGuard MCP** | **Your AdGuard Home as an MCP server**: ask an AI assistant why a site doesn't load, unblock a domain, block a service on one device, or add a DNS rewrite. Covers the whole AdGuard Home API. |
+| **MetaMCP** | **One MCP gateway for all your MCP servers**: gathers STDIO and remote MCP servers behind one endpoint, groups them into namespaces, picks which tools each AI client sees, and protects it with an API key or OAuth — with an MCP inspector and audit logs. |
 | **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
 
@@ -81,6 +82,13 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Byparr | `http://mathieu-byparr_server_1:8191` | none |
 | Shredarr | `http://mathieu-shredarr_server_1:8089` (Jellyfin webhook) | none |
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
+| MetaMCP | `http://mathieu-metamcp_server_1:12008/metamcp/<endpoint>/mcp` (MCP) | an API key from its API Keys page |
+| arr-mcp | `http://mathieu-arr-mcp_server_1:6060/mcp` (MCP) | the bearer token on its dashboard |
+| MCP Memory | `http://mathieu-mcp-memory_web_1/mcp` (MCP) | its default password (bearer token) |
+| AdGuard MCP | `http://mathieu-adguard-mcp_web_1/mcp` (MCP) | its default password (bearer token) |
+| FreshRSS MCP | `http://mathieu-freshrss-mcp_web_1/mcp` (MCP) | its default password (bearer token) |
+| Spotarr | `http://mathieu-spotarr_server_1:3000/mcp?token=<MCP token>` (MCP) | Settings → Access |
+| umbrelOS | `http://host.docker.internal/mcp` (MCP, apps declaring `host.docker.internal`) | a `umbrelmcp_` token from Settings → MCP |
 
 Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that
 need it declare it), and Plex reaches an app through `http://127.0.0.1:<the app's port>`.

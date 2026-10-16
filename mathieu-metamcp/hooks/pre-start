@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# The MetaMCP image runs as nextjs (1001), not 1000: its home holds the npx/uvx caches of STDIO servers.
+dir="${APP_DATA_DIR}/data/home"
+mkdir -p "${dir}/.cache/uv" "${dir}/.cache/node/corepack"
+find -H "${dir}" ! -user 1001 -exec chown -h 1001:1001 {} +
+true

@@ -59,6 +59,7 @@
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
     { "matchPackageNames": ["ghcr.io/maintainerr/maintainerr"], "commitMessageTopic": "Maintainerr" },
     { "matchPackageNames": ["doobidoo/mcp-memory-service"], "commitMessageTopic": "MCP Memory" },
+    { "matchPackageNames": ["ghcr.io/metatool-ai/metamcp"], "commitMessageTopic": "MetaMCP" },
     { "matchPackageNames": ["ghcr.io/kirovair/muxarr"], "commitMessageTopic": "Muxarr" },
     { "matchPackageNames": ["iampuid0/neutarr"], "commitMessageTopic": "NeutArr" },
     { "matchPackageNames": ["ghcr.io/notifiarr/notifiarr"], "commitMessageTopic": "Notifiarr" },

@@ -1,0 +1,19 @@
+verified: 2.4.22 on umbrelOS 2.0.0 (2026-10-16)
+logs:
+  server: Backend server started successfully
+# The session cookie carries Domain=<APP_URL host> (umbrel-verify.local) unless the web sidecar
+# rewrites it to the browsed host: without it, sign-up lands back on the login page.
+steps:
+  - http: {path: /health, status: 200}
+  - goto: /en/register
+  - see: Create your account
+  - wait: 2000
+  - fill: {css: "#name", value: Verify}
+  - fill: {css: "#email", value: verify@umbrel.local}
+  - fill: {css: "#password", value: Verify-MetaMCP-1}
+  - fill: {css: "#confirmPassword", value: Verify-MetaMCP-1}
+  - click: {role: button, name: Create account}
+  - see: verify@umbrel.local
+  - goto: /en/mcp-servers
+  - see: {role: heading, name: MCP Servers}
+  - shot: mcp-servers

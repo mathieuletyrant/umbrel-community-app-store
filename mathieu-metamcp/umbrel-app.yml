@@ -1,0 +1,82 @@
+manifestVersion: 1
+id: mathieu-metamcp
+storage:
+  dataRoot: data
+category: ai
+name: MetaMCP
+tagline: One MCP gateway for all your MCP servers
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/icon.png
+# renovate: datasource=docker depName=ghcr.io/metatool-ai/metamcp
+version: "2.4.22"
+port: 12008
+description: >-
+  MetaMCP is a Model Context Protocol (MCP) gateway: it gathers all your MCP
+  servers behind a single endpoint, so an AI assistant (Claude, ChatGPT,
+  Cursor, Open WebUI or any MCP client) is configured once and sees every
+  tool you allow.
+
+
+  Add MCP servers of any kind — STDIO commands run right in the app (`npx`,
+  `uvx`), or remote SSE / Streamable HTTP servers — then group them into
+  namespaces, switch individual tools on or off, rename them or rewrite their
+  descriptions, and publish each namespace as an endpoint protected by an API
+  key or OAuth. Endpoints speak SSE, Streamable HTTP and OpenAPI, so even
+  tools without MCP support can call them. A built-in MCP inspector tests
+  every server, and audit logs record each tool call.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app, click "Sign Up" and create your account. Then, in
+  Settings, turn on "Disable UI Registration" so nobody else can create one.
+
+
+  2. In "MCP Servers", add your servers. STDIO servers run inside MetaMCP
+  with `npx` or `uvx`, for example:
+
+  - Web search with the SearXNG app: command `npx`, arguments
+  `-y mcp-searxng@1.16.0`, environment `SEARXNG_URL=http://searxng-web:8080`
+  (2.x needs Node 22, MetaMCP ships Node 20).
+
+  - Reddit, no account needed: command `uvx`, argument `mcp-reddit`.
+
+  - Web pages read by Crawl4AI (this store): type SSE, URL
+  `http://mathieu-crawl4ai_server_1:11235/mcp/sse`, bearer token = Crawl4AI's
+  default password.
+
+  - The other MCP apps answer at their Umbrel address too, e.g. arr-mcp at
+  `http://mathieu-arr-mcp_server_1:6060/mcp` with its bearer token, and a
+  server published on one of your Umbrel's ports at `http://localhost:<port>`.
+  umbrelOS's own MCP server is `http://host.docker.internal/mcp`, with a
+  `umbrelmcp_` token from umbrelOS Settings → MCP as bearer token. All the
+  addresses, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
+
+
+  3. Create a namespace with those servers, then an endpoint for it, and an
+  API key in "API Keys". Point your MCP client at
+  `http://umbrel.local:12008/metamcp/<endpoint>/mcp` (Streamable HTTP) or
+  `/metamcp/<endpoint>/sse`, with the header `Authorization: Bearer <API key>`.
+  The web UI stays behind your Umbrel login; only the endpoints (and OAuth for
+  clients that use it) are opened, so leave API key authentication on.
+
+  4. Home Assistant only takes a URL: turn on query-parameter auth on the
+  endpoint and give it
+  `http://127.0.0.1:12008/metamcp/<endpoint>/mcp?api_key=<API key>`
+  (Home Assistant runs on the host network of your Umbrel).
+developer: metatool-ai
+website: https://docs.metamcp.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/metatool-ai/metamcp
+repo: https://github.com/metatool-ai/metamcp
+support: https://github.com/metatool-ai/metamcp/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/gallery-2.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
