@@ -82,6 +82,13 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Byparr | `http://mathieu-byparr_server_1:8191` | none |
 | Shredarr | `http://mathieu-shredarr_server_1:8089` (Jellyfin webhook) | none |
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
+| MetaMCP | `http://mathieu-metamcp_server_1:12008/metamcp/<endpoint>/mcp` (MCP) | an API key from its API Keys page |
+| arr-mcp | `http://mathieu-arr-mcp_server_1:6060/mcp` (MCP) | the bearer token on its dashboard |
+| MCP Memory | `http://mathieu-mcp-memory_web_1/mcp` (MCP) | its default password (bearer token) |
+| AdGuard MCP | `http://mathieu-adguard-mcp_web_1/mcp` (MCP) | its default password (bearer token) |
+| FreshRSS MCP | `http://mathieu-freshrss-mcp_web_1/mcp` (MCP) | its default password (bearer token) |
+| Spotarr | `http://mathieu-spotarr_server_1:3000/mcp?token=<MCP token>` (MCP) | Settings → Access |
+| umbrelOS | `http://host.docker.internal/mcp` (MCP, apps declaring `host.docker.internal`) | a `umbrelmcp_` token from Settings → MCP |
 
 Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that
 need it declare it), and Plex reaches an app through `http://127.0.0.1:<the app's port>`.

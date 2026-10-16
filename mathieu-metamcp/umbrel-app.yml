@@ -48,6 +48,10 @@ description: >-
   - The other MCP apps answer at their Umbrel address too, e.g. arr-mcp at
   `http://mathieu-arr-mcp_server_1:6060/mcp` with its bearer token, and a
   server published on one of your Umbrel's ports at `http://localhost:<port>`.
+  umbrelOS's own MCP server is `http://host.docker.internal/mcp`, with a
+  `umbrelmcp_` token from umbrelOS Settings → MCP as bearer token. All the
+  addresses, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
 
   3. Create a namespace with those servers, then an endpoint for it, and an

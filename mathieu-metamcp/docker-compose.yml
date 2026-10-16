@@ -16,6 +16,7 @@ services:
     environment:
       TZ: Etc/UTC
       NODE_ENV: production
+      npm_config_manage_package_manager_versions: "false"
       POSTGRES_HOST: mathieu-metamcp_db_1
       POSTGRES_PORT: 5432
       POSTGRES_USER: metamcp
