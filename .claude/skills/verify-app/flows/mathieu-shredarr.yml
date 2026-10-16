@@ -1,4 +1,4 @@
-verified: 1.2.1 on umbrelOS 2.0.0 (2026-10-16)
+verified: 2.0.0 on umbrelOS 2.0.0 (2026-10-16)
 setup:
   - docker exec mathieu-shredarr_server_1 sh -c '[ "$(id -u)" = 1000 ] && touch /downloads/.shredarr-w && rm /downloads/.shredarr-w'
 steps:

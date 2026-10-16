@@ -7,7 +7,7 @@ services:
       APP_PORT: 8089
 
   server:
-    image: ghcr.io/jschaef80/shredarr:1.2.1@sha256:e14bf5a4e980780aa514d9b3d5a5e62b51efc66b0fe6f15f58ed1d2e345a2dbf
+    image: ghcr.io/jschaef80/shredarr:2.0.0@sha256:647f5df180e02ea10beafa1eb9bd51ee86ed4192b8db4659fa944b6476225736
     user: "1000:1000"
     init: true
     environment:
