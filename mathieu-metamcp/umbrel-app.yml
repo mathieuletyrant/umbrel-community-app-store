@@ -33,11 +33,22 @@ description: >-
   like: the default one only applies to the first start.
 
   2. In "MCP Servers", add your servers. STDIO servers run inside MetaMCP
-  (e.g. command `npx`, arguments `-y @modelcontextprotocol/server-everything`).
-  The MCP apps of this store answer at their Umbrel address, e.g. arr-mcp at
-  `http://mathieu-arr-mcp_server_1:6060/mcp` with its bearer token; a server
-  published on your Umbrel's port can also be reached at
-  `http://localhost:<port>`.
+  with `npx` or `uvx`, for example:
+
+  - Web search with the SearXNG app: command `npx`, arguments
+  `-y mcp-searxng@1.16.0`, environment `SEARXNG_URL=http://searxng-web:8080`
+  (2.x needs Node 22, MetaMCP ships Node 20).
+
+  - Reddit, no account needed: command `uvx`, argument `mcp-reddit`.
+
+  - Web pages read by Crawl4AI (this store): type SSE, URL
+  `http://mathieu-crawl4ai_server_1:11235/mcp/sse`, bearer token = Crawl4AI's
+  default password.
+
+  - The other MCP apps answer at their Umbrel address too, e.g. arr-mcp at
+  `http://mathieu-arr-mcp_server_1:6060/mcp` with its bearer token, and a
+  server published on one of your Umbrel's ports at `http://localhost:<port>`.
+
 
   3. Create a namespace with those servers, then an endpoint for it, and an
   API key in "API Keys". Point your MCP client at
@@ -45,6 +56,11 @@ description: >-
   `/metamcp/<endpoint>/sse`, with the header `Authorization: Bearer <API key>`.
   The web UI stays behind your Umbrel login; only the endpoints (and OAuth for
   clients that use it) are opened, so leave API key authentication on.
+
+  4. Home Assistant only takes a URL: turn on query-parameter auth on the
+  endpoint and give it
+  `http://127.0.0.1:12008/metamcp/<endpoint>/mcp?api_key=<API key>`
+  (Home Assistant runs on the host network of your Umbrel).
 developer: metatool-ai
 website: https://docs.metamcp.com
 submitter: Mathieu Le Tyrant
