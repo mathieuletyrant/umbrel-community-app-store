@@ -50,7 +50,6 @@
     { "matchPackageNames": ["ghcr.io/thephaseless/byparr"], "commitMessageTopic": "Byparr" },
     { "matchPackageNames": ["robertlordhood/chaptarr"], "commitMessageTopic": "Chaptarr" },
     { "matchPackageNames": ["ghcr.io/cleanuparr/cleanuparr"], "commitMessageTopic": "Cleanuparr" },
-    { "matchPackageNames": ["unclecode/crawl4ai"], "commitMessageTopic": "Crawl4AI" },
     { "matchPackageNames": ["ghcr.io/cross-seed/cross-seed"], "commitMessageTopic": "cross-seed" },
     { "matchPackageNames": ["ghcr.io/dispatcharr/dispatcharr"], "commitMessageTopic": "Dispatcharr" },
     { "matchPackageNames": ["dockurr/umbrel"], "commitMessageTopic": "test umbrelOS (verify-app skill)" },
