@@ -28,9 +28,9 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  1. Sign in with the default credentials shown by umbrelOS (email
-  `umbrel@umbrel.local`). Change the password in MetaMCP's settings if you
-  like: the default one only applies to the first start.
+  1. Open the app, click "Sign Up" and create your account. Then, in
+  Settings, turn on "Disable UI Registration" so nobody else can create one.
+
 
   2. In "MCP Servers", add your servers. STDIO servers run inside MetaMCP
   with `npx` or `uvx`, for example:
@@ -77,6 +77,6 @@ gallery:
 releaseNotes: ""
 dependencies: []
 path: ""
-defaultUsername: "umbrel@umbrel.local"
-deterministicPassword: true
+defaultUsername: ""
+defaultPassword: ""
 permissions: []
