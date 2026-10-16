@@ -7,7 +7,7 @@ name: MCP Memory
 tagline: Long-term memory for your AI assistants, as an MCP server
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/icon.png
 # renovate: datasource=docker depName=doobidoo/mcp-memory-service
-version: "12.1.0-patch.1"
+version: "12.1.1"
 port: 6363
 description: >-
   MCP Memory gives your AI assistant (Claude, ChatGPT, Home Assistant, or any
