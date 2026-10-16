@@ -72,6 +72,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | SABnzbd | `http://sabnzbd_web_1:8080` | Config → General |
 | Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
 | Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
+| Jellyfin | `http://jellyfin_server_1:8096` | Dashboard → API Keys |
 | Plex | `http://host.docker.internal:32400` | your Plex token |
 | Healarr | `http://mathieu-healarr_server_1:3090` | its settings |
 | Cleanuparr | `http://mathieu-cleanuparr_server_1:11011` | its account settings |
