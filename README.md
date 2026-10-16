@@ -74,6 +74,8 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
 | Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
 | Plex | `http://host.docker.internal:32400` | your Plex token |
+| Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
+| SearXNG | `http://searxng-web:8080` | none |
 | Healarr | `http://mathieu-healarr_server_1:3090` | its settings |
 | Cleanuparr | `http://mathieu-cleanuparr_server_1:11011` | its account settings |
 | Maintainerr | `http://mathieu-maintainerr_server_1:6246` | none |
@@ -81,8 +83,6 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | slskd | `http://mathieu-slskd_server_1:5030` | its options (`web.authentication.api_keys`) |
 | Byparr | `http://mathieu-byparr_server_1:8191` | none |
 | Shredarr | `http://mathieu-shredarr_server_1:8089` (Jellyfin webhook) | none |
-| Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
-| SearXNG | `http://searxng-web:8080` | none |
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
 
 Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that
