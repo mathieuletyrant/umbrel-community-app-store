@@ -1,0 +1,62 @@
+manifestVersion: 1
+id: mathieu-metamcp
+storage:
+  dataRoot: data
+category: ai
+name: MetaMCP
+tagline: One MCP gateway for all your MCP servers
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/icon.png
+# renovate: datasource=docker depName=ghcr.io/metatool-ai/metamcp
+version: "2.4.22"
+port: 12008
+description: >-
+  MetaMCP is a Model Context Protocol (MCP) gateway: it gathers all your MCP
+  servers behind a single endpoint, so an AI assistant (Claude, ChatGPT,
+  Cursor, Open WebUI or any MCP client) is configured once and sees every
+  tool you allow.
+
+
+  Add MCP servers of any kind — STDIO commands run right in the app (`npx`,
+  `uvx`), or remote SSE / Streamable HTTP servers — then group them into
+  namespaces, switch individual tools on or off, rename them or rewrite their
+  descriptions, and publish each namespace as an endpoint protected by an API
+  key or OAuth. Endpoints speak SSE, Streamable HTTP and OpenAPI, so even
+  tools without MCP support can call them. A built-in MCP inspector tests
+  every server, and audit logs record each tool call.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Sign in with the default credentials shown by umbrelOS (email
+  `umbrel@umbrel.local`). Change the password in MetaMCP's settings if you
+  like: the default one only applies to the first start.
+
+  2. In "MCP Servers", add your servers. STDIO servers run inside MetaMCP
+  (e.g. command `npx`, arguments `-y @modelcontextprotocol/server-everything`).
+  The MCP apps of this store answer at their Umbrel address, e.g. arr-mcp at
+  `http://mathieu-arr-mcp_server_1:6060/mcp` with its bearer token; a server
+  published on your Umbrel's port can also be reached at
+  `http://localhost:<port>`.
+
+  3. Create a namespace with those servers, then an endpoint for it, and an
+  API key in "API Keys". Point your MCP client at
+  `http://umbrel.local:12008/metamcp/<endpoint>/mcp` (Streamable HTTP) or
+  `/metamcp/<endpoint>/sse`, with the header `Authorization: Bearer <API key>`.
+  The web UI stays behind your Umbrel login; only the endpoints (and OAuth for
+  clients that use it) are opened, so leave API key authentication on.
+developer: metatool-ai
+website: https://docs.metamcp.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/metatool-ai/metamcp
+repo: https://github.com/metatool-ai/metamcp
+support: https://github.com/metatool-ai/metamcp/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/gallery-2.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: "umbrel@umbrel.local"
+deterministicPassword: true
+permissions: []

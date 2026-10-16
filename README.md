@@ -51,6 +51,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
 | **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read. |
 | **AdGuard MCP** | **Your AdGuard Home as an MCP server**: ask an AI assistant why a site doesn't load, unblock a domain, block a service on one device, or add a DNS rewrite. Covers the whole AdGuard Home API. |
+| **MetaMCP** | **One MCP gateway for all your MCP servers**: gathers STDIO and remote MCP servers behind one endpoint, groups them into namespaces, picks which tools each AI client sees, and protects it with an API key or OAuth — with an MCP inspector and audit logs. |
 | **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
 

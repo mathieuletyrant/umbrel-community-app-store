@@ -1,0 +1,12 @@
+logs:
+  server: Backend server started successfully
+steps:
+  - http: {path: /health, status: 200}
+  - goto: /en/login
+  - fill: {css: "#email", value: umbrel@umbrel.local}
+  - fill: {css: "#password", value: "${env.server.BOOTSTRAP_USER_PASSWORD}"}
+  - click: {role: button, name: Sign In}
+  - see: umbrel@umbrel.local
+  - goto: /en/mcp-servers
+  - see: {role: heading, name: MCP Servers}
+  - shot: mcp-servers
