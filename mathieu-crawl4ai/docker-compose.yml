@@ -14,3 +14,4 @@ services:
     environment:
       TZ: Etc/UTC
       CRAWL4AI_API_TOKEN: ${APP_PASSWORD}
+      GUNICORN_BIND: 0.0.0.0:11235

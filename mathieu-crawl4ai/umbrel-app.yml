@@ -40,14 +40,17 @@ description: >-
   the top to try crawls in the browser.
 
 
-  Each crawl runs a full browser: count about 1 GB of RAM while it works.
+  Each crawl runs a full browser: count about 1 GB of RAM while it works. It
+  only crawls public websites: addresses on your local network (your
+  Umbrel's apps included) are refused.
 developer: unclecode
 website: https://docs.crawl4ai.com
 submitter: Mathieu Le Tyrant
 submission: https://github.com/unclecode/crawl4ai
 repo: https://github.com/unclecode/crawl4ai
 support: https://github.com/unclecode/crawl4ai/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-crawl4ai/gallery-1.jpg
 releaseNotes: ""
 dependencies: []
 path: ""
