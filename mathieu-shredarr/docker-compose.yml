@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-shredarr_server_1
+      APP_PORT: 8089
+
+  server:
+    image: ghcr.io/jschaef80/shredarr:1.2.1@sha256:e14bf5a4e980780aa514d9b3d5a5e62b51efc66b0fe6f15f58ed1d2e345a2dbf
+    user: "1000:1000"
+    init: true
+    environment:
+      - TZ=Etc/UTC
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: on-failure
