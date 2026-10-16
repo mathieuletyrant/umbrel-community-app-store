@@ -21,6 +21,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Cleanuparr** | **Download queue cleanup** for the *arr stack: removes stalled, failed and orphaned downloads (no hardlinks / unclaimed files), then re-triggers a search. Web UI, works with Transmission / qBittorrent / SABnzbd. |
 | **Profilarr** | **Quality profiles & custom formats manager** for Radarr/Sonarr: import curated TRaSH-style databases, keep them in sync with Git-style versioning, and push to all your *arr instances. |
 | **Maintainerr** | **Rule-based library cleanup** for Plex: collect media by rules (watched, old, unrequested…), show a "Leaving Soon" Plex collection, then auto-delete via Radarr/Sonarr after a grace period. |
+| **Shredarr** | **Delete it in Jellyfin or Plex, it's gone everywhere**: removes the item from Sonarr / Radarr and Seerr, keeps the torrent seeding until your seeding rule is met, then deletes it from Transmission / qBittorrent / Deluge — season-pack and cross-seed aware, with Undo and Redownload. |
 | **Agregarr** | **Keeps your Plex Home screen fresh**: builds collections from Trakt, IMDb, TMDb, Letterboxd, streaming Top 10s, Tautulli stats and Overseerr requests, pins them to Plex Home / Recommended on a schedule, and sends missing titles to Radarr / Sonarr. |
 | **Posterizarr** | **Consistent posters & title cards** for Plex: fetches textless artwork (TMDb, Fanart.tv, TVDB), adds your overlays, borders and fonts, and uploads posters, season posters, backgrounds and episode cards — on a schedule or on each Sonarr / Radarr import. |
 | **Labelarr** | **TMDb keywords → Plex labels**: tags every movie and show with its TMDb keywords ("heist", "time travel"…) for smart filters and collections. Needs a free TMDb token and your Plex token; Radarr and Sonarr optional. |
@@ -78,6 +79,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Tracearr | `http://mathieu-tracearr_server_1:3000` | its settings |
 | slskd | `http://mathieu-slskd_server_1:5030` | its options (`web.authentication.api_keys`) |
 | Byparr | `http://mathieu-byparr_server_1:8191` | none |
+| Shredarr | `http://mathieu-shredarr_server_1:8089` (Jellyfin webhook) | none |
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
 
 Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that

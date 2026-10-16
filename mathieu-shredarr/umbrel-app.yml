@@ -1,0 +1,62 @@
+manifestVersion: 1
+id: mathieu-shredarr
+storage:
+  dataRoot: data
+category: media
+name: Shredarr
+tagline: Delete it in Jellyfin or Plex, and it's gone everywhere
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/jschaef80/shredarr
+version: "2.0.0"
+port: 8188
+description: >-
+  When you delete a movie, show, season or episode in Jellyfin or Plex, Shredarr
+  cleans it up everywhere else: Sonarr and Radarr, Seerr (Jellyseerr/Overseerr)
+  and your torrent client (Transmission, qBittorrent or Deluge).
+
+
+  The torrent keeps seeding until your seeding rule (time and/or ratio, per
+  category, show, movie or tracker) is met, then it is removed with its data.
+  Season packs and cross-seeds are handled safely, Undo brings an item back
+  while it is still seeding, and Redownload brings it back afterwards.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open Shredarr and create its password.
+
+  2. In Settings → Connections, add Sonarr, Radarr, your torrent client and your
+  media server with their API keys. The addresses of your Umbrel apps are in
+  the "Connecting apps" table of this store's README:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
+
+  3. Jellyfin: under Jellyfin webhook, enter http://mathieu-shredarr_server_1:8089
+  and click "Set up Jellyfin webhook" (needs Jellyfin's Webhook plugin). Plex:
+  nothing to set up, Shredarr watches your library folders; turn on "Allow
+  media deletion" in Plex.
+
+  4. Pick a default seeding rule and leave Dry run on until the Activity tab
+  shows it doing the right thing.
+developer: jschaef80
+website: https://github.com/jschaef80/shredarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/jschaef80/shredarr
+repo: https://github.com/jschaef80/shredarr
+support: https://github.com/jschaef80/shredarr/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-4.jpg
+releaseNotes: >-
+  Initial release on this store.
+
+
+  Full release notes can be found at https://github.com/jschaef80/shredarr/releases/tag/v2.0.0
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS

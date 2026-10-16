@@ -1,0 +1,11 @@
+verified: 2.0.0 on umbrelOS 2.0.0 (2026-10-16)
+setup:
+  - docker exec mathieu-shredarr_server_1 sh -c '[ "$(id -u)" = 1000 ] && touch /downloads/.shredarr-w && rm /downloads/.shredarr-w'
+steps:
+  - goto: /
+  - see: Choose a password to protect Shredarr
+  - fill: {label: Password, exact: true, value: Verify-Shredarr-1!}
+  - fill: {label: Confirm password, value: Verify-Shredarr-1!}
+  - click: {role: button, name: Create password}
+  - see: Default seeding rule
+  - shot: dashboard
