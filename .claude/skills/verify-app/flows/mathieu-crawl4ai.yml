@@ -1,0 +1,13 @@
+verified: 0.9.5 on umbrelOS 2.0.0 (2026-10-16)
+egress: true
+timeout: 600
+logs:
+  server: Auth gate active
+steps:
+  - http: {path: /md, method: POST, body: {url: "https://example.com"}, status: 401}
+  - http: {path: /md, method: POST, headers: {Authorization: "Bearer ${env.server.CRAWL4AI_API_TOKEN}", Content-Type: application/json}, body: {url: "http://example.com"}, status: 200, contains: "use in documentation examples"}
+  - goto: /playground
+  - fill: {css: "#token-input", value: "${env.server.CRAWL4AI_API_TOKEN}"}
+  - click: {css: "#token-save"}
+  - see: Token saved
+  - shot: playground

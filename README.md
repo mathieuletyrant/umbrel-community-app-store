@@ -54,6 +54,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **MetaMCP** | **One MCP gateway for all your MCP servers**: gathers STDIO and remote MCP servers behind one endpoint, groups them into namespaces, picks which tools each AI client sees, and protects it with an API key or OAuth — with an MCP inspector and audit logs. |
 | **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
+| **Crawl4AI** | **Lets an AI read any web page**: a headless-browser crawler that returns clean Markdown, HTML, screenshots or PDFs, with its own MCP server and REST API — pair it with SearXNG for web search. |
 
 ## 🔗 Connecting apps
 
@@ -74,6 +75,8 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
 | Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
 | Plex | `http://host.docker.internal:32400` | your Plex token |
+| Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
+| SearXNG | `http://searxng-web:8080` | none |
 | Healarr | `http://mathieu-healarr_server_1:3090` | its settings |
 | Cleanuparr | `http://mathieu-cleanuparr_server_1:11011` | its account settings |
 | Maintainerr | `http://mathieu-maintainerr_server_1:6246` | none |

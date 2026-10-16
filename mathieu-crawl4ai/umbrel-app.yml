@@ -1,0 +1,59 @@
+manifestVersion: 1
+id: mathieu-crawl4ai
+storage:
+  dataRoot: data
+category: ai
+name: Crawl4AI
+tagline: Web crawler that turns any page into clean Markdown for AI
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-crawl4ai/icon.png
+# renovate: datasource=docker depName=unclecode/crawl4ai
+version: "0.9.5"
+port: 11235
+description: >-
+  Crawl4AI is an open-source web crawler and scraper built for AI: it opens
+  pages in a real headless Chromium, runs their JavaScript, and returns clean,
+  LLM-ready Markdown, the raw HTML, a screenshot or a PDF.
+
+
+  It ships its own MCP server, so an AI assistant can read any web page on
+  demand: give it the results of a search (with the SearXNG app, for
+  example) and it fetches and reads the pages itself. Its tools fetch a page
+  as Markdown or HTML, take a screenshot, print a PDF, run JavaScript on a
+  page, and crawl several URLs at once. A REST API and a playground are
+  included for scripts and automations (n8n, Home Assistant…).
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Every call needs the API token: it is the default password shown by
+  umbrelOS for this app, sent as `Authorization: Bearer <token>`.
+
+
+  1. MCP: add it to your MCP client or gateway as an SSE server. From another
+  app on your Umbrel (MetaMCP, for example) the address is
+  `http://mathieu-crawl4ai_server_1:11235/mcp/sse`; from another device,
+  `http://umbrel.local:11235/mcp/sse`. Set the header
+  `Authorization: Bearer <token>`.
+
+  2. Playground: open the app and paste the token in the "API token" field at
+  the top to try crawls in the browser.
+
+
+  Each crawl runs a full browser: count about 1 GB of RAM while it works. It
+  only crawls public websites: addresses on your local network (your
+  Umbrel's apps included) are refused.
+developer: unclecode
+website: https://docs.crawl4ai.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/unclecode/crawl4ai
+repo: https://github.com/unclecode/crawl4ai
+support: https://github.com/unclecode/crawl4ai/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-crawl4ai/gallery-1.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+deterministicPassword: true
+permissions: []
