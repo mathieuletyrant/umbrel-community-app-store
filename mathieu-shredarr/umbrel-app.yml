@@ -7,7 +7,7 @@ name: Shredarr
 tagline: Delete it in Jellyfin or Plex, and it's gone everywhere
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/jschaef80/shredarr
-version: "2.2.0"
+version: "2.3.0"
 port: 8188
 description: >-
   When you delete a movie, show, season or episode in Jellyfin or Plex, Shredarr
@@ -50,13 +50,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-4.jpg
 releaseNotes: >-
-  Settings now has a left-hand menu that opens one section at a time, and Connections
-  shows a red dot when an app is unreachable. New Settings option to choose whether
-  to keep the .torrent files used by Redownload, and for how long (default one year,
-  applied to existing installs too). Adds an optional read-only mode for test copies.
+  Fixes Jellyfin 12 sign-in (the API key now goes in the Authorization header),
+  a "never delete" show or movie that could still be removed by the low disk space
+  sweep, and Undo and Redownload reporting problems more honestly. Wrong torrent
+  client passwords are no longer retried, and the cleanup loops keep running after
+  an error. Hardens config and database writes and the torrent category filter.
 
 
-  Full release notes can be found at https://github.com/jschaef80/shredarr/releases/tag/v2.2.0
+  Full release notes can be found at https://github.com/jschaef80/shredarr/releases/tag/v2.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
