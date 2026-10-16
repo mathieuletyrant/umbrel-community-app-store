@@ -40,10 +40,10 @@ support: https://github.com/Cleanuparr/Cleanuparr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/gallery-1.jpg
 releaseNotes: >-
-  Adds SABnzbd support and qBittorrent API key authentication, and dark mode can now follow the system preference. Transmission magnets without metadata are no longer reported as missing, and a download client's type is now locked after creation.
+  Handles errored torrents, and the media manager settings are now consolidated into a single page. Fixes the missing per-instance failed import strikes setting and the failed import category change for Usenet.
 
 
-  Full release notes can be found at https://github.com/Cleanuparr/Cleanuparr/releases/tag/v2.10.10
+  Full release notes can be found at https://github.com/Cleanuparr/Cleanuparr/releases/tag/v2.10.11
 dependencies: []
 path: ""
 defaultUsername: ""
