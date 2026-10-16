@@ -53,6 +53,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **AdGuard MCP** | **Your AdGuard Home as an MCP server**: ask an AI assistant why a site doesn't load, unblock a domain, block a service on one device, or add a DNS rewrite. Covers the whole AdGuard Home API. |
 | **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
+| **Crawl4AI** | **Lets an AI read any web page**: a headless-browser crawler that returns clean Markdown, HTML, screenshots or PDFs, with its own MCP server and REST API — pair it with SearXNG for web search. |
 
 ## 🔗 Connecting apps
 
@@ -80,6 +81,8 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | slskd | `http://mathieu-slskd_server_1:5030` | its options (`web.authentication.api_keys`) |
 | Byparr | `http://mathieu-byparr_server_1:8191` | none |
 | Shredarr | `http://mathieu-shredarr_server_1:8089` (Jellyfin webhook) | none |
+| Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
+| SearXNG | `http://searxng-web:8080` | none |
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
 
 Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that

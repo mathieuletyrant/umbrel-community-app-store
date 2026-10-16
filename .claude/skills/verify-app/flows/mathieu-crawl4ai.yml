@@ -1,0 +1,12 @@
+egress: true
+timeout: 600
+logs:
+  server: Auth gate active
+steps:
+  - http: {path: /md, method: POST, body: {url: "https://example.com"}, status: 401}
+  - http: {path: /md, method: POST, headers: {Authorization: "Bearer ${env.server.CRAWL4AI_API_TOKEN}"}, body: {url: "https://example.com"}, status: 200, contains: Example Domain}
+  - goto: /playground
+  - fill: {css: "#token-input", value: "${env.server.CRAWL4AI_API_TOKEN}"}
+  - click: {css: "#token-save"}
+  - see: Token saved
+  - shot: playground
