@@ -7,7 +7,7 @@ services:
       APP_PORT: 8089
 
   server:
-    image: ghcr.io/jschaef80/shredarr:2.3.0@sha256:7ce66b68fbafa43a801699c8462994f4e7c69974433ad08c5701a79870d1aa78
+    image: ghcr.io/jimbos-slop-shop/shredarr:2.3.2@sha256:101adba611d78752a0ec535260166217e289c20cb0572d2367f3b129508ec68d
     user: "1000:1000"
     init: true
     environment:
