@@ -64,7 +64,9 @@ support: https://github.com/bitr8/agregarr-dev/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
 releaseNotes: >-
-  Agregarr now runs as your Umbrel user instead of root, as its developer recommends, so the "Coming Soon" folders it creates in your Downloads no longer block Radarr and Sonarr imports. Placeholder folders created before this update are still owned by root: delete them in the Files app and Agregarr recreates them.
+  Adds a Recently Released Episodes (Individual) hub, a minimum IMDb votes criterion for auto-download, optional TMDB IDs in movie placeholder folder names, and descriptions of each job on the Jobs page. Fixes several collection sync issues: multi-source ordering and Reverse source order, unwatched-only collections no longer emptied by failed labels, and failed AniList/MyAnimeList syncs now show as failed.
+
+  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.12.0
 
 dependencies: []
 path: ""
