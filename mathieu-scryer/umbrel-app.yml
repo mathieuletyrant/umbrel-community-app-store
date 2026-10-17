@@ -45,9 +45,9 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Fixes search stalls and lost results during large searches, and Prowlarr/Jackett syncs now keep your indexer routing categories, enabled state and priority. Imports no longer fail only because the destination reports a different owner, and Lists, requests and script settings got small fixes.
+  Maintenance update with a batch of upstream fixes and improvements since 0.21.16.
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.16
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.17
 dependencies: []
 path: ""
 defaultUsername: ""
