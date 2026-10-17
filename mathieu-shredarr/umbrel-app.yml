@@ -6,8 +6,8 @@ category: media
 name: Shredarr
 tagline: Delete it in Jellyfin or Plex, and it's gone everywhere
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/icon.png
-# renovate: datasource=docker depName=ghcr.io/jschaef80/shredarr
-version: "2.3.0"
+# renovate: datasource=docker depName=ghcr.io/jimbos-slop-shop/shredarr
+version: "2.3.2"
 port: 8188
 description: >-
   When you delete a movie, show, season or episode in Jellyfin or Plex, Shredarr
@@ -39,25 +39,32 @@ description: >-
   4. Pick a default seeding rule and leave Dry run on until the Activity tab
   shows it doing the right thing.
 developer: jschaef80
-website: https://github.com/jschaef80/shredarr
+website: https://github.com/jimbos-slop-shop/shredarr
 submitter: Mathieu Le Tyrant
-submission: https://github.com/jschaef80/shredarr
-repo: https://github.com/jschaef80/shredarr
-support: https://github.com/jschaef80/shredarr/issues
+submission: https://github.com/jimbos-slop-shop/shredarr
+repo: https://github.com/jimbos-slop-shop/shredarr
+support: https://github.com/jimbos-slop-shop/shredarr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-4.jpg
 releaseNotes: >-
-  Fixes Jellyfin 12 sign-in (the API key now goes in the Authorization header),
-  a "never delete" show or movie that could still be removed by the low disk space
-  sweep, and Undo and Redownload reporting problems more honestly. Wrong torrent
-  client passwords are no longer retried, and the cleanup loops keep running after
-  an error. Hardens config and database writes and the torrent category filter.
+  Shredarr moved to github.com/jimbos-slop-shop/shredarr and its Docker image to
+  ghcr.io/jimbos-slop-shop/shredarr: this update switches to the new image, the
+  old one gets no new versions. Settings, history and saved .torrent files are
+  kept.
 
 
-  Full release notes can be found at https://github.com/jschaef80/shredarr/releases/tag/v2.3.0
+  Also fixes the cleanup sweep stopping when Sonarr or Radarr is down during the
+  low disk space pass, a successful delete logged as failed on an empty reply,
+  random Plex failures when two things use the connection at once, settings not
+  saving on shares that forbid changing file permissions, and the "new version"
+  notice. Half-written .torrent files are removed after an hour, and wrong
+  passwords are now counted per connection too.
+
+
+  Full release notes can be found at https://github.com/jimbos-slop-shop/shredarr/releases/tag/v2.3.2
 dependencies: []
 path: ""
 defaultUsername: ""
