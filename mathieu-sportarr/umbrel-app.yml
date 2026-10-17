@@ -7,7 +7,7 @@ name: Sportarr
 tagline: PVR for sports — monitors leagues, grabs releases, organizes your library
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/icon.png
 # renovate: datasource=docker depName=sportarr/sportarr
-version: "4.1.9.1119"
+version: "4.1.10.1120"
 port: 1867
 description: >-
   Sportarr is a sports PVR built in the style of Sonarr and Radarr. It monitors
@@ -42,11 +42,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-4.jpg
 releaseNotes: >-
-  Eight releases of fixes and features since 4.1.1. Sportarr is now much better at picking the right game: date, league, round and session checks were tightened across manual search, automatic search, RSS and imports, so yesterday's match in the same series is no longer grabbed by mistake. The IPTV section is reorganised around Guide, Channels, Recordings and Options, with optional HLS playback profiles and a larger EPG download limit. Downloads and imports honour quality profiles and custom format scores everywhere, ambiguous multi-video downloads are held for manual selection, and the current queue is shown in the sidebar. New optional event-type folders can group wrestling, fighting and motorsport events inside season folders.
+  Better release matching for NASCAR, MotoGP, Formula One and playoff games, with stale pre-event releases rejected. New in-app support reporting previews redacted diagnostics before submission, and preseason, postseason and finals can be monitored for no teams, selected teams or all teams. IPTV recordings can optionally be replaced by indexer releases (off by default), and Transmission download directories and labels are now applied.
 
-  Database migrations run automatically on first start; back up your database before updating. Event-type grouping is off by default and only applies to new imports.
 
-  Full release notes can be found at https://github.com/Sportarr/Sportarr/releases/tag/v4.1.9.1119
+  Database migrations run automatically on first start; back up your database before updating. New first-run quality defaults only affect new installs.
+
+
+  Full release notes can be found at https://github.com/Sportarr/Sportarr/releases/tag/v4.1.10.1120
 dependencies: []
 path: ""
 defaultUsername: ""
