@@ -7,7 +7,7 @@ name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
-version: "3.30.1"
+version: "3.30.2"
 port: 6246
 description: >-
   Maintainerr is a rule-based cleanup tool for your Plex media library. You
@@ -42,7 +42,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-4.jpg
 releaseNotes: >-
-  Adds Ombi support as a request service alongside Seerr, introduces database migrations for improved settings management, and includes various bug fixes across Plex, Jellyfin, Emby, and watch statistics integrations. Dependency updates for security fixes.
+  Maintainerr now starts correctly when the TZ variable is empty, and Sonarr and Radarr tag rules skip items whose tags cannot be read instead of evaluating them wrongly. The Tracearr connection test now uses the /servers endpoint, which requires Tracearr 2.7.0. Dependency updates.
+
+
+  Full release notes can be found at https://github.com/Maintainerr/Maintainerr/releases/tag/v3.30.2
 dependencies: []
 path: ""
 defaultUsername: ""
