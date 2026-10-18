@@ -75,6 +75,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
 | Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
 | Plex | `http://host.docker.internal:32400` | your Plex token |
+| Jellyfin | `http://jellyfin_server_1:8096` | Dashboard → API Keys |
 | Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
 | SearXNG | `http://searxng-web:8080` | none |
 | Healarr | `http://mathieu-healarr_server_1:3090` | its settings |
