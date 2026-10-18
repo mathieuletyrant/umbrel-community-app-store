@@ -7,7 +7,7 @@ name: Weaver
 tagline: Usenet downloader with built-in repair and extraction
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/weaver
-version: "0.16.0"
+version: "0.16.1"
 port: 9390
 description: >-
   Weaver is a self-hosted Usenet downloader written in Rust. Downloading,
@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  History now records the full name of each file renamed after PAR2 repair or delivery, and the name it was originally posted with. Fixes to the speed test (server origin checks, connection pool accounting), updated archive libraries (zip 9, unrar 0.12, 7z/LZMA) with more precise RAR error handling, and a Windows build fix. No configuration changes.
+  Test-only release: fixes to Weaver's Windows and proxy/WireGuard test fixtures. No changes to the app itself and no configuration changes.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.0
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.1
 dependencies: []
 path: ""
 defaultUsername: "admin"
