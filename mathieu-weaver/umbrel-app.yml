@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Test-only release: fixes to Weaver's Windows and proxy/WireGuard test fixtures. No changes to the app itself and no configuration changes.
+  Release validation fixes (a flaky direct-unpack test) and build pipeline improvements (faster test builds, compiler caching). No changes to the app itself and no configuration changes.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.1
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.2
 dependencies: []
 path: ""
 defaultUsername: "admin"
