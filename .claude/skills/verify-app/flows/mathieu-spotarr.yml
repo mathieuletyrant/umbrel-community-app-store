@@ -16,7 +16,7 @@ steps:
       headers: {content-type: application/json, authorization: "Bearer ${env.server.API_TOKEN}"}
       body: {}
       status: 200
-      contains: '"version":"0.10.0"'
+      contains: '"version":"0.11.0"'
   - http:
       path: /mcp
       method: POST
@@ -31,7 +31,9 @@ steps:
   - see: Every share, what was suggested and what was added.
   - shot: history
   - click: {role: link, name: Settings}
+  - see: Where Spotarr checks the library and sends requests.
+  - click: {role: link, name: Identification}
   - see: The LLM names the works
-  - click: {text: MCP, exact: true}
+  - click: {role: link, name: Access}
   - see: MCP URL
   - shot: settings

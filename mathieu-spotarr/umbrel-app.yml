@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.10.0"
+version: "0.11.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -26,17 +26,22 @@ description: >-
   2. In Settings → Identification, paste an OpenRouter API key (or any
   OpenAI-compatible API) and a TMDB read access token.
 
-  3. In Settings → Seerr, set the URL `http://jellyseerr_server_1:5055` (or
-  `http://overseerr_server_1:5055`) and Seerr's API key, from its Settings →
-  General.
+  3. In Settings → Connections, set Seerr's URL
+  `http://jellyseerr_server_1:5055` (or `http://overseerr_server_1:5055`) and
+  its API key, from Seerr's Settings → General.
 
-  4. The Status at the top of Settings says whether each service answers.
+  4. Optional: in the same tab, set Jellyfin's URL
+  `http://jellyfin_server_1:8096`, an API key (Dashboard → API Keys) and your
+  user: Spotarr keeps a "Spotted" collection of what you added, once
+  downloaded and until watched.
 
-  5. On the iPhone, install the Shortcut from
+  5. The Status at the top of Settings says whether each service answers.
+
+  6. On the iPhone, install the Shortcut from
   https://github.com/mathieuletyrant/spotarr#-share-from-the-iphone with the
   address `http://umbrel.local:3838` and the same token.
 
-  6. To let an AI assistant (Claude…) read your history, give its MCP client
+  7. To let an AI assistant (Claude…) read your history, give its MCP client
   the MCP URL from Settings → Access. It can only read, and Regenerate
   revokes it.
 developer: Mathieu Le Tyrant
@@ -49,13 +54,16 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Library states now stay current from Seerr: add a Webhook notification agent
-  in Seerr pointing at Spotarr and a title shows as Available once downloaded.
-  Settings are split into tabs with the Seerr setup as numbered steps, service
-  status moves to the header, and the Stats chart shows each month's LLM cost.
+  Spotarr now tells where to watch a candidate already: pick your country and
+  streaming platforms in Settings → Streaming. With Jellyfin connected, a
+  "Spotted" collection keeps what you added, once downloaded and until
+  watched. A Rule can put candidates in Seerr's watchlist instead of
+  requesting them. Settings are regrouped into Connections, Automation,
+  Identification, Streaming and Access tabs, and the outgoing Webhooks are
+  removed.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.10.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.11.0
 dependencies: []
 path: ""
 defaultUsername: ""
