@@ -57,9 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Services are no longer added automatically from the other apps installed on
-  your Umbrel: add them with "Add a service". The ones already added stay as
-  they are.
+  Bug fixes in the library health checks: the Plex metadata detector now
+  catches more cases, and the "language preferred but not required" check
+  fires whenever the quality floor doesn't need the language.
+
+
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1441-2026-10-18
 
 dependencies: []
 path: ""
