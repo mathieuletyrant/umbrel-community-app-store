@@ -49,13 +49,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Library states now stay current from Seerr: add a Webhook notification agent
-  in Seerr pointing at Spotarr and a title shows as Available once downloaded.
-  Settings are split into tabs with the Seerr setup as numbered steps, service
-  status moves to the header, and the Stats chart shows each month's LLM cost.
+  A Rule can now put what it finds in Seerr's watchlist instead of requesting
+  it, and Spotarr can keep a Jellyfin collection of everything spotted. Shares
+  show their best match with where to watch it on streaming platforms. Settings
+  are split into Connections and Automation tabs, and the header gets a menu on
+  phones.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.10.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/blob/HEAD/CHANGELOG.md#0110-2026-10-18
 dependencies: []
 path: ""
 defaultUsername: ""
