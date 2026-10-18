@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.10.0"
+version: "0.11.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
