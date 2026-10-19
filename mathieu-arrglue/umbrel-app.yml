@@ -51,9 +51,11 @@ repo: https://github.com/mathieuletyrant/arrglue
 support: https://github.com/mathieuletyrant/arrglue/issues
 gallery: []
 releaseNotes: >-
-  First release: scan, doctor, plan, apply and the serve daemon with its
-  registry. Connectors for Prowlarr, Radarr, Sonarr, Transmission, Jellyfin,
-  Seerr, Cleanuparr, Maintainerr, Healarr, Spotarr and cross-seed.
+  Documentation-only release: the README now covers installing arrglue from
+  this Umbrel community store. No change in behaviour.
+
+
+  Full release notes can be found at https://github.com/mathieuletyrant/arrglue/releases/tag/v0.2.0
 dependencies: []
 path: ""
 defaultUsername: ""
