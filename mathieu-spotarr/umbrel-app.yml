@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.12.0"
+version: "0.13.0"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -54,16 +54,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Spotarr now tells where to watch a candidate already: pick your country and
-  streaming platforms in Settings → Streaming. With Jellyfin connected, a
-  "Spotted" collection keeps what you added, once downloaded and until
-  watched. A Rule can put candidates in Seerr's watchlist instead of
-  requesting them. Settings are regrouped into Connections, Automation,
-  Identification, Streaming and Access tabs, and the outgoing Webhooks are
-  removed.
+  Spotarr now keeps each Candidate's TMDB keywords and lets you filter the
+  History by keyword. The web UI can also be installed as an app on the
+  iPhone's Home Screen.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.11.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.13.0
 dependencies: []
 path: ""
 defaultUsername: ""
