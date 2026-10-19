@@ -1,0 +1,69 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-open-notebook_web_1
+      APP_PORT: 80
+
+  web:
+    image: nginx:alpine@sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d
+    init: true
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        server {
+          listen 80;
+          client_max_body_size 100m;
+          resolver 127.0.0.11 valid=10s;
+          set $$upstream http://mathieu-open-notebook_server_1:8502;
+
+          location = /config {
+            default_type application/json;
+            add_header Cache-Control no-store;
+            return 200 '{"apiUrl":""}';
+          }
+
+          location / {
+            proxy_pass $$upstream;
+            proxy_set_header Host $$http_host;
+            proxy_http_version 1.1;
+            proxy_buffering off;
+            proxy_request_buffering off;
+            proxy_read_timeout 600s;
+            proxy_send_timeout 600s;
+          }
+        }
+        CONF
+        exec nginx -g 'daemon off;'
+    depends_on:
+      - server
+    restart: on-failure
+
+  server:
+    image: lfnovo/open_notebook:1.15.0@sha256:54b2025a4a4853c188f74b9b8246eca8c5480e5dd1babfa92db1038ff2f30212
+    restart: on-failure
+    depends_on:
+      - db
+    environment:
+      TZ: Etc/UTC
+      OPEN_NOTEBOOK_ENCRYPTION_KEY: ${APP_SEED}
+      SURREAL_URL: ws://mathieu-open-notebook_db_1:8000/rpc
+      SURREAL_USER: root
+      SURREAL_PASSWORD: root
+      SURREAL_NAMESPACE: open_notebook
+      SURREAL_DATABASE: open_notebook
+      LOGURU_LEVEL: INFO
+    volumes:
+      - ${APP_DATA_DIR}/data/notebook:/app/data
+
+  db:
+    image: surrealdb/surrealdb:v2.7.0@sha256:e5d7387e3727bbe2f7cd6d869e48cd34777272258572ead37c9656b25f745723
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 1m
+    command: ["start", "--log", "info", "--user", "root", "--pass", "root", "rocksdb:/data/mydatabase.db"]
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/data

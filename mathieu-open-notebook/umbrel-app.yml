@@ -1,0 +1,57 @@
+manifestVersion: 1
+id: mathieu-open-notebook
+storage:
+  dataRoot: data
+category: ai
+name: Open Notebook
+tagline: Private NotebookLM alternative to research your documents and turn them into podcasts
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-open-notebook/icon.png
+# renovate: datasource=docker depName=lfnovo/open_notebook
+version: "1.15.0"
+port: 8502
+description: >-
+  Open Notebook is an open-source, self-hosted alternative to Google's
+  NotebookLM. Gather your sources in notebooks (PDFs, web pages, YouTube
+  videos, audio, Office files, plain text), then chat with them, ask
+  questions answered with citations, write notes and run transformations
+  such as summaries or key insights.
+
+
+  It also turns a notebook into a podcast: an AI writes the script and up to
+  four speakers read it aloud, with profiles you can tune (tone, length,
+  voices).
+
+
+  You pick the AI behind it: OpenAI, Anthropic, Google, Mistral, Groq,
+  OpenRouter, DeepSeek, ElevenLabs, or local models through Ollama or any
+  OpenAI-compatible server. Your sources and notes stay on your Umbrel.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app, go to Manage → Models and add a credential for your AI
+  provider (an API key, or the address of your Ollama server, e.g.
+  `http://ollama_ollama_1:11434` for the Ollama app of the Umbrel App
+  Store). Keys are stored encrypted.
+
+  2. On the same page, choose the default models: a language model for chat
+  and an embedding model for search. Podcasts also need a text-to-speech
+  model (OpenAI, ElevenLabs or Google, for example).
+
+  3. Create a notebook, add sources, and start asking questions.
+developer: Luis Novo
+website: https://www.open-notebook.ai
+submitter: Mathieu Le Tyrant
+submission: https://github.com/lfnovo/open-notebook
+repo: https://github.com/lfnovo/open-notebook
+support: https://github.com/lfnovo/open-notebook/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-open-notebook/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-open-notebook/gallery-2.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []

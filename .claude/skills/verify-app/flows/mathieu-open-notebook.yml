@@ -1,0 +1,18 @@
+verified: 1.15.0 on umbrelOS 2.0.0 (2026-10-19)
+timeout: 600
+logs:
+  server: Uvicorn running
+# The web sidecar answers /config with an empty apiUrl so the browser calls the API on the
+# same origin (/api/* forwarded by Next.js) instead of auto-detected <host>:5055.
+steps:
+  - http: {path: /config, status: 200, contains: '"apiUrl":""'}
+  - http: {path: /api/config, status: 200, contains: dbStatus}
+  - goto: /notebooks
+  - see: Start by creating your first notebook
+  - click: {role: button, name: New Notebook}
+  - fill: {css: "#notebook-name", value: Verify notebook}
+  - click: {css: "button[type=submit]"}
+  - see: Notebook created successfully
+  - goto: /notebooks
+  - see: Verify notebook
+  - shot: notebooks
