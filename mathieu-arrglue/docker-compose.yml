@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-arrglue_server_1
+      APP_PORT: 8787
+      PROXY_AUTH_WHITELIST: "/healthz"
+
+  # Read-only view of the Docker API: arrglue discovers containers, networks
+  # and events through it and can never create or change a container.
+  socket_proxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:0.3.0@sha256:9e4b9e7517a6b660f2cc903a19b257b1852d5b3344794e3ea334ff00ae677ac2
+    environment:
+      CONTAINERS: 1
+      NETWORKS: 1
+      EVENTS: 1
+      INFO: 1
+      POST: 0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: on-failure
+
+  server:
+    image: ghcr.io/mathieuletyrant/arrglue:0.1.0@sha256:0f4ef21b81db5cafc1184085fa12391ac76d43aebab087e77f9ca1faecda60a6
+    command: ["serve"]
+    environment:
+      DOCKER_HOST: tcp://mathieu-arrglue_socket_proxy_1:2375
+      ARRGLUE_TOKEN: ${APP_PASSWORD}
+      ARRGLUE_SECRETS: /data/secrets.yaml
+    volumes:
+      # the apps' config files and the media storage, read-only, at their host
+      # paths so what Docker reports is readable as-is
+      - ${UMBREL_ROOT}:${UMBREL_ROOT}:ro
+      - ${APP_DATA_DIR}/data:/data
+    depends_on:
+      - socket_proxy
+    restart: on-failure

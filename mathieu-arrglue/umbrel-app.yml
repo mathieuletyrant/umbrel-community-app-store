@@ -1,0 +1,61 @@
+manifestVersion: 1
+id: mathieu-arrglue
+storage:
+  dataRoot: data
+category: media
+name: arrglue
+tagline: Discovers your *arr apps and wires them together
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arrglue/icon.png
+# renovate: datasource=docker depName=ghcr.io/mathieuletyrant/arrglue
+version: "0.1.0"
+port: 8790
+description: >-
+  arrglue finds every app of your *arr stack on this Umbrel (Radarr, Sonarr,
+  Prowlarr, Transmission, Jellyfin, Seerr, Cleanuparr, Maintainerr, Healarr,
+  Spotarr, cross-seed…), reads their API keys, works out how each one can
+  reach the others, and checks what they have configured by asking the apps
+  themselves to test their links. It also compares download and library
+  folders so hardlinks keep working.
+
+
+  Everything is read-only until you ask it to write: `plan` shows what it
+  would change, Terraform-style, and `apply` writes it through the apps'
+  APIs. Objects arrglue creates carry an `arrglue` tag; what you set up by
+  hand is left alone unless you adopt it. Other tools can ask its registry
+  which URL and key to use for any app.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open arrglue: the page shows the apps found, the routes between them,
+  the path checks and the state of every link, refreshed every minute. The
+  daemon rescans whenever a container starts or stops.
+
+  2. Healarr encrypts its own API key: copy it from Healarr → Config → API
+  key into `~/umbrel/app-data/mathieu-arrglue/data/secrets.yaml` as
+  `mathieu-healarr_server_1: <key>`. Everything else is read from the apps.
+
+  3. To let arrglue write, run it from the Umbrel terminal (Settings →
+  Advanced → Terminal): `docker exec mathieu-arrglue_server_1 /arrglue plan`
+  then `… apply --adopt --yes`. Nothing is written otherwise.
+
+  4. The registry answers at `http://mathieu-arrglue_server_1:8787/v1/services`
+  on the Umbrel network; keys are only given with
+  `Authorization: Bearer <this app's password>`.
+developer: Mathieu Le Tyrant
+website: https://github.com/mathieuletyrant/arrglue
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/mathieuletyrant/arrglue
+support: https://github.com/mathieuletyrant/arrglue/issues
+gallery: []
+releaseNotes: >-
+  First release: scan, doctor, plan, apply and the serve daemon with its
+  registry. Connectors for Prowlarr, Radarr, Sonarr, Transmission, Jellyfin,
+  Seerr, Cleanuparr, Maintainerr, Healarr, Spotarr and cross-seed.
+dependencies: []
+path: ""
+defaultUsername: ""
+deterministicPassword: true
+permissions: []

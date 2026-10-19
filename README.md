@@ -15,6 +15,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 
 | App | What it does |
 | --- | --- |
+| **arrglue** | **Wires the *arr stack together**: discovers every app on the Umbrel, reads their keys, checks routes, paths/hardlinks and each configured link by asking the apps themselves, then creates or repairs the links through their APIs (plan / apply, Terraform-style). Also a registry other tools can ask for URLs and keys. |
 | **Healarr** | Scans your media library for **corrupt files** (ffprobe / MediaInfo / HandBrake), deletes them, and triggers a re-download via Sonarr / Radarr / Whisparr — then verifies the replacement is healthy. |
 | **Boxarr** | Tracks the **weekly box office top 10** and syncs it with Radarr: check what's already in your library, auto-add trending movies with smart filters, manage quality profiles. |
 | **Tracearr** | Real-time **monitoring for Plex, Jellyfin & Emby** (an open-source Tautulli / Jellystat alternative): stream tracking, session history with geolocation, and account-sharing detection — all from one dashboard. |
