@@ -22,7 +22,7 @@ services:
     restart: on-failure
 
   server:
-    image: ghcr.io/mathieuletyrant/arrglue:0.1.0@sha256:0f4ef21b81db5cafc1184085fa12391ac76d43aebab087e77f9ca1faecda60a6
+    image: ghcr.io/mathieuletyrant/arrglue:0.2.0@sha256:1fe2d081f0c8aad740e1ce0b240a20f51885d84e8f16b095adcceb3f9ec0a3de
     command: ["serve"]
     environment:
       DOCKER_HOST: tcp://mathieu-arrglue_socket_proxy_1:2375
