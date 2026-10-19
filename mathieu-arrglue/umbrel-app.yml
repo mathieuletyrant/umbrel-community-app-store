@@ -7,7 +7,7 @@ name: arrglue
 tagline: Discovers your *arr apps and wires them together
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arrglue/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/arrglue
-version: "0.2.0-patch.1"
+version: "0.3.0"
 port: 8797
 description: >-
   arrglue finds every app of your *arr stack on this Umbrel (Radarr, Sonarr,
@@ -51,8 +51,16 @@ repo: https://github.com/mathieuletyrant/arrglue
 support: https://github.com/mathieuletyrant/arrglue/issues
 gallery: []
 releaseNotes: >-
-  Updated the Docker socket proxy the app reads containers through
-  (docker-socket-proxy 0.5.0, HAProxy 3 base). No change in arrglue itself.
+  Three more apps: Bazarr (Sonarr and Radarr connections), Lingarr (Radarr
+  and Sonarr settings) and Profilarr (its *arr instances are checked from its
+  database and spelled out as manual steps, its API cannot write them).
+  plan and apply gain --only to limit a run to some links, doctor runs its
+  checks in parallel (seconds instead of a minute), and the Jellyfin key is
+  read with its WAL journal and sent with the MediaBrowser scheme that
+  Jellyfin 12 requires.
+
+
+  Full release notes can be found at https://github.com/mathieuletyrant/arrglue/releases/tag/v0.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
