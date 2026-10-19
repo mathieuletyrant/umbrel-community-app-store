@@ -8,7 +8,7 @@ tagline: Discovers your *arr apps and wires them together
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arrglue/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/arrglue
 version: "0.1.0"
-port: 8790
+port: 8797
 description: >-
   arrglue finds every app of your *arr stack on this Umbrel (Radarr, Sonarr,
   Prowlarr, Transmission, Jellyfin, Seerr, Cleanuparr, Maintainerr, Healarr,

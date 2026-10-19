@@ -6,7 +6,9 @@
     ":semanticCommitsDisabled"
   ],
   "timezone": "Europe/Paris",
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "pinDigests": true,
   "rebaseWhen": "behind-base-branch",
   "separateMinorPatch": true,
@@ -15,7 +17,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["/(^|/)umbrel-app\\.yml$/"],
+      "managerFilePatterns": [
+        "/(^|/)umbrel-app\\.yml$/"
+      ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s*\\nversion:\\s*\"(?<currentValue>[^\"]+?)(?:-patch\\.\\d+)?\""
       ],
@@ -24,7 +28,9 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^\\.claude/skills/verify-app/scripts/verify\\.mjs$/"],
+      "managerFilePatterns": [
+        "/^\\.claude/skills/verify-app/scripts/verify\\.mjs$/"
+      ],
       "matchStrings": [
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s*\\nconst \\w+ = '[^:]+:(?<currentValue>[^@']+)@(?<currentDigest>sha256:[a-f0-9]+)'"
       ]
@@ -32,82 +38,346 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "commitMessageExtra": "to {{{newValue}}}"
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["digest"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "digest"
+      ],
       "commitMessageExtra": "digest to {{{newDigestShort}}}"
     },
-    { "matchPackageNames": ["nginx"], "commitMessageTopic": "nginx sidecar" },
-    { "matchPackageNames": ["postgres"], "commitMessageTopic": "PostgreSQL sidecar", "allowedVersions": "<19" },
-    { "matchPackageNames": ["ghcr.io/samik081/mcp-adguard-home"], "commitMessageTopic": "AdGuard MCP" },
-    { "matchPackageNames": ["ghcr.io/bardesss/arr-mcp"], "commitMessageTopic": "arr-mcp" },
-    { "matchPackageNames": ["ghcr.io/leitosama/freshrss-mcp-server"], "commitMessageTopic": "FreshRSS MCP" },
-    { "matchPackageNames": ["bitr8/agregarr"], "commitMessageTopic": "Agregarr" },
-    { "matchPackageNames": ["ghcr.io/iongpt/boxarr"], "commitMessageTopic": "Boxarr" },
-    { "matchPackageNames": ["ghcr.io/thephaseless/byparr"], "commitMessageTopic": "Byparr" },
-    { "matchPackageNames": ["robertlordhood/chaptarr"], "commitMessageTopic": "Chaptarr" },
-    { "matchPackageNames": ["ghcr.io/cleanuparr/cleanuparr"], "commitMessageTopic": "Cleanuparr" },
-    { "matchPackageNames": ["unclecode/crawl4ai"], "commitMessageTopic": "Crawl4AI" },
-    { "matchPackageNames": ["ghcr.io/cross-seed/cross-seed"], "commitMessageTopic": "cross-seed" },
-    { "matchPackageNames": ["ghcr.io/dispatcharr/dispatcharr"], "commitMessageTopic": "Dispatcharr" },
-    { "matchPackageNames": ["dockurr/umbrel"], "commitMessageTopic": "test umbrelOS (verify-app skill)" },
-    { "matchPackageNames": ["ghcr.io/mescon/healarr"], "commitMessageTopic": "Healarr" },
-    { "matchPackageNames": ["mrcas/kapowarr"], "commitMessageTopic": "Kapowarr" },
-    { "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"], "commitMessageTopic": "Labelarr" },
-    { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
-    { "matchPackageNames": ["ghcr.io/maintainerr/maintainerr"], "commitMessageTopic": "Maintainerr" },
-    { "matchPackageNames": ["doobidoo/mcp-memory-service"], "commitMessageTopic": "MCP Memory" },
-    { "matchPackageNames": ["ghcr.io/metatool-ai/metamcp"], "commitMessageTopic": "MetaMCP" },
-    { "matchPackageNames": ["ghcr.io/kirovair/muxarr"], "commitMessageTopic": "Muxarr" },
-    { "matchPackageNames": ["iampuid0/neutarr"], "commitMessageTopic": "NeutArr" },
-    { "matchPackageNames": ["ghcr.io/notifiarr/notifiarr"], "commitMessageTopic": "Notifiarr" },
-    { "matchPackageNames": ["ghcr.io/fscorrupt/posterizarr"], "commitMessageTopic": "Posterizarr" },
-    { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
-    { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
-    { "matchPackageNames": ["lakker/pulsarr"], "commitMessageTopic": "Pulsarr", "allowedVersions": "<1.0.0" },
-    { "matchPackageNames": ["ghcr.io/ignisda/ryot"], "commitMessageTopic": "Ryot" },
-    { "matchPackageNames": ["ghcr.io/scryer-media/scryer"], "commitMessageTopic": "Scryer" },
-    { "matchPackageNames": ["slskd/slskd"], "commitMessageTopic": "slskd" },
-    { "matchPackageNames": ["ghcr.io/jimbos-slop-shop/shredarr"], "commitMessageTopic": "Shredarr" },
-    { "matchPackageNames": ["ghcr.io/jakejarvis/sofa"], "commitMessageTopic": "Sofa" },
-    { "matchPackageNames": ["mrusse08/soularr"], "commitMessageTopic": "Soularr" },
-    { "matchPackageNames": ["ghcr.io/abrechen2/sublarr"], "commitMessageTopic": "Sublarr" },
-    { "matchPackageNames": ["sportarr/sportarr"], "commitMessageTopic": "Sportarr" },
-    { "matchPackageNames": ["ghcr.io/mathieuletyrant/spotarr"], "commitMessageTopic": "Spotarr" },
-    { "matchPackageNames": ["ciuse99/suggestarr"], "commitMessageTopic": "SuggestArr" },
-    { "matchPackageNames": ["nandyalu/trailarr"], "commitMessageTopic": "Trailarr" },
-    { "matchPackageNames": ["haveagitgat/tdarr"], "commitMessageTopic": "Tdarr" },
-    { "matchPackageNames": ["ghcr.io/chrisbenincasa/tunarr"], "commitMessageTopic": "Tunarr" },
-    { "matchPackageNames": ["ghcr.io/unpackerr/unpackerr"], "commitMessageTopic": "Unpackerr" },
-    { "matchPackageNames": ["ghcr.io/mathieuletyrant/vitals"], "commitMessageTopic": "Vitals" },
-    { "matchPackageNames": ["ghcr.io/scryer-media/weaver"], "commitMessageTopic": "Weaver" },
-    { "matchFileNames": ["packages/**"], "groupName": "packages build" },
-    { "matchPackageNames": ["ghcr.io/mathieuletyrant/**", "!ghcr.io/mathieuletyrant/spotarr"], "enabled": false },
     {
-      "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"],
-      "matchManagers": ["custom.regex"],
+      "matchPackageNames": [
+        "nginx"
+      ],
+      "commitMessageTopic": "nginx sidecar"
+    },
+    {
+      "matchPackageNames": [
+        "postgres"
+      ],
+      "commitMessageTopic": "PostgreSQL sidecar",
+      "allowedVersions": "<19"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/samik081/mcp-adguard-home"
+      ],
+      "commitMessageTopic": "AdGuard MCP"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/bardesss/arr-mcp"
+      ],
+      "commitMessageTopic": "arr-mcp"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/leitosama/freshrss-mcp-server"
+      ],
+      "commitMessageTopic": "FreshRSS MCP"
+    },
+    {
+      "matchPackageNames": [
+        "bitr8/agregarr"
+      ],
+      "commitMessageTopic": "Agregarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/iongpt/boxarr"
+      ],
+      "commitMessageTopic": "Boxarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/thephaseless/byparr"
+      ],
+      "commitMessageTopic": "Byparr"
+    },
+    {
+      "matchPackageNames": [
+        "robertlordhood/chaptarr"
+      ],
+      "commitMessageTopic": "Chaptarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/cleanuparr/cleanuparr"
+      ],
+      "commitMessageTopic": "Cleanuparr"
+    },
+    {
+      "matchPackageNames": [
+        "unclecode/crawl4ai"
+      ],
+      "commitMessageTopic": "Crawl4AI"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/cross-seed/cross-seed"
+      ],
+      "commitMessageTopic": "cross-seed"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/dispatcharr/dispatcharr"
+      ],
+      "commitMessageTopic": "Dispatcharr"
+    },
+    {
+      "matchPackageNames": [
+        "dockurr/umbrel"
+      ],
+      "commitMessageTopic": "test umbrelOS (verify-app skill)"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/mescon/healarr"
+      ],
+      "commitMessageTopic": "Healarr"
+    },
+    {
+      "matchPackageNames": [
+        "mrcas/kapowarr"
+      ],
+      "commitMessageTopic": "Kapowarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/nullable-eth/labelarr"
+      ],
+      "commitMessageTopic": "Labelarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/lingarr-translate/lingarr"
+      ],
+      "commitMessageTopic": "Lingarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/maintainerr/maintainerr"
+      ],
+      "commitMessageTopic": "Maintainerr"
+    },
+    {
+      "matchPackageNames": [
+        "doobidoo/mcp-memory-service"
+      ],
+      "commitMessageTopic": "MCP Memory"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/metatool-ai/metamcp"
+      ],
+      "commitMessageTopic": "MetaMCP"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/kirovair/muxarr"
+      ],
+      "commitMessageTopic": "Muxarr"
+    },
+    {
+      "matchPackageNames": [
+        "iampuid0/neutarr"
+      ],
+      "commitMessageTopic": "NeutArr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/notifiarr/notifiarr"
+      ],
+      "commitMessageTopic": "Notifiarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/fscorrupt/posterizarr"
+      ],
+      "commitMessageTopic": "Posterizarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/dictionarry-hub/profilarr"
+      ],
+      "commitMessageTopic": "Profilarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/dictionarry-hub/profilarr-parser"
+      ],
+      "commitMessageTopic": "Profilarr parser"
+    },
+    {
+      "matchPackageNames": [
+        "lakker/pulsarr"
+      ],
+      "commitMessageTopic": "Pulsarr",
+      "allowedVersions": "<1.0.0"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/ignisda/ryot"
+      ],
+      "commitMessageTopic": "Ryot"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/scryer-media/scryer"
+      ],
+      "commitMessageTopic": "Scryer"
+    },
+    {
+      "matchPackageNames": [
+        "slskd/slskd"
+      ],
+      "commitMessageTopic": "slskd"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/jimbos-slop-shop/shredarr"
+      ],
+      "commitMessageTopic": "Shredarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/jakejarvis/sofa"
+      ],
+      "commitMessageTopic": "Sofa"
+    },
+    {
+      "matchPackageNames": [
+        "mrusse08/soularr"
+      ],
+      "commitMessageTopic": "Soularr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/abrechen2/sublarr"
+      ],
+      "commitMessageTopic": "Sublarr"
+    },
+    {
+      "matchPackageNames": [
+        "sportarr/sportarr"
+      ],
+      "commitMessageTopic": "Sportarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/mathieuletyrant/spotarr"
+      ],
+      "commitMessageTopic": "Spotarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/mathieuletyrant/arrglue"
+      ],
+      "commitMessageTopic": "arrglue"
+    },
+    {
+      "matchPackageNames": [
+        "ciuse99/suggestarr"
+      ],
+      "commitMessageTopic": "SuggestArr"
+    },
+    {
+      "matchPackageNames": [
+        "nandyalu/trailarr"
+      ],
+      "commitMessageTopic": "Trailarr"
+    },
+    {
+      "matchPackageNames": [
+        "haveagitgat/tdarr"
+      ],
+      "commitMessageTopic": "Tdarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/chrisbenincasa/tunarr"
+      ],
+      "commitMessageTopic": "Tunarr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/unpackerr/unpackerr"
+      ],
+      "commitMessageTopic": "Unpackerr"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/mathieuletyrant/vitals"
+      ],
+      "commitMessageTopic": "Vitals"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/scryer-media/weaver"
+      ],
+      "commitMessageTopic": "Weaver"
+    },
+    {
+      "matchFileNames": [
+        "packages/**"
+      ],
+      "groupName": "packages build"
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/mathieuletyrant/**",
+        "!ghcr.io/mathieuletyrant/spotarr",
+        "!ghcr.io/mathieuletyrant/arrglue"
+      ],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/nullable-eth/labelarr"
+      ],
+      "matchManagers": [
+        "custom.regex"
+      ],
       "extractVersion": "^v(?<version>.+)$"
     },
     {
-      "matchPackageNames": ["ghcr.io/ignisda/ryot"],
-      "matchManagers": ["custom.regex"],
+      "matchPackageNames": [
+        "ghcr.io/ignisda/ryot"
+      ],
+      "matchManagers": [
+        "custom.regex"
+      ],
       "extractVersion": "^v(?<version>.+)$"
     },
     {
-      "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
-      "matchManagers": ["docker-compose"],
+      "matchPackageNames": [
+        "ghcr.io/connorgallopo/tracearr"
+      ],
+      "matchManagers": [
+        "docker-compose"
+      ],
       "versioning": "regex:^supervised-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {
-      "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
-      "matchManagers": ["custom.regex"],
+      "matchPackageNames": [
+        "ghcr.io/connorgallopo/tracearr"
+      ],
+      "matchManagers": [
+        "custom.regex"
+      ],
       "extractVersion": "^supervised-(?<version>.+)$"
     },
     {
-      "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],
+      "matchPackageNames": [
+        "ghcr.io/connorgallopo/tracearr"
+      ],
       "commitMessageTopic": "Tracearr",
       "commitMessageExtra": "to {{{replace 'supervised-' '' newValue}}}"
     }
