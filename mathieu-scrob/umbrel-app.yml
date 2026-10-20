@@ -1,0 +1,64 @@
+manifestVersion: 1
+id: mathieu-scrob
+storage:
+  dataRoot: data
+category: media
+name: Scrob
+tagline: Self-hosted tracker for the movies and shows you watch
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/icon.png
+# renovate: datasource=docker depName=bellamy/scrob
+version: "2.31.0"
+port: 7330
+description: >-
+  Scrob is a self-hosted tracker for the movies and TV shows you watch, a
+  private alternative to Trakt. Your watch history, ratings and lists stay on
+  your Umbrel.
+
+
+  It syncs your libraries, watched status and playback progress from
+  Jellyfin, Plex and Emby, and webhooks log what you play as you play it, or
+  mark as watched, whatever app you watch it in. Follow your shows with Next
+  Up, Continue Watching and an episode calendar, rate and review titles, build
+  lists, add titles to Radarr and Sonarr, and import your history from Trakt,
+  Simkl, MDBList or Yamtrack. It installs on a phone's home screen as a web
+  app, and its REST API is documented at /docs.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and create your account: the first account is the admin,
+  and registration closes after it (more accounts from Scrob's admin
+  settings). Scrob has its own login (no Umbrel login in front, so webhooks,
+  the API and the home screen app can reach it).
+
+  2. Add your free TMDB "API Read Access Token" (the long one, from
+  themoviedb.org → Settings → API) in Scrob → Settings → General.
+
+  3. Connect your media servers in Connections → Media Players. Jellyfin is
+  `http://jellyfin_server_1:8096` with an API key from its Dashboard → API
+  Keys, Plex is `http://host.docker.internal:32400`. For live scrobbling,
+  each connection gives a webhook URL; replace its address part before
+  pasting it: `http://mathieu-scrob_server_1:7330/api/proxy/webhooks/…` in
+  Jellyfin's Webhook plugin (follow the events listed in Scrob), and
+  `http://127.0.0.1:7330/api/proxy/webhooks/…` in Plex (Plex runs on the
+  host network). Radarr and Sonarr are `http://radarr_server_1:7878` and
+  `http://sonarr_server_1:8989`, with the API key from their Settings →
+  General.
+developer: ellite
+website: https://github.com/ellite/scrob
+submitter: Mathieu Le Tyrant
+submission: https://github.com/ellite/scrob
+repo: https://github.com/ellite/scrob
+support: https://github.com/ellite/scrob/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []

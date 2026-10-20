@@ -1,0 +1,13 @@
+vars:
+  HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
+logs:
+  db: database system is ready to accept connections
+steps:
+  - goto: http://${HOST_IP}:7330/register
+  - fill: {label: Email, exact: true, value: verify@example.com}
+  - fill: {label: Username, exact: true, value: verify}
+  - fill: {label: Password, exact: true, value: Verify-Scrob-1}
+  - fill: {label: Confirm Password, exact: true, value: Verify-Scrob-1}
+  - click: {role: button, name: Create Account}
+  - see: verify
+  - shot: home
