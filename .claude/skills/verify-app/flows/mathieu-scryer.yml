@@ -1,4 +1,4 @@
-verified: 0.21.17 on umbrelOS 2.0.0 (2026-10-17)
+verified: 0.21.18 on umbrelOS 2.0.0 (2026-10-20)
 steps:
   - goto: /
   - see: Welcome to Scryer
