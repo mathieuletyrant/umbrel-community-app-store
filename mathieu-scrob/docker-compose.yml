@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-scrob_server_1
+      APP_PORT: 7330
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: bellamy/scrob:2.31.0@sha256:ef18e4bd642f583dd3a421e0da70cd0eb2a0060084c46e51b30ae0edccd609b2
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: Etc/UTC
+      PUID: "1000"
+      PGID: "1000"
+      DATABASE_URL: postgresql+asyncpg://scrob:scrob@mathieu-scrob_db_1:5432/scrob
+      SECRET_KEY: ${APP_SEED}
+      SERVER_URL: http://${DEVICE_DOMAIN_NAME:-umbrel.local}:7330
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ${APP_DATA_DIR}/data/scrob:/app/backend/data
+
+  db:
+    image: postgres:18.6-alpine@sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_DB: scrob
+      POSTGRES_USER: scrob
+      POSTGRES_PASSWORD: scrob
+      PGDATA: /data/pgdata
+    healthcheck:
+      test: "pg_isready -U scrob -h localhost -d scrob"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/data

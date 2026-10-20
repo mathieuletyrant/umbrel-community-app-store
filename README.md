@@ -46,6 +46,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Dispatcharr** | **IPTV & stream manager**: imports M3U playlists and XMLTV guides, cleans and organizes channels, then serves them to Plex / Jellyfin / Emby as an emulated HDHomeRun tuner (live TV + guide + DVR). |
 | **Tunarr** | **Live TV channels from your own library**: builds always-on channels from Plex / Jellyfin / Emby or local folders, with time slots, shuffles and filler, served as an HDHomeRun tuner + M3U + XMLTV guide. |
 | **Ryot** | **One tracker for everything you watch, read, play and lift**: movies, shows, anime, books, audiobooks, podcasts, comics, music and video games, plus workouts and measurements — with Plex / Jellyfin / Emby / Kodi plays logged automatically and imports from Trakt, Goodreads, Letterboxd and more. |
+| **Scrob** | **Your own Trakt, synced with your media servers**: watch history, ratings and lists for movies and shows, with libraries and watched status pulled from Jellyfin / Plex / Emby and live scrobbling by webhook (manual "mark as watched" included), Next Up, an episode calendar, Radarr / Sonarr requests and imports from Trakt, Simkl or Yamtrack. Web app for the phone and a REST API. |
 | **Sofa** | **Your own Trakt / Letterboxd**: tracks the movies and shows you watch, episode by episode, with Continue Watching, ratings, what airs this week and where to stream it. Plex / Jellyfin / Emby log watches, Sonarr / Radarr pull your watchlist, Trakt / Simkl / Letterboxd history imports. Accounts for the whole household and iPhone / Android apps. |
 | **Notifiarr** | **Rich Discord notifications for the whole media stack**: grabs, imports, Plex playback, stuck downloads, health checks and system snapshots, routed per channel from notifiarr.com, plus TRaSH profile sync. |
 | **Unpackerr** | **Extracts archived downloads** for the *arr stack: when a release arrives as .rar / .7z / .zip, it unpacks it so Radarr / Sonarr / Lidarr can import it, then cleans up the extracted copy. Headless: API keys set in its umbrelOS settings. |
@@ -88,6 +89,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | slskd | `http://mathieu-slskd_server_1:5030` | its options (`web.authentication.api_keys`) |
 | Byparr | `http://mathieu-byparr_server_1:8191` | none |
 | Shredarr | `http://mathieu-shredarr_server_1:8089` (Jellyfin webhook) | none |
+| Scrob | `http://mathieu-scrob_server_1:7330` | in the webhook URLs of its Connections |
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
 | MetaMCP | `http://mathieu-metamcp_server_1:12008/metamcp/<endpoint>/mcp` (MCP) | an API key from its API Keys page |
 | arr-mcp | `http://mathieu-arr-mcp_server_1:6060/mcp` (MCP) | the bearer token on its dashboard |
