@@ -7,7 +7,7 @@ name: arrglue
 tagline: Discovers your *arr apps and wires them together
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arrglue/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/arrglue
-version: "0.3.0"
+version: "0.4.0"
 port: 8797
 description: >-
   arrglue finds every app of your *arr stack on this Umbrel (Radarr, Sonarr,
@@ -18,27 +18,28 @@ description: >-
   folders so hardlinks keep working.
 
 
-  Everything is read-only until you ask it to write: `plan` shows what it
-  would change, Terraform-style, and `apply` writes it through the apps'
-  APIs. Objects arrglue creates carry an `arrglue` tag; what you set up by
-  hand is left alone unless you adopt it. Other tools can ask its registry
-  which URL and key to use for any app.
+  Everything is read-only until you ask it to write: the Plan tab shows
+  what it would change, and you tick what to apply. Objects arrglue
+  creates are named with an `[arrglue]` prefix (never a tag: in Radarr,
+  Sonarr and Prowlarr a tag filters what the object applies to); what you
+  set up by hand is left alone unless you take it over. Other tools can
+  ask its registry which URL and key to use for any app.
 
 
   🛠️ SETUP INSTRUCTIONS
 
 
-  1. Open arrglue: the page shows the apps found, the routes between them,
-  the path checks and the state of every link, refreshed every minute. The
-  daemon rescans whenever a container starts or stops.
+  1. Open arrglue: the Health tab shows the apps found, the routes between
+  them, the path checks and the state of every link. The daemon rescans
+  whenever a container starts or stops, and on the Rescan button.
 
   2. Healarr encrypts its own API key: copy it from Healarr → Config → API
   key into `~/umbrel/app-data/mathieu-arrglue/data/secrets.yaml` as
   `mathieu-healarr_server_1: <key>`. Everything else is read from the apps.
 
-  3. To let arrglue write, run it from the Umbrel terminal (Settings →
-  Advanced → Terminal): `docker exec mathieu-arrglue_server_1 /arrglue plan`
-  then `… apply --adopt --yes`. Nothing is written otherwise.
+  3. To write, open the Plan tab, tick the changes you want and press
+  Apply. Objects you set up by hand are listed apart, unticked: tick one to
+  let arrglue take it over. Nothing is written otherwise.
 
   4. The registry answers at `http://mathieu-arrglue_server_1:8787/v1/services`
   on the Umbrel network; keys are only given with
@@ -51,16 +52,16 @@ repo: https://github.com/mathieuletyrant/arrglue
 support: https://github.com/mathieuletyrant/arrglue/issues
 gallery: []
 releaseNotes: >-
-  Three more apps: Bazarr (Sonarr and Radarr connections), Lingarr (Radarr
-  and Sonarr settings) and Profilarr (its *arr instances are checked from its
-  database and spelled out as manual steps, its API cannot write them).
-  plan and apply gain --only to limit a run to some links, doctor runs its
-  checks in parallel (seconds instead of a minute), and the Jellyfin key is
-  read with its WAL journal and sent with the MediaBrowser scheme that
-  Jellyfin 12 requires.
+  The web page can now apply the plan: rescan, tick the changes you want,
+  take over hand-made objects one by one, and see what each app answered,
+  with no terminal. arrglue no longer tags what it creates: in Radarr,
+  Sonarr and Prowlarr a tag filters what the object applies to, so the
+  `arrglue` tag stopped indexers syncing to Radarr/Sonarr and kept
+  Transmission from being used. Objects are now named with an `[arrglue]`
+  prefix; ones still carrying the old tag are cleaned up on the next apply.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/arrglue/releases/tag/v0.3.0
+  Full release notes can be found at https://github.com/mathieuletyrant/arrglue/releases/tag/v0.4.0
 dependencies: []
 path: ""
 defaultUsername: ""
