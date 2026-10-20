@@ -27,9 +27,10 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  1. Open the app and create your account: the first account is the admin,
-  and registration closes after it (more accounts from Scrob's admin
-  settings). Scrob has its own login (no Umbrel login in front, so webhooks,
+  1. Open the app and create your account, then sign in with it (over plain
+  HTTP Scrob sends you back to the sign-in page after registering). The
+  first account is the admin, and registration closes after it (more
+  accounts from Scrob's admin settings). Scrob has its own login (no Umbrel login in front, so webhooks,
   the API and the home screen app can reach it).
 
   2. Add your free TMDB "API Read Access Token" (the long one, from

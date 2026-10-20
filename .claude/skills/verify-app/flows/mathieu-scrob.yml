@@ -1,3 +1,6 @@
+verified: 2.31.0 on umbrelOS 2.0.0 (2026-10-20)
+# Browsed by IP over plain HTTP like a real install: registration sets a Secure cookie
+# (upstream's register page), which the browser drops, so the flow then signs in.
 vars:
   HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
 logs:
@@ -9,5 +12,8 @@ steps:
   - fill: {label: Password, exact: true, value: Verify-Scrob-1}
   - fill: {label: Confirm Password, exact: true, value: Verify-Scrob-1}
   - click: {role: button, name: Create Account}
-  - see: verify
+  - fill: {label: Username, exact: true, value: verify}
+  - fill: {label: Password, exact: true, value: Verify-Scrob-1}
+  - click: {role: button, name: Sign In}
+  - see: Finish setting up your account
   - shot: home
