@@ -57,7 +57,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Connections warnings now clear once a later push or pull completes without
+  the problem. The image moved from a Debian to an Alpine base, about 25%
+  smaller and with no known vulnerabilities.
+
+
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.31.1
 dependencies: []
 path: ""
 defaultUsername: ""
