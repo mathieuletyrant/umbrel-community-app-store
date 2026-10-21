@@ -39,10 +39,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/gallery-3.jpg
 releaseNotes: >-
-  Adds named API keys with per-area permissions (existing keys become full-access "default" keys), password and SSO login together, optional Basic Auth for Radarr and Sonarr, and experimental Sonarr v5 support. Fixes three security issues (sanitized backup downloads, markdown and SQL from linked databases), and uses less memory. The local authentication bypass is removed: you always sign in.
+  Updates the bundled Deno runtime to 2.9.8 and removes the regex preview from the pattern picker.
 
 
-  Full release notes can be found at https://github.com/Dictionarry-Hub/profilarr/releases/tag/v2.3.0
+  Full release notes can be found at https://github.com/Dictionarry-Hub/profilarr/releases/tag/v2.3.1
 dependencies: []
 path: ""
 defaultUsername: ""
