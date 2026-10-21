@@ -58,14 +58,8 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  Connections warnings now clear once a later push or pull completes without
-  the problem. The image moved from a Debian to an Alpine base, about 25%
-  smaller and with no known vulnerabilities.
+  Fixes a startup failure: the container no longer exits at launch when
+  /etc/localtime is a mounted file.
 
 
-  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.31.1
-dependencies: []
-path: ""
-defaultUsername: ""
-defaultPassword: ""
-permissions: []
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.31.2
