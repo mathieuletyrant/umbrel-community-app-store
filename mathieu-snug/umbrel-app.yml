@@ -54,11 +54,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  The Upcoming page shows readable dates, and the Settings page is now
-  comfortable to use on a phone.
+  The Library status menu now opens above the tab bar and the round menu
+  button on posters is smaller. Every "Watched" call from Jellyfin is now kept
+  in the history.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.4.0
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.4.1
 dependencies: []
 path: ""
 defaultUsername: ""
