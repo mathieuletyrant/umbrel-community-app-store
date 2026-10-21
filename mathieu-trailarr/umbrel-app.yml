@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-4.jpg
 releaseNotes: >-
-  Hardware acceleration works again on umbrelOS 2.0: Trailarr now asks umbrelOS for the GPU, which removed the old /dev/dri mapping. It also installs on an Umbrel without a GPU.
+  Profiles can now download teasers, clips, featurettes, behind-the-scenes videos and bloopers (new Video Type setting), and can be told not to search YouTube. Trailarr never deletes extras it did not download, and stopping a task now stops yt-dlp and ffmpeg at once. Maximum Duration goes up to 1200 seconds. The YouTube Trailer ID field is replaced by the Known videos list.
 
 
-  This update integrates TMDB for curated trailers in your preferred language (add an optional TMDB API key in Settings > General), adds a setup guide on first install, and improves database backup management. Filter counts now show how much of your library has a trailer, and any video you choose is preserved across updates.
+  Full release notes can be found at https://github.com/nandyalu/trailarr/releases/tag/v0.14.0
 dependencies: []
 path: ""
 defaultUsername: "admin"
