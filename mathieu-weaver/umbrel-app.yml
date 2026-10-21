@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Release validation fixes (a flaky direct-unpack test) and build pipeline improvements (faster test builds, compiler caching). No changes to the app itself and no configuration changes.
+  Downloads stay responsive on slow storage, and a queue stall under write pressure is fixed. Pending writes now finish before repair and shutdown, and a failed write fails the job instead of only logging. Updated certificate roots and archive engines (RAR, 7z, PAR2, PAR3).
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.2
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.3
 dependencies: []
 path: ""
 defaultUsername: "admin"
