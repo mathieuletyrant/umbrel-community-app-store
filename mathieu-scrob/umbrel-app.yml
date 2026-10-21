@@ -58,12 +58,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  Connections warnings now clear once a later push or pull completes without
-  the problem. The image moved from a Debian to an Alpine base, about 25%
-  smaller and with no known vulnerabilities.
+  API clients can now set the source of a watch added through POST /history.
+  Exports write episode comments to their own file and imports put them back
+  onto their episodes. The container no longer exits at startup when
+  /etc/localtime is a mounted file.
 
 
-  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.31.1
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.32.0
 dependencies: []
 path: ""
 defaultUsername: ""
