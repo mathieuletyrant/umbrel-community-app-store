@@ -1,4 +1,4 @@
-verified: 2.31.0 on umbrelOS 2.0.0 (2026-10-20)
+verified: 2.32.0 on umbrelOS 2.0.0 (2026-10-21)
 # Browsed by IP over plain HTTP like a real install: registration sets a Secure cookie
 # (upstream's register page), which the browser drops, so the flow then signs in.
 vars:
