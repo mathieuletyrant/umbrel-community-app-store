@@ -57,11 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Bug fixes for SABnzbd: queue ETAs longer than 24 hours are now kept, and
-  paused slots no longer report an ETA.
+  Dependency updates for the MCP server library and the web framework. No
+  changes to settings or behavior.
 
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1443-2026-10-20
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1444-2026-10-21
 
 dependencies: []
 path: ""
