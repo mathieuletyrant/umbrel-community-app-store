@@ -7,7 +7,7 @@ name: MCP Memory
 tagline: Long-term memory for your AI assistants, as an MCP server
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/icon.png
 # renovate: datasource=docker depName=doobidoo/mcp-memory-service
-version: "12.1.1"
+version: "12.2.0"
 port: 6363
 description: >-
   MCP Memory gives your AI assistant (Claude, ChatGPT, Home Assistant, or any
@@ -56,12 +56,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: >-
-  Security fixes for the dashboard (stored XSS in tag and memory-type labels)
-  and for OAuth clients (graph entity extraction now needs write scope).
-  Consolidation no longer hides older memories on keyword-only matches, and
-  automatic supersession is now off by default.
+  Adds per-agent rate limiting for MCP tool calls (off by default), store-scoped
+  live-update subscriptions and Codex memory hooks. The dashboard no longer puts
+  the API key in live-update URLs and gets a stricter Content Security Policy.
+  Fixes several search bugs: tag and type filters, hybrid search and
+  cross-store results.
 
-  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.1.1
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.2.0
 dependencies: []
 path: ""
 defaultUsername: mcp
