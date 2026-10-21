@@ -7,7 +7,7 @@ name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
-version: "3.30.2"
+version: "3.31.0"
 port: 6246
 description: >-
   Maintainerr is a rule-based cleanup tool for your Plex media library. You
@@ -42,10 +42,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-4.jpg
 releaseNotes: >-
-  Maintainerr now starts correctly when the TZ variable is empty, and Sonarr and Radarr tag rules skip items whose tags cannot be read instead of evaluating them wrongly. The Tracearr connection test now uses the /servers endpoint, which requires Tracearr 2.7.0. Dependency updates.
+  Adds Seerr watchlist rules. Sonarr now matches episodes by their file first, Plex metadata is no longer augmented during rule evaluation, and TVDB logins recover after a failure and no longer block startup when TVDB is unreachable. The image moves to Node 26.12.1 with patched Alpine packages (security update).
 
 
-  Full release notes can be found at https://github.com/Maintainerr/Maintainerr/releases/tag/v3.30.2
+  Full release notes can be found at https://github.com/Maintainerr/Maintainerr/releases/tag/v3.31.0
 dependencies: []
 path: ""
 defaultUsername: ""
