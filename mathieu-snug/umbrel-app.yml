@@ -54,12 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  Sign-in now works over plain HTTP when Snug is opened from several
-  addresses (SNUG_ORIGINS): the session cookie was marked Secure, so
-  browsers dropped it and every page answered 401.
+  The Upcoming page shows readable dates, and the Settings page is now
+  comfortable to use on a phone.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.2.1
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.4.0
 dependencies: []
 path: ""
 defaultUsername: ""
