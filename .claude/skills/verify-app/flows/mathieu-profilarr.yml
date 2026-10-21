@@ -1,4 +1,4 @@
-verified: 2.3.1 on umbrelOS 2.0.0 (2026-10-21)
+verified: 2.3.0 on umbrelOS 2.0.0 (2026-10-21)
 egress: true
 steps:
   - goto: /
