@@ -24,7 +24,7 @@ services:
     restart: on-failure
 
   parser:
-    image: ghcr.io/dictionarry-hub/profilarr-parser:latest@sha256:3cd3f8c4979ee66304a518462cc6c5b59825bae6b25e7dfa51b30178b9265df7
+    image: ghcr.io/dictionarry-hub/profilarr-parser:latest@sha256:02a511132a6881f9e82f08632a7843c4d298fb72bf11bfe73ac0017eb3a03639
     init: true
     expose:
       - "5000"
