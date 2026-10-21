@@ -7,7 +7,7 @@ name: Scryer
 tagline: A whole *arr stack in one app — movies, series and anime
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/scryer
-version: "0.21.18"
+version: "0.21.20"
 port: 8380
 description: >-
   Scryer replaces Sonarr, Radarr, Prowlarr and Bazarr with a single native
@@ -45,9 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Movies without their own availability setting now follow the instance default, and delay profile order is preserved when migrating. Also fixes title folder recovery, quality profile saving, backup location recovery and PostgreSQL release date decoding.
+  Movie availability settings move to the Movie facet and can be overridden per library. RSS polling is bounded and scheduled jobs run independently, so a long sync no longer delays other jobs. Stuck unconfirmed grabs are recovered, and episode revision suffixes such as S07E12v2 are recognised. Maintenance rules and request rules stay experimental and are disabled after the upgrade.
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.18
+
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.20
 dependencies: []
 path: ""
 defaultUsername: ""
