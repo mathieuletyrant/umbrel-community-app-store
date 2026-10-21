@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp*,/.well-known/*,/healthz"
 
   server:
-    image: ghcr.io/bardesss/arr-mcp:1.44.3@sha256:3a8eb15941ff26f85fc15fff852fc968641c56dafecfe3f5ec0f632a6e0f5f2c
+    image: ghcr.io/bardesss/arr-mcp:1.44.4@sha256:17ce143a8297542da1227656197e21faa4ac5f32f2024d59f62b5560307ff6ec
     environment:
       - TZ=Etc/UTC
       - PUID=1000
