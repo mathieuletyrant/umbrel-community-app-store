@@ -1,0 +1,15 @@
+egress: true
+vars:
+  SETUP_CODE: docker logs mathieu-seek_server_1 2>&1 | sed -n 's/.*First-run setup code: \([A-Z0-9-]*\).*/\1/p' | tail -1
+logs:
+  server: First-run setup code
+steps:
+  - goto: /
+  - fill: {placeholder: Your name, value: Verify}
+  - fill: {placeholder: Email, value: verify@example.com}
+  - fill: {placeholder: Password (8+ characters), value: Verify-Seek-1}
+  - fill: {placeholder: Confirm password, value: Verify-Seek-1}
+  - fill: {placeholder: Setup code, value: "${SETUP_CODE}"}
+  - click: {role: button, name: Create account}
+  - see: TMDB
+  - shot: services

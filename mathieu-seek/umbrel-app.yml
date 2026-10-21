@@ -1,0 +1,68 @@
+manifestVersion: 1
+id: mathieu-seek
+storage:
+  dataRoot: data
+category: media
+name: Seek
+tagline: Phone-first tracker for the shows and films you watch
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-seek/icon.png
+version: "0.1.0"
+port: 8102
+description: >-
+  Seek is a self-hosted tracker for TV shows, films and books, built for the
+  phone first. Add it to your iPhone home screen and it behaves like a native
+  app: swipe an episode to mark it watched and the next one slides into its
+  place, see what airs this week with real air times, browse a show season by
+  season, and find something new to watch from what you have already seen.
+
+
+  Every person in the household gets their own account, list and history in
+  one shared Seek, and shows you watch together count for both of you. Each
+  person also gets a private Jellyfin webhook URL, so a play in Jellyfin lands
+  in Seek within seconds. Seek can also talk to Sonarr and Radarr, and tracks
+  books through BookOrbit and Hardcover.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Creating the first account needs a setup code, printed in the app's logs
+  (right-click Seek → Troubleshoot): "First-run setup code: XXXX-XXXX". Open
+  the app, enter your name, email, a password and that code. Seek has its own
+  login (no Umbrel login in front, so the home screen app and the Jellyfin
+  webhook can reach it); invite the rest of the household from Settings →
+  Household.
+
+  2. Add your free TMDB API key (themoviedb.org → Settings → API) in Settings
+  → Services. Sonarr is `http://sonarr_server_1:8989` and Radarr
+  `http://radarr_server_1:7878`, with the API key from their Settings →
+  General.
+
+  3. For Jellyfin, copy your webhook URL from Settings → Your accounts into
+  Jellyfin's Webhook plugin, replacing its address part with
+  `http://mathieu-seek_server_1:8100`. Each person adds their own.
+
+  4. On the iPhone, open Seek in Safari → Share → Add to Home Screen.
+
+
+  Set your time zone in this app's settings in umbrelOS (e.g. Europe/Paris)
+  so days and stats follow your local time.
+developer: nerdspar
+website: https://github.com/nerdspar/seek
+submitter: Mathieu Le Tyrant
+submission: https://github.com/nerdspar/seek
+repo: https://github.com/nerdspar/seek
+support: https://github.com/nerdspar/seek/issues
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
+environment:
+  - name: TZ
+    services:
+      - server
+    default: Etc/UTC
+    note: Your time zone, e.g. Europe/Paris. Seek groups days and stats by it.
