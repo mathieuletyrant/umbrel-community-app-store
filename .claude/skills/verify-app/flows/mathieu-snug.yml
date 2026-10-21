@@ -1,0 +1,13 @@
+vars:
+  HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
+settings:
+  SNUG_ORIGINS: http://${HOST_IP}:3077
+steps:
+  - goto: http://${HOST_IP}:3077/
+  - see: Welcome to Snug
+  - fill: {label: Name, value: Verify}
+  - fill: {label: Email, value: verify@example.com}
+  - fill: {label: Password, value: Verify-Snug-1}
+  - click: {role: button, name: Create account}
+  - see: API key or read access token
+  - shot: setup

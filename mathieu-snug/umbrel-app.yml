@@ -1,0 +1,71 @@
+manifestVersion: 1
+id: mathieu-snug
+storage:
+  dataRoot: data
+category: media
+name: Snug
+tagline: A cozy tracker for the TV series you're watching
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/icon.png
+# renovate: datasource=docker depName=ghcr.io/mathieuletyrant/snug
+version: "0.2.0"
+port: 3077
+description: >-
+  Snug is a self-hosted tracker for the TV series you're watching: where you
+  are (S02E05), what's next and what airs soon. One tap marks the next episode
+  watched, with undo.
+
+
+  The home screen shows what is ready to watch and what is coming up. Each
+  series keeps its progress per episode and moves between Watchlist,
+  Watching, Paused, Completed and Dropped, coming back to Watching on its own
+  when a new season airs. Jellyfin's webhook tracks the episodes you finish or
+  mark as played, and adds series you didn't track yet. Descriptions, episode
+  titles and posters come from TMDB in your language. It installs on a
+  phone's home screen as a web app.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and create your account. The first account is the admin,
+  and sign-up closes after it. Snug has its own login (no Umbrel login in
+  front, so the home screen app and the Jellyfin webhook can reach it).
+
+  2. Paste your TMDB key (themoviedb.org → Settings → API, the v3 key or the
+  v4 read access token) and pick a language.
+
+  3. For Jellyfin, install the Webhook plugin, add a Generic Destination with
+  the webhook URL from Snug → Settings → Jellyfin, replacing its address part
+  with `http://mathieu-snug_server_1:3000`. Tick Playback Stop and User Data
+  Saved, select your user and tick Send All Properties.
+
+
+  Snug answers on umbrel.local. To open it from another address (the IP,
+  Tailscale, a domain of your own), list every address you use in this app's
+  settings in umbrelOS (SNUG_ORIGINS).
+developer: Mathieu Le Tyrant
+website: https://github.com/mathieuletyrant/snug
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/snug
+repo: https://github.com/mathieuletyrant/snug
+support: https://github.com/mathieuletyrant/snug/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
+releaseNotes: >-
+  First release.
+
+
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.2.0
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
+environment:
+  - name: SNUG_ORIGINS
+    services:
+      - server
+    default: http://umbrel.local:3077
+    note: Every address you open Snug with, comma separated, protocol and port included, e.g. http://umbrel.local:3077,http://192.168.1.10:3077,https://snug.example.com.
