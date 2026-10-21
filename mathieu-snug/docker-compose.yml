@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-snug_server_1
+      APP_PORT: 3000
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: ghcr.io/mathieuletyrant/snug:0.2.0@sha256:cf4fb36d0d9b81de8d533ecf885b60ffd29ad2d7ca61487641fbec3ca21d2384
+    restart: on-failure
+    environment:
+      TZ: Etc/UTC
+      SNUG_ORIGINS: http://${DEVICE_DOMAIN_NAME:-umbrel.local}:3077
+    volumes:
+      - ${APP_DATA_DIR}/data/snug:/data
