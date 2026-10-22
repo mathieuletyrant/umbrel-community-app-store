@@ -7,7 +7,7 @@ name: MetaMCP
 tagline: One MCP gateway for all your MCP servers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/metatool-ai/metamcp
-version: "2.4.22"
+version: "2.4.22-patch.1"
 port: 12008
 description: >-
   MetaMCP is a Model Context Protocol (MCP) gateway: it gathers all your MCP
