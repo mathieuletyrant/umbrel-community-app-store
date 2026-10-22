@@ -54,11 +54,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  Menus, switches, toasts, filters and confirmation dialogs now use Radix UI,
-  so they are more accessible and behave the same everywhere in the app.
+  Library posters in Watching now show an airing badge, and the server logs are
+  easier to read. Since 0.6.0: pull to refresh in the Home Screen app, Settings
+  in sections, and Spotarr can add a series to the Watchlist.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.5.0
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.7.0
 dependencies: []
 path: ""
 defaultUsername: ""
