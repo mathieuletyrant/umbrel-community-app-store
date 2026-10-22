@@ -52,7 +52,7 @@ services:
     restart: on-failure
 
   server:
-    image: doobidoo/mcp-memory-service:12.2.0-slim@sha256:767e81c26e65314cb80a82f319428a66d71ceae3ab9974bfac9148b7467fb446
+    image: doobidoo/mcp-memory-service:12.2.1-slim@sha256:13e18544f6cdf1ead0cf6db5fba8c79dba255048e91384790bcb72b1aae3c381
     user: "1000:1000"
     environment:
       TZ: Etc/UTC
