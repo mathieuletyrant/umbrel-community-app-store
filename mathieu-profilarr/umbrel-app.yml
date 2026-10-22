@@ -7,7 +7,7 @@ name: Profilarr
 tagline: Quality profiles & custom formats manager for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/dictionarry-hub/profilarr
-version: "2.3.1"
+version: "2.3.1-patch.1"
 port: 6868
 description: >-
   Profilarr is a configuration management platform for Radarr and Sonarr. It
@@ -39,10 +39,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-profilarr/gallery-3.jpg
 releaseNotes: >-
-  Updates the bundled Deno runtime to 2.9.8 and removes the regex preview from the pattern picker.
-
-
-  Full release notes can be found at https://github.com/Dictionarry-Hub/profilarr/releases/tag/v2.3.1
+  Refreshes the bundled parser service to its latest image.
 dependencies: []
 path: ""
 defaultUsername: ""
