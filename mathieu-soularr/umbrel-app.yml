@@ -48,8 +48,13 @@ support: https://github.com/mrusse/soularr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-soularr/gallery-1.jpg
 releaseNotes: >-
-  The Lidarr and slskd API keys are no longer filled in automatically: paste
-  them in Soularr's config editor (an slskd key is added in slskd's options).
+  Fixes several hangs while monitoring downloads and imports, a search timeout
+  that was compared in the wrong unit, and handling of upper-case extensions.
+  Adds optional settings to keep download folder names (rename_download_folders),
+  skip users whose downloads failed (ignore_failed_users) and wait before
+  re-searching a failed album (search_retry_wait_hours).
+
+  Full release notes can be found at https://github.com/mrusse/soularr/releases/tag/v1.2.3
 
 dependencies:
   - lidarr
