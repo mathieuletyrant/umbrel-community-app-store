@@ -48,10 +48,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-pulsarr/gallery-3.jpg
 releaseNotes: >-
-  Hotfix: the highest-priority routing rule now decides both approval and
-  quota bypass.
+  Security hotfix: the bundled runtime certificate stores were updated after the
+  eMudhra intermediate CA compromise. No settings or data change.
 
-  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.7
+  Full release notes can be found at https://github.com/jamcalli/Pulsarr/releases/tag/v0.19.8
 
 dependencies: []
 path: ""
