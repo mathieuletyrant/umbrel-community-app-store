@@ -54,12 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  The Library status menu now opens above the tab bar and the round menu
-  button on posters is smaller. Every "Watched" call from Jellyfin is now kept
-  in the history.
+  Menus, switches, toasts, filters and confirmation dialogs now use Radix UI,
+  so they are more accessible and behave the same everywhere in the app.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.4.1
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.5.0
 dependencies: []
 path: ""
 defaultUsername: ""
