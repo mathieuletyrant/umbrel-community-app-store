@@ -7,7 +7,7 @@ name: Soularr
 tagline: Auto-download Lidarr's wanted music from Soulseek via slskd
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-soularr/icon.png
 # renovate: datasource=docker depName=mrusse08/soularr
-version: "1.2.2-patch.3"
+version: "1.2.3"
 port: 8265
 description: >-
   Soularr bridges Lidarr and slskd to automate music downloads from the Soulseek
