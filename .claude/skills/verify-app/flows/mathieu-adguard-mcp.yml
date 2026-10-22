@@ -1,4 +1,4 @@
-verified: 0.10.1-patch.1 on umbrelOS 2.0.0 (2026-10-15)
+verified: 0.10.1-patch.3 on umbrelOS 2.0.0 (2026-10-22)
 requires: [adguard-home]
 setup:
   - curl -sf -u admin:Verify-AdGuard-1 localhost:8095/control/status | grep -q dns_port || curl -sf -X POST localhost:8095/control/install/configure -H 'content-type:application/json' -d '{"web":{"ip":"0.0.0.0","port":8095},"dns":{"ip":"0.0.0.0","port":53},"username":"admin","password":"Verify-AdGuard-1"}'

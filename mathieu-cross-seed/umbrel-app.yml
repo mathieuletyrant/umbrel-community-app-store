@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "6.13.7-patch.7"
+version: "6.13.9-patch.1"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -49,7 +49,9 @@ repo: https://github.com/cross-seed/cross-seed
 support: https://github.com/cross-seed/cross-seed/issues
 gallery: []
 releaseNotes: >-
-  Updates the bundled nginx web server to its latest build.
+  Updates the Docker runtime to Node.js 26.12.1 with the latest security fixes and upgrades the SQLite dependency. Rejects unsafe paths in torrent metadata and hardens release-name parsing against excessive regular-expression processing.
+
+  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v6.13.9
 dependencies:
   - transmission
 path: ""

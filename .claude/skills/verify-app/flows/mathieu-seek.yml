@@ -1,3 +1,4 @@
+verified: 0.1.0-patch.1 on umbrelOS 2.0.0 (2026-10-22)
 egress: true
 vars:
   SETUP_CODE: >-
