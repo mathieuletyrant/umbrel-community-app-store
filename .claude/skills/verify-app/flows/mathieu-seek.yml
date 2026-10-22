@@ -1,6 +1,8 @@
+verified: 0.1.0-patch.1 on umbrelOS 2.0.0 (2026-10-22)
 egress: true
 vars:
-  SETUP_CODE: docker logs mathieu-seek_server_1 2>&1 | sed -n 's/.*First-run setup code: \([A-Z0-9-]*\).*/\1/p' | tail -1
+  SETUP_CODE: >-
+    docker logs mathieu-seek_server_1 2>&1 | sed -n 's/.*First-run setup code: \([A-Z0-9-]*\).*/\1/p' | tail -1
 logs:
   server: First-run setup code
 steps:
