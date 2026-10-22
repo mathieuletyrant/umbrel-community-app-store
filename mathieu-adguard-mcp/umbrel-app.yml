@@ -7,7 +7,7 @@ name: AdGuard MCP
 tagline: Your AdGuard Home, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-adguard-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/samik081/mcp-adguard-home
-version: "0.10.1-patch.3"
+version: "0.10.1-patch.4"
 port: 6464
 description: >-
   AdGuard MCP is a Model Context Protocol (MCP) server that lets an AI
