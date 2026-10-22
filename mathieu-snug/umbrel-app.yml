@@ -54,11 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  Menus, switches, toasts, filters and confirmation dialogs now use Radix UI,
-  so they are more accessible and behave the same everywhere in the app.
+  The bottom tab bar responds faster, double-tapping no longer zooms the page,
+  and the Ready cards have properly rounded corners on iPhone.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.5.0
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.5.1
 dependencies: []
 path: ""
 defaultUsername: ""
