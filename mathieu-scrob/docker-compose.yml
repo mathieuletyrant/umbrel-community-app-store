@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: bellamy/scrob:2.32.0@sha256:96a4b2480016ec52a46bf465235b13efd9d5487f8b165f8b1ad2060029ee658d
+    image: bellamy/scrob:2.32.1@sha256:ad649e02f7252109a4c98bf16ecb1fcaf16d376caf7d4f89539c564acbc332e4
     restart: on-failure
     depends_on:
       db:
