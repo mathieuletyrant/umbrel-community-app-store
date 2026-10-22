@@ -54,12 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Spotarr now keeps each Candidate's TMDB keywords and lets you filter the
-  History by keyword. The web UI can also be installed as an app on the
-  iPhone's Home Screen.
+  A Share's buttons are now the Rules' Actions, and Snug's Watchlist is
+  available as a Rule Action.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.13.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.14.0
 dependencies: []
 path: ""
 defaultUsername: ""
