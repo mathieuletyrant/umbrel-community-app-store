@@ -1,4 +1,4 @@
-verified: 2.4.22-patch.1 on umbrelOS 2.0.0 (2026-10-22)
+verified: 2.4.22-patch.2 on umbrelOS 2.0.0 (2026-10-22)
 logs:
   server: Backend server started successfully
 # The session cookie carries Domain=<APP_URL host> (umbrel-verify.local) unless the web sidecar
