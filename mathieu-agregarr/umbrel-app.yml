@@ -7,7 +7,7 @@ name: Agregarr
 tagline: Keep your Plex Home screen fresh with auto-updated collections
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/icon.png
 # renovate: datasource=docker depName=bitr8/agregarr
-version: "2.12.0"
+version: "2.12.1"
 port: 7171
 description: >-
   Agregarr builds Plex collections from public lists and pins them to your
