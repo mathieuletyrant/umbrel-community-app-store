@@ -7,7 +7,7 @@ name: Transmission VPN
 tagline: Transmission behind a VPN, with a kill switch and port forwarding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/icon.png
 # renovate: datasource=docker depName=linuxserver/transmission
-version: "4.1.3"
+version: "4.1.3-patch.1"
 port: 9097
 description: >-
   The Transmission BitTorrent client, with all of its traffic sent through
@@ -68,7 +68,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-3.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Port forwarding is now turned on by default with ProtonVPN, Private Internet
+  Access, PrivateVPN and Perfect Privacy, and ProtonVPN only uses P2P servers.
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
