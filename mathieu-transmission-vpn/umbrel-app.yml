@@ -7,7 +7,7 @@ name: Transmission VPN
 tagline: Transmission behind a VPN, with a kill switch and port forwarding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/icon.png
 # renovate: datasource=docker depName=linuxserver/transmission
-version: "4.1.3"
+version: "4.1.3-patch.1"
 port: 9097
 description: >-
   The Transmission BitTorrent client, with all of its traffic sent through
@@ -20,9 +20,9 @@ description: >-
   Transmission only starts once the tunnel is up: if the VPN drops,
   Transmission has no network at all until it comes back. With ProtonVPN,
   Private Internet Access, PrivateVPN and Perfect Privacy, port forwarding is
-  turned on and the forwarded port becomes Transmission's peer port
-  automatically, so other peers can connect to you and seeding works as well
-  as with an open port on your router.
+  available: turn on VPN_PORT_FORWARDING and the forwarded port becomes
+  Transmission's peer port automatically, so other peers can connect to you
+  and seeding works as well as with an open port on your router.
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -45,7 +45,7 @@ description: >-
   ProtonVPN: you need a paid plan (the free one doesn't allow P2P). On
   account.protonvpn.com → Downloads → WireGuard configuration, create a
   GNU/Linux configuration with "NAT-PMP (Port Forwarding)" turned on and copy
-  its PrivateKey. Only P2P servers are used.
+  its PrivateKey. Set VPN_PORT_FORWARDING and PORT_FORWARD_ONLY to on.
 
 
   Radarr, Sonarr and the other apps reach this Transmission at
@@ -68,7 +68,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-3.jpg
-releaseNotes: ""
+releaseNotes: >-
+  New PORT_FORWARD_ONLY setting. VPN_PORT_FORWARDING and PORT_FORWARD_ONLY
+  were ignored before: turn both on in the settings with ProtonVPN to get a
+  forwarded port on a P2P server.
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
@@ -112,6 +115,13 @@ environment:
     options:
       - "on"
       - "off"
-    note: Optional. On by default with ProtonVPN, Private Internet Access, PrivateVPN and Perfect Privacy, the providers whose port forwarding Gluetun sets up.
+    note: Optional, off by default. Turn it on with ProtonVPN, Private Internet Access, PrivateVPN or Perfect Privacy, the providers whose port forwarding Gluetun sets up.
+  - name: PORT_FORWARD_ONLY
+    services:
+      - gluetun
+    options:
+      - "on"
+      - "off"
+    note: Optional, ProtonVPN and Private Internet Access only. On picks only the servers that support port forwarding (P2P servers on ProtonVPN).
 permissions:
   - STORAGE_DOWNLOADS
