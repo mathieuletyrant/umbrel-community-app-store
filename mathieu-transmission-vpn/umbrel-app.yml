@@ -1,0 +1,117 @@
+manifestVersion: 1
+id: mathieu-transmission-vpn
+storage:
+  dataRoot: data
+category: networking
+name: Transmission VPN
+tagline: Transmission behind a VPN, with a kill switch and port forwarding
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/icon.png
+# renovate: datasource=docker depName=linuxserver/transmission
+version: "4.1.3"
+port: 9097
+description: >-
+  The Transmission BitTorrent client, with all of its traffic sent through
+  your VPN by Gluetun. Peers and trackers see your VPN's address, never your
+  public IP. Gluetun works with ProtonVPN, Mullvad, NordVPN, Surfshark,
+  Private Internet Access, AirVPN, Windscribe and many more.
+
+
+  Gluetun's kill switch blocks every connection outside the tunnel, and
+  Transmission only starts once the tunnel is up: if the VPN drops,
+  Transmission has no network at all until it comes back. With ProtonVPN,
+  Private Internet Access, PrivateVPN and Perfect Privacy, port forwarding is
+  turned on and the forwarded port becomes Transmission's peer port
+  automatically, so other peers can connect to you and seeding works as well
+  as with an open port on your router.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open this app's settings (⋯ → Settings → Advanced settings), fill in your
+  VPN and restart the app. Until then, Transmission doesn't start.
+
+
+  1. VPN_SERVICE_PROVIDER: your provider, as Gluetun names it (protonvpn,
+  mullvad, nordvpn, surfshark, private internet access…). Each provider's page
+  of the Gluetun wiki lists what it needs:
+  github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+
+  2. WireGuard (the default): WIREGUARD_PRIVATE_KEY, plus WIREGUARD_ADDRESSES
+  for most providers other than ProtonVPN. OpenVPN: set VPN_TYPE to openvpn,
+  then OPENVPN_USER and OPENVPN_PASSWORD.
+
+
+  ProtonVPN: you need a paid plan (the free one doesn't allow P2P). On
+  account.protonvpn.com → Downloads → WireGuard configuration, create a
+  GNU/Linux configuration with "NAT-PMP (Port Forwarding)" turned on and copy
+  its PrivateKey. Only P2P servers are used.
+
+
+  Radarr, Sonarr and the other apps reach this Transmission at
+  mathieu-transmission-vpn_gluetun_1, port 9091 (not transmission_server_1).
+
+
+  Moving from the Transmission app: stop both apps, copy
+  ~/umbrel/app-data/transmission/data/config to
+  ~/umbrel/app-data/mathieu-transmission-vpn/data/config on your Umbrel, then
+  start this one. Downloads stay in the same folder, so torrents resume and
+  hardlinks keep working. With port forwarding from your VPN, the port
+  forwarded on your router for Transmission is no longer needed.
+developer: Transmission
+website: https://transmissionbt.com/
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/transmission/transmission
+support: https://github.com/transmission/transmission/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-3.jpg
+releaseNotes: ""
+dependencies: []
+path: "/transmission/web/"
+defaultUsername: ""
+defaultPassword: ""
+environment:
+  - name: VPN_SERVICE_PROVIDER
+    services:
+      - gluetun
+    note: Your VPN provider as Gluetun names it, e.g. protonvpn, mullvad, nordvpn, surfshark, private internet access. Required.
+  - name: VPN_TYPE
+    services:
+      - gluetun
+    default: wireguard
+    options:
+      - wireguard
+      - openvpn
+    note: WireGuard is faster; use OpenVPN if your provider has no WireGuard support in Gluetun.
+  - name: WIREGUARD_PRIVATE_KEY
+    services:
+      - gluetun
+    note: The PrivateKey of a WireGuard configuration from your provider. For ProtonVPN, turn on NAT-PMP (Port Forwarding) when creating it.
+  - name: WIREGUARD_ADDRESSES
+    services:
+      - gluetun
+    note: The Address of that WireGuard configuration, e.g. 10.64.222.21/32. Needed by most providers other than ProtonVPN.
+  - name: OPENVPN_USER
+    services:
+      - gluetun
+    note: OpenVPN only. Your provider's OpenVPN username (often not your account login).
+  - name: OPENVPN_PASSWORD
+    services:
+      - gluetun
+    note: OpenVPN only. Your provider's OpenVPN password.
+  - name: SERVER_COUNTRIES
+    services:
+      - gluetun
+    note: Optional. Server countries, comma-separated, e.g. Switzerland,Netherlands.
+  - name: VPN_PORT_FORWARDING
+    services:
+      - gluetun
+    options:
+      - "on"
+      - "off"
+    note: Optional. On by default with ProtonVPN, Private Internet Access, PrivateVPN and Perfect Privacy, the providers whose port forwarding Gluetun sets up.
+permissions:
+  - STORAGE_DOWNLOADS

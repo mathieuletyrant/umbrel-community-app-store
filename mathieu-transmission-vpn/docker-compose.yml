@@ -1,0 +1,78 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-transmission-vpn_gluetun_1
+      APP_PORT: 9091
+
+  gluetun:
+    image: qmcgaw/gluetun:v3.41.3@sha256:fa19cc76b2af13d57a8d3dc3066f2ada061b1c761b8aecf989b3877c0486e027
+    cap_add:
+      - NET_ADMIN
+    entrypoint:
+      - sh
+      - -c
+      - |
+        rm -f /gluetun/ip /gluetun/forwarded_port
+        if [ -z "$$VPN_SERVICE_PROVIDER" ] || [ -z "$$WIREGUARD_PRIVATE_KEY$$OPENVPN_USER" ]; then
+          echo "Waiting for the VPN provider and credentials: set them in this app's settings in umbrelOS"
+          trap 'exit 0' TERM
+          while :; do sleep 1; done
+        fi
+        case "$$VPN_SERVICE_PROVIDER" in
+          protonvpn|"private internet access") export VPN_PORT_FORWARDING="$${VPN_PORT_FORWARDING:-on}" PORT_FORWARD_ONLY="$${VPN_PORT_FORWARDING:-on}" ;;
+          "perfect privacy"|privatevpn) export VPN_PORT_FORWARDING="$${VPN_PORT_FORWARDING:-on}" ;;
+        esac
+        exec /gluetun-entrypoint
+    environment:
+      TZ: Etc/UTC
+      VPN_TYPE: wireguard
+      VPN_PORT_FORWARDING_STATUS_FILE: /gluetun/forwarded_port
+      PUBLICIP_FILE: /gluetun/ip
+    volumes:
+      - ${APP_DATA_DIR}/data/gluetun:/gluetun
+    restart: on-failure
+
+  server:
+    image: linuxserver/transmission:4.1.3@sha256:30d59b253993df8c7634fe03cbb33e22324d00d200ff3d3cc30e6184fa55f96b
+    network_mode: service:gluetun
+    depends_on:
+      - gluetun
+    entrypoint:
+      - sh
+      - -c
+      - |
+        until [ -s /gluetun/ip ]; do sleep 5; done
+        exec /init
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${APP_DATA_DIR}/data/gluetun:/gluetun:ro
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    restart: on-failure
+
+  port-sync:
+    image: linuxserver/transmission:4.1.3@sha256:30d59b253993df8c7634fe03cbb33e22324d00d200ff3d3cc30e6184fa55f96b
+    network_mode: service:gluetun
+    depends_on:
+      - server
+    entrypoint:
+      - sh
+      - -c
+      - |
+        last=
+        while :; do
+          port=$$(cat /gluetun/forwarded_port 2>/dev/null)
+          if [ -n "$$port" ] && [ "$$port" != "$$last" ] && transmission-remote 127.0.0.1:9091 --port "$$port" --no-portmap >/dev/null; then
+            echo "Transmission peer port set to $$port"
+            last=$$port
+          fi
+          sleep 30
+        done
+    volumes:
+      - ${APP_DATA_DIR}/data/gluetun:/gluetun:ro
+    restart: on-failure
