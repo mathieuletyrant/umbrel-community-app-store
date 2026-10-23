@@ -20,15 +20,10 @@ services:
           trap 'exit 0' TERM
           while :; do sleep 1; done
         fi
-        case "$$VPN_SERVICE_PROVIDER" in
-          protonvpn|"private internet access") export VPN_PORT_FORWARDING="$${VPN_PORT_FORWARDING:-on}" PORT_FORWARD_ONLY="$${VPN_PORT_FORWARDING:-on}" ;;
-          "perfect privacy"|privatevpn) export VPN_PORT_FORWARDING="$${VPN_PORT_FORWARDING:-on}" ;;
-        esac
         exec /gluetun-entrypoint
     environment:
       TZ: Etc/UTC
       VPN_TYPE: wireguard
-      VPN_PORT_FORWARDING: ""
       VPN_PORT_FORWARDING_STATUS_FILE: /gluetun/forwarded_port
       PUBLICIP_FILE: /gluetun/ip
     volumes:
