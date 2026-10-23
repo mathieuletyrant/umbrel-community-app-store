@@ -7,7 +7,7 @@ services:
       APP_PORT: 9091
 
   gluetun:
-    image: qmcgaw/gluetun:v3.40.0@sha256:2b42bfa046757145a5155acece417b65b4443c8033fb88661a8e9dcf7fda5a00
+    image: qmcgaw/gluetun:v3.40.4@sha256:e10584de1f82d8999e5e6c3111901d9d56a2eed21151fb96af060f390bbdfba8
     cap_add:
       - NET_ADMIN
     entrypoint:
