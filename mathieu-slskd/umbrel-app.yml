@@ -63,12 +63,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-slskd/gallery-3.jpg
 releaseNotes: >-
-  Adds an option to set the MTU of the connection to the Soulseek server (set it
-  to 1500 if you use jumbo frames and cannot connect), logging to disk is now
-  enabled by default with 30 days of retention, and downloads are cancelled when
-  their enqueue attempt times out. Also includes memory and stability fixes.
+  Fixes an error when a user asks for their place in the queue and several
+  records exist for that user and file. Runtime memory dumps now need an
+  explicit opt-in, some core API endpoints require a higher access level, and
+  the .DataProtection-Keys folder is no longer written.
 
-  Full release notes can be found at https://github.com/slskd/slskd/releases/tag/0.26.1
+  Full release notes can be found at https://github.com/slskd/slskd/releases/tag/0.26.2
 
 dependencies: []
 path: ""
