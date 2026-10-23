@@ -40,6 +40,7 @@
       "matchUpdateTypes": ["digest"],
       "commitMessageExtra": "digest to {{{newDigestShort}}}"
     },
+    { "matchPackageNames": ["qmcgaw/gluetun"], "commitMessageTopic": "Gluetun sidecar" },
     { "matchPackageNames": ["nginx"], "commitMessageTopic": "nginx sidecar" },
     { "matchPackageNames": ["postgres"], "commitMessageTopic": "PostgreSQL sidecar", "allowedVersions": "<19" },
     { "matchPackageNames": ["surrealdb/surrealdb"], "commitMessageTopic": "SurrealDB sidecar", "allowedVersions": "<3" },
@@ -84,6 +85,7 @@
     { "matchPackageNames": ["ghcr.io/mathieuletyrant/arrglue"], "commitMessageTopic": "arrglue" },
     { "matchPackageNames": ["ciuse99/suggestarr"], "commitMessageTopic": "SuggestArr" },
     { "matchPackageNames": ["nandyalu/trailarr"], "commitMessageTopic": "Trailarr" },
+    { "matchPackageNames": ["linuxserver/transmission"], "commitMessageTopic": "Transmission VPN" },
     { "matchPackageNames": ["haveagitgat/tdarr"], "commitMessageTopic": "Tdarr" },
     { "matchPackageNames": ["ghcr.io/chrisbenincasa/tunarr"], "commitMessageTopic": "Tunarr" },
     { "matchPackageNames": ["ghcr.io/unpackerr/unpackerr"], "commitMessageTopic": "Unpackerr" },

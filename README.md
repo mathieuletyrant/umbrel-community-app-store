@@ -31,6 +31,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Byparr** | **Cloudflare-bypass proxy** for Prowlarr / Jackett: a drop-in **FlareSolverr replacement** that drives a modern stealth browser, standing up better to today's Cloudflare / DDoS-Guard challenges. |
 | **SuggestArr** | **Automatic "what to watch" recommendations**: reads your Plex / Jellyfin / Emby history, finds similar titles (TMDb or any OpenAI-compatible LLM), and auto-requests them through Jellyseerr / Overseerr. |
 | **cross-seed** | **Automatic cross-seeding**: finds torrents on your other trackers matching what you already seed and injects them into Transmission — more ratio on every tracker, zero extra disk space (hardlinks). |
+| **Transmission VPN** | **Transmission behind your VPN**: every torrent connection goes through Gluetun (ProtonVPN, Mullvad, NordVPN, PIA… kill switch included), so peers never see your public IP. With ProtonVPN or PIA, the forwarded port becomes Transmission's peer port automatically, so seeding stays fast. |
 | **Sportarr** | **PVR for sports** (Sonarr/Radarr-style): monitors leagues and events across fighting, football, soccer, basketball, racing…, grabs releases from your indexers, then renames, organizes and imports into Plex / Jellyfin / Emby. |
 | **Trailarr** | **Automatic trailer downloader** for your Radarr/Sonarr library: fetches and stores trailers next to your movies and shows so Plex / Jellyfin / Emby play them in-app. |
 | **slskd** | **Soulseek client** with a modern web UI: search and download from the Soulseek P2P network, set credentials in-browser, files land in your downloads share. |
@@ -77,6 +78,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | SABnzbd | `http://sabnzbd_web_1:8080` | Config → General |
 | Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
 | Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
+| Transmission VPN | `http://mathieu-transmission-vpn_gluetun_1:9091` (RPC: `/transmission/rpc`) | none |
 | Plex | `http://host.docker.internal:32400` | your Plex token |
 | Jellyfin | `http://jellyfin_server_1:8096` | Dashboard → API Keys |
 | Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
