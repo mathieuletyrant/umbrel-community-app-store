@@ -1,4 +1,4 @@
-verified: 0.26.0-patch.4 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.26.2 on umbrelOS 2.0.0 (2026-10-23)
 logs:
   server: Listening for HTTP requests
 steps:
