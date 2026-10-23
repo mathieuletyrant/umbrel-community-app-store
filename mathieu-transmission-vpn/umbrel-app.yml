@@ -71,7 +71,8 @@ gallery:
 releaseNotes: >-
   New PORT_FORWARD_ONLY setting. VPN_PORT_FORWARDING and PORT_FORWARD_ONLY
   were ignored before: turn both on in the settings with ProtonVPN to get a
-  forwarded port on a P2P server.
+  forwarded port on a P2P server. Gluetun goes back to 3.40.0: with 3.41, the
+  ProtonVPN WireGuard tunnel never came up on some Umbrels.
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
