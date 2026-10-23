@@ -58,11 +58,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  Added a Silo icon for connection and watch sources, and the Kodi webhook now
-  accepts an optional source field.
+  The calendar page gains Sonarr, collection and watched filters. Security
+  updates to the bundled Node.js and certificate roots.
 
 
-  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.33.0
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.33.1
 dependencies: []
 path: ""
 defaultUsername: ""
