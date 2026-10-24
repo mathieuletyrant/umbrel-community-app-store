@@ -54,11 +54,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  A Share's buttons are now the Rules' Actions, and Snug's Watchlist is
-  available as a Rule Action.
+  Spotarr has a new spotlight logo in the web UI.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.14.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.15.0
 dependencies: []
 path: ""
 defaultUsername: ""
