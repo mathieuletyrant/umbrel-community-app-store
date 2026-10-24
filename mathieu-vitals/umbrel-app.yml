@@ -7,7 +7,7 @@ name: Vitals
 tagline: Live numbers and health of your media stack, as one JSON API
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/vitals
-version: "0.2.4"
+version: "0.2.4-patch.1"
 port: 6565
 description: >-
   Vitals reads the apps of your media stack and answers with one small JSON
@@ -19,8 +19,8 @@ description: >-
   Apps it reads: Radarr, Sonarr, Prowlarr, Bazarr, Seerr (Jellyseerr or
   Overseerr), Transmission, Maintainerr, Healarr, Cleanuparr and Tracearr.
   Paste the API key of each app you use in this app's settings in umbrelOS
-  (⋯ → Settings → Advanced settings), and pick Transmission and Maintainerr
-  from their list. The addresses of the Umbrel App Store apps are already
+  (⋯ → Settings → Advanced settings), and pick Transmission (or Transmission
+  VPN) and Maintainerr from their list. The addresses of the Umbrel App Store apps are already
   filled in. Apps left empty are reported as `not-configured`.
 
 
@@ -58,9 +58,8 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-2.jpg
 releaseNotes: >-
-  Maintainerr now reports the media waiting for deletion (pendingItems). Its
-  count of deleting collections, previously reclaimableItems, is renamed
-  reclaimableCollections.
+  Vitals can now read Transmission VPN: pick its address in Transmission's
+  list in this app's settings.
 
 dependencies: []
 path: ""
@@ -163,7 +162,8 @@ environment:
       - server
     options:
       - http://transmission_server_1:9091/transmission/rpc
-    note: Pick the Transmission app's address to read it (its RPC must have no login).
+      - http://mathieu-transmission-vpn_gluetun_1:9091/transmission/rpc
+    note: Pick the address of your Transmission app, or of Transmission VPN, to read it (its RPC must have no login).
   - name: MAINTAINERR_URL
     services:
       - server
