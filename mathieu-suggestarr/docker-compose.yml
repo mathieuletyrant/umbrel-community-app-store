@@ -7,7 +7,7 @@ services:
       APP_PORT: 5000
 
   server:
-    image: ciuse99/suggestarr:v3.0.0@sha256:499fd0226aacea1135b82af62c579149da2b6f741cebbe2fcc821eb446f61dd9
+    image: ciuse99/suggestarr:v3.1.0@sha256:b9cfa55bdffb24155e6908d8c904fa842a17c607810e665a544e34cc34bb427a
     init: true
     environment:
       - TZ=Etc/UTC
