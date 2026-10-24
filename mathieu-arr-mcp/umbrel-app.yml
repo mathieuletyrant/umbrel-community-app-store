@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.44.5"
+version: "1.45.0"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,12 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  fix_metadata now states its verdict in its text answer, and a Plex item
-  that merges two Sonarr series is sent for inspection instead of being
-  skipped.
+  Plex metadata repair is now on by default. Dependency updates under the
+  hood.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.44.5
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.45.0
 dependencies: []
 path: ""
 defaultUsername: ""
