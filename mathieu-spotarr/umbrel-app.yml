@@ -7,7 +7,7 @@ name: Spotarr
 tagline: Share a reel from your iPhone, add the movie or show through Seerr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/spotarr
-version: "0.16.0"
+version: "0.16.1"
 port: 3838
 description: >-
   Spotarr identifies the movie or TV show behind an Instagram reel or photo
@@ -55,10 +55,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-3.jpg
 releaseNotes: >-
-  A cozier web theme and a better experience on phones.
+  The tab bar on a phone is now lower and slimmer.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.16.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.16.1
 dependencies: []
 path: ""
 defaultUsername: ""
