@@ -52,10 +52,15 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-2.jpg
 releaseNotes: >-
-  Radarr and Sonarr are no longer connected automatically: set them once in
-  Lingarr's Settings → Integrations. Existing installs keep the values saved
-  in Lingarr.
+  Fixes batch translation of forced and regular subtitles, matches subtitle
+  languages case-insensitively and on the closest language code, and keeps
+  translations running when the browser disconnects. Path mapping settings
+  are removed (not needed on Umbrel, where paths already match the *arr
+  apps), and unmonitored media can now be scanned. Several layout fixes at
+  tablet widths.
 
+  Full release notes can be found at
+  https://github.com/lingarr-translate/lingarr/releases/tag/1.4.1
 dependencies: []
 path: ""
 defaultUsername: ""
