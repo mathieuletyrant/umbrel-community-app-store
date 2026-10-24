@@ -1,4 +1,4 @@
-verified: 3.0.0 on umbrelOS 2.0.0 (2026-10-20)
+verified: 3.1.0 on umbrelOS 2.0.0 (2026-10-24)
 steps:
   - goto: /
   - see: Set up your admin credentials to get started.
