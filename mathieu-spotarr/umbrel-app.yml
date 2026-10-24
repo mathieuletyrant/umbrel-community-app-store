@@ -55,10 +55,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-3.jpg
 releaseNotes: >-
-  A cozier web theme and a better experience on phones.
+  The tab bar on a phone is now lower and slimmer.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.16.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.16.1
 dependencies: []
 path: ""
 defaultUsername: ""
