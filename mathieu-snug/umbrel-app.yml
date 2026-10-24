@@ -54,13 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  Smoother scrolling and a more native feel on mobile, with an opaque tab bar.
-  Since 0.7.0: no other changes. Since 0.6.0: library posters in Watching now
-  show an airing badge, pull to refresh in the Home Screen app, Settings in
-  sections, and Spotarr can add a series to the Watchlist.
+  The tab bar at the bottom of the screen on mobile is now opaque, so
+  content no longer shows through it while scrolling.
 
-
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.8.1
+  Full release notes can be found at
+  https://github.com/mathieuletyrant/snug/releases/tag/v0.8.1
 dependencies: []
 path: ""
 defaultUsername: ""
