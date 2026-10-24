@@ -7,7 +7,7 @@ services:
       APP_PORT: 9876
 
   server:
-    image: ghcr.io/lingarr-translate/lingarr:1.4.0@sha256:8f392cf1efe718e0fcbc735d6d82df0b0bf86594bf64998aad85e8f306263774
+    image: ghcr.io/lingarr-translate/lingarr:1.4.1@sha256:38592c3f6156d519a131aeeda3245f0a7765e7c541b801a7b527b7d731efdfce
     user: "1000:1000"
     init: true
     environment:
