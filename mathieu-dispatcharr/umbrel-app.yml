@@ -54,13 +54,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-4.jpg
 releaseNotes: >-
-  Adds optional reverse-proxy header authentication (off by default), radio
-  channel support in M3U and XC output, richer stream failover events, and
-  quieter container logs. The default FFmpeg and Streamlink stream profiles now
-  copy all input streams and mux to MPEG-TS. Also fixes several issues with
-  connection counters, catch-up playback, Redis URLs and DVR recordings.
+  Adds native HLS output for live channels, configurable stream startup and idle
+  timeouts, per-account M3U hash key overrides, limits on how much EPG history is
+  kept, and QR codes for API keys. Failed API key and Xtream logins are now
+  rate-limited, and non-admin users no longer see provider stream URLs. Fixes
+  many live-proxy, recording, XMLTV and VOD refresh issues.
 
-  Full release notes can be found at https://github.com/Dispatcharr/Dispatcharr/releases/tag/v0.32.0
+  Full release notes can be found at https://github.com/Dispatcharr/Dispatcharr/releases/tag/v0.33.0
 dependencies: []
 path: ""
 defaultUsername: ""
