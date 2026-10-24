@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: ghcr.io/mathieuletyrant/spotarr:0.15.0@sha256:97044da21d81ecf4f47c91711034c1fa9f4f2170f2a5356c2e6cc9f27e538c13
+    image: ghcr.io/mathieuletyrant/spotarr:0.15.1@sha256:c840368883ff2b9dc7659de6c310d47fecc26ea6881e6c3a50dc0e3ccd2b4eec
     user: "1000:1000"
     environment:
       API_TOKEN: ${APP_PASSWORD}
