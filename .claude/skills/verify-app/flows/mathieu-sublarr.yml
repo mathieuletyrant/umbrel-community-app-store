@@ -13,7 +13,6 @@ steps:
   - click: {css: "[data-testid=wizard-next]"}
   - click: {css: "[data-testid=wizard-pick]"}
   - click: {css: "[data-testid=wizard-done-close]"}
-  - click: {role: button, name: Got it}
   - click: {css: "[data-testid=usage-stats-decline]"}
   - wait: 1500
   - see: Live Activity Feed
