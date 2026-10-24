@@ -55,10 +55,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-3.jpg
 releaseNotes: >-
-  The logo and Home Screen icon now have hashed file names, so browsers and iOS pick up the new icon instead of a cached one.
+  A cozier web theme and a better experience on phones.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.15.1
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.16.0
 dependencies: []
 path: ""
 defaultUsername: ""
