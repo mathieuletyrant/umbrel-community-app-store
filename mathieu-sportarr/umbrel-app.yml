@@ -7,7 +7,7 @@ name: Sportarr
 tagline: PVR for sports — monitors leagues, grabs releases, organizes your library
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/icon.png
 # renovate: datasource=docker depName=sportarr/sportarr
-version: "4.1.10.1120"
+version: "4.1.11.1121"
 port: 1867
 description: >-
   Sportarr is a sports PVR built in the style of Sonarr and Radarr. It monitors
@@ -42,13 +42,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sportarr/gallery-4.jpg
 releaseNotes: >-
-  Better release matching for NASCAR, MotoGP, Formula One and playoff games, with stale pre-event releases rejected. New in-app support reporting previews redacted diagnostics before submission, and preseason, postseason and finals can be monitored for no teams, selected teams or all teams. IPTV recordings can optionally be replaced by indexer releases (off by default), and Transmission download directories and labels are now applied.
+  Every event search is now recorded with a plain-words explanation of the result, including why each release was rejected. League cards show upcoming events apart from missing ones, and team sports search both team names. Fixes cover DVR guide matching and mkv recordings, the change feed after a failed league refresh, duplicate grabs of paused downloads, and strict v3 clients.
 
 
-  Database migrations run automatically on first start; back up your database before updating. New first-run quality defaults only affect new installs.
+  Two small database migrations run automatically on first start; back up your database before updating.
 
 
-  Full release notes can be found at https://github.com/Sportarr/Sportarr/releases/tag/v4.1.10.1120
+  Full release notes can be found at https://github.com/Sportarr/Sportarr/releases/tag/v4.1.11.1121
 dependencies: []
 path: ""
 defaultUsername: ""
