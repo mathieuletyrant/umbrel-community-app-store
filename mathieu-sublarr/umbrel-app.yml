@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Sonarr and Radarr path mapping now matches whole folders only (`/data/movies` no longer rewrites `/data/movies-4k`), the longest matching pair wins in any order, and trailing slashes are fine. The media server form no longer shows the path mapping field twice, and the image now reports its own version instead of the release candidate's.
+  Security update: notifications no longer follow HTTP redirects (Apprise 1.13.1), and the bundled setuptools and frontend follow-redirects dependencies are updated. No configuration changes.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/sublarr/releases/tag/v1.17.1
+  Full release notes can be found at https://github.com/Abrechen2/sublarr/releases/tag/v1.17.2
 dependencies: []
 path: ""
 defaultUsername: ""
