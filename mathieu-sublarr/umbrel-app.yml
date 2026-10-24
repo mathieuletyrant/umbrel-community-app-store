@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Subtitles saved in older encodings (Windows-125x, Cyrillic, GBK...) keep their letters instead of "�", and the subtitle repair can restore files already damaged. Subtitles that name another season or episode are no longer downloaded, and a subtitle that doesn't fit the video's length is skipped. Media server path mapping now takes several pairs separated by ";".
+  Sonarr and Radarr path mapping now matches whole folders only (`/data/movies` no longer rewrites `/data/movies-4k`), the longest matching pair wins in any order, and trailing slashes are fine. The media server form no longer shows the path mapping field twice, and the image now reports its own version instead of the release candidate's.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/sublarr/releases/tag/v1.17.0
+  Full release notes can be found at https://github.com/Abrechen2/sublarr/releases/tag/v1.17.1
 dependencies: []
 path: ""
 defaultUsername: ""
