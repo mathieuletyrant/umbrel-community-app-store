@@ -54,11 +54,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  The tab bar at the bottom of the screen on mobile is now opaque, so
-  content no longer shows through it while scrolling.
+  New "fresh episodes first" mode on Home, a "Saving up" status to wait for a
+  full season or a number of episodes, and a spoiler shield for episode
+  titles. Snug can offer to mark earlier episodes as watched when you catch
+  up, and the whole app is now available in French or English.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/snug/releases/tag/v0.8.1
+  https://github.com/mathieuletyrant/snug/releases/tag/v0.9.0
 dependencies: []
 path: ""
 defaultUsername: ""
