@@ -58,13 +58,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  Kodi webhooks accept an optional source field, a Silo icon joins the
-  connection icons, the sync progress counter is fixed for multi-episode
-  files and skipped items, and the calendar filter buttons wrap on small
-  screens. Security updates to the bundled Node.js and certificate roots.
+  Kodi plays triggered by a library update are now recorded with the
+  source "kodi" instead of the raw add-on flag.
 
 
-  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.34.1
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.34.2
 dependencies: []
 path: ""
 defaultUsername: ""
