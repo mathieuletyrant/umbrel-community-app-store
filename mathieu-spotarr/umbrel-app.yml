@@ -54,10 +54,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
 releaseNotes: >-
-  Spotarr has a new spotlight logo in the web UI.
+  The logo and Home Screen icon now have hashed file names, so browsers and iOS pick up the new icon instead of a cached one.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.15.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.15.1
 dependencies: []
 path: ""
 defaultUsername: ""
