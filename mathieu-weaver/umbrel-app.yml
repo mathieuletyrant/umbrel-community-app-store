@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Bulk actions on large selections now work in bounded groups, and a cancelled job only leaves the queue once its history record is saved. Downloads that stall for no clear reason are retried automatically, and archive writes are ordered again so direct unpack is reliable.
+  The queue stays responsive while Weaver repairs or extracts, restarts resume around missing articles instead of crawling, and downloads no longer get stuck on phantom in-flight work. The download checkpoint format changes: files that were part-way through a download restart from the beginning after the update.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.4
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.5
 dependencies: []
 path: ""
 defaultUsername: "admin"
