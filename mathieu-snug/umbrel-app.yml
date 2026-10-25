@@ -54,12 +54,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  Snug now offers an iCal calendar feed, sorting in the Library and the time
-  left to watch. Seasons show per-season progress segments, and Series and
-  seasons can be rated out of 10 from the app, CSV import and MCP.
+  The MCP assistant can now manage your library (list, set status, mark
+  watched or unwatched, rate, untrack) and import a history from another
+  tracker through a new import prompt. Season progress now follows the current
+  season instead of the last one.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/snug/releases/tag/v0.11.0
+  https://github.com/mathieuletyrant/snug/releases/tag/v0.12.0
 dependencies: []
 path: ""
 defaultUsername: ""
