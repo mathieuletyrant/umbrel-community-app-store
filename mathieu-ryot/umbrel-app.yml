@@ -59,10 +59,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-4.jpg
 releaseNotes: >-
-  Security update: React Router is upgraded to 7.18.4, fixing two published
-  vulnerabilities (CVE-2026-42211 and CVE-2026-42342) in the web interface.
+  Fixes sign-in when Ryot is reached through an HTTPS proxy and no frontend URL
+  is configured.
 
-  Full release notes can be found at https://github.com/IgnisDa/ryot/releases/tag/v10.5.4
+  Full release notes can be found at https://github.com/IgnisDa/ryot/releases/tag/v10.5.5
 dependencies: []
 path: ""
 defaultUsername: ""
