@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Security update: notifications no longer follow HTTP redirects (Apprise 1.13.1), and the bundled setuptools and frontend follow-redirects dependencies are updated. No configuration changes.
+  Live updates (progress, toasts, queue) now work when Sublarr is opened through a LAN IP or a domain instead of localhost. 1.17.3 hardens the web UI and API: no more probing of files outside the library, error responses no longer carry exception text, and log lines cannot be forged. Translation is no longer labelled beta. No configuration changes.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/sublarr/releases/tag/v1.17.2
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.17.4
 dependencies: []
 path: ""
 defaultUsername: ""
