@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/device.xml,/discover.json,/lineup.json,/lineup_status.json,/stream/*,/streams/*,/api/channels.m3u,/api/xmltv.xml"
 
   server:
-    image: ghcr.io/chrisbenincasa/tunarr:2026.10.3@sha256:18c475cc6b6abcc8aff267789e3f56fe9fbd0ea08e36919accfe7fdf42034b63
+    image: ghcr.io/chrisbenincasa/tunarr:2026.10.4@sha256:4eaf595ea82e7f47c5add48e3216b04005121988b80f062e21c50999f4761f7a
     environment:
       - TZ=Etc/UTC
     volumes:
