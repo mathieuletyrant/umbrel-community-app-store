@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Movie availability settings move to the Movie facet and can be overridden per library. RSS polling is bounded and scheduled jobs run independently, so a long sync no longer delays other jobs. Stuck unconfirmed grabs are recovered, and episode revision suffixes such as S07E12v2 are recognised. Maintenance rules and request rules stay experimental and are disabled after the upgrade.
+  Adds HTTP indexer support with a native HTTP download client, and shows movies in the calendar using their availability dates. Imported episode files can be reassigned from the web, and each user can pick a color palette. RSS polling is spread across scheduler ticks. Request leases now only expire by date: operator keeps are removed, and an enabled "Expired request leases" rule returns to dry run. Weaver 0.11.5 or newer is required.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.20
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.21
 dependencies: []
 path: ""
 defaultUsername: ""
