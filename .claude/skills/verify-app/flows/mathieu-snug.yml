@@ -1,3 +1,4 @@
+verified: 0.11.0 on umbrelOS 2.0.0 (2026-10-25)
 vars:
   HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
 settings:
