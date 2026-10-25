@@ -7,7 +7,7 @@ name: Ryot
 tagline: Track the movies, shows, books, games and workouts of your life in one place
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/icon.png
 # renovate: datasource=docker depName=ghcr.io/ignisda/ryot
-version: "10.5.4"
+version: "10.5.5"
 port: 8010
 description: >-
   Ryot ("Roll Your Own Tracker") keeps track of everything you watch, read,
