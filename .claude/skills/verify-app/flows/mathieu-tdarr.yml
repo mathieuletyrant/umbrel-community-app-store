@@ -1,4 +1,4 @@
-verified: 3.00.00 on umbrelOS 2.0.0 (2026-10-11)
+verified: 3.02.00 on umbrelOS 2.0.0 (2026-10-25)
 steps:
   - goto: /
   - see: Please create a local account
