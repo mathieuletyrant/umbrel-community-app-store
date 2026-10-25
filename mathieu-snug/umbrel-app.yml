@@ -54,13 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  The MCP assistant gains a calendar tool listing the episodes airing in the
-  next days, and series and library results now include the day episodes were
-  watched. Episodes can also be read with absolute numbering, such as "Ep.
-  1156", per series.
+  The library tool of the MCP assistant can now filter and sort the series it
+  lists.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/snug/releases/tag/v0.13.0
+  https://github.com/mathieuletyrant/snug/releases/tag/v0.14.0
 dependencies: []
 path: ""
 defaultUsername: ""
