@@ -56,10 +56,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
 releaseNotes: >-
-  The bundled mkvmerge and mkvpropedit tools are updated to MKVToolNix v102 (previously v82). When Sonarr or Radarr reject a webhook, Muxarr now shows the reason they give, usually a Muxarr URL they cannot reach.
+  Conversions now check for free disk space before writing the converted copy and fail with a clear message instead of filling the disk. Progress is shown live when you open a conversion that is already running. The bundled MKVToolNix is updated to v103 and several dependencies are refreshed.
 
 
-  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.12
+  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.13
 dependencies: []
 path: ""
 defaultUsername: ""
