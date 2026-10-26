@@ -54,12 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  Snug can now send the admin's notifications through ntfy. Settings is
-  reorganized: integrations and preferences are grouped lists, and your account
-  now lives in the navigation.
+  The home screen can now suggest what fits a time budget, so you can pick
+  something short or long to match the time you have.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/snug/releases/tag/v0.16.0
+  https://github.com/mathieuletyrant/snug/releases/tag/v0.17.0
 dependencies: []
 path: ""
 defaultUsername: ""
