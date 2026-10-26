@@ -54,11 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  The library tool of the MCP assistant can now filter and sort the series it
-  lists.
+  You can now export your series as a CSV file, and import that file back
+  into Snug.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/snug/releases/tag/v0.14.0
+  https://github.com/mathieuletyrant/snug/releases/tag/v0.15.0
 dependencies: []
 path: ""
 defaultUsername: ""
