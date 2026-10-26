@@ -7,7 +7,7 @@ name: Snug
 tagline: A cozy tracker for the TV series you're watching
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/snug
-version: "0.16.0"
+version: "0.17.0"
 port: 3077
 description: >-
   Snug is a self-hosted tracker for the TV series you're watching: where you
