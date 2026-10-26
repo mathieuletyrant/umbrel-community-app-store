@@ -57,11 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Plex metadata repair is now on by default. Dependency updates under the
-  hood.
+  Dependency update (zod) under the hood, no change for users.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.45.0
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.45.1
 dependencies: []
 path: ""
 defaultUsername: ""
