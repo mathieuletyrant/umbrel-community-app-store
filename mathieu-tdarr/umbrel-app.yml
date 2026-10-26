@@ -47,7 +47,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tdarr/gallery-4.jpg
 releaseNotes: >-
-  Tdarr 3.02.00 is a minor update to the 3.0 Rust engine. Upstream published no
+  Tdarr 3.03.00 is a minor update to the 3.0 Rust engine. Upstream published no
   detailed notes for this version; no configuration changes are needed on our
   side.
 
