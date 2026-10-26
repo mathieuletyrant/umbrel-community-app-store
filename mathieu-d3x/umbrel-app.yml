@@ -1,0 +1,65 @@
+manifestVersion: 1
+id: mathieu-d3x
+storage:
+  dataRoot: data
+category: media
+name: D3X
+tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
+# renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
+version: "1.1.38"
+port: 8733
+description: >-
+  D3X is the open-source companion tool of the V3X tracker. It talks to your
+  torrent client through its web interface and to V3X with your API key.
+
+
+  It cross-seeds what you already seed for other trackers: it finds the
+  identical releases on V3X and adds them on the same files, nothing is
+  downloaded again. It lists what you have that V3X is missing and publishes
+  it (the .torrent is built while you fill in the listing: TMDB, MediaInfo,
+  presentation), one release at a time or a whole folder in a batch. It also
+  matches your renamed media library against V3X, watches your hit and runs,
+  and can rerun the analysis on its own and add new identical releases.
+
+
+  D3X never modifies or deletes your files. Every torrent is added stopped,
+  your client checks the data, and only what is 100% complete is started.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. On V3X, create an API key in Settings → Integrations with the "Torznab"
+  (cross-seed) and "Upload" (publish) rights, and paste it in D3X's Settings.
+
+  2. Add your torrent client in D3X's Settings, as Transmission, no username
+  or password: `http://mathieu-transmission-vpn_gluetun_1:9091` for this
+  store's Transmission VPN, `http://transmission_server_1:9091` for the
+  Transmission app of the Umbrel App Store (other clients: see the
+  "Connecting apps" table at
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps).
+
+  3. Click "Analyser mon client".
+
+
+  Your Umbrel's downloads are at /downloads in D3X, the same path as in
+  Transmission. D3X opens straight after the Umbrel login: no access link to
+  copy from its logs.
+developer: V3x0rV3x
+website: https://github.com/V3x0rV3x/D3X
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/V3x0rV3x/D3X
+support: https://github.com/V3x0rV3x/D3X/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
