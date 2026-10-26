@@ -7,7 +7,7 @@ name: Ryot
 tagline: Track the movies, shows, books, games and workouts of your life in one place
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/icon.png
 # renovate: datasource=docker depName=ghcr.io/ignisda/ryot
-version: "10.5.5"
+version: "10.5.5-patch.1"
 port: 8010
 description: >-
   Ryot ("Roll Your Own Tracker") keeps track of everything you watch, read,
@@ -59,10 +59,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-4.jpg
 releaseNotes: >-
-  Fixes sign-in when Ryot is reached through an HTTPS proxy and no frontend URL
-  is configured.
-
-  Full release notes can be found at https://github.com/IgnisDa/ryot/releases/tag/v10.5.5
+  Updates the bundled PostgreSQL 18.6 database image to its latest build.
 dependencies: []
 path: ""
 defaultUsername: ""
