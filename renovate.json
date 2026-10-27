@@ -72,6 +72,7 @@
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
     { "matchPackageNames": ["lakker/pulsarr"], "commitMessageTopic": "Pulsarr", "allowedVersions": "<1.0.0" },
+    { "matchPackageNames": ["ghcr.io/jessielw/reclaimerr"], "commitMessageTopic": "Reclaimerr" },
     { "matchPackageNames": ["ghcr.io/ignisda/ryot"], "commitMessageTopic": "Ryot" },
     { "matchPackageNames": ["bellamy/scrob"], "commitMessageTopic": "Scrob" },
     { "matchPackageNames": ["ghcr.io/scryer-media/scryer"], "commitMessageTopic": "Scryer" },

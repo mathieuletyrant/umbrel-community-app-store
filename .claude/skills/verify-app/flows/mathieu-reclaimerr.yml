@@ -1,0 +1,33 @@
+verified: 0.6.4 on umbrelOS 2.0.0 (2026-10-27)
+requires: [radarr, sonarr]
+vars:
+  RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+  SONARR_API_KEY: docker exec sonarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+# No media server offline (Jellyfin and Plex need their own setup and account): the proof is
+# Radarr and Sonarr wired and healthy on the dashboard.
+steps:
+  - goto: /
+  - see: Welcome! Create your admin account to get started.
+  - fill: {placeholder: Admin password, exact: true, value: umbrel-verify}
+  - fill: {placeholder: Confirm password, value: umbrel-verify}
+  - click: {role: button, name: Create Admin Account}
+  - see: Setup complete!
+  - fill: {css: "#username", value: admin}
+  - fill: {css: "#password", value: umbrel-verify}
+  - click: {role: button, name: Sign In}
+  - see: Nothing reclaimable right now
+  - goto: /#/settings
+  - click: {role: button, name: Radarr}
+  - fill: {placeholder: "e.g. http://localhost:7878", value: "http://radarr_server_1:7878"}
+  - fill: {label: API Key, value: "${RADARR_API_KEY}"}
+  - click: {role: button, name: Save}
+  - wait: 1500
+  - click: {role: button, name: Sonarr}
+  - fill: {placeholder: "e.g. http://localhost:8989", value: "http://sonarr_server_1:8989"}
+  - fill: {label: API Key, value: "${SONARR_API_KEY}"}
+  - click: {role: button, name: Save}
+  - wait: 1500
+  - goto: /#/
+  - see: http://radarr_server_1:7878
+  - see: http://sonarr_server_1:8989
+  - shot: dashboard

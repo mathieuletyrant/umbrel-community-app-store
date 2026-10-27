@@ -1,0 +1,70 @@
+manifestVersion: 1
+id: mathieu-reclaimerr
+storage:
+  dataRoot: data
+category: media
+name: Reclaimerr
+tagline: Rule-based cleanup for Jellyfin, Plex and Emby libraries
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/icon.png
+# renovate: datasource=docker depName=ghcr.io/jessielw/reclaimerr
+version: "0.6.4"
+port: 8011
+description: >-
+  Reclaimerr frees disk space on your media server without surprises. It syncs
+  your Jellyfin, Plex or Emby libraries, finds what is eligible for cleanup
+  with rules you build (never watched, watched long ago, oldest additions,
+  biggest files, duplicates…) and lists them as candidates with the space each
+  one would free.
+
+
+  Nothing goes without a say: users can ask to protect a title or request its
+  deletion, admins approve or deny, and protected titles and pending requests
+  are always skipped. Deletion goes through Radarr and Sonarr when they are
+  connected (or the media server otherwise), can move files instead of
+  deleting them, and only runs on a schedule once you turn it on. The
+  dashboard shows what was reclaimed, what is leaving soon and what was
+  recently added; notifications go to Discord, email and more.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open Reclaimerr and create the admin password (the username is `admin`),
+  then sign in.
+
+  2. Settings → Media Servers: add Jellyfin (`http://jellyfin_server_1:8096`,
+  API key from Jellyfin's Dashboard → API Keys) or Plex
+  (`http://host.docker.internal:32400`, sign in with Plex or paste your Plex
+  token).
+
+  3. Settings → Radarr and Settings → Sonarr: add `http://radarr_server_1:7878`
+  and `http://sonarr_server_1:8989` with their API keys (Settings → General in
+  each). Optionally Seerr (`http://jellyseerr_server_1:5055`), Tautulli or
+  Tracearr (`http://mathieu-tracearr_server_1:3000`) for watch history.
+
+  4. Build your rules, check the Candidates page, then review Settings → Tasks
+  before enabling automatic deletion: it stays off until you turn it on.
+
+
+  Your media library is available at /downloads, the same paths Jellyfin,
+  Plex, Radarr and Sonarr use. All addresses are in the store's README:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
+developer: jessielw
+website: https://jessielw.github.io/Reclaimerr/
+submitter: Mathieu Le Tyrant
+submission: https://github.com/jessielw/Reclaimerr
+repo: https://github.com/jessielw/Reclaimerr
+support: https://github.com/jessielw/Reclaimerr/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
+releaseNotes: >-
+  Initial release on this store.
+permissions:
+  - STORAGE_DOWNLOADS
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
