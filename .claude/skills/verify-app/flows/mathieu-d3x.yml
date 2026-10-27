@@ -1,4 +1,4 @@
-verified: 1.1.38 on umbrelOS 2.0.0 (2026-10-26)
+verified: 1.1.39 on umbrelOS 2.0.0 (2026-10-27)
 steps:
   - goto: /
   - see: Analyser mon client
