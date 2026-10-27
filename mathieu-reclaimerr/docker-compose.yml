@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-reclaimerr_server_1
+      APP_PORT: 8000
+
+  server:
+    image: ghcr.io/jessielw/reclaimerr:0.6.4@sha256:6a87325f2729285bc6430b86a16b52dfde6d15d8223c403e33c70ddb75fa4aea
+    environment:
+      - TZ=Etc/UTC
+      - PUID=1000
+      - PGID=1000
+      - UMASK=022
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ${APP_DATA_DIR}/data/reclaimerr:/app/data
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    restart: on-failure
