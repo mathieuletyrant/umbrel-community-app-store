@@ -7,7 +7,7 @@ name: Tunarr
 tagline: Turn your media library into live TV channels
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/chrisbenincasa/tunarr
-version: "2026.10.3"
+version: "2026.10.4"
 port: 8023
 description: >-
   Tunarr builds classic, always-on TV channels out of the movies, shows and
@@ -55,14 +55,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-3.jpg
 releaseNotes: >-
-  Bug-fix release. Log rolling is now on by default, Emby programs get external
-  links, and anamorphic video keeps the right aspect ratio. Fixes for VAAPI
-  tone-mapping, a hang in the ffmpeg gcd helper, HLS default audio, NFO
-  scanning and movie artwork, and shuffle and random slots now use the seeded
-  random. Stored language codes are normalised to ISO 639-2/T.
+  New look: a redesigned app shell, theme and IBM Plex fonts. Movie slots in
+  time and random slot schedules are migrated to custom-show slots, and the API
+  now rejects new movie slots there. Fixes for subtitle paths and playlists,
+  AV1 decoding, VAAPI MPEG-2 output, HDR tone-mapping, library scan spinner and
+  clipboard copy over plain HTTP, and a database index speeds up large libraries.
 
+  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.4
 
-  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.3
 dependencies: []
 path: ""
 defaultUsername: ""
