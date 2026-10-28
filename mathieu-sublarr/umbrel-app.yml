@@ -7,7 +7,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.17.4"
+version: "1.18.0"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Live updates (progress, toasts, queue) now work when Sublarr is opened through a LAN IP or a domain instead of localhost. 1.17.3 hardens the web UI and API: no more probing of files outside the library, error responses no longer carry exception text, and log lines cannot be forged. Translation is no longer labelled beta. No configuration changes.
+  Titles added from watched folders (without Sonarr or Radarr) now use their own language profile everywhere, and keep their own ids, settings and glossary instead of mixing with Sonarr/Radarr titles of the same number. Subtitle health scans and the nightly sweep now cover standalone series, and a single standalone title can be rescanned. Existing standalone settings keep working with no upgrade step.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.17.4
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.0
 dependencies: []
 path: ""
 defaultUsername: ""
