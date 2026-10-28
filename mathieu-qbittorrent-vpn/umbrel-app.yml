@@ -7,7 +7,7 @@ name: qBittorrent VPN
 tagline: qBittorrent behind a VPN, with a kill switch and port forwarding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/icon.png
 # renovate: datasource=docker depName=ghcr.io/hotio/qbittorrent
-version: "5.3.0"
+version: "5.3.0-patch.1"
 port: 8185
 description: >-
   The qBittorrent BitTorrent client, with all of its traffic sent through your
@@ -78,7 +78,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-3.jpg
-releaseNotes: ""
+releaseNotes: "Refreshed the qBittorrent image (same 5.3.0 release, rebuilt by hotio)."
 dependencies: []
 path: ""
 defaultUsername: "admin"
