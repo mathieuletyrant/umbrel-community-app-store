@@ -66,6 +66,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
 | **Crawl4AI** | **Lets an AI read any web page**: a headless-browser crawler that returns clean Markdown, HTML, screenshots or PDFs, with its own MCP server and REST API — pair it with SearXNG for web search. |
 | **Open Notebook** | **Your own NotebookLM**: chat with your PDFs, web pages, YouTube videos and audio, get cited answers and notes, and turn a notebook into a multi-voice podcast — with the AI of your choice (OpenAI, Anthropic, Google, Ollama…). |
+| **Hermes Agent** | **Nous Research's self-improving AI agent**, packaged from the official image: it writes its own skills, remembers you across sessions, runs scheduled tasks and talks to MCP servers. Hermes's own login means the same address works from a browser, Hermes Desktop and the Hermex iPhone app; its OpenAI-compatible API serves apps like Open WebUI. |
 
 ## 🔗 Connecting apps
 
@@ -90,6 +91,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Plex | `http://host.docker.internal:32400` | your Plex token |
 | Jellyfin | `http://jellyfin_server_1:8096` | Dashboard → API Keys |
 | Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
+| Hermes Agent | `http://mathieu-hermes_server_1:8642/v1` (OpenAI-compatible API) | its default password |
 | SearXNG | `http://searxng-web:8080` | none |
 | Ollama | `http://ollama_ollama_1:11434` | none |
 | Healarr | `http://mathieu-healarr_server_1:3090` | its settings |
