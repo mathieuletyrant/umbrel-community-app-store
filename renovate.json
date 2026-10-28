@@ -73,6 +73,7 @@
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
     { "matchPackageNames": ["lakker/pulsarr"], "commitMessageTopic": "Pulsarr", "allowedVersions": "<1.0.0" },
+    { "matchPackageNames": ["ghcr.io/hotio/qbittorrent"], "commitMessageTopic": "qBittorrent VPN" },
     { "matchPackageNames": ["ghcr.io/jessielw/reclaimerr"], "commitMessageTopic": "Reclaimerr" },
     { "matchPackageNames": ["ghcr.io/ignisda/ryot"], "commitMessageTopic": "Ryot" },
     { "matchPackageNames": ["bellamy/scrob"], "commitMessageTopic": "Scrob" },
@@ -105,6 +106,16 @@
       "matchPackageNames": ["ghcr.io/ignisda/ryot"],
       "matchManagers": ["custom.regex"],
       "extractVersion": "^v(?<version>.+)$"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/hotio/qbittorrent"],
+      "matchManagers": ["docker-compose"],
+      "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/hotio/qbittorrent"],
+      "matchManagers": ["custom.regex"],
+      "extractVersion": "^release-(?<version>.+)$"
     },
     {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],

@@ -1,0 +1,21 @@
+egress: true
+# Gluetun is unhealthy until the key is saved; the logs below prove the tunnel instead.
+ignoreHealth: true
+vars:
+  # A real ProtonVPN WireGuard key (NAT-PMP on): the cloud environment's secret, or a local file.
+  WG_KEY: printenv PROTON_WG_KEY || cat ~/.umbrel-verify/proton-wg-key
+settings:
+  VPN_SERVICE_PROVIDER: protonvpn
+  VPN_PORT_FORWARDING: "on"
+  PORT_FORWARD_ONLY: "on"
+  WIREGUARD_PRIVATE_KEY: ${WG_KEY}
+logs:
+  gluetun: port forwarded is \d+
+  port-sync: qBittorrent peer port set to \d+
+steps:
+  - goto: /
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, value: "${env.port-sync.WEBUI_PASSWORD}"}
+  - click: {role: button, name: Login}
+  - see: Transfers
+  - shot: qbittorrent

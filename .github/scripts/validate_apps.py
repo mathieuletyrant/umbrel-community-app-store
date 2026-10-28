@@ -162,7 +162,7 @@ for d in app_dirs:
         if not tags:
             fail(f"{name}: no service uses the image {annotation.group(1)} named by the renovate annotation")
         for tag in tags:
-            bare = re.sub(r"^(supervised-|v)", "", tag)
+            bare = re.sub(r"^(supervised-|release-|v)", "", tag)
             if bare != version and not bare.startswith(version + "-"):
                 fail(f"{name}: image tag '{tag}' does not match version '{app.get('version')}'")
 
