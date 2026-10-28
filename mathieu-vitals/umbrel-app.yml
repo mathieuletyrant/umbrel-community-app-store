@@ -7,7 +7,7 @@ name: Vitals
 tagline: Live numbers and health of your media stack, as one JSON API
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/vitals
-version: "0.3.0"
+version: "0.3.1"
 port: 6565
 description: >-
   Vitals reads the apps of your media stack and answers with one small JSON
@@ -59,9 +59,8 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-2.jpg
 releaseNotes: >-
-  Vitals can now read qBittorrent and qBittorrent VPN: pick its address and
-  paste its Web UI password in this app's settings. The home screen widget
-  shows qBittorrent's downloads when it is set, Transmission's otherwise.
+  Fixes the qBittorrent connection: qBittorrent 5.2 and later answer a good
+  login differently, and Vitals took it as a wrong password.
 
 dependencies: []
 path: ""

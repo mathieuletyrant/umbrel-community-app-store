@@ -3,6 +3,7 @@ import {afterAll, beforeEach, expect, test} from 'bun:test'
 import {qbittorrent} from '../src/sources/qbittorrent'
 
 let logins = 0
+let legacyLogin = false
 let sessions = new Set<string>()
 let torrents: {state: string; name: string}[] = []
 
@@ -16,7 +17,8 @@ const api = Bun.serve({
 			logins++
 			const sid = `s${logins}`
 			sessions.add(sid)
-			return new Response('Ok.', {headers: {'Set-Cookie': `QBT_SID_8080=${sid}; HttpOnly; path=/; SameSite=Strict`}})
+			const cookie = {'Set-Cookie': `QBT_SID_8080=${sid}; HttpOnly; path=/; SameSite=Strict`}
+			return legacyLogin ? new Response('Ok.', {headers: cookie}) : new Response(null, {status: 204, headers: cookie})
 		}
 		const sid = request.headers.get('cookie')?.match(/QBT_SID_8080=([^;]+)/)?.[1]
 		if (!sid || !sessions.has(sid)) return new Response('Forbidden', {status: 403})
@@ -31,6 +33,7 @@ const url = `http://localhost:${api.port}/`
 
 beforeEach(() => {
 	logins = 0
+	legacyLogin = false
 	sessions = new Set()
 	torrents = [
 		{state: 'downloading', name: 'a'},
@@ -50,6 +53,11 @@ test('counts torrents by state and reads the speeds, logging in once', async () 
 	})
 	await source.read!()
 	expect(logins).toBe(1)
+})
+
+test('accepts the 200 "Ok." login answer of qBittorrent before 5.2', async () => {
+	legacyLogin = true
+	expect((await qbittorrent({name: 'qBittorrent', url, password: 'secret'}).read!()).data.seeding).toBe(2)
 })
 
 test('logs in again when the session expired', async () => {
