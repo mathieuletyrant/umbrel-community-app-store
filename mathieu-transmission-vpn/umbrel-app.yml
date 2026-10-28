@@ -29,10 +29,7 @@ description: >-
 
   A provider sometimes stops renewing the forwarded port while the tunnel
   stays up. Every 5 minutes the app checks that the port is really open, and
-  restarts the VPN to get a new one when it stays closed. Set NOTIFY_URL to be
-  told when that happens and when seeding is back, for example with ntfy:
-  http://ntfy_app_1/transmission for the ntfy app on your Umbrel, with an
-  access token from its Account page in NOTIFY_TOKEN.
+  restarts the VPN to get a new one when it stays closed.
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -87,9 +84,7 @@ gallery:
 releaseNotes: >-
   With port forwarding on, the app now checks every 5 minutes that the
   forwarded port is really open, and restarts the VPN to get a new one when
-  your provider stopped renewing it. New NOTIFY_URL and NOTIFY_TOKEN settings
-  send a notification (ntfy or any URL taking a POST) when that happens and
-  when seeding is back.
+  your provider stopped renewing it.
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
@@ -142,13 +137,5 @@ environment:
       - "on"
       - "off"
     note: Optional, ProtonVPN and Private Internet Access only. On picks only the servers that support port forwarding (P2P servers on ProtonVPN).
-  - name: NOTIFY_URL
-    services:
-      - port-sync
-    note: Optional. A URL that receives a POST when the forwarded port closes and when it opens again, e.g. an ntfy topic such as http://ntfy_app_1/transmission.
-  - name: NOTIFY_TOKEN
-    services:
-      - port-sync
-    note: Optional. Sent as a Bearer token with each notification, e.g. an ntfy access token (tk_…).
 permissions:
   - STORAGE_DOWNLOADS

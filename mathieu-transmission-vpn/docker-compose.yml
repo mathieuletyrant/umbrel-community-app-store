@@ -62,25 +62,19 @@ services:
 
   port-sync:
     image: linuxserver/transmission:4.1.3@sha256:55aaeedf9fc354d34136387e15ee0ba4679096f20398dd2875867e5cd5cf8be5
+    network_mode: service:gluetun
     depends_on:
       - server
     entrypoint:
       - sh
       - -c
       - |
-        tr=mathieu-transmission-vpn_gluetun_1:9091
-        notify() {
-          [ -n "$$NOTIFY_URL" ] || return 0
-          msg=$$1 tags=$$2
-          set -- -H "Title: Transmission VPN" -H "Tags: $$tags"
-          [ -n "$$NOTIFY_TOKEN" ] && set -- "$$@" -H "Authorization: Bearer $$NOTIFY_TOKEN"
-          curl -fsS -m 15 -o /dev/null "$$@" -d "$$msg" "$$NOTIFY_URL" || echo "Could not send the notification"
-        }
+        tr=127.0.0.1:9091
         vpn() {
           curl -fsS -m 30 -o /dev/null -X PUT -H "X-API-Key: $$CONTROL_API_KEY" -H "Content-Type: application/json" \
-            -d "{\"status\":\"$$1\"}" http://mathieu-transmission-vpn_gluetun_1:8000/v1/vpn/status
+            -d "{\"status\":\"$$1\"}" http://127.0.0.1:8000/v1/vpn/status
         }
-        tick=0 bad=0 restarts=0 last_restart=0 down=
+        tick=0 bad=0 restarts=0 last_restart=0
         while :; do
           port=$$(cat /gluetun/forwarded_port 2>/dev/null)
           [ "$$port" = 0 ] && port=
@@ -102,12 +96,8 @@ services:
               esac
             fi
             if [ "$$state" = open ]; then
-              bad=0
-              if [ -n "$$down" ]; then
-                echo "Port $$port is open again"
-                notify "Seeding is back: port $$port is open again." white_check_mark
-                down= restarts=0
-              fi
+              [ "$$restarts" -gt 0 ] && echo "Port $$port is open again"
+              bad=0 restarts=0
             elif [ "$$state" = closed ]; then
               bad=$$((bad + 1))
             fi
@@ -116,12 +106,6 @@ services:
             if [ "$$bad" -ge 2 ] && [ $$((now - last_restart)) -ge "$$wait" ]; then
               restarts=$$((restarts + 1))
               echo "No open forwarded port at the last two checks: restarting the VPN (attempt $$restarts)"
-              if [ -z "$$down" ]; then
-                notify "The forwarded port is closed, so peers can't reach Transmission. Restarting the VPN to get a new one." warning
-              elif [ "$$restarts" = 3 ]; then
-                notify "The port is still closed after 3 VPN restarts: check this app's logs." rotating_light
-              fi
-              down=1
               vpn stopped || echo "Could not stop the VPN through Gluetun's control server"
               sleep 5
               n=0
