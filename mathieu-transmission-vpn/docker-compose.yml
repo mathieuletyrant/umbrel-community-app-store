@@ -20,12 +20,21 @@ services:
           trap 'exit 0' TERM
           while :; do sleep 1; done
         fi
+        cat > /tmp/auth.toml <<TOML
+        [[roles]]
+        name = "port-sync"
+        routes = ["PUT /v1/vpn/status"]
+        auth = "apikey"
+        apikey = "$$CONTROL_API_KEY"
+        TOML
         exec /gluetun-entrypoint
     environment:
       TZ: Etc/UTC
       VPN_TYPE: wireguard
       VPN_PORT_FORWARDING_STATUS_FILE: /gluetun/forwarded_port
       PUBLICIP_FILE: /gluetun/ip
+      HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /tmp/auth.toml
+      CONTROL_API_KEY: ${APP_SEED:?APP_SEED is not set}
     volumes:
       - ${APP_DATA_DIR}/data/gluetun:/gluetun
     restart: on-failure
@@ -53,22 +62,81 @@ services:
 
   port-sync:
     image: linuxserver/transmission:4.1.3@sha256:55aaeedf9fc354d34136387e15ee0ba4679096f20398dd2875867e5cd5cf8be5
-    network_mode: service:gluetun
     depends_on:
       - server
     entrypoint:
       - sh
       - -c
       - |
-        last=
+        tr=mathieu-transmission-vpn_gluetun_1:9091
+        notify() {
+          [ -n "$$NOTIFY_URL" ] || return 0
+          msg=$$1 tags=$$2
+          set -- -H "Title: Transmission VPN" -H "Tags: $$tags"
+          [ -n "$$NOTIFY_TOKEN" ] && set -- "$$@" -H "Authorization: Bearer $$NOTIFY_TOKEN"
+          curl -fsS -m 15 -o /dev/null "$$@" -d "$$msg" "$$NOTIFY_URL" || echo "Could not send the notification"
+        }
+        vpn() {
+          curl -fsS -m 30 -o /dev/null -X PUT -H "X-API-Key: $$CONTROL_API_KEY" -H "Content-Type: application/json" \
+            -d "{\"status\":\"$$1\"}" http://mathieu-transmission-vpn_gluetun_1:8000/v1/vpn/status
+        }
+        tick=0 bad=0 restarts=0 last_restart=0 down=
         while :; do
           port=$$(cat /gluetun/forwarded_port 2>/dev/null)
-          if [ -n "$$port" ] && [ "$$port" != "$$last" ] && transmission-remote 127.0.0.1:9091 --port "$$port" --no-portmap >/dev/null; then
-            echo "Transmission peer port set to $$port"
-            last=$$port
+          [ "$$port" = 0 ] && port=
+          if [ -n "$$port" ]; then
+            listen=$$(transmission-remote "$$tr" -si 2>/dev/null | sed -n 's/^ *Listen port: *//p')
+            if [ -n "$$listen" ] && [ "$$listen" != "$$port" ] && transmission-remote "$$tr" --port "$$port" --no-portmap >/dev/null; then
+              echo "Transmission peer port set to $$port"
+            fi
+          fi
+          tick=$$((tick + 1))
+          if [ "$$VPN_PORT_FORWARDING" = on ] && [ $$((tick % 10)) = 0 ]; then
+            if [ -z "$$port" ]; then
+              state=closed
+            else
+              case "$$(transmission-remote "$$tr" -pt 2>/dev/null)" in
+                *"open: Yes"*) state=open ;;
+                *"open: No"*) state=closed ;;
+                *) state=unknown ;;
+              esac
+            fi
+            if [ "$$state" = open ]; then
+              bad=0
+              if [ -n "$$down" ]; then
+                echo "Port $$port is open again"
+                notify "Seeding is back: port $$port is open again." white_check_mark
+                down= restarts=0
+              fi
+            elif [ "$$state" = closed ]; then
+              bad=$$((bad + 1))
+            fi
+            now=$$(date +%s) wait=900
+            [ "$$restarts" -ge 3 ] && wait=3600
+            if [ "$$bad" -ge 2 ] && [ $$((now - last_restart)) -ge "$$wait" ]; then
+              restarts=$$((restarts + 1))
+              echo "No open forwarded port at the last two checks: restarting the VPN (attempt $$restarts)"
+              if [ -z "$$down" ]; then
+                notify "The forwarded port is closed, so peers can't reach Transmission. Restarting the VPN to get a new one." warning
+              elif [ "$$restarts" = 3 ]; then
+                notify "The port is still closed after 3 VPN restarts: check this app's logs." rotating_light
+              fi
+              down=1
+              vpn stopped || echo "Could not stop the VPN through Gluetun's control server"
+              sleep 5
+              n=0
+              until vpn running; do
+                n=$$((n + 1))
+                [ "$$n" -ge 6 ] && { echo "Could not start the VPN through Gluetun's control server"; break; }
+                sleep 10
+              done
+              last_restart=$$now bad=0
+            fi
           fi
           sleep 30
         done
+    environment:
+      CONTROL_API_KEY: ${APP_SEED:?APP_SEED is not set}
     volumes:
       - ${APP_DATA_DIR}/data/gluetun:/gluetun:ro
     restart: on-failure
