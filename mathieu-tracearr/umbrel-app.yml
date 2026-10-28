@@ -45,16 +45,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  History, user pages and Stale Content are much faster on servers with
-  years of plays, and library syncs on large libraries no longer run the
-  database out of memory. Dates and times now follow your region, with a
-  date format and first day of the week in Settings → General → Locale.
-  Notifications (Telegram in particular) give clearer errors and no longer
-  fail on slow connections. 3.1.1 updates Node to fix a Brotli security
-  flaw.
+  Linking your own Jellyfin or Emby account is now possible from Settings →
+  Servers → Connections. A library that fails to sync (a slow Plex scan, for
+  example) no longer stops the others, Plexamp playback is no longer
+  recorded as downloads, several stats (completion rates, binge scores,
+  Most Watched) are more accurate, and History, Violations and Settings open
+  faster.
 
-  Full release notes can be found at
-  https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.1
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.2
 dependencies: []
 path: ""
 defaultUsername: ""
