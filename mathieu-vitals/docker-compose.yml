@@ -19,4 +19,5 @@ services:
       HEALARR_URL: http://mathieu-healarr_server_1:3090
       CLEANUPARR_URL: http://mathieu-cleanuparr_server_1:11011
       TRACEARR_URL: http://mathieu-tracearr_server_1:3000
+      QBITTORRENT_USERNAME: admin
     restart: on-failure

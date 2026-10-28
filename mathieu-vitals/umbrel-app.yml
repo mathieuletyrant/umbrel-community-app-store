@@ -17,10 +17,11 @@ description: >-
 
 
   Apps it reads: Radarr, Sonarr, Prowlarr, Bazarr, Seerr (Jellyseerr or
-  Overseerr), Transmission, Maintainerr, Healarr, Cleanuparr and Tracearr.
-  Paste the API key of each app you use in this app's settings in umbrelOS
-  (⋯ → Settings → Advanced settings), and pick Transmission (or Transmission
-  VPN) and Maintainerr from their list. The addresses of the Umbrel App Store apps are already
+  Overseerr), Transmission, qBittorrent, Maintainerr, Healarr, Cleanuparr and
+  Tracearr. Paste the API key of each app you use in this app's settings in
+  umbrelOS (⋯ → Settings → Advanced settings), and pick Transmission (or
+  Transmission VPN), qBittorrent (or qBittorrent VPN, with its password) and
+  Maintainerr from their list. The addresses of the Umbrel App Store apps are already
   filled in. Apps left empty are reported as `not-configured`.
 
 
@@ -34,8 +35,8 @@ description: >-
   - `GET /v1/summary`: every app, with an overall `healthy` flag.
 
   - `GET /v1/apps/<id>`: one app (`radarr`, `sonarr`, `prowlarr`, `bazarr`,
-  `seerr`, `transmission`, `maintainerr`, `healarr`, `cleanuparr`,
-  `tracearr`).
+  `seerr`, `transmission`, `qbittorrent`, `maintainerr`, `healarr`,
+  `cleanuparr`, `tracearr`).
 
   - Send the header `Authorization: Bearer <token>`. The token is the password
   shown in this app's settings in umbrelOS (Default credentials). The Umbrel
@@ -58,8 +59,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-2.jpg
 releaseNotes: >-
-  Vitals can now read Transmission VPN: pick its address in Transmission's
-  list in this app's settings.
+  Vitals can now read qBittorrent and qBittorrent VPN: pick its address and
+  paste its Web UI password in this app's settings. The home screen widget
+  shows qBittorrent's downloads when it is set, Transmission's otherwise.
 
 dependencies: []
 path: ""
@@ -164,6 +166,22 @@ environment:
       - http://transmission_server_1:9091/transmission/rpc
       - http://mathieu-transmission-vpn_gluetun_1:9091/transmission/rpc
     note: Pick the address of your Transmission app, or of Transmission VPN, to read it (its RPC must have no login).
+  - name: QBITTORRENT_URL
+    services:
+      - server
+    options:
+      - http://qbittorrent_server_1:8080
+      - http://mathieu-qbittorrent-vpn_gluetun_1:8080
+    note: Pick the address of your qBittorrent app, or of qBittorrent VPN, to read it.
+  - name: QBITTORRENT_USERNAME
+    services:
+      - server
+    default: admin
+    note: Only if your qBittorrent Web UI username isn't admin.
+  - name: QBITTORRENT_PASSWORD
+    services:
+      - server
+    note: Your qBittorrent Web UI password (for qBittorrent VPN, the default password shown in its settings in umbrelOS).
   - name: MAINTAINERR_URL
     services:
       - server

@@ -6,7 +6,7 @@ import type {Report, Summary} from './types'
 
 const DASH = '–'
 
-const dataOf = <T>(report: Report<T>): T | undefined => (report.status === 'ok' ? report.data : undefined)
+const dataOf = <T>(report: Report<T> | undefined): T | undefined => (report?.status === 'ok' ? report.data : undefined)
 
 const media = (downloading: string, speed: string, movies: string, episodes: string, missing: string): FourStatsWidget => ({
 	type: 'four-stats',
@@ -25,10 +25,11 @@ export function vitalsWidgets(summary: () => Promise<Summary<VitalsSources>>): W
 		media: {
 			async read() {
 				const {apps} = await summary()
-				const [radarr, sonarr, transmission] = [dataOf(apps.radarr), dataOf(apps.sonarr), dataOf(apps.transmission)]
+				const [radarr, sonarr] = [dataOf(apps.radarr), dataOf(apps.sonarr)]
+				const client = dataOf(apps.qbittorrent) ?? dataOf(apps.transmission)
 				return media(
-					transmission ? formatCount(transmission.downloading) : DASH,
-					transmission ? `↓ ${formatSpeed(transmission.downloadSpeed)}` : '',
+					client ? formatCount(client.downloading) : DASH,
+					client ? `↓ ${formatSpeed(client.downloadSpeed)}` : '',
 					radarr ? formatCount(radarr.queue) : DASH,
 					sonarr ? formatCount(sonarr.queue) : DASH,
 					radarr || sonarr ? formatCount((radarr?.missing ?? 0) + (sonarr?.missing ?? 0)) : DASH,
