@@ -27,6 +27,18 @@ test('the media widget sums up downloads, queues and missing media', async () =>
 	})
 })
 
+test('the media widget prefers qBittorrent over Transmission for downloads', async () => {
+	const sources = {
+		radarr: fake('Radarr', arr(0, 0)),
+		sonarr: fake('Sonarr', arr(0, 0)),
+		transmission: absent('Transmission'),
+		qbittorrent: fake('qBittorrent', {downloading: 1, seeding: 100, paused: 0, downloadSpeed: 950, uploadSpeed: 0}),
+	} as unknown as VitalsSources
+
+	const {items} = (await vitalsWidgets(createSummary(sources)).media!.read()) as {items: unknown[]}
+	expect(items[0]).toEqual({title: 'Downloading', text: '1', subtext: '↓ 950 B/s'})
+})
+
 test('the media widget shows dashes for apps it cannot read', async () => {
 	const sources = {
 		radarr: fake('Radarr', arr(2, 14)),
