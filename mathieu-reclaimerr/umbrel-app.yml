@@ -7,7 +7,7 @@ name: Reclaimerr
 tagline: Rule-based cleanup for Jellyfin, Plex and Emby libraries
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/jessielw/reclaimerr
-version: "0.6.4"
+version: "0.6.5"
 port: 8011
 description: >-
   Reclaimerr frees disk space on your media server without surprises. It syncs
