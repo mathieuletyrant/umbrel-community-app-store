@@ -40,7 +40,7 @@
       "matchUpdateTypes": ["digest"],
       "commitMessageExtra": "digest to {{{newDigestShort}}}"
     },
-    { "matchPackageNames": ["qmcgaw/gluetun"], "commitMessageTopic": "Gluetun sidecar", "allowedVersions": "!/^v3\\.41\\./" },
+    { "matchPackageNames": ["qmcgaw/gluetun"], "commitMessageTopic": "Gluetun", "allowedVersions": "!/^v3\\.41\\./" },
     { "matchPackageNames": ["nginx"], "commitMessageTopic": "nginx sidecar" },
     { "matchPackageNames": ["postgres"], "commitMessageTopic": "PostgreSQL sidecar", "allowedVersions": "<19" },
     { "matchPackageNames": ["surrealdb/surrealdb"], "commitMessageTopic": "SurrealDB sidecar", "allowedVersions": "<3" },

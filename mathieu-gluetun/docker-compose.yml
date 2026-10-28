@@ -1,0 +1,135 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-gluetun_web_1
+      APP_PORT: 80
+
+  web:
+    image: nginx:alpine@sha256:a3554c0d0b48177b1413c26e01f695334428020d9df01243fbae3e11cfd17417
+    init: true
+    environment:
+      CONTROL_API_KEY: ${APP_SEED:?APP_SEED is not set}
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        server {
+          listen 80;
+          root /usr/share/nginx/html;
+          resolver 127.0.0.11 valid=10s;
+          set $$upstream http://mathieu-gluetun_gluetun_1:8000;
+
+          location = /status/vpn {
+            access_log off;
+            proxy_pass $$upstream/v1/vpn/status;
+            proxy_set_header X-API-Key "__CONTROL_API_KEY__";
+            proxy_intercept_errors on;
+            error_page 401 403 404 502 504 =503 @offline;
+          }
+
+          location = /status/ip {
+            access_log off;
+            proxy_pass $$upstream/v1/publicip/ip;
+            proxy_set_header X-API-Key "__CONTROL_API_KEY__";
+            proxy_intercept_errors on;
+            error_page 401 403 404 502 504 =503 @offline;
+          }
+
+          location @offline {
+            default_type application/json;
+            return 503 '{}';
+          }
+        }
+        CONF
+        sed -i "s/__CONTROL_API_KEY__/$$CONTROL_API_KEY/" /etc/nginx/conf.d/default.conf
+        cat > /usr/share/nginx/html/index.html <<'HTML'
+        <!doctype html><html lang="en"><head><meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Gluetun</title>
+        <style>body{font-family:system-ui,sans-serif;max-width:720px;margin:8vh auto;padding:0 24px;line-height:1.6;color:#e8e8ef;background:#15161c}code{background:#262833;padding:2px 6px;border-radius:4px;word-break:break-all}h1{margin-bottom:.2em}#status{padding:10px 14px;border-radius:6px;background:#262833}.ok{border-left:3px solid #67b279}.ko{border-left:3px solid #f5a623}table{border-collapse:collapse;width:100%}td{padding:6px 10px;border-bottom:1px solid #262833;vertical-align:top}td:first-child{color:#9a9cab;white-space:nowrap}</style>
+        </head><body>
+        <h1>🛡️ Gluetun</h1>
+        <p>A VPN connection shared through an HTTP proxy: the apps you point at it browse through your VPN, the others keep your own connection.</p>
+        <p id="status">Checking the VPN…</p>
+        <h3>The proxy</h3>
+        <table>
+        <tr><td>Host</td><td><code>mathieu-gluetun_gluetun_1</code></td></tr>
+        <tr><td>Port</td><td><code>8888</code></td></tr>
+        <tr><td>Username</td><td><code>proxy</code></td></tr>
+        <tr><td>Password</td><td>the password shown in this app's settings in umbrelOS (Default credentials)</td></tr>
+        </table>
+        <h3>Sending an app through the VPN</h3>
+        <p><b>Prowlarr</b>, indexer by indexer: Settings → Indexers → Indexer Proxies → + → Http, fill in the proxy above and a tag such as <code>vpn</code>. Then add the <code>vpn</code> tag to each indexer that should go through the VPN.</p>
+        <p><b>Any other app with an HTTP proxy setting</b> (Radarr, Sonarr, Bazarr… under Settings → General → Proxy): same host, port, username and password. Keep "Bypass proxy for local addresses" on so it still reaches your other apps directly.</p>
+        <p>Torrent clients need more than a proxy (their UDP traffic and incoming peers can't go through it): use Transmission VPN for them.</p>
+        <script>
+        const s = document.getElementById("status");
+        async function get(path) {
+          const r = await fetch(path, { cache: "no-store" });
+          return r.ok ? r.json() : null;
+        }
+        async function refresh() {
+          try {
+            const [vpn, ip] = await Promise.all([get("status/vpn"), get("status/ip")]);
+            if (vpn?.status === "running" && ip?.public_ip) {
+              const place = [ip.city, ip.country].filter(Boolean).join(", ");
+              s.className = "ok";
+              s.innerHTML = "✅ Connected. Public IP through the VPN: <code>" + ip.public_ip + "</code>" + (place ? " (" + place + ")" : "") + (ip.organization ? "<br>" + ip.organization : "");
+            } else if (vpn) {
+              s.className = "ko";
+              s.textContent = "⏳ Connecting to the VPN…";
+            } else {
+              s.className = "ko";
+              s.textContent = "⚠️ Not connected: set your VPN provider and its credentials in this app's settings in umbrelOS (⋯ → Settings), then restart the app.";
+            }
+          } catch {
+            s.className = "ko";
+            s.textContent = "⚠️ Gluetun is not responding yet.";
+          }
+        }
+        refresh();
+        setInterval(refresh, 15000);
+        </script>
+        </body></html>
+        HTML
+        exec nginx -g 'daemon off;'
+    depends_on:
+      - gluetun
+    restart: on-failure
+
+  gluetun:
+    image: qmcgaw/gluetun:v3.40.4@sha256:e10584de1f82d8999e5e6c3111901d9d56a2eed21151fb96af060f390bbdfba8
+    cap_add:
+      - NET_ADMIN
+    entrypoint:
+      - sh
+      - -c
+      - |
+        if [ -z "$$VPN_SERVICE_PROVIDER" ] || [ -z "$$WIREGUARD_PRIVATE_KEY$$OPENVPN_USER" ]; then
+          echo "Waiting for the VPN provider and credentials: set them in this app's settings in umbrelOS"
+          trap 'exit 0' TERM
+          while :; do sleep 1; done
+        fi
+        cat > /tmp/auth.toml <<TOML
+        [[roles]]
+        name = "status page"
+        routes = ["GET /v1/vpn/status", "GET /v1/publicip/ip"]
+        auth = "apikey"
+        apikey = "$$CONTROL_API_KEY"
+        TOML
+        exec /gluetun-entrypoint
+    environment:
+      TZ: Etc/UTC
+      VPN_TYPE: wireguard
+      HTTPPROXY: "on"
+      HTTPPROXY_STEALTH: "on"
+      HTTPPROXY_USER: proxy
+      HTTPPROXY_PASSWORD: ${APP_PASSWORD:?APP_PASSWORD is not set}
+      HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /tmp/auth.toml
+      CONTROL_API_KEY: ${APP_SEED:?APP_SEED is not set}
+    volumes:
+      - ${APP_DATA_DIR}/data/gluetun:/gluetun
+    restart: on-failure
