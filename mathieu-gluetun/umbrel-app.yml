@@ -1,0 +1,102 @@
+manifestVersion: 1
+id: mathieu-gluetun
+storage:
+  dataRoot: data
+category: networking
+name: Gluetun
+tagline: Your VPN as a proxy, for the apps you choose
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-gluetun/icon.png
+# renovate: datasource=docker depName=qmcgaw/gluetun
+version: "3.40.4"
+port: 8885
+description: >-
+  Gluetun connects to your VPN and shares it with your other apps through an
+  HTTP proxy. Only the apps you point at the proxy browse through the VPN;
+  everything else on your Umbrel keeps your own connection. Gluetun works
+  with ProtonVPN, Mullvad, NordVPN, Surfshark, Private Internet Access,
+  AirVPN, Windscribe and many more.
+
+
+  Gluetun's kill switch blocks every connection outside the tunnel: if the VPN
+  drops, the proxy stops working until it comes back, it never falls back to
+  your own connection. Its own DNS goes through the tunnel too.
+
+
+  The typical use is Prowlarr: with an Indexer Proxy and a tag, you choose
+  indexer by indexer which ones are reached through the VPN (a tracker
+  blocked by your internet provider, or one that shouldn't see your IP). Any
+  app with an HTTP proxy setting can use it the same way.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open this app's settings (⋯ → Settings → Advanced settings), fill in your
+  VPN and restart the app. Until then, the proxy doesn't start.
+
+
+  1. VPN_SERVICE_PROVIDER: your provider, as Gluetun names it (protonvpn,
+  mullvad, nordvpn, surfshark, private internet access…). Each provider's page
+  of the Gluetun wiki lists what it needs:
+  github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+
+  2. WireGuard (the default): WIREGUARD_PRIVATE_KEY, plus WIREGUARD_ADDRESSES
+  for most providers other than ProtonVPN. OpenVPN: set VPN_TYPE to openvpn,
+  then OPENVPN_USER and OPENVPN_PASSWORD.
+
+
+  Then point an app at the proxy: host mathieu-gluetun_gluetun_1, port 8888,
+  username proxy, and this app's password (shown in its settings in umbrelOS,
+  Default credentials). In Prowlarr: Settings → Indexers → Indexer Proxies → +
+  → Http, with a tag such as vpn, then add that tag to the indexers that should
+  go through the VPN. The app's page shows the VPN's public IP and these steps.
+
+
+  Torrent clients need more than a proxy (their UDP traffic and incoming peers
+  can't go through it): use Transmission VPN for them. This app opens its own
+  VPN connection, which counts as one more device with your provider.
+developer: Quentin McGaw
+website: https://github.com/qdm12/gluetun
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/qdm12/gluetun
+support: https://github.com/qdm12/gluetun/discussions
+gallery: []
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: proxy
+deterministicPassword: true
+environment:
+  - name: VPN_SERVICE_PROVIDER
+    services:
+      - gluetun
+    note: Your VPN provider as Gluetun names it, e.g. protonvpn, mullvad, nordvpn, surfshark, private internet access. Required.
+  - name: VPN_TYPE
+    services:
+      - gluetun
+    default: wireguard
+    options:
+      - wireguard
+      - openvpn
+    note: WireGuard is faster; use OpenVPN if your provider has no WireGuard support in Gluetun.
+  - name: WIREGUARD_PRIVATE_KEY
+    services:
+      - gluetun
+    note: The PrivateKey of a WireGuard configuration from your provider.
+  - name: WIREGUARD_ADDRESSES
+    services:
+      - gluetun
+    note: The Address of that WireGuard configuration, e.g. 10.64.222.21/32. Needed by most providers other than ProtonVPN.
+  - name: OPENVPN_USER
+    services:
+      - gluetun
+    note: OpenVPN only. Your provider's OpenVPN username (often not your account login).
+  - name: OPENVPN_PASSWORD
+    services:
+      - gluetun
+    note: OpenVPN only. Your provider's OpenVPN password.
+  - name: SERVER_COUNTRIES
+    services:
+      - gluetun
+    note: Optional. Server countries, comma-separated, e.g. Switzerland,Netherlands.

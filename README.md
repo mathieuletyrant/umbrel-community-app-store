@@ -34,6 +34,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **cross-seed** | **Automatic cross-seeding**: finds torrents on your other trackers matching what you already seed and injects them into Transmission — more ratio on every tracker, zero extra disk space (hardlinks). |
 | **D3X** | **Companion tool of the V3X tracker**: cross-seeds what you already seed onto V3X (same files, nothing re-downloaded), publishes what V3X is missing (torrent, TMDB, MediaInfo, presentation; one release or a whole folder), matches your media library and tracks your hit and runs. |
 | **Transmission VPN** | **Transmission behind your VPN**: every torrent connection goes through Gluetun (ProtonVPN, Mullvad, NordVPN, PIA… kill switch included), so peers never see your public IP. With ProtonVPN or PIA, the forwarded port becomes Transmission's peer port automatically, so seeding stays fast. |
+| **Gluetun** | **Your VPN as a proxy, for the apps you choose**: connects to your VPN (ProtonVPN, Mullvad, NordVPN, PIA… kill switch included) and shares it through a password-protected HTTP proxy. Point Prowlarr's Indexer Proxies (per indexer, with a tag) or any app's proxy setting at it; everything else keeps your own connection. |
 | **Sportarr** | **PVR for sports** (Sonarr/Radarr-style): monitors leagues and events across fighting, football, soccer, basketball, racing…, grabs releases from your indexers, then renames, organizes and imports into Plex / Jellyfin / Emby. |
 | **Trailarr** | **Automatic trailer downloader** for your Radarr/Sonarr library: fetches and stores trailers next to your movies and shows so Plex / Jellyfin / Emby play them in-app. |
 | **slskd** | **Soulseek client** with a modern web UI: search and download from the Soulseek P2P network, set credentials in-browser, files land in your downloads share. |
@@ -85,6 +86,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
 | Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
 | Transmission VPN | `http://mathieu-transmission-vpn_gluetun_1:9091` (RPC: `/transmission/rpc`) | none |
+| Gluetun (HTTP proxy) | host `mathieu-gluetun_gluetun_1`, port `8888`, username `proxy` | its default password |
 | Plex | `http://host.docker.internal:32400` | your Plex token |
 | Jellyfin | `http://jellyfin_server_1:8096` | Dashboard → API Keys |
 | Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
