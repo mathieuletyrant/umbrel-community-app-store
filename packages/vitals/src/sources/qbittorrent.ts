@@ -46,9 +46,10 @@ export function qbittorrent({name, url, username = 'admin', password}: Config): 
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			body: new URLSearchParams({username, password: password!}),
 		})
-		// SID before 5.1, QBT_SID_<port> since: keep whatever session cookie it sets.
+		// A good login sets the session cookie (SID, or QBT_SID_<port> in recent versions), with
+		// "Ok." before 5.2 and an empty 204 since; a bad one answers 200 "Fails." and no cookie.
 		const sid = response.headers.get('set-cookie')?.match(/(?:QBT_)?SID[^=;]*=[^;]+/)?.[0]
-		if ((await response.text()).trim() !== 'Ok.' || !sid) throw new Error('qBittorrent refused the login: check its username and password')
+		if ((await response.text()).trim() === 'Fails.' || !sid) throw new Error('qBittorrent refused the login: check its username and password')
 		cookie = sid
 	}
 
