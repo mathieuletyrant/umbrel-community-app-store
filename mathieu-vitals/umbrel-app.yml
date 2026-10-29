@@ -4,19 +4,19 @@ storage:
   dataRoot: data
 category: media
 name: Vitals
-tagline: Live numbers and health of your media stack, as one JSON API
+tagline: Health of your media stack's apps, as one JSON API
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/vitals
-version: "0.3.1"
+version: "0.4.0"
 port: 6565
 description: >-
-  Vitals reads the apps of your media stack and answers with one small JSON
-  document: queues, missing and upcoming media, downloads, subtitles, requests,
-  library cleanup and file health, and whether each app is healthy. Point your
-  own dashboard at it instead of wiring every app's API and key yourself.
+  Vitals runs the health checks of the apps of your media stack and answers
+  with one small JSON document: whether each app is up, the warnings and errors
+  it reports itself, and an overall `healthy` flag. Point your own dashboard at
+  it instead of wiring every app's API and key yourself.
 
 
-  Apps it reads: Radarr, Sonarr, Prowlarr, Bazarr, Seerr (Jellyseerr or
+  Apps it checks: Radarr, Sonarr, Prowlarr, Bazarr, Seerr (Jellyseerr or
   Overseerr), Transmission, qBittorrent, Maintainerr, Healarr, Cleanuparr and
   Tracearr. Paste the API key of each app you use in this app's settings in
   umbrelOS (⋯ → Settings → Advanced settings), and pick Transmission (or
@@ -25,8 +25,11 @@ description: >-
   filled in. Apps left empty are reported as `not-configured`.
 
 
-  It also adds a home screen widget with your downloads, queues and missing
-  media: add it from "Edit widgets" on the umbrelOS home screen.
+  What each app reports: the *arr apps and Bazarr their own health checks,
+  Transmission and qBittorrent the torrents in error, Maintainerr and
+  Cleanuparr the apps they can't reach, Healarr the corrupted files waiting
+  for a fix, Tracearr the media servers it can't reach. Seerr is healthy when
+  it answers.
 
 
   🛠️ API
@@ -43,12 +46,12 @@ description: >-
   login isn't needed for `/v1/*`: only the token opens it.
 
   - Each app reports `status` (`ok`, `error` or `not-configured`), `healthy`
-  (an app is unhealthy when it is unreachable or reports an error in its own
-  health checks; warnings are listed without changing it) and its numbers in
-  `data`. Answers are cached for 10 seconds.
+  (an app is unhealthy when it is unreachable or reports an error; warnings
+  are listed in `issues` without changing it). Answers are cached for 10
+  seconds.
 
 
-  The keys never leave your Umbrel: Vitals never returns them. Opening the app shows the same numbers on a status page.
+  The keys never leave your Umbrel: Vitals never returns them. Opening the app shows the same health on a status page.
 developer: Mathieu Le Tyrant
 website: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/packages/vitals
 submitter: Mathieu Le Tyrant
@@ -57,34 +60,14 @@ repo: https://github.com/mathieuletyrant/umbrel-community-app-store/tree/master/
 support: https://github.com/mathieuletyrant/umbrel-community-app-store/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-1.jpg
-  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vitals/gallery-2.jpg
 releaseNotes: >-
-  Fixes the qBittorrent connection: qBittorrent 5.2 and later answer a good
-  login differently, and Vitals took it as a wrong password.
+  Vitals now only checks the health of your apps: the numbers (queues,
+  downloads, requests…) are gone from the API and the status page, and so is
+  the home screen widget. The API answers `version: 2`, without `data`. A
+  status card now reads "Warning" when an app reports only warnings.
 
 dependencies: []
 path: ""
-widgets:
-  - id: "media"
-    type: "four-stats"
-    refresh: "30s"
-    endpoint: "server:3001/media"
-    link: ""
-    example:
-      type: "four-stats"
-      link: ""
-      items:
-        - title: "Downloading"
-          text: "3"
-          subtext: "↓ 4.2 MB/s"
-        - title: "Movies"
-          text: "2"
-          subtext: "queued"
-        - title: "Episodes"
-          text: "5"
-          subtext: "queued"
-        - title: "Missing"
-          text: "23"
 environment:
   - name: RADARR_API_KEY
     services:

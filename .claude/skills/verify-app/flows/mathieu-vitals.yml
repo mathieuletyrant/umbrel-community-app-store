@@ -24,9 +24,6 @@ steps:
       headers: {authorization: "Bearer ${env.server.VITALS_TOKEN}"}
       status: 200
       contains: '"healthy":true,"apps".*"prowlarr":\{"name":"Prowlarr","status":"ok".*"bazarr":\{"name":"Bazarr","status":"ok"'
-  - widget: {id: media, contains: '"title":"Movies","text":"0"'}
-  - see: Episodes
-  - shot: media-widget
   - goto: /
   - see: All healthy
   - see: "Paste Healarr's API key in Vitals' settings"
