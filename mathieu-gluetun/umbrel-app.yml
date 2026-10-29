@@ -7,7 +7,7 @@ name: Gluetun
 tagline: Your VPN as a proxy, for the apps you choose
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-gluetun/icon.png
 # renovate: datasource=docker depName=qmcgaw/gluetun
-version: "3.40.4"
+version: "3.40.4-patch.1"
 port: 8885
 description: >-
   Gluetun connects to your VPN and shares it with your other apps through an
@@ -62,7 +62,8 @@ submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/qdm12/gluetun
 support: https://github.com/qdm12/gluetun/discussions
 gallery: []
-releaseNotes: ""
+releaseNotes: >-
+  Updates the bundled nginx web server to its latest build.
 dependencies: []
 path: ""
 defaultUsername: proxy

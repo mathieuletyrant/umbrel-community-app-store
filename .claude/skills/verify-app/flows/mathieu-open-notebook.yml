@@ -1,4 +1,4 @@
-verified: 1.15.0-patch.1 on umbrelOS 2.0.0 (2026-10-22)
+verified: 1.15.0-patch.3 on umbrelOS 2.0.0 (2026-10-29)
 timeout: 600
 logs:
   server: Uvicorn running

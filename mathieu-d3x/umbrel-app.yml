@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.41"
+version: "1.1.41-patch.1"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,7 +57,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Copies without a tag (or renamed) that match a tagged copy to the byte are flagged "Detag" with the original team, and V3X's reupload rules now apply to every publication: a release from a team that forbids reupload, a refused group, or a detag/retag is never published and is kept under "To check" in the batch. Albums with a music video are detected by weight, with a button to switch between album and video, and Publish can ignore a release already on V3X. VirusTotal links are clickable.
+  Copies without a tag (or renamed) that match a tagged copy to the byte are flagged "Detag" with the original team, and V3X's reupload rules now apply to every publication: a release from a team that forbids reupload, a refused group, or a detag/retag is never published and is kept under "To check" in the batch. Albums with a music video are detected by weight, with a button to switch between album and video, and Publish can ignore a release already on V3X. VirusTotal links are clickable. The bundled nginx web server is updated to its latest build.
 
   Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.41
 dependencies: []
