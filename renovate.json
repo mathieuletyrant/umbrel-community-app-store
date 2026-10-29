@@ -40,7 +40,7 @@
       "matchUpdateTypes": ["digest"],
       "commitMessageExtra": "digest to {{{newDigestShort}}}"
     },
-    { "matchPackageNames": ["qmcgaw/gluetun"], "commitMessageTopic": "Gluetun sidecar", "allowedVersions": "!/^v3\\.41\\./" },
+    { "matchPackageNames": ["qmcgaw/gluetun"], "commitMessageTopic": "Gluetun", "allowedVersions": "!/^v3\\.41\\./" },
     { "matchPackageNames": ["nginx"], "commitMessageTopic": "nginx sidecar" },
     { "matchPackageNames": ["postgres"], "commitMessageTopic": "PostgreSQL sidecar", "allowedVersions": "<19" },
     { "matchPackageNames": ["surrealdb/surrealdb"], "commitMessageTopic": "SurrealDB sidecar", "allowedVersions": "<3" },
@@ -53,11 +53,12 @@
     { "matchPackageNames": ["robertlordhood/chaptarr"], "commitMessageTopic": "Chaptarr" },
     { "matchPackageNames": ["ghcr.io/cleanuparr/cleanuparr"], "commitMessageTopic": "Cleanuparr" },
     { "matchPackageNames": ["unclecode/crawl4ai"], "commitMessageTopic": "Crawl4AI" },
-    { "matchPackageNames": ["ghcr.io/cross-seed/cross-seed"], "commitMessageTopic": "cross-seed" },
+    { "matchPackageNames": ["ghcr.io/cross-seed/cross-seed"], "commitMessageTopic": "cross-seed", "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:-(?<prerelease>\\d+))?$" },
     { "matchPackageNames": ["ghcr.io/v3x0rv3x/d3x"], "commitMessageTopic": "D3X" },
     { "matchPackageNames": ["ghcr.io/dispatcharr/dispatcharr"], "commitMessageTopic": "Dispatcharr" },
     { "matchPackageNames": ["dockurr/umbrel"], "commitMessageTopic": "test umbrelOS (verify-app skill)" },
     { "matchPackageNames": ["ghcr.io/mescon/healarr"], "commitMessageTopic": "Healarr" },
+    { "matchPackageNames": ["nousresearch/hermes-agent"], "commitMessageTopic": "Hermes Agent" },
     { "matchPackageNames": ["mrcas/kapowarr"], "commitMessageTopic": "Kapowarr" },
     { "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"], "commitMessageTopic": "Labelarr" },
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },
@@ -72,6 +73,7 @@
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr"], "commitMessageTopic": "Profilarr" },
     { "matchPackageNames": ["ghcr.io/dictionarry-hub/profilarr-parser"], "commitMessageTopic": "Profilarr parser" },
     { "matchPackageNames": ["lakker/pulsarr"], "commitMessageTopic": "Pulsarr", "allowedVersions": "<1.0.0" },
+    { "matchPackageNames": ["ghcr.io/hotio/qbittorrent"], "commitMessageTopic": "qBittorrent VPN" },
     { "matchPackageNames": ["ghcr.io/jessielw/reclaimerr"], "commitMessageTopic": "Reclaimerr" },
     { "matchPackageNames": ["ghcr.io/ignisda/ryot"], "commitMessageTopic": "Ryot" },
     { "matchPackageNames": ["bellamy/scrob"], "commitMessageTopic": "Scrob" },
@@ -104,6 +106,16 @@
       "matchPackageNames": ["ghcr.io/ignisda/ryot"],
       "matchManagers": ["custom.regex"],
       "extractVersion": "^v(?<version>.+)$"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/hotio/qbittorrent"],
+      "matchManagers": ["docker-compose"],
+      "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/hotio/qbittorrent"],
+      "matchManagers": ["custom.regex"],
+      "extractVersion": "^release-(?<version>.+)$"
     },
     {
       "matchPackageNames": ["ghcr.io/connorgallopo/tracearr"],

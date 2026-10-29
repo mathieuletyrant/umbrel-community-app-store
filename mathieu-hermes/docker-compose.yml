@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-hermes_server_1
+      APP_PORT: 9119
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: nousresearch/hermes-agent:v0.22.5@sha256:9c5561579f3ffdf333401797094ac3a743738d6c25d40f4331c7bf77b694238d
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+      - ${APP_DATA_DIR}/data/hermes:/opt/data
+    environment:
+      TZ: Etc/UTC
+      HERMES_UID: "1000"
+      HERMES_GID: "1000"
+      HERMES_DASHBOARD: "1"
+      HERMES_DASHBOARD_HOST: "0.0.0.0"
+      HERMES_DASHBOARD_PORT: "9119"
+      HERMES_DASHBOARD_BASIC_AUTH_USERNAME: "admin"
+      HERMES_DASHBOARD_BASIC_AUTH_PASSWORD: ${APP_PASSWORD}
+      HERMES_DASHBOARD_BASIC_AUTH_SECRET: ${APP_SEED}
+      HERMES_GATEWAY_BOOTSTRAP_STATE: "running"
+      API_SERVER_ENABLED: "true"
+      API_SERVER_HOST: "0.0.0.0"
+      API_SERVER_PORT: "8642"
+      API_SERVER_KEY: ${APP_PASSWORD}
+    command: ["gateway", "run"]

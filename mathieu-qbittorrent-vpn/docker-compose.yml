@@ -1,0 +1,144 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-qbittorrent-vpn_gluetun_1
+      APP_PORT: 8080
+
+  gluetun:
+    image: qmcgaw/gluetun:v3.40.4@sha256:e10584de1f82d8999e5e6c3111901d9d56a2eed21151fb96af060f390bbdfba8
+    cap_add:
+      - NET_ADMIN
+    entrypoint:
+      - sh
+      - -c
+      - |
+        rm -f /gluetun/ip /gluetun/forwarded_port
+        if [ -z "$$VPN_SERVICE_PROVIDER" ] || [ -z "$$WIREGUARD_PRIVATE_KEY$$OPENVPN_USER" ]; then
+          echo "Waiting for the VPN provider and credentials: set them in this app's settings in umbrelOS"
+          trap 'exit 0' TERM
+          while :; do sleep 1; done
+        fi
+        cat > /tmp/auth.toml <<TOML
+        [[roles]]
+        name = "port-sync"
+        routes = ["PUT /v1/vpn/status"]
+        auth = "apikey"
+        apikey = "$$CONTROL_API_KEY"
+        TOML
+        exec /gluetun-entrypoint
+    environment:
+      TZ: Etc/UTC
+      VPN_TYPE: wireguard
+      VPN_PORT_FORWARDING_STATUS_FILE: /gluetun/forwarded_port
+      PUBLICIP_FILE: /gluetun/ip
+      HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /tmp/auth.toml
+      CONTROL_API_KEY: ${APP_SEED:?APP_SEED is not set}
+    volumes:
+      - ${APP_DATA_DIR}/data/gluetun:/gluetun
+    restart: on-failure
+
+  server:
+    image: ghcr.io/hotio/qbittorrent:release-5.3.0@sha256:84a374fce2b6a35687b77cc2e6ffe349d12c183b96a847c6faf7287482527d26
+    network_mode: service:gluetun
+    depends_on:
+      - gluetun
+    entrypoint:
+      - sh
+      - -c
+      - |
+        until [ -s /gluetun/ip ]; do sleep 5; done
+        exec /init
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      UMASK: "002"
+      TZ: Etc/UTC
+      WEBUI_PORTS: 8080/tcp
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${APP_DATA_DIR}/data/gluetun:/gluetun:ro
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    restart: on-failure
+
+  port-sync:
+    image: ghcr.io/hotio/qbittorrent:release-5.3.0@sha256:84a374fce2b6a35687b77cc2e6ffe349d12c183b96a847c6faf7287482527d26
+    network_mode: service:gluetun
+    depends_on:
+      - server
+    entrypoint:
+      - sh
+      - -c
+      - |
+        qb=http://127.0.0.1:8080/api/v2
+        set_prefs() {
+          curl -fsS -m 30 -o /dev/null --data-urlencode "json=$$1" "$$qb/app/setPreferences"
+        }
+        vpn() {
+          curl -fsS -m 30 -o /dev/null -X PUT -H "X-API-Key: $$CONTROL_API_KEY" -H "Content-Type: application/json" \
+            -d "{\"status\":\"$$1\"}" http://127.0.0.1:8000/v1/vpn/status
+        }
+        tick=0 bad=0 restarts=0 last_restart=0
+        while :; do
+          prefs=$$(curl -fsS -m 10 "$$qb/app/preferences" 2>/dev/null)
+          if [ -n "$$prefs" ] && [ ! -f /config/.webui-password-set ] \
+            && set_prefs "{\"web_ui_username\":\"admin\",\"web_ui_password\":\"$$WEBUI_PASSWORD\"}"; then
+            touch /config/.webui-password-set
+            echo "Web UI login set: admin and this app's default password"
+          fi
+          if [ -n "$$prefs" ] && [ ! -f /config/.webui-csrf-off ] \
+            && set_prefs '{"web_ui_csrf_protection_enabled":false,"web_ui_host_header_validation_enabled":false}'; then
+            touch /config/.webui-csrf-off
+            echo "Web UI CSRF and Host header checks turned off (umbrelOS proxy)"
+          fi
+          port=$$(cat /gluetun/forwarded_port 2>/dev/null)
+          [ "$$port" = 0 ] && port=
+          if [ -n "$$port" ] && [ -n "$$prefs" ]; then
+            listen=$$(printf '%s' "$$prefs" | sed -n 's/.*"listen_port":\([0-9]*\).*/\1/p')
+            if [ -n "$$listen" ] && [ "$$listen" != "$$port" ] && set_prefs "{\"listen_port\":$$port,\"upnp\":false,\"random_port\":false}"; then
+              echo "qBittorrent peer port set to $$port"
+            fi
+          fi
+          tick=$$((tick + 1))
+          if [ "$$VPN_PORT_FORWARDING" = on ] && [ $$((tick % 10)) = 0 ]; then
+            if [ -z "$$port" ]; then
+              state=closed
+            else
+              case "$$(curl -fsS -m 30 "https://portcheck.transmissionbt.com/$$port" 2>/dev/null)" in
+                1) state=open ;;
+                0) state=closed ;;
+                *) state=unknown ;;
+              esac
+            fi
+            if [ "$$state" = open ]; then
+              [ "$$restarts" -gt 0 ] && echo "Port $$port is open again"
+              bad=0 restarts=0
+            elif [ "$$state" = closed ]; then
+              bad=$$((bad + 1))
+            fi
+            now=$$(date +%s) wait=900
+            [ "$$restarts" -ge 3 ] && wait=3600
+            if [ "$$bad" -ge 2 ] && [ $$((now - last_restart)) -ge "$$wait" ]; then
+              restarts=$$((restarts + 1))
+              echo "No open forwarded port at the last two checks: restarting the VPN (attempt $$restarts)"
+              vpn stopped || echo "Could not stop the VPN through Gluetun's control server"
+              sleep 5
+              n=0
+              until vpn running; do
+                n=$$((n + 1))
+                [ "$$n" -ge 6 ] && { echo "Could not start the VPN through Gluetun's control server"; break; }
+                sleep 10
+              done
+              last_restart=$$now bad=0
+            fi
+          fi
+          sleep 30
+        done
+    environment:
+      CONTROL_API_KEY: ${APP_SEED:?APP_SEED is not set}
+      WEBUI_PASSWORD: ${APP_PASSWORD:?APP_PASSWORD is not set}
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${APP_DATA_DIR}/data/gluetun:/gluetun:ro
+    restart: on-failure

@@ -1,0 +1,32 @@
+egress: true
+# Gluetun is unhealthy until the key is saved; the logs below prove the tunnel instead.
+ignoreHealth: true
+vars:
+  # A real ProtonVPN WireGuard key (NAT-PMP on): the cloud environment's secret, or a local file.
+  WG_KEY: printenv PROTON_WG_KEY || cat ~/.umbrel-verify/proton-wg-key
+settings:
+  VPN_SERVICE_PROVIDER: protonvpn
+  VPN_PORT_FORWARDING: "on"
+  PORT_FORWARD_ONLY: "on"
+  WIREGUARD_PRIVATE_KEY: ${WG_KEY}
+logs:
+  gluetun: port forwarded is \d+
+  port-sync: qBittorrent peer port set to \d+
+steps:
+  - goto: /
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, value: "${env.port-sync.WEBUI_PASSWORD}"}
+  - click: {role: button, name: Login}
+  - see: Transfers
+  - shot: qbittorrent
+# No outbound UDP (Claude cloud sandbox): no WireGuard. Gluetun waits for its settings, and a
+# stand-in public IP file lets qBittorrent start in Gluetun's (unfirewalled) network, so the
+# image, port-sync's login setup and the Web UI are proven; the tunnel and port forwarding aren't.
+noTunnel:
+  vars: null
+  settings: null
+  setup:
+    - docker exec mathieu-qbittorrent-vpn_gluetun_1 sh -c 'echo 203.0.113.1 > /gluetun/ip'
+  logs:
+    gluetun: Waiting for the VPN provider
+    port-sync: Web UI login set

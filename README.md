@@ -34,6 +34,8 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **cross-seed** | **Automatic cross-seeding**: finds torrents on your other trackers matching what you already seed and injects them into Transmission — more ratio on every tracker, zero extra disk space (hardlinks). |
 | **D3X** | **Companion tool of the V3X tracker**: cross-seeds what you already seed onto V3X (same files, nothing re-downloaded), publishes what V3X is missing (torrent, TMDB, MediaInfo, presentation; one release or a whole folder), matches your media library and tracks your hit and runs. |
 | **Transmission VPN** | **Transmission behind your VPN**: every torrent connection goes through Gluetun (ProtonVPN, Mullvad, NordVPN, PIA… kill switch included), so peers never see your public IP. With ProtonVPN or PIA, the forwarded port becomes Transmission's peer port automatically, so seeding stays fast. |
+| **qBittorrent VPN** | **qBittorrent behind your VPN**: same Gluetun tunnel and kill switch as Transmission VPN, with categories, tags and per-category seeding limits, plus the VueTorrent web UI. With ProtonVPN or PIA, the forwarded port becomes qBittorrent's peer port automatically, and the app restarts the VPN when the provider stops renewing it. Counts as the Transmission app Radarr, Sonarr and Prowlarr require, so Transmission can go. |
+| **Gluetun** | **Your VPN as a proxy, for the apps you choose**: connects to your VPN (ProtonVPN, Mullvad, NordVPN, PIA… kill switch included) and shares it through a password-protected HTTP proxy. Point Prowlarr's Indexer Proxies (per indexer, with a tag) or any app's proxy setting at it; everything else keeps your own connection. |
 | **Sportarr** | **PVR for sports** (Sonarr/Radarr-style): monitors leagues and events across fighting, football, soccer, basketball, racing…, grabs releases from your indexers, then renames, organizes and imports into Plex / Jellyfin / Emby. |
 | **Trailarr** | **Automatic trailer downloader** for your Radarr/Sonarr library: fetches and stores trailers next to your movies and shows so Plex / Jellyfin / Emby play them in-app. |
 | **slskd** | **Soulseek client** with a modern web UI: search and download from the Soulseek P2P network, set credentials in-browser, files land in your downloads share. |
@@ -56,7 +58,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Snug** | **A cozy tracker for the TV series you're watching**: where you are, what's next and what airs soon, next episode marked in one tap. Series move between Watchlist, Watching, Paused, Completed and Dropped on their own; Jellyfin's webhook logs what you watch. |
 | **Notifiarr** | **Rich Discord notifications for the whole media stack**: grabs, imports, Plex playback, stuck downloads, health checks and system snapshots, routed per channel from notifiarr.com, plus TRaSH profile sync. |
 | **Unpackerr** | **Extracts archived downloads** for the *arr stack: when a release arrives as .rar / .7z / .zip, it unpacks it so Radarr / Sonarr / Lidarr can import it, then cleans up the extracted copy. Headless: API keys set in its umbrelOS settings. |
-| **Vitals** | **Your media stack's live numbers as one JSON API**: queues, missing and upcoming media, downloads, requests, cleanup and file health, plus each app's health, from Radarr, Sonarr, Prowlarr, Bazarr, Seerr, Transmission, Maintainerr, Healarr, Cleanuparr and Tracearr. Built for your own dashboard, with a home screen widget. |
+| **Vitals** | **Your media stack's health as one JSON API**: whether each app is up and the warnings and errors it reports, from Radarr, Sonarr, Prowlarr, Bazarr, Seerr, Transmission, qBittorrent, Maintainerr, Healarr, Cleanuparr and Tracearr. Built for your own dashboard. |
 | **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
 | **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read. |
 | **AdGuard MCP** | **Your AdGuard Home as an MCP server**: ask an AI assistant why a site doesn't load, unblock a domain, block a service on one device, or add a DNS rewrite. Covers the whole AdGuard Home API. |
@@ -65,6 +67,7 @@ one folder per app, images pinned by digest, sensible defaults out of the box.
 | **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
 | **Crawl4AI** | **Lets an AI read any web page**: a headless-browser crawler that returns clean Markdown, HTML, screenshots or PDFs, with its own MCP server and REST API — pair it with SearXNG for web search. |
 | **Open Notebook** | **Your own NotebookLM**: chat with your PDFs, web pages, YouTube videos and audio, get cited answers and notes, and turn a notebook into a multi-voice podcast — with the AI of your choice (OpenAI, Anthropic, Google, Ollama…). |
+| **Hermes Agent** | **Nous Research's self-improving AI agent**, packaged from the official image: it writes its own skills, remembers you across sessions, runs scheduled tasks and talks to MCP servers. Hermes's own login means the same address works from a browser, Hermes Desktop and the Hermex iPhone app; its OpenAI-compatible API serves apps like Open WebUI. |
 
 ## 🔗 Connecting apps
 
@@ -85,9 +88,12 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Tautulli | `http://tautulli_web_1:8181` | Settings → Web Interface |
 | Transmission | `http://transmission_server_1:9091` (RPC: `/transmission/rpc`) | none |
 | Transmission VPN | `http://mathieu-transmission-vpn_gluetun_1:9091` (RPC: `/transmission/rpc`) | none |
+| qBittorrent VPN | `http://mathieu-qbittorrent-vpn_gluetun_1:8080` | `admin` and the app's default password (umbrelOS) |
+| Gluetun (HTTP proxy) | host `mathieu-gluetun_gluetun_1`, port `8888`, username `proxy` | its default password |
 | Plex | `http://host.docker.internal:32400` | your Plex token |
 | Jellyfin | `http://jellyfin_server_1:8096` | Dashboard → API Keys |
 | Crawl4AI | `http://mathieu-crawl4ai_server_1:11235/mcp/sse` (MCP) | its default password (bearer token) |
+| Hermes Agent | `http://mathieu-hermes_server_1:8642/v1` (OpenAI-compatible API) | its default password |
 | SearXNG | `http://searxng-web:8080` | none |
 | Ollama | `http://ollama_ollama_1:11434` | none |
 | Healarr | `http://mathieu-healarr_server_1:3090` | its settings |

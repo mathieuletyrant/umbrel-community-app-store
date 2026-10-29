@@ -7,7 +7,7 @@ name: SuggestArr
 tagline: Automatic media recommendations from your watch history
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/icon.png
 # renovate: datasource=docker depName=ciuse99/suggestarr
-version: "3.1.0"
+version: "3.2.0"
 port: 5009
 description: >-
   SuggestArr automates "what to watch next": it reads your recent activity from
@@ -42,13 +42,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-3.jpg
 releaseNotes: >-
-  Adds a Ratings page where you can rate or exclude watched titles per user,
-  and optional external URLs for Jellyfin and Seerr so links open on the
-  address you use. Seerr requests can now be auto-approved, and Jellyfin TV
-  shows are matched on the series instead of the episode.
+  Adds Simkl watch history, Trakt ratings as a recommendation filter and
+  MDBList import URLs. Security is tighter: regular users' jobs only use their
+  own linked account (link one under Profile), logs and config export are
+  admin-only, and Jellyfin/Emby linking needs the account password.
 
   Full release notes can be found at
-  https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v3.1.0
+  https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v3.2.0
 dependencies: []
 path: ""
 defaultUsername: ""

@@ -2,6 +2,7 @@
 import {AsyncLocalStorage} from 'node:async_hooks'
 import {execFileSync, spawn} from 'node:child_process'
 import crypto from 'node:crypto'
+import dgram from 'node:dgram'
 import fs from 'node:fs'
 import http from 'node:http'
 import os from 'node:os'
@@ -765,7 +766,7 @@ async function umbrelShots(page, appId, out) {
 	return files
 }
 
-async function proof(ctx, {appId, version, ok, error, store, umbrel, shots, out}) {
+async function proof(ctx, {appId, version, ok, error, store, umbrel, shots, out, mode}) {
 	const page = await ctx.newPage()
 	await page.setViewportSize({width: 1600, height: 900})
 	const imgs = shots.filter((f) => fs.existsSync(f)).map((f) => `data:image/png;base64,${fs.readFileSync(f).toString('base64')}`)
@@ -776,7 +777,7 @@ async function proof(ctx, {appId, version, ok, error, store, umbrel, shots, out}
 <div style="padding:18px 24px;display:flex;align-items:center;gap:16px;border-bottom:1px solid #2c303b">
   <div style="font-size:30px">${ok ? '✅' : '❌'}</div>
   <div><div style="font-size:22px;font-weight:600">${esc(appId)} <span style="color:#9aa0ad;font-weight:400">${esc(version)}</span></div>
-  <div style="color:#9aa0ad;margin-top:4px">${ok ? 'installed, healthy and set up' : esc(error).slice(0, 300)} · umbrelOS ${esc(umbrel)} · store ${esc(store)} · ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</div></div>
+  <div style="color:#9aa0ad;margin-top:4px">${ok ? `installed, healthy and set up${mode === 'no-tunnel' ? ' · no outbound UDP: VPN tunnel not tested' : ''}` : esc(error).slice(0, 300)} · umbrelOS ${esc(umbrel)} · store ${esc(store)} · ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</div></div>
 </div>
 <div style="display:flex;gap:16px;padding:16px 24px">
   <img src="${main}" style="width:1100px;border-radius:10px;border:1px solid #2c303b">
@@ -811,6 +812,38 @@ const readFlow = (appId) => {
 	return fs.existsSync(file) ? readYaml(file) : null
 }
 
+// WireGuard needs outbound UDP, which the Claude cloud sandbox doesn't pass (HTTPS and DNS only):
+// there a VPN flow runs its `noTunnel` keys instead of timing out on a tunnel that can't come up.
+let udpProbe
+function udpEgress() {
+	const ntp = (host) => new Promise((resolve) => {
+		const sock = dgram.createSocket('udp4')
+		let settled = false
+		const done = (ok) => {
+			if (settled) return
+			settled = true
+			clearTimeout(timer)
+			sock.close()
+			resolve(ok)
+		}
+		const timer = setTimeout(() => done(false), 3000)
+		sock.on('error', () => done(false))
+		sock.on('message', () => done(true))
+		const packet = Buffer.alloc(48)
+		packet[0] = 0x1b
+		sock.send(packet, 123, host, (e) => e && done(false))
+	})
+	return (udpProbe ??= (async () => (await ntp('time.google.com')) || (await ntp('time.cloudflare.com')))())
+}
+
+async function flowForHere(appId, flow, flags) {
+	if (!flow?.noTunnel) return flow
+	const {noTunnel, ...base} = flow
+	if (!flags['no-tunnel'] && (flags.tunnel || (await udpEgress()))) return base
+	say(`no outbound UDP here: ${appId} runs its noTunnel variant (image and UI proven, VPN tunnel not tested)`)
+	return {...base, ...noTunnel, mode: 'no-tunnel'}
+}
+
 const BLANK = 4
 
 // One app: fresh install, checks, flow in its own logged-in browser context, proof image.
@@ -827,7 +860,7 @@ async function verify(appId, flow, flags, b, {keepInstalled = false} = {}) {
 	const budget = (flow?.timeout ?? 300) * 1000
 	const left = () => Math.max(1000, budget - (Date.now() - t0))
 	const state = loadState()
-	const result = {appId, version: manifest.version, umbrel: state.umbrel, store: state.storeLabel, hash: appHash(appId), shots: [], out}
+	const result = {appId, version: manifest.version, umbrel: state.umbrel, store: state.storeLabel, hash: appHash(appId), shots: [], out, mode: flow?.mode}
 	if (!flow) say(`⚠ no flow at flows/${appId}.yml — generic checks only`)
 	let session
 	let stage = 'install'
@@ -891,10 +924,10 @@ async function verify(appId, flow, flags, b, {keepInstalled = false} = {}) {
 	result.proof = await proof(ctx, result).catch((e) => log(`proof image failed: ${e.message}`))
 	await ctx.close()
 	fs.writeFileSync(path.join(out, `${appId}.result.json`), JSON.stringify(result, null, 2))
-	if (result.ok && flow && !flags['no-record'] && !flags.remote) recordVerified(appId, manifest.version, result.umbrel)
+	if (result.ok && flow && !flow.mode && !flags['no-record'] && !flags.remote) recordVerified(appId, manifest.version, result.umbrel)
 	if (!flags.keep && !keepInstalled) await uninstall(appId).catch((e) => log(`uninstall: ${e.message}`))
 	result.seconds = Math.round((Date.now() - t0) / 1000)
-	say(`${result.ok ? '✅' : '❌'} ${manifest.version} in ${result.seconds}s${result.ok ? '' : ` — ${result.error.split('\n')[0]}`}`)
+	say(`${result.ok ? '✅' : '❌'} ${manifest.version}${result.mode ? ` (${result.mode})` : ''} in ${result.seconds}s${result.ok ? '' : ` — ${result.error.split('\n')[0]}`}`)
 	return result
 }
 
@@ -924,13 +957,13 @@ async function contactSheet(b, results, out) {
 async function run(apps, flags) {
 	const t0 = Date.now()
 	for (const a of apps) if (!fs.existsSync(path.join(REPO, a, 'umbrel-app.yml'))) throw new Error(`no app folder ${a}`)
-	const flows = Object.fromEntries(apps.map((a) => [a, readFlow(a)]))
-	for (const a of apps) lintFlow(a, flows[a])
 	const out = path.resolve(flags.out ?? path.join(REPO, '.verify-out'))
 	fs.mkdirSync(out, {recursive: true})
 	output.quiet = !flags.verbose
 	output.file = path.join(out, 'run.log')
 	fs.writeFileSync(output.file, '')
+	const flows = Object.fromEntries(await Promise.all(apps.map(async (a) => [a, await flowForHere(a, readFlow(a), flags)])))
+	for (const a of apps) lintFlow(a, flows[a])
 	const jobs = Math.max(1, Number(flags.jobs ?? 3))
 	say(`verifying ${apps.join(', ')} (${jobs} at a time) — details in ${output.file}`)
 	await up(flags.umbrel)
@@ -995,7 +1028,7 @@ async function run(apps, flags) {
 		console.log(
 			[
 				'',
-				...results.map((r) => `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version ?? ''}${r.ok ? '' : ` — ${r.error.split('\n')[0]}`}`),
+				...results.map((r) => `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version ?? ''}${r.mode ? ` (${r.mode})` : ''}${r.ok ? '' : ` — ${r.error.split('\n')[0]}`}`),
 				`${results.filter((r) => r.ok).length}/${results.length} ok in ${Math.round((Date.now() - t0) / 1000)}s`,
 				`all proofs: ${sheet ?? '-'} (Read it)   details: ${output.file}`,
 			].join('\n'),
@@ -1124,7 +1157,7 @@ function attachProofs(results, pr) {
 	const keys = uploadsJson(['list', '--pr', String(pr), '--repo', repo])?.items?.map((i) => i.key) ?? []
 	let attached = 0
 	for (const r of results.filter((r) => r.proof)) {
-		const alt = `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version} on umbrelOS ${r.umbrel}`
+		const alt = `${r.ok ? '✅' : '❌'} ${r.appId} ${r.version} on umbrelOS ${r.umbrel}${r.mode ? ` (${r.mode})` : ''}`
 		// GitHub caches embeds by URL: every proof needs a new name, so a re-run never shows the old image
 		const hash = crypto.createHash('sha256').update(fs.readFileSync(r.proof)).digest('hex').slice(0, 8)
 		const name = `${r.appId}--${r.version}--${r.ok ? 'pass' : 'fail'}--${hash}${path.extname(r.proof)}`
@@ -1173,6 +1206,8 @@ const USAGE = `usage: verify.mjs <command> [args] [flags]
       --no-record   do not update "verified:" in the flow file
       --umbrel TAG  dockurr/umbrel tag to test against (default ${umbrelVersion(UMBREL_IMAGE)}, e.g. 1.7.4)
       --pr N        upload each proof to PR N with uploads.sh (its bot keeps one comment up to date)
+      --no-tunnel   run the \`noTunnel\` variant of VPN flows even with outbound UDP (default: only without)
+      --tunnel      run VPN flows as written even when the UDP probe fails
   attach --pr N [<app-id>... | --changed]   upload the proofs of the last runs without running again;
                     refuses a proof when the app or its flow changed since (default: the changed apps)
   explore <app-id> [path]   replay the flow's steps (or open path), then screenshot + list fields/buttons/text
@@ -1220,6 +1255,7 @@ async function doctor() {
 	}
 	for (const [what, url] of [['ghcr.io (most app images)', 'https://ghcr.io/v2/'], ['mirror.gcr.io (Docker Hub images)', 'https://mirror.gcr.io/v2/'], ['registry.npmjs.org (npx fallback)', 'https://registry.npmjs.org/-/ping'], ['uploads.sh', 'https://uploads.sh/']])
 		check(`egress to ${what}`, await reach(url), 'allow the host in the environment network settings', {blocking: what.startsWith('ghcr')})
+	check('outbound UDP (WireGuard of the VPN apps)', await udpEgress(), 'none here (Claude cloud sandbox): VPN flows run their `noTunnel` variant, which proves the image and UI but not the tunnel', {blocking: false})
 	check(`proxy CA bundle ${caBundle() ?? '(none, fine outside the sandbox)'}`, true, '', {blocking: false})
 	for (const c of checks) console.log(`${c.ok ? '✓' : c.blocking ? '✗' : '⚠'} ${c.name}${c.ok || !c.fix ? '' : `\n    → ${c.fix}`}`)
 	const bad = checks.filter((c) => !c.ok && c.blocking)
@@ -1270,7 +1306,7 @@ async function main() {
 			const [appId, p] = rest
 			const manifest = readYaml(path.join(REPO, appId, 'umbrel-app.yml'))
 			const flowFile = path.join(FLOWS_DIR, `${appId}.yml`)
-			const flow = fs.existsSync(flowFile) ? readYaml(flowFile) : {}
+			const flow = (await flowForHere(appId, fs.existsSync(flowFile) ? readYaml(flowFile) : {}, flags)) ?? {}
 			const health = {ignoreHealth: flow.ignoreHealth}
 			const apps = [appId, ...(flow.requires ?? [])]
 			await up(flags.umbrel)

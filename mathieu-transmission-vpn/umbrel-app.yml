@@ -2,12 +2,14 @@ manifestVersion: 1
 id: mathieu-transmission-vpn
 storage:
   dataRoot: data
+implements:
+  - transmission
 category: networking
 name: Transmission VPN
 tagline: Transmission behind a VPN, with a kill switch and port forwarding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/icon.png
 # renovate: datasource=docker depName=linuxserver/transmission
-version: "4.1.3-patch.5"
+version: "4.1.3-patch.7"
 port: 9097
 description: >-
   The Transmission BitTorrent client, with all of its traffic sent through
@@ -23,6 +25,11 @@ description: >-
   available: turn on VPN_PORT_FORWARDING and the forwarded port becomes
   Transmission's peer port automatically, so other peers can connect to you
   and seeding works as well as with an open port on your router.
+
+
+  A provider sometimes stops renewing the forwarded port while the tunnel
+  stays up. Every 5 minutes the app checks that the port is really open, and
+  restarts the VPN to get a new one when it stays closed.
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -52,6 +59,12 @@ description: >-
   mathieu-transmission-vpn_gluetun_1, port 9091 (not transmission_server_1).
 
 
+  Radarr, Sonarr, Prowlarr, Lidarr and Readarr require the Transmission app.
+  This app can stand in for it: in each of them, open ⋯ → Settings →
+  Connections and pick Transmission VPN instead of Transmission. Once no app
+  uses it, the Transmission app can be uninstalled.
+
+
   Moving from the Transmission app: stop both apps, copy
   ~/umbrel/app-data/transmission/data/config to
   ~/umbrel/app-data/mathieu-transmission-vpn/data/config on your Umbrel, then
@@ -69,8 +82,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-3.jpg
 releaseNotes: >-
-  The Transmission image is updated to linuxserver's latest rebuild of 4.1.3
-  (base system updates). Transmission remains on version 4.1.3.
+  Updates Transmission to linuxserver's latest 4.1.3 image (system package
+  updates, same Transmission version). With port forwarding on, the app also
+  checks every 5 minutes that the forwarded port is really open, and restarts
+  the VPN to get a new one when your provider stopped renewing it.
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
@@ -111,6 +126,7 @@ environment:
   - name: VPN_PORT_FORWARDING
     services:
       - gluetun
+      - port-sync
     options:
       - "on"
       - "off"

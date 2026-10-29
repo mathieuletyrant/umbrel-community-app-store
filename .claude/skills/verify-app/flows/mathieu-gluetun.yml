@@ -1,0 +1,32 @@
+egress: true
+# Gluetun is unhealthy until the key is saved; the logs and the proxied IP below prove the tunnel instead.
+ignoreHealth: true
+vars:
+  # A real ProtonVPN WireGuard key: the cloud environment's secret, or a local file.
+  WG_KEY: printenv PROTON_WG_KEY || cat ~/.umbrel-verify/proton-wg-key
+settings:
+  VPN_SERVICE_PROVIDER: protonvpn
+  WIREGUARD_PRIVATE_KEY: ${WG_KEY}
+setup:
+  # Another container of the Umbrel network reaches the internet through the proxy, with its password.
+  - docker exec mathieu-gluetun_web_1 env http_proxy=http://proxy:$(docker exec mathieu-gluetun_gluetun_1 printenv HTTPPROXY_PASSWORD)@mathieu-gluetun_gluetun_1:8888 wget -qO- http://ipinfo.io/ip | grep -E '^[0-9.]+$'
+logs:
+  gluetun: Public IP address is
+steps:
+  - goto: /
+  - see: {text: "✅ Connected", reload: true}
+  - see: mathieu-gluetun_gluetun_1
+  - shot: status
+# No outbound UDP (Claude cloud sandbox): no WireGuard. Gluetun waits for its settings and the
+# status sidecar must say so; the image and the page are proven, the tunnel and proxy aren't.
+noTunnel:
+  vars: null
+  settings: null
+  setup: null
+  logs:
+    gluetun: Waiting for the VPN provider
+  steps:
+    - goto: /
+    - see: {text: "Not connected", reload: true}
+    - see: mathieu-gluetun_gluetun_1
+    - shot: status

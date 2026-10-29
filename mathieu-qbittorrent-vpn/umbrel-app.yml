@@ -1,0 +1,142 @@
+manifestVersion: 1
+id: mathieu-qbittorrent-vpn
+storage:
+  dataRoot: data
+implements:
+  - transmission
+category: networking
+name: qBittorrent VPN
+tagline: qBittorrent behind a VPN, with a kill switch and port forwarding
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/icon.png
+# renovate: datasource=docker depName=ghcr.io/hotio/qbittorrent
+version: "5.3.0-patch.2"
+port: 8185
+description: >-
+  The qBittorrent BitTorrent client, with all of its traffic sent through your
+  VPN by Gluetun. Peers and trackers see your VPN's address, never your public
+  IP. Gluetun works with ProtonVPN, Mullvad, NordVPN, Surfshark, Private
+  Internet Access, AirVPN, Windscribe and many more.
+
+
+  Gluetun's kill switch blocks every connection outside the tunnel, and
+  qBittorrent only starts once the tunnel is up: if the VPN drops,
+  qBittorrent has no network at all until it comes back. With ProtonVPN,
+  Private Internet Access, PrivateVPN and Perfect Privacy, port forwarding is
+  available: turn on VPN_PORT_FORWARDING and the forwarded port becomes
+  qBittorrent's peer port automatically, so other peers can connect to you
+  and seeding works as well as with an open port on your router.
+
+
+  A provider sometimes stops renewing the forwarded port while the tunnel
+  stays up. Every 5 minutes the app checks that the port is really open, and
+  restarts the VPN to get a new one when it stays closed.
+
+
+  The VueTorrent and Nightwalker web UIs are included: in Tools → Options →
+  Web UI, turn on "Use alternative WebUI" with /app/vuetorrent or
+  /app/nightwalker as files location.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open this app's settings (⋯ → Settings → Advanced settings), fill in your
+  VPN and restart the app. Until then, qBittorrent doesn't start.
+
+
+  1. VPN_SERVICE_PROVIDER: your provider, as Gluetun names it (protonvpn,
+  mullvad, nordvpn, surfshark, private internet access…). Each provider's page
+  of the Gluetun wiki lists what it needs:
+  github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+
+  2. WireGuard (the default): WIREGUARD_PRIVATE_KEY, plus WIREGUARD_ADDRESSES
+  for most providers other than ProtonVPN. OpenVPN: set VPN_TYPE to openvpn,
+  then OPENVPN_USER and OPENVPN_PASSWORD.
+
+
+  ProtonVPN: you need a paid plan (the free one doesn't allow P2P). On
+  account.protonvpn.com → Downloads → WireGuard configuration, create a
+  GNU/Linux configuration with "NAT-PMP (Port Forwarding)" turned on and copy
+  its PrivateKey. Set VPN_PORT_FORWARDING and PORT_FORWARD_ONLY to on. Each
+  VPN app uses one of your provider's devices.
+
+
+  Web UI login: admin and the default password shown by umbrelOS. Downloads
+  go to the Umbrel Downloads folder (/downloads), like the *arr apps.
+
+
+  Radarr, Sonarr, Prowlarr and the other apps reach this qBittorrent at
+  mathieu-qbittorrent-vpn_gluetun_1, port 8080, with the same login: add it in
+  their Settings → Download Clients. Radarr, Sonarr, Prowlarr, Lidarr and
+  Readarr require a Transmission app: this app counts as one, so pick it in
+  their settings (⋯ → Settings → Connections) and Transmission can be
+  uninstalled. On a fresh install they still add a Transmission download
+  client that points at the official app: delete it.
+developer: qBittorrent
+website: https://www.qbittorrent.org/
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/qbittorrent/qBittorrent
+support: https://github.com/qbittorrent/qBittorrent/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-3.jpg
+releaseNotes: >-
+  qBittorrent VPN now counts as the Transmission app that Radarr, Sonarr,
+  Prowlarr and the other apps require: pick it in their settings
+  (⋯ → Settings → Connections) and Transmission can be uninstalled.
+dependencies: []
+path: ""
+defaultUsername: "admin"
+deterministicPassword: true
+environment:
+  - name: VPN_SERVICE_PROVIDER
+    services:
+      - gluetun
+    note: Your VPN provider as Gluetun names it, e.g. protonvpn, mullvad, nordvpn, surfshark, private internet access. Required.
+  - name: VPN_TYPE
+    services:
+      - gluetun
+    default: wireguard
+    options:
+      - wireguard
+      - openvpn
+    note: WireGuard is faster; use OpenVPN if your provider has no WireGuard support in Gluetun.
+  - name: WIREGUARD_PRIVATE_KEY
+    services:
+      - gluetun
+    note: The PrivateKey of a WireGuard configuration from your provider. For ProtonVPN, turn on NAT-PMP (Port Forwarding) when creating it.
+  - name: WIREGUARD_ADDRESSES
+    services:
+      - gluetun
+    note: The Address of that WireGuard configuration, e.g. 10.64.222.21/32. Needed by most providers other than ProtonVPN.
+  - name: OPENVPN_USER
+    services:
+      - gluetun
+    note: OpenVPN only. Your provider's OpenVPN username (often not your account login).
+  - name: OPENVPN_PASSWORD
+    services:
+      - gluetun
+    note: OpenVPN only. Your provider's OpenVPN password.
+  - name: SERVER_COUNTRIES
+    services:
+      - gluetun
+    note: Optional. Server countries, comma-separated, e.g. Switzerland,Netherlands.
+  - name: VPN_PORT_FORWARDING
+    services:
+      - gluetun
+      - port-sync
+    options:
+      - "on"
+      - "off"
+    note: Optional, off by default. Turn it on with ProtonVPN, Private Internet Access, PrivateVPN or Perfect Privacy, the providers whose port forwarding Gluetun sets up.
+  - name: PORT_FORWARD_ONLY
+    services:
+      - gluetun
+    options:
+      - "on"
+      - "off"
+    note: Optional, ProtonVPN and Private Internet Access only. On picks only the servers that support port forwarding (P2P servers on ProtonVPN).
+permissions:
+  - STORAGE_DOWNLOADS
