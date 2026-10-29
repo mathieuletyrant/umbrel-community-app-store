@@ -1,4 +1,4 @@
-verified: 0.2.3 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.4.0 on umbrelOS 2.0.0 (2026-10-29)
 requires: [radarr, sonarr, prowlarr, bazarr, transmission, mathieu-healarr]
 vars:
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
@@ -23,9 +23,11 @@ steps:
       anonymous: true
       headers: {authorization: "Bearer ${env.server.VITALS_TOKEN}"}
       status: 200
-      contains: '"healthy":true,"apps".*"prowlarr":\{"name":"Prowlarr","status":"ok".*"bazarr":\{"name":"Bazarr","status":"ok"'
+      contains: '"version":2,.*"radarr":\{"name":"Radarr","status":"ok","healthy":true,"issues":\[\]\}.*"prowlarr":\{"name":"Prowlarr","status":"ok","healthy":false,"issues":\[\{"level":"error","message":"No indexers enabled.*"bazarr":\{"name":"Bazarr","status":"ok"'
   - goto: /
-  - see: All healthy
+  # A fresh Prowlarr has no indexer, and its own health check reports it as an error.
+  - see: Something needs attention
+  - see: No indexers enabled
   - see: "Paste Healarr's API key in Vitals' settings"
   - see: "Set Maintainerr's address in Vitals' settings"
   - shot: status-page
