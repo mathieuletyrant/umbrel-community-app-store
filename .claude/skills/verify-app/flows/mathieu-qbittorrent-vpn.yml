@@ -19,3 +19,14 @@ steps:
   - click: {role: button, name: Login}
   - see: Transfers
   - shot: qbittorrent
+# No outbound UDP (Claude cloud sandbox): no WireGuard. Gluetun waits for its settings, and a
+# stand-in public IP file lets qBittorrent start in Gluetun's (unfirewalled) network, so the
+# image, port-sync's login setup and the Web UI are proven; the tunnel and port forwarding aren't.
+noTunnel:
+  vars: null
+  settings: null
+  setup:
+    - docker exec mathieu-qbittorrent-vpn_gluetun_1 sh -c 'echo 203.0.113.1 > /gluetun/ip'
+  logs:
+    gluetun: Waiting for the VPN provider
+    port-sync: Web UI login set

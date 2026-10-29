@@ -124,6 +124,7 @@ requires: [radarr]            # installed first, uninstalled after
 timeout: 300                  # seconds for the whole app, install to last step (default 300); over it the app fails with its containers' logs
 egress: true                  # app needs internet at runtime (see Sandbox)
 headless: true                # no HTTP check on / (status page apps still get steps)
+noTunnel: {settings: null, setup: [...], logs: {...}}   # VPN apps: keys that replace the flow's own without outbound UDP (see Sandbox)
 vars:                         # shell commands run on the host after install, retried until non-empty
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
 settings:                     # the app's umbrelOS settings (manifest `environment:`), saved after `vars`; the app restarts
@@ -241,6 +242,12 @@ workaround, why the flow stops early).
   rate limit of the shared egress IP (`429 Too Many Requests`) doesn't stall installs. On a
   dockerd that was already running without it: write `{"registry-mirrors": ["https://mirror.gcr.io"]}`
   to `/etc/docker/daemon.json` and `kill -HUP` it (live reload, containers keep running).
+- No outbound UDP: WireGuard never comes up, so a VPN app (Gluetun, Transmission VPN, qBittorrent
+  VPN) can't prove its tunnel here. `doctor` probes it (NTP), and `run`/`explore` then use the
+  flow's `noTunnel:` keys instead of its own (`--tunnel` / `--no-tunnel` force either): Gluetun
+  waits for its settings, a stand-in `data/gluetun/ip` lets the torrent client start in Gluetun's
+  unfirewalled network, and the image + UI are proven. The result and proof say `no-tunnel`, and
+  `verified:` isn't updated. It proves everything but the tunnel and port forwarding.
 - Outbound HTTPS may go through a TLS-intercepting proxy. umbreld gets its CA automatically
   (`NODE_EXTRA_CA_CERTS` or `/root/.ccr/ca-bundle.crt`). App containers don't: `egress: true`
   appends the CA to the container's system trust store and restarts it (works for
