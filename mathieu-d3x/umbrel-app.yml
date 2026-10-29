@@ -57,9 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Fixes an orphaned hash when a batch cancels a release right after it opens, and retries a stalled verification once before reporting "different files". Batches now start only from a click. Adds 6-hour, 12-hour and daily monitoring options, files content V3X rejects as a duplicate under "Already present", and suggests the main video's name when the folder has no release name.
+  Copies without a tag (or renamed) that match a tagged copy to the byte are flagged "Detag" with the original team, and V3X's reupload rules now apply to every publication: a release from a team that forbids reupload, a refused group, or a detag/retag is never published and is kept under "To check" in the batch. Albums with a music video are detected by weight, with a button to switch between album and video, and Publish can ignore a release already on V3X. VirusTotal links are clickable.
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.39
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.41
 dependencies: []
 path: ""
 defaultUsername: ""
