@@ -9,7 +9,7 @@ name: Transmission VPN
 tagline: Transmission behind a VPN, with a kill switch and port forwarding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/icon.png
 # renovate: datasource=docker depName=linuxserver/transmission
-version: "4.1.3-patch.6"
+version: "4.1.3-patch.7"
 port: 9097
 description: >-
   The Transmission BitTorrent client, with all of its traffic sent through
@@ -82,9 +82,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-3.jpg
 releaseNotes: >-
-  With port forwarding on, the app now checks every 5 minutes that the
-  forwarded port is really open, and restarts the VPN to get a new one when
-  your provider stopped renewing it.
+  Updates Transmission to linuxserver's latest 4.1.3 image (system package
+  updates, same Transmission version). With port forwarding on, the app also
+  checks every 5 minutes that the forwarded port is really open, and restarts
+  the VPN to get a new one when your provider stopped renewing it.
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
