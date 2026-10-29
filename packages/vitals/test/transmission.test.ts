@@ -3,7 +3,7 @@ import {afterAll, beforeEach, expect, test} from 'bun:test'
 import {transmission} from '../src/sources/transmission'
 
 let handshakes = 0
-let torrents: {status: number; error: number; errorString: string}[] = []
+let torrents: {error: number; errorString: string}[] = []
 
 const rpc = Bun.serve({
 	port: 0,
@@ -14,7 +14,6 @@ const rpc = Bun.serve({
 		}
 		const {method} = (await request.json()) as {method: string}
 		if (method === 'torrent-get') return Response.json({result: 'success', arguments: {torrents}})
-		if (method === 'session-stats') return Response.json({result: 'success', arguments: {downloadSpeed: 4_200_000, uploadSpeed: 120_000}})
 		return Response.json({result: 'method name not recognized', arguments: {}})
 	},
 })
@@ -25,40 +24,24 @@ const url = `http://localhost:${rpc.port}/transmission/rpc`
 beforeEach(() => {
 	handshakes = 0
 	torrents = [
-		{status: 4, error: 0, errorString: ''},
-		{status: 3, error: 0, errorString: ''},
-		{status: 6, error: 0, errorString: ''},
-		{status: 0, error: 0, errorString: ''},
+		{error: 0, errorString: ''},
+		{error: 0, errorString: ''},
 	]
 })
 
-test('counts torrents by activity and reads the speeds, after the session handshake', async () => {
+test('is healthy without torrents in error, after the session handshake', async () => {
 	const source = transmission({name: 'Transmission', url})
 
-	expect(await source.read!()).toEqual({
-		data: {downloading: 2, seeding: 1, paused: 1, downloadSpeed: 4_200_000, uploadSpeed: 120_000},
-		issues: [],
-	})
-	await source.read!()
-	expect(handshakes).toBeLessThanOrEqual(2)
+	expect(await source.check!()).toEqual([])
+	await source.check!()
+	expect(handshakes).toBe(1)
 })
 
 test('reports torrents in error as a warning', async () => {
-	torrents.push({status: 0, error: 3, errorString: 'No data found! Ensure your drives are connected'})
-	const {issues} = await transmission({name: 'Transmission', url}).read!()
-	expect(issues).toEqual([{level: 'warning', message: '1 torrent(s) in error: No data found! Ensure your drives are connected'}])
+	torrents.push({error: 3, errorString: 'No data found! Ensure your drives are connected'})
+	expect(await transmission({name: 'Transmission', url}).check!()).toEqual([{level: 'warning', message: '1 torrent(s) in error: No data found! Ensure your drives are connected'}])
 })
 
 test('is not configured without a URL', () => {
-	expect(transmission({name: 'Transmission'}).read).toBeNull()
-})
-
-test('describes its data with readable speeds', () => {
-	const {facts} = transmission({name: 'Transmission'})
-	expect(facts({downloading: 2, seeding: 10, paused: 0, downloadSpeed: 4_200_000, uploadSpeed: 950})).toEqual([
-		{label: 'Downloading', value: '2'},
-		{label: 'Seeding', value: '10'},
-		{label: 'Down', value: '4.2 MB/s'},
-		{label: 'Up', value: '950 B/s'},
-	])
+	expect(transmission({name: 'Transmission'}).check).toBeNull()
 })
