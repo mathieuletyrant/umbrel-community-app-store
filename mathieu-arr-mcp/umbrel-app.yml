@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Dependency update (zod) under the hood, no change for users.
+  Adds NZBGet as a supported download client, plus a dependency update.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.45.1
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.46.0
 dependencies: []
 path: ""
 defaultUsername: ""
