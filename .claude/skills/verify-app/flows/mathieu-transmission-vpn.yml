@@ -17,3 +17,13 @@ steps:
   - goto: /transmission/web/
   - see: 0 Transfers
   - shot: transmission
+# No outbound UDP (Claude cloud sandbox): no WireGuard. Gluetun waits for its settings, and a
+# stand-in public IP file lets Transmission start in Gluetun's (unfirewalled) network, so the
+# image and the web UI are proven; the tunnel and port forwarding aren't.
+noTunnel:
+  vars: null
+  settings: null
+  setup:
+    - docker exec mathieu-transmission-vpn_gluetun_1 sh -c 'echo 203.0.113.1 > /gluetun/ip'
+  logs:
+    gluetun: Waiting for the VPN provider

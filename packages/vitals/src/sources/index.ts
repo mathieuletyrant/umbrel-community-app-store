@@ -3,7 +3,6 @@ import {bazarr} from './bazarr'
 import {cleanuparr} from './cleanuparr'
 import {healarr} from './healarr'
 import {maintainerr} from './maintainerr'
-import {prowlarr} from './prowlarr'
 import {qbittorrent} from './qbittorrent'
 import {seerr} from './seerr'
 import {tracearr} from './tracearr'
@@ -12,9 +11,9 @@ import {transmission} from './transmission'
 // Adding an app to Vitals: a source module, one line here, and its URL (and key) as settings in mathieu-vitals/umbrel-app.yml.
 export function sourcesFromEnv(env: NodeJS.ProcessEnv = process.env) {
 	return {
-		radarr: arr({name: 'Radarr', url: env.RADARR_URL, apiKey: env.RADARR_API_KEY, upcomingDays: 30}),
-		sonarr: arr({name: 'Sonarr', url: env.SONARR_URL, apiKey: env.SONARR_API_KEY, upcomingDays: 7}),
-		prowlarr: prowlarr({name: 'Prowlarr', url: env.PROWLARR_URL, apiKey: env.PROWLARR_API_KEY}),
+		radarr: arr({name: 'Radarr', url: env.RADARR_URL, apiKey: env.RADARR_API_KEY}),
+		sonarr: arr({name: 'Sonarr', url: env.SONARR_URL, apiKey: env.SONARR_API_KEY}),
+		prowlarr: arr({name: 'Prowlarr', url: env.PROWLARR_URL, apiKey: env.PROWLARR_API_KEY, apiPath: '/api/v1'}),
 		bazarr: bazarr({name: 'Bazarr', url: env.BAZARR_URL, apiKey: env.BAZARR_API_KEY}),
 		seerr: seerr({name: 'Seerr', url: env.SEERR_URL, apiKey: env.SEERR_API_KEY}),
 		transmission: transmission({name: 'Transmission', url: env.TRANSMISSION_URL}),
@@ -30,5 +29,3 @@ export function sourcesFromEnv(env: NodeJS.ProcessEnv = process.env) {
 		tracearr: tracearr({name: 'Tracearr', url: env.TRACEARR_URL, apiKey: env.TRACEARR_API_KEY}),
 	}
 }
-
-export type VitalsSources = ReturnType<typeof sourcesFromEnv>

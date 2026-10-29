@@ -3,23 +3,21 @@ import type {Report, Source, Sources, Summary} from './types'
 const escape = (text: string) =>
 	text.replace(/[&<>"']/g, (char) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[char]!)
 
-const STATE: Record<Report<unknown>['status'], {label: string; tone: string}> = {
+const STATE: Record<Report['status'], {label: string; tone: string}> = {
 	ok: {label: 'Healthy', tone: 'ok'},
 	error: {label: 'Unreachable', tone: 'bad'},
 	'not-configured': {label: 'Not set up', tone: 'off'},
 }
 
-function card<T>(id: string, report: Report<T>, {facts, setup}: Source<T>): string {
-	const state = report.status === 'ok' && !report.healthy ? {label: 'Needs attention', tone: 'warn'} : STATE[report.status]
+function card(id: string, report: Report, {setup}: Source): string {
+	let state = STATE[report.status]
+	if (report.status === 'ok' && !report.healthy) state = {label: 'Needs attention', tone: 'bad'}
+	else if (report.status === 'ok' && report.issues.length) state = {label: 'Warning', tone: 'warn'}
 	const body =
 		report.status === 'ok'
-			? `<dl>${facts(report.data)
-					.map(({label, value}) => `<div><dt>${escape(label)}</dt><dd>${escape(value)}</dd></div>`)
-					.join('')}</dl>${
-					report.issues.length
-						? `<ul>${report.issues.map(({level, message}) => `<li class="${level}">${escape(message)}</li>`).join('')}</ul>`
-						: ''
-				}`
+			? report.issues.length
+				? `<ul>${report.issues.map(({level, message}) => `<li class="${level}">${escape(message)}</li>`).join('')}</ul>`
+				: ''
 			: report.status === 'error'
 				? `<p class="note">${escape(report.error)}</p>`
 				: `<p class="note">${escape(setup ?? `Set ${report.name}'s address in Vitals' settings in umbrelOS.`)}</p>`
@@ -28,7 +26,7 @@ function card<T>(id: string, report: Report<T>, {facts, setup}: Source<T>): stri
 
 export function renderPage<S extends Sources>(sources: S, summary: Summary<S>): string {
 	const cards = Object.entries(summary.apps)
-		.map(([id, report]) => card(id, report as Report<unknown>, sources[id]!))
+		.map(([id, report]) => card(id, report, sources[id]!))
 		.join('')
 	return `<!doctype html>
 <html lang="en">
@@ -52,8 +50,6 @@ article header{display:flex;justify-content:space-between;align-items:center;gap
 h2{margin:0;font-size:17px}
 .pill{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
 .ok{color:var(--ok);background:var(--ok-bg)}.warn{color:var(--warn);background:var(--warn-bg)}.bad{color:var(--bad);background:var(--bad-bg)}.off{color:var(--off);background:var(--off-bg)}
-dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-dt{color:var(--muted);font-size:12px}dd{margin:0;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
 ul{margin:0;padding-left:18px;font-size:13px}li.error{color:var(--bad)}li.warning{color:var(--warn)}
 .note{margin:0;color:var(--muted);font-size:13px}
 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}

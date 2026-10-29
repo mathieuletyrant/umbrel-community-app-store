@@ -1,11 +1,17 @@
-verified: 6.13.9-patch.3 on umbrelOS 2.0.0 (2026-10-29)
+verified: 7.0.0-26 on umbrelOS 2.0.0 (2026-10-29)
 requires: [transmission]
 setup:
   - >-
-    docker exec mathieu-cross-seed_daemon_1 sh -c '[ "$(id -u)" = 1000 ] && [ "$(stat -c %u /config/config.js)" = 1000 ] && grep -qF "torznab: []," /config/config.js'
+    docker exec mathieu-cross-seed_daemon_1 sh -c '[ "$(id -u)" = 1000 ] && [ -f /config/cross-seed.db ] && grep -qF "torznab: []," /config/config.js.bak && [ ! -e /config/config.js ]'
 logs:
   daemon: Server is running on port 2468
 steps:
   - goto: /
-  - see: Add your trackers' Torznab URLs
-  - shot: status
+  - see: Initial Setup
+  - fill: {label: Username, value: admin}
+  - fill: {label: Password, value: Verify-CrossSeed-1}
+  - click: {role: button, name: Create Account}
+  - see: {text: Dashboard}
+  - goto: /settings/clients
+  - see: {text: transmission_server_1}
+  - shot: clients

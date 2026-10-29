@@ -85,12 +85,19 @@ node $V up                          # Bash run_in_background: boots umbrelOS whi
    - renamed env var, new port, moved path, new required setting → adapt that app's
      `docker-compose.yml` / `umbrel-app.yml`, bump `-patch.N` if `version:` didn't move;
    - install or container error that reads like egress or a registry limit → check
-     `doctor` again and `run.log`; confirm before calling it the sandbox.
+     `doctor` again and `run.log`; confirm before calling it the sandbox;
+   - a VPN app stuck on its tunnel (no `port forwarded`, DNS `i/o timeout` through
+     WireGuard) while `doctor` shows ⚠ outbound UDP → that's the sandbox: the run must
+     have printed `runs its noTunnel variant`; if it didn't, re-run with `--no-tunnel`.
    Commit each fix with a message naming it (the flow's `verified:` line too). Stop at
    a real upstream bug, a data migration needing manual steps, or a major bump.
 6. **Merge** (`gh pr merge <n> --squash`) when all of these hold:
    - CI is green on the head you merge: `gh pr checks <n> --watch --fail-fast`;
-   - verify is ✅ and you Read its proof (or the PR touches no app);
+   - verify is ✅ and you Read its proof (or the PR touches no app). A VPN app's
+     `no-tunnel` ✅ counts when the PR leaves the Gluetun image (`qmcgaw/gluetun`) as it
+     was (client image or sidecar digest): what changed is proven, Gluetun didn't move. A
+     PR that bumps Gluetun itself with only a `no-tunnel` ✅ stays open: `⚠️ Review needed —
+     Gluetun bump, the tunnel can't be tested without outbound UDP`;
    - the proof is on the PR: read the `uploads-sh` comment back
      (`gh pr view <n> --json comments --jq '.comments[] | select(.author.login=="uploads-sh") | .body'`)
      and check its newest entry for the app is named `<app-id>--<new version>--pass--<hash>`

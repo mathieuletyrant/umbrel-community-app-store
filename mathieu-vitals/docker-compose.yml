@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/v1/*,/health"
 
   server:
-    image: ghcr.io/mathieuletyrant/vitals:0.3.1@sha256:602e96592c4e3e517eb30944c4a90e9510319ec37ecd17be5c7ae3112b1c4ce3
+    image: ghcr.io/mathieuletyrant/vitals:0.4.0@sha256:be77d79ab19929fed8d0ecd922920b363e0935365666aa2a41a9856c3fa0cdf2
     environment:
       VITALS_TOKEN: ${APP_PASSWORD:?APP_PASSWORD is not set}
       RADARR_URL: http://radarr_server_1:7878
