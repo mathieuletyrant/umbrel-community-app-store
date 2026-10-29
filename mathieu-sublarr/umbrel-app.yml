@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Fixes subtitle repair for subtitles downloaded from SubDL, and Sonarr/Radarr path mapping for Windows or UNC paths. The wrong-episode check now handles story/part numbering (classic Doctor Who) and multi-episode files such as S05E01-E03.
+  Fixes subtitle repair so saved subtitles can be re-downloaded from every provider, not only a few. Each download now remembers where it came from; subtitles saved before this version from the other providers are listed as unavailable with the reason. Manual and forced downloads now keep their decision log in History.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.1
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.2
 dependencies: []
 path: ""
 defaultUsername: ""
