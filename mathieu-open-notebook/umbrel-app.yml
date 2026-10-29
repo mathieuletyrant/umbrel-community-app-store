@@ -7,7 +7,7 @@ name: Open Notebook
 tagline: Private NotebookLM alternative to research your documents and turn them into podcasts
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-open-notebook/icon.png
 # renovate: datasource=docker depName=lfnovo/open_notebook
-version: "1.15.0-patch.2"
+version: "1.15.0-patch.3"
 port: 8502
 description: >-
   Open Notebook is an open-source, self-hosted alternative to Google's

@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.39"
+version: "1.1.39-patch.1"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,9 +57,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Fixes an orphaned hash when a batch cancels a release right after it opens, and retries a stalled verification once before reporting "different files". Batches now start only from a click. Adds 6-hour, 12-hour and daily monitoring options, files content V3X rejects as a duplicate under "Already present", and suggests the main video's name when the folder has no release name.
-
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.39
+  Updates the bundled nginx web server to its latest build.
 dependencies: []
 path: ""
 defaultUsername: ""
