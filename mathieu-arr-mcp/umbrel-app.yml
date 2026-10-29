@@ -57,10 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Adds NZBGet as a supported download client, plus a dependency update.
+  Lidarr is now a managed service, so you can add it in arr-mcp alongside
+  the other *arr apps.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.46.0
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.47.0
 dependencies: []
 path: ""
 defaultUsername: ""
