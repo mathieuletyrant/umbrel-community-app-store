@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Titles added from watched folders (without Sonarr or Radarr) now use their own language profile everywhere, and keep their own ids, settings and glossary instead of mixing with Sonarr/Radarr titles of the same number. Subtitle health scans and the nightly sweep now cover standalone series, and a single standalone title can be rescanned. Existing standalone settings keep working with no upgrade step.
+  Fixes subtitle repair for subtitles downloaded from SubDL, and Sonarr/Radarr path mapping for Windows or UNC paths. The wrong-episode check now handles story/part numbering (classic Doctor Who) and multi-episode files such as S05E01-E03.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.0
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.1
 dependencies: []
 path: ""
 defaultUsername: ""
