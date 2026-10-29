@@ -1,33 +1,13 @@
-import {formatCount, formatSpeed} from '@mathieu/core/format'
 import {HttpError, request} from '@mathieu/core/http'
 
-import type {Issue, Source} from '../types'
-
-export type TransmissionStats = {
-	downloading: number
-	seeding: number
-	paused: number
-	downloadSpeed: number
-	uploadSpeed: number
-}
+import type {Source} from '../types'
 
 type Config = {name: string; url?: string}
 
-// https://github.com/transmission/transmission/blob/main/docs/rpc-spec.md (tr_torrent_activity)
-const STOPPED = 0
-const DOWNLOADING = new Set([3, 4])
-const SEEDING = new Set([5, 6])
-
 const SESSION_HEADER = 'X-Transmission-Session-Id'
 
-export function transmission({name, url}: Config): Source<TransmissionStats> {
-	const facts = (data: TransmissionStats) => [
-		{label: 'Downloading', value: formatCount(data.downloading)},
-		{label: 'Seeding', value: formatCount(data.seeding)},
-		{label: 'Down', value: formatSpeed(data.downloadSpeed)},
-		{label: 'Up', value: formatSpeed(data.uploadSpeed)},
-	]
-	if (!url) return {name, read: null, facts}
+export function transmission({name, url}: Config): Source {
+	if (!url) return {name, check: null}
 
 	let session = ''
 
@@ -54,28 +34,12 @@ export function transmission({name, url}: Config): Source<TransmissionStats> {
 
 	return {
 		name,
-		facts,
-		async read() {
-			const [{torrents}, stats] = await Promise.all([
-				rpc<{torrents: {status: number; error: number; errorString: string}[]}>('torrent-get', {
-					fields: ['status', 'error', 'errorString'],
-				}),
-				rpc<{downloadSpeed: number; uploadSpeed: number}>('session-stats'),
-			])
+		async check() {
+			const {torrents} = await rpc<{torrents: {error: number; errorString: string}[]}>('torrent-get', {
+				fields: ['error', 'errorString'],
+			})
 			const failing = torrents.filter((torrent) => torrent.error !== 0)
-			const issues: Issue[] = failing.length
-				? [{level: 'warning', message: `${failing.length} torrent(s) in error: ${failing[0]!.errorString}`}]
-				: []
-			return {
-				data: {
-					downloading: torrents.filter(({status}) => DOWNLOADING.has(status)).length,
-					seeding: torrents.filter(({status}) => SEEDING.has(status)).length,
-					paused: torrents.filter(({status}) => status === STOPPED).length,
-					downloadSpeed: stats.downloadSpeed,
-					uploadSpeed: stats.uploadSpeed,
-				},
-				issues,
-			}
+			return failing.length ? [{level: 'warning', message: `${failing.length} torrent(s) in error: ${failing[0]!.errorString}`}] : []
 		},
 	}
 }

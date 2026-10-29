@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/v1/*,/health"
 
   server:
-    image: ghcr.io/mathieuletyrant/vitals:0.2.4@sha256:7a7757a9b838145d0ea3546238c6dcbf14c149e4387866cb3be9025ca7d5e195
+    image: ghcr.io/mathieuletyrant/vitals:0.4.0@sha256:be77d79ab19929fed8d0ecd922920b363e0935365666aa2a41a9856c3fa0cdf2
     environment:
       VITALS_TOKEN: ${APP_PASSWORD:?APP_PASSWORD is not set}
       RADARR_URL: http://radarr_server_1:7878
@@ -19,4 +19,5 @@ services:
       HEALARR_URL: http://mathieu-healarr_server_1:3090
       CLEANUPARR_URL: http://mathieu-cleanuparr_server_1:11011
       TRACEARR_URL: http://mathieu-tracearr_server_1:3000
+      QBITTORRENT_USERNAME: admin
     restart: on-failure

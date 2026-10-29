@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "6.13.9-patch.2"
+version: "7.0.0-26"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -16,40 +16,57 @@ description: >-
   space (matches are hardlinked).
 
 
-  It runs headless as a background daemon: it periodically searches your
-  indexers for everything you seed, watches their RSS feeds for new matches,
-  and injects the cross-seedable torrents straight into Transmission, paused
-  rechecks included.
+  It runs as a background daemon: it periodically searches your indexers for
+  everything you seed, watches their RSS feeds for new matches, and injects the
+  cross-seedable torrents straight into Transmission, paused rechecks included.
+  Since version 7 it has a web interface to set it up and follow its activity.
+
+
+  ⚠️ This is a pre-release of cross-seed v7. Settings move from config.js to
+  cross-seed's database on the first start, so you can't go back to v6
+  afterwards.
 
 
   🛠️ SETUP INSTRUCTIONS
 
 
-  cross-seed has no web interface — opening the app shows a status page with
-  these instructions. It is pre-configured for the official Transmission app.
-  Add your trackers' Torznab URLs (from Prowlarr:
-  `http://prowlarr_server_1:9696/<indexer id>/api?apikey=<Prowlarr API key>`)
-  and any other option to the config on your Umbrel host, then restart the
-  app:
+  1. Open the app within 5 minutes of its start and create your cross-seed
+  account (otherwise restart the app). It is pre-configured for the official
+  Transmission app.
 
 
-  ~/umbrel/app-data/mathieu-cross-seed/data/config/config.js
+  2. In Settings → Trackers, add each tracker with Add Tracker: its Torznab URL
+  from Prowlarr, `http://prowlarr_server_1:9696/<indexer id>/api`, and
+  Prowlarr's API key (Prowlarr → Settings → General).
+
+
+  Already set up with config.js? It is imported into the database on the first
+  start of v7 and kept as config.js.bak; then change settings in the web
+  interface.
 
 
   Addresses of the other apps, to copy:
   https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
 
 
-  Check activity with: docker logs -f mathieu-cross-seed_daemon_1
+  Forgot your password? Run: docker exec mathieu-cross-seed_daemon_1 cross-seed reset-user
 developer: cross-seed
 website: https://www.cross-seed.org
 submitter: Mathieu Le Tyrant
 submission: https://github.com/cross-seed/cross-seed
 repo: https://github.com/cross-seed/cross-seed
 support: https://github.com/cross-seed/cross-seed/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/gallery-1.jpg
 releaseNotes: >-
-  Updates the bundled nginx web server to its latest build.
+  cross-seed v7 (pre-release 7.0.0-26) brings a web interface: open the app and
+  create your account within 5 minutes of its start, then change settings
+  there.
+
+
+  Your config.js is imported into cross-seed's database on the first start and
+  kept as config.js.bak. This upgrade is one-way: v6 can't read the v7
+  database.
 dependencies:
   - transmission
 path: ""

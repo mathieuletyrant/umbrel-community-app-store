@@ -87,6 +87,11 @@ services:
             touch /config/.webui-password-set
             echo "Web UI login set: admin and this app's default password"
           fi
+          if [ -n "$$prefs" ] && [ ! -f /config/.webui-csrf-off ] \
+            && set_prefs '{"web_ui_csrf_protection_enabled":false,"web_ui_host_header_validation_enabled":false}'; then
+            touch /config/.webui-csrf-off
+            echo "Web UI CSRF and Host header checks turned off (umbrelOS proxy)"
+          fi
           port=$$(cat /gluetun/forwarded_port 2>/dev/null)
           [ "$$port" = 0 ] && port=
           if [ -n "$$port" ] && [ -n "$$prefs" ]; then

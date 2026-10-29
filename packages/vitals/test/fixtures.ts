@@ -1,20 +1,15 @@
 import type {Issue, Source} from '../src/types'
 
-export const fake = <T>(name: string, data: T, issues: Issue[] = []): Source<T> => ({
-	name,
-	read: async () => ({data, issues}),
-	facts: () => [],
-})
+export const fake = (name: string, issues: Issue[] = []): Source => ({name, check: async () => issues})
 
-export const failing = (name: string, message: string): Source<unknown> => ({
+export const failing = (name: string, message: string): Source => ({
 	name,
-	read: async () => {
+	check: async () => {
 		throw new Error(message)
 	},
-	facts: () => [],
 })
 
-export const absent = (name: string): Source<unknown> => ({name, read: null, facts: () => []})
+export const absent = (name: string): Source => ({name, check: null})
 
 // A fake app API: answers each path with its JSON, only when the given header carries the right value.
 export function fakeApi(routes: Record<string, unknown>, auth?: {header: string; value: string}) {

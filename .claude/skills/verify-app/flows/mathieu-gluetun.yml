@@ -17,3 +17,16 @@ steps:
   - see: {text: "✅ Connected", reload: true}
   - see: mathieu-gluetun_gluetun_1
   - shot: status
+# No outbound UDP (Claude cloud sandbox): no WireGuard. Gluetun waits for its settings and the
+# status sidecar must say so; the image and the page are proven, the tunnel and proxy aren't.
+noTunnel:
+  vars: null
+  settings: null
+  setup: null
+  logs:
+    gluetun: Waiting for the VPN provider
+  steps:
+    - goto: /
+    - see: {text: "Not connected", reload: true}
+    - see: mathieu-gluetun_gluetun_1
+    - shot: status
