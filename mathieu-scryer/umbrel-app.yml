@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Adds HTTP indexer support with a native HTTP download client, and shows movies in the calendar using their availability dates. Imported episode files can be reassigned from the web, and each user can pick a color palette. RSS polling is spread across scheduler ticks. Request leases now only expire by date: operator keeps are removed, and an enabled "Expired request leases" rule returns to dry run. Weaver 0.11.5 or newer is required.
+  Adds Newznab and Torznab endpoints to share your indexers with other tools such as Lidarr (beta), and a per-user dashboard grid you can rearrange. New instances now ask for an explicit authentication choice on first run, and backup restores accept only encrypted .enc bundles. RSS sync now wakes every 15 minutes and checks every due indexer, background searches skip indexers that never answer, and Czech is added as a language.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.21
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.23
 dependencies: []
 path: ""
 defaultUsername: ""
