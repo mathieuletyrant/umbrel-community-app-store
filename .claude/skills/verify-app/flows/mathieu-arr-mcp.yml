@@ -1,4 +1,4 @@
-verified: 1.44.5 on umbrelOS 2.0.0 (2026-10-24)
+verified: 1.48.0 on umbrelOS 2.0.0 (2026-10-30)
 requires: [radarr]
 vars:
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
