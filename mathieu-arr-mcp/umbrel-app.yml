@@ -57,11 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Lidarr is now a managed service, so you can add it in arr-mcp alongside
-  the other *arr apps.
+  SABnzbd and NZBGet downloads that failed can now be retried, and NZBGet can
+  run post-processing again from a scan. NZBGet downloads aborted for health
+  reasons are now counted as failed.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.47.0
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.48.0
 dependencies: []
 path: ""
 defaultUsername: ""
