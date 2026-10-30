@@ -7,7 +7,7 @@ name: Agregarr
 tagline: Keep your Plex Home screen fresh with auto-updated collections
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/icon.png
 # renovate: datasource=docker depName=bitr8/agregarr
-version: "2.12.2"
+version: "2.12.3"
 port: 7171
 description: >-
   Agregarr builds Plex collections from public lists and pins them to your
@@ -64,9 +64,9 @@ support: https://github.com/bitr8/agregarr-dev/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
 releaseNotes: >-
-  Security and dependency update: patches sharp, express and axios and drops an unused YouTube search package. No changes to collections or settings.
+  Security fix: turns off the unused Next.js image optimiser. No changes to collections or settings.
 
-  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.12.2
+  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.12.3
 
 dependencies: []
 path: ""

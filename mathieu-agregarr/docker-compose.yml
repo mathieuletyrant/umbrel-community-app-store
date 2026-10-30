@@ -7,7 +7,7 @@ services:
       APP_PORT: 7171
 
   server:
-    image: bitr8/agregarr:2.12.2@sha256:fc62991ec3b20fe526f26231b1eaabaa6b51d68ee158026f1f1d3c06e8b080a1
+    image: bitr8/agregarr:2.12.3@sha256:fe50b7d232e802622ff38b0f963d9cbc4f1a6d83dbc150d8bf86b528de3ac836
     restart: on-failure
     extra_hosts:
       - "host.docker.internal:host-gateway"
