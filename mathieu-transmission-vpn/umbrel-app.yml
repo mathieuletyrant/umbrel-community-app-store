@@ -82,10 +82,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-3.jpg
 releaseNotes: >-
-  Updates Transmission to linuxserver's latest 4.1.3 image (system package
-  updates, same Transmission version). With port forwarding on, the app also
-  checks every 5 minutes that the forwarded port is really open, and restarts
-  the VPN to get a new one when your provider stopped renewing it.
+  Updates Transmission to 4.1.4, a bugfix release: fixes a regression with
+  zero-byte files, a hardened torrent-add RPC method, a shutdown hang, a
+  webseed download bug and torrents sometimes showing as "Unknown" in the web
+  client.
+
+
+  Full release notes can be found at https://github.com/transmission/transmission/releases/tag/4.1.4
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
