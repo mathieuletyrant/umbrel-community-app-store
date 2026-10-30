@@ -7,7 +7,7 @@ services:
       APP_PORT: 2468
 
   daemon:
-    image: ghcr.io/cross-seed/cross-seed:7.0.0-27@sha256:23ce72c9f8b53ca95aabfbbf5108f8dfc07b11f8d026859628222835a2fe7f42
+    image: ghcr.io/cross-seed/cross-seed:7.0.0-28@sha256:cbf943cf30b0f51f296eb99a27b5d32576ff7f15eb97b1cd918a792d3025dc7e
     user: "1000:1000"
     init: true
     restart: on-failure
