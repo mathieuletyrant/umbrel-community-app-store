@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-4.jpg
 releaseNotes: >-
-  Profiles can now download teasers, clips, featurettes, behind-the-scenes videos and bloopers (new Video Type setting), and can be told not to search YouTube. Trailarr never deletes extras it did not download, and stopping a task now stops yt-dlp and ffmpeg at once. Maximum Duration goes up to 1200 seconds. The YouTube Trailer ID field is replaced by the Known videos list.
+  Download and notification errors are clearer: a media folder that refuses the file is reported as a folder problem, and a failing download shows the reason yt-dlp gave. Remove Silence now works on trailers that start with silence or have a long description. yt-dlp, Pillow, Brotli and Apprise are updated.
 
 
-  Full release notes can be found at https://github.com/nandyalu/trailarr/releases/tag/v0.14.0
+  Full release notes can be found at https://github.com/nandyalu/trailarr/releases/tag/v0.14.1
 dependencies: []
 path: ""
 defaultUsername: "admin"
