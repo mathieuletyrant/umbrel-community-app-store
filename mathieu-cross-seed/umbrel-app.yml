@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "7.0.0-27"
+version: "7.0.0-28"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -59,11 +59,11 @@ support: https://github.com/cross-seed/cross-seed/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/gallery-1.jpg
 releaseNotes: >-
-  Pre-release 7.0.0-27 fixes the handling of streamed requests in the web
-  interface and API.
+  Pre-release 7.0.0-28 keeps your stored settings intact when cross-seed
+  cannot load them at startup, instead of overwriting them.
 
 
-  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-27
+  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-28
 dependencies:
   - transmission
 path: ""
