@@ -58,7 +58,6 @@
     { "matchPackageNames": ["ghcr.io/dispatcharr/dispatcharr"], "commitMessageTopic": "Dispatcharr" },
     { "matchPackageNames": ["dockurr/umbrel"], "commitMessageTopic": "test umbrelOS (verify-app skill)" },
     { "matchPackageNames": ["ghcr.io/mescon/healarr"], "commitMessageTopic": "Healarr" },
-    { "matchPackageNames": ["nousresearch/hermes-agent"], "commitMessageTopic": "Hermes Agent" },
     { "matchPackageNames": ["mrcas/kapowarr"], "commitMessageTopic": "Kapowarr" },
     { "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"], "commitMessageTopic": "Labelarr" },
     { "matchPackageNames": ["ghcr.io/lingarr-translate/lingarr"], "commitMessageTopic": "Lingarr" },

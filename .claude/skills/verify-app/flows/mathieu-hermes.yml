@@ -1,9 +1,0 @@
-steps:
-  - http: {path: /api/status, status: 200, contains: basic}
-  - goto: /
-  - see: Sign in
-  - fill: {label: Username, value: admin}
-  - fill: {label: Password, exact: true, value: "${env.server.HERMES_DASHBOARD_BASIC_AUTH_PASSWORD}"}
-  - click: {role: button, name: Sign in}
-  - see: Sessions
-  - shot: dashboard
