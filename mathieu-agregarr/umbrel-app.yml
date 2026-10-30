@@ -64,9 +64,9 @@ support: https://github.com/bitr8/agregarr-dev/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
 releaseNotes: >-
-  Fixes placeholder handling: Plex's trash is now emptied after placeholder cleanup, date filtering is skipped for non-Coming-Soon collections that include all released items, and digital release dates are no longer estimated twice.
+  Security and dependency update: patches sharp, express and axios and drops an unused YouTube search package. No changes to collections or settings.
 
-  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.12.1
+  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.12.2
 
 dependencies: []
 path: ""
