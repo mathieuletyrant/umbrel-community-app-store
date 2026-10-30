@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.48.0"
+version: "1.48.1"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,12 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  SABnzbd and NZBGet downloads that failed can now be retried, and NZBGet can
-  run post-processing again from a scan. NZBGet downloads aborted for health
-  reasons are now counted as failed.
+  Fixes title resolution when a request includes an episode or a bare year.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.48.0
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.48.1
 dependencies: []
 path: ""
 defaultUsername: ""
