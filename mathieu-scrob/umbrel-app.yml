@@ -7,7 +7,7 @@ name: Scrob
 tagline: Self-hosted tracker for the movies and shows you watch
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/icon.png
 # renovate: datasource=docker depName=bellamy/scrob
-version: "2.34.2-patch.1"
+version: "2.35.0"
 port: 7330
 description: >-
   Scrob is a self-hosted tracker for the movies and TV shows you watch, a
@@ -58,7 +58,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  Updates the bundled PostgreSQL 18.6 database image to its latest build.
+  List imports from TMDB, TVDB, IMDb and MDBList now run as background jobs with a higher item cap. Fixes several next-up and calendar issues, Emby watch dates, multi-episode Jellyfin/Emby syncs and OIDC login over plain HTTP. Adds LOG_LEVEL and ACCESS_LOG_EXCLUDE to reduce access log noise.
+
+
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.35.0
 dependencies: []
 path: ""
 defaultUsername: ""
