@@ -7,7 +7,7 @@ name: Scrob
 tagline: Self-hosted tracker for the movies and shows you watch
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/icon.png
 # renovate: datasource=docker depName=bellamy/scrob
-version: "2.35.0"
+version: "2.37.0"
 port: 7330
 description: >-
   Scrob is a self-hosted tracker for the movies and TV shows you watch, a
@@ -58,10 +58,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  List imports from TMDB, TVDB, IMDb and MDBList now run as background jobs with a higher item cap. Fixes several next-up and calendar issues, Emby watch dates, multi-episode Jellyfin/Emby syncs and OIDC login over plain HTTP. Adds LOG_LEVEL and ACCESS_LOG_EXCLUDE to reduce access log noise.
+  The Explore page can now exclude a genre or language by clicking its filter twice, offers 17 more languages (Arabic, Hebrew, Tamil and others), and saves named filter sets per page. Plays of the same episode on different media rows are now treated as duplicates in the live check, imports and Heal.
 
 
-  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.35.0
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.37.0
 dependencies: []
 path: ""
 defaultUsername: ""
