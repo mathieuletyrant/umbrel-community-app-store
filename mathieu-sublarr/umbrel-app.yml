@@ -7,7 +7,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.18.3"
+version: "1.18.4"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Improves subtitle sync for subtitles made for another cut of the episode: Sublarr now finds the cuts in the dialogue pauses and shifts each stretch on its own. Hearing-impaired markers in other languages (such as "[Gelächter]" or "(seufzt)") are now removed too. Translated and extracted subtitles now get the same HI removal, common fixes and credit removal as downloads.
+  Fixes the first-run setup wizard, which could not save any step since 1.14.0. SubsDump no longer searches a default LAN address and stays inactive until you enter your own server URL. The wanted scan now logs a warning when Sonarr or Radarr paths are not visible inside Sublarr. Updates follow-redirects for a security advisory.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.3
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.4
 dependencies: []
 path: ""
 defaultUsername: ""
