@@ -45,14 +45,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  Linking your own Jellyfin or Emby account is now possible from Settings →
-  Servers → Connections. A library that fails to sync (a slow Plex scan, for
-  example) no longer stops the others, Plexamp playback is no longer
-  recorded as downloads, several stats (completion rates, binge scores,
-  Most Watched) are more accurate, and History, Violations and Settings open
-  faster.
+  Plex setup now accepts your server's own plex.direct address and only
+  refuses Plex relay addresses. Mobile pushes replace instead of stacking, and
+  an iPhone that was offline gets the alert it missed. Android phones in
+  standby get push notifications right away. Jellyfin and Emby stream
+  reporting is improved, and the 24-hour clock shows a leading zero.
 
-  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.2
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.3
 dependencies: []
 path: ""
 defaultUsername: ""
