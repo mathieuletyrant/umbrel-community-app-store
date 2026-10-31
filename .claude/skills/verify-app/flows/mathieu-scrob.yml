@@ -1,4 +1,4 @@
-verified: 2.35.0 on umbrelOS 2.0.0 (2026-10-31)
+verified: 2.37.0 on umbrelOS 2.0.0 (2026-10-31)
 # Browsed by IP over plain HTTP like a real install: since 2.35.0 registration
 # signs in directly (the Secure cookie is only set over HTTPS).
 vars:
