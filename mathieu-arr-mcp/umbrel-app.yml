@@ -57,10 +57,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Fixes title resolution when a request includes an episode or a bare year.
+  Adds a read-only Cleanuparr adapter: stack health now checks Cleanuparr's
+  cleaner modules and rule coverage, and the queue says when a rule falls due.
+  Diagnose also searches download history when a title is in no library, and
+  Lidarr artists can be returned by get_media_details.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.48.1
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.49.0
 dependencies: []
 path: ""
 defaultUsername: ""
