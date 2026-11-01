@@ -59,11 +59,15 @@ support: https://github.com/cross-seed/cross-seed/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/gallery-1.jpg
 releaseNotes: >-
-  Pre-release 7.0.0-28 keeps your stored settings intact when cross-seed
-  cannot load them at startup, instead of overwriting them.
+  Pre-release 7.0.0-29 checks blocklist rules and torrent client connection
+  settings before saving them, and keeps the previous settings when they are
+  invalid. Nested source and destination folders no longer index linked copies
+  as original content. Scheduler, injection mode and notification webhook
+  changes apply without a restart, with safeguards on how often RSS polling
+  and automatic searches run.
 
 
-  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-28
+  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-29
 dependencies:
   - transmission
 path: ""
