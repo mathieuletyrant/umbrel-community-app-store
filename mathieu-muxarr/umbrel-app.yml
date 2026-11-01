@@ -7,8 +7,8 @@ name: Muxarr
 tagline: Strip unwanted audio and subtitle tracks without re-encoding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/kirovair/muxarr
-version: "0.9.13"
-port: 8184
+version: "0.9.13-patch.1"
+port: 8186
 description: >-
   Muxarr cleans up your media files by removing the audio and subtitle tracks
   you never use (foreign dubs, commentary, SDH, dozens of subtitle languages)
@@ -56,10 +56,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
 releaseNotes: >-
-  Conversions now check for free disk space before writing the converted copy and fail with a clear message instead of filling the disk. Progress is shown live when you open a conversion that is already running. The bundled MKVToolNix is updated to v103 and several dependencies are refreshed.
-
-
-  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.13
+  Muxarr now listens on host port 8186, because 8184 is taken by the official Fedimint app.
 dependencies: []
 path: ""
 defaultUsername: ""
