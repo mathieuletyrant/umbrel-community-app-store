@@ -57,11 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Stack health now also shows what Cleanuparr's Queue Cleaner and Malware
-  Blocker remove. Builds on 1.49.0, which added a read-only Cleanuparr adapter.
+  Maintenance release: updates the Node base image and the project's
+  dependencies. No change to features or configuration.
 
   Full release notes can be found at
-  https://github.com/bardesss/arr-mcp/releases/tag/v1.50.0
+  https://github.com/bardesss/arr-mcp/releases/tag/v1.50.1
 dependencies: []
 path: ""
 defaultUsername: ""
