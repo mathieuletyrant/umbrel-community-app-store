@@ -1,4 +1,4 @@
-verified: 2026.10.4 on umbrelOS 2.0.0 (2026-10-25)
+verified: 2026.11.0 on umbrelOS 2.0.0 (2026-11-01)
 fixtures: [movie]
 steps:
   - goto: /web/welcome
@@ -10,17 +10,13 @@ steps:
   - click: {css: "[role=dialog] button >> nth=0"}
   - see: {css: "[role=dialog] li:has-text('/downloads/movies')"}
   - click: {css: "[role=dialog] button[type=submit]"}
-  - see: 1 source connected.
-  - click: {role: button, name: NEXT}
-  - see: FFMPEG is installed.
-  - click: {role: button, name: NEXT}
-  - see: You're All Set!
-  - click: {role: button, name: FINISH}
-  - see: New Channel
+  - see: {css: "table td:has-text('Films')"}
+  - click: {role: link, name: New Channel}
   - fill: {label: Channel Name, exact: true, value: Umbrel TV}
   - click: {role: button, name: SAVE}
   - see: No programming added yet
-  - click: {role: button, name: ADD MEDIA}
+  - click: {role: button, name: Add}
+  - click: Media...
   # The library scan of the new source finishes a few seconds after it is added.
   - see: {text: Test Pattern, exact: true, reload: true}
   - click: Test Pattern
