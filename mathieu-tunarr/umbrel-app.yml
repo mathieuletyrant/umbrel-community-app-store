@@ -55,13 +55,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-3.jpg
 releaseNotes: >-
-  New look: a redesigned app shell, theme and IBM Plex fonts. Movie slots in
-  time and random slot schedules are migrated to custom-show slots, and the API
-  now rejects new movie slots there. Fixes for subtitle paths and playlists,
-  AV1 decoding, VAAPI MPEG-2 output, HDR tone-mapping, library scan spinner and
-  clipboard copy over plain HTTP, and a database index speeds up large libraries.
+  Tunarr can now use ErsatzTV Next as its streaming pipeline, the welcome
+  stepper became a skippable setup checklist, and bulk flex tools moved into a
+  Flex menu. Fixes for HLS playlists frozen by a slow client, Plex video streams
+  without dimensions, local library trash handling, slot padding on the local
+  clock and channel icon URLs.
 
-  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.10.4
+  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.11.0
 
 dependencies: []
 path: ""
