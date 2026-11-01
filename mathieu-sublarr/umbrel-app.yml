@@ -7,7 +7,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.18.4"
+version: "1.19.0"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Fixes the first-run setup wizard, which could not save any step since 1.14.0. SubsDump no longer searches a default LAN address and stays inactive until you enter your own server URL. The wanted scan now logs a warning when Sonarr or Radarr paths are not visible inside Sublarr. Updates follow-redirects for a security advisory.
+  Adds signs & songs subtitle support for anime, a per-language minimum score, an hourly disk space warning and a default library view setting. Saving settings and importing a backup now follow the same validation rules, and port, media path and database path are read-only (set them as environment variables). Fixes forced subtitles that were never searched once a full subtitle existed.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.18.4
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.19.0
 dependencies: []
 path: ""
 defaultUsername: ""
