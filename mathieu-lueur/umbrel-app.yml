@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.2.0-patch.1"
+version: "0.3.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -37,7 +37,7 @@ description: >-
   4. Libraries: switch on Movies and Shows. Umbrel's Jellyfin and lueur both
   see your files under /downloads, so the suggested folders are right.
 
-  5. Library → Scan now. A 2-hour film takes about a minute on an N100.
+  5. Library → Scan now. A 2-hour film takes about 3 minutes on an N100.
 
 
   Analysis uses the Intel GPU (Umbrel Home) when there is one, the CPU
@@ -53,8 +53,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  lueur now asks for GPU access, so films are analyzed with the Intel GPU
-  instead of the CPU.
+  Stop a scan, analyze a single film or episode from a searchable list, and
+  click a light in the area view to make it blink. The device filter now lists
+  every device Jellyfin knows.
+
+  Full release notes can be found at
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
