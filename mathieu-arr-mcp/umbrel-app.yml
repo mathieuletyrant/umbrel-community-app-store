@@ -57,8 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Playback history from get_playback now also counts plays found in
-  Jellyfin's activity log. Dependency updates in 1.50.1.
+  Adds a read-only Reclaimerr adapter, and Lidarr's queue, history and
+  blocklist can now be read. SABnzbd reports its health checks in stack
+  health, and Whisparr is named where it already answers.
+
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.53.0
 
   Full release notes can be found at
   https://github.com/bardesss/arr-mcp/releases/tag/v1.51.0
