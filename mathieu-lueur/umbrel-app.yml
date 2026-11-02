@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.15.0"
+version: "0.16.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,11 +53,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Look: intensity presets, from Subtle to Intense. The area view now looks
-  like an ambilight, with soft glows around the TV.
+  A pause switch in the top bar: while off, films leave the lights alone.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.15.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.16.0
 dependencies: []
 path: ""
 defaultUsername: ""
