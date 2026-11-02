@@ -53,8 +53,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  lueur now asks for GPU access, so films are analyzed with the Intel GPU
-  instead of the CPU.
+  You can now stop a running scan, analyze one video next, and blink a single
+  light to find it. The film and episode list is searchable, lights in the area
+  view are clickable, and the Jellyfin device list now shows every known device
+  instead of only connected ones.
+
+
+  Full release notes can be found at https://github.com/mathieuletyrant/lueur/releases/tag/v0.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
