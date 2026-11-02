@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.9.0"
+version: "0.10.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -37,7 +37,7 @@ description: >-
   4. Libraries: switch on Movies and Shows. Umbrel's Jellyfin and lueur both
   see your files under /downloads, so the suggested folders are right.
 
-  5. Library → Scan now. A 2-hour film takes about 3 minutes on an N100.
+  5. Library → Scan now. By default a 2-hour film takes about 12 minutes; pick a speed and analysis hours in Library → Automation.
 
 
   Analysis uses the Intel GPU (Umbrel Home) when there is one, the CPU
@@ -53,15 +53,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Smoother lights without delay: lueur now fades around each cut instead of
-  after it, so a calm smoothing no longer makes the lights late. It learns
-  how late each Jellyfin app reports its position and corrects the first
-  seconds after a play or a seek; the re-sync thresholds are settings on the
-  Now page. Analyses use about a third less CPU. On a phone, the navigation
-  moves to a bottom tab bar.
+  Keep your Umbrel cool: choose how hard analyses work, from Gentle (5x real
+  time) to Hurt my GPU, and optionally analyze only at certain hours. Films
+  you play or ask to analyze still start right away.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.9.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.10.0
 dependencies: []
 path: ""
 defaultUsername: ""
