@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.5.0"
+version: "0.6.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,13 +53,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  AV1 films are now analyzed on the GPU. Analyses run at the lowest priority
-  and use at most 2 CPU threads when the GPU can't decode a file, so they
-  never slow down Jellyfin. Each running analysis shows whether it decodes on
-  the GPU or the CPU.
+  Test on a frame: in Look, pick a film and a moment, hold it on your lights
+  and tune brightness, saturation or spread while looking at the room.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.5.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.6.0
 dependencies: []
 path: ""
 defaultUsername: ""
