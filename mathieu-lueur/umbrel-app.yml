@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.12.0"
+version: "0.13.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,12 +53,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Auto exposure brightens dark films, warm greys turn washed-out scenes into
-  a warm white, and every film shows its color barcode. The sync settings on
-  the Now page are clearer.
+  A new top navigation, and one status pill next to the logo: Live while the
+  lights follow a film, or what needs your attention (setup, the bridge,
+  Jellyfin).
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.12.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.13.0
 dependencies: []
 path: ""
 defaultUsername: ""
