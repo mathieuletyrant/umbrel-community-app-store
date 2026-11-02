@@ -37,7 +37,7 @@ description: >-
   4. Libraries: switch on Movies and Shows. Umbrel's Jellyfin and lueur both
   see your files under /downloads, so the suggested folders are right.
 
-  5. Library → Scan now. By default a 2-hour film takes about 12 minutes; pick a speed and analysis hours in Library → Automation.
+  5. Library → Analyze missing (an auto scan runs every 15 min too). By default a 2-hour film takes about 12 minutes; pick a speed and analysis hours in Library → Automation.
 
 
   Analysis uses the Intel GPU (Umbrel Home) when there is one, the CPU
