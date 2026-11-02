@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.13.1"
+version: "0.14.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,13 +53,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Resuming after a pause no longer runs the lights ahead by the length of the
-  pause. The still frame in Look renders exactly like a film, and switching
-  between a film, a still frame and the test pattern reuses the same stream
-  instead of fighting over the lights.
+  A cinema look: the Now page shows the film's current frame in scope format
+  with your lights' colors glowing around it, the Library shows a still of
+  each film, and titles use a poster-style serif. lueur can be installed on
+  your phone's home screen as an app. Pages no longer shift sideways when the
+  scrollbar appears.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.13.1
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.14.0
 dependencies: []
 path: ""
 defaultUsername: ""
