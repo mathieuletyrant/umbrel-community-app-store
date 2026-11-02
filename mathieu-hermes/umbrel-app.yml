@@ -7,7 +7,7 @@ name: Hermes Agent
 tagline: The self-improving AI agent, reachable from your phone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/icon.png
 # renovate: datasource=docker depName=nousresearch/hermes-agent
-version: "0.22.5"
+version: "0.22.6"
 port: 18791
 description: >-
   Hermes Agent by Nous Research is an AI agent that gets better the more you
@@ -58,13 +58,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-3.jpg
 releaseNotes: >-
-  Session auto-pruning is opt-in again: Hermes prompts when disk space is low
-  instead of deleting old sessions. Agent importers, the MCP server and the
-  Singularity backend now live in plugins, and chats no longer reset on idle or
-  daily timers (use /new or /reset).
+  Maintenance release with no user-facing changes (an installer test fix only).
 
 
-  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.22.5
+  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.22.6
 dependencies: []
 path: ""
 defaultUsername: "admin"
