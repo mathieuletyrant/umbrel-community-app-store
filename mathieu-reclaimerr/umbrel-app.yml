@@ -61,13 +61,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Seasons stored directly in the series folder can now be unmonitored and
-  deleted through Sonarr. Cleanup no longer gets stuck after files were
-  removed successfully, and cleanup candidate notifications are readable
-  and no longer sent twice. Dependencies were updated.
+  Adds a "Why doesn't this match?" check in the rule editor, support
+  diagnostics and optional support bundles under Settings > About, and
+  readable "Why this candidate?" details. Move and deletion failures now
+  record clearer diagnostics, playback history handling is more reliable, and
+  database locking is much improved.
 
 
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#065---2026-10-28
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#066---2026-11-01
 permissions:
   - STORAGE_DOWNLOADS
 dependencies: []
