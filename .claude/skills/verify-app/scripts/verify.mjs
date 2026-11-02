@@ -22,7 +22,7 @@ const PASSWORD = 'umbrel-verify'
 const CONTAINER = 'umbrel-verify'
 
 // renovate: datasource=docker depName=dockurr/umbrel
-const UMBREL_IMAGE = 'dockurr/umbrel:2.0.0@sha256:11cb2635ff795284c0d406a1336ede0e386cc0f494457b1bf22e889ec6a77bdc'
+const UMBREL_IMAGE = 'dockurr/umbrel:2.0.1@sha256:e06387aabc65f72e947017924b351039064601701f361a887d0d11d73d1209d6'
 const umbrelImage = (tag) => (tag ? `dockurr/umbrel:${tag}` : UMBREL_IMAGE)
 const umbrelVersion = (image) => image.split(':')[1].split('@')[0]
 
