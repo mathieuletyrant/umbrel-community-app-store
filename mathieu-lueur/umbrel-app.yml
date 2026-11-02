@@ -40,7 +40,8 @@ description: >-
   5. Library → Scan now. A 2-hour film takes about a minute on an N100.
 
 
-  Needs an Intel GPU (/dev/dri), like the Umbrel Home's.
+  Analysis uses the Intel GPU (Umbrel Home) when there is one, the CPU
+  otherwise.
 developer: Mathieu Le Tyrant
 website: https://github.com/mathieuletyrant/lueur
 submitter: Mathieu Le Tyrant
@@ -58,4 +59,6 @@ dependencies: []
 path: ""
 defaultUsername: ""
 defaultPassword: ""
-permissions: []
+permissions:
+  - STORAGE_DOWNLOADS
+  - GPU

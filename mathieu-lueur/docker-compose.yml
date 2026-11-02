@@ -15,6 +15,3 @@ services:
       - ${APP_DATA_DIR}/data/lueur:/data
       # Same path as Jellyfin's container, so Libraries map one to one.
       - ${UMBREL_ROOT}/data/storage/downloads:/downloads:ro
-    devices:
-      # Intel GPU for hardware decoding during Analysis (VA-API).
-      - /dev/dri:/dev/dri
