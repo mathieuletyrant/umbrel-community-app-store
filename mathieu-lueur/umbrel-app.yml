@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.16.1"
+version: "0.17.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,11 +53,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  The lights no longer flash back on for a moment after you quit the
-  Jellyfin app.
+  Unsure whether the lights are early or late? The Now page has a
+  calibration clip to download: add it to a Jellyfin library, play it on the
+  TV, and move the sync offset until the lights switch with the screen.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.16.1
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.17.0
 dependencies: []
 path: ""
 defaultUsername: ""
