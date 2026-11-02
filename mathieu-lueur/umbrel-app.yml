@@ -1,0 +1,61 @@
+manifestVersion: 1
+id: mathieu-lueur
+storage:
+  dataRoot: data
+category: media
+name: lueur
+tagline: Your Philips Hue lights follow the films you play on Jellyfin
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
+# renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
+version: "0.2.0"
+port: 5878
+description: >-
+  lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
+  Sync Box, a PC or the Hue Sync app. Each film is analyzed once (hardware
+  decoding on Intel), then the lights of your entertainment area take the
+  colors of their side of the screen, 50 times per second, while you watch on
+  any Jellyfin client (Apple TV, TV, phone).
+
+
+  The web UI finds and pairs your bridge, picks the entertainment area, lists
+  your Jellyfin libraries and scans them. The Now page shows what is playing
+  and each light's color live; brightness, saturation, smoothing and sync
+  offset apply instantly, even during a film.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. In the Hue app, create an entertainment area (Settings → Entertainment
+  areas) around your TV.
+
+  2. Open lueur → Setup, pick your bridge and press its link button.
+
+  3. Jellyfin: URL `http://jellyfin_server_1:8096` and an admin API key
+  (Jellyfin → Dashboard → API keys).
+
+  4. Libraries: switch on Movies and Shows. Umbrel's Jellyfin and lueur both
+  see your files under /downloads, so the suggested folders are right.
+
+  5. Library → Scan now. A 2-hour film takes about a minute on an N100.
+
+
+  Needs an Intel GPU (/dev/dri), like the Umbrel Home's.
+developer: Mathieu Le Tyrant
+website: https://github.com/mathieuletyrant/lueur
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/lueur
+repo: https://github.com/mathieuletyrant/lueur
+support: https://github.com/mathieuletyrant/lueur/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
+releaseNotes: >-
+  First release: web UI with bridge discovery and pairing, entertainment area,
+  Jellyfin libraries, Scan and live Look settings.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
