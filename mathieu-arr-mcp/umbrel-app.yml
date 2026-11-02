@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.53.0"
+version: "1.54.0"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,11 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Adds a read-only Reclaimerr adapter, and Lidarr's queue, history and
-  blocklist can now be read. SABnzbd reports its health checks in stack
-  health, and Whisparr is named where it already answers.
+  Lidarr gains the ability to remove queue items and clean up orphaned
+  downloads.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.53.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.54.0
 
 dependencies: []
 path: ""
