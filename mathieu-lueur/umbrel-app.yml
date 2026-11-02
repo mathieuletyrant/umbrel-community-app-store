@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.10.0"
+version: "0.11.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -29,7 +29,7 @@ description: >-
   1. In the Hue app, create an entertainment area (Settings → Entertainment
   areas) around your TV.
 
-  2. Open lueur → Setup, pick your bridge and press its link button.
+  2. Open lueur → Settings, pick your bridge and press its link button.
 
   3. Jellyfin: URL `http://jellyfin_server_1:8096` and an admin API key
   (Jellyfin → Dashboard → API keys).
@@ -37,7 +37,7 @@ description: >-
   4. Libraries: switch on Movies and Shows. Umbrel's Jellyfin and lueur both
   see your files under /downloads, so the suggested folders are right.
 
-  5. Library → Analyze missing (an auto scan runs every 15 min too). By default a 2-hour film takes about 12 minutes; pick a speed and analysis hours in Library → Automation.
+  5. Library → Analyze missing (an auto scan runs every 15 min too). By default a 2-hour film takes about 12 minutes; pick a speed and analysis hours in Settings → Analysis.
 
 
   Analysis uses the Intel GPU (Umbrel Home) when there is one, the CPU
@@ -53,12 +53,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Keep your Umbrel cool: choose how hard analyses work, from Gentle (5x real
-  time) to Hurt my GPU, and optionally analyze only at certain hours. Films
-  you play or ask to analyze still start right away.
+  A lighter Library page: analysis settings (speed, auto scan, hours, skipped
+  files) move to Settings → Analysis, and the queue shows a one-line summary
+  of how lueur analyzes.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.10.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.11.0
 dependencies: []
 path: ""
 defaultUsername: ""
