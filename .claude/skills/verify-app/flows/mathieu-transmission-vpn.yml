@@ -25,5 +25,6 @@ noTunnel:
   settings: null
   setup:
     - docker exec mathieu-transmission-vpn_gluetun_1 sh -c 'echo 203.0.113.1 > /gluetun/ip'
+    - docker restart mathieu-transmission-vpn_server_1 mathieu-transmission-vpn_port-sync_1
   logs:
     gluetun: Waiting for the VPN provider

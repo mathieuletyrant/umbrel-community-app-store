@@ -9,7 +9,7 @@ name: Transmission VPN
 tagline: Transmission behind a VPN, with a kill switch and port forwarding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/icon.png
 # renovate: datasource=docker depName=linuxserver/transmission
-version: "4.1.4"
+version: "4.1.4-patch.1"
 port: 9097
 description: >-
   The Transmission BitTorrent client, with all of its traffic sent through
@@ -82,13 +82,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-transmission-vpn/gallery-3.jpg
 releaseNotes: >-
-  Updates Transmission to 4.1.4, a bugfix release: fixes a regression with
-  zero-byte files, a hardened torrent-add RPC method, a shutdown hang, a
-  webseed download bug and torrents sometimes showing as "Unknown" in the web
-  client.
-
-
-  Full release notes can be found at https://github.com/transmission/transmission/releases/tag/4.1.4
+  Refreshes the Transmission 4.1.4 image to the latest linuxserver build.
 dependencies: []
 path: "/transmission/web/"
 defaultUsername: ""
