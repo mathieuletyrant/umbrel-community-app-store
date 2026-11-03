@@ -53,12 +53,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Unsure whether the lights are early or late? The Now page has a
-  calibration clip to download: add it to a Jellyfin library, play it on the
-  TV, and move the sync offset until the lights switch with the screen.
+  The logs now carry diagnostics while a film plays, to help work out why
+  the lights don't follow the screen as expected.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.17.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.18.0
 dependencies: []
 path: ""
 defaultUsername: ""
