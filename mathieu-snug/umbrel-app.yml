@@ -58,3 +58,14 @@ releaseNotes: >-
   opens it in your own app.
 
   Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.19.0
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
+environment:
+  - name: SNUG_ORIGINS
+    services:
+      - server
+    default: http://umbrel.local:3077
+    note: Every address you open Snug with, comma separated, protocol and port included, e.g. http://umbrel.local:3077,http://192.168.1.10:3077,https://snug.example.com.
