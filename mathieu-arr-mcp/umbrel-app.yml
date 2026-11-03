@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Lidarr's trigger_scan tool can now also rescan, rename and import
-  downloads.
+  Adds a read-only Dispatcharr adapter, so the assistant can look at your
+  Dispatcharr IPTV setup alongside the rest of the media stack.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.55.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.56.0
 
 dependencies: []
 path: ""
