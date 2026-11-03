@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  The queue stays responsive while Weaver repairs or extracts, restarts resume around missing articles instead of crawling, and downloads no longer get stuck on phantom in-flight work. The download checkpoint format changes: files that were part-way through a download restart from the beginning after the update.
+  Weaver now processes each job as one tree of files, archives and recovery sets, handles large queues faster, and adds a "Maximum concurrent NZBs" setting (default 10). Recovery, resume and password handling were improved, and zip archives with mismatched headers are now refused (security fix). The update migrates the database automatically: downloads that were in progress restart from the beginning, while queued jobs and history are kept.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.5
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.6
 dependencies: []
 path: ""
 defaultUsername: "admin"
