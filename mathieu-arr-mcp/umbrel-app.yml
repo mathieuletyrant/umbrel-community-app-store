@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Lidarr gains the ability to remove queue items and clean up orphaned
+  Lidarr's trigger_scan tool can now also rescan, rename and import
   downloads.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.54.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.55.0
 
 dependencies: []
 path: ""
