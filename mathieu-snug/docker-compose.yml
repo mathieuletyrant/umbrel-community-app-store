@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: ghcr.io/mathieuletyrant/snug:0.19.0@sha256:461dd736335a109ae075aa83de00a30db892cb06a276f6af94e989eaaaae5586
+    image: ghcr.io/mathieuletyrant/snug:0.20.0@sha256:a9a464d25a294f35bd2c4c8cb93b7f0cbdc7b4f209d50af26b1675d7e75bd7f8
     restart: on-failure
     environment:
       TZ: Etc/UTC
