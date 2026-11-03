@@ -55,10 +55,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-3.jpg
 releaseNotes: >-
-  The tab bar on a phone is now lower and slimmer.
+  Instagram carousels are now identified too: Spotarr looks at the picture in view first.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.16.1
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.17.0
 dependencies: []
 path: ""
 defaultUsername: ""
