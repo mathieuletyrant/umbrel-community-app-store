@@ -58,10 +58,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-3.jpg
 releaseNotes: >-
-  Maintenance release with no user-facing changes (an installer test fix only).
+  Adds opt-in lead routing for Group Chats (a room lead can assign incoming messages), and fixes several room settings and scheduled-post delivery issues.
 
 
-  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.22.6
+  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.22.7
 dependencies: []
 path: ""
 defaultUsername: "admin"
