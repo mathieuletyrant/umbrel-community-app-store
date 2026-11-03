@@ -54,18 +54,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  Fixes the Jellyfin webhook: the duplicate call Jellyfin sends after a
-  finished episode is now ignored, so it no longer registers twice.
+  Adds a Play button on each episode: it starts playback on a Jellyfin TV or
+  opens it in your own app.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.18.1
-dependencies: []
-path: ""
-defaultUsername: ""
-defaultPassword: ""
-permissions: []
-environment:
-  - name: SNUG_ORIGINS
-    services:
-      - server
-    default: http://umbrel.local:3077
-    note: Every address you open Snug with, comma separated, protocol and port included, e.g. http://umbrel.local:3077,http://192.168.1.10:3077,https://snug.example.com.
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.19.0
