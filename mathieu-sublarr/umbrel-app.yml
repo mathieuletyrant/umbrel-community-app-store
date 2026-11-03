@@ -7,7 +7,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.19.0"
+version: "1.19.2"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Adds signs & songs subtitle support for anime, a per-language minimum score, an hourly disk space warning and a default library view setting. Saving settings and importing a backup now follow the same validation rules, and port, media path and database path are read-only (set them as environment variables). Fixes forced subtitles that were never searched once a full subtitle existed.
+  Fixes the English interface showing German pop-ups, sync dialog and settings help texts. Embedded subtitle extraction now reads the text of a track and drops it when its language doesn't match its name, so English text no longer ends up in .de.srt files.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.19.0
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.19.2
 dependencies: []
 path: ""
 defaultUsername: ""
