@@ -59,15 +59,14 @@ support: https://github.com/cross-seed/cross-seed/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/gallery-1.jpg
 releaseNotes: >-
-  Pre-release 7.0.0-29 checks blocklist rules and torrent client connection
-  settings before saving them, and keeps the previous settings when they are
-  invalid. Nested source and destination folders no longer index linked copies
-  as original content. Scheduler, injection mode and notification webhook
-  changes apply without a restart, with safeguards on how often RSS polling
-  and automatic searches run.
+  Pre-release 7.0.0-30 imports indexer credentials atomically with the rest
+  of the settings, normalizes legacy values when importing a config, and
+  honors the settings saved at startup. Linking is now required when
+  injecting virtual season packs, and a failing file watcher on Linux no
+  longer takes the daemon down.
 
 
-  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-29
+  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-30
 dependencies:
   - transmission
 path: ""
