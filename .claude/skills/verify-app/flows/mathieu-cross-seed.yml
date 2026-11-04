@@ -1,4 +1,4 @@
-verified: 7.0.0-26 on umbrelOS 2.0.0 (2026-10-29)
+verified: 7.0.0-30 on umbrelOS 2.0.1 (2026-11-04)
 requires: [transmission]
 setup:
   - >-
