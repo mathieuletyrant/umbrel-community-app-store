@@ -7,7 +7,7 @@ name: Shredarr
 tagline: Delete it in Jellyfin or Plex, and it's gone everywhere
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/jimbos-slop-shop/shredarr
-version: "2.3.2"
+version: "2.3.3"
 port: 8188
 description: >-
   When you delete a movie, show, season or episode in Jellyfin or Plex, Shredarr
