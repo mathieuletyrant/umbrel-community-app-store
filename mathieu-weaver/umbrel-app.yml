@@ -7,7 +7,7 @@ name: Weaver
 tagline: Usenet downloader with built-in repair and extraction
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/weaver
-version: "0.16.6"
+version: "0.16.7"
 port: 9390
 description: >-
   Weaver is a self-hosted Usenet downloader written in Rust. Downloading,
@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Weaver now processes each job as one tree of files, archives and recovery sets, handles large queues faster, and adds a "Maximum concurrent NZBs" setting (default 10). Recovery, resume and password handling were improved, and zip archives with mismatched headers are now refused (security fix). The update migrates the database automatically: downloads that were in progress restart from the beginning, while queued jobs and history are kept.
+  Bug-fix release. Fixes crashes and wrong file sizes when a post declares a bogus yEnc length, makes a paused job whose NZB can't be read back cancellable, stores queue reorders for jobs outside the active window, and hides deleted history rows from Weaver's history listings.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.6
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.7
 dependencies: []
 path: ""
 defaultUsername: "admin"
