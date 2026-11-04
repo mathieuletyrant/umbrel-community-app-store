@@ -7,7 +7,7 @@ name: Shredarr
 tagline: Delete it in Jellyfin or Plex, and it's gone everywhere
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/jimbos-slop-shop/shredarr
-version: "2.3.2"
+version: "2.3.3"
 port: 8188
 description: >-
   When you delete a movie, show, season or episode in Jellyfin or Plex, Shredarr
@@ -50,21 +50,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-4.jpg
 releaseNotes: >-
-  Shredarr moved to github.com/jimbos-slop-shop/shredarr and its Docker image to
-  ghcr.io/jimbos-slop-shop/shredarr: this update switches to the new image, the
-  old one gets no new versions. Settings, history and saved .torrent files are
-  kept.
+  A connection must now stay down for two minutes (SHREDARR_HEALTH_GRACE) before
+  a "Connection FAILED" notification is sent, so a short restart of qBittorrent
+  or Sonarr no longer sends a failed/restored pair. An unreachable http
+  qBittorrent WebUI is no longer reported as an untrusted certificate.
 
 
-  Also fixes the cleanup sweep stopping when Sonarr or Radarr is down during the
-  low disk space pass, a successful delete logged as failed on an empty reply,
-  random Plex failures when two things use the connection at once, settings not
-  saving on shares that forbid changing file permissions, and the "new version"
-  notice. Half-written .torrent files are removed after an hour, and wrong
-  passwords are now counted per connection too.
-
-
-  Full release notes can be found at https://github.com/jimbos-slop-shop/shredarr/releases/tag/v2.3.2
+  Full release notes can be found at https://github.com/jimbos-slop-shop/shredarr/releases/tag/v2.3.3
 dependencies: []
 path: ""
 defaultUsername: ""
