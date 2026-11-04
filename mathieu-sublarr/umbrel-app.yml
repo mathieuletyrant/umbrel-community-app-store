@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Fixes the English interface showing German pop-ups, sync dialog and settings help texts. Embedded subtitle extraction now reads the text of a track and drops it when its language doesn't match its name, so English text no longer ends up in .de.srt files.
+  Adds an opt-in Automatic Repair setting (Settings → Automation) that checks downloaded subtitles against the video's timing, shifts or replaces ones that don't fit, and treats signs-only sidecars as missing. Fixes subtitle search for Gestdown, BetaSeries, Napisy24, OpenSubtitles and Jimaku, and adds a configurable ASS size limit.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.19.2
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.20.0
 dependencies: []
 path: ""
 defaultUsername: ""
