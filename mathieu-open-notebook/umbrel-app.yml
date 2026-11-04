@@ -7,7 +7,7 @@ name: Open Notebook
 tagline: Private NotebookLM alternative to research your documents and turn them into podcasts
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-open-notebook/icon.png
 # renovate: datasource=docker depName=lfnovo/open_notebook
-version: "1.15.0-patch.3"
+version: "1.15.1"
 port: 8502
 description: >-
   Open Notebook is an open-source, self-hosted alternative to Google's
@@ -50,7 +50,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-open-notebook/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-open-notebook/gallery-2.jpg
 releaseNotes: >-
-  Updates the bundled nginx web server to its latest build.
+  Fixes timeouts being reported as connection failures (the error now says the provider took too long and how to raise the limit), adds Italian to the language menu, and enforces upload and URL safety checks inside the background worker. The documentation was also rewritten.
+
+  Full release notes can be found at https://github.com/lfnovo/open-notebook/releases/tag/v1.15.1
 dependencies: []
 path: ""
 defaultUsername: ""

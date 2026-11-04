@@ -43,7 +43,7 @@ services:
     restart: on-failure
 
   server:
-    image: lfnovo/open_notebook:1.15.0@sha256:54b2025a4a4853c188f74b9b8246eca8c5480e5dd1babfa92db1038ff2f30212
+    image: lfnovo/open_notebook:1.15.1@sha256:3a6ddfb4c4189ada09e831b9ac237e828df90f7762fc86cca168829cdafd7abd
     restart: on-failure
     depends_on:
       - db
