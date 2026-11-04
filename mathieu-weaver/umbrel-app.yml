@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Bug-fix release. Fixes crashes and wrong file sizes when a post declares a bogus yEnc length, makes a paused job whose NZB can't be read back cancellable, stores queue reorders for jobs outside the active window, and hides deleted history rows from Weaver's history listings.
+  Restarts during delivery now resume the move instead of downloading again, and a job that crashes Weaver stays paused after restart. Moving finished files works on more filesystems (NFS, SMB, FUSE), PAR2 recovery counting and RAR4 password retries are fixed, and downloads and extraction use less overhead.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.7
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.8
 dependencies: []
 path: ""
 defaultUsername: "admin"
