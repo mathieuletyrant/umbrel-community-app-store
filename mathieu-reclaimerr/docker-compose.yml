@@ -7,7 +7,7 @@ services:
       APP_PORT: 8000
 
   server:
-    image: ghcr.io/jessielw/reclaimerr:0.6.7@sha256:d09ce6ed5b706566274c4f267aa6a652c50bbda54b036e270da138deb994b774
+    image: ghcr.io/jessielw/reclaimerr:0.6.8@sha256:3696535683cadf2df7cc2691441f811922d85b1926521b245c13e57550f8c4da
     environment:
       - TZ=Etc/UTC
       - PUID=1000
