@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Restarts during delivery now resume the move instead of downloading again, and a job that crashes Weaver stays paused after restart. Moving finished files works on more filesystems (NFS, SMB, FUSE), PAR2 recovery counting and RAR4 password retries are fixed, and downloads and extraction use less overhead.
+  Moving finished files is more robust across mounts (files are no longer lost on fallback copies, and aliases are resolved first), ZIP archives with repaired headers or encrypted entries are handled, and progress bars stay live while files move. Archive extraction and checkpoints are also faster.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.8
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.9
 dependencies: []
 path: ""
 defaultUsername: "admin"
