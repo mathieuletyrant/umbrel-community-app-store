@@ -61,17 +61,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Adds a "Why doesn't this match?" check in the rule editor, support
-  diagnostics and optional support bundles under Settings > About, and
-  readable "Why this candidate?" details. Move and deletion failures now
-  record clearer diagnostics, playback history handling is more reliable, and
-  database locking is much improved.
+  Plex episodes now include watches from every user, so "Days since watched"
+  and episode-scoped rules no longer miss an episode watched by another
+  account. Backend dependencies are updated.
 
 
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#066---2026-11-01
-permissions:
-  - STORAGE_DOWNLOADS
-dependencies: []
-path: ""
-defaultUsername: ""
-defaultPassword: ""
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#067---2026-11-04
