@@ -7,7 +7,7 @@ name: Maintainerr
 tagline: Rule-based media library cleanup for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
-version: "3.31.0"
+version: "3.32.0"
 port: 6246
 description: >-
   Maintainerr is a rule-based cleanup tool for your Plex media library. You
@@ -42,10 +42,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-4.jpg
 releaseNotes: >-
-  Adds Seerr watchlist rules. Sonarr now matches episodes by their file first, Plex metadata is no longer augmented during rule evaluation, and TVDB logins recover after a failure and no longer block startup when TVDB is unreachable. The image moves to Node 26.12.1 with patched Alpine packages (security update).
+  Downloads that have seeded for 14 days are now removed even without a ratio when no client limit is set. Plex connection settings apply immediately without a restart, and clearing Plex credentials revokes the token at plex.tv. Fixes Emby show and season sizes and ZFS free space with several datasets, and adds Russian and Traditional Chinese.
 
 
-  Full release notes can be found at https://github.com/Maintainerr/Maintainerr/releases/tag/v3.31.0
+  Full release notes can be found at https://github.com/Maintainerr/Maintainerr/releases/tag/v3.32.0
 dependencies: []
 path: ""
 defaultUsername: ""
