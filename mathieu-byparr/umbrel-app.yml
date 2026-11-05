@@ -40,13 +40,9 @@ repo: https://github.com/ThePhaseless/Byparr
 support: https://github.com/ThePhaseless/Byparr/issues
 gallery: []
 releaseNotes: >-
-  Byparr's browser now keeps its temporary files in memory, as its developer recommends, instead of writing them to your Umbrel's disk on every request.
+  Cloudflare-protected plain-http pages now load, and the cookies Byparr returns are limited to the requested page. Pages are read after the browser has gone idle rather than before, and Byparr handles the browser's own errors better. The browser timezone is resolved once instead of on every request, and the log level now reaches the web server. Dependencies are updated, including Playwright and FastAPI.
 
 
-  The app moves from port 8191 to 8192, because FlareSolverr from the Umbrel App Store already uses 8191 and the two apps could not be installed together. Update your bookmark if you open it by address.
+  Full release notes can be found at https://github.com/ThePhaseless/Byparr/releases/tag/v3.1.1
 
-
-  Cloudflare challenges are solved again: Byparr now matches a real browser's TLS fingerprint and detects localized interstitials, not just English ones. Requests no longer fail when the page blocks script evaluation (such as Firefox's JSON viewer). A new optional BROWSER_LOCALE setting lets you force the browser language.
-
-  Full release notes can be found at https://github.com/ThePhaseless/Byparr/releases/tag/v3.0.4
 defaultPassword: ""
