@@ -61,12 +61,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Plex episodes now include watches from every user, so "Days since watched"
-  and episode-scoped rules no longer miss an episode watched by another
-  account. Backend dependencies are updated.
+  Fixes the Deletion Requests page failing to load when a requested movie
+  version is no longer available. Affected requests now show the movie and the
+  missing version; owners can cancel stale pending requests and managers can
+  deny them.
 
 
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#067---2026-11-04
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#068---2026-11-05
 permissions:
   - STORAGE_DOWNLOADS
 dependencies: []
