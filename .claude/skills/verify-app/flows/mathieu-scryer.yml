@@ -1,4 +1,4 @@
-verified: 0.21.23 on umbrelOS 2.0.0 (2026-10-30)
+verified: 0.21.24 on umbrelOS 2.0.1 (2026-11-05)
 steps:
   - goto: /
   - see: Set up access to Scryer
