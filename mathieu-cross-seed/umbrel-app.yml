@@ -59,14 +59,13 @@ support: https://github.com/cross-seed/cross-seed/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/gallery-1.jpg
 releaseNotes: >-
-  Pre-release 7.0.0-30 imports indexer credentials atomically with the rest
-  of the settings, normalizes legacy values when importing a config, and
-  honors the settings saved at startup. Linking is now required when
-  injecting virtual season packs, and a failing file watcher on Linux no
-  longer takes the daemon down.
+  Pre-release 7.0.0-31 improves qBittorrent injection diagnostics: invalid
+  torrent files now fail immediately with qBittorrent's explicit rejection
+  message instead of waiting and reporting a missing torrent. No database
+  migration.
 
 
-  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-30
+  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-31
 dependencies:
   - transmission
 path: ""
