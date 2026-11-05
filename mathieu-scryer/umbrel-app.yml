@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Adds Newznab and Torznab endpoints to share your indexers with other tools such as Lidarr (beta), and a per-user dashboard grid you can rearrange. New instances now ask for an explicit authentication choice on first run, and backup restores accept only encrypted .enc bundles. RSS sync now wakes every 15 minutes and checks every due indexer, background searches skip indexers that never answer, and Czech is added as a language.
+  Adds support for Prowlarr v3 indexers and fixes indexer connection tests for managed transports. The release parser now keeps release groups that follow dot-separated tags, pack imports verify membership more reliably, and the Russian translation is expanded.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.23
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.24
 dependencies: []
 path: ""
 defaultUsername: ""
