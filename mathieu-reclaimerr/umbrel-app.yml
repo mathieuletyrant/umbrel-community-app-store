@@ -67,3 +67,9 @@ releaseNotes: >-
 
 
   Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#067---2026-11-04
+permissions:
+  - STORAGE_DOWNLOADS
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
