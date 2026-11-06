@@ -7,7 +7,7 @@ name: Sortarr
 tagline: Orders your Prowlarr indexers by your real ratio on each tracker
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/lroffic/sortarr
-version: "1.0.8"
+version: "1.0.8-patch.1"
 port: 9697
 description: >-
   Prowlarr doesn't know your ratio or whether a tracker is in freeleech.
@@ -60,7 +60,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-4.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Fixes signing in over plain HTTP (umbrel.local, the IP, Tailscale): the
+  session cookie was marked Secure, so the browser dropped it and every
+  login went back to the login page.
 dependencies:
   - prowlarr
 path: ""
