@@ -7,7 +7,7 @@ services:
       APP_PORT: 9090
 
   server:
-    image: ghcr.io/scryer-media/weaver:0.16.9@sha256:2202d1764b79386c52eb13b51e83f14805ac92aa9326a7813342a04a7be39c11
+    image: ghcr.io/scryer-media/weaver:0.16.10@sha256:9b50af7c349ff69a0d2aeb260d80c05ce363f3d6fe994830eae4f955f4d3d5e1
     environment:
       - TZ=Etc/UTC
       - PUID=1000
