@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-sortarr_server_1
+      APP_PORT: 3000
+
+  server:
+    image: ghcr.io/lroffic/sortarr:1.0.8@sha256:ac1f17d2fbb9650506b3801ca29e0758f77e043c3211e2a9ca9f1721294fc8a7
+    restart: on-failure
+    environment:
+      TZ: Etc/UTC
+    volumes:
+      - ${APP_DATA_DIR}/data/sortarr:/app/data

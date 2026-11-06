@@ -1,0 +1,11 @@
+requires: [prowlarr]
+steps:
+  - goto: /
+  - see: Bienvenue sur Sortarr
+  - fill: {css: "#username", value: verify}
+  - fill: {css: "#password", value: Verify-Sortarr-1}
+  - fill: {css: "#confirmPassword", value: Verify-Sortarr-1}
+  - click: {role: button, name: Créer le compte}
+  - click: {text: Passer pour l'instant}
+  - see: Configuration requise
+  - shot: home
