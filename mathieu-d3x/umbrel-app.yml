@@ -57,9 +57,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Small maintenance update; upstream published no detailed notes for this release.
+  Adds an "Ignore" action in the media library for releases you no longer want to see,
+  a per-tracker filter and a separate label for published torrents, and publishing by
+  links in the client's links folder. Batch publishing now pauses when V3X rate-limits
+  calls and only publishes release names. Also adds a read speed limit for hashing files
+  on network shares.
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.42
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.52
 dependencies: []
 path: ""
 defaultUsername: ""
