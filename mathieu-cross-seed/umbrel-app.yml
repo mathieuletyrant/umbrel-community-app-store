@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "7.0.0-31"
+version: "7.0.0-32"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -59,13 +59,12 @@ support: https://github.com/cross-seed/cross-seed/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/gallery-1.jpg
 releaseNotes: >-
-  Pre-release 7.0.0-31 improves qBittorrent injection diagnostics: invalid
-  torrent files now fail immediately with qBittorrent's explicit rejection
-  message instead of waiting and reporting a missing torrent. No database
-  migration.
+  Pre-release 7.0.0-32 lets the announce API use independent, optional
+  announce identities and explains announce validation errors instead of
+  failing with a generic message. No database migration.
 
 
-  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-31
+  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-32
 dependencies:
   - transmission
 path: ""
