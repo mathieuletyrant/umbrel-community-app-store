@@ -55,7 +55,11 @@ submitter: Mathieu Le Tyrant
 submission: https://github.com/mathieuletyrant/umbrel-community-app-store
 repo: https://github.com/LRoffic/Sortarr
 support: https://github.com/LRoffic/Sortarr/issues
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-4.jpg
 releaseNotes: ""
 dependencies:
   - prowlarr

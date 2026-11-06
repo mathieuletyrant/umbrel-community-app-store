@@ -1,4 +1,7 @@
+verified: 1.0.8 on umbrelOS 2.0.1 (2026-11-06)
 requires: [prowlarr]
+vars:
+  PROWLARR_API_KEY: docker exec prowlarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
 steps:
   - goto: /
   - see: Bienvenue sur Sortarr
@@ -8,4 +11,16 @@ steps:
   - click: {role: button, name: Créer le compte}
   - click: {text: Passer pour l'instant}
   - see: Configuration requise
-  - shot: home
+  - click: Aller aux paramètres
+  - see: Clé API Prowlarr
+  # the settings page ignores edits made in its first 400 ms, then auto-saves them
+  - wait: 1000
+  - fill: {label: "🌐 URL de Prowlarr", value: "http://prowlarr_server_1:9696"}
+  - fill: {label: "🔑 Clé API Prowlarr", value: "${PROWLARR_API_KEY}"}
+  - see: Enregistré automatiquement
+  - click: {role: button, name: "🔌 Tester la connexion Prowlarr"}
+  - see: Connexion réussie à Prowlarr
+  - goto: /
+  - see: Gestion des indexeurs
+  - see: Aucun indexeur trouvé sur Prowlarr
+  - shot: indexers
