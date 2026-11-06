@@ -45,13 +45,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  Plex setup now accepts your server's own plex.direct address and only
-  refuses Plex relay addresses. Mobile pushes replace instead of stacking, and
-  an iPhone that was offline gets the alert it missed. Android phones in
-  standby get push notifications right away. Jellyfin and Emby stream
-  reporting is improved, and the 24-hour clock shows a leading zero.
+  Automations can now fire when a stream passes the watched threshold, and
+  Browse can filter by added date. The dashboard shows today's watch time in
+  hours and minutes, and binge highlights rank shows per person. A few seconds
+  of a title no longer counts as a viewer, and the Overview shelves cover
+  exactly the days picked. Tracearr now runs on Node.js 26.
 
-  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.3
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.4
 dependencies: []
 path: ""
 defaultUsername: ""
