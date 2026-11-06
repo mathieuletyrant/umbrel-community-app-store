@@ -7,7 +7,7 @@ name: Hermes Agent
 tagline: The self-improving AI agent, reachable from your phone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/icon.png
 # renovate: datasource=docker depName=nousresearch/hermes-agent
-version: "0.22.7"
+version: "0.23.0"
 port: 18791
 description: >-
   Hermes Agent by Nous Research is an AI agent that gets better the more you
@@ -58,10 +58,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-3.jpg
 releaseNotes: >-
-  Adds opt-in lead routing for Group Chats (a room lead can assign incoming messages), and fixes several room settings and scheduled-post delivery issues.
+  Adds an opt-in browser webapp (off by default), one gateway per machine that owns all sessions, /rewind to edit and resend an earlier message, and a larger plugin catalog. The old browser_* tools are replaced by browser_exec, and GLM-5.3 is the new default model.
 
 
-  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.22.7
+  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.0
 dependencies: []
 path: ""
 defaultUsername: "admin"
