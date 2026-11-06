@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Moving finished files is more robust across mounts (files are no longer lost on fallback copies, and aliases are resolved first), ZIP archives with repaired headers or encrypted entries are handled, and progress bars stay live while files move. Archive extraction and checkpoints are also faster.
+  RAR extraction can now decode several files of a non-solid archive in parallel while a download is still arriving, reading ahead through complete volumes. Output is still delivered in archive order, and damaged or incomplete volumes stay out of the worker pool.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.9
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.10
 dependencies: []
 path: ""
 defaultUsername: "admin"
