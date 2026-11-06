@@ -1,4 +1,4 @@
-verified: 10.5.3 on umbrelOS 2.0.0 (2026-10-11)
+verified: 10.5.6-patch.2 on umbrelOS 2.0.1 (2026-11-06)
 logs:
   db: database system is ready to accept connections
 steps:
