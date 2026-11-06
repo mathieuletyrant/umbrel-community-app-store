@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-trailarr/gallery-4.jpg
 releaseNotes: >-
-  Download and notification errors are clearer: a media folder that refuses the file is reported as a folder problem, and a failing download shows the reason yt-dlp gave. Remove Silence now works on trailers that start with silence or have a long description. yt-dlp, Pillow, Brotli and Apprise are updated.
+  Cleanup no longer marks trailers as deleted when a network drive hasn't mounted, and renamed or edited trailers are re-analyzed instead of downloaded again. Large libraries scan and refresh much faster, API keys up to 128 characters are accepted, and `{tmdb_id}` / `{tvdb_id}` work in profile File Name, Custom Folder and Search Query. Remove Silence handles long descriptions and no longer leaves temp files behind. yt-dlp and Apprise are updated.
 
 
-  Full release notes can be found at https://github.com/nandyalu/trailarr/releases/tag/v0.14.1
+  Full release notes can be found at https://github.com/nandyalu/trailarr/releases/tag/v0.14.2
 dependencies: []
 path: ""
 defaultUsername: "admin"
