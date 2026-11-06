@@ -1,0 +1,69 @@
+manifestVersion: 1
+id: mathieu-sortarr
+storage:
+  dataRoot: data
+category: media
+name: Sortarr
+tagline: Orders your Prowlarr indexers by your real ratio on each tracker
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/icon.png
+# renovate: datasource=docker depName=ghcr.io/lroffic/sortarr
+version: "1.0.8"
+port: 9697
+description: >-
+  Prowlarr doesn't know your ratio or whether a tracker is in freeleech.
+  Sortarr reads them from your private trackers' own APIs (C411, TR4KER, V3X,
+  UNIT3D trackers such as G3MINI, The Old School or Generation Free,
+  Draupnirr, AstraTorrent, SpeedApp and more) and orders your Prowlarr
+  indexers from it: trackers without a ratio first, then those in freeleech,
+  then the others from the highest ratio to the lowest. Sonarr and Radarr
+  then grab from the trackers where you can afford it.
+
+
+  When a tracker's ratio drops below a threshold you choose, Sortarr tags it
+  in Prowlarr, Radarr and Sonarr so they stop grabbing there, while the
+  indexer stays active for seeding and cross-seed. The tag goes away once the
+  ratio is back up. A dashboard shows each tracker's ratio, upload, download,
+  buffer, seeds and bonus points, with a daily history and charts.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and create Sortarr's admin account (password with 8
+  characters, an uppercase letter, a number and a symbol). Two-factor
+  authentication is offered next; you can skip it.
+
+  2. In ⚙️ Configuration, set Prowlarr to `http://prowlarr_server_1:9696` and
+  paste its API key (Prowlarr → Settings → General).
+
+  3. In the Trackers section, click "Détecter automatiquement", then paste
+  each tracker's API key, or leave it empty when it is the same key as in
+  Prowlarr. "Tester" checks it.
+
+  4. For the ratio protection tag, add Radarr (`http://radarr_server_1:7878`)
+  and Sonarr (`http://sonarr_server_1:8989`) with their API keys (Settings →
+  General).
+
+
+  The interface is in French. Sortarr has its own login behind the Umbrel
+  one; its captcha can be turned off in Configuration → Sécurité. Anonymous
+  telemetry is on by default, and can be turned off in Configuration →
+  Télémétrie. Update Sortarr from umbrelOS, not from its own update button.
+developer: LRoffic
+website: https://github.com/LRoffic/Sortarr
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/LRoffic/Sortarr
+support: https://github.com/LRoffic/Sortarr/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sortarr/gallery-4.jpg
+releaseNotes: ""
+dependencies:
+  - prowlarr
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
