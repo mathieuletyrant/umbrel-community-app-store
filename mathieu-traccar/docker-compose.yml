@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-traccar_server_1
+      APP_PORT: 8082
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: traccar/traccar:6.17.0@sha256:b32d9346adf46df7c33c58577e17ad60f6feadd1f3cd87c876041f6c79317ef1
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: Etc/UTC
+      CONFIG_USE_ENVIRONMENT_VARIABLES: "true"
+      DATABASE_DRIVER: org.postgresql.Driver
+      DATABASE_URL: jdbc:postgresql://mathieu-traccar_db_1:5432/traccar
+      DATABASE_USER: traccar
+      DATABASE_PASSWORD: traccar
+      LOGGER_CONSOLE: "true"
+      PROTOCOLS_ENABLE: osmand,owntracks,gt06,h02,teltonika,watch
+      OSMAND_PORT: "5155"
+      GT06_PORT: "5123"
+    ports:
+      - "5155:5155"
+      - "5144:5144"
+      - "5123:5123"
+      - "5013:5013"
+      - "5013:5013/udp"
+      - "5027:5027"
+      - "5027:5027/udp"
+      - "5093:5093"
+    volumes:
+      - ${APP_DATA_DIR}/data/media:/opt/traccar/media
+
+  db:
+    image: postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_DB: traccar
+      POSTGRES_USER: traccar
+      POSTGRES_PASSWORD: traccar
+      PGDATA: /data/pgdata
+    healthcheck:
+      test: "pg_isready -U traccar -h localhost -d traccar"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/data

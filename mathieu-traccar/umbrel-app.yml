@@ -1,0 +1,58 @@
+manifestVersion: 1
+id: mathieu-traccar
+storage:
+  dataRoot: data
+category: automation
+name: Traccar
+tagline: Track phones, cars and GPS devices on your own server
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-traccar/icon.png
+# renovate: datasource=docker depName=traccar/traccar
+version: "6.17.0"
+port: 8802
+description: >-
+  Traccar is an open source GPS tracking server. It receives the positions of
+  phones, vehicle trackers, pet and kids' watches and more than 200 GPS
+  protocols, and shows them live on a map, with trip and stop reports,
+  geofences, alerts (overspeed, ignition, low battery, entering or leaving a
+  zone) and notifications by email, push or webhook. Several people can share
+  one server, each with their own account and devices.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and register: the first account is the administrator.
+  Traccar has its own login, so the Umbrel login is not in front of it (the
+  Traccar Manager app and Home Assistant must reach it). Then turn off
+  Settings → Server → Registration so nobody else can sign up.
+
+  2. Phones: install Traccar Client (iOS, Android), set the server URL to
+  `http://umbrel.local:5155` (or your Umbrel's IP) and add a device in Traccar
+  with the identifier shown in the app. OwnTracks (HTTP mode) posts to
+  `http://umbrel.local:5144`, GPSLogger and other OsmAnd-compatible apps use
+  port 5155.
+
+  3. GPS trackers: point the device at your Umbrel's IP on its protocol's
+  port. This app opens these ones: GT06 and compatible (Concox, most cheap
+  trackers) 5123, H02 5013, Teltonika 5027, Watch (kids' watches) 5093. Don't
+  change their ports in Settings → Protocols: the Umbrel only opens
+  these. To use another protocol, turn one of these off there and give its
+  port to the protocol you need. A tracker outside your home network needs the
+  port forwarded on your router.
+
+  4. Home Assistant's Traccar Server integration connects to
+  `http://<your Umbrel's IP>:8802` with a Traccar account.
+developer: Anton Tananaev
+website: https://www.traccar.org
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store/issues/561
+repo: https://github.com/traccar/traccar
+support: https://github.com/traccar/traccar/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-traccar/gallery-1.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
