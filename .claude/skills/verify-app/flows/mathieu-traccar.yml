@@ -1,0 +1,16 @@
+setup:
+  - curl -sf -u verify@example.com:Verify-Traccar-1 localhost:8802/api/session || curl -sf -X POST localhost:8802/api/users -H 'content-type:application/json' -d '{"name":"Verify","email":"verify@example.com","password":"Verify-Traccar-1"}'
+  - curl -sf -u verify@example.com:Verify-Traccar-1 localhost:8802/api/devices | grep -q 424242 || curl -sf -u verify@example.com:Verify-Traccar-1 -X POST localhost:8802/api/devices -H 'content-type:application/json' -d '{"name":"Verify phone","uniqueId":"424242"}'
+  - curl -sf 'localhost:5155/?id=424242&lat=48.8584&lon=2.2945&speed=0&batt=87'
+logs:
+  db: database system is ready to accept connections
+steps:
+  - goto: /login
+  - fill: {label: Email, value: verify@example.com}
+  - fill: {label: Password, value: Verify-Traccar-1}
+  - click: {role: button, name: Log In}
+  - see: Verify phone
+  - http: {path: /api/positions, status: 200, contains: '"latitude":48\.8584'}
+  - goto: /
+  - see: Verify phone
+  - shot: map
