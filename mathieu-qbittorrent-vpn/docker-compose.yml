@@ -40,7 +40,7 @@ services:
     restart: on-failure
 
   server:
-    image: ghcr.io/hotio/qbittorrent:release-5.3.0@sha256:ba4ee383b9cf2152db4029e829420d0f3f80276ed5f64b350b9c031286400d69
+    image: ghcr.io/hotio/qbittorrent:release-5.3.0@sha256:bd7e2d02cb1b52941bfe50feef87fce7f02db82aea7ba71259d3e6312a2f8fc8
     network_mode: service:gluetun
     depends_on:
       - gluetun
@@ -63,7 +63,7 @@ services:
     restart: on-failure
 
   port-sync:
-    image: ghcr.io/hotio/qbittorrent:release-5.3.0@sha256:ba4ee383b9cf2152db4029e829420d0f3f80276ed5f64b350b9c031286400d69
+    image: ghcr.io/hotio/qbittorrent:release-5.3.0@sha256:bd7e2d02cb1b52941bfe50feef87fce7f02db82aea7ba71259d3e6312a2f8fc8
     network_mode: service:gluetun
     depends_on:
       - server
