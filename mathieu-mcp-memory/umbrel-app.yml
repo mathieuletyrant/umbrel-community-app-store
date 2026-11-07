@@ -7,7 +7,7 @@ name: MCP Memory
 tagline: Long-term memory for your AI assistants, as an MCP server
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/icon.png
 # renovate: datasource=docker depName=doobidoo/mcp-memory-service
-version: "12.6.0"
+version: "12.7.0"
 port: 6363
 description: >-
   MCP Memory gives your AI assistant (Claude, ChatGPT, Home Assistant, or any
@@ -56,9 +56,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: >-
-  The dashboard now follows your system light/dark setting by default and no longer flashes light on reload in dark mode. Adds a Russian translation, a memory_quality rebuild_entities action to rebuild entity graphs, and OAuth client list/delete commands. Fixes untranslated labels in the Manage tab.
+  Fixes the Test Connection and Save buttons in the dashboard's Settings Credentials tab, translates the search filter tooltips and the Documents tab, and clears the conflict:unresolved tag once a conflict is gone. Entity linking no longer overwrites contradicts edges, deleting untagged memories now goes through the storage layer, and typed-edge consolidation is off by default.
 
-  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.6.0
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.7.0
 dependencies: []
 path: ""
 defaultUsername: mcp
