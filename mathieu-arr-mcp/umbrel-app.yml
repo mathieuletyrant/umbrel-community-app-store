@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.67.0"
+version: "1.67.2"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,13 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Adds Shelfmark for finding and downloading books, support for several Lidarr
-  instances, and webhook events that show up in history, diagnose and the Logs
-  page. The configuration page is split into tabs, named read and admin API
-  keys are available, and stack health now reports recent *arr log warnings with
-  credentials stripped.
+  Bug fixes: configuration validation errors for list settings now name the
+  failing field, the config error on the read-only repair page is redacted, and
+  the web UI shows health-check sources properly with clearer connection-test
+  errors.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1670-2026-11-06
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.67.2
 
 dependencies: []
 path: ""
