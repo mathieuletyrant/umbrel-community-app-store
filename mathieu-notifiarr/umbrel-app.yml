@@ -7,7 +7,7 @@ name: Notifiarr
 tagline: Rich Discord notifications and a dashboard for your *arr stack and Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-notifiarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/notifiarr/notifiarr
-version: "0.9.7-patch.1"
+version: "v0.10.0"
 port: 5454
 description: >-
   Notifiarr turns what happens in your media stack into rich, configurable

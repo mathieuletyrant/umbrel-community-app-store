@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/plex"
 
   server:
-    image: ghcr.io/notifiarr/notifiarr:0.9.7@sha256:2b0a8784d8a43177cbc5a19110e7eb066d9321572c3352eda79c0a89898c7735
+    image: ghcr.io/notifiarr/notifiarr:v0.10.0@sha256:f83a85c60eebb21a446975a32d6ca4bc2f03226966d9eb8e46befdafb015f81e
     hostname: ${DEVICE_HOSTNAME:-umbrel}
     user: "1000:1000"
     restart: on-failure
