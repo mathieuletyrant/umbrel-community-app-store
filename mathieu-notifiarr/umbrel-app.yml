@@ -7,7 +7,7 @@ name: Notifiarr
 tagline: Rich Discord notifications and a dashboard for your *arr stack and Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-notifiarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/notifiarr/notifiarr
-version: "0.9.7-patch.1"
+version: "0.10.0"
 port: 5454
 description: >-
   Notifiarr turns what happens in your media stack into rich, configurable
@@ -57,8 +57,11 @@ repo: https://github.com/Notifiarr/notifiarr
 support: https://notifiarr.com/discord
 gallery: []
 releaseNotes: >-
-  Your apps are no longer connected automatically: add them in Notifiarr's
-  settings pages. Apps that were connected this way must be added again once.
+  A mostly internal release: the web interface moves from Font Awesome to
+  Phosphor icons, the API docs switch to OpenAPI 3, and many form-handling
+  fixes land in the settings pages.
+
+  Full release notes can be found at https://github.com/Notifiarr/notifiarr/releases/tag/v0.10.0
 
 dependencies: []
 path: ""
