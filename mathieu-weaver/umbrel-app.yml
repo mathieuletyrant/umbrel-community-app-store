@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  RAR extraction can now decode several files of a non-solid archive in parallel while a download is still arriving, reading ahead through complete volumes. Output is still delivered in archive order, and damaged or incomplete volumes stay out of the worker pool.
+  Fixes expired NNTP sessions mid-batch (Weaver re-authenticates in place and no longer loses the article), SQLite locking and write-ahead log handling, and several ZipCrypto and RAR extraction bugs. Adds a timed pause-all and a separator-aware job search.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.10
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.11
 dependencies: []
 path: ""
 defaultUsername: "admin"
