@@ -7,7 +7,7 @@ name: Scryer
 tagline: A whole *arr stack in one app — movies, series and anime
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/scryer
-version: "0.21.24"
+version: "0.22.1"
 port: 8380
 description: >-
   Scryer replaces Sonarr, Radarr, Prowlarr and Bazarr with a single native
@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Adds support for Prowlarr v3 indexers and fixes indexer connection tests for managed transports. The release parser now keeps release groups that follow dot-separated tags, pack imports verify membership more reliably, and the Russian translation is expanded.
+  Adds Discovery browsing by genre or theme, an interactive library graph, bulk subtitle search for selected episodes, library and root moves (Beta), and Plex and Emby watch history. Imports now hold files whose media can't be verified for review, and the same-tier upgrade threshold moves into each quality profile. The first start after upgrading builds catalog ordering keys, so it can take longer on large libraries.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.21.24
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.1
 dependencies: []
 path: ""
 defaultUsername: ""

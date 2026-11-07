@@ -1,9 +1,13 @@
-verified: 0.21.23 on umbrelOS 2.0.0 (2026-10-30)
+verified: 0.22.1 on umbrelOS 2.0.1 (2026-11-07)
+vars:
+  SETUP_CODE: >-
+    docker logs mathieu-scryer_server_1 2>&1 | grep -i 'setup code' | grep -oE '[A-Z0-9]{3}-[A-Z0-9]{3}' | tail -1
 steps:
   - goto: /
   - see: Set up access to Scryer
   - click: {text: Continue without authentication}
   - check: {label: "I understand that anyone allowed to reach this unauthenticated instance can act as administrator. Existing network restrictions still apply."}
+  - fill: {label: Setup code, value: "${SETUP_CODE}"}
   - click: {role: button, name: Confirm no authentication and continue}
   - see: Welcome to Scryer
   - click: {role: button, name: Skip setup entirely}
