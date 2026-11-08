@@ -6,7 +6,7 @@ category: media
 name: Seek
 tagline: Phone-first tracker for the shows and films you watch
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-seek/icon.png
-version: "0.1.0-patch.3"
+version: "0.1.0-patch.4"
 port: 8102
 description: >-
   Seek is a self-hosted tracker for TV shows, films and books, built for the
@@ -55,7 +55,7 @@ repo: https://github.com/nerdspar/seek
 support: https://github.com/nerdspar/seek/issues
 gallery: []
 releaseNotes: >-
-  Updates the bundled nginx web server to its latest build.
+  Updated the nginx status sidecar image.
 dependencies: []
 path: ""
 defaultUsername: ""
