@@ -505,7 +505,9 @@ async function playwright() {
 
 async function launch() {
 	const {chromium} = await playwright()
-	return chromium.launch()
+	// `umbrel-host.test` is a non-localhost origin (browsers only accept Secure cookies over plain HTTP on
+	// localhost) that reaches the published ports; the sandbox's Chromium can't use the docker bridge IP
+	return chromium.launch({args: ['--host-resolver-rules=MAP umbrel-host.test 127.0.0.1']})
 }
 
 async function login(b) {
@@ -516,6 +518,9 @@ async function login(b) {
 	await page.keyboard.press('Enter')
 	await page.waitForURL((u) => !u.pathname.startsWith('/login'), {timeout: 30_000})
 	await settle(page)
+	// the session is per host: without it app_proxy sends umbrel-host.test visitors to the unpublished UI port
+	const cookies = await ctx.cookies()
+	await ctx.addCookies(cookies.map(({name, value, path, httpOnly, secure, sameSite}) => ({name, value, path, httpOnly, secure, sameSite, domain: 'umbrel-host.test'})))
 	return {ctx, page}
 }
 
