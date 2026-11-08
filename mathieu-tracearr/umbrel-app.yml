@@ -7,7 +7,7 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr
-version: "3.1.5"
+version: "3.1.7"
 port: 3009
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
@@ -45,11 +45,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  A play that resumed later now shows in History at the time it resumed, with
-  its segment count beside it. Importing a shared automation scoped to one
-  account no longer lists your accounts on every server to choose from.
+  Episodes now show their show's poster in notifications and on their own page
+  instead of a cropped still. Posters also load on Library, Browse, media pages
+  and Your requests when Tracearr runs under a base path.
 
-  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.5
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.7
 dependencies: []
 path: ""
 defaultUsername: ""
