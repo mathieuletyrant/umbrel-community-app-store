@@ -7,7 +7,7 @@ name: Cleanuparr
 tagline: Automated download cleanup for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/icon.png
 # renovate: datasource=docker depName=ghcr.io/cleanuparr/cleanuparr
-version: "2.10.12"
+version: "2.11.0"
 port: 11011
 description: >-
   Cleanuparr is an advanced download manager for the Servarr ecosystem
@@ -40,10 +40,10 @@ support: https://github.com/Cleanuparr/Cleanuparr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/gallery-1.jpg
 releaseNotes: >-
-  Fixes a crash when every file of a Deluge torrent is blocked.
+  Seeker, the proactive search feature, gets a reworked cycle tracking, include tags, quiet hours, snoozing of failed searches and support for Whisparr, Lidarr, Sportarr and Chaptarr. Local blocklists reload automatically, and paused rTorrent and uTorrent downloads are no longer reported as stalled.
 
 
-  Full release notes can be found at https://github.com/Cleanuparr/Cleanuparr/releases/tag/v2.10.12
+  Full release notes can be found at https://github.com/Cleanuparr/Cleanuparr/releases/tag/v2.11.0
 dependencies: []
 path: ""
 defaultUsername: ""
