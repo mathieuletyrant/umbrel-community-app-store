@@ -1,5 +1,6 @@
+verified: 0.20.0 on umbrelOS 2.0.1 (2026-11-08)
 vars:
-  HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
+  HOST_IP: echo umbrel-host.test
 settings:
   SNUG_ORIGINS: http://${HOST_IP}:3077
 steps:

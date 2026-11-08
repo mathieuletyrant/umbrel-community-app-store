@@ -1,9 +1,9 @@
-verified: 1.0.8-patch.1 on umbrelOS 2.0.1 (2026-11-06)
+verified: 1.0.8-patch.2 on umbrelOS 2.0.1 (2026-11-08)
 requires: [prowlarr]
 # Browsed by IP, not localhost: browsers accept Secure cookies over plain HTTP on localhost only,
 # which hid a login loop that every real umbrel.local / IP install hit.
 vars:
-  HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
+  HOST_IP: echo umbrel-host.test
   PROWLARR_API_KEY: docker exec prowlarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
 steps:
   - goto: http://${HOST_IP}:9697/

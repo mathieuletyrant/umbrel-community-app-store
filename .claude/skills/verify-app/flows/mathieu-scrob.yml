@@ -1,8 +1,8 @@
-verified: 2.37.0 on umbrelOS 2.0.0 (2026-10-31)
+verified: 2.38.0 on umbrelOS 2.0.1 (2026-11-08)
 # Browsed by IP over plain HTTP like a real install: since 2.35.0 registration
 # signs in directly (the Secure cookie is only set over HTTPS).
 vars:
-  HOST_IP: docker network inspect bridge -f '{{(index .IPAM.Config 0).Gateway}}'
+  HOST_IP: echo umbrel-host.test
 logs:
   db: database system is ready to accept connections
 steps:

@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.53"
+version: "1.1.53-patch.1"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,12 +57,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Fixes publishing and the media library when your torrent client stores torrents under
-  Linux paths (NAS, Docker, seedbox) and a path from your PC matches none of the client
-  folders: D3X now refuses the add and tells you which folder to declare, instead of
-  sending a path the client could never find.
-
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.53
+  Updated the nginx status sidecar image.
 dependencies: []
 path: ""
 defaultUsername: ""
