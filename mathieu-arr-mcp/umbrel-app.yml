@@ -57,10 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  The settings page can now find services on your network and add them with
-  the address already filled in.
+  Lidarr artists can now have their profiles, folder, monitoring and tags
+  changed, and set_watched, set_monitoring and get_releases accept a title in
+  place of an id. Title matching now covers original and alternate titles, and
+  the tool list is trimmed and tailored to the services you have configured.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.73.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1740-2026-11-08
 
 dependencies: []
 path: ""
