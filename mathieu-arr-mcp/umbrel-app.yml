@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.73.1"
+version: "1.74.0"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,12 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Bug fixes: library matching now considers original and alternate titles,
-  Lidarr artists no manager tracks can be looked up, and setting an item to
-  unmonitored now means it grabs nothing. MCP tool descriptions are shorter
-  and the tool list adapts to your configured stack.
+  Lidarr artists can now have their profiles, folder, monitoring and tags
+  changed, and set_watched, set_monitoring and get_releases accept a title in
+  place of an id. Title matching now covers original and alternate titles, and
+  the tool list is trimmed and tailored to the services you have configured.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.73.1
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1740-2026-11-08
 
 dependencies: []
 path: ""
