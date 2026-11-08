@@ -306,7 +306,10 @@ failure triage.
 ## Automated updates
 
 Renovate (Mend GitHub App, `renovate.json`) opens one PR per image bump, with the
-manifest `version:` bumped alongside. Nothing auto-merges: a Claude routine fires
+manifest `version:` bumped alongside. Digest-only updates (a rebuild of the same tag:
+hotio, nginx, postgres sidecars) only come on the 1st of the month, and Renovate leaves their
+branch alone the rest of the month, so the `-patch.N` bump pushed on it isn't wiped by the next
+rebuild. Nothing auto-merges: a Claude routine fires
 on each `renovate/*` PR and runs the `verify-app-and-merge` skill (changelog →
 `releaseNotes` → `verify-app` with the proof on the PR → fix and re-verify → merge
 verified patch/minor bumps, one comment on the rest). Run it by hand with
