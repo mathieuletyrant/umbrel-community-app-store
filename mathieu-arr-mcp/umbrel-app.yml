@@ -57,12 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Adds Grimmory as a read-only book library service (with book writes), Lidarr
-  artist search, adding an artist, wanted albums and the album calendar, a
-  --stdio read-only mode, and a fix so grab_release works without
-  structuredContent.
+  The settings page can now find services on your network and add them with
+  the address already filled in.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.72.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.73.0
 
 dependencies: []
 path: ""
