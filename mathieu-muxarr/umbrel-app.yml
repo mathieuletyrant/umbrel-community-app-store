@@ -7,7 +7,7 @@ name: Muxarr
 tagline: Strip unwanted audio and subtitle tracks without re-encoding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/kirovair/muxarr
-version: "0.9.13-patch.1"
+version: "0.9.14"
 port: 8186
 description: >-
   Muxarr cleans up your media files by removing the audio and subtitle tracks
@@ -56,7 +56,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-muxarr/gallery-4.jpg
 releaseNotes: >-
-  Muxarr now listens on host port 8186, because 8184 is taken by the official Fedimint app.
+  A conversion no longer replaces a file whose source is cut off or damaged.
+  Matroska track flags are read correctly, so AC-3 tracks for impaired listeners no longer need a metadata fix after every conversion, and "Hi-Res" or "Hi-Fi" in a track name is no longer read as hearing impaired.
+  A paused queue stays paused after a restart, and the UI is usable on phones.
+
+
+  Full release notes can be found at https://github.com/KirovAir/muxarr/releases/tag/v0.9.14
 dependencies: []
 path: ""
 defaultUsername: ""
