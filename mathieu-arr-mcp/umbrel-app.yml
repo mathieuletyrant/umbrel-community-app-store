@@ -57,10 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  The settings page can now find services on your network and add them with
-  the address already filled in.
+  Bug fixes: library matching now considers original and alternate titles,
+  Lidarr artists no manager tracks can be looked up, and setting an item to
+  unmonitored now means it grabs nothing. MCP tool descriptions are shorter
+  and the tool list adapts to your configured stack.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.73.0
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/releases/tag/v1.73.1
 
 dependencies: []
 path: ""
