@@ -353,7 +353,12 @@ async function trustProxyCA(appId) {
 	if (!ca) return
 	const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'verify-ca-'))
 	const patched = []
-	for (const c of appContainers(appId).filter((c) => c.State === 'running')) {
+	// A container in another's network (`network_mode: service:gluetun`) stays in the old namespace
+	// when that one restarts after it, unreachable through app_proxy: restart network owners first.
+	const running = appContainers(appId).filter((c) => c.State === 'running')
+	const sharesNetwork = (c) => trySh('docker', ['inspect', '-f', '{{.HostConfig.NetworkMode}}', c.Names])?.startsWith('container:')
+	running.sort((a, b) => Number(sharesNetwork(a)) - Number(sharesNetwork(b)))
+	for (const c of running) {
 		for (const store of TRUST_STORES) {
 			const local = path.join(tmp, 'bundle.crt')
 			if (trySh('docker', ['cp', '-L', `${c.Names}:${store}`, local]) === null) continue

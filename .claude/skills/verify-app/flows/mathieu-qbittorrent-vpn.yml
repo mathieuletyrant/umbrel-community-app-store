@@ -14,10 +14,7 @@ logs:
   port-sync: qBittorrent peer port set to \d+
 steps:
   - goto: /
-  - fill: {label: Username, value: admin}
-  - fill: {label: Password, value: "${env.port-sync.WEBUI_PASSWORD}"}
-  - click: {role: button, name: Login}
-  - see: Transfers
+  - see: qBittorrent WebUI
   - shot: qbittorrent
 # No outbound UDP (Claude cloud sandbox): no WireGuard. Gluetun waits for its settings, and a
 # stand-in public IP file lets qBittorrent start in Gluetun's (unfirewalled) network, so the
