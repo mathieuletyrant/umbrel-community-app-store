@@ -1,76 +1,120 @@
+<div align="center">
+
 # Mathieu's Umbrel App Store
 
-A personal [Umbrel Community App Store](https://github.com/getumbrel/umbrel-apps),
-focused on **self-hosted media apps** — the kind of tools that round out a
-*arr / Plex / Jellyfin setup but aren't (yet) in the official Umbrel App Store.
+**Self-hosted apps for umbrelOS that round out a *arr / Plex / Jellyfin setup.**
+Companions for Radarr and Sonarr, torrents behind a VPN, watch trackers, live TV, and MCP servers to drive it all from an AI assistant.
 
-Everything here is packaged for [umbrelOS](https://umbrel.com) and kept simple:
-one folder per app, images pinned by digest, sensible defaults out of the box.
+[![Validate apps](https://github.com/mathieuletyrant/umbrel-community-app-store/actions/workflows/validate.yml/badge.svg)](https://github.com/mathieuletyrant/umbrel-community-app-store/actions/workflows/validate.yml)
+![umbrelOS](https://img.shields.io/badge/umbrelOS-2.0-5351fb)
+![Renovate](https://img.shields.io/badge/updates-Renovate-1a1f6c?logo=renovate&logoColor=white)
+![Claude Code](https://img.shields.io/badge/maintained%20with-Claude%20Code-d97757?logo=claude&logoColor=white)
 
-> 🤖 **This store is maintained with AI.** Most of the packaging, updates and
-> fixes are written by an AI coding agent ([Claude Code](https://claude.com/claude-code)),
-> under rules I set. See [How this store is maintained](#-how-this-store-is-maintained).
+<img src="docs/screenshots/store.jpg" alt="The store in umbrelOS" />
 
-## 📦 Apps
+</div>
 
-| App | What it does |
-| --- | --- |
-| **arrglue** | **Wires the *arr stack together**: discovers every app on the Umbrel, reads their keys, checks routes, paths/hardlinks and each configured link by asking the apps themselves, then creates or repairs the links through their APIs (plan / apply, Terraform-style). Also a registry other tools can ask for URLs and keys. |
-| **Healarr** | Scans your media library for **corrupt files** (ffprobe / MediaInfo / HandBrake), deletes them, and triggers a re-download via Sonarr / Radarr / Whisparr — then verifies the replacement is healthy. |
-| **Boxarr** | Tracks the **weekly box office top 10** and syncs it with Radarr: check what's already in your library, auto-add trending movies with smart filters, manage quality profiles. |
-| **Tracearr** | Real-time **monitoring for Plex, Jellyfin & Emby** (an open-source Tautulli / Jellystat alternative): stream tracking, session history with geolocation, and account-sharing detection — all from one dashboard. |
-| **Cleanuparr** | **Download queue cleanup** for the *arr stack: removes stalled, failed and orphaned downloads (no hardlinks / unclaimed files), then re-triggers a search. Web UI, works with Transmission / qBittorrent / SABnzbd. |
-| **Profilarr** | **Quality profiles & custom formats manager** for Radarr/Sonarr: import curated TRaSH-style databases, keep them in sync with Git-style versioning, and push to all your *arr instances. |
-| **Maintainerr** | **Rule-based library cleanup** for Plex: collect media by rules (watched, old, unrequested…), show a "Leaving Soon" Plex collection, then auto-delete via Radarr/Sonarr after a grace period. |
-| **Reclaimerr** | **Rule-based library cleanup for Jellyfin, Plex & Emby**: rules find what can go (unwatched, old, big, duplicates…), users ask to protect or delete titles, admins approve, then it deletes or moves through Radarr / Sonarr on a schedule you turn on — with a "Leaving Soon" dashboard row and notifications. |
-| **Shredarr** | **Delete it in Jellyfin or Plex, it's gone everywhere**: removes the item from Sonarr / Radarr and Seerr, keeps the torrent seeding until your seeding rule is met, then deletes it from Transmission / qBittorrent / Deluge — season-pack and cross-seed aware, with Undo and Redownload. |
-| **Agregarr** | **Keeps your Plex Home screen fresh**: builds collections from Trakt, IMDb, TMDb, Letterboxd, streaming Top 10s, Tautulli stats and Overseerr requests, pins them to Plex Home / Recommended on a schedule, and sends missing titles to Radarr / Sonarr. |
-| **Posterizarr** | **Consistent posters & title cards** for Plex: fetches textless artwork (TMDb, Fanart.tv, TVDB), adds your overlays, borders and fonts, and uploads posters, season posters, backgrounds and episode cards — on a schedule or on each Sonarr / Radarr import. |
-| **Labelarr** | **TMDb keywords → Plex labels**: tags every movie and show with its TMDb keywords ("heist", "time travel"…) for smart filters and collections. Needs a free TMDb token and your Plex token; Radarr and Sonarr optional. |
-| **Lingarr** | **Automated subtitle translation** for Radarr/Sonarr: translate subtitles into French (or any language) via LibreTranslate or a SaaS engine (DeepL, OpenAI…), written next to your media. |
-| **Sublarr** | **All-in-one subtitle manager & LLM translator**: searches 20+ providers, syncs timing (ffsubsync/alass), translates, and includes a waveform editor. A modern alternative to Bazarr + Lingarr. |
-| **Byparr** | **Cloudflare-bypass proxy** for Prowlarr / Jackett: a drop-in **FlareSolverr replacement** that drives a modern stealth browser, standing up better to today's Cloudflare / DDoS-Guard challenges. |
-| **SuggestArr** | **Automatic "what to watch" recommendations**: reads your Plex / Jellyfin / Emby history, finds similar titles (TMDb or any OpenAI-compatible LLM), and auto-requests them through Jellyseerr / Overseerr. |
-| **cross-seed** | **Automatic cross-seeding**: finds torrents on your other trackers matching what you already seed and injects them into Transmission — more ratio on every tracker, zero extra disk space (hardlinks). |
-| **Sortarr** | **Your Prowlarr indexers in ratio order**: reads your real ratio, buffer and freeleech on each private tracker (C411, TR4KER, V3X, UNIT3D trackers…) and sets Prowlarr's priorities from it; below a ratio threshold, it tags the tracker so Radarr / Sonarr stop grabbing there, while seeding and cross-seed carry on. |
-| **D3X** | **Companion tool of the V3X tracker**: cross-seeds what you already seed onto V3X (same files, nothing re-downloaded), publishes what V3X is missing (torrent, TMDB, MediaInfo, presentation; one release or a whole folder), matches your media library and tracks your hit and runs. |
-| **Transmission VPN** | **Transmission behind your VPN**: every torrent connection goes through Gluetun (ProtonVPN, Mullvad, NordVPN, PIA… kill switch included), so peers never see your public IP. With ProtonVPN or PIA, the forwarded port becomes Transmission's peer port automatically, so seeding stays fast. |
-| **qBittorrent VPN** | **qBittorrent behind your VPN**: same Gluetun tunnel and kill switch as Transmission VPN, with categories, tags and per-category seeding limits, plus the VueTorrent web UI. With ProtonVPN or PIA, the forwarded port becomes qBittorrent's peer port automatically, and the app restarts the VPN when the provider stops renewing it. Counts as the Transmission app Radarr, Sonarr and Prowlarr require, so Transmission can go. |
-| **Gluetun** | **Your VPN as a proxy, for the apps you choose**: connects to your VPN (ProtonVPN, Mullvad, NordVPN, PIA… kill switch included) and shares it through a password-protected HTTP proxy. Point Prowlarr's Indexer Proxies (per indexer, with a tag) or any app's proxy setting at it; everything else keeps your own connection. |
-| **Sportarr** | **PVR for sports** (Sonarr/Radarr-style): monitors leagues and events across fighting, football, soccer, basketball, racing…, grabs releases from your indexers, then renames, organizes and imports into Plex / Jellyfin / Emby. |
-| **Trailarr** | **Automatic trailer downloader** for your Radarr/Sonarr library: fetches and stores trailers next to your movies and shows so Plex / Jellyfin / Emby play them in-app. |
-| **slskd** | **Soulseek client** with a modern web UI: search and download from the Soulseek P2P network, set credentials in-browser, files land in your downloads share. |
-| **Soularr** | **Bridges Lidarr → slskd → Lidarr**: reads Lidarr's *wanted* list, searches Soulseek via slskd, downloads the best match and imports it back — ideal for niche or rare tracks that never hit trackers. |
-| **Tdarr** | **Automated transcoding & library health checks**: plugin-driven rules re-encode (H.265/AV1), remux, strip unwanted tracks and flag corrupt files across your library, using a Server + Node worker model. |
-| **Muxarr** | **Strips unwanted audio & subtitle tracks** without re-encoding: keeps the languages you want (e.g. original + French) using Radarr/Sonarr's original-language info, renames tracks, and processes new imports automatically. Often saves 10–30% of disk space. |
-| **Kapowarr** | **Comic book library manager** (*arr style): add volumes, and it searches, downloads, renames and converts issues — ComicVine metadata, built-in sources like GetComics, no separate indexer needed. |
-| **Chaptarr** | **Ebook & audiobook manager** — a re-work of the retired Readarr that handles both in one instance: wanted list, indexers via Prowlarr, download client, organized import. |
-| **Scryer** | **A whole *arr stack in one binary**: movies, series and anime in a single interface — monitoring, indexer search, quality upgrades, renaming, import and subtitles, in ~100 MB of RAM instead of a gigabyte. |
-| **Weaver** | **Usenet downloader** (by the Scryer authors): download, PAR2 repair and extraction run as one streaming pipeline, with native RAR/7z/ZIP support and no external unrar or par2. |
-| **Pulsarr** | **Plex watchlist → Sonarr / Radarr in real time**: watchlist a title in any Plex app and it starts downloading — for you and your friends, with routing rules, optional approvals and quotas, and delete sync. |
-| **Spotarr** | **Share a reel, get the movie**: share an Instagram reel, TikTok or YouTube Short from your iPhone, an LLM + TMDB identify the movie or show, and Spotarr requests it through Seerr. |
-| **NeutArr** | **Hunts missing media and quality upgrades**: periodically asks Sonarr / Radarr / Lidarr / Readarr / Whisparr to search for missing or below-cutoff items, a few at a time. The maintained, security-hardened fork of Huntarr. |
-| **Dispatcharr** | **IPTV & stream manager**: imports M3U playlists and XMLTV guides, cleans and organizes channels, then serves them to Plex / Jellyfin / Emby as an emulated HDHomeRun tuner (live TV + guide + DVR). |
-| **Tunarr** | **Live TV channels from your own library**: builds always-on channels from Plex / Jellyfin / Emby or local folders, with time slots, shuffles and filler, served as an HDHomeRun tuner + M3U + XMLTV guide. |
-| **Ryot** | **One tracker for everything you watch, read, play and lift**: movies, shows, anime, books, audiobooks, podcasts, comics, music and video games, plus workouts and measurements — with Plex / Jellyfin / Emby / Kodi plays logged automatically and imports from Trakt, Goodreads, Letterboxd and more. |
-| **Scrob** | **Your own Trakt, synced with your media servers**: watch history, ratings and lists for movies and shows, with libraries and watched status pulled from Jellyfin / Plex / Emby and live scrobbling by webhook (manual "mark as watched" included), Next Up, an episode calendar, Radarr / Sonarr requests and imports from Trakt, Simkl or Yamtrack. Web app for the phone and a REST API. |
-| **Sofa** | **Your own Trakt / Letterboxd**: tracks the movies and shows you watch, episode by episode, with Continue Watching, ratings, what airs this week and where to stream it. Plex / Jellyfin / Emby log watches, Sonarr / Radarr pull your watchlist, Trakt / Simkl / Letterboxd history imports. Accounts for the whole household and iPhone / Android apps. |
-| **Seek** | **Phone-first tracker for shows, films and books**: swipe an episode to mark it watched, see what airs this week, find something new from what you've seen. One account per person in the household, each with a private Jellyfin webhook; talks to Sonarr / Radarr. |
-| **Snug** | **A cozy tracker for the TV series you're watching**: where you are, what's next and what airs soon, next episode marked in one tap. Series move between Watchlist, Watching, Paused, Completed and Dropped on their own; Jellyfin's webhook logs what you watch. |
-| **lueur** | **Ambilight for Jellyfin with Philips Hue**: analyzes each film once, then your Hue entertainment area takes the colors of its side of the screen while you watch — no Sync Box, no PC. Web UI for pairing, libraries and live brightness / saturation / sync tuning. |
-| **Notifiarr** | **Rich Discord notifications for the whole media stack**: grabs, imports, Plex playback, stuck downloads, health checks and system snapshots, routed per channel from notifiarr.com, plus TRaSH profile sync. |
-| **Unpackerr** | **Extracts archived downloads** for the *arr stack: when a release arrives as .rar / .7z / .zip, it unpacks it so Radarr / Sonarr / Lidarr can import it, then cleans up the extracted copy. Headless: API keys set in its umbrelOS settings. |
-| **Vitals** | **Your media stack's health as one JSON API**: whether each app is up and the warnings and errors it reports, from Radarr, Sonarr, Prowlarr, Bazarr, Seerr, Transmission, qBittorrent, Maintainerr, Healarr, Cleanuparr and Tracearr. Built for your own dashboard. |
-| **arr-mcp** | **One MCP server for the whole media stack**: lets Claude / ChatGPT (any MCP client) query and drive Radarr, Sonarr, Prowlarr, Bazarr, Jellyfin, Plex, Seerr, SABnzbd, Transmission, qBittorrent and Profilarr — with a `diagnose` tool that explains why something never showed up. Writes are opt-in and previewed. |
-| **FreshRSS MCP** | **Your FreshRSS feeds as an MCP server**: lets Claude / ChatGPT (any MCP client) list your subscriptions, read unread articles as Markdown and mark them read. |
-| **AdGuard MCP** | **Your AdGuard Home as an MCP server**: ask an AI assistant why a site doesn't load, unblock a domain, block a service on one device, or add a DNS rewrite. Covers the whole AdGuard Home API. |
-| **MetaMCP** | **One MCP gateway for all your MCP servers**: gathers STDIO and remote MCP servers behind one endpoint, groups them into namespaces, picks which tools each AI client sees, and protects it with an API key or OAuth — with an MCP inspector and audit logs. |
-| **MCP Memory** | **Long-term memory for AI assistants**: an MCP server that remembers your preferences, decisions and setup across conversations, searched by meaning. Everything stays on your Umbrel, with daily backups. |
-| **Umbrel MCP Bridge** | **Connect URL-only MCP clients** (like Home Assistant) to umbrelOS's own MCP server: moves a `?token=` from the URL into the `Authorization` header it requires. |
-| **Crawl4AI** | **Lets an AI read any web page**: a headless-browser crawler that returns clean Markdown, HTML, screenshots or PDFs, with its own MCP server and REST API — pair it with SearXNG for web search. |
-| **Open Notebook** | **Your own NotebookLM**: chat with your PDFs, web pages, YouTube videos and audio, get cited answers and notes, and turn a notebook into a multi-voice podcast — with the AI of your choice (OpenAI, Anthropic, Google, Ollama…). |
-| **Hermes Agent** | **Nous Research's self-improving AI agent**, packaged from the official image: it writes its own skills, remembers you across sessions, runs scheduled tasks and talks to MCP servers. Hermes's own login means the same address works from a browser, Hermes Desktop and the Hermex iPhone app; its OpenAI-compatible API serves apps like Open WebUI. |
-| **Traccar** | **GPS tracking on your own server**: phones (Traccar Client, OwnTracks), car trackers, kids' watches and 200+ GPS protocols on a live map, with trips and stops reports, geofences and alerts (overspeed, ignition, low battery, zone in / out). Works with the Traccar Manager app and Home Assistant. |
+## ✨ Apps
+
+**🎬 Around Radarr and Sonarr**
+
+- 🪢 [**arrglue**](mathieu-arrglue): finds every *arr app on the Umbrel, checks their links, paths and hardlinks, then creates or repairs the links (plan / apply) · *made here*
+- 🎚️ [**Profilarr**](mathieu-profilarr): quality profiles and custom formats from curated TRaSH-style databases, synced to every *arr
+- 🧽 [**Cleanuparr**](mathieu-cleanuparr): removes stalled, failed and orphaned downloads from the queues, then searches again
+- 🔎 [**NeutArr**](mathieu-neutarr): searches for missing and below-cutoff items a few at a time (the maintained Huntarr fork)
+- 🩺 [**Healarr**](mathieu-healarr): finds corrupt files, deletes them, re-downloads through Sonarr / Radarr and checks the replacement
+- 📦 [**Unpackerr**](mathieu-unpackerr): extracts `.rar` / `.7z` / `.zip` downloads so Radarr, Sonarr and Lidarr can import them
+- 🍿 [**Boxarr**](mathieu-boxarr): the weekly box office top 10, synced with Radarr
+- 📋 [**Pulsarr**](mathieu-pulsarr): Plex watchlists → Sonarr / Radarr in real time, for you and your friends
+- 🎞️ [**Trailarr**](mathieu-trailarr): trailers next to your movies and shows, played by Plex / Jellyfin / Emby
+- 🛡️ [**Byparr**](mathieu-byparr): Cloudflare-bypass proxy for Prowlarr / Jackett, a drop-in FlareSolverr replacement
+- 📊 [**Sortarr**](mathieu-sortarr): Prowlarr indexer priorities from your real ratio, buffer and freeleech on each private tracker
+
+**🧹 Library cleanup**
+
+- 🗂️ [**Maintainerr**](mathieu-maintainerr): rule-based cleanup for Plex, with a "Leaving Soon" collection
+- ♻️ [**Reclaimerr**](mathieu-reclaimerr): rule-based cleanup for Jellyfin, Plex and Emby, with protect / delete requests
+- 🗑️ [**Shredarr**](mathieu-shredarr): delete it in Jellyfin or Plex, it's gone from Sonarr / Radarr / Seerr and the torrent client once seeded
+
+**📚 More libraries**
+
+- 🧩 [**Scryer**](mathieu-scryer): a whole *arr stack (movies, series, anime) in one binary
+- ⚽ [**Sportarr**](mathieu-sportarr): a PVR for sports leagues and events
+- 🦸 [**Kapowarr**](mathieu-kapowarr): comic book library manager
+- 📖 [**Chaptarr**](mathieu-chaptarr): ebooks and audiobooks, the Readarr successor
+- 📰 [**Weaver**](mathieu-weaver): Usenet downloader with PAR2 repair and extraction built in
+
+**⬇️ Downloads and VPN**
+
+- 🔒 [**qBittorrent VPN**](mathieu-qbittorrent-vpn): qBittorrent behind Gluetun (any provider), kill switch and forwarded peer port; replaces Transmission for the *arr apps
+- 🔒 [**Transmission VPN**](mathieu-transmission-vpn): the same for Transmission
+- 🌐 [**Gluetun**](mathieu-gluetun): your VPN as a password-protected HTTP proxy, for the apps you choose
+- 🌱 [**cross-seed**](mathieu-cross-seed): seeds what you already have on your other trackers, no extra disk space
+- 🔁 [**D3X**](mathieu-d3x): V3X tracker's companion: cross-seed, publish, hit-and-run tracking
+- 🎵 [**slskd**](mathieu-slskd): Soulseek client with a web UI
+- 🎶 [**Soularr**](mathieu-soularr): Lidarr's wanted list → slskd → Lidarr
+
+**🗣️ Subtitles and files**
+
+- 🌍 [**Lingarr**](mathieu-lingarr): translates subtitles (LibreTranslate, DeepL, OpenAI…)
+- 💬 [**Sublarr**](mathieu-sublarr): subtitle manager and LLM translator, a Bazarr + Lingarr alternative
+- ✂️ [**Muxarr**](mathieu-muxarr): strips unwanted audio and subtitle tracks without re-encoding
+- ⚙️ [**Tdarr**](mathieu-tdarr): automated transcoding and library health checks
+
+**🖼️ Plex and Jellyfin**
+
+- 🏠 [**Agregarr**](mathieu-agregarr): Plex Home collections from Trakt, IMDb, Letterboxd, Top 10s…
+- 🎨 [**Posterizarr**](mathieu-posterizarr): consistent posters and title cards for Plex
+- 🏷️ [**Labelarr**](mathieu-labelarr): TMDb keywords → Plex labels
+- 📈 [**Tracearr**](mathieu-tracearr): monitoring for Plex, Jellyfin and Emby, with account-sharing detection
+- 💡 [**lueur**](mathieu-lueur): Ambilight for Jellyfin with Philips Hue, no Sync Box · *made here*
+- 🤔 [**SuggestArr**](mathieu-suggestarr): recommendations from your watch history, requested through Seerr
+- 🔗 [**Spotarr**](mathieu-spotarr): share a reel from your iPhone, get the movie or show through Seerr · *made here*
+- 🔔 [**Notifiarr**](mathieu-notifiarr): Discord notifications and TRaSH sync for the whole stack
+
+**📺 Live TV**
+
+- 📡 [**Dispatcharr**](mathieu-dispatcharr): IPTV playlists and guides, served as an HDHomeRun tuner
+- 📺 [**Tunarr**](mathieu-tunarr): live channels built from your own library
+
+**🛋️ Watch tracking**
+
+- 🛋️ [**Snug**](mathieu-snug): a cozy tracker for the TV series you're watching · *made here*
+- 🎮 [**Ryot**](mathieu-ryot): movies, shows, books, games and workouts in one tracker
+- 🎬 [**Scrob**](mathieu-scrob): your own Trakt, synced with Jellyfin / Plex / Emby
+- 🍿 [**Sofa**](mathieu-sofa): your own Trakt / Letterboxd, with phone apps
+- 👀 [**Seek**](mathieu-seek): phone-first tracker for shows, films and books
+
+**🤖 AI and MCP**
+
+- 🧠 [**arr-mcp**](mathieu-arr-mcp): one MCP server for Radarr, Sonarr, Prowlarr, Jellyfin, Plex, Seerr…
+- 🕸️ [**MetaMCP**](mathieu-metamcp): one gateway for all your MCP servers
+- 🗃️ [**MCP Memory**](mathieu-mcp-memory): long-term memory for AI assistants
+- 📰 [**FreshRSS MCP**](mathieu-freshrss-mcp): your FreshRSS feeds as an MCP server
+- 🛡️ [**AdGuard MCP**](mathieu-adguard-mcp): your AdGuard Home as an MCP server
+- 🌉 [**Umbrel MCP Bridge**](mathieu-umbrel-mcp-bridge): connects URL-only MCP clients (Home Assistant) to umbrelOS's MCP server
+- 🕷️ [**Crawl4AI**](mathieu-crawl4ai): any web page as clean Markdown, screenshot or PDF, with an MCP server
+- 📓 [**Open Notebook**](mathieu-open-notebook): your own NotebookLM, with the AI of your choice
+- 🪽 [**Hermes Agent**](mathieu-hermes): Nous Research's self-improving agent, reachable from your phone
+
+**🧰 Other**
+
+- 💓 [**Vitals**](mathieu-vitals): your media stack's health as one JSON API, for your own dashboard · *made here*
+- 🛰️ [**Traccar**](mathieu-traccar): GPS tracking for phones, cars and trackers, with Home Assistant support
+
+## 🚀 Install
+
+1. In umbrelOS, open the **App Store**, then **⋯** (top right) → **Community App Stores**.
+2. Add this repository's URL:
+
+   ```
+   https://github.com/mathieuletyrant/umbrel-community-app-store
+   ```
+
+3. Open **Mathieu's Umbrel App Store** and install any app. Each listing says how to set it up.
+
+> [!NOTE]
+> Community app stores are third-party: only add stores you trust, their apps run on your own hardware.
 
 ## 🔗 Connecting apps
 
@@ -123,53 +167,34 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 Plex runs on the host network: apps reach it through `host.docker.internal` (the store's apps that
 need it declare it), and Plex reaches an app through `http://127.0.0.1:<the app's port>`.
 
-## 🚀 How to install
-
-1. In umbrelOS, open the **App Store**.
-2. Click the **⋮** menu (top right) → **Community App Stores**.
-3. Add this repository's URL:
-
-   ```
-   https://github.com/mathieuletyrant/umbrel-community-app-store
-   ```
-
-4. Open the **Mathieu's Umbrel App Store** that now appears and install any app.
-
-> ℹ️ Community app stores are third-party. Only add stores you trust — you're
-> running their apps on your own hardware.
-
 ## 🔄 Updates
 
-Apps follow their upstream releases automatically. [Renovate](https://github.com/renovatebot/renovate)
-opens a pull request for every new image; each one is checked against the upstream
-changelog, gets user-facing release notes, and is installed on a test umbrelOS
-before it's merged. Updates then show up in umbrelOS like any other app update.
+[Renovate](https://github.com/renovatebot/renovate) opens a pull request for every new upstream image (a rebuild of the same version only on the 1st of the month). For each one, an AI agent ([Claude Code](https://claude.com/claude-code)) reads the upstream changelog, writes the release notes, installs the app on a test umbrelOS and posts a screenshot of it running. Verified patch and minor updates are merged; the rest wait for me. Updates then show up in umbrelOS like any other app update.
 
-## 🤖 How this store is maintained
+> [!IMPORTANT]
+> Apps are tested on a real umbrelOS before release, not by a human on every hardware setup, and the agent can get things wrong. Upstream developers don't maintain these packages: [report problems here](https://github.com/mathieuletyrant/umbrel-community-app-store/issues) first.
 
-This is a one-person side project, and most of the work is done by an AI coding
-agent ([Claude Code](https://claude.com/claude-code)) rather than by hand:
+## 🛠️ Develop
 
-- **Packaging:** new apps and fixes are written by the agent, following the
-  rules in [`CLAUDE.md`](CLAUDE.md) and each app's official install docs.
-- **Updates:** Renovate opens a pull request for each new image. The agent reads
-  the upstream changelog, writes the release notes, installs the app on a test
-  umbrelOS and posts a screenshot of it running on the pull request. Verified
-  patch and minor updates are merged by the agent; the rest wait for me.
-- **Checks:** CI validates every app (pinned images, unique ports, including
-  against the official store) before anything is merged.
+```sh
+python3 .github/scripts/validate_apps.py                         # what CI checks: ids, ports, pinned images, Renovate
+node .claude/skills/verify-app/scripts/verify.mjs run <app-id>   # install on a throwaway umbrelOS (Docker), run its setup, screenshot
+cd packages && bun install && bun test && bun run typecheck      # the store's own images
+```
 
-What this means for you: apps are tested on a real umbrelOS before release, but
-not by a human on every hardware setup, and the agent can get things wrong. The
-upstream developers don't maintain these packages, so report problems here first.
-If something is off, [open an issue](https://github.com/mathieuletyrant/umbrel-community-app-store/issues)
-and it will be looked at.
+```
+umbrel-app-store.yml         store id (mathieu) and name
+mathieu-<app>/               one folder per app: umbrel-app.yml (listing), docker-compose.yml, icon, gallery
+packages/                    the store's own images (Bun workspaces)
+  core                       shared code: HTTP, env, the umbrelOS widget protocol
+  widgets                    home screen widgets (ghcr.io/mathieuletyrant/umbrel-widgets)
+  vitals                     the Vitals API (ghcr.io/mathieuletyrant/vitals)
+.claude/skills/verify-app/   end-to-end checks, one flow per app in flows/
+renovate.json                image updates
+```
 
-## 💬 Requests & issues
+Every app id starts with `mathieu-`, images are pinned by digest, and a change that must reach existing installs bumps `version` (`-patch.N` for an image rebuild).
 
-Want an app added, or something isn't working? [Open an issue](https://github.com/mathieuletyrant/umbrel-community-app-store/issues).
+📖 Packaging rules: [CLAUDE.md](CLAUDE.md) · 💡 Backlog: [IDEAS.md](IDEAS.md) · 💬 [Requests and issues](https://github.com/mathieuletyrant/umbrel-community-app-store/issues)
 
-## 📄 License
-
-App packaging in this repo is provided as-is. Each application is the property of
-its respective author under its own license.
+App packaging is provided as is. Each application belongs to its authors, under its own license.
