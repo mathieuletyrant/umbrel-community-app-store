@@ -7,7 +7,7 @@ name: Unpackerr
 tagline: Extract archived downloads so Radarr, Sonarr and Lidarr can import them
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-unpackerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/unpackerr/unpackerr
-version: "v1.0.1-patch.1"
+version: "v1.0.1-patch.2"
 port: 5657
 description: >-
   Some releases arrive as .rar, .7z or .zip archives instead of a playable
@@ -41,6 +41,7 @@ gallery: []
 releaseNotes: >-
   Fixes the status page staying on "Starting…" since Unpackerr 1.0, which only
   shares its metrics with an API key: the page now has its own read-only key.
+  Also updates the bundled nginx web server to its latest build.
 dependencies: []
 path: ""
 defaultUsername: ""
