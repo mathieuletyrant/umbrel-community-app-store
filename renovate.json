@@ -38,7 +38,9 @@
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["digest"],
-      "commitMessageExtra": "digest to {{{newDigestShort}}}"
+      "commitMessageExtra": "digest to {{{newDigestShort}}}",
+      "schedule": ["* 0-5 1 * *"],
+      "updateNotScheduled": false
     },
     { "matchPackageNames": ["qmcgaw/gluetun"], "commitMessageTopic": "Gluetun", "allowedVersions": "!/^v3\\.41\\./" },
     { "matchPackageNames": ["nginx"], "commitMessageTopic": "nginx sidecar" },
