@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Adds Discovery browsing by genre or theme, an interactive library graph, bulk subtitle search for selected episodes, library and root moves (Beta), and Plex and Emby watch history. Imports now hold files whose media can't be verified for review, and the same-tier upgrade threshold moves into each quality profile. The first start after upgrading builds catalog ordering keys, so it can take longer on large libraries.
+  Searches by TMDB, IMDb or TVDB id no longer return unrelated releases from indexers that pad id lookups with other results. Direct Newznab and Torznab searches without routed categories now send default categories. Disabled built-in indexer plugins can be enabled again, and Russian is available as a metadata language.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.1
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.2
 dependencies: []
 path: ""
 defaultUsername: ""
