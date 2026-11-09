@@ -55,10 +55,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-3.jpg
 releaseNotes: >-
-  Instagram carousels are now identified too: Spotarr looks at the picture in view first.
+  Shorter texts in the settings screen.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.17.0
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.17.1
 dependencies: []
 path: ""
 defaultUsername: ""
