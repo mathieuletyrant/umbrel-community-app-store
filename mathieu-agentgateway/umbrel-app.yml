@@ -29,7 +29,8 @@ description: >-
 
   1. Open the app and go to MCP → Servers. The endpoint has no MCP server
   yet: add one per server, with its address and, as backend auth, its
-  bearer token. agentgateway refuses host names with an underscore, so the
+  bearer token (a `?token=` in the address is dropped, it never reaches the
+  server). agentgateway refuses host names with an underscore, so the
   Umbrel container names (`mathieu-arr-mcp_server_1`) don't resolve: reach
   each app through its port on the Umbrel, e.g. arr-mcp at
   `http://host.docker.internal:6061/mcp`, MCP Memory at
