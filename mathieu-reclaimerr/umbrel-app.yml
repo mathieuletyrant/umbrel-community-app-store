@@ -61,13 +61,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Adds scheduled manual deletion: pick "Delete on…" for a cleanup candidate or
-  from the Movies and Series delete dialog, manage schedules from Candidates and
-  Calendar, and see the next deletion on the dashboard. Scheduled deletions stay
-  in the Leaving Soon collections and survive rescans and restarts.
+  Security fix for notifications: non-admin accounts can only use public
+  services (Discord, Telegram, Slack, Pushover, Pushbullet, ntfy.sh) freely, and
+  other destinations wait for admin approval in a new Destination approvals
+  panel. Non-admin email notifications only go to the account's own address.
 
-
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#069---2026-11-07
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0610---2026-11-08
 permissions:
   - STORAGE_DOWNLOADS
 dependencies: []
