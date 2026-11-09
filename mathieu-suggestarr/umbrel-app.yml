@@ -42,13 +42,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-3.jpg
 releaseNotes: >-
-  AI Search gets a per-account original-language selector and now only reads the
-  current user's linked watch history. "Similar titles per title" is now a
-  maximum per watched title, and Jellyfin checks movies inside collections
-  (needs TMDb provider IDs).
+  Adds rating prompts through Telegram and Discord, multi-person AI Search
+  (mention several users in one query), smarter AI Search exclusions that skip
+  already-handled titles, and unified feedback and sorting options for
+  suggestions and requests. The UI also gets accessibility fixes.
 
   Full release notes can be found at
-  https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v3.3.0
+  https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v3.4.0
 dependencies: []
 path: ""
 defaultUsername: ""
