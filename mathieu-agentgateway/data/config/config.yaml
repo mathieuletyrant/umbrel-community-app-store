@@ -1,17 +1,16 @@
 # yaml-language-server: $schema=https://agentgateway.dev/schema/config
-binds:
-- port: 3000
-  listeners:
-  - routes:
-    - policies:
-        apiKey:
-          mode: strict
-          location:
-            queryParameter:
-              name: api_key
-          keys:
-          - key: $API_KEY
-      backends:
-      - mcp:
-          failureMode: failOpen
-          targets: []
+gateways:
+  default:
+    port: 3000
+mcp:
+  gateways: default
+  failureMode: failOpen
+  policies:
+    apiKey:
+      mode: strict
+      location:
+        queryParameter:
+          name: api_key
+      keys:
+      - key: $API_KEY
+  targets: []

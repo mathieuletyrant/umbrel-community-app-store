@@ -27,9 +27,9 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  1. Open the app and go to Backends. The endpoint has no MCP server yet: add
-  one target per server, each with its address and, in its policies, a
-  backend auth key (bearer token). This store's MCP apps, to copy:
+  1. Open the app and go to MCP → Servers. The endpoint has no MCP server
+  yet: add one per server, with its address and, as backend auth, its
+  bearer token. This store's MCP apps, to copy:
   https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
   (e.g. arr-mcp at `http://mathieu-arr-mcp_server_1:6060/mcp`, Crawl4AI as an
   SSE target at `http://mathieu-crawl4ai_server_1:11235/mcp/sse`, umbrelOS at
