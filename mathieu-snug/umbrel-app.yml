@@ -54,10 +54,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  A series you start in Jellyfin now shows up in Snug right away. The Jellyfin
-  server is now set in Snug's Jellyfin integration settings.
+  Seasons can now show their TMDB name (for example "Arc East Blue") instead of
+  "Season 1", with a toggle for each series.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.20.0
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.21.0
 dependencies: []
 path: ""
 defaultUsername: ""
