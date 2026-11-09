@@ -1,0 +1,8 @@
+logs:
+  server: marking server ready
+steps:
+  - http: {path: /mcp, method: POST, headers: {Content-Type: application/json, Accept: "application/json, text/event-stream"}, body: {jsonrpc: "2.0", id: 1, method: initialize, params: {protocolVersion: "2025-06-18", capabilities: {}, clientInfo: {name: verify, version: "1"}}}, status: 401}
+  - http: {path: "/mcp?api_key=${env.server.API_KEY}", method: POST, headers: {Content-Type: application/json, Accept: "application/json, text/event-stream"}, body: {jsonrpc: "2.0", id: 1, method: initialize, params: {protocolVersion: "2025-06-18", capabilities: {}, clientInfo: {name: verify, version: "1"}}}, status: 503, contains: "no backends"}
+  - goto: /ui
+  - see: Overview
+  - shot: overview

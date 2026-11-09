@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-agentgateway_web_1
+      APP_PORT: 80
+      PROXY_AUTH_WHITELIST: "/mcp,/mcp/*,/sse,/sse/*"
+
+  web:
+    image: nginx:alpine@sha256:713fc2ebfd92e8217db451477182ee91944b123d2b1ee9fd5a8c6e91ca6c3a11
+    init: true
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        server {
+          listen 80;
+          client_max_body_size 50m;
+          resolver 127.0.0.11 valid=10s;
+          set $$gateway http://mathieu-agentgateway_server_1:3000;
+          set $$admin http://mathieu-agentgateway_server_1:15000;
+
+          location ~ ^/(mcp|sse)(/|$$) {
+            proxy_pass $$gateway;
+            proxy_set_header Host $$http_host;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_buffering off;
+            proxy_read_timeout 1h;
+          }
+
+          location / {
+            proxy_pass $$admin;
+            proxy_set_header Host $$http_host;
+            proxy_http_version 1.1;
+            proxy_buffering off;
+            proxy_read_timeout 1h;
+          }
+        }
+        CONF
+        exec nginx -g 'daemon off;'
+    depends_on:
+      - server
+    restart: on-failure
+
+  server:
+    image: ghcr.io/agentgateway/agentgateway:v1.7.0@sha256:60216aafb03d37f94e952ff3d51d2f630a65b10ecaebdc0a864882f92610c45b
+    user: "1000:1000"
+    restart: on-failure
+    command: ["-f", "/config/config.yaml"]
+    environment:
+      TZ: Etc/UTC
+      ADMIN_ADDR: 0.0.0.0:15000
+      IPV6_ENABLED: "false"
+      SESSION_KEY: ${APP_SEED}
+      API_KEY: ${APP_PASSWORD}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config

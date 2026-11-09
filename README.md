@@ -89,6 +89,7 @@ Companions for Radarr and Sonarr, torrents behind a VPN, watch trackers, live TV
 
 - 🧠 [**arr-mcp**](mathieu-arr-mcp): one MCP server for Radarr, Sonarr, Prowlarr, Jellyfin, Plex, Seerr…
 - 🕸️ [**MetaMCP**](mathieu-metamcp): one gateway for all your MCP servers
+- 🚪 [**agentgateway**](mathieu-agentgateway): one MCP endpoint for all your MCP servers, MCP Apps included
 - 🗃️ [**MCP Memory**](mathieu-mcp-memory): long-term memory for AI assistants
 - 📰 [**FreshRSS MCP**](mathieu-freshrss-mcp): your FreshRSS feeds as an MCP server
 - 🛡️ [**AdGuard MCP**](mathieu-adguard-mcp): your AdGuard Home as an MCP server
@@ -157,6 +158,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Snug | `http://mathieu-snug_server_1:3000` (Jellyfin webhook) | in the webhook URL of its Settings → Jellyfin |
 | Vitals | `http://mathieu-vitals_server_1:3000/v1/summary` | its default password (bearer token) |
 | MetaMCP | `http://mathieu-metamcp_server_1:12008/metamcp/<endpoint>/mcp` (MCP) | an API key from its API Keys page |
+| agentgateway | `http://mathieu-agentgateway_server_1:3000/mcp?api_key=<key>` (MCP) | its default password (`api_key` query parameter) |
 | arr-mcp | `http://mathieu-arr-mcp_server_1:6060/mcp` (MCP) | the bearer token on its dashboard |
 | MCP Memory | `http://mathieu-mcp-memory_web_1/mcp` (MCP) | its default password (bearer token) |
 | AdGuard MCP | `http://mathieu-adguard-mcp_web_1/mcp` (MCP) | its default password (bearer token) |
