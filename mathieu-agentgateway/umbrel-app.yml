@@ -29,11 +29,13 @@ description: >-
 
   1. Open the app and go to MCP → Servers. The endpoint has no MCP server
   yet: add one per server, with its address and, as backend auth, its
-  bearer token. This store's MCP apps, to copy:
-  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
-  (e.g. arr-mcp at `http://mathieu-arr-mcp_server_1:6060/mcp`, Crawl4AI as an
-  SSE target at `http://mathieu-crawl4ai_server_1:11235/mcp/sse`, umbrelOS at
-  `http://host.docker.internal/mcp` with a `umbrelmcp_` token). Remote HTTP and
+  bearer token. agentgateway refuses host names with an underscore, so the
+  Umbrel container names (`mathieu-arr-mcp_server_1`) don't resolve: reach
+  each app through its port on the Umbrel, e.g. arr-mcp at
+  `http://host.docker.internal:6061/mcp`, MCP Memory at
+  `http://host.docker.internal:6363/mcp`, Crawl4AI as an SSE target at
+  `http://host.docker.internal:11235/mcp/sse`, umbrelOS at
+  `http://host.docker.internal/mcp` with a `umbrelmcp_` token. Remote HTTP and
   SSE servers only: the image ships no `npx` or `uvx` for STDIO servers.
 
 
