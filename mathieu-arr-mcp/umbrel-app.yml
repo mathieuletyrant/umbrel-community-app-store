@@ -57,12 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Adds poster cards in MCP Apps hosts, server-side queue filtering with seed
-  time per tracker, adopting an existing folder when adding media, and moving
-  Radarr and Sonarr files to a new root folder. Writes now bind what a preview
-  showed, and a Lidarr metadata profile change is treated as a destructive write.
+  Adds a tool to delete a Lidarr artist (previewed and confirmed like every
+  write) and clearer messages when a Lidarr metadata profile change applies.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1752-2026-11-09
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1760-2026-11-09
 
 dependencies: []
 path: ""
