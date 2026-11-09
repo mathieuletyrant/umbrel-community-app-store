@@ -47,6 +47,7 @@
     { "matchPackageNames": ["postgres"], "commitMessageTopic": "PostgreSQL sidecar", "allowedVersions": "<19" },
     { "matchPackageNames": ["surrealdb/surrealdb"], "commitMessageTopic": "SurrealDB sidecar", "allowedVersions": "<3" },
     { "matchPackageNames": ["ghcr.io/samik081/mcp-adguard-home"], "commitMessageTopic": "AdGuard MCP" },
+    { "matchPackageNames": ["ghcr.io/agentgateway/agentgateway"], "commitMessageTopic": "agentgateway" },
     { "matchPackageNames": ["ghcr.io/bardesss/arr-mcp"], "commitMessageTopic": "arr-mcp" },
     { "matchPackageNames": ["ghcr.io/leitosama/freshrss-mcp-server"], "commitMessageTopic": "FreshRSS MCP" },
     { "matchPackageNames": ["bitr8/agregarr"], "commitMessageTopic": "Agregarr" },

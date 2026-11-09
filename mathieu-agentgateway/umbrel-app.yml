@@ -1,0 +1,58 @@
+manifestVersion: 1
+id: mathieu-agentgateway
+storage:
+  dataRoot: data
+category: ai
+name: agentgateway
+tagline: One MCP endpoint for all your MCP servers, MCP Apps included
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agentgateway/icon.png
+# renovate: datasource=docker depName=ghcr.io/agentgateway/agentgateway
+version: "1.7.0"
+port: 15080
+description: >-
+  agentgateway is an open-source gateway for AI agents, hosted by the Linux
+  Foundation. Here it gathers your MCP servers behind a single endpoint, so an
+  AI assistant (Claude, ChatGPT, Home Assistant or any MCP client) is
+  configured once and sees the tools of every server.
+
+
+  It passes the client's own capabilities through to each server, so MCP Apps
+  (interactive cards rendered by Claude and other hosts) keep working behind
+  the gateway, and it rewrites their `ui://` resources so each one still
+  reaches the right server. A server that is down is skipped instead of
+  taking the others with it. Its web UI edits listeners, routes, backends and
+  policies, and has a playground to test them.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and go to Backends. The endpoint has no MCP server yet: add
+  one target per server, each with its address and, in its policies, a
+  backend auth key (bearer token). This store's MCP apps, to copy:
+  https://github.com/mathieuletyrant/umbrel-community-app-store#-connecting-apps
+  (e.g. arr-mcp at `http://mathieu-arr-mcp_server_1:6060/mcp`, Crawl4AI as an
+  SSE target at `http://mathieu-crawl4ai_server_1:11235/mcp/sse`, umbrelOS at
+  `http://host.docker.internal/mcp` with a `umbrelmcp_` token). Remote HTTP and
+  SSE servers only: the image ships no `npx` or `uvx` for STDIO servers.
+
+
+  2. Point your MCP client at `http://umbrel.local:15080/mcp?api_key=<key>`
+  (Streamable HTTP) or `/sse?api_key=<key>`, where the key is this app's
+  default password. Tool names are prefixed with the target name
+  (`arr_get_library`). The web UI stays behind your Umbrel login; only `/mcp`
+  and `/sse` are opened, and they refuse any request without the key.
+developer: agentgateway (Linux Foundation)
+website: https://agentgateway.dev
+submitter: Mathieu Le Tyrant
+submission: https://github.com/agentgateway/agentgateway
+repo: https://github.com/agentgateway/agentgateway
+support: https://github.com/agentgateway/agentgateway/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agentgateway/gallery-1.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+deterministicPassword: true
+permissions: []
