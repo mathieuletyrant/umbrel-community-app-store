@@ -57,11 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Lighter blocklist, history, Seerr and diagnose reads, clearer server
-  instructions, and a clean shutdown on stop. IMDb data is no longer
-  re-downloaded on every restart.
+  Adds Lidarr artist file retagging through fix_metadata. Jellyfin and Plex
+  library reads are paged, HTTP calls get one deadline per request, and tool
+  schemas are built once instead of on every request. The web sign-in is
+  throttled per peer and its cookie is Secure over https.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1761-2026-11-09
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1770-2026-11-09
 
 dependencies: []
 path: ""
