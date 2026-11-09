@@ -55,10 +55,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tunarr/gallery-3.jpg
 releaseNotes: >-
-  Windows-only build fix (ErsatzTV channel worker and libvpl.dll packaging);
-  nothing changes for the Docker image.
+  Adds bulk editing of channel and filler assignments, stream selection
+  profiles, a bulk-action channels page, and an uploadable looping fallback
+  soundtrack for channels. The API endpoint listing a media library's
+  programs now returns a paged object instead of an array.
 
-  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.11.1
+  Full release notes can be found at https://github.com/chrisbenincasa/tunarr/releases/tag/v2026.11.2
 
 dependencies: []
 path: ""
