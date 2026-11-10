@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.77.0"
+version: "1.78.0"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,12 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Adds Lidarr artist file retagging through fix_metadata. Jellyfin and Plex
-  library reads are paged, HTTP calls get one deadline per request, and tool
-  schemas are built once instead of on every request. The web sign-in is
-  throttled per peer and its cookie is Secure over https.
+  Cleanuparr tools now read standing strikes and report manual events, and
+  Cleanuparr 2.11 is marked as tested. Stack health lists each service,
+  failing check and disk, Seerr issues name the media they are about, and
+  Lidarr tools refuse an id that matches no configured Lidarr.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1770-2026-11-09
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1780-2026-11-10
 
 dependencies: []
 path: ""
