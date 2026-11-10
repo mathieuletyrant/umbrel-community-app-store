@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/_i/*"
 
   server:
-    image: ghcr.io/ignisda/ryot:v10.5.6@sha256:d7a07c2eac3d8ee3c2be16e21da4a158cb1e550d9fd073a8c98da63ef0d67710
+    image: ghcr.io/ignisda/ryot:v10.5.7@sha256:69dade0f20f66bfb0eccb4a35d778387c873e84fc8f3e39ddc5433501ceeda4f
     restart: on-failure
     depends_on:
       db:
