@@ -36,7 +36,7 @@ services:
     restart: on-failure
 
   server:
-    image: ghcr.io/v3x0rv3x/d3x:1.1.53@sha256:2f49006715b78727eed1a26536ee6cc543ecb36958da6faf290cbdc3a99fc0e3
+    image: ghcr.io/v3x0rv3x/d3x:1.1.55@sha256:529f865737c29eddad6797c92596eb233be4f43cac856ec0c167042815788a98
     restart: on-failure
     stop_grace_period: 1m
     environment:
