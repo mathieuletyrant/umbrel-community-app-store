@@ -58,10 +58,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-hermes/gallery-3.jpg
 releaseNotes: >-
-  Adds an opt-in browser webapp (off by default), one gateway per machine that owns all sessions, /rewind to edit and resend an earlier message, and a larger plugin catalog. The old browser_* tools are replaced by browser_exec, and GLM-5.3 is the new default model.
+  Bug-fix release: Telegram topics and streamed previews, session /resume and /handoff handling, approvals bound to the right sender in shared chats, and sessions saved without a provider now reopen on the right model.
 
 
-  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.0
+  Full release notes can be found at https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.1
 dependencies: []
 path: ""
 defaultUsername: "admin"
