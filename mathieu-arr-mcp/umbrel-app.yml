@@ -57,12 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Cleanuparr tools now read standing strikes and report manual events, and
-  Cleanuparr 2.11 is marked as tested. Stack health lists each service,
-  failing check and disk, Seerr issues name the media they are about, and
-  Lidarr tools refuse an id that matches no configured Lidarr.
+  Write tools are now listed only for services you have configured, and the
+  tools list is trimmed. Whisparr reports logs, history, downloads and running
+  commands like Sonarr does.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1780-2026-11-10
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1790-2026-11-10
 
 dependencies: []
 path: ""
