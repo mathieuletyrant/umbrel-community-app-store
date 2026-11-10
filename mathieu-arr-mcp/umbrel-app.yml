@@ -57,13 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  New tools: search_media (lookup_media stays as a deprecated alias),
-  delete_indexer, import_download, update_book for Grimmory edits,
-  get_instance_options, and a service filter on stack_health. Seerr titles can
-  now be blocklisted from delete_media, with blocklist_media to add or lift one.
-  Lidarr artists can be updated all at once, with monitor_new_items.
+  blocklist_media can now add and remove Radarr, Sonarr and Lidarr import
+  exclusions. remove_queue_item now says when an item cannot be blocklisted,
+  and Lidarr albums with no release date no longer show a wrong year.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1810-2026-11-10
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1821-2026-11-10
 
 dependencies: []
 path: ""
