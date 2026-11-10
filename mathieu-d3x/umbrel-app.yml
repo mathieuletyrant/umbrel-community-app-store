@@ -57,7 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Updated the nginx status sidecar image.
+  Before adding a release from the Library or Publish, D3X now asks qBittorrent 5 and Deluge whether they can see the files, instead of leaving the torrent stuck at 0%. Adds support for the Hydranos client through its native API, and after a D3X restart, stopping, checking and removing a torrent now target the right copy.
+
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.55
 dependencies: []
 path: ""
 defaultUsername: ""
