@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.79.0"
+version: "1.81.0"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,11 +57,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Write tools are now listed only for services you have configured, and the
-  tools list is trimmed. Whisparr reports logs, history, downloads and running
-  commands like Sonarr does.
+  New tools: search_media (lookup_media stays as a deprecated alias),
+  delete_indexer, import_download, update_book for Grimmory edits,
+  get_instance_options, and a service filter on stack_health. Seerr titles can
+  now be blocklisted from delete_media, with blocklist_media to add or lift one.
+  Lidarr artists can be updated all at once, with monitor_new_items.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1790-2026-11-10
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1810-2026-11-10
 
 dependencies: []
 path: ""
