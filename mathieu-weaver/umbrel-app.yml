@@ -7,7 +7,7 @@ name: Weaver
 tagline: Usenet downloader with built-in repair and extraction
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/weaver
-version: "0.16.12"
+version: "0.16.13"
 port: 9390
 description: >-
   Weaver is a self-hosted Usenet downloader written in Rust. Downloading,
@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  A stalled console no longer freezes downloads or the API, and a restarted move no longer copies leftover input files into the completed folder. Dispatch stall warnings now count only articles that can actually be handed out, and the WAL checkpoint task now closes its database connection with the database.
+  Restarted jobs no longer read every downloaded byte back from disk before resuming, so restores no longer hold all download slots. Zip archives now extract while they download, and archives with large dictionaries decode through a scratch file instead of failing on memory, with each hardware profile setting how much RAM a decoder may use. When the complete folder is on another drive or share, files are written there directly so finishing a job is a rename instead of a copy.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.12
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.13
 dependencies: []
 path: ""
 defaultUsername: "admin"
