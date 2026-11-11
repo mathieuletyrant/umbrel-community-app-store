@@ -226,7 +226,7 @@ this too.
   render/video groups when the host has a GPU. Never map `/dev/dri` in `devices:`,
   umbrelOS 2.0 strips it and older versions fail to start without a GPU.
 - `port` is the **host** port Umbrel binds for the app — it must be unique across
-  installed apps, including the official store's (CI checks it), and not a system port. **Never use 80/443** (taken by umbrelOS →
+  installed apps, including the official store's (CI only checks this store's own), and not a system port. **Never use 80/443** (taken by umbrelOS →
   install fails with `failed to bind host port ... address already in use`). Pick
   a free high port; it's independent of the container's internal `APP_PORT`.
 
