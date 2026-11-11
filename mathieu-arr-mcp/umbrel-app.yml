@@ -57,11 +57,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  blocklist_media can now add and remove Radarr, Sonarr and Lidarr import
-  exclusions. remove_queue_item now says when an item cannot be blocklisted,
-  and Lidarr albums with no release date no longer show a wrong year.
+  Books can now be added through Shelfmark, and a new fix_profile tool applies
+  a proven quality profile fix. get_stack_health and diagnose_media replace the
+  old tool names (kept as aliases), stack_health shows recent Lidarr warnings,
+  and remove_queue_item can clear every orphaned download on an instance.
+  Service discovery merges container duplicates and shows versions.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1821-2026-11-10
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1831-2026-11-11
 
 dependencies: []
 path: ""
