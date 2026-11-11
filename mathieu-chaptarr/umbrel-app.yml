@@ -42,7 +42,12 @@ support: https://hub.docker.com/r/robertlordhood/chaptarr
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-chaptarr/gallery-1.jpg
 releaseNotes: >-
-  Updates Chaptarr to 0.9.999 (development build, no upstream changelog published).
+  Chaptarr 0.9.1000 pages the backfills of database migrations 126 and 128, so large
+  libraries on a PostgreSQL database can upgrade.
+  Installs on the default SQLite database see no change.
+
+
+  Full release notes can be found at https://github.com/Chaptarr/chaptarr/releases/tag/v0.9.1000
 
 dependencies: []
 path: ""
