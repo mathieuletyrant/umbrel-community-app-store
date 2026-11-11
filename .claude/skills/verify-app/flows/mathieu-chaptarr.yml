@@ -1,4 +1,4 @@
-verified: 0.9.965-patch.1 on umbrelOS 2.0.0 (2026-10-09)
+verified: 0.9.1000 on umbrelOS 2.0.1 (2026-11-11)
 egress: true
 steps:
   - goto: /
