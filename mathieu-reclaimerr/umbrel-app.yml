@@ -61,12 +61,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Security fix for notifications: non-admin accounts can only use public
-  services (Discord, Telegram, Slack, Pushover, Pushbullet, ntfy.sh) freely, and
-  other destinations wait for admin approval in a new Destination approvals
-  panel. Non-admin email notifications only go to the account's own address.
+  Bug fixes for deletions: removing the last version of a movie through the
+  media-server fallback now also removes it from Radarr so it isn't
+  re-downloaded, and seasons or episodes already gone from disk no longer fail
+  every run. Duplicates ignores Plex versions whose file is gone and refuses to
+  delete the only real copy. Backend dependencies were updated.
 
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0610---2026-11-08
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0611---2026-11-08
 permissions:
   - STORAGE_DOWNLOADS
 dependencies: []
