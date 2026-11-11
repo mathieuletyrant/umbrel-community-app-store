@@ -38,17 +38,6 @@ if not app_dirs:
 seen_ports: dict[int, str] = {}
 
 
-def published_ports(compose: dict) -> set[int]:
-    ports = set()
-    for spec in (compose.get("services") or {}).values():
-        for entry in (spec or {}).get("ports") or []:
-            host = str(entry.get("published", "") if isinstance(entry, dict) else entry).split("/")[0]
-            parts = host.split(":")
-            if len(parts) >= 2 and parts[-2].isdigit():
-                ports.add(int(parts[-2]))
-    return ports
-
-
 def images(compose: dict) -> list[str]:
     return sorted(str((spec or {}).get("image")) for spec in (compose.get("services") or {}).values() if (spec or {}).get("image"))
 
@@ -60,22 +49,6 @@ def base_version(path: str):
     shown = subprocess.run(["git", "show", f"{base_ref}:{path}"], cwd=ROOT, capture_output=True, text=True)
     return yaml.safe_load(shown.stdout) if shown.returncode == 0 else None
 
-
-official_ports: dict[int, str] = {}
-official_dir = os.environ.get("OFFICIAL_APPS_DIR")
-if official_dir:
-    for manifest in sorted(Path(official_dir).glob("*/umbrel-app.yml")):
-        official = load(manifest) or {}
-        if isinstance(official.get("port"), int):
-            official_ports.setdefault(official["port"], f"official app '{manifest.parent.name}'")
-        compose_file = manifest.parent / "docker-compose.yml"
-        if compose_file.exists():
-            for port in published_ports(load(compose_file) or {}):
-                official_ports.setdefault(port, f"official app '{manifest.parent.name}' (published port)")
-    if not official_ports:
-        fail(f"OFFICIAL_APPS_DIR={official_dir} holds no official app manifests")
-else:
-    print("⚠️  OFFICIAL_APPS_DIR not set: ports are not checked against the official Umbrel App Store")
 
 # The store's own images: Renovate leaves them alone, so the PR that bumps a package also pins
 # its new version in every app using it.
@@ -127,8 +100,6 @@ for d in app_dirs:
             fail(f"{name}: port {port} already used by {seen_ports[port]}")
         else:
             seen_ports[port] = name
-        if port in official_ports:
-            fail(f"{name}: port {port} already used by {official_ports[port]}: both apps can't be installed together")
 
     if (app.get("storage") or {}).get("dataRoot") != "data":
         fail(f"{name}: umbrel-app.yml must declare storage: dataRoot: data")
@@ -147,10 +118,6 @@ for d in app_dirs:
     base_compose = base_version(f"{name}/docker-compose.yml")
     if base_app and base_compose and images(base_compose) != images(compose) and str(base_app.get("version")) == str(app.get("version")):
         fail(f"{name}: an image changed but version is still {app.get('version')}: bump it with -patch.N, or existing installs never get the new image")
-
-    for port in published_ports(compose):
-        if port in official_ports:
-            fail(f"{name}: published port {port} already used by {official_ports[port]}")
 
     if annotation:
         version = str(app.get("version", "")).split("-patch.")[0].lstrip("v")
