@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.56"
+version: "1.1.57"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,9 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Publish now finds TMDB collections (complete sets, movie packs): title search keeps them at the end of the list marked "Saga", and a TMDB collection link or "collection/528" finds one. Previously D3X only matched movies and series, so a collection release found no title at all.
+  Batch can now retry releases that failed on a network cut (V3X unreachable, timeout, 502): "Retry errors" at the top of the Error tab, or "Retry" per row, starting over without ever publishing twice. The Batch list sorts by size or name from its column headers. Team rules no longer flag a release whose title merely ends with a word spelled like a team tag.
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.56
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.57
 dependencies: []
 path: ""
 defaultUsername: ""
