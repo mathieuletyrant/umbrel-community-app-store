@@ -7,7 +7,7 @@ name: AdGuard MCP
 tagline: Your AdGuard Home, as an MCP server for AI assistants
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-adguard-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/samik081/mcp-adguard-home
-version: "0.10.1-patch.6"
+version: "0.11.0"
 port: 6464
 description: >-
   AdGuard MCP is a Model Context Protocol (MCP) server that lets an AI
@@ -49,7 +49,13 @@ repo: https://github.com/Samik081/mcp-adguard-home
 support: https://github.com/Samik081/mcp-adguard-home/issues
 gallery: []
 releaseNotes: >-
-  Updated the nginx status sidecar image.
+  The MCP server can now check the Host and Origin headers of HTTP requests
+  to guard against DNS rebinding, and binds to 127.0.0.1 by default outside
+  Docker. On Umbrel it keeps listening on all interfaces behind the
+  token-checking sidecar, so nothing changes for your MCP clients.
+
+
+  Full release notes can be found at https://github.com/Samik081/mcp-adguard-home/releases/tag/v0.11.0
 dependencies:
   - adguard-home
 path: ""

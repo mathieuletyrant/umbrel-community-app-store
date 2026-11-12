@@ -89,7 +89,7 @@ services:
     restart: on-failure
 
   server:
-    image: ghcr.io/samik081/mcp-adguard-home:0.10.1@sha256:8b99f6c1be373537ae0ac08b607a6f7b43086b77ed20bdc0a5b0964fa7e3c9ff
+    image: ghcr.io/samik081/mcp-adguard-home:0.11.0@sha256:704a75ac799d078695254de29ae1859e9d0b57444416f4b1e0404cd69bc45005
     init: true
     entrypoint: ["sh", "-c"]
     command:
