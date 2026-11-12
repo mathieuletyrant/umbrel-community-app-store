@@ -1,4 +1,4 @@
-verified: 0.22.0 on umbrelOS 2.0.1 (2026-11-11)
+verified: 0.22.1 on umbrelOS 2.0.1 (2026-11-12)
 vars:
   HOST_IP: echo umbrel-host.test
 settings:
