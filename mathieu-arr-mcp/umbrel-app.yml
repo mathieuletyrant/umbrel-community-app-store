@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "1.83.1"
+version: "1.84.0"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,13 +57,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Books can now be added through Shelfmark, and a new fix_profile tool applies
-  a proven quality profile fix. get_stack_health and diagnose_media replace the
-  old tool names (kept as aliases), stack_health shows recent Lidarr warnings,
-  and remove_queue_item can clear every orphaned download on an instance.
-  Service discovery merges container duplicates and shows versions.
+  get_queue and get_profile_issues now suggest the next call to make, and tool
+  descriptions and instructions are trimmed to the services you have set up.
+  Queue messages name the Usenet rerun call and word single-item pauses
+  correctly. The next release, 2.0.0, will remove the deprecated tool names
+  (stack_health, diagnose, lookup_media, clean_queue and others); they still
+  work in this version.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1831-2026-11-11
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#1840-2026-11-11
 
 dependencies: []
 path: ""
