@@ -7,7 +7,7 @@ name: cross-seed
 tagline: Fully-automatic cross-seeding across your trackers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/icon.png
 # renovate: datasource=docker depName=ghcr.io/cross-seed/cross-seed
-version: "7.0.0-33"
+version: "7.0.0-33-patch.1"
 port: 2468
 description: >-
   cross-seed finds torrents on your other trackers that match what you are
@@ -59,13 +59,7 @@ support: https://github.com/cross-seed/cross-seed/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cross-seed/gallery-1.jpg
 releaseNotes: >-
-  Pre-release 7.0.0-33 adds settings recovery: invalid settings no longer
-  stop the Web UI from starting. A banner explains the problem while searches
-  and injection stay paused, and you can fix the settings in the Web UI and
-  save to resume. No database migration.
-
-
-  Full release notes can be found at https://github.com/cross-seed/cross-seed/releases/tag/v7.0.0-33
+  The cross-seed 7.0.0-33 image was rebuilt upstream; this update pulls the new build, with no change to settings or data.
 dependencies:
   - transmission
 path: ""
