@@ -56,15 +56,15 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: >-
-  Custom memory types, relationship types and retention periods can now be
-  stored in the memory database without a restart, and memory_search can look
-  a memory up by its exact content hash. The dashboard's knowledge graph gains
-  a click-to-focus mode, and browsers no longer keep a stale dashboard after an
-  upgrade. A search no longer erases metadata written while it ran, and the
-  startup check no longer reports torch as missing on this ONNX image.
+  The dashboard's Manage tab gets an Ontology section to add memory types, set
+  retention periods and remove stored entries, also available through a new
+  /api/ontology REST API, and tag management can hide rarely used tags. A recall
+  range like "from January to March" now covers the whole window. Two security
+  fixes: the server status no longer shows host details below admin scope, and
+  MCP prompts refuse tokens restricted to one store.
 
 
-  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.8.0
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.9.0
 dependencies: []
 path: ""
 defaultUsername: mcp
