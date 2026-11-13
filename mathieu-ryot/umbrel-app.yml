@@ -7,7 +7,7 @@ name: Ryot
 tagline: Track the movies, shows, books, games and workouts of your life in one place
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/icon.png
 # renovate: datasource=docker depName=ghcr.io/ignisda/ryot
-version: "10.5.7-patch.1"
+version: "10.5.8"
 port: 8010
 description: >-
   Ryot ("Roll Your Own Tracker") keeps track of everything you watch, read,
@@ -59,7 +59,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-4.jpg
 releaseNotes: >-
-  Updates the bundled PostgreSQL database to 18.7, a bug-fix release with no data migration.
+  Security fix: Ryot now checks ownership of custom exercises and uploaded files, so one
+  user can no longer see or change another user's custom exercises or uploads.
+
+
+  Full release notes can be found at https://github.com/IgnisDa/ryot/releases/tag/v10.5.8
 dependencies: []
 path: ""
 defaultUsername: ""
