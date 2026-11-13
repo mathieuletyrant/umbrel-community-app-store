@@ -7,7 +7,7 @@ name: Scrob
 tagline: Self-hosted tracker for the movies and shows you watch
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/icon.png
 # renovate: datasource=docker depName=bellamy/scrob
-version: "2.38.0"
+version: "2.38.0-patch.1"
 port: 7330
 description: >-
   Scrob is a self-hosted tracker for the movies and TV shows you watch, a
@@ -58,10 +58,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  Adds a native watchlist that every connected service syncs with, plays and watch time on detail pages, a server-wide default episode order, a "follow most recent watch" option for Next Up, resume points pushed to Plex, rating filters and sorting, full most-played pages, and French and Portuguese translations. Database migrations run automatically at start.
-
-
-  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.38.0
+  Updates the bundled PostgreSQL database to 18.7, a bug-fix release with no data migration.
 dependencies: []
 path: ""
 defaultUsername: ""

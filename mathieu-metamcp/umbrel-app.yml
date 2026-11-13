@@ -7,7 +7,7 @@ name: MetaMCP
 tagline: One MCP gateway for all your MCP servers
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/metatool-ai/metamcp
-version: "2.4.22-patch.9"
+version: "2.4.22-patch.10"
 port: 12008
 description: >-
   MetaMCP is a Model Context Protocol (MCP) gateway: it gathers all your MCP
@@ -75,7 +75,7 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-metamcp/gallery-2.jpg
 releaseNotes: >-
-  Updated the nginx status sidecar image.
+  Updates the bundled PostgreSQL database to 18.7, a bug-fix release with no data migration.
 dependencies: []
 path: ""
 defaultUsername: ""
