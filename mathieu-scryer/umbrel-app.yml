@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Searches by TMDB, IMDb or TVDB id no longer return unrelated releases from indexers that pad id lookups with other results. Direct Newznab and Torznab searches without routed categories now send default categories. Disabled built-in indexer plugins can be enabled again, and Russian is available as a metadata language.
+  Releases can now be ranked by preferred and optional audio languages, set per facet, library or title, and each quality profile gets a reorderable Decision order. Library deletion runs as a background job, request-only users can search titles, import warnings can be dismissed while a torrent seeds, and large libraries need far fewer database round trips. On first start a one-time repair clears conflicting title folder records; no files on disk change.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.2
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.3
 dependencies: []
 path: ""
 defaultUsername: ""
