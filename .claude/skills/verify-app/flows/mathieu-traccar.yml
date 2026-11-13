@@ -1,4 +1,4 @@
-verified: 6.17.0 on umbrelOS 2.0.1 (2026-11-06)
+verified: 6.17.0-patch.1 on umbrelOS 2.0.1 (2026-11-13)
 setup:
   - curl -sf -u verify@example.com:Verify-Traccar-1 localhost:8802/api/session || curl -sf -X POST localhost:8802/api/users -H 'content-type:application/json' -d '{"name":"Verify","email":"verify@example.com","password":"Verify-Traccar-1"}'
   - curl -sf -u verify@example.com:Verify-Traccar-1 localhost:8802/api/devices | grep -q 424242 || curl -sf -u verify@example.com:Verify-Traccar-1 -X POST localhost:8802/api/devices -H 'content-type:application/json' -d '{"name":"Verify phone","uniqueId":"424242"}'
