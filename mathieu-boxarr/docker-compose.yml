@@ -7,7 +7,7 @@ services:
       APP_PORT: 8888
 
   server:
-    image: ghcr.io/iongpt/boxarr:2.1.0@sha256:f4e99515090a2dde550a61beaa0caa6f7e2c31ce2b80ffe8a5f6424059317fad
+    image: ghcr.io/iongpt/boxarr:2.1.1@sha256:c313f84b90d3bb326f265ff30da5ed5785b6b0fbb6c59b91a4f13fb33b3d4789
     init: true
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
