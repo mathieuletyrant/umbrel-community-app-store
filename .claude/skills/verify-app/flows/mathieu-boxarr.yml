@@ -1,8 +1,11 @@
-verified: 2.1.0-patch.2 on umbrelOS 2.0.0 (2026-10-09)
+verified: 2.1.1 on umbrelOS 2.0.1 (2026-11-14)
 requires: [radarr]
 egress: true
 vars:
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
+setup:
+  # The setup page lists Radarr's root folders, which media-app-configurator adds a few seconds after Radarr's install.
+  - docker exec radarr_server_1 curl -sf "localhost:7878/api/v3/rootfolder?apikey=$RADARR_API_KEY" | grep -q /downloads/movies
 steps:
   - goto: /
   - see: {text: Welcome to Boxarr!, reload: true}

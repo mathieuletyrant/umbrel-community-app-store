@@ -7,7 +7,7 @@ name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "2.1.0-patch.2"
+version: "2.1.1"
 port: 8891
 description: >-
   Boxarr is an automated box office tracking application that integrates with
@@ -38,16 +38,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-3.jpg
 releaseNotes: >-
-  The app moves from port 8888 to 8891, because InfluxDB from the Umbrel App Store already uses 8888 and the two apps could not be installed together. Update your bookmark if you open it by address.
+  Boxarr 2.1.1 fetches the right Box Office Mojo weekend for every market: France no longer requests the following weekend, and from January 2027 the domestic chart and Friday-start markets no longer run a week behind. "Add to Radarr" no longer rewrites stored weeks and adds the exact film shown. Historical range updates now pick the right weeks across New Year and allow week 53. Weeks already stored for France in 2026 keep their chart until you press Regenerate on them.
 
 
-  This update adds support for the new storage management and configuration options introduced with umbrelOS 2.0, and restores the standard shared Downloads mount path so the app works on every umbrelOS version.
-
-
-  Previous release notes:
-
-
-  Boxarr 2.1 adds full Radarr language vocabulary (~57 languages), weekend gross thresholds, and Hide Ignored Movies setting. Fixes Box Office Mojo column parsing, preserves filter settings on save, and improves setup page stability.
+  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.1.1
 dependencies: []
 path: ""
 defaultUsername: ""
