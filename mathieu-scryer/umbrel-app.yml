@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Releases can now be ranked by preferred and optional audio languages, set per facet, library or title, and each quality profile gets a reorderable Decision order. Library deletion runs as a background job, request-only users can search titles, import warnings can be dismissed while a torrent seeds, and large libraries need far fewer database round trips. On first start a one-time repair clears conflicting title folder records; no files on disk change.
+  One unreadable folder, such as a title on an unplugged drive or a share that is down, no longer blocks imports, renames, scans and deletes of every other title. Search, catalog sorting, history, requests and the calendar are faster thanks to new indexes, built once on first start. NZB and torrent downloads from http:// links try HTTPS first, and failed automatic imports now show in import history.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.3
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.4
 dependencies: []
 path: ""
 defaultUsername: ""
