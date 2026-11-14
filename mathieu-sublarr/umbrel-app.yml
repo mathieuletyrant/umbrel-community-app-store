@@ -45,10 +45,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Adds an opt-in Automatic Repair setting (Settings → Automation) that checks downloaded subtitles against the video's timing, shifts or replaces ones that don't fit, and treats signs-only sidecars as missing. Fixes subtitle search for Gestdown, BetaSeries, Napisy24, OpenSubtitles and Jimaku, and adds a configurable ASS size limit.
+  Fixes a batch of subtitle matching bugs: second-cour anime releases are placed on the right episode, downloads or tracks in the wrong language are no longer saved, and signs-only tracks no longer count as the full subtitle. Large Bluray remuxes now get extracted and translated instead of timing out, song lyrics with group-prefixed styles are no longer translated as dialogue, and the video length is read from more MKV files.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.20.0
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.20.2
 dependencies: []
 path: ""
 defaultUsername: ""
