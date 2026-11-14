@@ -64,9 +64,9 @@ support: https://github.com/bitr8/agregarr-dev/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
 releaseNotes: >-
-  Security fix: turns off the unused Next.js image optimiser. No changes to collections or settings.
+  TVDB lists can now be used as a collection source, and Tracearr can replace Tautulli as the statistics source for watch-based collections and the dashboard. Overlays gain a Resolution preset, an SD icon and series Atmos/HDR10+ badges, and collections get leading-article sort handling, a "count only released movies" option for franchises and a way to exclude lists from Random Lists. Many fixes to overlays, TMDB paging and placeholders; the database updates itself on first start.
 
-  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.12.3
+  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.13.0
 
 dependencies: []
 path: ""
