@@ -1,4 +1,4 @@
-verified: 2.12.3 on umbrelOS 2.0.0 (2026-10-30)
+verified: 2.13.0 on umbrelOS 2.0.1 (2026-11-14)
 setup:
   - docker exec mathieu-agregarr_server_1 sh -c 'for p in /proc/[0-9]*; do [ "$(cat $p/comm 2>/dev/null)" = node ] && grep -Eq "^Uid:[[:space:]]+1000[[:space:]]" $p/status && exit 0; done; exit 1'
 steps:
