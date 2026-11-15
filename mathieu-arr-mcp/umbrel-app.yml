@@ -57,16 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Major release. Deprecated tools are removed: use get_stack_health,
-  diagnose_media, search_media (source "discover"), remove_queue_item,
-  import_download, update_book and delete_indexer instead; remove_queue_item
-  with orphaned now only lists the rows. A config.yaml with an unknown top-level
-  key now opens the repair page instead of starting. The config UI gets a new
-  sidebar, a phone menu and a v2 dashboard that shows before the services
-  answer, service credentials can come from a file or an environment variable,
-  and Lidarr gains webhooks, profile checks and import mapping.
+  The Access page of the config UI is reworked into one consistent layout.
+  retry_download now names SABnzbd's post-processing wait instead of reporting
+  a stuck download, along with smaller follow-up fixes.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#210-2026-11-15
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#220-2026-11-15
 
 dependencies: []
 path: ""
