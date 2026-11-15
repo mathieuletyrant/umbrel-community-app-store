@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.18.0"
+version: "0.19.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,11 +53,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  The logs now carry diagnostics while a film plays, to help work out why
-  the lights don't follow the screen as expected.
+  A WLED strip behind the TV can now replace the Hue area: one color per
+  LED, 60 times per second. There is no setup screen yet: describe the strip
+  under "wled" in lueur.json (see the README), then restart the app.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.18.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.19.0
 dependencies: []
 path: ""
 defaultUsername: ""

@@ -7,7 +7,7 @@ services:
       APP_PORT: 8080
 
   server:
-    image: ghcr.io/mathieuletyrant/lueur:0.18.0@sha256:b729f2816cde9cef4e3bc2e1635cd26478175a7a19eac6c41d6af4e83bb5e8ac
+    image: ghcr.io/mathieuletyrant/lueur:0.19.0@sha256:2901866fb802eb8f17d092f4fde23d8a164aa22e8c8dff8814384ae5c9030d4e
     restart: on-failure
     environment:
       TZ: Etc/UTC
