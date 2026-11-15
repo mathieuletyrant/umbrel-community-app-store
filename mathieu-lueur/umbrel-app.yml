@@ -53,12 +53,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  A WLED strip behind the TV can now replace the Hue area: one color per
-  LED, 60 times per second. There is no setup screen yet: describe the strip
-  under "wled" in lueur.json (see the README), then restart the app.
+  Edges are now tracked more finely, at 24 frames per second, so a light
+  strip follows the picture more closely.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.19.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.20.0
 dependencies: []
 path: ""
 defaultUsername: ""
