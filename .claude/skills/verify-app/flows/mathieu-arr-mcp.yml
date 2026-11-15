@@ -1,4 +1,4 @@
-verified: 1.51.0 on umbrelOS 2.0.0 (2026-11-01)
+verified: 2.1.0 on umbrelOS 2.0.1 (2026-11-15)
 requires: [radarr]
 vars:
   RADARR_API_KEY: docker exec radarr_server_1 sed -n 's:.*<ApiKey>\(.*\)</ApiKey>.*:\1:p' /config/config.xml
@@ -8,7 +8,7 @@ steps:
   - fill: {label: Password, exact: true, value: Verify-ArrMcp-1}
   - fill: {label: Confirm password, value: Verify-ArrMcp-1}
   - click: {role: button, name: Claim this instance}
-  - click: {role: link, name: Configuration}
+  - click: {role: link, name: Services}
   - click: {role: button, name: Add a service}
   - select: {css: "[id='add.type']", value: radarr}
   - fill: {css: "[id='add.url']", value: "http://radarr_server_1:7878"}
