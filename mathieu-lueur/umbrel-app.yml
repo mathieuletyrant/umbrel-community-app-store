@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.20.0"
+version: "0.21.0"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,15 +53,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Films are now analyzed at 24 frames per second, with the edges of the
-  picture in fine cells, so each LED of a WLED strip follows the part of the
-  screen in front of it. Colorful details also count more than grey ones,
-  for Hue lights too. Existing analyses keep playing while the library is
-  analyzed again in the background (about 40 MB per film); a film you play
-  goes first.
+  The WLED strip is now set up from Settings → Lights → WLED strip: lueur
+  finds the controller on the network, you say where LED 0 is, which way
+  the strip runs and how many LEDs are behind each side, and a drawing of
+  the strip shows the result, with a rainbow test and a LED that blinks
+  when you click it. No more editing lueur.json by hand.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.20.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.21.0
 dependencies: []
 path: ""
 defaultUsername: ""
