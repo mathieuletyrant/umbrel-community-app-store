@@ -7,7 +7,7 @@ name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "2.1.2"
+version: "2.2.0"
 port: 8891
 description: >-
   Boxarr is an automated box office tracking application that integrates with
@@ -38,10 +38,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-3.jpg
 releaseNotes: >-
-  Boxarr 2.1.2 is a security and bug-fix release. Other websites can no longer read your Radarr API key or change Boxarr: the setup page no longer shows the stored key (leave it blank to keep it) and cross-site requests are refused. New sequels and remakes are no longer matched to an older film you already have, a slow or unreachable Radarr no longer freezes Boxarr, and saving the setup page keeps the settings it does not show. Auto-add now honours the "search for movie" setting, and films with words like "Pictures" or "Studios" in the title stay on the chart.
+  Boxarr 2.2.0 can follow several box office regions at once: pick up to 5 Box Office Mojo regions in the setup page, and the weekly page gets one tab per region with a combined list. Saved Radarr and schedule settings now apply without a restart, "Add to Radarr" and auto-add always pick the exact film that charted (no more mix-ups between films sharing a title), and the auto-add limit only counts films actually added. The weekly job now runs in its configured timezone, America/New_York by default (Wednesday 23:00); press Update Week on older weeks to get exact-film matching for them.
 
 
-  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.1.2
+  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.2.0
 dependencies: []
 path: ""
 defaultUsername: ""
