@@ -57,9 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  A desktop-only fix: on Windows, "Open in browser" and links to V3X now open through the standard Windows call, so Windows Defender no longer quarantines D3X. Nothing changes for the Umbrel app, which runs the same server as before.
+  The cross-seed list can now be sorted by name or size by clicking the "Release" or "Size" column header (click again to reverse, a third time to go back to the tab's order); the choice is remembered. In a batch, a release already on V3X now goes to "Already present" even when its team requires permission to reupload, and nothing is hashed or sent for it.
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.58
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.59
 dependencies: []
 path: ""
 defaultUsername: ""
