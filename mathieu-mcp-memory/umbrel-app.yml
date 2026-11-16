@@ -56,15 +56,15 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: >-
-  The dashboard's Manage tab now shows Bulk Operations, Tags and Ontology as
-  separate sub-tabs, and its connection badge moves into a status capsule in the
-  header. Filtering by memory type alone works again. Duplicate detection can now
-  supersede an updated fact instead of dropping it (opt-in). A security fix makes
-  the OAuth authorize page show who is asking and stops open client registration
-  from granting the admin scope.
+  Security fix: with automatic extraction on, a client allowed to write to one
+  memory store could overwrite or flag memories in the default store; every
+  store write now stays in its own store. The dashboard's Quality tab can pick
+  the openai-compatible provider (Ollama, vLLM, LiteLLM…), and hybrid sync
+  progress shows up again in the status capsule. "Day before yesterday" in time
+  searches now picks the right day.
 
 
-  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.10.0
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.11.0
 dependencies: []
 path: ""
 defaultUsername: mcp
