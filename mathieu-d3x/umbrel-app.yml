@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.59"
+version: "1.1.60"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,9 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  The cross-seed list can now be sorted by name or size by clicking the "Release" or "Size" column header (click again to reverse, a third time to go back to the tab's order); the choice is remembered. In a batch, a release already on V3X now goes to "Already present" even when its team requires permission to reupload, and nothing is hashed or sent for it.
+  Folders whose name starts with a dot (such as .cross-seed) now show up in the batch folder browser and can be opened and picked, since they hold releases. A release whose own name starts with a dot is still skipped.
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.59
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.60
 dependencies: []
 path: ""
 defaultUsername: ""
