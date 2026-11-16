@@ -7,7 +7,7 @@ name: Weaver
 tagline: Usenet downloader with built-in repair and extraction
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/weaver
-version: "0.16.15"
+version: "0.16.16"
 port: 9390
 description: >-
   Weaver is a self-hosted Usenet downloader written in Rust. Downloading,
@@ -47,10 +47,10 @@ support: https://github.com/scryer-media/weaver/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-weaver/gallery-1.jpg
 releaseNotes: >-
-  Large queues use far less memory and restart faster, the yEnc decoder and encoder are faster on every CPU, and Weaver gives memory back when idle. History search now matches the full release name while ignoring case, accents and separators, and NZBs that SABnzbd and NZBGet accept are no longer refused. This release also hardens archive, repair and queue handling against crafted posts, lifts the ZIP directory size limits, and lets PAR2 win when it disagrees with PAR3. The database is migrated automatically on first start.
+  A full disk now holds a job instead of failing it: the job waits for space and goes on by itself from its last checkpoint once room is free. Each disk gets its own writer, so a slow disk no longer slows downloads to a fast one. You can now archive a finished job, removing its files while keeping its history entry. Old RAR 3.0–3.3 sets now unpack, and archive, repair and ingest are further hardened against crafted posts.
 
 
-  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.15
+  Full release notes can be found at https://github.com/scryer-media/weaver/releases/tag/weaver-v0.16.16
 dependencies: []
 path: ""
 defaultUsername: "admin"
