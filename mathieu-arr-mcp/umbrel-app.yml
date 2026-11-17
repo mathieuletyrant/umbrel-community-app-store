@@ -57,11 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  One bug fix: the release tools now keep long release identifiers intact
-  instead of shortening them, so a release found through arr-mcp can still be
-  picked by its id afterwards.
+  Playback history is now kept in arr-mcp's own local store, so every play it
+  has seen stays available even after the media server's own history is
+  cleared or the server is replaced.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#222-2026-11-17
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#230-2026-11-17
 
 dependencies: []
 path: ""
