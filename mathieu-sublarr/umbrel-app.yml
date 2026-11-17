@@ -28,7 +28,14 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  After launching, open Sublarr and connect your Sonarr
+  On first launch, Sublarr asks for a password and then a one-time setup code
+  (the request comes through Umbrel's proxy, which Sublarr treats as outside
+  the local network). Find the code in the app's logs (right-click Sublarr →
+  Troubleshoot), on the line "Sublarr one-time setup code: …"; it changes at
+  every restart until the setup is done.
+
+
+  Then connect your Sonarr
   (`http://sonarr_server_1:8989`) / Radarr (`http://radarr_server_1:7878`) with
   their API keys, set your language profiles (e.g. French), and optionally a
   translation backend. Media is mounted at /downloads, matching the paths the
