@@ -38,10 +38,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-3.jpg
 releaseNotes: >-
-  Auto-add now skips films on Radarr's exclusion list (needs Radarr 5.9 or later), so a film you deleted with "Add exclusion" is no longer added back; Add to Radarr still adds it by hand. The setup page now shows the Test Connection result, or why it failed. Title matching no longer cuts hyphenated titles ("Spider-Man" matched as "Spider") or links a charted film to another film of its franchise. The footer year now follows the date.
+  Boxarr can now ask for its own login, chosen in the new Settings → Security section: off (as before), its own username and password, or an external sign-in proxy. With sign-in on, scripts use an API key from the same page, and the widgets can require a token. After the upgrade sign-in stays off and a banner asks you to choose; on Umbrel the Umbrel login still guards Boxarr either way.
 
 
-  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.3.0
+  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.4.0
 dependencies: []
 path: ""
 defaultUsername: ""
