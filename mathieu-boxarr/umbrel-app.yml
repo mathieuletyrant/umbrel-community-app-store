@@ -7,7 +7,7 @@ name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "2.2.1"
+version: "2.3.0"
 port: 8891
 description: >-
   Boxarr is an automated box office tracking application that integrates with
@@ -38,10 +38,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-3.jpg
 releaseNotes: >-
-  Boxarr 2.2.1 is a bug-fix release. The setup page now shows the Test Connection result ("Connected successfully!" or the reason it failed), and Save stays disabled after a network failure until a test succeeds. Hyphenated titles such as "Spider-Man" or "X-Men" no longer match unrelated films, and a charted film with an IMDb id is no longer linked to another film of its franchise in Radarr ("Avatar: Fire and Ash" to "Avatar").
+  Auto-add now skips films on Radarr's exclusion list (needs Radarr 5.9 or later), so a film you deleted with "Add exclusion" is no longer added back; Add to Radarr still adds it by hand. The setup page now shows the Test Connection result, or why it failed. Title matching no longer cuts hyphenated titles ("Spider-Man" matched as "Spider") or links a charted film to another film of its franchise. The footer year now follows the date.
 
 
-  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.2.1
+  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
