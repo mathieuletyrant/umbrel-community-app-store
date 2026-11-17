@@ -1,4 +1,4 @@
-verified: 2.3.0 on umbrelOS 2.0.1 (2026-11-17)
+verified: 2.4.0 on umbrelOS 2.0.1 (2026-11-17)
 requires: [radarr]
 egress: true
 vars:
