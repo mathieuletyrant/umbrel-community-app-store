@@ -7,7 +7,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.20.1"
+version: "1.21.0"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -28,7 +28,14 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  After launching, open Sublarr and connect your Sonarr
+  On first launch, Sublarr asks for a password and then a one-time setup code
+  (the request comes through Umbrel's proxy, which Sublarr treats as outside
+  the local network). Find the code in the app's logs (right-click Sublarr →
+  Troubleshoot), on the line "Sublarr one-time setup code: …"; it changes at
+  every restart until the setup is done.
+
+
+  Then connect your Sonarr
   (`http://sonarr_server_1:8989`) / Radarr (`http://radarr_server_1:7878`) with
   their API keys, set your language profiles (e.g. French), and optionally a
   translation backend. Media is mounted at /downloads, matching the paths the
@@ -45,10 +52,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Adds an opt-in Automatic Repair setting (Settings → Automation) that checks downloaded subtitles against the video's timing, shifts or replaces ones that don't fit, and treats signs-only sidecars as missing. Fixes subtitle search for Gestdown, BetaSeries, Napisy24, OpenSubtitles and Jimaku, and adds a configurable ASS size limit.
+  Adds bundled anime glossary suggestions and per-language glossary entries, and long lists now scroll in their own box. Translations that merely echo the source text are rejected and retried, only approved glossary entries reach DeepL and Google, and series glossaries are no longer cut at 30 entries.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.20.0
+  Also fixes second-cour episode numbering, extraction timeouts on large remuxes, wrong-language downloads, signs-only tracks saved as full subtitles, and the setup token being hidden in the container log.
+
+
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.21.0
 dependencies: []
 path: ""
 defaultUsername: ""
