@@ -7,7 +7,7 @@ name: Boxarr
 tagline: Weekly box office tracking that syncs with Radarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/iongpt/boxarr
-version: "2.3.0"
+version: "2.4.0"
 port: 8891
 description: >-
   Boxarr is an automated box office tracking application that integrates with
