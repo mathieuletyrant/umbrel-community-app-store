@@ -50,13 +50,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-shredarr/gallery-4.jpg
 releaseNotes: >-
-  A connection must now stay down for two minutes (SHREDARR_HEALTH_GRACE) before
-  a "Connection FAILED" notification is sent, so a short restart of qBittorrent
-  or Sonarr no longer sends a failed/restored pair. An unreachable http
-  qBittorrent WebUI is no longer reported as an untrusted certificate.
+  New opt-in setting under Settings → Cleanup behavior: "Clean up leftovers
+  automatically". When Sonarr or Radarr replace a file with an upgrade, the old
+  torrent is queued for cleanup after an hour and removed once its seeding rule
+  is met. Undo now works on leftovers, and the image is built on Python 3.15.
 
 
-  Full release notes can be found at https://github.com/jimbos-slop-shop/shredarr/releases/tag/v2.3.3
+  Full release notes can be found at https://github.com/jimbos-slop-shop/shredarr/releases/tag/v2.4.0
 dependencies: []
 path: ""
 defaultUsername: ""
