@@ -64,9 +64,9 @@ support: https://github.com/bitr8/agregarr-dev/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
 releaseNotes: >-
-  A fix release: stopping overlays on a running library now stops it, Color Scale colours tiles from the Rotten Tomatoes scores, and yes/no overlay conditions only offer equals and not equals. Collections fixes: Cycle Lists starts on the first list, dynamic titles only change when the collection updates, Library Essentials starts fully ticked and the Days Ahead placeholder shows 90. The TMDB poster cache toggle is gone from General settings.
+  A fix release. Overlay run errors and last results stay on the dashboard. Collections: Max Items now counts placeholders on every list source and Coming Soon keeps Max Items and Trakt ranking through full and Quick Sync, TMDB sources page through every result, TMDB Custom Advanced Filters match any status, type or certification and skip empty groups, and a TMDB rating filter with no country uses US. Removing a custom wallpaper or theme now removes it from Plex, and unticking Always Active no longer hides the collection every day.
 
-  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.13.1
+  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.13.2
 
 dependencies: []
 path: ""
