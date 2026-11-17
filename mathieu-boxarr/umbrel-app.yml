@@ -38,10 +38,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-boxarr/gallery-3.jpg
 releaseNotes: >-
-  Boxarr 2.2.0 can follow several box office regions at once: pick up to 5 Box Office Mojo regions in the setup page, and the weekly page gets one tab per region with a combined list. Saved Radarr and schedule settings now apply without a restart, "Add to Radarr" and auto-add always pick the exact film that charted (no more mix-ups between films sharing a title), and the auto-add limit only counts films actually added. The weekly job now runs in its configured timezone, America/New_York by default (Wednesday 23:00); press Update Week on older weeks to get exact-film matching for them.
+  Auto-add now skips films on Radarr's exclusion list (needs Radarr 5.9 or later), so a film you deleted with "Add exclusion" is no longer added back; Add to Radarr still adds it by hand. The setup page now shows the Test Connection result, or why it failed. Title matching no longer cuts hyphenated titles ("Spider-Man" matched as "Spider") or links a charted film to another film of its franchise. The footer year now follows the date.
 
 
-  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.2.0
+  Full release notes can be found at https://github.com/iongpt/boxarr/releases/tag/v2.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
