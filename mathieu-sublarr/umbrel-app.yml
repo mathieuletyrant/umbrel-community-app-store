@@ -45,10 +45,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Adds an opt-in Automatic Repair setting (Settings → Automation) that checks downloaded subtitles against the video's timing, shifts or replaces ones that don't fit, and treats signs-only sidecars as missing. Fixes subtitle search for Gestdown, BetaSeries, Napisy24, OpenSubtitles and Jimaku, and adds a configurable ASS size limit.
+  Adds bundled anime glossary suggestions and per-language glossary entries, and long lists now scroll in their own box. Translations that merely echo the source text are rejected and retried, only approved glossary entries reach DeepL and Google, and series glossaries are no longer cut at 30 entries.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.20.0
+  Also fixes second-cour episode numbering, extraction timeouts on large remuxes, wrong-language downloads, signs-only tracks saved as full subtitles, and the setup token being hidden in the container log.
+
+
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.21.0
 dependencies: []
 path: ""
 defaultUsername: ""
