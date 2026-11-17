@@ -7,7 +7,7 @@ name: lueur
 tagline: Your Philips Hue lights follow the films you play on Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/lueur
-version: "0.23.0"
+version: "0.23.1"
 port: 5878
 description: >-
   lueur turns your Hue lights into an ambilight for Jellyfin, without a Hue
@@ -53,18 +53,16 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lueur/gallery-3.jpg
 releaseNotes: >-
-  Cuts between two shots now fade on their own (Look → Cut fade), so
-  Smoothing can stay low and the lights follow the picture closely without
-  snapping at every cut. Flashes (explosions, lightning, camera flashes) are
-  toned down (Look → Flash guard), and very dark colors can fade out instead
-  of showing dim and muddy (Look → Black threshold).
+  HDR films (HDR10, and Dolby Vision with an HDR10 base) now light the room
+  with their real colors. They used to be read as if they were SDR, which
+  made them washed out and dim: a fire scene came out pale beige instead of
+  orange. lueur now tone-maps them during analysis.
 
-  The lights also stay steadier with an Apple TV, whose position reports
-  swing a little: lueur now follows their average instead of each one. And
-  starting a film no longer freezes the lights for a moment.
+  On the next scan, only HDR films and episodes are analyzed again. SDR
+  tracks are kept.
 
   Full release notes can be found at
-  https://github.com/mathieuletyrant/lueur/releases/tag/v0.23.0
+  https://github.com/mathieuletyrant/lueur/releases/tag/v0.23.1
 dependencies: []
 path: ""
 defaultUsername: ""
