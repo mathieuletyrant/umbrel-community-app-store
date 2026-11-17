@@ -57,11 +57,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  The Access page of the config UI is reworked into one consistent layout.
-  retry_download now names SABnzbd's post-processing wait instead of reporting
-  a stuck download, along with smaller follow-up fixes.
+  Two bug fixes. A stop request that arrives while arr-mcp is still starting up is
+  no longer lost, so the container shuts down cleanly. The queue tools now read
+  SABnzbd's wait state from its switch and history, and NZBGet's post-processing
+  after a retry, instead of reporting those downloads as stuck.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#220-2026-11-15
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#221-2026-11-16
 
 dependencies: []
 path: ""
