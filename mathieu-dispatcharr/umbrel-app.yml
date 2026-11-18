@@ -7,7 +7,7 @@ name: Dispatcharr
 tagline: Manage IPTV playlists and guides, then stream them to Plex or Jellyfin
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/icon.png
 # renovate: datasource=docker depName=ghcr.io/dispatcharr/dispatcharr
-version: "0.34.0"
+version: "0.34.1"
 port: 9191
 description: >-
   Dispatcharr is an IPTV and stream manager in the spirit of the *arr apps. It
@@ -54,13 +54,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-dispatcharr/gallery-4.jpg
 releaseNotes: >-
-  Adds settings for proxy connection attempts and retry timeout, a separate HDHR
-  output format, every probed audio track with its language, an ISO 8601 date
-  format, and much richer plugins (approvals, background tasks, detail pages).
-  Provider credentials are now masked in the logs and Django gets security fixes.
-  Fixes fMP4 and DVR remux on audio changes, failover, XMLTV and VOD refresh issues.
+  Fixes plugins that open network sockets with a context manager, and keeps plugin
+  data directories stable when a plugin repository removes or replaces a plugin.
+  New plugin file uploads are now stored in the plugin's persistent data folder so
+  they survive plugin updates; files uploaded before this version may need to be
+  uploaded again after a plugin update.
 
-  Full release notes can be found at https://github.com/Dispatcharr/Dispatcharr/releases/tag/v0.34.0
+  Full release notes can be found at https://github.com/Dispatcharr/Dispatcharr/releases/tag/v0.34.1
 dependencies: []
 path: ""
 defaultUsername: ""
