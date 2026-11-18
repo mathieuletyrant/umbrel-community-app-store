@@ -7,7 +7,7 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr
-version: "3.1.7"
+version: "3.2.0"
 port: 3009
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
@@ -45,11 +45,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  Episodes now show their show's poster in notifications and on their own page
-  instead of a cropped still. Posters also load on Library, Browse, media pages
-  and Your requests when Tracearr runs under a base path.
+  Tracearr now monitors tofa servers (0.13.3 or newer), and a fresh install walks
+  through signing in, connecting a server and importing history. History imports
+  start right away and retry on their own, Jellyfin shows Direct Play, Direct Stream
+  or Transcode correctly, and Live TV shows the program on air. Request ids are
+  stored differently from this release on, so going back to an older version needs
+  a backup made before upgrading.
 
-  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.1.7
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.2.0
 dependencies: []
 path: ""
 defaultUsername: ""
