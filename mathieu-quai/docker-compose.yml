@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/api/*"
 
   server:
-    image: ghcr.io/mathieuletyrant/quai:0.2.2@sha256:dd4e200107147f98acbba54e34a66516dbe9854d5d6704fa080813e5c6a514ca
+    image: ghcr.io/mathieuletyrant/quai:0.3.0@sha256:5a30327fa7472d346ea4552a17963dd65670888f8a909f20271728cb386c1977
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -17,6 +17,5 @@ services:
       QUAI_SONARR_URL: http://sonarr_server_1:8989
       QUAI_JELLYFIN_URL: http://jellyfin_server_1:8096
       QUAI_QBITTORRENT_USERNAME: admin
-      QUAI_APNS_KEY_FILE: /data/AuthKey.p8
     volumes:
       - ${APP_DATA_DIR}/data/quai:/data

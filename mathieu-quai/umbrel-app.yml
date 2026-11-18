@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.2.2"
+version: "0.3.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -30,10 +30,10 @@ description: >-
   your qBittorrent app with its password. Quai adds its own webhook to Radarr
   and Sonarr on start.
 
-  2. For the pushes, put your Apple push key in the app's data folder as
-  AuthKey.p8 and fill in its key id and your team id in the settings.
+  2. Open Quai and upload your Apple push key (.p8, from developer.apple.com →
+  Keys) with its key id and your team id. It is stored encrypted.
 
-  3. Open Quai, then iPhones → Show a QR code, and scan it with the iPhone.
+  3. Still in Quai, show a QR code and scan it with the iPhone.
 
 
   The console is behind your Umbrel login; the iPhone app talks to Quai's API
@@ -46,10 +46,10 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  The iPhone app's identifier is now com.mathieuletyrant.quai, and the pushes
-  target it.
+  The Apple push key is now set in Quai's console, stored encrypted, and used
+  at once: the key id and team id left this app's settings in umbrelOS.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.2.2
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -79,14 +79,6 @@ environment:
     services:
       - server
     note: Your qBittorrent Web UI password (for qBittorrent VPN, the default password shown in its settings in umbrelOS).
-  - name: QUAI_APNS_KEY_ID
-    services:
-      - server
-    note: The key id of your Apple push key (developer.apple.com → Keys). The key itself goes in the app's data folder as AuthKey.p8.
-  - name: QUAI_APNS_TEAM_ID
-    services:
-      - server
-    note: Your Apple developer team id.
   - name: QUAI_PUBLIC_URL
     services:
       - server

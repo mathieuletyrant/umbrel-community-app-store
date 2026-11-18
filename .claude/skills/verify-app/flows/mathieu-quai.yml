@@ -1,4 +1,4 @@
-verified: 0.2.2 on umbrelOS 2.0.1 (2026-11-18)
+verified: 0.3.0 on umbrelOS 2.0.1 (2026-11-18)
 logs:
   server: "Listening on"
 steps:
@@ -6,6 +6,7 @@ steps:
   - http: {path: /api/activities, anonymous: true, status: 401}
   - goto: /
   - see: Pair an iPhone
+  - see: "Not set: nothing is pushed"
   - click: {role: button, name: Show a QR code}
   - see: Expires in
   - shot: pairing
