@@ -1,0 +1,6 @@
+verified: 0.1.0 on umbrelOS 2.0.1 (2026-11-18)
+steps:
+  - http: {path: /api/health, anonymous: true, status: 200, contains: '"status":"ok"'}
+  - goto: /
+  - see: Quai
+  - shot: console

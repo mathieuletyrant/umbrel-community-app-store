@@ -1,0 +1,46 @@
+manifestVersion: 1
+id: mathieu-quai
+storage:
+  dataRoot: data
+category: media
+name: Quai
+tagline: Your media stack, live on your iPhone
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
+# renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
+version: "0.1.0"
+port: 3078
+description: >-
+  Quai follows every movie or series from the request to "ready to watch" and
+  shows it on your iPhone's Lock Screen and in the Dynamic Island, with the
+  app closed.
+
+
+  It watches Radarr, Sonarr, Prowlarr, Bazarr, qBittorrent, Seerr and Jellyfin
+  over your Umbrel's network and pushes Live Activities to the iPhones you
+  pair: a download from search to import, what plays on Jellyfin, today's
+  releases, and a service that stops answering. Nothing leaves the Umbrel but
+  the pushes to Apple.
+
+
+  ⚠️ Early version: this release ships the server and its web console. The
+  iPhone app and the Live Activities come in the next releases.
+
+
+  The console is behind your Umbrel login; the iPhone app talks to Quai's API
+  directly.
+developer: Mathieu Le Tyrant
+website: https://github.com/mathieuletyrant/quai-app
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/quai-app
+repo: https://github.com/mathieuletyrant/quai-app
+support: https://github.com/mathieuletyrant/quai-app/issues
+gallery: []
+releaseNotes: >-
+  First release: the Quai server and its web console.
+
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.1.0
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
