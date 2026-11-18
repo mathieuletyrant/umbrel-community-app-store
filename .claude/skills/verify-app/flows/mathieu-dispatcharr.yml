@@ -1,4 +1,4 @@
-verified: 0.32.0 on umbrelOS 2.0.0 (2026-10-07)
+verified: 0.34.1 on umbrelOS 2.0.1 (2026-11-18)
 steps:
   - goto: /
   - see: Create your Super User Account
