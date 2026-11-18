@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.2.1"
+version: "0.2.2"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -46,11 +46,10 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Download Live Activity: a movie added in Radarr or Seerr is followed from
-  the search to "ready to watch" and pushed to the paired iPhones. The console
-  pairs iPhones with a QR code.
+  The iPhone app's identifier is now com.mathieuletyrant.quai, and the pushes
+  target it.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.2.1
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.2.2
 dependencies: []
 path: ""
 defaultUsername: ""
