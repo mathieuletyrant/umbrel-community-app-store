@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.4.0"
+version: "0.5.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -46,14 +46,17 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Flows: build your own Live Activities in Quai's console (Flows page), with
-  built-in ones for downloads, Jellyfin playback and server incidents. Jellyfin
-  playback shows a live timeline with Play/Pause and Stop buttons on the Lock
-  Screen. Each iPhone picks which flows and steps it shows, with a test button.
-  Update the iPhone app from TestFlight too: older builds don't understand the
-  new activities.
+  A redesigned console: each flow reads top to bottom, with what it follows,
+  its steps and the services they come from, and how it ends. Clicking a block
+  edits it beside a live Lock Screen preview, which can also show a playback
+  paused. Tests play on the iPhones you pick.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.4.0
+
+  Fixes: pausing from the TV remote now reaches the iPhone, and a Live Activity
+  you swipe away comes back at its next change (pause, resume, next step).
+  Update the iPhone app from TestFlight too.
+
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.5.0
 dependencies: []
 path: ""
 defaultUsername: ""
