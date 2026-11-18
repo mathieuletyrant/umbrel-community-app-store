@@ -1,4 +1,4 @@
-verified: 3.2.0 on umbrelOS 2.0.1 (2026-11-18)
+verified: 3.2.1 on umbrelOS 2.0.1 (2026-11-18)
 logs:
   server: Tuning PostgreSQL for 2048MB \(cgroup
 steps:
@@ -16,5 +16,5 @@ steps:
   - see: Connect your Jellyfin server
   - click: {role: button, name: Skip}
   - see: No servers connected
-  - see: supervised-v3.2.0
+  - see: supervised-v3.2.1
   - shot: dashboard
