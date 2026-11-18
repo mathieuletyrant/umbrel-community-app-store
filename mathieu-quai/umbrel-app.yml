@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.3.4"
+version: "0.4.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -46,10 +46,14 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Download progress now updates on the Lock Screen while the iPhone is locked,
-  instead of catching up when the app opens. Each push is logged.
+  Flows: build your own Live Activities in Quai's console (Flows page), with
+  built-in ones for downloads, Jellyfin playback and server incidents. Jellyfin
+  playback shows a live timeline with Play/Pause and Stop buttons on the Lock
+  Screen. Each iPhone picks which flows and steps it shows, with a test button.
+  Update the iPhone app from TestFlight too: older builds don't understand the
+  new activities.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.3.4
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.4.0
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -67,7 +71,7 @@ environment:
   - name: QUAI_JELLYFIN_API_KEY
     services:
       - server
-    note: A Jellyfin API key, from Dashboard → API Keys, to know when a title is ready.
+    note: A Jellyfin API key, from Dashboard → API Keys, to know when a title is ready and to follow and control what plays.
   - name: QUAI_QBITTORRENT_URL
     services:
       - server
