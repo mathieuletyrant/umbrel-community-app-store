@@ -46,10 +46,11 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  The Apple push key is now set in Quai's console, stored encrypted, and used
-  at once: the key id and team id left this app's settings in umbrelOS.
+  Live Activities that were running now keep going when Quai restarts, instead
+  of being dropped. The iPhone app also gets its icon and is now iPhone-only in
+  portrait.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.3.0
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.3.3
 dependencies: []
 path: ""
 defaultUsername: ""
