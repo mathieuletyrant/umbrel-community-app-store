@@ -19,6 +19,7 @@ Companions for Radarr and Sonarr, torrents behind a VPN, watch trackers, live TV
 **🎬 Around Radarr and Sonarr**
 
 - 🪢 [**arrglue**](mathieu-arrglue): finds every *arr app on the Umbrel, checks their links, paths and hardlinks, then creates or repairs the links (plan / apply) · *made here*
+- 📲 [**Quai**](mathieu-quai): your *arr stack live on your iPhone, as Live Activities · *made here*
 - 🎚️ [**Profilarr**](mathieu-profilarr): quality profiles and custom formats from curated TRaSH-style databases, synced to every *arr
 - 🧽 [**Cleanuparr**](mathieu-cleanuparr): removes stalled, failed and orphaned downloads from the queues, then searches again
 - 🔎 [**NeutArr**](mathieu-neutarr): searches for missing and below-cutoff items a few at a time (the maintained Huntarr fork)
