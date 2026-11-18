@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.1.0"
+version: "0.2.1"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -22,12 +22,22 @@ description: >-
   the pushes to Apple.
 
 
-  ⚠️ Early version: this release ships the server and its web console. The
-  iPhone app and the Live Activities come in the next releases.
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. In this app's settings in umbrelOS, paste the API keys of Radarr and
+  Sonarr (Settings → General) and Jellyfin (Dashboard → API Keys), and pick
+  your qBittorrent app with its password. Quai adds its own webhook to Radarr
+  and Sonarr on start.
+
+  2. For the pushes, put your Apple push key in the app's data folder as
+  AuthKey.p8 and fill in its key id and your team id in the settings.
+
+  3. Open Quai, then iPhones → Show a QR code, and scan it with the iPhone.
 
 
   The console is behind your Umbrel login; the iPhone app talks to Quai's API
-  directly.
+  directly. ⚠️ Early version: the iPhone app isn't on the App Store yet.
 developer: Mathieu Le Tyrant
 website: https://github.com/mathieuletyrant/quai-app
 submitter: Mathieu Le Tyrant
@@ -36,11 +46,49 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  First release: the Quai server and its web console.
+  Download Live Activity: a movie added in Radarr or Seerr is followed from
+  the search to "ready to watch" and pushed to the paired iPhones. The console
+  pairs iPhones with a QR code.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.1.0
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.2.1
 dependencies: []
 path: ""
 defaultUsername: ""
 defaultPassword: ""
 permissions: []
+environment:
+  - name: QUAI_RADARR_API_KEY
+    services:
+      - server
+    note: Radarr's API key, from Settings → General. Leave empty to skip Radarr.
+  - name: QUAI_SONARR_API_KEY
+    services:
+      - server
+    note: Sonarr's API key, from Settings → General. Leave empty to skip Sonarr.
+  - name: QUAI_JELLYFIN_API_KEY
+    services:
+      - server
+    note: A Jellyfin API key, from Dashboard → API Keys, to know when a title is ready.
+  - name: QUAI_QBITTORRENT_URL
+    services:
+      - server
+    options:
+      - http://qbittorrent_server_1:8080
+      - http://mathieu-qbittorrent-vpn_gluetun_1:8080
+    note: Pick your qBittorrent app, or qBittorrent VPN, to follow download progress.
+  - name: QUAI_QBITTORRENT_PASSWORD
+    services:
+      - server
+    note: Your qBittorrent Web UI password (for qBittorrent VPN, the default password shown in its settings in umbrelOS).
+  - name: QUAI_APNS_KEY_ID
+    services:
+      - server
+    note: The key id of your Apple push key (developer.apple.com → Keys). The key itself goes in the app's data folder as AuthKey.p8.
+  - name: QUAI_APNS_TEAM_ID
+    services:
+      - server
+    note: Your Apple developer team id.
+  - name: QUAI_PUBLIC_URL
+    services:
+      - server
+    note: Optional. Quai's address from outside (behind Cloudflare Access, say), added to the pairing QR code.
