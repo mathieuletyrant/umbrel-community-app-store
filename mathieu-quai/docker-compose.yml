@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/api/*"
 
   server:
-    image: ghcr.io/mathieuletyrant/quai:0.2.1@sha256:f8cf0882002f00f92cd98bcc7c5f2751adfb3a8aafe3291f3fa17f885df85c66
+    image: ghcr.io/mathieuletyrant/quai:0.2.2@sha256:dd4e200107147f98acbba54e34a66516dbe9854d5d6704fa080813e5c6a514ca
     restart: on-failure
     environment:
       TZ: Etc/UTC
