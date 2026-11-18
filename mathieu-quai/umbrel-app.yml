@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.3.0"
+version: "0.3.3"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -46,10 +46,12 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  The Apple push key is now set in Quai's console, stored encrypted, and used
-  at once: the key id and team id left this app's settings in umbrelOS.
+  Download progress now works with qBittorrent 5, which renamed its session
+  cookie. A wrong qBittorrent password is reported as such, and failed logins
+  slow down so qBittorrent doesn't ban Quai. Running activities now survive
+  an update or a restart instead of freezing on the iPhone.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.3.0
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.3.3
 dependencies: []
 path: ""
 defaultUsername: ""
