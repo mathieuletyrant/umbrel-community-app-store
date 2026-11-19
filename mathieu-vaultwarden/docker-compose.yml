@@ -47,8 +47,16 @@ services:
         provider=Other
         case "$$BACKUP_S3_ENDPOINT" in *r2.cloudflarestorage.com*) provider=Cloudflare ;; esac
         export RCLONE_CONFIG=/tmp/rclone.conf
-        printf '[Backup]\ntype = s3\nprovider = %s\naccess_key_id = %s\nsecret_access_key = %s\nendpoint = %s\nregion = auto\nno_check_bucket = true\n' \
-          "$$provider" "$$BACKUP_S3_ACCESS_KEY_ID" "$$BACKUP_S3_SECRET_ACCESS_KEY" "$$BACKUP_S3_ENDPOINT" > "$$RCLONE_CONFIG"
+        {
+          echo "[Backup]"
+          echo "type = s3"
+          echo "provider = $$provider"
+          echo "access_key_id = $$BACKUP_S3_ACCESS_KEY_ID"
+          echo "secret_access_key = $$BACKUP_S3_SECRET_ACCESS_KEY"
+          echo "endpoint = $$BACKUP_S3_ENDPOINT"
+          echo "region = auto"
+          echo "no_check_bucket = true"
+        } > "$$RCLONE_CONFIG"
         export RCLONE_REMOTE_DIR="$$BACKUP_S3_BUCKET" ZIP_PASSWORD="$$BACKUP_PASSWORD"
         exec /app/entrypoint.sh
     volumes:
