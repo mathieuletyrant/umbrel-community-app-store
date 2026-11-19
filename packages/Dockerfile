@@ -5,7 +5,6 @@ WORKDIR /app
 COPY package.json bun.lock ./
 COPY core/package.json core/
 COPY widgets/package.json widgets/
-COPY vitals/package.json vitals/
 RUN bun install --frozen-lockfile --production
 COPY core/src core/src
 COPY ${PACKAGE}/src ${PACKAGE}/src

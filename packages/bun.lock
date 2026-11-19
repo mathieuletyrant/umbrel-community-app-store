@@ -12,13 +12,6 @@
     "core": {
       "name": "@mathieu/core",
     },
-    "vitals": {
-      "name": "@mathieu/vitals",
-      "version": "0.2.4",
-      "dependencies": {
-        "@mathieu/core": "workspace:*",
-      },
-    },
     "widgets": {
       "name": "@mathieu/widgets",
       "version": "0.5.0",
@@ -29,8 +22,6 @@
   },
   "packages": {
     "@mathieu/core": ["@mathieu/core@workspace:core"],
-
-    "@mathieu/vitals": ["@mathieu/vitals@workspace:vitals"],
 
     "@mathieu/widgets": ["@mathieu/widgets@workspace:widgets"],
 

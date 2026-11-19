@@ -101,7 +101,6 @@ Companions for Radarr and Sonarr, torrents behind a VPN, watch trackers, live TV
 
 **🧰 Other**
 
-- 💓 [**Vitals**](mathieu-vitals): your media stack's health as one JSON API, for your own dashboard · *made here*
 - 🛰️ [**Traccar**](mathieu-traccar): GPS tracking for phones, cars and trackers, with Home Assistant support
 
 ## 🚀 Install
@@ -157,7 +156,6 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
 | Seek | `http://mathieu-seek_server_1:8100` (Jellyfin webhook) | in your personal Jellyfin webhook URL |
 | Snug | `http://mathieu-snug_server_1:3000` (Jellyfin webhook) | in the webhook URL of its Settings → Jellyfin |
-| Vitals | `http://mathieu-vitals_server_1:3000/v1/summary` | its default password (bearer token) |
 | MetaMCP | `http://mathieu-metamcp_server_1:12008/metamcp/<endpoint>/mcp` (MCP) | an API key from its API Keys page |
 | agentgateway | `http://mathieu-agentgateway_server_1:3000/mcp?api_key=<key>` (MCP) | its default password (`api_key` query parameter) |
 | arr-mcp | `http://mathieu-arr-mcp_server_1:6060/mcp` (MCP) | the bearer token on its dashboard |
@@ -191,7 +189,6 @@ mathieu-<app>/               one folder per app: umbrel-app.yml (listing), docke
 packages/                    the store's own images (Bun workspaces)
   core                       shared code: HTTP, env, the umbrelOS widget protocol
   widgets                    home screen widgets (ghcr.io/mathieuletyrant/umbrel-widgets)
-  vitals                     the Vitals API (ghcr.io/mathieuletyrant/vitals)
 .claude/skills/verify-app/   end-to-end checks, one flow per app in flows/
 renovate.json                image updates
 ```
