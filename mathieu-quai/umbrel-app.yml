@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.7.0"
+version: "0.8.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,13 +52,14 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  A new black console, cleaner and easier to read, that says right away when
-  Quai Home is offline.
+  New "To fix" list, in the app and the console: imports Radarr or Sonarr
+  refuse (remove, or import anyway), titles with no release after 2 hours
+  (search releases and pick one, or wait), and what Reclaimerr is about to
+  delete (keep it).
 
 
-  The iPhone app gets a Home tab with what's going on tonight and a Library
-  tab with your movies and series, read from Radarr and Sonarr through Quai
-  Home.
+  To see Reclaimerr's scheduled deletions, add a Reclaimerr API key in this
+  app's settings.
 dependencies: []
 path: ""
 defaultUsername: ""
