@@ -3,19 +3,29 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: mathieu-quai_server_1
+      APP_HOST: mathieu-quai_cloud_1
       APP_PORT: 8787
       PROXY_AUTH_WHITELIST: "/api/*"
 
-  server:
-    image: ghcr.io/mathieuletyrant/quai:0.5.1@sha256:6a433d721db37dd45836ac9af08ad86437c26539706b4a7cdc04e2c3de6e14e9
+  cloud:
+    image: ghcr.io/mathieuletyrant/quai:0.6.0@sha256:CLOUD_DIGEST
     restart: on-failure
     environment:
       TZ: Etc/UTC
-      QUAI_INTERNAL_URL: http://mathieu-quai_server_1:8787
+      QUAI_APNS_KEY_FILE: /keys/AuthKey.p8
+    volumes:
+      - ${APP_DATA_DIR}/data/quai:/keys:ro
+
+  home:
+    image: ghcr.io/mathieuletyrant/quai-home:0.6.0@sha256:HOME_DIGEST
+    restart: on-failure
+    environment:
+      TZ: Etc/UTC
+      QUAI_CLOUD_URL: ws://mathieu-quai_cloud_1:8787/home
+      QUAI_INTERNAL_URL: http://mathieu-quai_home_1:8788
       QUAI_RADARR_URL: http://radarr_server_1:7878
       QUAI_SONARR_URL: http://sonarr_server_1:8989
       QUAI_JELLYFIN_URL: http://jellyfin_server_1:8096
       QUAI_QBITTORRENT_USERNAME: admin
     volumes:
-      - ${APP_DATA_DIR}/data/quai:/data
+      - ${APP_DATA_DIR}/data/home:/data
