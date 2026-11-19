@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.7.0"
+version: "0.8.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -32,7 +32,8 @@ description: >-
   1. In this app's settings in umbrelOS, paste the API keys of Radarr and
   Sonarr (Settings → General) and Jellyfin (Dashboard → API Keys), and pick
   your qBittorrent app with its password. Quai sets up its own webhook in
-  Radarr and Sonarr.
+  Radarr and Sonarr. Optionally add a Reclaimerr API key to see its
+  scheduled deletions.
 
   2. Put your Apple push key in the Files app at Apps → mathieu-quai → data →
   quai, named AuthKey.p8 (developer.apple.com → Keys, with Apple Push
@@ -51,13 +52,14 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  A new black console, cleaner and easier to read, that says right away when
-  Quai Home is offline.
+  New "To fix" list, in the app and the console: imports Radarr or Sonarr
+  refuse (remove, or import anyway), titles with no release after 2 hours
+  (search releases and pick one, or wait), and what Reclaimerr is about to
+  delete (keep it).
 
 
-  The iPhone app gets a Home tab with what's going on tonight and a Library
-  tab with your movies and series, read from Radarr and Sonarr through Quai
-  Home.
+  To see Reclaimerr's scheduled deletions, add a Reclaimerr API key in this
+  app's settings.
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -76,6 +78,10 @@ environment:
     services:
       - home
     note: A Jellyfin API key, from Dashboard → API Keys, to know when a title is ready and to follow and control what plays.
+  - name: QUAI_RECLAIMERR_API_KEY
+    services:
+      - home
+    note: Optional. A Reclaimerr API key (Settings → Integrations, scopes candidates:manage and system:read), to list scheduled deletions under To fix and keep a title.
   - name: QUAI_QBITTORRENT_URL
     services:
       - home
