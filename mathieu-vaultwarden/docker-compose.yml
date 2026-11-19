@@ -1,0 +1,63 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-vaultwarden_server_1
+      APP_PORT: 8089
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: vaultwarden/server:1.37.5@sha256:4fe17f415f90087377d37c755e0ea3cf189dcc6794e49cdd2a9adbb4937d9e1f
+    user: "1000:1000"
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        set -e
+        web_vault="/tmp/web-vault-patched"
+        rm -rf "$$web_vault"
+        cp -R /web-vault "$$web_vault"
+        main_js="$$(ls "$$web_vault"/app/main.*.js)"
+        grep -Fq '&&!this.platformUtilsService.isDev()' "$$main_js"
+        sed -i 's/&&!this\.platformUtilsService\.isDev()/\&\&!this.platformUtilsService.isDev()\&\&!location.hostname.endsWith(".onion")/g' "$$main_js"
+        grep -Fq '&&!this.platformUtilsService.isDev()&&!location.hostname.endsWith(".onion")' "$$main_js"
+        export WEB_VAULT_FOLDER="$$web_vault"
+        exec /start.sh
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+      - ${APP_DATA_DIR}/data/vaultwarden:/data
+    environment:
+      ROCKET_PORT: 8089
+
+  backup:
+    image: ttionya/vaultwarden-backup:1.27.3@sha256:818a18cd938d84e8cd685b12a734802ac357cf2d523e02e0ef25479f49e63530
+    restart: on-failure
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        for v in BACKUP_S3_ENDPOINT BACKUP_S3_ACCESS_KEY_ID BACKUP_S3_SECRET_ACCESS_KEY BACKUP_S3_BUCKET BACKUP_PASSWORD; do
+          if [ -z "$${!v}" ]; then
+            echo "Backups are off: set $$v in this app's settings in umbrelOS."
+            while :; do sleep 3600; done
+          fi
+        done
+        provider=Other
+        case "$$BACKUP_S3_ENDPOINT" in *r2.cloudflarestorage.com*) provider=Cloudflare ;; esac
+        export RCLONE_CONFIG=/tmp/rclone.conf
+        printf '[Backup]\ntype = s3\nprovider = %s\naccess_key_id = %s\nsecret_access_key = %s\nendpoint = %s\nregion = auto\nno_check_bucket = true\n' \
+          "$$provider" "$$BACKUP_S3_ACCESS_KEY_ID" "$$BACKUP_S3_SECRET_ACCESS_KEY" "$$BACKUP_S3_ENDPOINT" > "$$RCLONE_CONFIG"
+        export RCLONE_REMOTE_DIR="$$BACKUP_S3_BUCKET" ZIP_PASSWORD="$$BACKUP_PASSWORD"
+        exec /app/entrypoint.sh
+    volumes:
+      - ${APP_DATA_DIR}/data/vaultwarden:/bitwarden/data
+    environment:
+      DATA_DIR: /bitwarden/data
+      RCLONE_REMOTE_NAME: Backup
+      CRON: "0 3 * * *"
+      BACKUP_KEEP_DAYS: "30"
+      ZIP_TYPE: 7z
+      TIMEZONE: Etc/UTC
+      DISPLAY_NAME: Vaultwarden

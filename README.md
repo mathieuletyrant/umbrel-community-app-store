@@ -102,6 +102,7 @@ Companions for Radarr and Sonarr, torrents behind a VPN, watch trackers, live TV
 **🧰 Other**
 
 - 🛰️ [**Traccar**](mathieu-traccar): GPS tracking for phones, cars and trackers, with Home Assistant support
+- 🔐 [**Vaultwarden**](mathieu-vaultwarden): Bitwarden-compatible password server with encrypted nightly backups to S3 or Cloudflare R2
 
 ## 🚀 Install
 
