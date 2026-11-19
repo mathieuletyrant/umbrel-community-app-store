@@ -105,3 +105,7 @@ environment:
     services:
       - cloud
     note: Optional. Quai's address from outside (behind Cloudflare Access, say), added to the pairing QR code.
+  - name: QUAI_PUBLIC_HEADERS
+    services:
+      - cloud
+    note: Optional. Headers your proxy asks the iPhone app for, as "Name: value" pairs separated by ";" (a Cloudflare Access service token is "CF-Access-Client-Id: …; CF-Access-Client-Secret: …"). They go in the pairing QR code.
