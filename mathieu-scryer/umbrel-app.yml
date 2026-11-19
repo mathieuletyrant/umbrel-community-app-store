@@ -7,7 +7,7 @@ name: Scryer
 tagline: A whole *arr stack in one app — movies, series and anime
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/scryer
-version: "0.22.4"
+version: "0.22.5"
 port: 8380
 description: >-
   Scryer replaces Sonarr, Radarr, Prowlarr and Bazarr with a single native
@@ -45,10 +45,10 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  One unreadable folder, such as a title on an unplugged drive or a share that is down, no longer blocks imports, renames, scans and deletes of every other title. Search, catalog sorting, history, requests and the calendar are faster thanks to new indexes, built once on first start. NZB and torrent downloads from http:// links try HTTPS first, and failed automatic imports now show in import history.
+  A retried import no longer recycles and rewrites the library's identical copy of the same file about once a minute, which filled the recycle bin: identical files are now recorded as already imported. The Balanced, Compatible and Efficient scoring personas penalize oversized releases again, so a normal-sized release is preferred over a much larger one of the same quality, and oversized files already in the library can be upgraded. Installs using the bundled TRaSH Guides size rule unchanged get the updated rule on first start.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.4
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.5
 dependencies: []
 path: ""
 defaultUsername: ""
