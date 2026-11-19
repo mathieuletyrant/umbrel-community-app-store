@@ -1,7 +1,7 @@
 {
   "name": "mathieu-store-packages",
   "private": true,
-  "packageManager": "bun@1.4.4",
+  "packageManager": "bun@1.4.5",
   "workspaces": ["core", "widgets"],
   "scripts": {
     "test": "bun test",
