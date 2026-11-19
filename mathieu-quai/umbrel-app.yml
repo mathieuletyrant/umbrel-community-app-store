@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.9.0"
+version: "0.10.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,10 +52,10 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Use Quai away from home through a proxy that asks for headers, such as a
-  Cloudflare Access service token: set QUAI_PUBLIC_URL and QUAI_PUBLIC_HEADERS
-  in this app's settings, then pair the iPhone again. The app sends them on
-  every request, and Settings → Connection shows them (values hidden).
+  Posters on the To fix cards, Settings as a tab in the iPhone app, the same
+  header on every tab, and titles nobody monitors no longer shown as wanted.
+  The console's pairing panel has an "Open in Quai" button when it's opened on
+  the iPhone itself. Update the iPhone app from TestFlight too.
 dependencies: []
 path: ""
 defaultUsername: ""
