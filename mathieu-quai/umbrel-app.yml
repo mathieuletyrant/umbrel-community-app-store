@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.6.0"
+version: "0.7.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -51,16 +51,13 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai is now two parts in one app: Quai Home, next to your services, keeps
-  their keys and all your data; Quai Cloud runs the flows and the console and
-  keeps nothing. They are the same pieces a hosted Quai will use.
+  A new black console, cleaner and easier to read, that says right away when
+  Quai Home is offline.
 
 
-  After updating: pair your iPhones again from the console, enter the Apple
-  push key id and team id in this app's settings (the key file stays in
-  data/quai/AuthKey.p8), and redo any flow you had edited.
-
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.6.0
+  The iPhone app gets a Home tab with what's going on tonight and a Library
+  tab with your movies and series, read from Radarr and Sonarr through Quai
+  Home.
 dependencies: []
 path: ""
 defaultUsername: ""
