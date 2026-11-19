@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.8.0"
+version: "0.9.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,14 +52,10 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  New "To fix" list, in the app and the console: imports Radarr or Sonarr
-  refuse (remove, or import anyway), titles with no release after 2 hours
-  (search releases and pick one, or wait), and what Reclaimerr is about to
-  delete (keep it).
-
-
-  To see Reclaimerr's scheduled deletions, add a Reclaimerr API key in this
-  app's settings.
+  Use Quai away from home through a proxy that asks for headers, such as a
+  Cloudflare Access service token: set QUAI_PUBLIC_URL and QUAI_PUBLIC_HEADERS
+  in this app's settings, then pair the iPhone again. The app sends them on
+  every request, and Settings → Connection shows them (values hidden).
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -105,3 +101,7 @@ environment:
     services:
       - cloud
     note: Optional. Quai's address from outside (behind Cloudflare Access, say), added to the pairing QR code.
+  - name: QUAI_PUBLIC_HEADERS
+    services:
+      - cloud
+    note: 'Optional. Headers your proxy asks the iPhone app for, as "Name: value" pairs separated by ";" (a Cloudflare Access service token is "CF-Access-Client-Id: …; CF-Access-Client-Secret: …"). They go in the pairing QR code.'
