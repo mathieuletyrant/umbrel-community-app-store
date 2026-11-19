@@ -100,6 +100,7 @@
     { "matchPackageNames": ["haveagitgat/tdarr"], "commitMessageTopic": "Tdarr" },
     { "matchPackageNames": ["ghcr.io/chrisbenincasa/tunarr"], "commitMessageTopic": "Tunarr" },
     { "matchPackageNames": ["ghcr.io/unpackerr/unpackerr"], "commitMessageTopic": "Unpackerr" },
+    { "matchPackageNames": ["vaultwarden/server"], "commitMessageTopic": "Vaultwarden" },
     { "matchPackageNames": ["ghcr.io/scryer-media/weaver"], "commitMessageTopic": "Weaver" },
     { "matchFileNames": ["packages/**"], "groupName": "packages build" },
     { "matchPackageNames": ["ghcr.io/mathieuletyrant/**", "!ghcr.io/mathieuletyrant/spotarr", "!ghcr.io/mathieuletyrant/arrglue", "!ghcr.io/mathieuletyrant/snug", "!ghcr.io/mathieuletyrant/quai", "!ghcr.io/mathieuletyrant/lueur"], "enabled": false },

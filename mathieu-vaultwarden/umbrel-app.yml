@@ -1,0 +1,98 @@
+manifestVersion: 1
+id: mathieu-vaultwarden
+storage:
+  dataRoot: data
+category: files
+name: Vaultwarden
+tagline: Bitwarden-compatible password server with encrypted offsite backups
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vaultwarden/icon.png
+# renovate: datasource=docker depName=vaultwarden/server
+version: "1.37.5"
+port: 8189
+description: >-
+  Vaultwarden is an unofficial Bitwarden-compatible server for your encrypted
+  password vault. It works with the official Bitwarden apps, browser
+  extensions and web vault.
+
+
+  This package is the Vaultwarden of the Umbrel App Store with one addition: a
+  backup service (ttionya/vaultwarden-backup) that sends an encrypted copy of
+  the vault (database, attachments, Sends, keys) to any S3-compatible bucket
+  (Cloudflare R2, Backblaze B2, AWS S3…) every night. The archive is a 7z with
+  AES-256 and encrypted file names. Backups older than 30 days are deleted.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Bitwarden clients need HTTPS: give Vaultwarden an HTTPS address
+  (Tailscale Serve, umbrelOS local HTTPS, or a tunnel or reverse proxy of your
+  own) and use it as the self-hosted server URL in your Bitwarden apps.
+
+  2. Create a bucket and an access key limited to it at your storage
+  provider. For Cloudflare R2: R2 → Create bucket, then Manage API tokens →
+  Object Read & Write on that bucket only.
+
+  3. In this app's settings in umbrelOS, fill in the endpoint, the access key,
+  the bucket (optionally with a folder: my-bucket/vaultwarden) and a backup
+  password. Keep that password outside the vault: without it the backups
+  can't be opened.
+
+
+  Backups run at 03:00 UTC (CRON setting). Until the settings are filled in,
+  the backup service waits and Vaultwarden runs as usual.
+
+
+  To restore, download an archive, extract it with 7-Zip and the backup
+  password, and put db.sqlite3, rsa_key*, attachments and sends back in this
+  app's data folder (Files → Apps → mathieu-vaultwarden → data → vaultwarden)
+  while the app is stopped.
+developer: Daniel García
+website: https://github.com/dani-garcia/vaultwarden
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/dani-garcia/vaultwarden
+support: https://vaultwarden.discourse.group/
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vaultwarden/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vaultwarden/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-vaultwarden/gallery-3.jpg
+releaseNotes: >-
+  First release: Vaultwarden 1.37.5 with nightly encrypted backups to an
+  S3-compatible bucket.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
+environment:
+  - name: BACKUP_S3_ENDPOINT
+    services:
+      - backup
+    note: S3 endpoint, e.g. https://<account id>.r2.cloudflarestorage.com for Cloudflare R2.
+  - name: BACKUP_S3_ACCESS_KEY_ID
+    services:
+      - backup
+    note: Access key ID, limited to the backup bucket.
+  - name: BACKUP_S3_SECRET_ACCESS_KEY
+    services:
+      - backup
+    note: Secret access key.
+  - name: BACKUP_S3_BUCKET
+    services:
+      - backup
+    note: Bucket, optionally with a folder, e.g. my-bucket/vaultwarden.
+  - name: BACKUP_PASSWORD
+    services:
+      - backup
+    note: Password of the backup archives. Keep it outside the vault.
+  - name: CRON
+    services:
+      - backup
+    default: "0 3 * * *"
+    note: Backup schedule, cron format, UTC.
+  - name: BACKUP_KEEP_DAYS
+    services:
+      - backup
+    default: "30"
+    note: Backups older than this many days are deleted (0 keeps them all).

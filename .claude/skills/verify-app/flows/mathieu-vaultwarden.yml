@@ -1,0 +1,7 @@
+logs:
+  server: Rocket has launched
+  backup: "Backups are off: set BACKUP_S3_ENDPOINT"
+steps:
+  - goto: /
+  - see: Email address
+  - shot: login
