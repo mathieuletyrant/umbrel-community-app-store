@@ -6,17 +6,16 @@ steps:
   - http: {path: /api/health, anonymous: true, status: 200, contains: '"status":"ok"'}
   - http: {path: /api/activities, anonymous: true, status: 401}
   - goto: /
-  - see: No iPhone paired yet.
-  - click: {role: button, name: Pair an iPhone}
-  - see: Expires in
-  - shot: pairing
-  - click: {role: link, name: Settings}
-  - see: "Not configured: nothing is pushed"
+  - see: Nothing is pushed
   - click: {role: link, name: Flows}
-  - see: Downloads · built-in
   - click: {role: button, name: Choose a flow}
   - see: Jellyfin playback
   - shot: flows
-  - click: {role: link, name: Alerts}
+  - goto: /#alerts
   - see: Problems Radarr, Sonarr and Prowlarr report
   - shot: alerts
+  - goto: /#iphones
+  - see: No iPhone paired yet
+  - click: {role: button, name: Pair an iPhone}
+  - see: Expires in
+  - shot: pairing
