@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.14.0"
+version: "0.15.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -17,8 +17,10 @@ description: >-
 
   It watches Radarr, Sonarr, qBittorrent and Jellyfin over your Umbrel's
   network and pushes Live Activities to the iPhones you pair: a download from
-  search to import, what plays on Jellyfin (with Play/Pause), and a service
-  that stops answering.
+  search to import, what plays on Jellyfin (with Play/Pause). What goes wrong
+  and may last is an alert, a plain notification when it starts and when it's
+  over: a service that stops answering, the media disk running low, a problem
+  Radarr, Sonarr or Prowlarr report.
 
 
   This app runs both halves of Quai: Quai Home, which holds your services'
@@ -33,7 +35,8 @@ description: >-
   Sonarr (Settings → General) and Jellyfin (Dashboard → API Keys), and pick
   your qBittorrent app with its password. Quai sets up its own webhook in
   Radarr and Sonarr. Optionally add a Seerr API key to approve requests from
-  the iPhone, and a Reclaimerr API key to see its scheduled deletions.
+  the iPhone, a Reclaimerr API key to see its scheduled deletions, and a
+  Prowlarr API key for its alerts. The alerts are set up in Quai's Alerts page.
 
   2. Put your Apple push key in the Files app at Apps → mathieu-quai → data →
   quai, named AuthKey.p8 (developer.apple.com → Keys, with Apple Push
@@ -52,11 +55,13 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Cleanuparr: downloads it is about to remove show under To fix in the iPhone
-  app, with Keep (Quai adds it to Cleanuparr's ignored downloads, changing
-  nothing else) or Let it go, and its removals appear in the Journal. Add
-  Cleanuparr's API key in this app's settings. Update the iPhone app from
-  TestFlight too.
+  Alerts: a service that stops answering, the media disk running low and the
+  problems Radarr, Sonarr and Prowlarr report are now plain notifications, one
+  when it starts and one when it's over, set up in Quai's new Alerts page (the
+  Server incident Live Activity is gone). Add Prowlarr's API key in this app's
+  settings for its alerts. The iPhone app's Home shows what happened lately and
+  how full the disk is, and lists the journal under Activity. Update the iPhone
+  app from TestFlight too, and allow its notifications.
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -83,6 +88,10 @@ environment:
     services:
       - home
     note: Optional. Cleanuparr's API key (Settings → Account), to see downloads it is about to remove under To fix, keep one, and log its removals in the Journal.
+  - name: QUAI_PROWLARR_API_KEY
+    services:
+      - home
+    note: Optional. Prowlarr's API key (Settings → General), for alerts when it stops answering or reports a problem.
   - name: QUAI_RECLAIMERR_API_KEY
     services:
       - home
