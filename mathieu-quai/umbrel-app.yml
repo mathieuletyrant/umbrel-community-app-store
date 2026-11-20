@@ -52,11 +52,13 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Fixes: Library and Tonight say Quai Home is offline instead of blaming
-  Radarr or Sonarr; editing a flow while an activity runs no longer freezes
-  every Live Activity; a push Apple never answers no longer stalls Quai;
-  one damaged file in Quai Home's data no longer blocks it; a wrong
-  qBittorrent password no longer gets Quai Home banned.
+  Approving or declining a request from the Lock Screen now refuses a
+  request that is no longer pending (already approved, declined or removed
+  in Seerr) instead of acting on it again. Error messages on iOS are also
+  more consistent.
+
+
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#0123-2026-11-20
 dependencies: []
 path: ""
 defaultUsername: ""
