@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.11.0"
+version: "0.12.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,8 +52,17 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Download Live Activities refresh every 5 seconds instead of 15, and the time
-  left disappears when qBittorrent can no longer estimate it.
+  Approve or decline Seerr requests from the iPhone: a Live Activity with
+  Approve and Decline appears when a request waits for you (auto-approved
+  ones never do), plus a Requests tile. Add Seerr's API key in this app's
+  settings; Quai sets up Seerr's webhook if none is set.
+
+
+  Tonight's releases: a tile and one Live Activity for the evening with what
+  airs today and what is already here.
+
+
+  Update the iPhone app from TestFlight too.
 dependencies: []
 path: ""
 defaultUsername: ""
