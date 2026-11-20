@@ -17,3 +17,6 @@ steps:
   - click: {role: button, name: Choose a flow}
   - see: Jellyfin playback
   - shot: flows
+  - click: {role: link, name: Alerts}
+  - see: Problems Radarr, Sonarr and Prowlarr report
+  - shot: alerts
