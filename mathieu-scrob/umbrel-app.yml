@@ -59,9 +59,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
   Any setting can now be read from a *_FILE path, for Docker secrets. Anime watches synced to Simkl are no
-  longer dropped, ghost TVDB episodes stop appearing in shows and Next Up, season navigation follows
-  alternate episode orders, and shows whose TMDB link no longer exists open from TVDB data. Lists, resume
-  positions and DNS lookups on IPv4-only networks are also fixed.
+  longer dropped, shows whose TMDB link no longer exists open from TVDB data, and the Connections page
+  explains that Watched status also gates live webhook scrobbling. Lists, Nuvio resume positions and DNS
+  lookups on IPv4-only networks are also fixed.
 
 
   Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.39.0
