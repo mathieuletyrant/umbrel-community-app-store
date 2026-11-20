@@ -29,6 +29,7 @@ services:
       QUAI_RECLAIMERR_URL: http://mathieu-reclaimerr_server_1:8000
       QUAI_SEERR_URL: http://jellyseerr_server_1:5055
       QUAI_CLEANUPARR_URL: http://mathieu-cleanuparr_server_1:11011
+      QUAI_PROWLARR_URL: http://prowlarr_server_1:9696
       QUAI_QBITTORRENT_USERNAME: admin
     volumes:
       - ${APP_DATA_DIR}/data/home:/data
