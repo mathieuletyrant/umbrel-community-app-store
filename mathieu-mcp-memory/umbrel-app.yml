@@ -7,7 +7,7 @@ name: MCP Memory
 tagline: Long-term memory for your AI assistants, as an MCP server
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/icon.png
 # renovate: datasource=docker depName=doobidoo/mcp-memory-service
-version: "12.11.0"
+version: "13.0.0"
 port: 6363
 description: >-
   MCP Memory gives your AI assistant (Claude, ChatGPT, Home Assistant, or any
@@ -56,15 +56,16 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: >-
-  Security fix: with automatic extraction on, a client allowed to write to one
-  memory store could overwrite or flag memories in the default store; every
-  store write now stays in its own store. The dashboard's Quality tab can pick
-  the openai-compatible provider (Ollama, vLLM, LiteLLM…), and hybrid sync
-  progress shows up again in the status capsule. "Day before yesterday" in time
-  searches now picks the right day.
+  Breaking: five MCP tools were renamed to the memory_ prefix and the old names
+  are gone (get_bootstrap_profile → memory_bootstrap_profile,
+  get_onboarding_guide → memory_onboarding_guide, get_quarantined_memories →
+  memory_quarantine_list, unquarantine_memory → memory_quarantine_release,
+  commit_session_legacy → memory_commit_session); update any prompt or tool
+  allowlist that names them. Stored memories are unchanged. The dashboard's
+  status island now reports backups, document imports and consolidation runs,
+  a memory can be opened by URL, and several time-search and upload fixes.
 
-
-  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v12.11.0
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v13.0.0
 dependencies: []
 path: ""
 defaultUsername: mcp
