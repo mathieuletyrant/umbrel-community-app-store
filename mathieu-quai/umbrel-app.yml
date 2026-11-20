@@ -32,8 +32,8 @@ description: >-
   1. In this app's settings in umbrelOS, paste the API keys of Radarr and
   Sonarr (Settings → General) and Jellyfin (Dashboard → API Keys), and pick
   your qBittorrent app with its password. Quai sets up its own webhook in
-  Radarr and Sonarr. Optionally add a Reclaimerr API key to see its
-  scheduled deletions.
+  Radarr and Sonarr. Optionally add a Seerr API key to approve requests from
+  the iPhone, and a Reclaimerr API key to see its scheduled deletions.
 
   2. Put your Apple push key in the Files app at Apps → mathieu-quai → data →
   quai, named AuthKey.p8 (developer.apple.com → Keys, with Apple Push
@@ -72,6 +72,10 @@ environment:
     services:
       - home
     note: A Jellyfin API key, from Dashboard → API Keys, to know when a title is ready and to follow and control what plays.
+  - name: QUAI_SEERR_API_KEY
+    services:
+      - home
+    note: Optional. Seerr's API key (Settings → General), to approve or decline requests waiting for you from the iPhone. Quai sets up Seerr's webhook if none is set.
   - name: QUAI_RECLAIMERR_API_KEY
     services:
       - home

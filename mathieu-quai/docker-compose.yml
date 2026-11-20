@@ -27,6 +27,7 @@ services:
       QUAI_SONARR_URL: http://sonarr_server_1:8989
       QUAI_JELLYFIN_URL: http://jellyfin_server_1:8096
       QUAI_RECLAIMERR_URL: http://mathieu-reclaimerr_server_1:8000
+      QUAI_SEERR_URL: http://jellyseerr_server_1:5055
       QUAI_QBITTORRENT_USERNAME: admin
     volumes:
       - ${APP_DATA_DIR}/data/home:/data
