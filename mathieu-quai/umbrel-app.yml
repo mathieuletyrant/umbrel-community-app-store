@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.16.0"
+version: "0.16.1"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -55,11 +55,9 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  The iPhone app gets a live bar above its tabs, like Music's mini player:
-  what plays and downloads, swiped through, with Play/Pause; a tap opens them
-  all. The Home keeps what needs a look (to fix, requests, today's releases,
-  what's on its way, alerts and the disk) and hides empty tiles. Update the
-  iPhone app from TestFlight.
+  In the iPhone app, Play/Pause now shows at once instead of a few seconds
+  later, and the playback card fills its bar on its own, with the time
+  elapsed and left. Update the iPhone app from TestFlight.
 dependencies: []
 path: ""
 defaultUsername: ""
