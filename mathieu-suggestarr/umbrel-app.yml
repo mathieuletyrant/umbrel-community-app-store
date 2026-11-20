@@ -42,13 +42,15 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-suggestarr/gallery-3.jpg
 releaseNotes: >-
-  Adds rating prompts through Telegram and Discord, multi-person AI Search
-  (mention several users in one query), smarter AI Search exclusions that skip
-  already-handled titles, and unified feedback and sorting options for
-  suggestions and requests. The UI also gets accessibility fixes.
+  Requests can now go straight to Radarr and Sonarr, without Seerr (existing
+  setups stay on Seerr until changed). Adds bulk approve/reject of pending
+  suggestions, the reason for each AI pick in Discord, ntfy and Telegram
+  notifications, per-account AI providers for AI Search, a 7-day queue when a
+  backend is offline and a safety breaker on large Cleanup deletions. The
+  requests tables are migrated on first start.
 
   Full release notes can be found at
-  https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v3.4.0
+  https://github.com/giuseppe99barchetta/SuggestArr/releases/tag/v3.5.0
 dependencies: []
 path: ""
 defaultUsername: ""
