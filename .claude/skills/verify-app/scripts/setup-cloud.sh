@@ -7,7 +7,7 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
-apt-get install -y -qq --no-install-recommends ffmpeg python3-yaml >/dev/null
+apt-get install -y -qq --no-install-recommends ffmpeg python3-yaml libnss3-tools >/dev/null
 
 command -v dockerd >/dev/null || curl -fsSL https://get.docker.com | sh
 mkdir -p /etc/docker

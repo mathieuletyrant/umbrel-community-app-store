@@ -348,11 +348,27 @@ async function waitHealthy(appId, timeoutMs, {ignoreHealth = false} = {}) {
 
 const TRUST_STORES = ['/etc/ssl/certs/ca-certificates.crt', '/etc/ssl/cert.pem', '/etc/pki/tls/certs/ca-bundle.crt']
 
+// Chromium ignores the system store and reads $HOME/.pki/nssdb: build one with the CA (host certutil).
+function nssDb(ca, tmp) {
+	if (trySh('sh', ['-c', 'command -v certutil']) === null) return null
+	const db = path.join(tmp, 'nss', '.pki', 'nssdb')
+	fs.mkdirSync(db, {recursive: true})
+	if (trySh('certutil', ['-N', '-d', `sql:${db}`, '--empty-password']) === null) return null
+	const pems = fs.readFileSync(ca, 'utf8').match(/-----BEGIN CERTIFICATE-----[\s\S]+?-----END CERTIFICATE-----/g) ?? []
+	pems.forEach((pem, i) => {
+		const f = path.join(tmp, `ca-${i}.pem`)
+		fs.writeFileSync(f, pem + '\n')
+		trySh('certutil', ['-A', '-d', `sql:${db}`, '-n', `verify-ca-${i}`, '-t', 'C,,', '-i', f])
+	})
+	return path.dirname(db)
+}
+
 async function trustProxyCA(appId) {
 	const ca = caBundle()
 	if (!ca) return
 	const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'verify-ca-'))
 	const patched = []
+	const pki = nssDb(ca, tmp)
 	// A container in another's network (`network_mode: service:gluetun`) stays in the old namespace
 	// when that one restarts after it, unreachable through app_proxy: restart network owners first.
 	const running = appContainers(appId).filter((c) => c.State === 'running')
@@ -364,6 +380,11 @@ async function trustProxyCA(appId) {
 			if (trySh('docker', ['cp', '-L', `${c.Names}:${store}`, local]) === null) continue
 			fs.appendFileSync(local, '\n' + fs.readFileSync(ca, 'utf8'))
 			if (trySh('docker', ['cp', local, `${c.Names}:${store}`]) !== null) patched.push(`${c.Names}:${store}`)
+		}
+		const home = pki && trySh('docker', ['exec', c.Names, 'sh', '-c', 'test -n "$HOME" && test "$HOME" != / && test -d "$HOME" && test ! -e "$HOME/.pki" && echo "$HOME"'])?.trim()
+		if (home && trySh('docker', ['cp', pki, `${c.Names}:${home}/`]) !== null) {
+			trySh('docker', ['exec', '-u', '0', c.Names, 'sh', '-c', `chown -R "$(stat -c %u:%g '${home}')" '${home}/.pki'`])
+			patched.push(`${c.Names}:${home}/.pki/nssdb`)
 		}
 		trySh('docker', ['restart', c.Names])
 	}
