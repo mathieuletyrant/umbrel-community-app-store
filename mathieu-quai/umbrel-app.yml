@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.12.3"
+version: "0.13.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,9 +52,11 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Approve and Decline on the Lock Screen no longer act on a Seerr request
-  already handled in Seerr, and the iPhone app shows the same clear message
-  for each error everywhere. Update the iPhone app from TestFlight too.
+  The day's releases are now "Today", morning ones included. The console is
+  for setting Quai up (Settings, Flows, iPhones) and gains a Journal of what
+  Quai did, kept by Quai Home for 7 days, plus a menu on phones; requests and
+  fixes now live in the iPhone app only. Update the iPhone app from
+  TestFlight too.
 dependencies: []
 path: ""
 defaultUsername: ""
