@@ -7,7 +7,7 @@ name: Lingarr
 tagline: Automated subtitle translation for Radarr/Sonarr
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/lingarr-translate/lingarr
-version: "1.4.1"
+version: "1.5.0"
 port: 9877
 description: >-
   Lingarr is an automated subtitle translator for Radarr and Sonarr. It
@@ -52,15 +52,17 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-lingarr/gallery-2.jpg
 releaseNotes: >-
-  Fixes batch translation of forced and regular subtitles, matches subtitle
-  languages case-insensitively and on the closest language code, and keeps
-  translations running when the browser disconnects. Path mapping settings
-  are removed (not needed on Umbrel, where paths already match the *arr
-  apps), and unmonitored media can now be scanned. Several layout fixes at
-  tablet widths.
+  The same translation provider can now be added more than once (for example
+  two OpenAI services with different models or keys), and the list order sets
+  the fallback cascade. Source and target languages are now ordered by
+  priority, with an option to translate only to the first target language.
+  An optional "Extract embedded subtitles" setting downloads ffmpeg (about
+  220 MB, kept in the app's data) to translate subtitles embedded in videos.
+  AI batch translations now retry when lines are missing or a response
+  can't be parsed.
 
   Full release notes can be found at
-  https://github.com/lingarr-translate/lingarr/releases/tag/1.4.1
+  https://github.com/lingarr-translate/lingarr/releases/tag/1.5.0
 dependencies: []
 path: ""
 defaultUsername: ""
