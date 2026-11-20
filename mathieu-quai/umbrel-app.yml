@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.13.0"
+version: "0.14.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,10 +52,10 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  The day's releases are now "Today", morning ones included. The console is
-  for setting Quai up (Settings, Flows, iPhones) and gains a Journal of what
-  Quai did, kept by Quai Home for 7 days, plus a menu on phones; requests and
-  fixes now live in the iPhone app only. Update the iPhone app from
+  Cleanuparr: downloads it is about to remove show under To fix in the iPhone
+  app, with Keep (Quai adds it to Cleanuparr's ignored downloads, changing
+  nothing else) or Let it go, and its removals appear in the Journal. Add
+  Cleanuparr's API key in this app's settings. Update the iPhone app from
   TestFlight too.
 dependencies: []
 path: ""
@@ -79,6 +79,10 @@ environment:
     services:
       - home
     note: Optional. Seerr's API key (Settings → General), to approve or decline requests waiting for you from the iPhone. Quai sets up Seerr's webhook if none is set.
+  - name: QUAI_CLEANUPARR_API_KEY
+    services:
+      - home
+    note: Optional. Cleanuparr's API key (Settings → Account), to see downloads it is about to remove under To fix, keep one, and log its removals in the Journal.
   - name: QUAI_RECLAIMERR_API_KEY
     services:
       - home
