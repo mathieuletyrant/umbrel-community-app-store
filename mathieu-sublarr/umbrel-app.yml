@@ -7,7 +7,7 @@ name: Sublarr
 tagline: All-in-one subtitle manager & translator for the *arr stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/abrechen2/sublarr
-version: "1.21.1"
+version: "1.21.2"
 port: 5765
 description: >-
   Sublarr is a self-hosted subtitle manager and LLM translator for anime and
@@ -52,10 +52,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Translations now follow the language profile of each series or movie instead of always going into German, so batches targeting another language are no longer rejected as "wrong script". Subtitle cleanup also keeps each profile's own source language, so a profile translating from Japanese, for example, no longer loses its source tracks.
+  Accepting a low-score subtitle ("I'm ok with this quality") now works: the decision is stored with the subtitle, so the low-score warning, counters and upgrade search leave it alone until a newer subtitle arrives. The dashboard's Accept and Skip buttons no longer fail with an error, and skipped items stop showing up as low-score.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.21.1
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.21.2
 dependencies: []
 path: ""
 defaultUsername: ""
