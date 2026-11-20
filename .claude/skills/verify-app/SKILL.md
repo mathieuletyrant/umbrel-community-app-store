@@ -250,8 +250,9 @@ workaround, why the flow stops early).
   `verified:` isn't updated. It proves everything but the tunnel and port forwarding.
 - Outbound HTTPS may go through a TLS-intercepting proxy. umbreld gets its CA automatically
   (`NODE_EXTRA_CA_CERTS` or `/root/.ccr/ca-bundle.crt`). App containers don't: `egress: true`
-  appends the CA to the container's system trust store and restarts it (works for
-  Go/Python/OpenSSL; Node apps that ignore the system store still fail). Some hosts are denied
+  appends the CA to the container's system trust store, adds it to an NSS db at
+  `$HOME/.pki/nssdb` for Chromium (host `certutil`), and restarts it (works for
+  Go/Python/OpenSSL/Chromium; Node apps that ignore the system store still fail). Some hosts are denied
   by policy: `mock` the app's own endpoint in the browser instead, never work around the policy.
 - App ports are only reachable from a browser logged into umbrelOS (the runner does that); a
   bare `curl` gets a 302 to umbrelOS auth.
