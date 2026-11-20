@@ -57,9 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  This release only changes the Windows desktop build: D3X now also opens its app window with Brave or Vivaldi when Edge and Chrome are missing. Nothing changes for the Umbrel app.
+  Publish now keeps the list of releases already on V3X while a long hash runs, and says so with a Retry button when the check fails (V3X unreachable, too many requests). Transmission's web UI address (…/transmission/web/) is accepted, whitelist refusals (403, 421) are explained, and "Test connection" stops after 12 seconds instead of hanging. The other changes only concern the Windows desktop build.
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.61
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.63
 dependencies: []
 path: ""
 defaultUsername: ""
