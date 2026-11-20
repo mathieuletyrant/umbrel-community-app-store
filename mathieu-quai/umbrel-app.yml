@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.10.0"
+version: "0.11.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,10 +52,8 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Posters on the To fix cards, Settings as a tab in the iPhone app, the same
-  header on every tab, and titles nobody monitors no longer shown as wanted.
-  The console's pairing panel has an "Open in Quai" button when it's opened on
-  the iPhone itself. Update the iPhone app from TestFlight too.
+  Download Live Activities refresh every 5 seconds instead of 15, and the time
+  left disappears when qBittorrent can no longer estimate it.
 dependencies: []
 path: ""
 defaultUsername: ""
