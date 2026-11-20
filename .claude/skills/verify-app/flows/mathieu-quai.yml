@@ -1,4 +1,4 @@
-verified: 0.6.0 on umbrelOS 2.0.1 (2026-11-19)
+verified: 0.13.0 on umbrelOS 2.0.1 (2026-11-20)
 logs:
   cloud: "connected"
   home: "linked as home"
@@ -6,14 +6,18 @@ steps:
   - http: {path: /api/health, anonymous: true, status: 200, contains: '"status":"ok"'}
   - http: {path: /api/activities, anonymous: true, status: 401}
   - goto: /
-  - see: No iPhone paired yet.
+  - see: Nothing is pushed
+  - see: Requests, fixes and today's releases are in the Quai app.
+  - click: {role: link, name: iPhones}
+  - see: No iPhone paired yet
   - click: {role: button, name: Pair an iPhone}
   - see: Expires in
   - shot: pairing
-  - click: {role: link, name: Settings}
-  - see: "Not configured: nothing is pushed"
   - click: {role: link, name: Flows}
   - see: Downloads · built-in
   - click: {role: button, name: Choose a flow}
   - see: Jellyfin playback
   - shot: flows
+  - click: {role: link, name: Journal}
+  - see: Quai Home linked
+  - shot: journal
