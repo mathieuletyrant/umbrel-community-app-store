@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/api/*"
 
   cloud:
-    image: ghcr.io/mathieuletyrant/quai:0.16.0@sha256:caeb67b5c44cbf6d6eba72e0a212d973dc6ad71de026a40caf99ea6cea2f453c
+    image: ghcr.io/mathieuletyrant/quai:0.16.1@sha256:0e94371d120bfeaece5d80d606449b0268057e0be6ab48acebbd135988b4ddee
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -17,7 +17,7 @@ services:
       - ${APP_DATA_DIR}/data/quai:/keys:ro
 
   home:
-    image: ghcr.io/mathieuletyrant/quai-home:0.16.0@sha256:49eceff7709f2ccbd89bfefc816ee0cdec1a4d9beec1ce6513e5a1ea74e422fd
+    image: ghcr.io/mathieuletyrant/quai-home:0.16.1@sha256:3838e8b77b9d864c79575448490441533b57045fac13739d06fd3d0c34bcfa56
     restart: on-failure
     environment:
       TZ: Etc/UTC
