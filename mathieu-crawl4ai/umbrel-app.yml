@@ -7,7 +7,7 @@ name: Crawl4AI
 tagline: Web crawler that turns any page into clean Markdown for AI
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-crawl4ai/icon.png
 # renovate: datasource=docker depName=unclecode/crawl4ai
-version: "0.9.5"
+version: "0.9.6"
 port: 11235
 description: >-
   Crawl4AI is an open-source web crawler and scraper built for AI: it opens
