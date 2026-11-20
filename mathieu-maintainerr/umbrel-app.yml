@@ -42,10 +42,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-maintainerr/gallery-4.jpg
 releaseNotes: >-
-  Downloads that have seeded for 14 days are now removed even without a ratio when no client limit is set. Plex connection settings apply immediately without a restart, and clearing Plex credentials revokes the token at plex.tv. Fixes Emby show and season sizes and ZFS free space with several datasets, and adds Russian and Traditional Chinese.
+  TV show collections get a configurable overlay scope to cut processing time, and movie rules can now use TMDB franchise properties. Adds Romanian, fixes the UI and unknown API routes when a base path is set, and replaces the outbound request retry library. The database gains a column on first start, applied automatically.
 
 
-  Full release notes can be found at https://github.com/Maintainerr/Maintainerr/releases/tag/v3.32.0
+  Full release notes can be found at https://github.com/Maintainerr/Maintainerr/releases/tag/v3.33.0
 dependencies: []
 path: ""
 defaultUsername: ""
