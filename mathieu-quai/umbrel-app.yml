@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.12.2"
+version: "0.12.3"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -52,11 +52,9 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Fixes: Library and Tonight say Quai Home is offline instead of blaming
-  Radarr or Sonarr; editing a flow while an activity runs no longer freezes
-  every Live Activity; a push Apple never answers no longer stalls Quai;
-  one damaged file in Quai Home's data no longer blocks it; a wrong
-  qBittorrent password no longer gets Quai Home banned.
+  Approve and Decline on the Lock Screen no longer act on a Seerr request
+  already handled in Seerr, and the iPhone app shows the same clear message
+  for each error everywhere. Update the iPhone app from TestFlight too.
 dependencies: []
 path: ""
 defaultUsername: ""
