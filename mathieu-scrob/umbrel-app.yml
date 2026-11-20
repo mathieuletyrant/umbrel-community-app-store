@@ -58,13 +58,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scrob/gallery-4.jpg
 releaseNotes: >-
-  A bug-fix release. Jellyfin libraries are fetched in smaller pages and timed-out pages are retried,
-  every page of a Trakt list export is imported, and Radarr/Sonarr import list URLs use the request host
-  instead of localhost. Next Up no longer skips unwatched episodes that aren't in the local library, and
-  the calendar, season ratings, pulled play counts, MDBList slugs and Kodi scrobbles of new movies are fixed.
+  Any setting can now be read from a *_FILE path, for Docker secrets. Anime watches synced to Simkl are no
+  longer dropped, ghost TVDB episodes stop appearing in shows and Next Up, season navigation follows
+  alternate episode orders, and shows whose TMDB link no longer exists open from TVDB data. Lists, resume
+  positions and DNS lookups on IPv4-only networks are also fixed.
 
 
-  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.38.1
+  Full release notes can be found at https://github.com/ellite/scrob/releases/tag/v2.39.0
 dependencies: []
 path: ""
 defaultUsername: ""
