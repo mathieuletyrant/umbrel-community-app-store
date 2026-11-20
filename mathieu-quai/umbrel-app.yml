@@ -55,13 +55,11 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Alerts: a service that stops answering, the media disk running low and the
-  problems Radarr, Sonarr and Prowlarr report are now plain notifications, one
-  when it starts and one when it's over, set up in Quai's new Alerts page (the
-  Server incident Live Activity is gone). Add Prowlarr's API key in this app's
-  settings for its alerts. The iPhone app's Home shows what happened lately and
-  how full the disk is, and lists the journal under Activity. Update the iPhone
-  app from TestFlight too, and allow its notifications.
+  The iPhone app gets a live bar above its tabs, like Music's mini player:
+  what plays and downloads, swiped through, with Play/Pause; a tap opens them
+  all. The Home keeps what needs a look (to fix, requests, today's releases,
+  what's on its way, alerts and the disk) and hides empty tiles. Update the
+  iPhone app from TestFlight.
 dependencies: []
 path: ""
 defaultUsername: ""
