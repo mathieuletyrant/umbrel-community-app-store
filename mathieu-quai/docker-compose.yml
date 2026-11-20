@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/api/*"
 
   cloud:
-    image: ghcr.io/mathieuletyrant/quai:0.13.0@sha256:7083ca60ff802b50420ace78b07c76085fd888cf134ba17c49273cde1d937db6
+    image: ghcr.io/mathieuletyrant/quai:0.14.0@sha256:1dd7150936074538ac663223c4d1162b6fde66039d5c01ea8e03b5ba175c2777
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -17,7 +17,7 @@ services:
       - ${APP_DATA_DIR}/data/quai:/keys:ro
 
   home:
-    image: ghcr.io/mathieuletyrant/quai-home:0.13.0@sha256:854d1a3c3235aca54798a49a05fb5bcf4d96f93c1c35c59885a5f323192adec1
+    image: ghcr.io/mathieuletyrant/quai-home:0.14.0@sha256:e8716f61af3fa967d17ba5b162b8ac2a24844a9640d590beeeebf6a0c6121a9c
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -28,6 +28,7 @@ services:
       QUAI_JELLYFIN_URL: http://jellyfin_server_1:8096
       QUAI_RECLAIMERR_URL: http://mathieu-reclaimerr_server_1:8000
       QUAI_SEERR_URL: http://jellyseerr_server_1:5055
+      QUAI_CLEANUPARR_URL: http://mathieu-cleanuparr_server_1:11011
       QUAI_QBITTORRENT_USERNAME: admin
     volumes:
       - ${APP_DATA_DIR}/data/home:/data
