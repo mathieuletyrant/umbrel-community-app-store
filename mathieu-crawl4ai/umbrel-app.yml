@@ -51,7 +51,16 @@ repo: https://github.com/unclecode/crawl4ai
 support: https://github.com/unclecode/crawl4ai/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-crawl4ai/gallery-1.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Security release: it closes eleven advisories, nine of them in the Docker server (an SSRF
+  path in the TLS certificate fetch, browser contexts and hooks shared between API callers,
+  a ReDoS gate bypass, unchecked markdown options, chunked bodies skipping the size limit,
+  uncapped screenshot waits). The default LLM provider moves to openai/gpt-6-luna and LLM
+  calls no longer force a low temperature; a dead pooled browser is now replaced, and many
+  crawling, caching and PDF fixes land.
+
+
+  Full release notes can be found at https://github.com/unclecode/crawl4ai/releases/tag/v0.9.6
 dependencies: []
 path: ""
 defaultUsername: ""
