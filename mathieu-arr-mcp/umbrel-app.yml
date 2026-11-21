@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "2.3.1"
+version: "2.3.2"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,10 +57,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  The download queue now reads SABnzbd's history only once while downloads are
-  post-processing, plus a few smaller speed-ups.
+  Playback stats now read Plex's whole watch history in one pass, keep the
+  release year of films that were deleted from the library, and no longer count
+  music plays as movie or show plays.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#231-2026-11-17
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#232-2026-11-21
 
 dependencies: []
 path: ""
