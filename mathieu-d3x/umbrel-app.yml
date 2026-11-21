@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.63"
+version: "1.1.64"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,9 +57,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Publish now keeps the list of releases already on V3X while a long hash runs, and says so with a Retry button when the check fails (V3X unreachable, too many requests). Transmission's web UI address (…/transmission/web/) is accepted, whitelist refusals (403, 421) are explained, and "Test connection" stops after 12 seconds instead of hanging. The other changes only concern the Windows desktop build.
+  Publish no longer mistakes a cross-seed folder (such as .cross-seed/TrackerB) for the folder of the originals that holds the same names, and a client that already seeds from a folder sees it as is. A new option in Settings ▸ Additions, "qBittorrent automatic management when possible", switches a torrent added in its category's own folder to automatic management once it is 100 % checked. The other changes only concern the desktop build.
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.63
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.64
 dependencies: []
 path: ""
 defaultUsername: ""
