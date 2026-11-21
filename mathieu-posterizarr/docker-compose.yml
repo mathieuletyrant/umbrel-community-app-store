@@ -7,7 +7,7 @@ services:
       APP_PORT: 8000
 
   server:
-    image: ghcr.io/fscorrupt/posterizarr:3.3.7@sha256:34b7be6e380dbd68811fbd594807883ffe74d440f73dc6259fb95e06b323d9d7
+    image: ghcr.io/fscorrupt/posterizarr:4.0.0@sha256:d4aa2958a310904df9d612c75830cadca0f3da23aae204cedfe47ffe5aeef3df
     user: "1000:1000"
     restart: on-failure
     extra_hosts:
