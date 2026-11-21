@@ -60,7 +60,6 @@ releaseNotes: >-
   needs the optional Reclaimerr API key in this app's settings. Update the
   iPhone app from TestFlight at the same time.
 
-
   Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.18.0
 dependencies: []
 path: ""
