@@ -17,7 +17,7 @@ services:
       - ${APP_DATA_DIR}/data/quai:/keys:ro
 
   home:
-    image: ghcr.io/mathieuletyrant/quai-home:0.16.1@sha256:3838e8b77b9d864c79575448490441533b57045fac13739d06fd3d0c34bcfa56
+    image: ghcr.io/mathieuletyrant/quai-home:0.17.0@sha256:b0bb5b6aa6d69fceb1f3dcfcf03c8b0ee8c7719b6049dcc17842223e078cb942
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -25,6 +25,8 @@ services:
       QUAI_INTERNAL_URL: http://mathieu-quai_home_1:8788
       QUAI_RADARR_URL: http://radarr_server_1:7878
       QUAI_SONARR_URL: http://sonarr_server_1:8989
+      QUAI_RADARR_WEB_URL: http://${DEVICE_DOMAIN_NAME}:7878
+      QUAI_SONARR_WEB_URL: http://${DEVICE_DOMAIN_NAME}:8989
       QUAI_JELLYFIN_URL: http://jellyfin_server_1:8096
       QUAI_RECLAIMERR_URL: http://mathieu-reclaimerr_server_1:8000
       QUAI_SEERR_URL: http://jellyseerr_server_1:5055
