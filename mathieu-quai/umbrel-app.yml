@@ -55,12 +55,13 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  A title in the Library opens in Radarr or Sonarr, at home or from outside
-  (set their public addresses in this app's settings). "Wanted" now means what
-  Radarr and Sonarr list as Missing, and a movie not out yet starts no Live
-  Activity. Away from home, the app tries both of Quai's addresses at once
-  instead of saying it can't reach the server. Update the iPhone app from
-  TestFlight at the same time.
+  Quai now sends a notification when Reclaimerr plans to delete a title, and
+  says in plain words why it was picked, so there is time to keep it. This
+  needs the optional Reclaimerr API key in this app's settings. Update the
+  iPhone app from TestFlight at the same time.
+
+
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.18.0
 dependencies: []
 path: ""
 defaultUsername: ""
