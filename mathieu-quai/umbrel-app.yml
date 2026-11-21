@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.17.0"
+version: "0.17.0-patch.1"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -55,9 +55,12 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  In the iPhone app, Play/Pause now shows at once instead of a few seconds
-  later, and the playback card fills its bar on its own, with the time
-  elapsed and left. Update the iPhone app from TestFlight.
+  A title in the Library opens in Radarr or Sonarr, at home or from outside
+  (set their public addresses in this app's settings). "Wanted" now means what
+  Radarr and Sonarr list as Missing, and a movie not out yet starts no Live
+  Activity. Away from home, the app tries both of Quai's addresses at once
+  instead of saying it can't reach the server. Update the iPhone app from
+  TestFlight at the same time.
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -103,6 +106,14 @@ environment:
     services:
       - home
     note: Your qBittorrent Web UI password (for qBittorrent VPN, the default password shown in its settings in umbrelOS).
+  - name: QUAI_RADARR_PUBLIC_URL
+    services:
+      - home
+    note: Optional. Radarr's address from outside (https://radarr.example.com), for the app's "Open in Radarr" away from home. At home it opens Radarr on your Umbrel.
+  - name: QUAI_SONARR_PUBLIC_URL
+    services:
+      - home
+    note: Optional. Sonarr's address from outside, for "Open in Sonarr" away from home.
   - name: QUAI_APNS_KEY_ID
     services:
       - cloud
