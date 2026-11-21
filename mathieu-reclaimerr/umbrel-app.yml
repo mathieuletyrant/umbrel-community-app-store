@@ -7,7 +7,7 @@ name: Reclaimerr
 tagline: Rule-based cleanup for Jellyfin, Plex and Emby libraries
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/jessielw/reclaimerr
-version: "0.6.15"
+version: "0.6.16"
 port: 8011
 description: >-
   Reclaimerr frees disk space on your media server without surprises. It syncs
@@ -61,9 +61,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Users can now be imported from Jellyfin, Emby and Plex in Settings → Users, with missing emails filled from a connected Seerr. Approved deletion requests get an optional grace period, and scheduled deletions can be rescheduled or cancelled; the default stays immediate deletion. The API gains a Leaving Soon endpoint, sizes on cleanup candidates and scoped tokens for delete requests, and Apprise JSON notifications carry structured event data.
+  Notification emails can now use templates. The "Why doesn't this match?" view now tells apart items with no recorded playback from items whose playback date is missing. Tautulli history recovers movie and episode plays after Plex rating keys change, by matching Plex GUIDs on the bound server.
 
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0615---2026-11-20
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0616---2026-11-20
 permissions:
   - STORAGE_DOWNLOADS
 dependencies: []
