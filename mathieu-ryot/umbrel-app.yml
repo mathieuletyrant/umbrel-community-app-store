@@ -59,11 +59,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-4.jpg
 releaseNotes: >-
-  Security fix: Ryot now checks ownership of custom exercises and uploaded files, so one
-  user can no longer see or change another user's custom exercises or uploads.
+  Security fix: descriptions and other rich text are now filtered before display, and the
+  login cookie is no longer readable by scripts in the page (the browser's requests to Ryot
+  now go through a same-origin route). Plex webhook logs also give more detail when a
+  scrobble can't be matched.
 
 
-  Full release notes can be found at https://github.com/IgnisDa/ryot/releases/tag/v10.5.8
+  Full release notes can be found at https://github.com/IgnisDa/ryot/releases/tag/v10.5.9
 dependencies: []
 path: ""
 defaultUsername: ""
