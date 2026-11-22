@@ -45,10 +45,13 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  A retried import no longer recycles and rewrites the library's identical copy of the same file about once a minute, which filled the recycle bin: identical files are now recorded as already imported. The Balanced, Compatible and Efficient scoring personas penalize oversized releases again, so a normal-sized release is preferred over a much larger one of the same quality, and oversized files already in the library can be upgraded. Installs using the bundled TRaSH Guides size rule unchanged get the updated rule on first start.
+  Maintenance rules become lifecycle rules, written in one Simple builder alongside scoring and request rules, which can now also set a request's quality profile, tags and monitoring. Rules can be imported from Sonarr, Radarr and Maintainerr, indexers can carry monthly limits, file moves and imports are safer, archives are extracted once per download, and Scryer now serves a built-in MCP endpoint at /mcp.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.22.5
+  Upgrade note: every lifecycle (maintenance) rule and request rule set you created is removed on upgrade and must be recreated (no files on disk are touched), and every user signs in once more.
+
+
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.23.0
 dependencies: []
 path: ""
 defaultUsername: ""
