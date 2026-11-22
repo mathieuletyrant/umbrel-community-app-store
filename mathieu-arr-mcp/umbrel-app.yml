@@ -7,7 +7,7 @@ name: arr-mcp
 tagline: One MCP server for your whole media stack
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/icon.png
 # renovate: datasource=docker depName=ghcr.io/bardesss/arr-mcp
-version: "2.3.2"
+version: "2.4.0"
 port: 6061
 description: >-
   arr-mcp is a Model Context Protocol (MCP) server that lets an AI assistant
@@ -57,11 +57,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Playback stats now read Plex's whole watch history in one pass, keep the
-  release year of films that were deleted from the library, and no longer count
-  music plays as movie or show plays.
+  Emby can now be added as a media server, alongside Jellyfin and Plex.
+  Jellyfin's Webhook plugin can report finished plays to arr-mcp (music is
+  opt-in), and discovery leaves out titles you already own or watched and ranks
+  the rest by weighted rating. Playback catch-up retries after a failure and
+  keeps stored plays when a full read is cut short.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#232-2026-11-21
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#240-2026-11-22
 
 dependencies: []
 path: ""
