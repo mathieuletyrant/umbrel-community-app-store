@@ -3,12 +3,48 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: mathieu-quai_cloud_1
-      APP_PORT: 8787
-      PROXY_AUTH_WHITELIST: "/api/*"
+      APP_HOST: mathieu-quai_web_1
+      APP_PORT: 80
+      PROXY_AUTH_ADD: "false"
+
+  web:
+    image: nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7
+    init: true
+    command:
+      - sh
+      - -c
+      - |
+        cat > /etc/nginx/conf.d/default.conf <<'CONF'
+        server {
+          listen 80;
+          client_max_body_size 10m;
+          resolver 127.0.0.11 valid=10s;
+          set $$cloud http://mathieu-quai_cloud_1:8787;
+          set $$home http://mathieu-quai_home_1:8788;
+
+          location /api/ {
+            proxy_pass $$cloud;
+            proxy_set_header Host $$http_host;
+            proxy_http_version 1.1;
+            proxy_read_timeout 5m;
+          }
+
+          location / {
+            proxy_pass $$home;
+            proxy_set_header Host $$http_host;
+            proxy_http_version 1.1;
+            proxy_read_timeout 5m;
+          }
+        }
+        CONF
+        exec nginx -g 'daemon off;'
+    depends_on:
+      - cloud
+      - home
+    restart: on-failure
 
   cloud:
-    image: ghcr.io/mathieuletyrant/quai:0.18.2@sha256:8bb8275586dd9b241513460b51b5e7135914a2d7ab30315bfdedb6b3d8221a1b
+    image: ghcr.io/mathieuletyrant/quai:0.20.0@sha256:f1046cf11a39a6fd141473502ab972a8665b74ad425dfac22cee54f5a3c915d3
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -17,11 +53,13 @@ services:
       - ${APP_DATA_DIR}/data/quai:/keys:ro
 
   home:
-    image: ghcr.io/mathieuletyrant/quai-home:0.18.2@sha256:3fe8ea7c26a22daafbc0162f60c185beb34621cbd6039c6131b073d068c5db53
+    image: ghcr.io/mathieuletyrant/quai-home:0.20.0@sha256:d8749e8751e93332f69a9b4eb024e9e36ed5522e976ff4f3b4ac64d3a381c1ea
     restart: on-failure
     environment:
       TZ: Etc/UTC
       QUAI_CLOUD_URL: ws://mathieu-quai_cloud_1:8787/home
+      QUAI_CLOUD_APP_URL: http://${DEVICE_DOMAIN_NAME}:3078
+      QUAI_HOME_PASSWORD: ${APP_PASSWORD}
       QUAI_INTERNAL_URL: http://mathieu-quai_home_1:8788
       QUAI_RADARR_URL: http://radarr_server_1:7878
       QUAI_SONARR_URL: http://sonarr_server_1:8989
