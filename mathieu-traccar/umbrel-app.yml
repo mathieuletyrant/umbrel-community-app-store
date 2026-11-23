@@ -7,7 +7,7 @@ name: Traccar
 tagline: Track phones, cars and GPS devices on your own server
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-traccar/icon.png
 # renovate: datasource=docker depName=traccar/traccar
-version: "6.17.0-patch.1"
+version: "6.17.0-patch.2"
 port: 8802
 description: >-
   Traccar is an open source GPS tracking server. It receives the positions of
@@ -51,7 +51,7 @@ support: https://github.com/traccar/traccar/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-traccar/gallery-1.jpg
 releaseNotes: >-
-  Updates the bundled PostgreSQL database to 18.7, a bug-fix release with no data migration.
+  Updates the bundled PostgreSQL 18.7 database image to its latest rebuild (base image updates, no data migration).
 dependencies: []
 path: ""
 defaultUsername: ""
