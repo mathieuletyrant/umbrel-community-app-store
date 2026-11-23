@@ -1,4 +1,4 @@
-verified: 1.0.0-patch.6 on umbrelOS 2.0.1 (2026-11-08)
+verified: 1.0.0-patch.7 on umbrelOS 2.0.1 (2026-11-23)
 steps:
   - goto: /
   - see: Umbrel MCP Bridge

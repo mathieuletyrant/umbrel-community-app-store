@@ -7,7 +7,7 @@ name: agentgateway
 tagline: One MCP endpoint for all your MCP servers, MCP Apps included
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agentgateway/icon.png
 # renovate: datasource=docker depName=ghcr.io/agentgateway/agentgateway
-version: "1.7.0"
+version: "1.7.0-patch.1"
 port: 15080
 description: >-
   agentgateway is an open-source gateway for AI agents, hosted by the Linux
@@ -50,7 +50,8 @@ repo: https://github.com/agentgateway/agentgateway
 support: https://github.com/agentgateway/agentgateway/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agentgateway/gallery-1.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Updated the nginx sidecar image.
 dependencies: []
 path: ""
 defaultUsername: ""

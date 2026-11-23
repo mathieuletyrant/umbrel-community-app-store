@@ -7,7 +7,7 @@ name: Unpackerr
 tagline: Extract archived downloads so Radarr, Sonarr and Lidarr can import them
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-unpackerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/unpackerr/unpackerr
-version: "v1.0.1-patch.2"
+version: "v1.0.1-patch.3"
 port: 5657
 description: >-
   Some releases arrive as .rar, .7z or .zip archives instead of a playable
@@ -39,7 +39,7 @@ repo: https://github.com/Unpackerr/unpackerr
 support: https://github.com/Unpackerr/unpackerr/issues
 gallery: []
 releaseNotes: >-
-  Updated the nginx status sidecar image.
+  Updated the nginx sidecar image.
 dependencies: []
 path: ""
 defaultUsername: ""
