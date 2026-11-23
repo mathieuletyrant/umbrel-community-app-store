@@ -1,4 +1,4 @@
-verified: 0.17.0-patch.1 on umbrelOS 2.0.1 (2026-11-21)
+verified: 0.20.0 on umbrelOS 2.0.1 (2026-11-23)
 logs:
   cloud: "connected"
   home: "linked as home"
@@ -7,7 +7,7 @@ steps:
   - http: {path: /api/activities, anonymous: true, status: 401}
   - http: {path: /console-api/devices, anonymous: true, status: 401}
   - goto: /
-  - fill: {label: Password, exact: true, value: "${env.home.QUAI_HOME_PASSWORD}"}
+  - fill: {css: "input[type=password]", value: "${env.home.QUAI_HOME_PASSWORD}"}
   - click: {role: button, name: Sign in}
   - see: Set up Quai
   - see: Nothing is pushed
