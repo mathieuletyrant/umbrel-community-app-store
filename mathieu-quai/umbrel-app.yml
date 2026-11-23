@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.18.0"
+version: "0.18.2"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -55,12 +55,13 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai now sends a notification when Reclaimerr plans to delete a title, and
-  says in plain words why it was picked, so there is time to keep it. This
-  needs the optional Reclaimerr API key in this app's settings. Update the
-  iPhone app from TestFlight at the same time.
+  A Live Activity no longer goes missing after a quiet spell: when Apple
+  doesn't answer a push, Quai sends it again on a new connection, and it no
+  longer reuses a connection left idle for 5 minutes. Planned deletions from
+  Reclaimerr are now checked every minute, so they are notified right after
+  Reclaimerr plans them.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.18.0
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.18.2
 dependencies: []
 path: ""
 defaultUsername: ""
