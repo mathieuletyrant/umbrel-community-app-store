@@ -54,10 +54,11 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-snug/gallery-3.jpg
 releaseNotes: >-
-  On the home page, the "I have N min" button and the layout switch now have
-  the same height.
+  When Snug sits behind an authentication proxy (such as a tunnel's login
+  page) and that proxy's session ends, Snug now takes you back to sign in
+  again.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.22.1
+  Full release notes can be found at https://github.com/mathieuletyrant/snug/releases/tag/v0.22.2
 dependencies: []
 path: ""
 defaultUsername: ""
