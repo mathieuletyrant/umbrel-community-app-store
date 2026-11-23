@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.18.2"
+version: "0.20.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -63,13 +63,14 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  A Live Activity no longer goes missing after a quiet spell: when Apple
-  doesn't answer a push, Quai sends it again on a new connection, and it no
-  longer reuses a connection left idle for 5 minutes. Planned deletions from
-  Reclaimerr are now checked every minute, so they are notified right after
-  Reclaimerr plans them.
+  Quai's console is now served by Quai Home and has its own password: the
+  default password umbrelOS shows for this app. Its new Services page is where
+  you paste each service's API key, with the Umbrel addresses already filled
+  in, and checks each one as you save it. The keys stay on your Umbrel. Keys
+  already saved in this app's settings keep working and show as "Env" there.
+  The Umbrel login no longer guards Quai: its own password does.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.18.2
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.20.0
 dependencies: []
 path: ""
 defaultUsername: ""
