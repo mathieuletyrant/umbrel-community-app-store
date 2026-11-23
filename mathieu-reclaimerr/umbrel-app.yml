@@ -61,9 +61,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Notification emails can now use templates. The "Why doesn't this match?" view now tells apart items with no recorded playback from items whose playback date is missing. Tautulli history recovers movie and episode plays after Plex rating keys change, by matching Plex GUIDs on the bound server.
+  The dashboard's Leaving Soon row now shows automatic cleanup, manual schedules and delayed deletion approvals together, each title once, by earliest deadline. Whoever scheduled a deletion directly is now emailed when it completes or fails. Plex sync skips trashed versions when an available copy exists, so sizes and file paths are accurate, and stale rec-* tags are cleared when a title stops matching cleanup rules.
 
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0616---2026-11-20
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0617---2026-11-22
 permissions:
   - STORAGE_DOWNLOADS
 dependencies: []
