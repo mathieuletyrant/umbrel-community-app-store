@@ -31,22 +31,30 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  1. In this app's settings in umbrelOS, paste the API keys of Radarr and
-  Sonarr (Settings → General) and Jellyfin (Dashboard → API Keys), and pick
-  your qBittorrent app with its password. Quai sets up its own webhook in
-  Radarr and Sonarr. Optionally add a Seerr API key to approve requests from
-  the iPhone, a Reclaimerr API key to see its scheduled deletions, and a
-  Prowlarr API key for its alerts. The alerts are set up in Quai's Alerts page.
+  1. Open Quai and sign in with the default password umbrelOS shows for this
+  app.
 
-  2. Put your Apple push key in the Files app at Apps → mathieu-quai → data →
+  2. In Quai's Services page, paste the API key of each service you use:
+  Radarr and Sonarr (Settings → General), Jellyfin (Dashboard → API Keys),
+  and optionally Seerr, Reclaimerr, Cleanuparr and Prowlarr. Their Umbrel
+  addresses are already filled in, and each key is checked as you save it.
+  For qBittorrent, give the address of your qBittorrent app
+  (http://qbittorrent_server_1:8080, or
+  http://mathieu-qbittorrent-vpn_gluetun_1:8080 for qBittorrent VPN) and its
+  password. The keys stay in this app's data and never leave the Umbrel. Keys
+  already saved in this app's settings in umbrelOS keep working, and show as
+  "Env" in that page.
+
+  3. Put your Apple push key in the Files app at Apps → mathieu-quai → data →
   quai, named AuthKey.p8 (developer.apple.com → Keys, with Apple Push
-  Notifications), and enter its key id and your team id in the settings.
+  Notifications), and enter its key id and your team id in this app's
+  settings in umbrelOS.
 
-  3. Open Quai, show a QR code and scan it with the iPhone.
+  4. In Quai's iPhones page, show a QR code and scan it with the iPhone.
 
 
-  The console is behind your Umbrel login; the iPhone app talks to Quai's API
-  directly. ⚠️ Early version: the iPhone app isn't on the App Store yet.
+  Quai has its own password; the iPhone app talks to Quai's API directly.
+  ⚠️ Early version: the iPhone app isn't on the App Store yet.
 developer: Mathieu Le Tyrant
 website: https://github.com/mathieuletyrant/quai-app
 submitter: Mathieu Le Tyrant
@@ -65,21 +73,21 @@ releaseNotes: >-
 dependencies: []
 path: ""
 defaultUsername: ""
-defaultPassword: ""
+deterministicPassword: true
 permissions: []
 environment:
   - name: QUAI_RADARR_API_KEY
     services:
       - home
-    note: Radarr's API key, from Settings → General. Leave empty to skip Radarr.
+    note: Optional, rather set in Quai's Services page. Radarr's API key, from Settings → General; set here, it wins over that page.
   - name: QUAI_SONARR_API_KEY
     services:
       - home
-    note: Sonarr's API key, from Settings → General. Leave empty to skip Sonarr.
+    note: Optional, rather set in Quai's Services page. Sonarr's API key, from Settings → General; set here, it wins over that page.
   - name: QUAI_JELLYFIN_API_KEY
     services:
       - home
-    note: A Jellyfin API key, from Dashboard → API Keys, to know when a title is ready and to follow and control what plays.
+    note: Optional, rather set in Quai's Services page. A Jellyfin API key, from Dashboard → API Keys; set here, it wins over that page.
   - name: QUAI_SEERR_API_KEY
     services:
       - home

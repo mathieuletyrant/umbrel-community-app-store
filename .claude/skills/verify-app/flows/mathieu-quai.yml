@@ -5,8 +5,18 @@ logs:
 steps:
   - http: {path: /api/health, anonymous: true, status: 200, contains: '"status":"ok"'}
   - http: {path: /api/activities, anonymous: true, status: 401}
+  - http: {path: /console-api/devices, anonymous: true, status: 401}
   - goto: /
+  - fill: {label: Password, exact: true, value: "${env.home.QUAI_HOME_PASSWORD}"}
+  - click: {role: button, name: Sign in}
+  - see: Set up Quai
   - see: Nothing is pushed
+  - shot: settings
+  - goto: /#services
+  - see: Not set
+  - click: {role: button, name: Set up}
+  - see: Save and check
+  - shot: services
   - click: {role: link, name: Flows}
   - click: {role: button, name: Choose a flow}
   - see: Jellyfin playback
