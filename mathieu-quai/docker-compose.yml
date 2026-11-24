@@ -44,7 +44,7 @@ services:
     restart: on-failure
 
   cloud:
-    image: ghcr.io/mathieuletyrant/quai:0.24.0@sha256:0eb67fbc4b46885111abc3d7b25b4b457781a781a9cb87ff02e4bf50fad96b56
+    image: ghcr.io/mathieuletyrant/quai:0.25.0@sha256:86d290573451256fdb3aeb478d9142a3c5a395d634fda57de065db7b4e2e62d8
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -53,7 +53,7 @@ services:
       - ${APP_DATA_DIR}/data/quai:/keys:ro
 
   home:
-    image: ghcr.io/mathieuletyrant/quai-home:0.24.0@sha256:52cb4be787507c72d635f703456cad5aec843f01907c52f175d0d6521bd96721
+    image: ghcr.io/mathieuletyrant/quai-home:0.25.0@sha256:7f5caa2ff46822f5eb09ccb1fb56c75dba7d99611936af4060b42d067db3b39e
     restart: on-failure
     command:
       - sh
