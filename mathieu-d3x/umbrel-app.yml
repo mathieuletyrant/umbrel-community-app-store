@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.66-patch.1"
+version: "1.1.67"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,7 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Updated the nginx sidecar image.
+  Publish now detects a file that isn't finished downloading (blocks of zeros in a video, track or book) after hashing, says which one in Publish and the batch, and sends nothing to V3X, which now refuses such a torrent. The zero padding FLAC and MP3 files often keep right after their tags and cover art is no longer mistaken for a hole.
+
+
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.67
 dependencies: []
 path: ""
 defaultUsername: ""
