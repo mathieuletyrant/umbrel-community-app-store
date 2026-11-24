@@ -57,7 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Updated the nginx sidecar image.
+  Cross-seed fixes: a V3X release that only puts your copy in an extra folder is now added to qBittorrent without that folder and without renaming, and a torrent added "under your names" now lands in your copy's category instead of a literal "{cat}" category that also left it in manual management.
+
+
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.65
 dependencies: []
 path: ""
 defaultUsername: ""
