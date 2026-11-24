@@ -59,7 +59,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-ryot/gallery-4.jpg
 releaseNotes: >-
-  Updates the bundled PostgreSQL 18.7 database image to its latest rebuild (base image updates, no data migration).
+  Web notifications (Gotify, ntfy, Apprise and other webhooks) now only go to
+  public HTTPS addresses by default, including destinations saved before the
+  update, and the test button now reports failed deliveries. If your
+  notification server runs on your home network or on this Umbrel, set
+  NOTIFICATIONS_ALLOW_PRIVATE_NETWORKS to true in this app's settings.
+
+
+  Full release notes can be found at https://github.com/IgnisDa/ryot/releases/tag/v10.6.0
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -97,6 +104,14 @@ environment:
       - "true"
       - "false"
     note: Whether new accounts can sign up. Set to false once everyone has an account.
+  - name: NOTIFICATIONS_ALLOW_PRIVATE_NETWORKS
+    services:
+      - server
+    default: "false"
+    options:
+      - "false"
+      - "true"
+    note: Allow notifications to servers on your home network or this Umbrel (Gotify, ntfy, Apprise). Off by default, only public HTTPS addresses are allowed.
   - name: SERVER_PRO_KEY
     services:
       - server
