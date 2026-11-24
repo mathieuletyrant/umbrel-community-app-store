@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.27.0"
+version: "0.27.2"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -74,15 +74,21 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Search Seerr from the iPhone: type or say a title, pick it among Seerr's
-  results and request it (a series asks which seasons). A Lock Screen control
-  opens the search already listening, a Lock Screen widget with the keyboard
-  up, and "Search in Quai" works with Siri. In the app's Settings, each iPhone
-  picks the Seerr user its requests are made for. Needs the new iPhone app.
+  "Ready to watch" now finds a title in Jellyfin by its TMDB or TVDB id,
+  whatever Jellyfin names it: a series Sonarr calls "Our House (2022)" no
+  longer stays on "Importing". A season pack keeps its name while its
+  episodes import one by one, and waits for all of them.
 
 
-  The app no longer shows "Can't reach" when you come back to it, and a dot
-  beside the Home's title says when it is connected.
+  When Radarr or Sonarr can't import a download on its own, the Live
+  Activity turns grey and says "Import blocked · see To fix" until it's
+  imported. Quai turns on that event in their webhook when it starts.
+
+
+  In the iPhone app, everything on its way (searching, downloading,
+  importing) is in the floating bar over the tabs. Posters stay loaded in the
+  Library, tapping a search result opens it, and the search shows its loader
+  at once. Needs the new iPhone app.
 dependencies: []
 path: ""
 defaultUsername: ""
