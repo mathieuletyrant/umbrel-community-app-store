@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.65"
+version: "1.1.66"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Cross-seed fixes: a V3X release that only puts your copy in an extra folder is now added to qBittorrent without that folder and without renaming, and a torrent added "under your names" now lands in your copy's category instead of a literal "{cat}" category that also left it in manual management.
+  Cross-seed: a copy whose files you renamed in your torrent client is now compared using its current names, so when they match the V3X listing it shows as "To add" instead of "Different names". The "V3X Exclusive" checkbox is gone from the publish form, since the site no longer has that label.
 
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.65
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.66
 dependencies: []
 path: ""
 defaultUsername: ""
