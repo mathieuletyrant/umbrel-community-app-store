@@ -9,7 +9,7 @@ name: qBittorrent VPN
 tagline: qBittorrent behind a VPN, with a kill switch and port forwarding
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/icon.png
 # renovate: datasource=docker depName=ghcr.io/hotio/qbittorrent
-version: "5.3.0-patch.7"
+version: "5.3.1"
 port: 8185
 description: >-
   The qBittorrent BitTorrent client, with all of its traffic sent through your
@@ -83,8 +83,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-qbittorrent-vpn/gallery-3.jpg
 releaseNotes: >-
-  Updates qBittorrent 5.3.0 to hotio's latest rebuild of the image (base system
-  packages), with no change to qBittorrent itself.
+  qBittorrent 5.3.1 is a bugfix release: torrents without metadata no longer
+  trip piece info, WebTorrent trackers in magnet links are accepted again, and
+  resume data is saved more reliably at shutdown. The Web UI keeps web seed URLs
+  when editing and lets search plugins download their own results.
+
+  Full release notes can be found at https://www.qbittorrent.org/news
 dependencies: []
 path: ""
 defaultUsername: "admin"
