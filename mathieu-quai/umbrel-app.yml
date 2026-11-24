@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.23.0"
+version: "0.24.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -65,14 +65,15 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  You can now link Quai to the hosted Quai Cloud at cloud.quai.stream instead
-  of the one in this app: pick it in this app's settings in umbrelOS (Quai
-  Cloud), then pair your iPhones again. The hosted Cloud sends the pushes with
-  Quai's own Apple key and keeps nothing; your services' keys and your data
-  stay on the Umbrel. The Cloud in this app remains the default. The Home tab
-  also shows posters on its Out today tile.
+  With the hosted Quai Cloud, Quai's Settings page now shows only what
+  matters: whether it's connected, and its version. With the Quai Cloud in
+  this app, its details stay, in plainer words.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.23.0
+  The iPhone app's "Open the console" now opens this app instead of the
+  Quai Cloud. Pair your iPhones again from Quai's iPhones page so the app
+  learns the console's address (it needs the TestFlight build of 0.24.0).
+
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.24.0
 dependencies: []
 path: ""
 defaultUsername: ""
