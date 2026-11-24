@@ -1,11 +1,18 @@
+verified: 0.109.0 on umbrelOS 2.0.1 (2026-11-24)
 timeout: 420
 steps:
   - goto: /
   - see: Welcome — create your admin account.
-  - fill: {label: Admin username, value: verify}
+  # The form remounts once /auth/config answers and drops what was typed before: password fields first,
+  # the username last, checked before submitting.
   - fill: {label: Password, exact: true, value: Verify-Uchiyomi-1}
   - fill: {label: Confirm password, value: Verify-Uchiyomi-1}
+  - wait: 2000
+  - fill: {label: Admin username, value: verify}
   - click: {role: button, name: Create admin account & open Uchiyomi}
+  - see: Welcome to Uchiyomi
   - goto: /library
   - see: Your library is empty.
-  - shot: library
+  - goto: /
+  - see: Welcome to Uchiyomi
+  - shot: home
