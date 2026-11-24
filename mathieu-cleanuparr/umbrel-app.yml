@@ -40,10 +40,10 @@ support: https://github.com/Cleanuparr/Cleanuparr/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-cleanuparr/gallery-1.jpg
 releaseNotes: >-
-  Security fixes: HTTPS connections now validate TLS certificates again (they were skipped for every connection), and the temporary login token no longer grants full access. Queue rules get an option to leave upgrade downloads alone, and Apprise notifications are updated.
+  Download clients can now use HTTP digest authentication. Fixes dry runs that still triggered replacement searches as if they were live runs. The qBittorrent and Transmission clients are now built into Cleanuparr instead of coming from third-party packages.
 
 
-  Full release notes can be found at https://github.com/Cleanuparr/Cleanuparr/releases/tag/v2.11.1
+  Full release notes can be found at https://github.com/Cleanuparr/Cleanuparr/releases/tag/v2.11.2
 dependencies: []
 path: ""
 defaultUsername: ""
