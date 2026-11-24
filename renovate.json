@@ -44,6 +44,7 @@
     },
     { "matchPackageNames": ["qmcgaw/gluetun"], "commitMessageTopic": "Gluetun", "allowedVersions": "!/^v3\\.41\\./" },
     { "matchPackageNames": ["nginx"], "commitMessageTopic": "nginx sidecar" },
+    { "matchPackageNames": ["ghcr.io/flaresolverr/flaresolverr"], "commitMessageTopic": "FlareSolverr sidecar" },
     { "matchPackageNames": ["postgres"], "commitMessageTopic": "PostgreSQL sidecar", "allowedVersions": "<19" },
     { "matchPackageNames": ["surrealdb/surrealdb"], "commitMessageTopic": "SurrealDB sidecar", "allowedVersions": "<3" },
     { "matchPackageNames": ["ghcr.io/samik081/mcp-adguard-home"], "commitMessageTopic": "AdGuard MCP" },
@@ -99,6 +100,7 @@
     { "matchPackageNames": ["linuxserver/transmission"], "commitMessageTopic": "Transmission VPN" },
     { "matchPackageNames": ["haveagitgat/tdarr"], "commitMessageTopic": "Tdarr" },
     { "matchPackageNames": ["ghcr.io/chrisbenincasa/tunarr"], "commitMessageTopic": "Tunarr" },
+    { "matchPackageNames": ["ghcr.io/angelosha/uchiyomi"], "commitMessageTopic": "Uchiyomi" },
     { "matchPackageNames": ["ghcr.io/unpackerr/unpackerr"], "commitMessageTopic": "Unpackerr" },
     { "matchPackageNames": ["vaultwarden/server"], "commitMessageTopic": "Vaultwarden" },
     { "matchPackageNames": ["ghcr.io/scryer-media/weaver"], "commitMessageTopic": "Weaver" },
@@ -106,6 +108,11 @@
     { "matchPackageNames": ["ghcr.io/mathieuletyrant/**", "!ghcr.io/mathieuletyrant/spotarr", "!ghcr.io/mathieuletyrant/arrglue", "!ghcr.io/mathieuletyrant/snug", "!ghcr.io/mathieuletyrant/quai", "!ghcr.io/mathieuletyrant/quai-home", "!ghcr.io/mathieuletyrant/lueur"], "enabled": false },
     {
       "matchPackageNames": ["ghcr.io/nullable-eth/labelarr"],
+      "matchManagers": ["custom.regex"],
+      "extractVersion": "^v(?<version>.+)$"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/angelosha/uchiyomi"],
       "matchManagers": ["custom.regex"],
       "extractVersion": "^v(?<version>.+)$"
     },

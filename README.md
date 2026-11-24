@@ -42,6 +42,7 @@ Companions for Radarr and Sonarr, torrents behind a VPN, watch trackers, live TV
 - 🧩 [**Scryer**](mathieu-scryer): a whole *arr stack (movies, series, anime) in one binary
 - ⚽ [**Sportarr**](mathieu-sportarr): a PVR for sports leagues and events
 - 🦸 [**Kapowarr**](mathieu-kapowarr): comic book library manager
+- 📚 [**Uchiyomi**](mathieu-uchiyomi): manga, manhwa and webtoon server and reader that downloads new chapters too
 - 📖 [**Chaptarr**](mathieu-chaptarr): ebooks and audiobooks, the Readarr successor
 - 📰 [**Weaver**](mathieu-weaver): Usenet downloader with PAR2 repair and extraction built in
 
