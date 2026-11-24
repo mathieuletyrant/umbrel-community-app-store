@@ -7,7 +7,7 @@ name: Posterizarr
 tagline: Automated, consistent posters and title cards for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/fscorrupt/posterizarr
-version: "4.0.0"
+version: "4.0.1"
 port: 8007
 description: >-
   Posterizarr gives your whole Plex library a matching look. It fetches
