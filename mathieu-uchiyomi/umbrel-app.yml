@@ -1,0 +1,72 @@
+manifestVersion: 1
+id: mathieu-uchiyomi
+storage:
+  dataRoot: data
+folderAccess:
+  - id: umbrel-downloads:manga
+    name: Manga library
+    note: Your existing manga, manhwa and webtoons (CBZ, CBR, PDF, image EPUB or folders of images, any layout), seen inside Uchiyomi at /library.
+    mounts:
+      - service: server
+        targetPath: /library
+category: media
+name: Uchiyomi
+tagline: Self-hosted manga server that downloads new chapters too
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-uchiyomi/icon.png
+# renovate: datasource=docker depName=ghcr.io/angelosha/uchiyomi
+version: "0.109.0"
+port: 8110
+description: >-
+  Uchiyomi is a manga, manhwa and webtoon server that also downloads. It serves the CBZ, CBR,
+  PDF and image EPUB files you already own the way Komga or Kavita do, follows series and grabs
+  new chapters by itself the way Mihon does, and puts a webtoon-first reader in front of both:
+  continuous scroll straight into the next chapter, wide pages split, borders cropped, and an
+  app you install on your phone that reads offline.
+
+
+  It fetches from MangaDex or from a manga site whose address you paste, prefers or blocks
+  scanlation groups, and estimates when each series' next chapter is due. Health finds chapter
+  gaps, bad downloads and failing sources, and Fix everything works through them. Built for a
+  household: one account each with its own progress, age limits, two-factor sign-in, OPDS for
+  KOReader or Panels, and nightly backups.
+
+
+  The database runs inside the app and a Cloudflare solver (FlareSolverr) comes with it. The
+  optional Mihon extension engine is not part of this package.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and create the admin account: there is no default password.
+
+  2. Put your existing files in the Downloads folder, under `manga` (Files app or a network
+  share), or pick another folder in this app's settings on umbrelOS 2.0. They appear after the
+  first scan. What Uchiyomi downloads itself stays in its own app data.
+
+  3. To follow series, add MangaDex or a site's address in Admin → Sources. You are responsible
+  for using a source in line with its terms and your local law.
+
+  4. OPDS readers and the Mihon extension sign in with a personal token from your profile, at
+  `http://umbrel.local:8110/opds`; those paths skip the Umbrel login, everything else stays
+  behind it.
+developer: AngeloSha
+website: https://uchiyomi.com
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store/issues/743
+repo: https://github.com/AngeloSha/uchiyomi
+support: https://github.com/AngeloSha/uchiyomi/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-uchiyomi/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-uchiyomi/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-uchiyomi/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-uchiyomi/gallery-4.jpg
+releaseNotes: ""
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
+backupIgnore:
+  - data/cache/*

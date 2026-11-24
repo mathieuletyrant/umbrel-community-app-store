@@ -1,0 +1,11 @@
+timeout: 420
+steps:
+  - goto: /
+  - see: Welcome — create your admin account.
+  - fill: {label: Admin username, value: verify}
+  - fill: {label: Password, exact: true, value: Verify-Uchiyomi-1}
+  - fill: {label: Confirm password, value: Verify-Uchiyomi-1}
+  - click: {role: button, name: Create admin account & open Uchiyomi}
+  - goto: /library
+  - see: Your library is empty.
+  - shot: library
