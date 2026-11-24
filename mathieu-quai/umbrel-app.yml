@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.26.0"
+version: "0.27.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -20,7 +20,8 @@ description: >-
   search to import, what plays on Jellyfin (with Play/Pause). What goes wrong
   and may last is an alert, a plain notification when it starts and when it's
   over: a service that stops answering, the media disk running low, a problem
-  Radarr, Sonarr or Prowlarr report.
+  Radarr, Sonarr or Prowlarr report. And it searches Seerr: type or say a
+  title in the app, or from a Lock Screen control, and request it in a tap.
 
 
   This app runs both halves of Quai: Quai Home, which holds your services'
@@ -73,7 +74,15 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Updated the nginx sidecar image.
+  Search Seerr from the iPhone: type or say a title, pick it among Seerr's
+  results and request it (a series asks which seasons). A Lock Screen control
+  opens the search already listening, a Lock Screen widget with the keyboard
+  up, and "Search in Quai" works with Siri. In the app's Settings, each iPhone
+  picks the Seerr user its requests are made for. Needs the new iPhone app.
+
+
+  The app no longer shows "Can't reach" when you come back to it, and a dot
+  beside the Home's title says when it is connected.
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -107,7 +116,7 @@ environment:
   - name: QUAI_SEERR_API_KEY
     services:
       - home
-    note: Optional. Seerr's API key (Settings → General), to approve or decline requests waiting for you from the iPhone. Quai sets up Seerr's webhook if none is set.
+    note: Optional. Seerr's API key (Settings → General), to search and request titles from the iPhone, and approve or decline requests waiting for you. Quai sets up Seerr's webhook if none is set.
   - name: QUAI_CLEANUPARR_API_KEY
     services:
       - home
