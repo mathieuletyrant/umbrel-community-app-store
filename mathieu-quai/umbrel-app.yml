@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.25.1"
+version: "0.25.1-patch.1"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -73,10 +73,7 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Bug fix release: the iOS app is now built for iPhone only, and the Discord
-  link points to a permanent invite. Nothing changes in this app's settings.
-
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.25.1
+  Updated the nginx sidecar image.
 dependencies: []
 path: ""
 defaultUsername: ""
