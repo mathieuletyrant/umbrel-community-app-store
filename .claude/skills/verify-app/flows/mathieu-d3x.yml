@@ -1,4 +1,4 @@
-verified: 1.1.65 on umbrelOS 2.0.1 (2026-11-24)
+verified: 1.1.66-patch.1 on umbrelOS 2.0.1 (2026-11-24)
 steps:
   - goto: /
   - see: Analyser mon client
