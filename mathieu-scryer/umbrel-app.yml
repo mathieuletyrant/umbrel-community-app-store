@@ -7,7 +7,7 @@ name: Scryer
 tagline: A whole *arr stack in one app — movies, series and anime
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/icon.png
 # renovate: datasource=docker depName=ghcr.io/scryer-media/scryer
-version: "0.23.0"
+version: "0.23.1"
 port: 8380
 description: >-
   Scryer replaces Sonarr, Radarr, Prowlarr and Bazarr with a single native
@@ -45,13 +45,13 @@ support: https://github.com/scryer-media/scryer/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-scryer/gallery-1.jpg
 releaseNotes: >-
-  Maintenance rules become lifecycle rules, written in one Simple builder alongside scoring and request rules, which can now also set a request's quality profile, tags and monitoring. Rules can be imported from Sonarr, Radarr and Maintainerr, indexers can carry monthly limits, file moves and imports are safer, archives are extracted once per download, and Scryer now serves a built-in MCP endpoint at /mcp.
+  Imports that copy a file into a library on a CIFS/SMB network mount work again: in 0.23.0 they failed with a permission error and left a 0-byte file behind. The recycle bin again purges files replaced by an upgrade, including entries an earlier version had quarantined.
 
 
-  Upgrade note: every lifecycle (maintenance) rule and request rule set you created is removed on upgrade and must be recreated (no files on disk are touched), and every user signs in once more.
+  On first start, a one-time background pass removes the 0-byte files left in libraries by failed 0.23.0 imports; affected movies or episodes go back up for search after their next scan.
 
 
-  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.23.0
+  Full release notes can be found at https://github.com/scryer-media/scryer/releases/tag/scryer-v0.23.1
 dependencies: []
 path: ""
 defaultUsername: ""
