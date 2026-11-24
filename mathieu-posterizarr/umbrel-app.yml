@@ -7,7 +7,7 @@ name: Posterizarr
 tagline: Automated, consistent posters and title cards for Plex
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/icon.png
 # renovate: datasource=docker depName=ghcr.io/fscorrupt/posterizarr
-version: "4.0.1"
+version: "4.0.2"
 port: 8007
 description: >-
   Posterizarr gives your whole Plex library a matching look. It fetches
@@ -54,13 +54,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/gallery-2.jpg
 releaseNotes: >-
-  Posterizarr 4.0.1 adds an in-app Community Gallery to import ready-made
-  blueprints and overlay bundles, a global search (Ctrl+K), Asset Title Review as
-  its own page that works without Dynamic Overlays, and custom PNG overlays per
-  library. It fixes regional language overlays, the AIRING status badge, missing
-  overlay templates, logo settings and leftover lock files after a stopped run.
+  Posterizarr 4.0.2 is a maintenance release. It fixes custom image overlay
+  uploads in Dynamic Overlays, which failed with "Uploaded file is not a valid
+  image", and updates the web UI's translation libraries to patch a security
+  advisory.
 
-  Full release notes can be found at https://github.com/fscorrupt/posterizarr/releases/tag/4.0.1
+  Full release notes can be found at https://github.com/fscorrupt/posterizarr/releases/tag/4.0.2
 dependencies: []
 path: ""
 defaultUsername: ""
