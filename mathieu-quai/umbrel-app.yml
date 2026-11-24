@@ -73,20 +73,10 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  New setting, QUAI_CONSOLE_PUBLIC_URL: the console's address from outside,
-  behind your own proxy or tunnel. The pairing QR code carries it next to the
-  address you opened the console at, and the iPhone app's "Open the console"
-  opens the local one at home and this one when out. Pair your iPhones again
-  after setting it.
+  Bug fix release: the iOS app is now built for iPhone only, and the Discord
+  link points to a permanent invite. Nothing changes in this app's settings.
 
-  The Quai Cloud in this app reads QUAI_CLOUD_PUBLIC_URL and
-  QUAI_CLOUD_PUBLIC_HEADERS instead of QUAI_PUBLIC_URL and
-  QUAI_PUBLIC_HEADERS: if you use it, enter them again under their new names.
-  They are unused with the hosted Quai Cloud (cloud.quai.stream).
-
-  The console's Settings page shows only the link with the hosted Quai Cloud.
-
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.25.0
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.25.1
 dependencies: []
 path: ""
 defaultUsername: ""
