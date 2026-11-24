@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.27.2"
+version: "0.27.3"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -74,9 +74,10 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  "Ready to watch" now finds a title in Jellyfin by its TMDB or TVDB id,
-  whatever Jellyfin names it: a series Sonarr calls "Our House (2022)" no
-  longer stays on "Importing". A season pack keeps its name while its
+  "Ready to watch" now finds a title in Jellyfin by any id both know (TMDB,
+  TVDB or IMDb), whatever Jellyfin names it: a series Sonarr calls "Our House
+  (2022)", or that Jellyfin knows without its TVDB plugin, no longer stays on
+  "Importing". A season pack keeps its name while its
   episodes import one by one, and waits for all of them.
 
 
