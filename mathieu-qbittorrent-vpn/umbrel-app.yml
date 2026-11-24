@@ -88,7 +88,6 @@ releaseNotes: >-
   resume data is saved more reliably at shutdown. The Web UI keeps web seed URLs
   when editing and lets search plugins download their own results.
 
-
   Full release notes can be found at https://www.qbittorrent.org/news
 dependencies: []
 path: ""
