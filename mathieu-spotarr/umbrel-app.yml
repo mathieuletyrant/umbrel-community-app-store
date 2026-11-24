@@ -55,10 +55,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-spotarr/gallery-3.jpg
 releaseNotes: >-
-  The web app now asks you to sign in again when the session of an auth proxy in front of Spotarr ends, instead of failing silently.
+  A new setting, Seerr → Request as user, makes Spotarr's requests as a Seerr user you pick, so they follow that user's permissions: without Auto-Approve they wait for approval in Seerr. The watchlist stays the API key owner's, and leaving the setting empty keeps the previous behaviour (requests approved at once as the admin).
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.17.2
+  Full release notes can be found at https://github.com/mathieuletyrant/spotarr/releases/tag/v0.18.0
 dependencies: []
 path: ""
 defaultUsername: ""
