@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.24.0"
+version: "0.25.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -33,10 +33,15 @@ description: >-
   🛠️ SETUP INSTRUCTIONS
 
 
-  1. Open Quai and sign in with the default password umbrelOS shows for this
+  1. In this app's settings in umbrelOS, set Quai Cloud (QUAI_CLOUD_URL) to
+  wss://cloud.quai.stream/home: the hosted Quai Cloud, free during the beta,
+  with nothing more to set up. The default keeps the Quai Cloud in this app,
+  which needs your own Apple push key and your own build of the iPhone app.
+
+  2. Open Quai and sign in with the default password umbrelOS shows for this
   app.
 
-  2. In Quai's Services page, paste the API key of each service you use:
+  3. In Quai's Services page, paste the API key of each service you use:
   Radarr and Sonarr (Settings → General), Jellyfin (Dashboard → API Keys),
   and optionally Seerr, Reclaimerr, Cleanuparr and Prowlarr. Their Umbrel
   addresses are already filled in, and each key is checked as you save it.
@@ -47,12 +52,15 @@ description: >-
   already saved in this app's settings in umbrelOS keep working, and show as
   "Env" in that page.
 
-  3. Put your Apple push key in the Files app at Apps → mathieu-quai → data →
-  quai, named AuthKey.p8 (developer.apple.com → Keys, with Apple Push
-  Notifications), and enter its key id and your team id in this app's
-  settings in umbrelOS.
+  4. Optional: to open the console from outside, put this app behind your
+  own proxy or tunnel and set QUAI_CONSOLE_PUBLIC_URL to that address in this
+  app's settings. The iPhone app then opens the console at home or away.
 
-  4. In Quai's iPhones page, show a QR code and scan it with the iPhone.
+  5. In Quai's iPhones page, show a QR code and scan it with the iPhone.
+
+  Only with the Quai Cloud in this app: put your Apple push key in the Files
+  app at Apps → mathieu-quai → data → quai, named AuthKey.p8, and enter its
+  key id and your team id in this app's settings.
 
 
   Quai has its own password; the iPhone app talks to Quai's API directly.
@@ -65,15 +73,20 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  With the hosted Quai Cloud, Quai's Settings page now shows only what
-  matters: whether it's connected, and its version. With the Quai Cloud in
-  this app, its details stay, in plainer words.
+  New setting, QUAI_CONSOLE_PUBLIC_URL: the console's address from outside,
+  behind your own proxy or tunnel. The pairing QR code carries it next to the
+  address you opened the console at, and the iPhone app's "Open the console"
+  opens the local one at home and this one when out. Pair your iPhones again
+  after setting it.
 
-  The iPhone app's "Open the console" now opens this app instead of the
-  Quai Cloud. Pair your iPhones again from Quai's iPhones page so the app
-  learns the console's address (it needs the TestFlight build of 0.24.0).
+  The Quai Cloud in this app reads QUAI_CLOUD_PUBLIC_URL and
+  QUAI_CLOUD_PUBLIC_HEADERS instead of QUAI_PUBLIC_URL and
+  QUAI_PUBLIC_HEADERS: if you use it, enter them again under their new names.
+  They are unused with the hosted Quai Cloud (cloud.quai.stream).
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.24.0
+  The console's Settings page shows only the link with the hosted Quai Cloud.
+
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.25.0
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -88,6 +101,10 @@ environment:
       - ws://mathieu-quai_cloud_1:8787/home
       - wss://cloud.quai.stream/home
     note: Which Quai Cloud runs your flows and sends the pushes. The first is the one in this app, with your own Apple push key below. The second is the hosted Quai Cloud, which needs no Apple key; then pair your iPhones again.
+  - name: QUAI_CONSOLE_PUBLIC_URL
+    services:
+      - home
+    note: Optional. The console's address from outside, behind your own proxy or tunnel (https://quai.example.com). It goes in the pairing QR code, so the iPhone app's "Open the console" works away from home. Pair your iPhones again after setting it.
   - name: QUAI_RADARR_API_KEY
     services:
       - home
@@ -138,16 +155,16 @@ environment:
   - name: QUAI_APNS_KEY_ID
     services:
       - cloud
-    note: The id of your Apple push key (the 10 characters in AuthKey_XXXXXXXXXX.p8). Put the file itself in data/quai as AuthKey.p8.
+    note: Only with the Quai Cloud in this app, unused with cloud.quai.stream. The id of your Apple push key (the 10 characters in AuthKey_XXXXXXXXXX.p8). Put the file itself in data/quai as AuthKey.p8.
   - name: QUAI_APNS_TEAM_ID
     services:
       - cloud
-    note: Your Apple developer team id (developer.apple.com → Membership).
-  - name: QUAI_PUBLIC_URL
+    note: Only with the Quai Cloud in this app, unused with cloud.quai.stream. Your Apple developer team id (developer.apple.com → Membership).
+  - name: QUAI_CLOUD_PUBLIC_URL
     services:
       - cloud
-    note: Optional. Quai's address from outside (behind Cloudflare Access, say), added to the pairing QR code.
-  - name: QUAI_PUBLIC_HEADERS
+    note: Only with the Quai Cloud in this app, unused with cloud.quai.stream. Optional. That Quai Cloud's address from outside (behind Cloudflare Access, say), added to the pairing QR code so the iPhone app reaches it away from home. Not the console's address, which is QUAI_CONSOLE_PUBLIC_URL.
+  - name: QUAI_CLOUD_PUBLIC_HEADERS
     services:
       - cloud
-    note: 'Optional. Headers your proxy asks the iPhone app for, as "Name: value" pairs separated by ";" (a Cloudflare Access service token is "CF-Access-Client-Id: …; CF-Access-Client-Secret: …"). They go in the pairing QR code.'
+    note: 'Only with the Quai Cloud in this app, unused with cloud.quai.stream. Optional. Headers your proxy asks the iPhone app for, as "Name: value" pairs separated by ";" (a Cloudflare Access service token is "CF-Access-Client-Id: …; CF-Access-Client-Secret: …"). They go in the pairing QR code.'
