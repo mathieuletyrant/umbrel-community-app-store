@@ -57,7 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Updated the nginx sidecar image.
+  Publish now detects a file that isn't finished downloading (blocks of zeros in a video, track or book) after hashing, says which one in Publish and the batch, and sends nothing to V3X, which now refuses such a torrent. The zero padding FLAC and MP3 files often keep right after their tags and cover art is no longer mistaken for a hole.
+
+
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.67
 dependencies: []
 path: ""
 defaultUsername: ""
