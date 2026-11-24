@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.20.0"
+version: "0.23.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -25,7 +25,9 @@ description: >-
 
   This app runs both halves of Quai: Quai Home, which holds your services'
   keys and your data, and Quai Cloud, which runs the flows and sends the
-  pushes. Nothing leaves the Umbrel but the pushes to Apple.
+  pushes. Nothing leaves the Umbrel but the pushes to Apple. You can instead
+  link Quai Home to the hosted Quai Cloud (cloud.quai.stream) in this app's
+  settings: it needs no Apple key, and keeps nothing.
 
 
   🛠️ SETUP INSTRUCTIONS
@@ -63,20 +65,28 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai's console is now served by Quai Home and has its own password: the
-  default password umbrelOS shows for this app. Its new Services page is where
-  you paste each service's API key, with the Umbrel addresses already filled
-  in, and checks each one as you save it. The keys stay on your Umbrel. Keys
-  already saved in this app's settings keep working and show as "Env" there.
-  The Umbrel login no longer guards Quai: its own password does.
+  You can now link Quai to the hosted Quai Cloud at cloud.quai.stream instead
+  of the one in this app: pick it in this app's settings in umbrelOS (Quai
+  Cloud), then pair your iPhones again. The hosted Cloud sends the pushes with
+  Quai's own Apple key and keeps nothing; your services' keys and your data
+  stay on the Umbrel. The Cloud in this app remains the default. The Home tab
+  also shows posters on its Out today tile.
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.20.0
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/releases/tag/v0.23.0
 dependencies: []
 path: ""
 defaultUsername: ""
 deterministicPassword: true
 permissions: []
 environment:
+  - name: QUAI_CLOUD_URL
+    services:
+      - home
+    default: ws://mathieu-quai_cloud_1:8787/home
+    options:
+      - ws://mathieu-quai_cloud_1:8787/home
+      - wss://cloud.quai.stream/home
+    note: Which Quai Cloud runs your flows and sends the pushes. The first is the one in this app, with your own Apple push key below. The second is the hosted Quai Cloud, which needs no Apple key; then pair your iPhones again.
   - name: QUAI_RADARR_API_KEY
     services:
       - home

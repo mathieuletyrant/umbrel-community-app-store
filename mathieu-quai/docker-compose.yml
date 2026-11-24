@@ -44,7 +44,7 @@ services:
     restart: on-failure
 
   cloud:
-    image: ghcr.io/mathieuletyrant/quai:0.20.0@sha256:f1046cf11a39a6fd141473502ab972a8665b74ad425dfac22cee54f5a3c915d3
+    image: ghcr.io/mathieuletyrant/quai:0.23.0@sha256:1862957364c22b34c3d9dcd8b26d09cb3f8e10a8eed0d0a259026a0ed026a5bb
     restart: on-failure
     environment:
       TZ: Etc/UTC
@@ -53,12 +53,19 @@ services:
       - ${APP_DATA_DIR}/data/quai:/keys:ro
 
   home:
-    image: ghcr.io/mathieuletyrant/quai-home:0.20.0@sha256:d8749e8751e93332f69a9b4eb024e9e36ed5522e976ff4f3b4ac64d3a381c1ea
+    image: ghcr.io/mathieuletyrant/quai-home:0.23.0@sha256:ca8b396dbb685abf521c610ed59df65754512b420ec4b3ba0742d75602277a13
     restart: on-failure
+    command:
+      - sh
+      - -c
+      - |
+        if [ "$$QUAI_CLOUD_URL" = "ws://mathieu-quai_cloud_1:8787/home" ]; then
+          export QUAI_CLOUD_APP_URL="http://${DEVICE_DOMAIN_NAME}:3078"
+        fi
+        exec node --disable-warning=ExperimentalWarning main.js
     environment:
       TZ: Etc/UTC
       QUAI_CLOUD_URL: ws://mathieu-quai_cloud_1:8787/home
-      QUAI_CLOUD_APP_URL: http://${DEVICE_DOMAIN_NAME}:3078
       QUAI_HOME_PASSWORD: ${APP_PASSWORD}
       QUAI_INTERNAL_URL: http://mathieu-quai_home_1:8788
       QUAI_RADARR_URL: http://radarr_server_1:7878
