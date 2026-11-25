@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.27.4"
+version: "0.27.6"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -74,20 +74,19 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  "Ready to watch" now finds titles Jellyfin just added: Quai lists Jellyfin's
-  library as an administrator (without a user, Jellyfin leaves the newest
-  titles out), and matches them by TMDB, TVDB or IMDb id, whatever Jellyfin
-  names them. A season pack keeps its name while its episodes import one by
-  one.
+  A download that leaves qBittorrent before its import (a failed release
+  Sonarr or Radarr replaced, or one Cleanuparr removed) now ends its Live
+  Activity, grey, instead of leaving it at 0 %. The next release grabbed
+  starts its own.
 
 
-  When Radarr or Sonarr can't import a download on its own, the Live Activity
-  turns grey and says so until it's imported.
+  A few seconds without Quai Cloud no longer lose anything: webhooks that
+  arrive meanwhile wait in Quai Home and are sent once it's back, and the
+  Journal only says Quai Home went offline after a minute away.
 
 
-  In the iPhone app, everything on its way is in the floating bar over the
-  tabs. Posters stay loaded in the Library, tapping a search result opens it,
-  and the search shows its loader at once. Needs the new iPhone app.
+  Long series names are cut in the middle on the Live Activity, so the
+  episode stays in sight. Needs the new iPhone app.
 dependencies: []
 path: ""
 defaultUsername: ""
