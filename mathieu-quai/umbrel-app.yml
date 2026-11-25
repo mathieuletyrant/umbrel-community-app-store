@@ -20,8 +20,11 @@ description: >-
   search to import, what plays on Jellyfin (with Play/Pause). What goes wrong
   and may last is an alert, a plain notification when it starts and when it's
   over: a service that stops answering, the media disk running low, a problem
-  Radarr, Sonarr or Prowlarr report. And it searches Seerr: type or say a
-  title in the app, or from a Lock Screen control, and request it in a tap.
+  Radarr, Sonarr or Prowlarr report. What the stack removed on its own can be
+  one notification too, once gone: a title Reclaimerr deleted, a download
+  Cleanuparr removed or cleaned after seeding, turned on in the iPhone app.
+  And it searches Seerr: type or say a title in the app, or from a Lock
+  Screen control, and request it in a tap.
 
 
   This app runs both halves of Quai: Quai Home, which holds your services'
@@ -74,11 +77,15 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai Home's page keeps its link to Quai Cloud after the console answers,
-  instead of losing it.
+  Gone: one notification once the stack removed something on its own, a
+  title Reclaimerr deleted (with the space that came back, when it surely
+  did), a stuck download or a seeded torrent Cleanuparr took out. Off until
+  turned on, per iPhone, in the app's Settings → Notifications. For
+  Reclaimerr, add the events:read scope to its API key; the Services page
+  says when it's missing.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#0291-2026-11-25
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#0300-2026-11-25
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -124,7 +131,7 @@ environment:
   - name: QUAI_RECLAIMERR_API_KEY
     services:
       - home
-    note: Optional. A Reclaimerr API key (Settings → Integrations, scopes candidates:manage and system:read), to list scheduled deletions under To fix and keep a title.
+    note: Optional. A Reclaimerr API key (Settings → Integrations, scopes candidates:manage and system:read, and events:read to hear when it deleted a title), to list scheduled deletions under To fix and keep a title.
   - name: QUAI_QBITTORRENT_URL
     services:
       - home
