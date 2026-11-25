@@ -1,0 +1,76 @@
+manifestVersion: 1
+id: mathieu-picsou
+storage:
+  dataRoot: data
+category: finance
+name: Picsou
+tagline: Track bank accounts, brokerage, crypto and net worth in one place
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-picsou/icon.png
+# renovate: datasource=docker depName=ghcr.io/cloeille/picsou-finance
+version: "1.3.0"
+port: 8484
+description: >-
+  Picsou is a self-hosted personal finance dashboard: bank accounts, livrets,
+  PEA and brokerage, crypto, real estate and loans, with your net worth over
+  time.
+
+
+  Bank accounts sync through Enable Banking (PSD2, 2000+ European banks) or
+  SimpleFIN, and BoursoBank, CIC, Crédit Mutuel Épargne Salariale, DEGIRO,
+  Natixis Interépargne and Sofidy through connectors built into the app.
+  Trade Republic imports from CSV, Binance and Meria sync with an API key,
+  and BTC, ETH and SOL addresses are tracked on-chain. Prices come from
+  CoinGecko and Yahoo Finance, and French property is valued every month from
+  open data. Savings goals, budgets, diversification by sector and region, a
+  net worth projection, family members with their own login, 2FA, a Finary
+  import and an MCP server for AI assistants. In French, English, German and
+  Spanish.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app: its setup wizard creates the admin account, then offers
+  the integrations (Enable Banking, BoursoBank, crypto…), all of which can
+  be set up later from Admin.
+
+  2. On the Security step, list every address you open Picsou with
+  (http://umbrel.local:8484, the IP, Tailscale, a domain of your own).
+
+
+  Enable Banking refuses plain-HTTP callback addresses: to sync banks through
+  it, open Picsou over HTTPS (a tunnel or a reverse proxy) when you run the
+  wizard or its Enable Banking step.
+
+
+  The connectors that log in through a browser (BNP Paribas, La Banque
+  Postale, Caisse d'Epargne, Banque Populaire, Fortuneo, Amex, Revolut,
+  Bourse Direct, Amundi, Corum) run as separate containers upstream and are
+  not included here.
+
+
+  MCP: create an access key in Picsou → Settings → Access keys and point
+  your client at http://umbrel.local:8484/mcp (Streamable HTTP) with
+  `Authorization: Bearer psk_…`. /mcp and the OAuth routes skip the Umbrel
+  login; Picsou checks the key itself.
+developer: Cloeille
+website: https://github.com/Cloeille/picsou-finance
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store
+repo: https://github.com/Cloeille/picsou-finance
+support: https://github.com/Cloeille/picsou-finance/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-picsou/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-picsou/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-picsou/gallery-3.jpg
+releaseNotes: >-
+  Picsou's backend is rewritten in Rust and can run on an embedded SQLite
+  database, in a single container. Six bank connectors (BoursoBank, CIC,
+  CMES, DEGIRO, Natixis, Sofidy) are now built into the app.
+
+  Full release notes can be found at https://github.com/Cloeille/picsou-finance/releases/tag/1.3.0
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []

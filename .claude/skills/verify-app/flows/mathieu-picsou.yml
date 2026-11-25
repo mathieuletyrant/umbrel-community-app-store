@@ -1,0 +1,21 @@
+verified: 1.3.0 on umbrelOS 2.0.1 (2026-11-25)
+# Browsed by IP, not localhost: the wizard's Security step turns secure cookies off from the
+# page's protocol, and browsers accept Secure cookies over plain HTTP on localhost only.
+vars:
+  HOST_IP: echo umbrel-host.test
+steps:
+  - goto: http://${HOST_IP}:8484/
+  - click: {role: button, name: Get started}
+  - fill: {label: Username, value: verify}
+  - fill: {label: Password, exact: true, value: Verify-Picsou-1}
+  - fill: {label: Display name, value: Verify}
+  - click: {role: button, name: Create account}
+  - see: Allowed origins
+  - click: {role: button, name: Continue}
+  - click: {role: button, name: Skip all and configure later}
+  - see: Add your first account
+  # /mcp passes the Umbrel login and answers with Picsou's own 401 (no access key).
+  - http: {path: /mcp, method: POST, headers: {Content-Type: application/json, Accept: "application/json, text/event-stream"}, body: {jsonrpc: "2.0", id: 1, method: initialize, params: {protocolVersion: "2025-11-25", capabilities: {}, clientInfo: {name: verify, version: "1"}}}, status: 401}
+  - goto: http://${HOST_IP}:8484/
+  - see: Add your first account
+  - shot: dashboard
