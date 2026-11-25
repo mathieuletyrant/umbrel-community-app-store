@@ -1,0 +1,89 @@
+manifestVersion: 1
+id: mathieu-floppy
+storage:
+  dataRoot: data
+category: media
+name: Floppy
+tagline: Track movies, TV, anime, books, games and music in one place
+icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/icon.png
+# renovate: datasource=docker depName=ghcr.io/dannyvfilms/floppy
+version: "26.11.19"
+port: 8743
+description: >-
+  Floppy is a self-hosted media tracker and diary for everything you watch,
+  read, play and listen to: your own private Trakt, Letterboxd and Goodreads in
+  one app. Movies, TV, anime, books, comics, manga, games, board games, music
+  and podcasts each get pages, progress and ratings that fit them.
+
+
+  Floppy shows what you are in the middle of and the next episode to watch, a
+  calendar of upcoming releases, yearly recaps with hours, streaks and top
+  people, shareable and smart lists, and the collection you own. Plays from
+  Plex, Jellyfin, Emby, Pocket Casts and Last.fm are logged on their own, and
+  your history imports from Trakt, TV Time, Simkl, IMDb, MyAnimeList, AniList,
+  Goodreads, StoryGraph, Steam and more. Discover rows learn from your ratings,
+  and a title can be requested through Seerr in one click.
+
+
+  Floppy started as a fork of Yamtrack: Yamtrack CSV exports import directly.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open the app and create your account (Floppy has its own login, no Umbrel
+  login in front, so webhooks, calendar feeds and the API can reach it). Then,
+  in this app's settings in umbrelOS, set REGISTRATION to False so nobody else
+  can sign up. Set it back to True to add someone from the household.
+
+  2. Metadata works out of the box with Floppy's shared keys. Your own keys
+  (TMDB, IGDB, Hardcover…) go in Floppy → Settings → Metadata.
+
+  3. Connect your media servers in Floppy → Settings → Integrations. Each one
+  shows a webhook URL to copy; replace its address part before pasting it:
+
+  - Jellyfin / Emby: `http://mathieu-floppy_server_1:8000/webhook/…`.
+
+  - Plex (host network): `http://127.0.0.1:8743/webhook/…`; Plex itself is
+  `http://host.docker.internal:32400`.
+
+  - Seerr: `http://mathieu-floppy_server_1:8000/webhook/…`.
+
+  4. Opening Floppy from a domain of your own (Cloudflare Tunnel, reverse
+  proxy): put that address, e.g. `https://floppy.example.com`, in this app's
+  settings (URLS), or sign-in fails with a CSRF error. Not needed for
+  umbrel.local, the IP address or Tailscale.
+developer: dannyvfilms
+website: https://github.com/dannyvfilms/Floppy
+submitter: Mathieu Le Tyrant
+submission: https://github.com/mathieuletyrant/umbrel-community-app-store/issues/764
+repo: https://github.com/dannyvfilms/Floppy
+support: https://github.com/dannyvfilms/Floppy/issues
+gallery:
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/gallery-1.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/gallery-2.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/gallery-3.jpg
+  - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/gallery-4.jpg
+releaseNotes: >-
+  First release in this store.
+
+
+  Full release notes can be found at https://github.com/dannyvfilms/Floppy/releases/tag/v26.11.19
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+environment:
+  - name: REGISTRATION
+    services:
+      - server
+    default: "True"
+    options:
+      - "True"
+      - "False"
+    note: Set to False once your account exists, so nobody else can sign up.
+  - name: URLS
+    services:
+      - server
+    note: Only if you open Floppy from a domain of your own (Cloudflare Tunnel, reverse proxy) — that full address, e.g. https://floppy.example.com. Leave empty for umbrel.local, the IP or Tailscale.
+permissions: []

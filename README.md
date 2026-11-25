@@ -86,6 +86,7 @@ Companions for Radarr and Sonarr, torrents behind a VPN, watch trackers, live TV
 - 🎬 [**Scrob**](mathieu-scrob): your own Trakt, synced with Jellyfin / Plex / Emby
 - 🍿 [**Sofa**](mathieu-sofa): your own Trakt / Letterboxd, with phone apps
 - 👀 [**Seek**](mathieu-seek): phone-first tracker for shows, films and books
+- 💾 [**Floppy**](mathieu-floppy): movies, TV, anime, books, games, music and podcasts in one diary
 
 **🤖 AI and MCP**
 
@@ -156,6 +157,7 @@ settings. Apps on your Umbrel reach each other by these addresses (copy them fro
 | Shredarr | `http://mathieu-shredarr_server_1:8089` (Jellyfin webhook) | none |
 | Scrob | `http://mathieu-scrob_server_1:7330` | in the webhook URLs of its Connections |
 | Sofa | `http://mathieu-sofa_server_1:3000` | in the URLs of its Settings → Integrations |
+| Floppy | `http://mathieu-floppy_server_1:8000` | in the webhook URLs of its Settings → Integrations |
 | Seek | `http://mathieu-seek_server_1:8100` (Jellyfin webhook) | in your personal Jellyfin webhook URL |
 | Snug | `http://mathieu-snug_server_1:3000` (Jellyfin webhook) | in the webhook URL of its Settings → Jellyfin |
 | MetaMCP | `http://mathieu-metamcp_server_1:12008/metamcp/<endpoint>/mcp` (MCP) | an API key from its API Keys page |
