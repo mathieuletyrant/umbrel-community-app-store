@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mathieu-floppy_server_1
+      APP_PORT: 8000
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: ghcr.io/dannyvfilms/floppy:26.11.19@sha256:1eb6cfc2b79a53a892cd6bf39e67ab4e11731a25aaac1666b1cbac802c447fa3
+    restart: on-failure
+    stop_grace_period: 150s
+    depends_on:
+      - redis
+    environment:
+      - TZ=Etc/UTC
+      - PUID=1000
+      - PGID=1000
+      - SECRET=${APP_SEED}
+      - REDIS_URL=redis://mathieu-floppy_redis_1:6379
+      - REGISTRATION=True
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/floppy/db
+      - ${APP_DATA_DIR}/data/backups:/floppy/backups
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  redis:
+    image: redis:8.12.0-alpine@sha256:5af80107c1eeecb484a2269b80a26d12bfa6521787da4663bd9f19f60a163483
+    user: "1000:1000"
+    restart: on-failure
+    command: redis-server --appendonly yes --save "" --maxmemory 256mb --maxmemory-policy volatile-lru
+    volumes:
+      - ${APP_DATA_DIR}/data/redis:/data
