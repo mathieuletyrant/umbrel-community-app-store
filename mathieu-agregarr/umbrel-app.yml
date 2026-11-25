@@ -7,7 +7,7 @@ name: Agregarr
 tagline: Keep your Plex Home screen fresh with auto-updated collections
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/icon.png
 # renovate: datasource=docker depName=bitr8/agregarr
-version: "2.13.2"
+version: "2.14.0"
 port: 7171
 description: >-
   Agregarr builds Plex collections from public lists and pins them to your
@@ -64,9 +64,9 @@ support: https://github.com/bitr8/agregarr-dev/issues
 gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-agregarr/gallery-1.jpg
 releaseNotes: >-
-  A fix release. Overlay run errors and last results stay on the dashboard. Collections: Max Items now counts placeholders on every list source and Coming Soon keeps Max Items and Trakt ranking through full and Quick Sync, TMDB sources page through every result, TMDB Custom Advanced Filters match any status, type or certification and skip empty groups, and a TMDB rating filter with no country uses US. Removing a custom wallpaper or theme now removes it from Plex, and unticking Always Active no longer hides the collection every day.
+  A feature release focused on overlays and collections. Show and season posters gain HD, SD and unknown episode counts, next-missing-episode, episode-today, last-aired and finale fields, and a Versions condition for items with more than one file. Collections get a per-collection "Collection" suffix and a pre-existing sync, and poster templates gain a tile element. Many fixes to overlay countdowns and air dates (now in the server's timezone), the overlay editor preview, and poster conditions.
 
-  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.13.2
+  Full release notes can be found at https://github.com/bitr8/agregarr-dev/releases/tag/v2.14.0
 
 dependencies: []
 path: ""
