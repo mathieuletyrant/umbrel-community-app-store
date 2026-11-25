@@ -74,19 +74,11 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  A download that leaves qBittorrent before its import (a failed release
-  Sonarr or Radarr replaced, or one Cleanuparr removed) now ends its Live
-  Activity, grey, instead of leaving it at 0 %. The next release grabbed
-  starts its own.
+  Quai Home's page keeps its link to Quai Cloud after the console answers,
+  instead of losing it.
 
 
-  A few seconds without Quai Cloud no longer lose anything: webhooks that
-  arrive meanwhile wait in Quai Home and are sent once it's back, and the
-  Journal only says Quai Home went offline after a minute away.
-
-
-  Long series names are cut in the middle on the Live Activity, so the
-  episode stays in sight. Needs the new iPhone app.
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#0291-2026-11-25
 dependencies: []
 path: ""
 defaultUsername: ""
