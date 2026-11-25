@@ -8,5 +8,7 @@ steps:
   - fill: {css: "input[name=password1]", value: Verify-Floppy-1}
   - fill: {css: "input[name=password2]", value: Verify-Floppy-1}
   - click: {role: button, name: Create Account, exact: true}
-  - see: Discover
+  - see: What do you want to track?
+  - click: {role: link, name: Save & finish later}
+  - see: Calendar
   - shot: home
