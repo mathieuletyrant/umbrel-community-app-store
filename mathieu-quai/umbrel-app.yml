@@ -77,12 +77,13 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai 2.2. Each iPhone now keeps its own order of the Home tiles and can hide
-  the ones it doesn't need. The Upcoming tile shows both what comes next and
-  what leaves next.
+  Quai 2.3. Requesting more seasons of a series already asked for now works
+  from the iPhone app, and freeing space is no longer blocked by a torrent of
+  another title that happens to weigh the same. A demo home was also added for
+  App Review.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#220-2026-11-26
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#230-2026-11-26
 dependencies: []
 path: ""
 defaultUsername: ""
