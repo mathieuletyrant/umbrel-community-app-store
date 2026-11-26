@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "0.30.0"
+version: "2.0.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -77,15 +77,15 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Gone: one notification once the stack removed something on its own, a
-  title Reclaimerr deleted (with the space that came back, when it surely
-  did), a stuck download or a seeded torrent Cleanuparr took out. Off until
-  turned on, per iPhone, in the app's Settings → Notifications. For
-  Reclaimerr, add the events:read scope to its API key; the Services page
-  says when it's missing.
+  Quai 2.0. In the iPhone app, each notification setting, Activity line,
+  Home alert and Upcoming title now shows the service it is about, with a
+  dot in that service's colour. The Notifications settings only list what
+  can fire on your home: rows of services you haven't set up, and alerts
+  turned off in the console, are hidden. "Request as" only shows when Seerr
+  is set up.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#0300-2026-11-25
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#200-2026-11-26
 dependencies: []
 path: ""
 defaultUsername: ""
