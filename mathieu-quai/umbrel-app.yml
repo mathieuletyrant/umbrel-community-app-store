@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "2.1.0"
+version: "2.2.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -77,12 +77,12 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai 2.1. A new Storage view shows each media disk's free space over time
-  and what changed it. A deletion planned by Reclaimerr now shows at the
-  moment Reclaimerr really deletes the title.
+  Quai 2.2. Each iPhone now keeps its own order of the Home tiles and can hide
+  the ones it doesn't need. The Upcoming tile shows both what comes next and
+  what leaves next.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#210-2026-11-26
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#220-2026-11-26
 dependencies: []
 path: ""
 defaultUsername: ""
