@@ -7,7 +7,7 @@ name: Picsou
 tagline: Track bank accounts, brokerage, crypto and net worth in one place
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-picsou/icon.png
 # renovate: datasource=docker depName=ghcr.io/cloeille/picsou-finance
-version: "1.3.0"
+version: "1.3.1"
 port: 8484
 description: >-
   Picsou is a self-hosted personal finance dashboard: bank accounts, livrets,
@@ -64,11 +64,14 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-picsou/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-picsou/gallery-3.jpg
 releaseNotes: >-
-  Picsou's backend is rewritten in Rust and can run on an embedded SQLite
-  database, in a single container. Six bank connectors (BoursoBank, CIC,
-  CMES, DEGIRO, Natixis, Sofidy) are now built into the app.
+  CSV import of bank and card statements now works on every non-investment
+  account, and AI categorization adds Mistral, Gemini and any
+  OpenAI-compatible server. Adds OKX exchange sync, Gulf currencies, editable
+  categorization rules and a proper home-screen icon. Shares and ETFs are now
+  priced by their ISIN, and fixes land for La Banque Postale, Natixis, BNP
+  Paribas, American Express, BoursoBank and Enable Banking savings accounts.
 
-  Full release notes can be found at https://github.com/Cloeille/picsou-finance/releases/tag/1.3.0
+  Full release notes can be found at https://github.com/Cloeille/picsou-finance/releases/tag/1.3.1
 dependencies: []
 path: ""
 defaultUsername: ""
