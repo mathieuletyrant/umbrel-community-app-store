@@ -77,15 +77,12 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai 2.0. In the iPhone app, each notification setting, Activity line,
-  Home alert and Upcoming title now shows the service it is about, with a
-  dot in that service's colour. The Notifications settings only list what
-  can fire on your home: rows of services you haven't set up, and alerts
-  turned off in the console, are hidden. "Request as" only shows when Seerr
-  is set up.
+  Quai 2.1. A new Storage view shows each media disk's free space over time
+  and what changed it. A deletion planned by Reclaimerr now shows at the
+  moment Reclaimerr really deletes the title.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#200-2026-11-26
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#210-2026-11-26
 dependencies: []
 path: ""
 defaultUsername: ""
