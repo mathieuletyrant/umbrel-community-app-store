@@ -77,15 +77,15 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Gone: one notification once the stack removed something on its own, a
-  title Reclaimerr deleted (with the space that came back, when it surely
-  did), a stuck download or a seeded torrent Cleanuparr took out. Off until
-  turned on, per iPhone, in the app's Settings → Notifications. For
-  Reclaimerr, add the events:read scope to its API key; the Services page
-  says when it's missing.
+  Notifications, Activity and the alerts on Home and Upcoming now name the
+  service behind each row, with a dot in the colour of its logo. The iPhone
+  app's notification settings only offer what can actually fire: the
+  services Quai Home reaches, the alerts turned on in the console, and
+  Request only when Seerr is set up. No change is needed on your side; the
+  jump to 2.0.0 is a version number, not a breaking change.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#0300-2026-11-25
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#200-2026-11-26
 dependencies: []
 path: ""
 defaultUsername: ""
