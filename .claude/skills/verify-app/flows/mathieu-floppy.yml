@@ -1,4 +1,4 @@
-verified: 26.11.19 on umbrelOS 2.0.1 (2026-11-25)
+verified: 26.11.26 on umbrelOS 2.0.1 (2026-11-27)
 # Browsed by IP over plain HTTP like a real install: Django's CSRF check is what a wrong origin breaks.
 vars:
   HOST_IP: echo umbrel-host.test
@@ -11,5 +11,6 @@ steps:
   - click: {role: button, name: Create Account, exact: true}
   - see: What do you want to track?
   - click: {role: link, name: Save & finish later}
+  - click: {role: button, name: Explore}
   - see: Calendar
   - shot: home
