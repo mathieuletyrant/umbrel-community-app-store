@@ -52,10 +52,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-sublarr/gallery-4.jpg
 releaseNotes: >-
-  Accepting a low-score subtitle ("I'm ok with this quality") now works: the decision is stored with the subtitle, so the low-score warning, counters and upgrade search leave it alone until a newer subtitle arrives. The dashboard's Accept and Skip buttons no longer fail with an error, and skipped items stop showing up as low-score.
+  Security fixes: until the first setup is done, API requests from outside the local network or through a reverse proxy are refused, catalog providers can no longer reach local files or the LAN, and API errors no longer expose raw exception text. Standalone mode now reads the season from episode NFOs, season.nfo or the season folder name, wanted search follows the profile's source language, and remux backups restore only onto their original file. Also fixes the Titrari provider, excluded HI/forced subtitles winning, scoring saves and live updates after signing in.
 
 
-  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.21.2
+  Full release notes can be found at https://github.com/Abrechen2/Sublarr/releases/tag/v1.21.3
 dependencies: []
 path: ""
 defaultUsername: ""
