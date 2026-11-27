@@ -78,13 +78,15 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai 2.5.0 makes the app's screens quicker: a screen's data is kept for a
-  minute, and Quai Home sends its requests together. The console now explains
-  what Quai Cloud does and shows whether it is really linked. Quai Home also
-  describes everything it answers as an OpenAPI document.
+  Quai 3.0.0 finishes moving Quai into Quai Home: Quai Cloud now only relays
+  the iPhone app and sends the pushes. Quai Cloud refuses a Quai Home older
+  than 2.4, so if you linked another Quai Home to it, update that one too;
+  this app updates both halves together. On the iPhone, the Upcoming tile
+  shows the three soonest titles, and Decline and Remove ask for confirmation
+  next to their button.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#250-2026-11-27
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#300-2026-11-27
 dependencies: []
 path: ""
 defaultUsername: ""
