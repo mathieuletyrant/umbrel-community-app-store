@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: ghcr.io/dannyvfilms/floppy:26.11.19@sha256:1eb6cfc2b79a53a892cd6bf39e67ab4e11731a25aaac1666b1cbac802c447fa3
+    image: ghcr.io/dannyvfilms/floppy:26.11.26@sha256:656fa8b598efffbc153def00684f2519348d5e27848daced65664efe90ed6be8
     restart: on-failure
     stop_grace_period: 150s
     depends_on:

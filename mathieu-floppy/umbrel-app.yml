@@ -7,7 +7,7 @@ name: Floppy
 tagline: Track movies, TV, anime, books, games and music in one place
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/icon.png
 # renovate: datasource=docker depName=ghcr.io/dannyvfilms/floppy
-version: "26.11.19"
+version: "26.11.26"
 port: 8743
 description: >-
   Floppy is a self-hosted media tracker and diary for everything you watch,
