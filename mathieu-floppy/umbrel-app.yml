@@ -7,7 +7,7 @@ name: Floppy
 tagline: Track movies, TV, anime, books, games and music in one place
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/icon.png
 # renovate: datasource=docker depName=ghcr.io/dannyvfilms/floppy
-version: "26.11.19"
+version: "26.11.26"
 port: 8743
 description: >-
   Floppy is a self-hosted media tracker and diary for everything you watch,
@@ -65,10 +65,15 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-floppy/gallery-4.jpg
 releaseNotes: >-
-  First release in this store.
+  Adds custom rating scales with weighted criteria and half stars, an optional
+  one-way sync of watched history to SIMKL, support for several Jellyfin servers
+  per account, Rotten Tomatoes scores and Trakt links on detail pages, and game
+  controller navigation in the web app. Lists can now hold cast, crew and authors,
+  periodic import schedules can be edited in place, and fixes cover Plex, Jellyfin,
+  Trakt and MyAnimeList imports, TV show status and SQLite responsiveness.
 
 
-  Full release notes can be found at https://github.com/dannyvfilms/Floppy/releases/tag/v26.11.19
+  Full release notes can be found at https://github.com/dannyvfilms/Floppy/releases/tag/v26.11.26
 dependencies: []
 path: ""
 defaultUsername: ""
