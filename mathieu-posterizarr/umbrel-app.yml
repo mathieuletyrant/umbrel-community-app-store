@@ -54,12 +54,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/gallery-1.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-posterizarr/gallery-2.jpg
 releaseNotes: >-
-  Posterizarr 4.0.2 is a maintenance release. It fixes custom image overlay
-  uploads in Dynamic Overlays, which failed with "Uploaded file is not a valid
-  image", and updates the web UI's translation libraries to patch a security
-  advisory.
+  Posterizarr 4.0.3 adds a Dry-Run preview gallery in the web UI, new Dynamic
+  Overlay builders (IMDb charts and awards, MDBList, TMDb keywords, ribbons)
+  and per-state Series Status and resolution tier controls. It also fixes
+  timeouts on large Jellyfin/Emby libraries, Jellyfin plugin issues behind
+  HTTPS, and several Manual and Arr mode edge cases.
 
-  Full release notes can be found at https://github.com/fscorrupt/posterizarr/releases/tag/4.0.2
+  Full release notes can be found at https://github.com/fscorrupt/posterizarr/releases/tag/4.0.3
 dependencies: []
 path: ""
 defaultUsername: ""
