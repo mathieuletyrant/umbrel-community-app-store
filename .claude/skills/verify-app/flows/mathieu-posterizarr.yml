@@ -1,4 +1,4 @@
-verified: 4.0.0 on umbrelOS 2.0.1 (2026-11-21)
+verified: 4.0.3 on umbrelOS 2.0.1 (2026-11-27)
 requires: [plex]
 steps:
   # The test Plex is not claimed, so it refuses any token from a container: a 401 answer (not a
