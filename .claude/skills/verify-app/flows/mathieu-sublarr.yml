@@ -1,4 +1,4 @@
-verified: 1.21.0 on umbrelOS 2.0.1 (2026-11-17)
+verified: 1.21.3 on umbrelOS 2.0.1 (2026-11-27)
 vars:
   SETUP_CODE: >-
     docker logs mathieu-sublarr_server_1 2>&1 | sed -n 's/.*one-time setup code: *\([A-Za-z0-9_-]*\).*/\1/p' | tail -1
@@ -15,6 +15,8 @@ steps:
   - goto: /login
   - fill: {placeholder: Password, value: Verify-Sublarr-1}
   - click: {role: button, name: Log In}
+  - see: Setup Mode
+  - click: {role: button, name: Skip Setup}
   - click: {css: "[data-testid=wizard-next]"}
   - click: {css: "[data-testid=wizard-pick]"}
   - click: {css: "[data-testid=wizard-done-close]"}
