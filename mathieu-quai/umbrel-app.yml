@@ -28,8 +28,9 @@ description: >-
 
 
   This app runs both halves of Quai: Quai Home, which holds your services'
-  keys and your data, and Quai Cloud, which runs the flows and sends the
-  pushes. Nothing leaves the Umbrel but the pushes to Apple. You can instead
+  keys and your data and runs the flows, and Quai Cloud, which relays the
+  iPhone app's requests and sends the pushes. Nothing leaves the Umbrel but
+  the pushes to Apple. You can instead
   link Quai Home to the hosted Quai Cloud (cloud.quai.stream) in this app's
   settings: it needs no Apple key, and keeps nothing.
 
@@ -77,12 +78,15 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai 2.3.1 fixes the iPhone app: requesting more seasons of a series reads
-  the library again, the tabs load again, and a single "Can't reach" card is
-  shown instead of one on every screen.
+  Quai 2.4.0 moves the work to Quai Home: it now runs the flows and answers
+  the iPhone app itself, and Quai Cloud only relays the app's requests and
+  sends the pushes, so the app's screens load much faster. A newly paired
+  iPhone signs each request with a key that never leaves it; iPhones already
+  paired keep working, and sign once you pair them again. Your iPhones, flows
+  and activities are kept, nothing to set up again.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#231-2026-11-26
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#240-2026-11-27
 dependencies: []
 path: ""
 defaultUsername: ""
@@ -96,7 +100,7 @@ environment:
     options:
       - ws://mathieu-quai_cloud_1:8787/home
       - wss://cloud.quai.stream/home
-    note: Which Quai Cloud runs your flows and sends the pushes. The first is the one in this app, with your own Apple push key below. The second is the hosted Quai Cloud, which needs no Apple key; then pair your iPhones again.
+    note: Which Quai Cloud relays the iPhone app and sends the pushes. The first is the one in this app, with your own Apple push key below. The second is the hosted Quai Cloud, which needs no Apple key; then pair your iPhones again.
   - name: QUAI_CONSOLE_PUBLIC_URL
     services:
       - home
