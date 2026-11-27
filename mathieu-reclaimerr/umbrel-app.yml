@@ -7,7 +7,7 @@ name: Reclaimerr
 tagline: Rule-based cleanup for Jellyfin, Plex and Emby libraries
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/icon.png
 # renovate: datasource=docker depName=ghcr.io/jessielw/reclaimerr
-version: "0.6.18"
+version: "0.6.19"
 port: 8011
 description: >-
   Reclaimerr frees disk space on your media server without surprises. It syncs
@@ -61,9 +61,9 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-reclaimerr/gallery-4.jpg
 releaseNotes: >-
-  Settings → Media Servers now lists your server's libraries with a checkbox each: Sync Media only reads the checked ones, so media in an unchecked library is never a cleanup candidate (every library starts checked). An admin notice flags enabled rules whose library filter needs an unchecked library. New Cleanup Candidates alerts now count only the titles added by the current scan, Discord destinations sharing a webhook get one copy of each notification, and Sync Media no longer fails with a FOREIGN KEY error when two series match the same show.
+  Protecting a season now holds automatic deletion of that season, its episodes and the whole series, while other seasons and their episodes can still be deleted automatically when eligible. The cleanup log, the Candidates list and the Calendar show why a candidate is on hold.
 
-  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0618---2026-11-25
+  Full release notes can be found at https://github.com/jessielw/Reclaimerr/blob/HEAD/CHANGELOG.md#0619---2026-11-27
 permissions:
   - STORAGE_DOWNLOADS
 dependencies: []
