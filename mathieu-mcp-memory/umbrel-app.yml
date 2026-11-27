@@ -56,7 +56,15 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-mcp-memory/gallery-4.jpg
 releaseNotes: >-
-  Updated the nginx sidecar image.
+  Editing a memory in the dashboard no longer fails with a "duplicate" error,
+  and removing a document or running a bulk operation no longer blocks the
+  whole page. CSV files that use a semicolon, tab or pipe separator and end
+  with an empty line are now imported as a table instead of a single column.
+  When a memory type isn't known, the assistant is now told how to add it
+  without a restart.
+
+
+  Full release notes can be found at https://github.com/doobidoo/mcp-memory-service/releases/tag/v13.1.0
 dependencies: []
 path: ""
 defaultUsername: mcp
