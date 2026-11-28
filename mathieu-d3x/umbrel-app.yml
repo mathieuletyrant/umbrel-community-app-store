@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  After adding a release to your torrent client, D3X now waits up to 2 minutes for the client to answer (15 to 20 seconds before). A busy qBittorrent, for example on a NAS checking a large file, could take close to a minute, so D3X gave up before the "Noms différents" rename and the torrent stayed in the client under the listing's names. Removing a failed add also keeps retrying while the client doesn't answer.
+  V3X releases with a hybrid v1+v2 .torrent (listings from before 11/09/26) are now found in qBittorrent. qBittorrent with libtorrent 2 files them under their truncated v2 hash, so D3X never saw the add ("le client n'a pas confirmé l'ajout") and recheck and rename did nothing. D3X now maps the v1 hash to the client's own identifier, renamed releases included.
 
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.69
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.70
 dependencies: []
 path: ""
 defaultUsername: ""
