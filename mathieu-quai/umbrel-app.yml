@@ -7,7 +7,7 @@ name: Quai
 tagline: Your media stack, live on your iPhone
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-quai/icon.png
 # renovate: datasource=docker depName=ghcr.io/mathieuletyrant/quai
-version: "3.1.0"
+version: "3.2.0"
 port: 3078
 description: >-
   Quai follows every movie or series from the request to "ready to watch" and
@@ -78,13 +78,13 @@ repo: https://github.com/mathieuletyrant/quai-app
 support: https://github.com/mathieuletyrant/quai-app/issues
 gallery: []
 releaseNotes: >-
-  Quai 3.1.0 improves posters in the iPhone app: they are now kept on the
-  phone, so they show at once and without a connection, and a poster that
-  failed to load is fetched again instead of staying blank. Nothing changes
-  on the Umbrel side.
+  Quai 3.2.0 makes Live Activities reach their end even when the iPhone's
+  push token arrives late, and Quiet mode now also covers the "ready to
+  watch" notification. A season that Reclaimerr unmonitored and whose files
+  were deleted is now shown as gone instead of missing.
 
 
-  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#310-2026-11-27
+  Full release notes can be found at https://github.com/mathieuletyrant/quai-app/blob/HEAD/CHANGELOG.md#320-2026-11-28
 dependencies: []
 path: ""
 defaultUsername: ""
