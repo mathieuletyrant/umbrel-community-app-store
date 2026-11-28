@@ -5,10 +5,10 @@ services:
     environment:
       APP_HOST: mathieu-arr-mcp_server_1
       APP_PORT: 6060
-      PROXY_AUTH_WHITELIST: "/mcp*,/.well-known/*,/healthz"
+      PROXY_AUTH_WHITELIST: "/mcp*,/.well-known/*,/healthz,/webhooks/*"
 
   server:
-    image: ghcr.io/bardesss/arr-mcp:2.5.0@sha256:f15f25235e2c3fdcc96c25286f0649b701d73656c4bc5d66ed63ca3dc1bc0877
+    image: ghcr.io/bardesss/arr-mcp:2.6.0@sha256:780db8857c0c6399b5c92487dde0cd3602a134e84f86c2ce901a7ff98e1a1127
     environment:
       - TZ=Etc/UTC
       - PUID=1000
