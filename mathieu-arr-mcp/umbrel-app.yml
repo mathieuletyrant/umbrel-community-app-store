@@ -46,6 +46,13 @@ description: >-
   token shown on the dashboard (header `Authorization: Bearer <token>`). The
   web UI stays behind your Umbrel login; only `/mcp` is opened so MCP clients
   can reach it with the token.
+
+  4. Optional: turn on "Library event log" in arr-mcp's Settings. Radarr,
+  Sonarr and Lidarr post to `http://mathieu-arr-mcp_server_1:6060/webhooks/radarr`
+  (or `/sonarr`, `/lidarr`); Plex (Plex Pass, host network) to
+  `http://arr-mcp:<secret>@127.0.0.1:6061/webhooks/plex` in Plex Web → Settings →
+  Webhooks. `/webhooks/*` bypasses the Umbrel login and only accepts the event
+  log's secret.
 developer: bardesss
 website: https://github.com/bardesss/arr-mcp
 submitter: Mathieu Le Tyrant
@@ -57,11 +64,12 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-arr-mcp/gallery-3.jpg
 releaseNotes: >-
-  Maintainerr and SuggestArr can now be added as read-only services, and
-  Deluge joins the supported torrent clients. Setting a Transmission speed limit
-  equal to its turtle-mode cap is now refused instead of being reported as set.
+  arr-mcp can now record Plex plays from a Plex webhook (Plex Pass) the moment
+  Plex counts them as watched, so a film deleted before the next hourly sync
+  keeps its history; music plays are opt-in with ?music=1. The Settings page
+  builds the full webhook URL to paste into Plex.
 
-  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#250-2026-11-28
+  Full release notes can be found at https://github.com/bardesss/arr-mcp/blob/HEAD/CHANGELOG.md#260-2026-11-28
 
 dependencies: []
 path: ""
