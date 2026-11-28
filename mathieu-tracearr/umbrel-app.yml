@@ -7,7 +7,7 @@ name: Tracearr
 tagline: Real-time monitoring for Plex, Jellyfin, and Emby
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/icon.png
 # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr
-version: "3.2.1"
+version: "3.3.0"
 port: 3009
 description: >-
   Tracearr is a self-hosted monitoring platform for Plex, Jellyfin, and Emby — an
@@ -45,10 +45,13 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-3.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-tracearr/gallery-4.jpg
 releaseNotes: >-
-  A play on a tofa server now stays one session when tofa briefly stops describing
-  it, instead of showing up as a second, untitled session.
+  Tracearr now records which tofa or Silo profile played each stream, shows it on the
+  account avatar and lets History filter by profile. It also monitors Silo servers, repairs
+  imported Plex plays that showed under the wrong item after a Plex rebuild, and writes far
+  less to disk during background jobs. This update changes how tofa requests are stored, so
+  going back to 3.2 needs a backup taken beforehand.
 
-  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.2.1
+  Full release notes can be found at https://github.com/connorgallopo/Tracearr/releases/tag/v3.3.0
 dependencies: []
 path: ""
 defaultUsername: ""
