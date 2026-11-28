@@ -7,7 +7,7 @@ name: D3X
 tagline: V3X's companion tool for cross-seeding, uploads and seed tracking
 icon: https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/icon.png
 # renovate: datasource=docker depName=ghcr.io/v3x0rv3x/d3x
-version: "1.1.68"
+version: "1.1.69"
 port: 8733
 description: >-
   D3X is the open-source companion tool of the V3X tracker. It talks to your
@@ -57,10 +57,10 @@ gallery:
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-2.jpg
   - https://raw.githubusercontent.com/mathieuletyrant/umbrel-community-app-store/master/mathieu-d3x/gallery-3.jpg
 releaseNotes: >-
-  Cross-seed's "Noms différents" rename is no longer blocked by a torrent your client stores without a root folder in the same folder (qBittorrent's "Don't create subfolder"): D3X used to answer that the name was already another torrent's location and put the release back in the list. Three more V3X refusals now show in plain words instead of their code, in Publish and in batches: a cinema audio capture, a series pack named complete with aired seasons missing, and a VirusTotal link that is a web page's report rather than a file's.
+  After adding a release to your torrent client, D3X now waits up to 2 minutes for the client to answer (15 to 20 seconds before). A busy qBittorrent, for example on a NAS checking a large file, could take close to a minute, so D3X gave up before the "Noms différents" rename and the torrent stayed in the client under the listing's names. Removing a failed add also keeps retrying while the client doesn't answer.
 
 
-  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.68
+  Full release notes can be found at https://github.com/V3x0rV3x/D3X/releases/tag/v1.1.69
 dependencies: []
 path: ""
 defaultUsername: ""
